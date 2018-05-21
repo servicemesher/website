@@ -3,7 +3,7 @@ title: "Go is for lovers"
 date: "2015-09-17T13:47:08+02:00"
 tags: ["go"]
 categories: ["programming"]
-banner: "img/banners/banner-2.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbo0i9msj30rs0ku4dv.jpg"
 summary: "介绍 Go Template，Hugo 如何渲染网站以及基本语法介绍"
 ---
 

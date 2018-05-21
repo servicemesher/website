@@ -3,7 +3,7 @@ title: "链接到博文"
 date: "2015-10-02T21:49:20+02:00"
 tags: ["golang", "programming", "theme", "hugo"]
 categories: ["programming"]
-banner: "img/banners/banner-4.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbk1wgc3j30ll0h6qja.jpg"
 author: "John Doe"
 summary: "如何在该主题中链接到某个博文"
 ---

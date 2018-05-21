@@ -8,3 +8,5 @@
 .box-simple {
   min-height: 230px;
 }
+
+img { max-width: 100%;}

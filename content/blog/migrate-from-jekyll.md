@@ -3,7 +3,7 @@ title: "从 Jekyll 迁移"
 date: "2015-10-10T13:07:31+02:00"
 tags: ["ipsum"]
 categories: ["lorem"]
-banner: "img/banners/banner-5.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbp4va6mj30rs0ku4qp.jpg"
 summary: "如何从 Jekyll 迁移到 Hugo 的说明文档"
 description: "如何从 Jekyll 迁移到 Hugo 的说明文档"
 ---

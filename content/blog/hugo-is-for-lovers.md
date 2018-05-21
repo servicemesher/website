@@ -3,7 +3,7 @@ title: "Hugo is for lovers"
 date: "2015-08-03T13:39:46+02:00"
 tags: ["hugo"]
 categories: ["pseudo"]
-banner: "img/banners/banner-3.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbnj2lqtj30rs0kuqj8.jpg"
 summary: "Hugo 使用指南"
 ---
 

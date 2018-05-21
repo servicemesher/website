@@ -3,7 +3,7 @@ title: "创建新的主题"
 date: "2015-06-24T13:50:46+02:00"
 tags: ["theme"]
 categories: ["starting"]
-banner: "img/banners/banner-1.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbo0i9msj30rs0ku4dv.jpg"
 summary: "如何创建一个新的 Hugo 主题"
 ---
 
