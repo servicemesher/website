@@ -1,0 +1,153 @@
+baseurl = "https://servicemesher.github.io"
+title = "Service Mesh爱好者"
+theme = "hugo-universal-theme"
+languageCode = "zh"
+# Site language. Available translations in the theme's `/i18n` directory.
+defaultContentLanguage = "zh"
+# Enable comments by entering your Disqus shortname
+disqusShortname = ""
+# Enable Google Analytics by entering your tracking code
+googleAnalytics = ""
+# Code highlight
+pygmentsUseClasses = false
+pygmentCodeFences = true
+
+# Define the number of posts per page
+paginate = 10
+
+[menu]
+
+# Main menu
+
+[[menu.main]]
+    name = "主页"
+    url  = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "博客"
+    url  = "/blog/"
+    weight = 2
+
+[[menu.main]]
+    name = "活动"
+    identifier = "activity"
+    url  = "/activity/"
+    weight = 3
+
+[[menu.main]]
+    name = "联系我们"
+    url  = "/contact/"
+    weight = 4
+
+# Top bar social links menu
+
+[[menu.topbar]]
+    weight = 1
+    name = "GitHub"
+    url = "https://github.com/servicemesher"
+    pre = "<i class='fa fa-2x fa-github'></i>"
+
+[[menu.topbar]]
+    weight = 4
+    name = "Email"
+    url = "mailto:jimmysong@jimmysong.io"
+    pre = "<i class='fa fa-2x fa-envelope'></i>"
+
+[params]
+    viewMorePostLink = "/blog/"
+    author = "ServiceMesher"
+    defaultKeywords = ["service mesh"]
+    defaultDescription = "Service Mesh爱好者网站"
+    
+    # Browser title description
+    description = "Service Mesh爱好者"
+    # Google Maps API key (if not set will default to not passing a key.)
+    googleMapsApiKey = ""
+    # Baidu统计
+    baiduKey="761ec5e305f799778975c1f71c47a520"
+    
+    # Style options: default (light-blue), blue, green, marsala, pink, red, turquoise, violet
+    style = "default"
+
+    # Since this template is static, the contact form uses www.formspree.io as a
+    # proxy. The form makes a POST request to their servers to send the actual
+    # email. Visitors can send up to a 1000 emails each month for free.
+    #
+    # What you need to do for the setup?
+    #
+    # - set your email address under 'email' below
+    # - upload the generated site to your server
+    # - send a dummy email yourself to confirm your account
+    # - click the confirm link in the email from www.formspree.io
+    # - you're done. Happy mailing!
+    #
+    # Enable the contact form by entering your Formspree.io email
+    email = "jimmysong@jimmysong.io"
+
+    about_us = "<p>Service Mesh 爱好者</p>"
+    copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
+
+    # Format dates with Go's time formatting
+    date_format = "2006-01-02"
+
+    logo = "img/logo.png"
+    address = """<p><strong>SerivceMesher.</strong>
+      """
+
+[Permalinks]
+    #blog = "/blog/:year/:month/:day/:filename/"
+    blog = "/blog/:filename/"
+
+# Enable or disable top bar with social icons
+[params.topbar]
+    enable = false 
+    text = """<p class="hidden-sm hidden-xs">欢迎来到 Service Mesh 爱好者网站</p>
+      """
+
+# Enable and disable widgets for the right sidebar
+[params.widgets]
+    categories = true
+    tags = true
+    search = true
+
+[params.carousel]
+    enable = true
+    # All carousel items are defined in their own files. You can find example items
+    # at 'exampleSite/data/carousel'.
+    # For more informtion take a look at the README.
+
+[params.features]
+    enable = true
+    # All features are defined in their own files. You can find example items
+    # at 'exampleSite/data/features'.
+    # For more informtion take a look at the README.
+
+[params.testimonials]
+    enable = true
+    # All testimonials are defined in their own files. You can find example items
+    # at 'exampleSite/data/testimonials'.
+    # For more informtion take a look at the README.
+    title = "社区活动"
+    subtitle = "我们会不定期得在线上和线下举办精彩的活动，敬请关注，下面是历史活动记录"
+
+[params.see_more]
+    enable = true
+    icon = "fa fa-pagelines"
+    title = "参与进来"
+    subtitle = "加入 Service Mesh 爱好者群体"
+    link_url = "/contact"
+    link_text = "查看加入方式"
+
+[params.clients]
+    enable = true
+    # All clients are defined in their own files. You can find example items
+    # at 'exampleSite/data/clients'.
+    # For more informtion take a look at the README.
+    title = "参与者"
+    subtitle = "Envoy官方文档中文版卓越贡献者"
+
+[params.recent_posts]
+    enable = true
+    title = "最新博客"
+    subtitle = "社区参与者的博客与最 in 的新闻都在这里"

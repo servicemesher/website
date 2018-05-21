@@ -1,0 +1,8 @@
+weight: 4
+title: "标题4"
+description: >
+  <ul class="list-style-none">
+    <li>列表1</li>
+    <li>列表2</li>
+  </ul>
+image: "img/carousel/bg1.png"
