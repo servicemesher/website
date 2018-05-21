@@ -524,19 +524,6 @@ $ cat public/index.html
 
 Note: If you're running the server with the `--watch` option, you'll see different content in the file:
 
-```bash
-$ cat public/index.html
-<!DOCTYPE html>
-<html>
-<body>
-  <p>hugo says hello!</p>
-<script>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-    + ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
-</html>
-```
-
 When you use `--watch`, the Live Reload script is added by Hugo. Look for live reload in the documentation to see what it does and how to disable it.
 
 ### Build a "Dynamic" Home Page
@@ -925,22 +912,6 @@ $ find public -name '*.html' | xargs ls -l
 Notice that the page wasn't created at the top level. It was created in a sub-directory named 'about-time/'. That name came from our slug. Hugo will use the slug to name the generated content. It's a reasonable default, by the way, but we can learn a few things by fighting it for this file.
 
 One other thing. Take a look at the home page.
-
-```bash
-$ cat public/index.html
-<!DOCTYPE html>
-<html>
-<body>
-    <h1><a href="http://localhost:1313/post/theme/">creating a new theme</a></h1>
-    <h1><a href="http://localhost:1313/about-time/">about</a></h1>
-    <h1><a href="http://localhost:1313/post/second-post/">second</a></h1>
-    <h1><a href="http://localhost:1313/post/first-post/">first</a></h1>
-<script>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-    + ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
-</html>
-```
 
 Notice that the "about" link is listed with the posts? That's not desirable, so let's change that first.
 
