@@ -1,4 +1,4 @@
-baseurl = "https://servicemesher.github.io"
+baseurl = "https://servicemesher.github.io/"
 title = "Service Mesh爱好者"
 theme = "hugo-universal-theme"
 languageCode = "zh"
@@ -6,8 +6,6 @@ languageCode = "zh"
 defaultContentLanguage = "zh"
 # Enable comments by entering your Disqus shortname
 disqusShortname = ""
-# Enable Google Analytics by entering your tracking code
-googleAnalytics = ""
 # Code highlight
 pygmentsUseClasses = false
 pygmentCodeFences = true
