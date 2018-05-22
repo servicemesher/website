@@ -98,7 +98,7 @@ paginate = 10
     date_format = "2006-01-02"
 
     logo = "img/logo.png"
-    address = """<p><strong>SerivceMesher.</strong>
+    address = """<p><strong>ServiceMesher.</strong>
       """
 
 [Permalinks]
