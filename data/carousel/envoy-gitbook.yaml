@@ -1,0 +1,10 @@
+weight: 1
+title: "Envoy proxy"
+description: >
+  <ul class="list-style-none">
+    <li>专为云原生应用而设计</li>
+    <li>开源</li>
+    <li>边缘和服务间代理</li>
+    <li>最新中文版文档</li>
+  </ul>
+image: "img/carousel/envoy-gitbook.png"

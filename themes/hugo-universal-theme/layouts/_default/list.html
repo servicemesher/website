@@ -41,12 +41,14 @@
                                     <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
                                     <div class="clearfix">
                                         <p class="author-category">
-                                          {{ if isset .Params "author" }}
-                                          {{ i18n "authorBy" }} <a href="#">{{ .Params.author }}</a>
+                                          {{ if and (isset .Params "author") (isset .Params "authorlink") }}
+                                          {{ i18n "authorBy" }} <a href="{{ .Params.authorlink }}">{{ .Params.author }}</a>
+                                          {{ else if isset .Params "author" }}
+                                          {{ i18n "authorBy" }} {{ .Params.author }}
                                           {{ end }}
                                           {{ if isset .Params "categories" }}
                                           {{ if gt (len .Params.categories) 0 }}
-                                          in <a href="{{ $.Site.BaseURL }}categories/{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 }}</a>
+                                          {{ i18n "archivedIn" }}<a href="{{ $.Site.BaseURL }}categories/{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 }}</a>
                                           {{ end }}
                                           {{ end }}
 

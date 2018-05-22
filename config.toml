@@ -34,9 +34,14 @@ paginate = 10
     weight = 3
 
 [[menu.main]]
+    name="黄页"
+    url = "/awesome-serivcemesh/"
+    weight = 4
+
+[[menu.main]]
     name = "联系我们"
     url  = "/contact/"
-    weight = 4
+    weight = 5
 
 # Top bar social links menu
 
@@ -66,7 +71,7 @@ paginate = 10
     baiduKey="761ec5e305f799778975c1f71c47a520"
     
     # Style options: default (light-blue), blue, green, marsala, pink, red, turquoise, violet
-    style = "default"
+    style = "violet"
 
     # Since this template is static, the contact form uses www.formspree.io as a
     # proxy. The form makes a POST request to their servers to send the actual

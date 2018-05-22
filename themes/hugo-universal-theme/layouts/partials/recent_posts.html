@@ -39,8 +39,10 @@
                         <div class="content">
                             <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
                             <p class="author-category">
-                            {{ with .Params.author }}
-                            {{ i18n "authorBy" }} <a href="#">{{ . }}</a>
+                            {{ if and (isset .Params "author") (isset .Params "authorlink") }}
+                            {{ i18n "authorBy" }} <a href="{{ .Params.authorlink }}">{{ .Params.author }}</a>
+                            {{ else if isset .Params "author" }}
+                            {{ i18n "authorBy" }}{{ .Params.author }}
                             {{ end }}
                             {{ i18n "publishedOn" }} {{ .Date.Format .Site.Params.date_format }}
                             </p>

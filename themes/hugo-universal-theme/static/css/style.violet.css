@@ -3386,6 +3386,7 @@ p {
 @media (min-width: 768px) {
   .lead {
     font-size: 21px;
+    text-align: center;
   }
 }
 .text-small {

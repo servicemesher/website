@@ -69,3 +69,6 @@
 
 - id: publishedOn
   translation: "发表于"
+
+- id: archivedIn
+  translation: "归档于"
