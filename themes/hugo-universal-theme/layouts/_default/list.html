@@ -29,7 +29,7 @@
                                 <div class="col-md-4">
                                   <div class="image">
                                       <a href="{{ .Permalink }}">
-                                          {{ if .Params.banner }}
+                                          {{ if isset .Params "banner" }}
                                           <img src="{{ .Params.banner }}" class="img-responsive" alt="">
                                           {{ else }}
                                           <img src="{{ .Site.BaseURL}}img/placeholder.png" class="img-responsive" alt="">
