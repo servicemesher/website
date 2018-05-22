@@ -35,7 +35,7 @@ paginate = 10
 
 [[menu.main]]
     name="黄页"
-    url = "/awesome-serivcemesh/"
+    url = "/awesome-servicemesh/"
     weight = 4
 
 [[menu.main]]
@@ -72,6 +72,9 @@ paginate = 10
     
     # Style options: default (light-blue), blue, green, marsala, pink, red, turquoise, violet
     style = "violet"
+
+    # 404 page
+    errorimage = "https://ws1.sinaimg.cn/large/00704eQkgy1frkahxdca2j30hd08wq52.jpg"
 
     # Since this template is static, the contact form uses www.formspree.io as a
     # proxy. The form makes a POST request to their servers to send the actual
