@@ -41,6 +41,7 @@
                         <a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">#{{ . }}</a>&nbsp;
                         {{ end }}
                         {{ end }}
+                        {{ .FuzzyWordCount }} {{ i18n "words"}} {{ i18n "readInAbout" }} {{ .ReadingTime }} {{ i18n "minute" }}
                         </p>
                         <div id="post-content">
                           {{ .Content }}

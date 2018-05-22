@@ -72,3 +72,12 @@
 
 - id: archivedIn
   translation: "归档于"
+
+- id: words
+  translation: "字"
+
+- id: readInAbout
+  translation: "阅读大约需要"
+
+- id: minute
+  translation: "分钟"

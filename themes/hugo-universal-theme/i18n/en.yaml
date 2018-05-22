@@ -69,3 +69,15 @@
 
 - id: publishedOn
   translation: "on"
+
+- id: archivedIn
+  translation: "in"
+
+- id: words
+  translation: "words"
+
+- id: readInAbout
+  translation: "read in about"
+
+- id: minute
+  translation: "min"
