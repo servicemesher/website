@@ -119,6 +119,8 @@ paginate = 10
 
 [params.carousel]
     enable = true
+    # Set carousel background image
+    background = "https://ws1.sinaimg.cn/large/00704eQkgy1frlkpcfzt4j30zk0k0at2.jpg" 
     # All carousel items are defined in their own files. You can find example items
     # at 'exampleSite/data/carousel'.
     # For more informtion take a look at the README.
