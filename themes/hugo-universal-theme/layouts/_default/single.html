@@ -24,8 +24,9 @@
 
                     <div class="col-md-9" id="blog-post">
 
-                        <p class="text-muted text-uppercase mb-small text-right">
+                        <p class="text-muted text-uppercase mb-small text-left">
                         {{ if and (isset .Params "author") (isset .Params "authorlink") }}{{ i18n "authorBy" }} <a href="{{ .Params.authorlink }}">{{ .Params.author }}</a>
+                        {{ else if (isset .Params "author") }}{{ i18n "authorBy" }}{{ .Params.author }}
                         {{ end }}
                         |
                         <!-- show categories -->
@@ -44,9 +45,10 @@
                         <a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">#{{ . }}</a>&nbsp;
                         {{ end }}
                         {{ end }}
-                        |
-                        <!-- show word count -->
+                        <!-- show word count
+                         |
                         {{ .FuzzyWordCount }} {{ i18n "words"}} {{ i18n "readInAbout" }} {{ .ReadingTime }} {{ i18n "minute" }}
+                        -->
                         </p>
                         <div id="post-content">
                           {{ .Content }}
