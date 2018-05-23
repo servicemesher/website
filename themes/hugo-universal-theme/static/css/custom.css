@@ -81,3 +81,7 @@ body {
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
+
+.lead {
+  text-align: center;
+}
