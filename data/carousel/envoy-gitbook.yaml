@@ -6,5 +6,6 @@ description: >
     <li>专为云原生应用而设计</li>
     <li>边缘和服务间代理</li>
     <li>Istio 默认的数据平面</li>
+    <li><a href="https://servicemesher.github.io/envoy">访问 Envoy 中文文档</a></li>
   </ul>
 image: "img/carousel/envoy-gitbook.png"

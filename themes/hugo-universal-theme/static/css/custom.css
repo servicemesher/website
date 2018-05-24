@@ -85,3 +85,15 @@ body {
 .lead {
   text-align: center;
 }
+
+/* change default violet css carousel background color style */
+.home-carousel .dark-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2b282d;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
