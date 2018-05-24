@@ -1,5 +1,5 @@
 baseurl = "https://servicemesher.github.io/"
-title = "Service Mesh爱好者"
+title = "ServiceMesher"
 theme = "hugo-universal-theme"
 languageCode = "zh"
 # Site language. Available translations in the theme's `/i18n` directory.
