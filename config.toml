@@ -107,8 +107,8 @@ paginate = 10
 
 # Enable or disable top bar with social icons
 [params.topbar]
-    enable = false 
-    text = """<p class="hidden-sm hidden-xs">欢迎来到 Service Mesh 爱好者网站</p>
+    enable = true
+    text = """<p class="hidden-sm hidden-xs">您现在浏览的是 ServiceMesher <u>临时</u>预览网站</p>
       """
 
 # Enable and disable widgets for the right sidebar
