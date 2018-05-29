@@ -4,7 +4,7 @@ description: "Service Mesh活动页面"
 keywords: ["service mesh"]
 ---
 
-## SerivceMesher 互动预告
+## SerivceMesher 活动预告
 
 此处将显示 ServiceMesher 最新活动信息。
 
