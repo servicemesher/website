@@ -10,7 +10,7 @@ tags: ["service mesh"]
 categories: ["service mesh"]
 ---
 
-**作者介绍**：田晓亮，8年软件行业经验，曾就职于三星，2012年进入云计算领域，对PaaS，DevOps，APM有深入的研究和实践经验，方案支撑近千台VM中的应用部署监控。 2016年加入华为担任架构师，负责微服务的Go语言开发框架及Service Mesh设计和落地，Go语言微服务框架已被华为5G核心网络采用，Service Mesh服务也已在华为云商用上线。  
+**作者介绍**：田晓亮，8年软件行业经验，曾就职于三星，2012年进入云计算领域，对PaaS，DevOps，APM有深入的研究和实践经验，方案支撑近千台VM中的应用部署监控。 2016年加入华为担任架构师，负责微服务的Go语言开发框架及Service Mesh设计和落地。
 
 原文地址：https://blog.csdn.net/karamos/article/details/80133231
 
