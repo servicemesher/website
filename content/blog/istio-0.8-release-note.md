@@ -5,7 +5,7 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frvj5vktpjj30rs0kut9a.jpg"
 author: "Istio"
 authorlink: "https://istio.io"
-summary: "北京时间 2018 年 6 月 1 日（儿童节）上午 9: 30 Istio 0.8.0 LST（长期支持版本）发布。该版本除了常见的一堆错误修复和性能改进之外，还包含以下更新和新功能。"
+summary: "北京时间 2018 年 6 月 1 日（儿童节）上午 9: 30 Istio 0.8.0 LTS（长期支持版本）发布。该版本除了常见的一堆错误修复和性能改进之外，还包含以下更新和新功能。"
 tags: ["istio"]
 categories: ["译文"]
 ---
@@ -14,7 +14,7 @@ categories: ["译文"]
 >
 > 译者：[Jimmy Song](https://jimmysong.io)
 
-北京时间 2018 年 6 月 1 日（儿童节）上午 9: 30 Istio 0.8.0 LST（长期支持版本）发布。该版本除了常见的一堆错误修复和性能改进之外，还包含以下更新和新功能。
+北京时间 2018 年 6 月 1 日（儿童节）上午 9: 30 Istio 0.8.0 LTS（长期支持版本）发布。该版本除了常见的一堆错误修复和性能改进之外，还包含以下更新和新功能。
 
 ![Istio 0.8 发布](https://ws1.sinaimg.cn/large/00704eQkgy1frvj0gh5pzj30kl0u4q6t.jpg)
 
