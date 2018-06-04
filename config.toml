@@ -91,7 +91,7 @@ paginate = 10
     # Enable the contact form by entering your Formspree.io email
     email = "jimmysong@jimmysong.io"
 
-    about_us = "<p>Service Mesh 爱好者</p>"
+    about_us = "<p>Service Mesh 爱好者</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1frzg765ahyj303k03kdg7.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
 
     # Format dates with Go's time formatting
