@@ -1,0 +1,10 @@
+weight: 1
+title: "社区活动预告"
+description: >
+  <ul class="list-style-none">
+     <li>本社区第一次线下 meetup</li>
+     <li>大咖云集</li>
+     <li>Call of topic</li>
+     <li><a href="/activity">了解详情</a></li>
+   </ul>
+image: "img/carousel/hangzhou-meetup.png"
