@@ -2,7 +2,7 @@
 title: "服务网格：8种方式简化微服务部署"
 date: 2018-06-05T19:12:42+08:00
 draft: false
-banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frk001fkixj30rs0ku4qp.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs0iwgalk7j30rs0kux38.jpg"
 author: "Robert Whiteley"
 authorlink: "https://thenewstack.io/author/robert-whitely/"
 summary: "基于微服务的架构是未来的趋势，但是实现这种架构会面临许多困难。现代应用架构远比过去的架构复杂，因此实现微服务架构将会带来了一系列特殊的挑战，而服务网格可以帮我们解决很多问题。"
