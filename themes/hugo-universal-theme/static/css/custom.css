@@ -97,3 +97,15 @@ body {
   opacity: 0.9;
   filter: alpha(opacity=90);
 }
+
+li {
+    line-height:2;
+}
+
+p {
+    line-height:2;
+}
+
+#post-content blockquote p {
+    line-height:1.2;
+}
