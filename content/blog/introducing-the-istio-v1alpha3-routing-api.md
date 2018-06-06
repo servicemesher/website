@@ -38,7 +38,7 @@ categories: ["译文"]
 
 在一个典型的网格中，通常有一个或多个用于终止外部TLS链接，将流量引入网格的负载均衡器（我们称之为gateway）。 然后流量通过sidecar网关（sidecar gateway）流经内部服务。应用程序使用外部服务的情况也很常见（例如访问Google Maps API），一些情况下，这些外部服务可能被直接调用；但在某些部署中，网格中所有访问外部服务的流量可能被要求强制通过专用的出口网关（Egress gateway）。 下图描绘了网关在网格中的使用情况。
 
-![](http://ww1.sinaimg.cn/large/6ce41a46ly1fs1eqjfubij20m308mgmu.jpg)
+![](https://ww1.sinaimg.cn/large/6ce41a46ly1fs1eqjfubij20m308mgmu.jpg)
 
 考虑到上述因素，`v1alpha3`引入了以下这些新的配置资源来控制进入网格、网格内部和离开网格的流量路由。
 
@@ -50,7 +50,7 @@ categories: ["译文"]
 `VirtualService`、`DestinationRule`和`ServiceEntry`分别替换了原API中的`RouteRule`、`DestinationPolicy`和`EgressRule`。`Gateway`是一个独立于平台的抽象，用于对流入专用中间设备的流量进行建模。
 
 下图描述了跨多个配置资源的控制流程。
-![](http://ww1.sinaimg.cn/large/6ce41a46ly1fs1erey8a3j20lt0acgmi.jpg)
+![](https://ww1.sinaimg.cn/large/6ce41a46ly1fs1erey8a3j20lt0acgmi.jpg)
 
 ### Gateway
 
