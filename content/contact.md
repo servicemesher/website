@@ -21,5 +21,4 @@ https://github.com/servicemesher
 
 ### 线下 meetup
 
-请关注我们的活动安排。
-
+请访问[活动](/activity)页面了解 meetup 安排。
