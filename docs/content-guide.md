@@ -12,9 +12,12 @@ date: {{ .Date }}
 draft: true
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frk001fkixj30rs0ku4qp.jpg"
 author: "N/A"
+authorlink: ""
+translator: ""
 summary: "文章摘要"
 tags: [""]
 categories: [""]
+keywords: [""]
 ```
 
 其中包含了博客文章的一些元数据。
@@ -24,9 +27,12 @@ categories: [""]
 - draft：是否是草稿，设置为 `false` 才会发布出去，默认是 `true`
 - banner：“最新文章”一栏下的博客横幅
 - author：文章作者
+- authorlink: 原文链接或者作者的个人链接地址
+- translator: 译者名字，若为翻译的文章可以不填
 - summary：文章摘要，会在“最新文章”一栏显示
 - tags：标签，可以写多个
 - categories：分类，可以写多个，一般写一个就行
+- keywords: 关键字
 
 下图是以上元数据对应的单个博客页面上的地方。
 
