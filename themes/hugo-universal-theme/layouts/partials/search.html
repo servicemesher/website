@@ -21,7 +21,9 @@ autocomplete('#aa-search-input',
     templates: {
         //'suggestion' templating function used to render a single suggestion
         suggestion: function(suggestion) {
-            return '<span>' + '<a href="{{ .Site.BaseURL }}' + suggestion.url+ '">' +
+            baseURL="{{ .Site.BaseURL }}"
+            baseURL=baseURL.substring(0,baseURL.length-1)
+            return '<span>' + '<a href="' + baseURL + suggestion.url+ '">' +
                 suggestion._highlightResult.title.value + '</a></span>'+
                 '<span>'+suggestion._highlightResult.summary.value+'</span>';
         }
