@@ -8,6 +8,7 @@ authorlink: "https://github.com/fleeto"
 summary: "本文将带您探究 Istio 0.8 LTS 版本中的 Helm Chart 的安装部署及其结构。"
 tags: ["istio","helm","chart"]
 categories: ["istio"]
+keywords: ["istio","helm chart","helm","istio 0.8"]
 ---
 
 儿童节期间，拖拉了一个多月的 Istio 0.8 正式发布了，这可能是 Istio 1.0 之前的最后一个 LTS 版本，意义重大。

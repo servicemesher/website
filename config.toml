@@ -2,6 +2,7 @@ baseurl = "https://servicemesher.github.io/"
 title = "ServiceMesher"
 theme = "hugo-universal-theme"
 languageCode = "zh"
+hasCJKLanguage = true
 # Site language. Available translations in the theme's `/i18n` directory.
 defaultContentLanguage = "zh"
 # Enable comments by entering your Disqus shortname
@@ -42,7 +43,6 @@ paginate = 10
     name = "联系我们"
     url  = "/contact/"
     weight = 5
-
 # Top bar social links menu
 
 [[menu.topbar]]
@@ -59,17 +59,15 @@ paginate = 10
 
 [params]
     viewMorePostLink = "/blog/"
-    author = "ServiceMesher"
+    author = "Jimmy Song(宋净超)"
     defaultKeywords = ["service mesh"]
     defaultDescription = "Service Mesh爱好者网站"
-    
     # Browser title description
     description = "Service Mesh爱好者"
     # Google Maps API key (if not set will default to not passing a key.)
     googleMapsApiKey = ""
     # Baidu统计
     baiduKey="761ec5e305f799778975c1f71c47a520"
-    
     # Style options: default (light-blue), blue, green, marsala, pink, red, turquoise, violet
     style = "violet"
 
@@ -159,3 +157,20 @@ paginate = 10
     enable = true
     title = "最新博客"
     subtitle = "社区参与者的博客与最 in 的新闻都在这里"
+
+[outputs]
+    home = ["HTML", "RSS", "Algolia"]
+
+[outputFormats.Algolia]
+    baseName = "algolia"
+    isPlainText = true
+    mediaType = "application/json"
+    notAlternative = true
+
+[params.algolia]
+    enable = true
+    appid = "X4YB3WOBNV"
+    index = "servicemesher"
+    vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
+    params = ["categories", "tags"]
+    key = "d2134c5a8d250e6d3246594240c45201"

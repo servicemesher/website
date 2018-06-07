@@ -34,25 +34,34 @@
                     {{ end  }}
                   </li>
                   {{ end }}
+                  {{ if .Site.Params.algolia.enable }}
+                    <li>
+                        <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+                        <span class="hidden-sm hidden-md hidden-lg">搜索</span> <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+                    </a>
+                    </li>
+                  {{ end }}
                 </ul>
             </div>
             <!--/.nav-collapse -->
 
-            <div class="collapse clearfix" id="search">
-
-                <form class="navbar-form" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <span class="input-group-btn">
-
-                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
-
-                </span>
-                    </div>
-                </form>
-
+            <!-- Search Modal -->
+            <div id="modalSearch" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">博客搜索</h4>
+                  </div>
+                  <div class="modal-body">
+                      {{ partial "search.html" . }}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!--/.nav-collapse -->
 
         </div>
     </div>

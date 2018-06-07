@@ -4,7 +4,7 @@
   <meta name="googlebot" content="index,follow,snippet,archive">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Title }} · {{ $.Site.Params.description }}</title>
-  <meta name="author" content="{{ .Site.Author.name }}" />
+  <meta name="author" content="{{ .Site.Params.Author }}" />
 
   {{ if .Keywords }}
   <meta name="keywords" content="{{ delimit .Keywords ", " }}">
@@ -37,6 +37,7 @@
 
   <!-- Custom stylesheet - for your changes -->
   <link href="{{ .Site.BaseURL }}css/custom.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/search.css" | absURL }}" />
 
   <!-- Responsivity for older IE -->
   {{ `

@@ -8,6 +8,7 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbqc9faoj30rs0kuwnv.jpg"
 summary: "今天我们不谈技术，不谈架构，也不谈具体的产品，我们来聊一聊在未来一两年之内，Service Mesh技术会在微服务相关的市场带来什么样的变化？"
 date: 2018-05-21T21:48:05+08:00
 draft: false
+keywords: ["service mesh","服务网格","微服务","市场"]
 ---
 
 今天我们不谈技术，不谈架构，也不谈具体的产品，我们来聊一聊在未来一两年之内，Service Mesh技术会在微服务相关的市场带来什么样的变化？

@@ -7,6 +7,7 @@ author: "刘超"
 summary: "在Kubernetes称为容器编排的标准之后，Service Mesh开始火了起来，但是很多文章讲概念的多，讲技术细节的少，所以专门写一篇文章，来解析Service Mesh背后的技术细节。"
 tags: ["service mesh","istio"]
 categories: ["service mesh"]
+keywords: ["service mesh","istio","kubernetes","envoy"]
 ---
 
 在Kubernetes称为容器编排的标准之后，Service Mesh开始火了起来，但是很多文章讲概念的多，讲技术细节的少，所以专门写一篇文章，来解析Service Mesh背后的技术细节。
