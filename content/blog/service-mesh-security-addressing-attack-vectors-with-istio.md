@@ -1,9 +1,10 @@
 ---
-title: "Service Mesh Security Addressing Attack Vectors With Istio"
+title: "Service Mesh 安全：用 Istio 应对攻击"
 date: 2018-06-07T19:27:19+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs2ua9kohvj30rs0kub29.jpg"
 author: "Zach Jory"
+translator: "崔秀龙"
 authorlink: "https://aspenmesh.io/2018/06/service-mesh-security-addressing-attack-vectors-with-istio/"
 summary: "把单体应用拆分为微服务的过程中，会引入一个风险就是——可能的受攻击面积变大了。从前单体应用中通过函数调用完成的通信，现在都要通过网络完成。提高安全性从而避免这个问题带来的安全影响，是微服务之路上必须要着重考虑的问题。"
 tags: ["istio"]

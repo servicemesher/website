@@ -81,3 +81,6 @@
 
 - id: minute
   translation: "min"
+
+- id: translator
+  translation: "translator"

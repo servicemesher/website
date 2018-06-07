@@ -4,6 +4,7 @@ date: 2018-05-31T21:12:03+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fruuebz4b3j30rs0kungw.jpg"
 author: "Anita"
+translator: "宋净超"
 summary: "本文是 Weaveworks 的 CEO 对 GitOps 工作流程和 Istio 的看法。本文还介绍了如何使用 GitOps 上线和管理 Istio 的金丝雀部署。以上观点来自哥本哈根 Kubecon 上的 Weaveworks 的分享。"
 tags: ["istio","gitops"]
 categories: ["译文"]

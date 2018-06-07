@@ -26,8 +26,12 @@
 
                         <p class="text-muted text-uppercase mb-small text-left">
                         {{ if and (isset .Params "author") (isset .Params "authorlink") }}{{ i18n "authorBy" }} <a href="{{ .Params.authorlink }}">{{ .Params.author }}</a>
-                        {{ else if (isset .Params "author") }}{{ i18n "authorBy" }}{{ .Params.author }}
+                        {{ else if (isset .Params "author") }}{{ i18n "authorBy" }} {{ .Params.author }}
                         {{ end }}
+                        {{ if (isset .Params "translator") }} | {{ i18n "translator" }} {{ .Params.translator }}
+                        {{ end }}
+                        |
+                        {{ .FuzzyWordCount }}{{ i18n "words" }} | {{ i18n "readInAbout" }}{{ .ReadingTime }}{{ i18n "minute" }}
                         |
                         <!-- show categories -->
                         {{ if isset .Params "categories" }}

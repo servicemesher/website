@@ -4,6 +4,7 @@ date: 2018-06-04T15:55:08+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frz7j5n8mfj30rs0kuhdt.jpg"
 author: "aspenmesh.io"
+translator: "卢宇亮"
 authorlink: "https://aspenmesh.io"
 summary: "通过 Aspen Mesh 之旅，我们带来三个主题的系列博文来讨论我们为什么选择了 Istio。"
 tags: ["service mesh"]

@@ -2,6 +2,7 @@
 title: "Istio v1aplha3 routing API介绍"
 date: 2018-06-06T18:30:53+08:00
 draft: false
+translator: "赵化冰"
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs1n3xnagxj30rs0kuke9.jpg"
 author: "Frank Budinsky & Shriram Rajagopalan"
 authorlink: "https://istio.io/blog/2018/v1alpha3-routing"

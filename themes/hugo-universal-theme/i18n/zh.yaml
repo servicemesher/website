@@ -81,3 +81,6 @@
 
 - id: minute
   translation: "分钟"
+
+- id: translator
+  translation: "译者"
