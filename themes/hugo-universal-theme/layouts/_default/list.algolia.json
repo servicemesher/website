@@ -3,7 +3,7 @@
 {{- $section := $.Site.GetPage "section" .Section }}
 {{- range .Site.AllPages -}}
   {{- if and (eq .Section "blog") (not .Draft) (eq .Kind "page") -}}
-    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "date" .Date "fuzzywordcount" .FuzzyWordCount "keywords" .Keywords "lang" .Lang "lastmod" .Lastmod "permalink" .Permalink "publishdate" .PublishDate "readingtime" .ReadingTime "relpermalink" .RelPermalink "summary" .Params.Summary  "title" .Title "url" .URL "weight" .Weight "wordcount" .WordCount "tags" .Params.Tags "categories" .Params.Categories "author" .Params.Author "authorlink" .Params.AuthorLink "banner" .Params.Banner)}}
+    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "date" .Date "fuzzywordcount" .FuzzyWordCount "keywords" .Keywords "lang" .Lang "lastmod" .Lastmod "permalink" .Permalink "publishdate" .PublishDate "readingtime" .ReadingTime "relpermalink" .RelPermalink "summary" .Params.Summary  "title" .Title "url" .URL "weight" .Weight "wordcount" .WordCount "tags" .Params.Tags "categories" .Params.Categories "author" .Params.Author "translator" .Params.Translator "authorlink" .Params.AuthorLink "banner" .Params.Banner)}}
   {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
