@@ -40,7 +40,7 @@
   background-color: #fff;
   border: 2px solid rgba(228, 228, 228, 0.6);
   border-top-width: 1px;
-  font-family: "Montserrat", sans-serif;
+  font-family: Monospaced Number,Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif;
   width: 300px;
   margin-top: 10px;
   box-shadow: 4px 4px 0 rgba(241, 241, 241, 0.35);
@@ -65,12 +65,12 @@
   .aa-suggestion:hover, .aa-suggestion.aa-cursor {
     background-color: rgba(241, 241, 241, 0.35); }
   .aa-suggestion > span:first-child {
-    color: #333; }
+    color: #1a1515; }
   .aa-suggestion > span:last-child {
     text-transform: uppercase;
-    color: #a9a9a9; }
+    color: #180f0f; }
 .aa-suggestion > span:first-child em, .aa-suggestion > span:last-child em {
   font-weight: 700;
   font-style: normal;
-  background-color: rgba(58, 150, 207, 0.1);
+  background-color: rgba(251, 235, 31,0.3);
   padding: 2px 0 2px 2px; }
