@@ -23,7 +23,6 @@
                     <!-- *** LEFT COLUMN *** -->
 
                     <div class="col-md-9" id="blog-post">
-
                         <p class="text-muted mb-small text-left">
                         {{ if and (isset .Params "author") (isset .Params "authorlink") }}{{ i18n "authorBy" }} <a href="{{ .Params.authorlink }}">{{ .Params.author }}</a>
                         {{ else if (isset .Params "author") }}{{ i18n "authorBy" }} {{ .Params.author }}
@@ -42,12 +41,14 @@
                         {{ end }}
                         {{ i18n "publishedOn" }}
                         {{ .Date.Format .Site.Params.date_format }}
-                        |
                         <!-- show tags -->
                         {{ if .Params.tags }}
+                        <p class="text=muted mb-small text-uppercase text-left">
+                        标签
                         {{ range .Params.tags }}
-                        <a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">#{{ . }}</a>
+                        <a style="text-transform:capitalize" href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/"><i>#{{ . }}</i></a>
                         {{ end }}
+                        </p>
                         {{ end }}
                         <!-- show word count
                          |
