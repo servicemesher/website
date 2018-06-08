@@ -46,7 +46,7 @@
                         <!-- show tags -->
                         {{ if .Params.tags }}
                         {{ range .Params.tags }}
-                        <a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">#{{ . }}</a>&nbsp;
+                        <a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">#{{ . }}</a>
                         {{ end }}
                         {{ end }}
                         <!-- show word count

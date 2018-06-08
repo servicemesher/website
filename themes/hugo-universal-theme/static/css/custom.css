@@ -109,3 +109,47 @@ p {
 #post-content blockquote p {
     line-height:1.2;
 }
+
+/* undo upper case title */
+.box-image-text .content h3, .box-image-text .content h4 {
+    text-transform: none;
+    line-height: 1.5;
+    color: #555555;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+#blog-listing-medium .post h2 {
+    text-transform: none;
+    margin: 0 0 10px;
+    font-size: 24px;
+    letter-spacing: 0.08em;
+}
+
+#blog-listing-medium .post .author-category {
+    float: left;
+    text-transform: none;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+}
+
+#heading-breadcrumbs h1 {
+    color: #333333;
+    text-transform: none;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.panel.sidebar-menu ul.tag-cloud li a {
+    display: inline-block;
+    padding: 5px;
+    border: solid 1px #eeeeee;
+    border-radius: 0;
+    color: #986dbd;
+    margin: 5px 5px 5px 0;
+    text-transform: capitalize;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-size: 12px;
+}
