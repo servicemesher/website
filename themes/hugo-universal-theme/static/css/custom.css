@@ -153,3 +153,16 @@ p {
     font-weight: 700;
     font-size: 12px;
 }
+
+.box-image-text.blog .author-category {
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    text-transform: none;
+}
+
+#footer .blog-entries .item .name h5 {
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+}

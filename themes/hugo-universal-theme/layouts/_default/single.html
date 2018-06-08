@@ -24,7 +24,7 @@
 
                     <div class="col-md-9" id="blog-post">
 
-                        <p class="text-muted text-uppercase mb-small text-left">
+                        <p class="text-muted mb-small text-left">
                         {{ if and (isset .Params "author") (isset .Params "authorlink") }}{{ i18n "authorBy" }} <a href="{{ .Params.authorlink }}">{{ .Params.author }}</a>
                         {{ else if (isset .Params "author") }}{{ i18n "authorBy" }} {{ .Params.author }}
                         {{ end }}
