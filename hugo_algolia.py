@@ -53,7 +53,7 @@ def update_index_of_mysite():
 
     index.set_settings({"searchableAttributes": ["title", "summary"]})
     index.set_settings({'attributesToHighlight': ["title", "summary"]})
-    index.set_settings({'attributesToSnippet': ['title', 'summary:120']})
+    index.set_settings({'attributesToSnippet': ['title', 'summary']})
     # for highlight
     index.set_settings({'highlightPreTag': '<em class="ais-Highlight">', 'highlightPostTag': '</em>'})
     return {'delete': len(ids_to_delete), 'save': len(rows)}
