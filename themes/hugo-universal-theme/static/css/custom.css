@@ -166,3 +166,9 @@ p {
     letter-spacing: 0.08em;
     font-size: 12px;
 }
+
+/* undo line break before and after comments */
+#blog-post .comment:before, #blog-post .comment:after {
+    content: " ";
+    display: contents;
+}
