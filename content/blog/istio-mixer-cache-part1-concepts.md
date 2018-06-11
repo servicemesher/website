@@ -32,7 +32,7 @@ keywords: ["service mesh","istio","源码解析"]
 
 ## 属性
 
-属性（Attuibute）是Istio中非常一个关键设计，对于Mixer更是特别重要，可以说Mixer的所有功能都是建立在属性这个核心概念之上。
+属性（attribute）是Istio中非常一个关键设计，对于Mixer更是特别重要，可以说Mixer的所有功能都是建立在属性这个核心概念之上。
 
 搬运一段官方文档的介绍：
 
@@ -40,7 +40,7 @@ keywords: ["service mesh","istio","源码解析"]
 
 属性的形式如下：
 
-```
+```ini
 request.path: xyz/abc
 request.size: 234
 request.time: 12:34:56.789 04/17/2017
@@ -56,8 +56,8 @@ target.service: example
 
 这些将被Istio使用的属性集合，被称为属性词汇，总数大概是50个，详细列表可以参看文档：
 
-- [Attribute Vocabulary](https://istio.io/docs/reference/config/mixer/attribute-vocabulary.html): 来自Istio官方文档中的Reference
-- [属性词汇](http://istio.doczh.cn/docs/reference/config/mixer/attribute-vocabulary.html)：此文档的中文文档翻译，来自istio.doczh.cn
+- [Attribute Vocabulary](https://istio.io/docs/reference/config/mixer/attribute-vocabulary.html)：来自Istio官方文档中的Reference
+- [属性词汇](http://istio.doczh.cn/docs/reference/config/mixer/attribute-vocabulary.html)：此文档的中文文档翻译，来自http://istio.doczh.cn
 
 ## 引用属性
 
@@ -69,7 +69,7 @@ target.service: example
 
 这个需要从Envoy和Mixer之间的Check方法说起：
 
-```
+```c++
 rpc Check(CheckRequest) returns (CheckResponse)
 ```
 
@@ -80,7 +80,7 @@ rpc Check(CheckRequest) returns (CheckResponse)
 | status                   | [google.rpc.Status](https://skyao.io/post/201804-istio-mixer-cache-concepts/#google.rpc.Status) | 状态码OK表示所有前置条件均满足。任何其它状态码表示不是所有的前置条件都满足，并且在detail中描述为什么。 |
 | validDuration            | [google.protobuf.Duration](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#duration) | 时间量，在此期间这个结果可以认为是有效的                     |
 | validUseCount            | int32                                                        | 可使用的次数，在此期间这个结果可以认为是有效的               |
-| attributes               | CompressedAttributes                                         | mixer返回的属性。 返回的切确属性集合由mixer配置的adapter决定。这些属性用于传送新属性，这些新属性是Mixer根据输入的属性集合和它的配置派生的。 |
+| attributes               | CompressedAttributes                                         | mixer返回的属性。返回的切确属性集合由mixer配置的adapter决定。这些属性用于传送新属性，这些新属性是Mixer根据输入的属性集合和它的配置派生的。 |
 | **referencedAttributes** | ReferencedAttributes                                         | **在匹配条件并生成结果的过程中使用到的全部属性集合。**       |
 
 “在匹配条件并生成结果的过程中使用到的全部属性集合”是什么意思呢？我们给个例子：
@@ -92,7 +92,7 @@ rpc Check(CheckRequest) returns (CheckResponse)
 
 ![img](https://skyao.io/post/201804-istio-mixer-cache-concepts/images/referenced-attributes.jpg)
 
-envoy在收到CheckResponse时，就可以从referencedAttributes字段的值中得知： 原来提交上去的”a=1,b=2,c=3,e=0,f=0”这样一个5个属性的集合，实际adapter使用到的只有”a,b,c”。
+Envoy在收到CheckResponse时，就可以从referencedAttributes字段的值中得知： 原来提交上去的”a=1,b=2,c=3,e=0,f=0”这样一个5个属性的集合，实际adapter使用到的只有”a,b,c”。
 
 ### 引用属性的作用
 
