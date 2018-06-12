@@ -172,3 +172,7 @@ p {
     content: " ";
     display: contents;
 }
+
+section, div.section {
+    margin-bottom: auto;
+}
