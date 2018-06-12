@@ -2,7 +2,7 @@
 title: "Istio服务网格的崛起"
 date: 2018-06-12T15:06:25+08:00
 draft: false
-banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frk001fkixj30rs0ku4qp.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs8g7sznh1j30rs0ku7wh.jpg"
 author: "Diogenes Rettori"
 authorlink: "https://www.infoworld.com/article/3273547/containers/the-rise-of-the-istio-service-mesh.html"
 translator: "戴佳顺"
