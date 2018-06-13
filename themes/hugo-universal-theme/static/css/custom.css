@@ -176,3 +176,18 @@ p {
 section, div.section {
     margin-bottom: auto;
 }
+
+.home-carousel h1 {
+    font-weight: 700;
+    text-transform: none;
+    font-size: 46px;
+    letter-spacing: 0.08em;
+}
+
+.home-carousel ul, .home-carousel p {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0;
+    text-transform: none;
+    letter-spacing: 0.10em;
+}
