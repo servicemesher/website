@@ -13,9 +13,7 @@ keywords: ["service mesh","istio","微服务"]
 ---
 
 > 原文链接：https://www.infoworld.com/article/3273547/containers/the-rise-of-the-istio-service-mesh.html
->
-> 作者：Diogenes Rettori   
->
+> 作者：Diogenes Rettori
 > 译者：戴佳顺
 
 如何确保微服务之间网络通信的可靠性、安全性和可管理性？ 使用服务网格吧！

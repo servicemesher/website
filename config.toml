@@ -89,14 +89,14 @@ paginate = 10
     # Enable the contact form by entering your Formspree.io email
     email = "jimmysong@jimmysong.io"
 
-    about_us = "<p>Service Mesh 爱好者</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1frzg765ahyj303k03kdg7.jpg>"
+    about_us = "<p>传播 Service Mesh 技术、加强行业内部交流、推动 Service Mesh 在企业落地</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1frzg765ahyj303k03kdg7.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
 
     # Format dates with Go's time formatting
     date_format = "2006-01-02"
 
     logo = "img/logo.png"
-    address = """<p><strong>ServiceMesher.</strong>
+    address = """<p>Service Mesh爱好者社区</p><p><a href="https://jimmysong.io/about">管理员</a></p>
       """
 
 [Permalinks]
@@ -141,7 +141,7 @@ paginate = 10
     enable = true
     icon = "fa fa-pagelines"
     title = "参与进来"
-    subtitle = "加入 Service Mesh 爱好者群体"
+    subtitle = "加入 Service Mesh 爱好者社区"
     link_url = "/contact"
     link_text = "查看加入方式"
 
