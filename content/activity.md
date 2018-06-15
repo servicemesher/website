@@ -10,7 +10,7 @@ keywords: ["service mesh"]
 
 继 Service Mesh 爱好者社区线上第一个社区任务：Envoy 官方文档翻译完成之后，我们也将组织线下的 Meetup 啦！
 
-首次 Meetup 我们选择在美丽的`杭州`，时间为`6月30日`，地点为`蚂蚁Z空间`。希望能借此机会加深 SMer 们的交流，也希望我们一起 mesh the service ！其他城市的小伙伴们稍安勿躁，我们还会做全国的巡回 meetup。
+首次 Meetup 我们选择在美丽的`杭州`，时间为`6月30日`，地点为`蚂蚁Z空间`。希望能借此机会加深 SMer 们的交流，也希望我们一起 mesh the service ！其他城市的小伙伴们稍安勿躁，我们还会做全国的巡回 meetup。如果您来不了现场，可以通过IT大咖说观看视频直播。
 
 报名地址：http://www.huodongxing.com/event/2444454870500
 
@@ -67,3 +67,7 @@ keywords: ["service mesh"]
 活动场地：杭州蚂蚁Z空间·1号楼·九重宫阙
 
 ![九重宫阙](https://ws1.sinaimg.cn/large/00704eQkgy1fsbqsfu8lvj34bk14whe2.jpg)
+
+独家视频直播媒体：IT大咖说
+
+![IT大咖说](https://ws1.sinaimg.cn/large/00704eQkgy1fsbye5vuanj31d30dtjyu.jpg)
