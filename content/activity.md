@@ -62,4 +62,8 @@ keywords: ["service mesh"]
 
 徐运元，谐云科技云平台架构师，浙江大学 SEL 实验室成员，曾就职于浙大网新，拥有超过9年的项目研发和5年的项目管理经验，主导过大型 PaaS 平台的软件定义网络控制平台的项目开发和落地工作、目前致力于容器 PaaS 平台、企业级容器云平台的方案设计和技术落地。 
 
-![](https://ws1.sinaimg.cn/large/00704eQkgy1fs9sr1ergbj30yo0ksth0.jpg)
+![蚂蚁Z空间位置](https://ws1.sinaimg.cn/large/00704eQkgy1fs9sr1ergbj30yo0ksth0.jpg)
+
+活动场地：杭州蚂蚁Z空间·1号楼·九重宫阙
+
+![九重宫阙](https://ws1.sinaimg.cn/large/00704eQkgy1fsbqsfu8lvj34bk14whe2.jpg)
