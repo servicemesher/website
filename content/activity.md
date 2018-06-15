@@ -12,9 +12,11 @@ keywords: ["service mesh"]
 
 首次 Meetup 我们选择在美丽的`杭州`，时间为`6月30日`，地点为`蚂蚁Z空间`。希望能借此机会加深 SMer 们的交流，也希望我们一起 mesh the service ！其他城市的小伙伴们稍安勿躁，我们还会做全国的巡回 meetup。
 
+报名地址：http://www.huodongxing.com/event/2444454870500
+
 <center>
 
-![Service Mesh杭州meetup](https://ws1.sinaimg.cn/large/00704eQkgy1fsaut0p566j30go14m1kx.jpg)
+![Service Mesh杭州meetup](https://ws1.sinaimg.cn/large/00704eQkgy1fsbn8ykcshj30go14m1kx.jpg))
 
 </center>
 
@@ -30,7 +32,7 @@ keywords: ["service mesh"]
 
 时间：2018年6月30日（星期六）
 
-地点：杭州，蚂蚁Z空间
+地点：杭州，蚂蚁Z空间，1号楼
 
 报名：本月中旬开放活动报名。
 
