@@ -2,14 +2,14 @@
 title: "WePay如何使用Linkerd作为服务网格代理"
 date: 2018-06-19T11:42:58+08:00
 draft: false
-banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frk001fkixj30rs0ku4qp.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsgcscf8r2j30rs0kugpu.jpg"
 author: "Mohsen Rezaei"
 authorlink: "https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay"
 translator: "Kael Zhang"
-summary: "本文是WePay使用Linkerd作为服务网格的代理的分享文章。"
+summary: "本文是WePay（一家做支付平台和风控产品的公司）使用Linkerd作为服务网格的代理的分享文章。"
 tags: ["linkerd"]
-categories: ["linkerd"]
-keywords: ["service mesh","linkerd","wepay"]
+categories: ["译文"]
+keywords: ["service mesh","linkerd","wepay","服务网格"]
 ---
 
 > 原文地址：[Using Linkerd as a Service Mesh Proxy at WePay](https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay)
