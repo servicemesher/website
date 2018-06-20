@@ -21,7 +21,7 @@ https://github.com/servicemesher
 
 #### 微信公众号
 
-![ServiceMesher微信群二维码](https://ws1.sinaimg.cn/large/00704eQkgy1friv56eu8vj3076076dga.jpg)
+![ServiceMesher微信群二维码](https://ws1.sinaimg.cn/large/00704eQkgy1fshv989hhqj309k09k0t6.jpg)
 
 #### 线下 meetup
 
