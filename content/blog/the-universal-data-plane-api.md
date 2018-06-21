@@ -7,7 +7,7 @@ author: "Matt Klein"
 translator: "敖小剑"
 authorlink: "https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a"
 summary: "本文是Matt Klein于2017年9月在Meduim上发表的通用数据平面API文章，文中指出了Envoy在API设计上的要点，以及数据平面与控制平面的关系。"
-tags: ["envoy"]
+tags: ["envoy","service mesh"]
 categories: ["译文"]
 keywords: ["service mesh","envoy"]
 ---
