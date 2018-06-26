@@ -71,3 +71,5 @@ keywords: ["service mesh"]
 独家视频直播媒体：IT大咖说
 
 ![IT大咖说](https://ws1.sinaimg.cn/large/00704eQkgy1fsbye5vuanj31d30dtjyu.jpg)
+
+视频直播地址：http://www.itdks.com/eventlist/detail/2311
