@@ -31,13 +31,13 @@
                             <div class="bg"></div>
                             <div class="text">
                                 <p class="buttons">
-                                    <a href="{{ .Permalink }}" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> {{ i18n "readMore" }}</a>
+                                    <a href="{{ .RelPermalink }}" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> {{ i18n "readMore" }}</a>
                                 </p>
                             </div>
                         </div>
 
                         <div class="content">
-                            <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+                            <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
                             <p class="author-category">
                             {{ if and (isset .Params "author") (isset .Params "authorlink") }}
                             {{ i18n "authorBy" }} <a href="{{ .Params.authorlink }}">{{ .Params.author }}</a>
@@ -57,7 +57,7 @@
                             <p class="intro">{{ .Summary | safeHTML | truncate 200 }}</p>
                             {{ end }}
                             <p class="read-more">
-                              <a href="{{ .Permalink }}" class="btn btn-template-main">{{ i18n "continueReading" }}</a>
+                              <a href="{{ .RelPermalink }}" class="btn btn-template-main">{{ i18n "continueReading" }}</a>
                             </p>
                         </div>
                     </div>
