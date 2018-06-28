@@ -8,7 +8,7 @@ authorlink: "https://www.linux.com/blog/event/kubecon/2018/4/making-most-out-mic
 summary: "本文是在哥本哈根KubeCon上对Aspen Mesh（隶属于F5公司）的首席架构师Andrew Jenkins关于微服务和Service Mesh的采访。"
 translator: "殷龙飞"
 tags: ["service mesh"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["service mesh","AspenMesh"]
 ---
 

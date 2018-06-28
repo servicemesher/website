@@ -6,7 +6,7 @@ author: "宋净超"
 authorlink: "https://jimmysong.io"
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frk001fkixj30rs0ku4qp.jpg"
 summary: "本文是 Istio 管理 Java 微服务的案例教程，使用的所有工具和软件全部基于开源方案，替换了 redhat-developer-demos/istio-tutorial 中的 minishift 环境，使用 kubernetes-vagrant-centos-cluster 替代，沿用了原有的微服务示例，使用 Zipkin 做分布式追踪而不是 Jaeger。"
-tags: ["istio","教程"]
+tags: ["istio","tutorial"]
 categories: ["istio"]
 keywords: ["istio","service mesh","服务网格","教程"]
 ---

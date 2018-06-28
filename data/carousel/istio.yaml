@@ -9,4 +9,4 @@ description: >
      <li>受限入站端口</li>
      <li><a href="/blog/istio-0.8-release-note/">了解详情</a></li>
    </ul>
-image: "img/carousel/istio.png"
+image: "/img/carousel/istio.png"

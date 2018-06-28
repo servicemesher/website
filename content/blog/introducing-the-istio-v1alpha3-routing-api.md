@@ -8,7 +8,7 @@ author: "Frank Budinsky & Shriram Rajagopalan"
 authorlink: "https://istio.io/blog/2018/v1alpha3-routing"
 summary: "本文讲解的是Istio 0.8中的一项重大变化——引入v1alpha3 routing API，旧版本的API将不再兼容，未来会提供模型转换工具来转换旧版 API。"
 tags: ["istio"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["istio","API","istio 0.8"]
 ---
 

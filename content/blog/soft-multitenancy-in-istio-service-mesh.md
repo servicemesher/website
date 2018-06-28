@@ -8,7 +8,7 @@ authorlink: "https://istio.io/blog/2018/soft-multitenancy/"
 summary: "多租户是一个在各种环境和各种应用中都得到了广泛应用的概念，但是不同环境中，为每租户提供的具体实现和功能性都是有差异的。Kubernetes 多租户工作组致力于在 Kubernetes 中定义多租户用例和功能。然而根据他们的工作进展来看，恶意容器和负载对于其他租户的 Pod 和内核资源的访问无法做到完全控制，因此只有“软性多租户”支持是可行的。"
 tags: ["istio"]
 translator: "崔秀龙"
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["service mesh","istio"]
 ---
 

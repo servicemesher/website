@@ -8,7 +8,7 @@ translator: "崔秀龙"
 authorlink: "https://aspenmesh.io/2018/06/service-mesh-security-addressing-attack-vectors-with-istio/"
 summary: "把单体应用拆分为微服务的过程中，会引入一个风险就是——可能的受攻击面积变大了。从前单体应用中通过函数调用完成的通信，现在都要通过网络完成。提高安全性从而避免这个问题带来的安全影响，是微服务之路上必须要着重考虑的问题。"
 tags: ["istio"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["service mesh","istio","安全"]
 ---
 

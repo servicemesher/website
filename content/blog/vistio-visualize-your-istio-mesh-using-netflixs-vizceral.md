@@ -7,8 +7,8 @@ translator: "宋净超"
 author: "Nick Nellis"
 authorlink: "https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e"
 summary: "Vizceral是Netflix发布的一个开源项目，用于近乎实时地监控应用程序和集群之间的网络流量。Vistio是使用Vizceral对Istio和网格监控的改进。本文是使用Vistio对Istio mesh做流量可视化的教程。"
-tags: ["istio","vistio","vizceral"]
-categories: ["译文"]
+tags: ["istio","vistio","vizceral","tutorial"]
+categories: ["translation"]
 keywords: ["service mesh","istio","vistio"]
 ---
 

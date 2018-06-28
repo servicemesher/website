@@ -6,7 +6,7 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs9s56exu9j30rs0ku7ru.jpg"
 author: "黄挺"
 authorlink: "https://mp.weixin.qq.com/s/40qIQnhSTUlIndGWUETcJQ"
 summary: "本文会给大家分享 Service Mesh 在蚂蚁金服的演进历程和在2018年6月举办的 GIAC 全球互联网架构大会中蚂蚁金服高级技术专家与现场人员关于Service Mesh的热门QA互动。"
-tags: ["service mesh","蚂蚁金服"]
+tags: ["service mesh","ant financial"]
 categories: ["service mesh"]
 keywords: ["service mesh","蚂蚁金服","微服务","SOA","SOFA",""]
 ---

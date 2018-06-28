@@ -5,9 +5,10 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsqwqgx0ylj30rs0kualy.jpg"
 author: "Todd Kaplinger"
 authorlink: "https://github.com/todkap"
+translator: "陈冬"
 summary: "通过使用 Istio Service Mesh 来保障 Kubernetes 平台服务。通常可以运行示例代码有助于用户更清晰的理解并将概念应用到实际的案例中。该项目围绕一个简单的 Node.js 应用程序演示了以 Istio Service Mesh 为 ETCD 的持久化数据服务的能力。"
 tags: ["istio","servcie mesh"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["service mesh","istio","微服务"]
 ---
 

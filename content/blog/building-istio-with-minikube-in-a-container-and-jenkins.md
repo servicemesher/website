@@ -6,7 +6,7 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fryzxh051sj30rs0ku0wn.jpg"
 author: "Andrew Jenkins"
 summary: "本文讲述如何制作一个新的 Minikube-in-a-Container 容器和使用 Jenkins Pipeline 来构建和测试 Istio 的流程脚本。"
 tags: ["istio","jenkins"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["minikube","容器","Jenkis","Istio","CI/CD","Jenkinsfile"]
 ---
 

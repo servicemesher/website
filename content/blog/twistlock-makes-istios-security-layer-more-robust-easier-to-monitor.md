@@ -8,7 +8,7 @@ translator: "宋净超"
 authorlink: "https://thenewstack.io/twistlock-makes-istios-security-layer-more-robust-easier-to-monitor/"
 summary: "本文介绍网络安全公司Twistlock如何实现Istio service mesh的可视化并增强微服务的安全性"
 tags: ["istio","security"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["service mesh","security","istio","twistlock"]
 ---
 

@@ -6,7 +6,7 @@ author: "田晓亮"
 authorlink: "https://github.com/tianxiaoliang"
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frtdesg6toj30rs0kuwtz.jpg"
 summary: "本文分享了微服务中存在的问题，以及如何通过商用级的 Service Mesh 设计来解决问题，作者分享了华为的 Service Mesh 设计之道。"
-tags: ["service mesh","华为"]
+tags: ["service mesh","huawei"]
 categories: ["service mesh"]
 keywords: ["service mesh","服务网格","华为","架构设计"]
 ---

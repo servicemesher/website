@@ -8,4 +8,4 @@ description: >
     <li>Istio 默认的数据平面</li>
     <li><a href="https://servicemesher.github.io/envoy">访问 Envoy 中文文档</a></li>
   </ul>
-image: "img/carousel/envoy-gitbook.png"
+image: "/img/carousel/envoy-gitbook.png"

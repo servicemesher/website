@@ -6,8 +6,8 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs780l6w6ej30rs0kub29.jpg"
 author: "敖小剑"
 authorlink: "https://skyao.io/post/201806-istio-mixer-cache-main/"
 summary: "经过前面基本概念和实现原理的介绍，大家对mixer check cache应该有了基本的了解，下面我们开始展开源代码来细细研读。"
-tags: ["istio","源码解析"]
-categories: ["istio源码解析"]
+tags: ["istio","source code"]
+categories: ["istio source code"]
 keywords: ["service mesh","istio","源码解析"]
 ---
 

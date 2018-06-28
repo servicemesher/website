@@ -8,7 +8,7 @@ authorlink: "https://medium.com/@prune998/istio-envoy-cert-manager-lets-encrypt-
 translator: "殷龙飞"
 summary: "本文是使用Let's Encrypt为Isito（Envoy）Service Mesh添加TLS安全支持的教程。"
 tags: ["istio","envoy","TLS","Let's Encrypt"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["service mesh","istio","let's encrypt","tls","envoy"]
 ---
 
