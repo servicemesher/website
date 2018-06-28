@@ -35,7 +35,7 @@
                         <!-- show categories -->
                         {{ if isset .Params "categories" }}
                         {{ if gt (len .Params.categories) 0 }}
-                        {{ i18n "archivedIn" }}<a href="{{ $.Site.BaseURL }}categories/{{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 }}</a>
+                        {{ i18n "archivedIn" }}<a href="/categories/ {{ index .Params.categories 0 | urlize | lower }}">{{ index .Params.categories 0 }}</a>
                         {{ end }}
                         |
                         {{ end }}

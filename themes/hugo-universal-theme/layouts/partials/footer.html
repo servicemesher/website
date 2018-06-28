@@ -26,7 +26,7 @@
                           {{ if isset .Params "banner" }}
                           <img src="{{ .Params.banner }}" class="img-responsive" alt="{{ .Title }}">
                           {{ else }}
-                            <img src="{{ .Site.BaseURL}}img/placeholder.png" class="img-responsive" alt="{{ .Title }}">
+                            <img src="/img/placeholder.png" class="img-responsive" alt="{{ .Title }}">
                           {{ end }}
                         </a>
                     </div>
