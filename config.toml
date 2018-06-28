@@ -92,7 +92,7 @@ paginate = 10
 
     about_us = "<p>传播 Service Mesh 技术、加强行业内部交流、推动 Service Mesh 在企业落地</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1fshv7n2uf7j303k03kweu.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
-    icpno = "京ICP备1503292号-5"
+    icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
     date_format = "2006-01-02"
     logo = "https://ws1.sinaimg.cn/large/00704eQkgy1fshutb9ya0j316v09nabp.jpg"
