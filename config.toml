@@ -135,8 +135,8 @@ paginate = 10
     # All testimonials are defined in their own files. You can find example items
     # at 'exampleSite/data/testimonials'.
     # For more informtion take a look at the README.
-    title = "社区活动"
-    subtitle = "我们会不定期得在线上和线下举办精彩的活动，敬请关注，下面是历史活动记录"
+    title = "社区活动与公告"
+    subtitle = "我们会不定期得在线上和线下举办精彩的活动，敬请关注，下面是活动公告"
 
 [params.see_more]
     enable = true
