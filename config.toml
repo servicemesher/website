@@ -1,5 +1,5 @@
 baseurl = "https://servicemesher.github.io/"
-#baseurl = "http://servicemesher.com/"
+#baseurl = "http://www.servicemesher.com/"
 title = "ServiceMesher"
 theme = "hugo-universal-theme"
 languageCode = "zh"
