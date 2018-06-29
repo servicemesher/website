@@ -87,6 +87,12 @@
                             <li class="next disabled"><a href="#">{{ i18n "older" }} &rarr;</a></li>
                             {{ end }}
                         </ul>
+
+                        <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        {{ template "_internal/pagination.html" . }}
+                        {{ range .Paginator.Pages }}
+                        {{ end }}
+                        </div>
                     </div>
                     <!-- /.col-md-9 -->
 
