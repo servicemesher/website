@@ -16,7 +16,7 @@ keywords: ["service mesh"]
 
 <center>
 
-![Service Mesh杭州meetup](https://ws1.sinaimg.cn/large/00704eQkgy1fsbn8ykcshj30go14m1kx.jpg))
+![Service Mesh杭州meetup](https://ws1.sinaimg.cn/large/00704eQkgy1fsbn8ykcshj30go14m1kx.jpg)
 
 </center>
 

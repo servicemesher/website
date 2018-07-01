@@ -110,7 +110,8 @@ p {
 }
 
 #post-content blockquote p {
-    line-height:1.2;
+    line-height:1.6;
+    font-size: 16px;
 }
 
 /* undo upper case title */
