@@ -1,5 +1,5 @@
 ---
-title: "速率限制—分布式系统的一个实用工具part1"
+title: "速率限制——分布式系统的一个实用工具part1"
 date: 2018-06-29T15:51:19+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fss3yvsw2ej30rs0kuq8e.jpg"
