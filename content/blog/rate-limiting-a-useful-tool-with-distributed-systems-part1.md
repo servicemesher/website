@@ -1,5 +1,5 @@
 ---
-title: "速率限制——分布式系统的一个实用工具part1"
+title: "速率限制Part1——分布式系统的一个实用工具"
 date: 2018-06-29T15:51:19+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fss3yvsw2ej30rs0kuq8e.jpg"
@@ -8,7 +8,7 @@ authorlink: "https://blog.getambassador.io/rate-limiting-a-useful-tool-with-dist
 translator: "戴佳顺"
 summary: "在计算领域，速率限制通常用于控制服务发起或消耗的操作速率，或者是请求发送或接收的流量。如果你有一年以上的软件开发经验，那么你应该会遇到这个概念。但是，和很多软件架构所面临的挑战一样，比起实际出现的问题，需要思考的问题会更多。本文概述了现代分布式应用程序中的一些关于速率限制的实现方案、优势和挑战。"
 tags: ["rate limiting","distributing system"]
-categories: ["translation","rate limiting"]
+categories: ["rate limiting","translation"]
 keywords: ["service mesh","速率限制","分布式系统"]
 ---
 

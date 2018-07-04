@@ -1,5 +1,5 @@
 ---
-title: "速率限制——作用于 API 网关的速率限制Part2"
+title: "速率限制Part2——作用于 API 网关的速率限制"
 date: 2018-07-03T12:11:49+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fswjxhtkcxj30rs0kuqlp.jpg"
@@ -8,7 +8,7 @@ translator: "李昕阳"
 authorlink: "https://www.infoq.com/profile/Daniel-Bryant"
 summary: "在本速率限制系列的第一篇文章中，介绍了实施速率限制的动机，并讨论了几种实施方案（取决于你是否同时作为通信的发送端和接收端）以及相关的权衡。本文会更加深入地探讨 API 网关速率限制的需求。"
 tags: ["rate limiting","distributing system"]
-categories: ["translation","rate limiting"]
+categories: ["rate limiting","translation"]
 keywords: ["service mesh","速率限制","分布式系统"]
 ---
 
@@ -17,6 +17,8 @@ keywords: ["service mesh","速率限制","分布式系统"]
 > 作者：[Daniel Bryant](https://www.infoq.com/profile/Daniel-Bryant)
 >
 > 译者：[李昕阳](https://darrenxyli.com/)
+>
+> 校对：[宋净超](https://jimmysong.io)
 
 在本速率限制系列的[第一篇文章](rate-limiting-a-useful-tool-with-distributed-systems-part1.md)中，介绍了实施速率限制的动机，并讨论了几种实施方案（取决于你是否同时作为通信的发送端和接收端）以及相关的权衡。本文会更加深入地探讨 API 网关速率限制的需求。
 
