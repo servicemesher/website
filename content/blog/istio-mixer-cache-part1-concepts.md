@@ -1,5 +1,5 @@
 ---
-title: "Istio Mixer Cache工作原理与源码分析Part1－基本概念"
+title: "Istio Mixer Cache工作原理与源码分析part1－基本概念"
 date: 2018-06-07T19:16:21+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs2u1psyn2j30rs0kuqdj.jpg"
@@ -7,7 +7,7 @@ author: "敖小剑"
 authorlink: "https://skyao.io/post/201804-istio-mixer-cache-concepts/"
 summary: "本系列文章将详细介绍Istio中Mixer Cache的工作原理，为了避免空谈，将引入广大程序员同学喜闻乐见的源码分析环节，并结合Mixer的接口API，详细展现Mixer Cache的各种细节。"
 tags: ["istio","source code"]
-categories: ["istio source code"]
+categories: ["istio mixer cache"]
 keywords: ["service mesh","istio","源码解析"]
 ---
 

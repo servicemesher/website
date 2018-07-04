@@ -13,7 +13,7 @@ id: "contact"
 
 #### 微信群
 
-请联系[管理员](https://jimmysong.io/about)，加入微信群
+要加入微信交流群，请联系[管理员](https://jimmysong.io/about)，并注明姓名-公司信息
 
 #### GitHub
 
@@ -25,6 +25,12 @@ https://github.com/servicemesher
 
 #### 线下 meetup
 
-请访问[活动](/activity)页面了解 meetup 安排。
+请访问[活动](/activity)页面以了解 meetup 安排。
+
+---
+
+## 加入社区
+
+请联系[管理员](https://jimmysong.io/about)，然后加入到 [ServiceMesher](https://github.com/servicemesher) GitHub 组织中，参与社区后续线上活动。
 
 </center>

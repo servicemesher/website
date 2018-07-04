@@ -7,7 +7,7 @@ author: "敖小剑"
 authorlink: "https://skyao.io/post/201806-istio-mixer-cache-principle/"
 summary: "经过前面的基础概念的介绍，我们现在已经可以勾勒出一个mixer cache的实现轮廓，当然实际代码实现时会有很多细节。但是为了方便理解，我们在深入细节之前，先给出一个简化版本，让大家快速了解mixer cache的实现原理。后面的章节我们再逐渐深入。"
 tags: ["istio","source code"]
-categories: ["istio source code"]
+categories: ["istio mixer cache"]
 keywords: ["istio","service mesh","源码解析"]
 ---
 

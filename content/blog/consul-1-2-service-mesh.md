@@ -4,6 +4,7 @@ date: 2018-07-04T12:48:07+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxqncg5ysj31ji15mq64.jpg"
 author: "Mitchell Hashimoto"
+translator: "董干"
 authorlink: "https://www.hashicorp.com/blog/consul-1-2-service-mesh"
 summary: "本文是 HashiCorp 创始人 Mitchell Hashimoto 在 2018 年 6 月 26 日发布的关于 Consul 1.2 新功能 Service Mesh 的官方介绍。"
 tags: ["consul","service mesh","harshicorp"]

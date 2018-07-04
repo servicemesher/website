@@ -7,7 +7,7 @@ author: "敖小剑"
 authorlink: "https://skyao.io/post/201806-istio-mixer-cache-main/"
 summary: "经过前面基本概念和实现原理的介绍，大家对mixer check cache应该有了基本的了解，下面我们开始展开源代码来细细研读。"
 tags: ["istio","source code"]
-categories: ["istio source code"]
+categories: ["istio mixer cache"]
 keywords: ["service mesh","istio","源码解析"]
 ---
 
