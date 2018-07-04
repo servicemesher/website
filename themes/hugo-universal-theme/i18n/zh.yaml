@@ -84,3 +84,9 @@
 
 - id: translator
   translation: "译者"
+
+- id: previousPost
+  translation: "更旧"
+
+- id: nextPost
+  translation: "更新"

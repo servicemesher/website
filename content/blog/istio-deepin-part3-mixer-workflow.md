@@ -126,7 +126,7 @@ spec:
 
 对于Handler而言，`{metadata.name}.{kind}.{metadata.namespace}`是其完全限定名（Fully Qualified name），上述Handler的完全限定名是**handler.prometheus.istio-system**，完全限定名是全局唯一的。
 
-adapter的配置信息定义在spec段中，每个adapter配置的格式都有所区别，可以从[这里]查看(<https://istio.io/docs/reference/config/adapters/>)指定的adapter配置格式。上述Handler中引用了`requestduration.metric.istio-system`这个Instance。
+adapter的配置信息定义在spec段中，每个adapter配置的格式都有所区别，可以从[这里查看](<https://istio.io/docs/reference/config/adapters/>)指定的adapter配置格式。上述Handler中引用了`requestduration.metric.istio-system`这个Instance。
 
 #### Instance
 
@@ -266,7 +266,7 @@ func runServer(sa *server.Args, printf, fatalf shared.FormatFn) {
 
 gRPC server启动主要逻辑在`istio/mixer/pkg/server/server.go#newServer`：
 
-```
+```go
 func newServer(a *Args, p *patchTable) (*Server, error) {
     ...
     s := &Server{}

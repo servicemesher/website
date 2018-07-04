@@ -84,3 +84,9 @@
 
 - id: translator
   translation: "translator"
+
+- id: previousPost
+  translation: "previous"
+
+- id: nextPost
+  translation: "next"
