@@ -1,5 +1,5 @@
 ---
-title: "使用 Minikube-in-a-Container 和 Jenkins 构建 Istio"
+title: "使用Minikube-in-a-Container和Jenkins构建Istio"
 date: 2018-06-04T11:33:16+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fryzxh051sj30rs0ku0wn.jpg"

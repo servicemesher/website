@@ -1,5 +1,5 @@
 ---
-title: "容器、服务网格和 API 网关：从边缘开始"
+title: "容器、服务网格和API网关：从边缘开始"
 date: 2018-06-21T18:00:58+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsiynxp5e2j30rs0ku7l4.jpg"

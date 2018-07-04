@@ -1,5 +1,5 @@
 ---
-title: "使用 Istio 为微服务提供高级流量管理和请求跟踪功能"
+title: "使用Istio为微服务提供高级流量管理和请求跟踪功能"
 date: 2018-06-06T15:32:26+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs1hvk6nt7j30rs0kunjm.jpg"

@@ -1,5 +1,5 @@
 ---
-title: "速率限制Part3——基于Ambassador API网关实现Java速率限制服务"
+title: "速率限制part3—基于Ambassador API网关实现Java速率限制服务"
 date: 2018-07-04T12:26:02+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxqadfbiwj31ji15o4qr.jpg"

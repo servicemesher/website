@@ -1,5 +1,5 @@
 ---
-title: "Istio 的软性多租户支持"
+title: "Istio的软性多租户支持"
 date: 2018-06-21T18:11:13+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsj0l63vq1j30rs0kutl4.jpg"

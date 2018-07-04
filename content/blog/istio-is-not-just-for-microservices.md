@@ -1,5 +1,5 @@
 ---
-title: "Istio不仅为微服务而生——使用Istio Service Mesh保护Kubernetes中的服务"
+title: "Istio不仅为微服务而生—使用Istio Service Mesh保护Kubernetes中的服务"
 date: 2018-06-28T15:09:03+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsqwqgx0ylj30rs0kualy.jpg"

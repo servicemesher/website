@@ -1,5 +1,5 @@
 ---
-title: "在 Istio 中跟踪 gRPC"
+title: "在Istio中跟踪gRPC"
 date: 2018-06-08T12:40:05+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs3o6ljkknj30rs0ku4qp.jpg"

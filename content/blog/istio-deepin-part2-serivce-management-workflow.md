@@ -1,5 +1,5 @@
 ---
-title: "Istio源码解析系列part2-服务治理配置生效流程解析"
+title: "Istio源码解析系列part2—服务治理配置生效流程解析"
 date: 2018-07-04T19:24:37+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsy2tydge8j315o0rs4p9.jpg"

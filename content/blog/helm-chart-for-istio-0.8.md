@@ -1,5 +1,5 @@
 ---
-title: "Istio 0.8 的 Helm Chart 解析"
+title: "Istio 0.8的Helm Chart解析"
 date: 2018-06-04T16:09:57+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frz88ricvmj30rs0kuq4b.jpg"

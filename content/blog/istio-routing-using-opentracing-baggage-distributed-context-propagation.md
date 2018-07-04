@@ -1,5 +1,5 @@
 ---
-title: "在 Istio 中使用 OpenTracing Baggage 进行传播和路由"
+title: "在Istio中使用OpenTracing Baggage进行传播和路由"
 date: 2018-06-08T16:01:00+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs3ujek8rqj30rs0kukfj.jpg"

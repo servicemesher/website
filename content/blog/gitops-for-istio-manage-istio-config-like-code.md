@@ -1,5 +1,5 @@
 ---
-title: "Istio 的 GitOps——像代码一样管理 Istio 配置"
+title: "Istio的GitOps—像代码一样管理Istio配置"
 date: 2018-05-31T21:12:03+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fruuebz4b3j30rs0kungw.jpg"

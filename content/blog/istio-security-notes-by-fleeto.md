@@ -1,5 +1,5 @@
 ---
-title: "Istio 安全设置笔记"
+title: "Istio安全设置笔记"
 date: 2018-06-11T10:56:15+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs73uiicgaj30rs0kue81.jpg"

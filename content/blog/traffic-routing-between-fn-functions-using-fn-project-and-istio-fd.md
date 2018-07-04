@@ -1,5 +1,5 @@
 ---
-title: "使用 Istio 控制 Fn Project 中的函数间流量路由"
+title: "使用Istio控制Fn Project中的函数间流量路由"
 date: 2018-07-04T17:44:01+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxz66f5xrj30rs0kuqv5.jpg"

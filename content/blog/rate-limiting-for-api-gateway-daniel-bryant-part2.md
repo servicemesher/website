@@ -1,5 +1,5 @@
 ---
-title: "速率限制Part2——作用于 API 网关的速率限制"
+title: "速率限制part2—作用于API网关的速率限制"
 date: 2018-07-03T12:11:49+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fswjxhtkcxj30rs0kuqlp.jpg"

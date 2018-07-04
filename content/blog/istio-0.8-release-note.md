@@ -1,5 +1,5 @@
 ---
-title: "Istio 0.8 发布了！"
+title: "Istio 0.8发布了！"
 date: 2018-06-01T11:41:00+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frvj5vktpjj30rs0kut9a.jpg"
