@@ -13,6 +13,10 @@ keywords: ["service mesh","线下沙龙","meetup"]
 
 6月30日，杭州，蚂蚁Z空间，一大早就下起了雨，我还心想，这雨要是下大了会不会很多人不来了？而且我们还一早就放出了IT大咖说的直播链接。没想到最后现场签到了有120多个小伙伴！👍视频直播最高峰值800多人同时在线，截止7月1号显示有5340人观看。
 
+- 讲师PPT：https://github.com/servicemesher/meetup-slides
+
+- 视频直播回放：http://www.itdks.com/eventlist/detail/2311
+
 Meetup结束时现场观众和讲师的合影。
 
 ![](https://ws1.sinaimg.cn/large/00704eQkgy1fsuaql8gjaj318w0u0qv6.jpg)
