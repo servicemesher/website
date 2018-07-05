@@ -97,7 +97,7 @@ body {
   width: 100%;
   height: 100%;
   background: #2b282d;
-  opacity: 0.9;
+  opacity: 0.7;
   filter: alpha(opacity=90);
 }
 
@@ -219,4 +219,10 @@ section, div.section {
     line-height: 20px;
     height: 72px;
     margin-bottom: -15px;
+}
+
+.bar {
+    position: static;
+    background: #986dbd;
+    padding: 60px 0;
 }
