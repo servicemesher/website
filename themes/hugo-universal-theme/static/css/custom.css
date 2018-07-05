@@ -218,4 +218,5 @@ section, div.section {
     font-size: 18px;
     line-height: 20px;
     height: 72px;
+    margin-bottom: -15px;
 }
