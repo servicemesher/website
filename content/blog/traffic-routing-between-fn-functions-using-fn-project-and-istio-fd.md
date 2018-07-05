@@ -1,12 +1,12 @@
 ---
-title: "使用Istio控制Fn Project中的函数间流量路由"
+title: "使用Istio控制Serverless架构Fn Project中的函数间流量路由"
 date: 2018-07-04T17:44:01+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxz66f5xrj30rs0kuqv5.jpg"
 author: "Peter Jansovec"
 authorlink: "https://hackernoon.com/@pjausovec"
 translator: "殷龙飞"
-summary: "本文首先解释 Istio 路由的基础知识以及将 Fn 部署和运行在 Kubernetes 上的方式。然后将说明如何利用 Istio 服务网格及其路由规则在两个不同的 Fn 函数之间路由流量的。"
+summary: “本文首先解释 Istio 路由的基础知识以及将服务器架构（Serverless framework）Fn 部署和运行在 Kubernetes 上的方式。然后将说明如何利用 Istio 服务网格及其路由规则在两个不同的 Fn 函数之间路由流量的。"
 tags: ["istio","fn","serverless","function"]
 categories: ["translation"]
 keywords: ["service mesh","istio","serverless","fn function"]
