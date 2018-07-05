@@ -2,7 +2,7 @@
 title: "Istio源码解析系列part2—服务治理配置生效流程解析"
 date: 2018-07-04T19:24:37+08:00
 draft: false
-banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsy2tydge8j315o0rs4p9.jpg"
+banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsz392escqj30rs0ku1h5.jpg"
 author: "郑伟"
 authorlink: "https://www.jianshu.com/u/07afa5f80e95"
 summary: "本系列文章主要从Istio源码出发深入剖析，让大家对istio有更深的认知，从而方便平时排查问题。本文讲解Istio源码架构及开发环境搭建。"
