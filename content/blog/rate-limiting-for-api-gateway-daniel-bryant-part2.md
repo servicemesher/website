@@ -22,6 +22,7 @@ keywords: ["service mesh","速率限制","分布式系统"]
 ![](https://ws1.sinaimg.cn/large/855e972fly1fsof0emvx9j20oj04jgli.jpg)
 当通过公共 API 暴露你的应用程序时，通常你必须在接收端或中间层中实施速率限制。即使你控制了源代码（客户端）应用程序，你也希望防止会导致过多 API 请求的错误产生，同时应付可能会试图破坏客户端应用程序的不良行为者。
 ![](https://ws1.sinaimg.cn/large/855e972fly1fsof2hv9hgj20jk06tdgn.jpg)
+
 Stripe 博客有一篇精彩的关于“[用限速器扩展你的 API](https://stripe.com/blog/rate-limiters)”的文章，我将在本文中引用这篇文章，那篇文章的开头部分讨论了速率限制会如何帮助你在以下情况中让你的 API 更加可靠：
 
 * 某位用户制造了流量洪峰，导致你的应用过载，而你的应用此时还需要为其他用户提供服务。
@@ -36,6 +37,7 @@ Stripe 博客有一篇精彩的关于“[用限速器扩展你的 API](https://s
 
 你还可以指定单位时间的最大请求数，并且定义一个计数递减算法，而不是在每个单位时间开始时重置计数器（稍后会详细介绍）。 当请求到达 API 网关时，它会递增相应的请求计数器并检查这个递增是否超过单位时间内最大允许请求数。 如果超过，则拒绝这个请求，最常见的情况是向调用客户端返回 [“Too Many Requests” HTTP 429 状态码](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)。
 ![](https://ws1.sinaimg.cn/large/855e972fly1fsof4rdz1qj20lg07jt8w.jpg)
+
 与速率限制密切相关的是“负载削减”。两者的主要区别在于判定拒绝请求的条件。速率限制是基于单个请求的属性（例如 clientId），而负载削减是基于应用的总体状态（例如，处于高负载的数据库）。如果系统仍处于部分运行状态，但是需要时间来恢复（或修复），则在流量入口点削减负载可以大量减少线上事故。
 ![](https://ws1.sinaimg.cn/large/855e972fly1fsof5go9vvj20mq07dt8y.jpg)
 
