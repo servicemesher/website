@@ -29,14 +29,32 @@ paginate = 10
     weight = 2
 
 [[menu.main]]
-    name = "活动"
-    identifier = "activity"
-    url  = "/activity/"
+    name="文档"
+    identifier = "docs"
     weight = 3
 
 [[menu.main]]
-    name="黄页"
+    parent="docs"
+    name="Awesome"
     url = "/awesome-servicemesh/"
+    weight = 1
+
+[[menu.main]]
+    parent="docs"
+    name="Envoy"
+    url = "/envoy/"
+    weight = 2
+
+[[menu.main]]
+    parent="docs"
+    name="Istio"
+    url = "https://preliminary.istio.io/zh/"
+    weight = 3
+
+[[menu.main]]
+    name = "活动"
+    identifier = "activity"
+    url  = "/activity/"
     weight = 4
 
 [[menu.main]]
