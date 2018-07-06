@@ -232,3 +232,9 @@ section, div.section {
     background-attachment: fixed;
     background-size: cover;
 }
+
+#top {
+    background: #2b1d1d;
+    color: #eeeeee;
+    padding: 3px 0;
+}

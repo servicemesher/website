@@ -9,13 +9,7 @@
   {{ if .Keywords }}
   <meta name="keywords" content="{{ delimit .Keywords ", " }}">
   {{ else if .Site.Params.DefaultKeywords }}
-  <meta name="keywords" content="{{ delimit .Site.Params.DefaultKeywords ", " }}">	
-  {{ end }}
-
-  {{ if .Description }}
-  <meta name="description" content="{{ .Description }}">
-  {{ else if .Site.Params.DefaultDescription }}
-  <meta name="description" content="{{ .Site.Params.DefaultDescription }}">	
+  <meta name="keywords" content="{{ delimit .Site.Params.DefaultKeywords ", " }}">
   {{ end }}
 
   {{ .Hugo.Generator }}
@@ -34,7 +28,6 @@
   <link href="{{ "/css/style.default.css" | relURL }}" rel="stylesheet" id="theme-stylesheet">
   {{ end }}
 
-
   <!-- Custom stylesheet - for your changes -->
   <link href="{{ "/css/custom.css" | relURL }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ "/css/search.css" | relURL }}" />
@@ -50,11 +43,10 @@
   <!-- Favicon and apple touch icons-->
   <link rel="shortcut icon" href="{{ "/img/favicon.ico" | relURL }}" type="image/x-icon" />
   <link rel="apple-touch-icon" href="{{ "/img/apple-touch-icon.png" | relURL }}" />
-  <!-- owl carousel css -->
 
+  <!-- owl carousel css -->
   <link href="{{ "/css/owl.carousel.css" | relURL }}" rel="stylesheet">
   <link href="{{ "/css/owl.theme.css" | relURL }}" rel="stylesheet">
-
   <link rel="alternate" href="{{ "/index.xml" | relURL }}" type="application/rss+xml" title="{{ .Site.Title }}">
 
   <!-- prism highlight -->
@@ -65,15 +57,27 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{{ .URL }}/" />
   <meta property="og:image" content="{{ .Site.Params.avatar }}" />
+  <meta property="og:image:alt" content="ServiceMesher Logo" />
+
+  <!-- Twitter card -->
+  {{- with .Description | default .Params.summary | default .Summary | default .Site.Params.DefaultDescription }}
+  <meta name="description" content="{{ . }}">
+  <meta property="og:description" content="{{ . }}">
+  <meta name="twitter:description" content="{{ . | truncate 200 }}">
+  <meta property="og:description" content="{{ . }}" />
+  {{- end }}
 
   <!-- Baidu analytics -->
+  {{ with .Site.Params.baiduKey }}
   <script>
   var _hmt = _hmt || [];
   (function() {
     var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?{{ .Site.Params.baiduKey }}";
+    hm.src = "https://hm.baidu.com/hm.js?{{ . }}";
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
+{{ end }}
+
 </head>
