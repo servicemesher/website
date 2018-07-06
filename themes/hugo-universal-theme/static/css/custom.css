@@ -226,3 +226,9 @@ section, div.section {
     background: #986dbd;
     padding: 60px 0;
 }
+
+.bar.background-image-fixed-2 {
+    background: url(../img/fixed-background-2.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
