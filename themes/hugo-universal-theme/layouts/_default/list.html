@@ -46,7 +46,9 @@
                                           {{ else if isset .Params "author" }}
                                           {{ i18n "authorBy" }} {{ .Params.author }}
                                           {{ end }}
-                                          {{ if (isset .Params "translator") }} | {{ i18n "translator" }} {{ .Params.translator }}
+                                          {{ if and (isset .Params "translator") (isset .Params "translatorlink") }}
+                                          | {{ i18n "translator" }} <a href="{{ .Params.translatorlink }}">{{ .Params.translator }}</a>
+                                          {{ else if isset .Params "translator" }} | {{ i18n "translator" }} {{ .Params.translator }}
                                           {{ end }}
                                           |
                                           {{ .FuzzyWordCount }}{{ i18n "words" }} | {{ i18n "readInAbout" }}{{ .ReadingTime }}{{ i18n "minute" }}

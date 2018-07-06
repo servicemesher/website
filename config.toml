@@ -1,4 +1,3 @@
-#baseurl = "https://servicemesher.github.io/"
 baseurl = "http://www.servicemesher.com/"
 title = "ServiceMesher"
 theme = "hugo-universal-theme"
@@ -61,7 +60,7 @@ paginate = 10
 [params]
     viewMorePostLink = "/blog/"
     author = "Jimmy Song(宋净超)"
-    defaultKeywords = ["service mesh"]
+    defaultKeywords = ["service mesh","服务网格"]
     defaultDescription = "Service Mesh爱好者网站"
     # Browser title description
     description = "Service Mesh爱好者"
@@ -71,11 +70,13 @@ paginate = 10
     baiduKey="154337f0d95f0b110f98c1d5d7038895"
     # Style options: default (light-blue), blue, green, marsala, pink, red, turquoise, violet
     style = "violet"
+    # Social share buttons
+    share = true
 
     # 404 page
     errorimage = "https://ws1.sinaimg.cn/large/00704eQkgy1frkahxdca2j30hd08wq52.jpg"
 
-    # Since this template is static, the contact form uses www.formspree.io as a
+    # Since this templateis static, the contact form uses www.formspree.io as a
     # proxy. The form makes a POST request to their servers to send the actual
     # email. Visitors can send up to a 1000 emails each month for free.
     #
@@ -89,15 +90,14 @@ paginate = 10
     #
     # Enable the contact form by entering your Formspree.io email
     email = "jimmysong@jimmysong.io"
-
-    about_us = "<p>传播 Service Mesh 技术、加强行业内部交流、推动 Service Mesh 在企业落地</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1fshv7n2uf7j303k03kweu.jpg>"
+    about_us = "<p>传播Service Mesh技术、加强行业内部交流、促进开源文化构建、推动Service Mesh在企业落地</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1fshv7n2uf7j303k03kweu.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
     icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
     date_format = "2006-01-02"
     logo = "https://ws1.sinaimg.cn/large/00704eQkgy1fshutb9ya0j316v09nabp.jpg"
     logosmall = "https://ws1.sinaimg.cn/large/00704eQkgy1fshuwshsojj30f303ewev.jpg"
-    address = """<p>Service Mesh爱好者社区</p><p><a href="https://jimmysong.io/about">管理员</a></p>
+    address = """<p>加我微信（请备注姓名-公司），加入微信交流群，参与社区活动</p><p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1ft002et2e2j303k03k3yk.jpg"></p>
       """
 
 [Permalinks]
@@ -106,8 +106,8 @@ paginate = 10
 
 # Enable or disable top bar with social icons
 [params.topbar]
-    enable = false
-    text = """<p class="hidden-sm hidden-xs">您现在浏览的是 ServiceMesher <u>临时</u>预览网站</p>
+    enable = true
+    text = """<p class="hidden-sm hidden-xs">ServiceMesher社区，Service Mesh人共同的家园</p>
       """
 
 # Enable and disable widgets for the right sidebar

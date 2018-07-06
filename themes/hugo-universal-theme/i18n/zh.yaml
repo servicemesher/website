@@ -90,3 +90,9 @@
 
 - id: nextPost
   translation: "更新"
+
+- id: reviewer
+  translation: "审校者"
+
+- id: originallink
+  translation: "查看原文"

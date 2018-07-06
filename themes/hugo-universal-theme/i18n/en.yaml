@@ -90,3 +90,9 @@
 
 - id: nextPost
   translation: "next"
+
+- id: reviewer
+  translation: "reviewer"
+
+- id: originallink
+  translation: "original"
