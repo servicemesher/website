@@ -6,15 +6,12 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs7j0whnvij30rs0kub29.jpg"
 author: "Liron Levin& John Morello"
 translator: "宋净超"
 authorlink: "https://thenewstack.io/twistlock-makes-istios-security-layer-more-robust-easier-to-monitor/"
+originallink: "https://thenewstack.io/twistlock-makes-istios-security-layer-more-robust-easier-to-monitor/"
 summary: "本文介绍网络安全公司Twistlock如何实现Istio service mesh的可视化并增强微服务的安全性"
 tags: ["istio","security"]
 categories: ["translation"]
 keywords: ["service mesh","security","istio","twistlock"]
 ---
-
-> 原文地址：[Twistlock Makes Istio’s Security Layer More Robust, Easier to Monitor](https://thenewstack.io/twistlock-makes-istios-security-layer-more-robust-easier-to-monitor/)
->
-> 译者：[宋净超](https://jimmysong.io)
 
 Istio已经成为一种流行且可靠的服务网格管理平台，使用它可以更轻松地部署、操作和扩展跨云部署的微服务。作为保证这些服务网格的一种方式，Twistlock已经与Istio集成，以丰富平台的连接机器学习功能。 Twistlock通过使用Twistlock数据来隔离受损服务并提供合规策略来执行安全配置，以及Istio运行的其他堆栈。
 

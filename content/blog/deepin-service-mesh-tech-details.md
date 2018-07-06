@@ -4,6 +4,8 @@ date: 2018-05-23T16:09:57+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbk1wgc3j30ll0h6qja.jpg"
 author: "刘超"
+authorlink: "https://mp.weixin.qq.com/s/hq9KTc9fm8Nou8hXmqdKuw"
+originallink: "https://mp.weixin.qq.com/s/hq9KTc9fm8Nou8hXmqdKuw"
 summary: "在Kubernetes称为容器编排的标准之后，Service Mesh开始火了起来，但是很多文章讲概念的多，讲技术细节的少，所以专门写一篇文章，来解析Service Mesh背后的技术细节。"
 tags: ["service mesh","istio"]
 categories: ["service mesh"]
@@ -11,8 +13,6 @@ keywords: ["service mesh","istio","kubernetes","envoy"]
 ---
 
 在Kubernetes称为容器编排的标准之后，Service Mesh开始火了起来，但是很多文章讲概念的多，讲技术细节的少，所以专门写一篇文章，来解析Service Mesh背后的技术细节。
-
-原文地址：[刘超的通俗云计算](https://mp.weixin.qq.com/s/hq9KTc9fm8Nou8hXmqdKuw)
 
 **一、Service Mesh是Kubernetes支撑微服务能力拼图的最后一块**
 

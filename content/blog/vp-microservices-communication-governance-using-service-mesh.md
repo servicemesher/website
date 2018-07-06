@@ -6,15 +6,13 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsjtk0n9rhj30rs0ku117.jpg"
 author: "InfoQ"
 authorlink: "https://www.infoq.com/articles/vp-microservices-communication-governance-using-service-mesh"
 translator: "宋净超"
+translatorlink: "https://jimmysong.io"
+originallink: "https://www.infoq.com/articles/vp-microservices-communication-governance-using-service-mesh"
 summary: "本文是InfoQ对Serivce Mesh业界领袖Matt Klein、Dan Berg、Priyanka Sharma、Lachlan Evenson、Varun Talwar、Oliver Gould的采访，几位大咖分别就Service Mesh的定义及其在微服务交互和治理方面带来的优势、服务网格与ESB的区别，谁应该关心服务网格，服务网格的运行方式、sidecar以及学习曲线展开了讨论。"
 tags: ["service mesh","Matt Klein","InfoQ"]
 categories: ["translation"]
 keywords: ["service mesh"]
 ---
-
-> 原文：https://www.infoq.com/articles/vp-microservices-communication-governance-using-service-mesh
->
-> 译者：[宋净超](https://jimmysong.io)
 
 ### 关键点
 

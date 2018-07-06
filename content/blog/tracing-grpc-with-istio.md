@@ -3,20 +3,16 @@ title: "在Istio中跟踪gRPC"
 date: 2018-06-08T12:40:05+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs3o6ljkknj30rs0ku4qp.jpg"
-author: "aspenmesh.io"
+author: "Aspen Mesh"
 translator: "宋净超"
-authorlink: "https://blog.aspenmesh.io/blog/2018/04/tracing-grpc-with-istio/"
+translatorlink: "https://jimmysong.io"
+authorlink: "https://aspenmesh.io"
+originallink: "https://blog.aspenmesh.io/blog/2018/04/tracing-grpc-with-istio/"
 summary: "本文介绍的是如何在Istio中使用grpc并设置跟踪（tracing）与header传播，包括gRPC到grpc请求传播header、gRPC到HTTP请求传播header、使用grpc-gateway时传播header等"
 tags: ["istio","grpc","tracing"]
 categories: ["translation"]
 keywords: ["service mesh","istio","grpc","tracing"]
 ---
-
-> 原文地址：<https://blog.aspenmesh.io/blog/2018/04/tracing-grpc-with-istio/>
->
-> 作者：[apsenmesh.io](https://aspenmesh.io)
->
-> 译者：[宋净超](https://jimmysong.io)
 
 Aspen Mesh很喜欢用[gRPC](https://grpc.io/docs/)。Apen Mesh面向公众的API和许多内部API大多都是使用gRPC构建的。如果您还没有听说过 gRPC（熟练掌握gRPC真的很难），那么我先为您简单的介绍下，它是一种新型、高效和优化的远程过程调用（RPC）框架。gRPC 基于[protocol buffer](https://developers.google.com/protocol-buffers/)序列化格式和[HTTP/2](https://http2.github.io/)网络协议。
 

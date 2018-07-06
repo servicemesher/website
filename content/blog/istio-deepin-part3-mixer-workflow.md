@@ -5,15 +5,15 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsy2tb10m8j315o0v9qv6.jpg"
 author: "郑伟"
 authorlink: "https://www.jianshu.com/u/07afa5f80e95"
+originallink: "https://www.jianshu.com/p/312b9b9a7e01"
 summary: "本系列文章主要从Istio源码出发深入剖析，让大家对istio有更深的认知，从而方便平时排查问题。本文是对Istio中Mixer的工作流程浅析。"
 tags: ["istio","source code"]
 categories: ["istio source deepin"]
 keywords: ["service mesh","istio"]
 ---
 
-> 本文转载自：https://www.jianshu.com/p/312b9b9a7e01
+> 本文系转载，作者：郑伟，小米信息部技术架构组
 >
-> 作者：郑伟，小米信息部技术架构组
 
 本系列文章主要从源码（[35e2b904](https://github.com/istio/istio/tree/35e2b9042fe3d4ebe68772311aa1ebe46b66a1be)）出发，对istio做深入剖析，让大家对istio有更深的认知，从而方便平时排查问题。不了解Service Mesh和Istio的同学请先阅读敖小剑老师如下文章进行概念上的理解：
 

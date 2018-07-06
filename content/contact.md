@@ -5,7 +5,17 @@ id: "contact"
 
 <center>
 
-我们是 Service Mesh 爱好者社区，我们的使命是：传播 Service Mesh 技术、加强行业内部交流、推动 Service Mesh 在企业落地。
+这里是Service Mesher社区，Service Mesh人共同的家园。
+
+### 我们的使命
+
+传播Service Mesh技术
+
+加强行业内部交流
+
+促进开源文化构建
+
+推动Service Mesh在企业落地
 
 ---
 

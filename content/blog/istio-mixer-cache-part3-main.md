@@ -4,7 +4,9 @@ date: 2018-06-11T13:43:10+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs780l6w6ej30rs0kub29.jpg"
 author: "敖小剑"
+authorlink: "https://skyao.io"
 authorlink: "https://skyao.io/post/201806-istio-mixer-cache-main/"
+originallink: "https://skyao.io/post/201806-istio-mixer-cache-main/"
 summary: "经过前面基本概念和实现原理的介绍，大家对mixer check cache应该有了基本的了解，下面我们开始展开源代码来细细研读。"
 tags: ["istio","source code"]
 categories: ["istio mixer cache"]

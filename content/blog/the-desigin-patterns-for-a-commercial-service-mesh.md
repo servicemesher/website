@@ -4,6 +4,7 @@ date: 2018-05-30T15:00:22+08:00
 draft: false
 author: "田晓亮"
 authorlink: "https://github.com/tianxiaoliang"
+originallink: "https://blog.csdn.net/karamos/article/details/80133231"
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frtdesg6toj30rs0kuwtz.jpg"
 summary: "本文分享了微服务中存在的问题，以及如何通过商用级的 Service Mesh 设计来解决问题，作者分享了华为的 Service Mesh 设计之道。"
 tags: ["service mesh","huawei"]
@@ -12,8 +13,6 @@ keywords: ["service mesh","服务网格","华为","架构设计"]
 ---
 
 **作者介绍**：田晓亮，8年软件行业经验，曾就职于三星，2012年进入云计算领域，对PaaS，DevOps，APM有深入的研究和实践经验，方案支撑近千台VM中的应用部署监控。 2016年加入华为担任架构师，负责微服务的Go语言开发框架及Service Mesh设计和落地。
-
-原文地址：https://blog.csdn.net/karamos/article/details/80133231
 
 ![](https://ws1.sinaimg.cn/large/00704eQkgy1frtczpjx7bj30q50g5wia.jpg)
 

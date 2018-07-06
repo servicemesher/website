@@ -4,6 +4,7 @@ author: "敖小剑"
 authorlink: "https://skyao.io"
 tags: ["microservices","service mesh"]
 categories: ["service mesh"]
+originallink: "https://skyao.io/publication/service-mesh-rebuild-microservice-market"
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbqc9faoj30rs0kuwnv.jpg"
 summary: "今天我们不谈技术，不谈架构，也不谈具体的产品，我们来聊一聊在未来一两年之内，Service Mesh技术会在微服务相关的市场带来什么样的变化？"
 date: 2018-05-21T21:48:05+08:00
@@ -12,8 +13,6 @@ keywords: ["service mesh","服务网格","微服务","市场"]
 ---
 
 今天我们不谈技术，不谈架构，也不谈具体的产品，我们来聊一聊在未来一两年之内，Service Mesh技术会在微服务相关的市场带来什么样的变化？
-
-原文地址：https://skyao.io/publication/service-mesh-rebuild-microservice-market
 
 ![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-01.jpg)
 

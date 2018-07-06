@@ -6,19 +6,14 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxqadfbiwj31ji15o4qr.jpg"
 author: "Daniel Bryant"
 translator: "戴佳顺"
 authorlink: "https://www.infoq.com/profile/Daniel-Bryant"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
+originallink: "https://blog.getambassador.io/implementing-a-java-rate-limiting-service-for-the-ambassador-api-gateway-e09d542455da"
 summary: "在本速率限制系列的第三篇文章中，根据实际Java语言编写的案例带领我们使用Ambassador API网关速率限制入门，并将实例部署到Kubernetes中，同时使用Java语言演示基于令牌通算法的速率限制方式。"
 tags: ["rate limiting","distributing system"]
 categories: ["rate limiting","translation"]
 keywords: ["service mesh","速率限制","分布式系统"]
 ---
-
-> 原文链接：https://blog.getambassador.io/implementing-a-java-rate-limiting-service-for-the-ambassador-api-gateway-e09d542455da
->
-> 作者：Daniel Bryant
->
-> 译者：[戴佳顺](https://github.com/edwin19861218)
->
-> 校对：[宋净超](https://jimmysong.io)
 
 基于Kubernetes云原生的[Ambassador API](https://www.getambassador.io/)网关所提供的速率限制功能是完全可定制的，其允许任何实现gRPC服务端点的服务自行决定是否需要对请求进行限制。本文在先前[第1部分](rate-limiting-a-useful-tool-with-distributed-systems-part1.md)和[第2部分](rate-limiting-for-api-gateway-daniel-bryant-part2.md)的基础上，阐述如何为Ambassador API网关创建和部署简单的基于Java的速率限制服务。
 

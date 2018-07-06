@@ -5,18 +5,16 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsgcscf8r2j30rs0kugpu.jpg"
 author: "Mohsen Rezaei"
 authorlink: "https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay"
+originallink: "https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay"
 translator: "Kael Zhang"
+translatorlink: "http://kaelzhang81.github.io/"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
 summary: "本文是WePay（一家做支付平台和风控产品的公司）使用Linkerd作为服务网格的代理的分享文章。"
 tags: ["linkerd"]
 categories: ["translation"]
 keywords: ["service mesh","linkerd","wepay","服务网格"]
 ---
-
-> 原文地址：[Using Linkerd as a Service Mesh Proxy at WePay](https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay)
->
-> 作者：Mohsen Rezaei
->
-> 译者：[Kael Zhang](http://kaelzhang81.github.io/)
 
 在接下来的几个月中，我们将撰写一系列文章来记录从传统负载均衡器到[谷歌Kubernetes引擎](https://cloud.google.com/kubernetes-engine/)（GKE）之上服务网格的[WePay工程化](https://wecode.wepay.com/)之路。
 

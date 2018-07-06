@@ -5,6 +5,7 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsix68f9vbj30rs0ku7wh.jpg"
 author: "Tian Zhou"
 authorlink: "https://ninokop.github.io/"
+originallink: "https://ninokop.github.io/2018/06/19/pilot-xDS/"
 summary: "本篇总结pilot的xDS常用接口，顺便浏览了部分pilot实现，下篇总结下istio的流量管理和服务发现的实现。简单来说istio做为管理面，集合了配置中心和服务中心两个功能，并把配置发现和服务发现以一组统一的xDS接口提供出来，数据面的envoy通过xDS获取需要的信息来做服务间通信和服务治理。"
 tags: ["istio","pilot"]
 categories: ["istio"]

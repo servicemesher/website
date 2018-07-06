@@ -5,20 +5,16 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsivgisloaj30rs0kuqsq.jpg"
 author: "Matt Klein"
 translator: "敖小剑"
-authorlink: "https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a"
+translatorlink: "https://skyao.io"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
+originallink: "https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a"
+authrolink: "https://envoyproxy.io"
 summary: "本文是Matt Klein于2017年9月在Meduim上发表的通用数据平面API文章，文中指出了Envoy在API设计上的要点，以及数据平面与控制平面的关系。"
 tags: ["envoy","service mesh"]
 categories: ["translation"]
 keywords: ["service mesh","envoy"]
 ---
-
-> 原文地址：https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a
->
-> 作者：[Matt Klein](https://blog.envoyproxy.io/@mattklein123)
->
-> 译者：[敖小剑 ](https://skyao.io)
->
-> 校对：[宋净超](https://jimmysong.io)
 
 正如我之前所说的，在如此短的时间内，[Envoy](https://lyft.github.io/envoy/) 带来的兴奋既神奇又震撼人心。我经常问自己：envoy 的哪些方面导致了我们所看到的异常的社区增长？虽然 Envoy 具有很多引人注目的特征，但最终我认为有三个主要特征在共同推动：
 

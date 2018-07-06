@@ -4,7 +4,8 @@ date: 2018-06-11T14:03:34+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs77zshhihj30rs0kunab.jpg"
 author: "敖小剑"
-authorlink: "https://skyao.io/post/201806-istio-mixer-cache-signature/"
+originallink: "https://skyao.io/post/201806-istio-mixer-cache-signature/"
+authorlink: "https://skyao.io"
 summary: "接前文，继续分析Mixer Check Cache的源码，这次的重点是签名算法，也就是Referenced::Signature()方法。"
 tags: ["istio","source code"]
 categories: ["istio mixer cache"]

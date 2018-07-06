@@ -7,18 +7,14 @@ author: "Taiki"
 authorlink: "http://techlife.cookpad.com/entry/2018/06/11/100355"
 summary: "Cookpad是日本的一家分享菜谱和烹调经验的网站，本文是该网站使用Service Mesh的实践，当前Cookpad没有直接使用Istio而是以Envoy为数据平面，自研的控制平面。"
 translator: "殷龙飞"
+translatorlink: "https://github.com/loverto"
+originallink: "http://techlife.cookpad.com/entry/2018/06/11/100355"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
 tags: ["envoy","istio","service mesh"]
 categories: ["translation"]
 keywords: ["service mesh","envoy"]
 ---
-
-> 原文：<http://techlife.cookpad.com/entry/2018/06/11/100355>
->
-> 作者：[Taiki](https://github.com/taiki45/kumonos)
->
-> 译者：殷龙飞
->
-> 校对：[宋净超](https://jimmysong.io)
 
 这个原文是 5 月初发表的[日文原文](http://techlife.cookpad.com/entry/2018/05/08/080000)的翻译。补充一下这篇文章的背景，Cookpad 是一家拥有 200 多种产品开发的中型科技公司，拥有 10 多支团队，每月平均用户数量达到 9000 万。[https://www.cookpadteam.com/](https://www.cookpadteam.com/)
 

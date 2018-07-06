@@ -5,15 +5,13 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fruuebz4b3j30rs0kungw.jpg"
 author: "Anita"
 translator: "宋净超"
+translatorlink: "https://jimmysong.io"
 summary: "本文是 Weaveworks 的 CEO 对 GitOps 工作流程和 Istio 的看法。本文还介绍了如何使用 GitOps 上线和管理 Istio 的金丝雀部署。以上观点来自哥本哈根 Kubecon 上的 Weaveworks 的分享。"
+originallink: "https://www.weave.works/blog/gitops-for-istio-manage-istio-config-like-code"
 tags: ["istio","gitops"]
 categories: ["translation"]
 keywords: ["gitops","kubecon","git","CI/CD","Istio","weavecloud"]
 ---
-
-> 译者：[Jimmy Song](https://jimmysong.io) 
->
-> 原文地址：[GitOps for Istio - Manage Istio Config like Code](https://www.weave.works/blog/gitops-for-istio-manage-istio-config-like-code)
 
 在今年的哥本哈根 Kubecon 大会上，Weaveworks 的 CEO Alexis Richardson 与 Varun Talwar（来自一家隐形创业公司）谈到了 GitOps 工作流程和 Istio。会后 Weaveworks 的 Stefan Prodan 进行了的演示，介绍如何使用 GitOps 上线和管理 Istio 的金丝雀部署。
 

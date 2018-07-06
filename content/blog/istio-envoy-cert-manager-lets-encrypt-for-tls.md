@@ -6,19 +6,15 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkly1fsnpdif8euj30rs0kue5z.jpg"
 author: "Prune"
 authorlink: "https://medium.com/@prune998/istio-envoy-cert-manager-lets-encrypt-for-tls-14b6a098f289"
 translator: "殷龙飞"
+translatorlink: "https://github.com/loverto"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
+originallink: "https://medium.com/@prune998/istio-envoy-cert-manager-lets-encrypt-for-tls-14b6a098f289"
 summary: "本文是使用Let's Encrypt为Isito（Envoy）Service Mesh添加TLS安全支持的教程。"
 tags: ["istio","envoy","TLS","Let's Encrypt"]
 categories: ["translation"]
 keywords: ["service mesh","istio","let's encrypt","tls","envoy"]
 ---
-
-> 原文链接：<https://medium.com/@prune998/istio-envoy-cert-manager-lets-encrypt-for-tls-14b6a098f289>
->
-> 作者：Prune 
->
-> 译者：[殷龙飞](https://github.com/loverto)
->
-> 校对：[宋净超](https://jimmysong.io)
 
 **更新**
 

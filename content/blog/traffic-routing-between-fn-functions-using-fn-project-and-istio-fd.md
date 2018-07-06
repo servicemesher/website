@@ -6,19 +6,15 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxz66f5xrj30rs0kuqv5.jpg"
 author: "Peter Jansovec"
 authorlink: "https://hackernoon.com/@pjausovec"
 translator: "殷龙飞"
+translatorlink: "https://github.com/loverto"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
+originallink: "https://hackernoon.com/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd56607913b8"
 summary: “本文首先解释 Istio 路由的基础知识以及将服务器架构（Serverless framework）Fn 部署和运行在 Kubernetes 上的方式。然后将说明如何利用 Istio 服务网格及其路由规则在两个不同的 Fn 函数之间路由流量的。"
 tags: ["istio","fn","serverless","function"]
 categories: ["translation"]
 keywords: ["service mesh","istio","serverless","fn function"]
 ---
-
-> 原文链接：https://hackernoon.com/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd56607913b8
->
-> 作者：[Peter Jausovec](https://hackernoon.com/@pjausovec)
->
-> 译者：[殷龙飞](https://github.com/loverto)
->
-> 校对：[宋净超](https://jimmysong.io)
 
 在本文中，我将解释如何在 [Fn 函数](https://fnproject.io)之间使用 [Istio](http://istio.io) 服务网格实现基于版本的流量路由。
 

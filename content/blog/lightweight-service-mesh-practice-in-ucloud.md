@@ -5,6 +5,7 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsais606xwj30rs0kub29.jpg"
 author: "徐亮"
 authorlink: "https://mp.weixin.qq.com/s/R5lHgGH5jz992S3eL2FTJw"
+originallink: "https://mp.weixin.qq.com/s/R5lHgGH5jz992S3eL2FTJw"
 summary: "本文讲述的是UCloud对Istio做的部分改造，并在内部使用轻量Service Mesh的实践。"
 tags: ["service mesh","UCloud"]
 categories: ["service mesh"]

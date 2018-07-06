@@ -5,20 +5,16 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs3ujek8rqj30rs0kukfj.jpg"
 author: "Pavol Loffay"
 translator: "崔秀龙"
+translatorlink: "https://blog.fleeto.us"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
 authorlink: "https://medium.com/jaegertracing/istio-routing-using-opentracing-baggage-distributed-context-propagation-ed8d787a4bef"
+originallink: "https://medium.com/jaegertracing/istio-routing-using-opentracing-baggage-distributed-context-propagation-ed8d787a4bef"
 summary: "这是一篇关于在 Istio 路由规则中使用 Opentracing Baggage 对流量进行分布式追踪的教程。"
 tags: ["istio","opentracing ","baggage","tutorial","tracing"]
 categories: ["translation"]
 keywords: ["service mesh","istio","opentracing","baggage"]
 ---
-
->原文地址：[Medium](https://medium.com/jaegertracing/istio-routing-using-opentracing-baggage-distributed-context-propagation-ed8d787a4bef)
->
->译者：[崔秀龙](https://blog.fleeto.us)
->
->校对：[宋净超](https://jimmysong.io)
->
->转载自：[伪架构师](https://mp.weixin.qq.com/s/oi2SlSGTFtzarFRkDlnPFQ)
 
 现代服务网格架构提供了很多的新功能，基础设施相关的依赖部分被逐步从代码中移除，极大的降低了编码工作量。除此之外，这一架构的智能路由功能还把金丝雀发布以及类似功能大大的简化了。
 

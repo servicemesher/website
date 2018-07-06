@@ -5,6 +5,7 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs73uiicgaj30rs0kue81.jpg"
 author: "崔秀龙"
 authorlink: "https://blog.fleeto.us/post/istio-security-notes/"
+originallink: "https://blog.fleeto.us/post/istio-security-notes/"
 summary: "Istio 为网格中的微服务提供了较为完善的安全加固功能，在不影响代码的前提下，可以从多个角度提供安全支撑，官方文档做了较为详细的介绍，但是也比较破碎，这里尝试做个简介兼索引，实现过程还是要根据官方文档进行。"
 tags: ["istio","security"]
 categories: ["istio"]

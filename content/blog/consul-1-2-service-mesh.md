@@ -5,19 +5,16 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxqncg5ysj31ji15mq64.jpg"
 author: "Mitchell Hashimoto"
 translator: "董干"
+translatorlink: "https://blog.idevfun.io/consul-1-2-service-mesh/"
 authorlink: "https://www.hashicorp.com/blog/consul-1-2-service-mesh"
 summary: "本文是 HashiCorp 创始人 Mitchell Hashimoto 在 2018 年 6 月 26 日发布的关于 Consul 1.2 新功能 Service Mesh 的官方介绍。"
+originallink: "https://www.hashicorp.com/blog/consul-1-2-service-mesh"
 tags: ["consul","service mesh","harshicorp"]
 categories: ["translation"]
 keywords: ["service mesh","harshicorp","consul"]
 ---
 
 > 本文译自 HashiCorp 官网关于 Consul 1.2 支持 Service Mesh 发布的博客文章。
->
-> 原文链接：<https://www.hashicorp.com/blog/consul-1-2-service-mesh>
-> 作者：Mitchell Hashimoto
-> 翻译：董干
-> 转载自：https://blog.idevfun.io/consul-1-2-service-mesh/
 >
 > 本文是 HashiCorp 创始人 Mitchell Hashimoto 在 2018 年 6 月 26 日发布的关于 Consul 1.2 新功能 Service Mesh 的官方介绍。译者接触过的 Hashicorp 的产品有过不少，每款都给人感觉功能强大，设计简洁，可以说是都是非常优秀的开源产品（当然这与背后的 Hashicorp 公司商业级支撑有关）。译者有幸见过作者 Mitchell 一面，是个日裔混血，佩服他们取得的成就，期待他们推出的新功能能够取得市场上的成功。
 >

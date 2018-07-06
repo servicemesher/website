@@ -5,6 +5,8 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frz88ricvmj30rs0kuq4b.jpg"
 author: "崔秀龙"
 authorlink: "https://github.com/fleeto"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
 summary: "本文将带您探究 Istio 0.8 LTS 版本中的 Helm Chart 的安装部署及其结构。"
 tags: ["istio","helm","chart"]
 categories: ["istio"]

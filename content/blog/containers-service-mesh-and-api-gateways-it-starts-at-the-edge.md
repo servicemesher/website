@@ -6,15 +6,15 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsiynxp5e2j30rs0ku7l4.jpg"
 author: "Daniel Bryant"
 authorlink: "https://devops.com/containers-service-mesh-and-api-gateways-it-starts-at-the-edge/"
 translator: "崔秀龙"
+translatorlink: "https://blog.fleeto.us"
+originallink: "https://devops.com/containers-service-mesh-and-api-gateways-it-starts-at-the-edge/"
+reviewer: "宋净超"
+reviewerlink: "https://jimmysong.io"
 summary: "本文中提到的典型是Envoy（数据平面）、Istio（控制平面）和Ambassador（API Gateway），Matt Klein指出人们在践行微服务的道路踩到的坑大多是与debugging有关，我们应该从服务网格的边缘开始实现反向代理、负载均衡和动态路由。实现或迁移基于容器技术的云原生平台如Kubernetes才刚刚开始，Service Mesh填补了该平台中的许多空白。"
 tags: ["envoy","istio","service mesh","ambassador"]
 categories: ["translation"]
 keywords: ["service mesh","envoy","ambassador"]
 ---
-
-> 原文：https://devops.com/containers-service-mesh-and-api-gateways-it-starts-at-the-edge/
->
-> 译者：[崔秀龙](https://blog.fleeto.us)
 
 [Docker](https://www.docker.com/) 和 [Kubernetes](https://kubernetes.io/) 为代表的容器技术炙手可热，熟知这一技术领域的用户，一定都知道下一个热点：Service Mesh，它承诺将微服务之间的内部网络通信均一化，并解决一系列监控、故障隔离等通用非功能性需求。底层的代理服务器技术是 Service Mesh 的立身之本，这种技术在 Service Mesh 之外，还能以 API 网关的形式在边缘为业务系统提供一系列的增强。
 
