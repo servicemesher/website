@@ -20,7 +20,7 @@ keywords: ["service mesh","istio","kubernetes","envoy"]
 
 ![微服务设计](https://ws1.sinaimg.cn/large/00704eQkgy1frlc9gw4y0j30u00bm122.jpg)
 
-在我们微服务设计的是个要点中，我们会发现Kubernetes都能够有相应的组件和概念，提供相应的支持。
+在我们微服务设计的十个要点中，我们会发现Kubernetes都能够有相应的组件和概念，提供相应的支持。
 
 其中最后的一块拼图就是服务发现，与熔断限流降级。
 
@@ -76,7 +76,7 @@ Discovery Service就是部署在控制面的，在istio中，是Pilot。
 
 ![](https://ws1.sinaimg.cn/large/00704eQkgy1frle5drdsxj30u00l944h.jpg)
 
-如图为Pilot的架构，最下面一层是envoy的API，就是提供Discovery Service的API，这个API的规则由envoy定，但是不是Pilot调用Envoy，而是Envoy去主动调用Pilot的这个API。
+如图为Pilot的架构，最下面一层是envoy的API，就是提供Discovery Service的API，这个API的规则由envoy定，但不是Pilot调用Envoy，而是Envoy去主动调用Pilot的这个API。
 
 Pilot最上面一层称为Platform Adapter，这一层是干什么的呢？这一层不是Kubernetes, Mesos调用Pilot，而是Pilot通过调用Kubernetes来发现服务之间的关系。
 
@@ -176,13 +176,13 @@ istioctl做的第二项定制化是，嵌入proxy容器作为sidecar。
 
 这个似乎看起来更加复杂，但是进入容器我们可以看到，启动了两个进程。
 
-![](https://ws1.sinaimg.cn/large/00704eQkgy1frle8ejl2xj30hr12448p.jpg)
+![](https://ws4.sinaimg.cn/large/006tNc79gy1ft3hlljbllj30u00bn41y.jpg)
 
 一个是我们熟悉的envoy，他有一个配置文件是/etc/istio/proxy/envoy-rev0.json
 
 我们再前面讲述envoy的时候说过，有了配置文件，envoy就能够转发了，我们先来看看配置文件里面都有啥。
 
-![](https://ws1.sinaimg.cn/large/00704eQkgy1frle96oxaij30u00gcwlm.jpg)
+![](https://ws3.sinaimg.cn/large/006tNc79gy1ft3hluiu2xj30u00gcmzx.jpg)
 
 在这里面配置了envoy的管理端口，等一下我们会通过这个端口查看envoy被pilot下发了哪些转发策略。
 
