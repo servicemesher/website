@@ -5,7 +5,7 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fswjxhtkcxj30rs0kuqlp.jpg"
 author: "Daniel Bryant"
 translator: "李昕阳"
-authorlink: "https://www.infoq.com/profile/Daniel-Bryant"
+authorlink: "https://blog.getambassador.io/@danielbryantuk"
 reviewer: "宋净超"
 reviewerlink: "https://jimmysong.io"
 originallink: "https://blog.getambassador.io/rate-limiting-for-api-gateways-892310a2da02"

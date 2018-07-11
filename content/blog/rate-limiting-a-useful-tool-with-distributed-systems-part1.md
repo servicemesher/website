@@ -4,7 +4,7 @@ date: 2018-06-29T15:51:19+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fss3yvsw2ej30rs0kuq8e.jpg"
 author: "Daniel Bryant"
-authorlink: "https://blog.getambassador.io/rate-limiting-a-useful-tool-with-distributed-systems-6be2b1a4f5f4"
+authorlink: "https://blog.getambassador.io/@danielbryantuk"
 translator: "戴佳顺"
 translatorlink: "https://github.com/edwin19861218"
 originallink: "https://blog.getambassador.io/rate-limiting-a-useful-tool-with-distributed-systems-6be2b1a4f5f4"

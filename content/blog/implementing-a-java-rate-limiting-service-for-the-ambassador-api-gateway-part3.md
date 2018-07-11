@@ -5,7 +5,7 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxqadfbiwj31ji15o4qr.jpg"
 author: "Daniel Bryant"
 translator: "戴佳顺"
-authorlink: "https://www.infoq.com/profile/Daniel-Bryant"
+authorlink: "https://blog.getambassador.io/@danielbryantuk"
 reviewer: "宋净超"
 reviewerlink: "https://jimmysong.io"
 originallink: "https://blog.getambassador.io/implementing-a-java-rate-limiting-service-for-the-ambassador-api-gateway-e09d542455da"
