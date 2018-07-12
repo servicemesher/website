@@ -1,5 +1,5 @@
 ---
-title: "Service Mesh深度学习系列part1——istio源码分析之pilot-agent模块分析"
+title: "Service Mesh深度学习系列part1—istio源码分析之pilot-agent模块分析"
 date: 2018-07-11T14:24:24+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/006tKfTcgy1ft5wypaul5j31ji15ob2b.jpg"

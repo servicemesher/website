@@ -6,7 +6,7 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsz392escqj30rs0ku1h5.jpg"
 author: "郑伟"
 originallink: "https://www.jianshu.com/p/c07ed0ef821e"
 authorlink: "https://www.jianshu.com/u/07afa5f80e95"
-summary: "本系列文章主要从Istio源码出发深入剖析，让大家对istio有更深的认知，从而方便平时排查问题。本文讲解Istio源码架构及开发环境搭建。"
+summary: "本系列文章主要从Istio源码出发深入剖析，让大家对istio有更深的认知，从而方便平时排查问题。本文讲解Istio中的bookinfo示例并执行过文档中的task，介绍从执行istioctl指令到配置文件生效的整个流程。"
 tags: ["istio","source code"]
 categories: ["istio source deepin"]
 keywords: ["service mesh","istio"]
