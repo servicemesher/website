@@ -1,5 +1,5 @@
 ---
-title: "Conduit 0.5 发布 —— 以及 R.I.P. Conduit"
+title: "Conduit 0.5发布—以及R.I.P. Conduit"
 date: 2018-07-09T12:19:53+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/006tNc79gy1ft3hxpzvkzj30rs0kun16.jpg"
