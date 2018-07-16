@@ -10,9 +10,9 @@ translatorlink: "https://github.com/zhangqx2010"
 reviewer: "宋净超"
 reviewerlink: "https://jimmysong.io"
 originallink: "https://medium.com/vamp-io/a-b-testing-on-kubernetes-with-istio-0-8-6323efa2b4e2"
-summary: “本文讲述Vamp（一款商业版的云原生应用平台）如何在Kubernetes上采用Istio进行流量路由的经验”
+summary: "本文讲述Vamp（一款商业版的云原生应用平台）如何在Kubernetes上采用Istio进行流量路由的经验"
 tags: ["istio","kubernetes","AB Test","vamp"]
-categories: ["译文"]
+categories: ["translation"]
 keywords: ["service mesh","istio","AB测试","vamp"]
 ---
 
@@ -39,21 +39,21 @@ Vamp Lamia 这个新版本的目标是将 Istio 从 0.7.1 迁移到 0.8 并让�
 现在，足以说 Gateway 是 Istio 对于 Kubernetes Ingress 的等价替代品，因此能让服务在对外暴露，而 Destination Rule 将 deployment 上的标签映射到 subset，提供了一层抽象用于更好地将不同版本的服务分组。
 正如您在下面的屏幕截图中所看到的，只需一些易于理解的参数即可轻松设置这些资源。
 
-![](https://ws1.sinaimg.cn/large/7134983fgy1ft55odj8ffj20m80f1aas.jpg)
+![](https://ws2.sinaimg.cn/large/006tNc79gy1ftbsadc9haj31jk11kq6s.jpg)
 
 *服务设置*
 
-![](https://ws1.sinaimg.cn/large/7134983fgy1ft55p32bxmj20m80jwaay.jpg)
+![](https://ws3.sinaimg.cn/large/006tKfTcgy1ftbso5iepqj31jk11kq6s.jpg)
 
 *网关设置*
 
-![](https://ws1.sinaimg.cn/large/7134983fgy1ft55pf1l3dj20m80sedgz.jpg)
+![](https://ws4.sinaimg.cn/large/006tKfTcgy1ftbsooaw9nj318g1ks0wz.jpg)
 
 *目标规则设置*
 
 完成此操作后，您可以开始设置实验本身，例如使用下面显示的配置。
 
-![](https://ws1.sinaimg.cn/large/7134983fgy1ft55purozaj20m80ukq47.jpg)
+![](https://ws1.sinaimg.cn/large/006tKfTcgy1ftbsow4ilbj318g1p5tdp.jpg)
 
 *实验设置*
 
@@ -75,7 +75,7 @@ Vamp Lamia 这个新版本的目标是将 Istio 从 0.7.1 迁移到 0.8 并让�
 Virtual Service 是 Istio 0.8 中 Route Rule 的替代品，用于定义指定 Service 的流量路由。
 您可以在以下屏幕截图中查看其配置。
 
-![](https://ws1.sinaimg.cn/large/7134983fgy1ft55qfs20zj20m80ob0ug.jpg)
+![img](https://cdn-images-1.medium.com/max/2000/1*2VxrlhZT4_ReuZBzaasNVg.png)
 
 *虚拟服务配置*
 
@@ -91,7 +91,7 @@ Virtual Service 定义了三条路由。前两个很容易理解：它们各自�
 
 可以通过指标页面监控此行为，如下所示。
 
-![](https://ws1.sinaimg.cn/large/7134983fgy1ft55re75e9j20m80egmy0.jpg)
+![img](https://cdn-images-1.medium.com/max/2000/1*VbWOYP-7vpSoyjsYmVZ8aQ.png)
 
 *虚拟服务指标*
 

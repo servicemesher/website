@@ -6,7 +6,7 @@ draft: false
 banner: "https://ws2.sinaimg.cn/large/006tNc79gy1ftbrmr04dyj30rs0kun0k.jpg"
 author: "蚂蚁金服"
 authorlink: "http://www.sofastack.tech"
-summary: "蚂蚁金服开源SOFAMesh—一款基于Istio改进和扩展而来的Service Mesh大规模落地实践方案，同时开源了Go语言版的Sidecar—SOFA MOSN，期待通过社区贡献。"
+summary: “蚂蚁金服开源SOFAMesh—一款基于Istio改进和扩展而来的Service Mesh大规模落地实践方案，同时开源了Go语言版的Sidecar—SOFA MOSN（可单独使用），期待通过社区贡献。"
 tags: ["sofa","sofamesh","service mesh","sofastack","mosn","istio"]
 categories: ["service mesh"]
 keywords: [“service mesh","蚂蚁金服","sofa","sofamesh","mosn"]
