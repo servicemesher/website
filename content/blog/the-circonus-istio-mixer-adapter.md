@@ -2,7 +2,7 @@
 title: "Circonus Istio Mixer适配器"
 date: 2018-07-17T20:12:18+08:00
 draft: false
-banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frk001fkixj30rs0ku4qp.jpg"
+banner: "https://ws3.sinaimg.cn/large/006tKfTcgy1ftd5hs4anpj30rs0kun0d.jpg"
 author: "Fred Moyer"
 authorlink: "https://twitter.com/phredmoyer"
 translator: "陈冬"
@@ -24,7 +24,7 @@ Circonus 参与开源软件有着悠久的传统。因此，当看到 Istio 提�
 
 如果你不知道什么是服务网格那也没关系，其实你已经用了很多年了。互联网的路由基础设施就是一个服务网格；它有利于 TCP 重传、访问控制、动态路由、流量规划等。以往占主导地位的单体web应用正在为微服务让路。Istio 通过一个  [sidecar proxy](https://www.envoyproxy.io/docs/envoy/latest/) 提供基于容器的分布式应用程序的控制平面功能。它为服务的操作人员提供了丰富的功能来控制 [Kubernetes](https://kubernetes.io/) 编排的服务集合，而不需要服务本身来实现任何控制平面的功能集合。
 
-Istio [Mixer](https://istio.io/docs/concepts/policies-and-telemetry/overview/) 提供了一个 [适配器](https://istio.io/blog/2017/adapter-model/) 模型，它允许我们通过为 Mixer 创建用于外部基础设施后端接口的 [处理器](https://istio.io/docs/concepts/policies-and-telemetry/config/#handlers) 来开发适配器。Mixer 还提供了一组模版，每个模板都为适配器提供了不同的元数据集。在例如 Circonus 适配器之类的度量适配器，该元数据集包括诸如*请求持续时间*（*request duration*）、*请求计数*（*request count*）、*请求有效负载大小*（*request payload size*）等度量。要激活 Istio 启用的 Kubernetes 集群中的 Circonus 适配器，只需要使用 istioctl 命令将 Circonus  operator 配置 注入到 k8s 集群中，metrics 将开始流动。
+Istio [Mixer](https://istio.io/docs/concepts/policies-and-telemetry/overview/) 提供了一个 [适配器](https://istio.io/blog/2017/adapter-model/) 模型，它允许我们通过为 Mixer 创建用于外部基础设施后端接口的 [处理器](https://istio.io/docs/concepts/policies-and-telemetry/config/#handlers) 来开发适配器。Mixer 还提供了一组模版，每个模板都为适配器提供了不同的元数据集。在例如 Circonus 适配器之类的度量适配器，该元数据集包括诸如`请求持续时间（request duration）`、`请求计数（request count）`、`请求有效负载大小（request payload size）`等度量。要激活 Istio 启用的 Kubernetes 集群中的 Circonus 适配器，只需要使用 istioctl 命令将 Circonus  operator 配置 注入到 k8s 集群中，metrics 将开始流动。
 
  以下是一个关于 Mixer 如何与这些外部后端服务交互的架构图：
 
@@ -32,7 +32,7 @@ Istio [Mixer](https://istio.io/docs/concepts/policies-and-telemetry/overview/) �
 
 Istio 还包含了 StatsD 和 Prometheus 的 metrics 适配器。然而，Circonus 适配器与其他适配器又存在一些区别。首先，Circonus 适配器允许我们将请求持续时间作为一个直方图来收集，而不仅仅是记录固定的百分位数。这使我们能够计算任何时间窗上的任意分位数，并对所收集的直方图进行统计分析。第二，数据可以基本上永久保留。第三，telemetry 数据被保存在持久的环境中，而独立于 Kubernetes 管理的任何短暂资源之外。
 
-让我们来看看，数据是如何从 Istio 到 Circonus 中的。Istio 的适配器框架暴露了很多可以给适配器开发者使用的方法。Istio 处理的每个请求都生成了一组度量实例用来调用 *HandleMetric()* 方法。在我们的 operator 配置中，我们可以指定我们要采用的 metric，以及它们的类型：
+让我们来看看，数据是如何从 Istio 到 Circonus 中的。Istio 的适配器框架暴露了很多可以给适配器开发者使用的方法。Istio 处理的每个请求都生成了一组度量实例用来调用 `HandleMetric()` 方法。在我们的 operator 配置中，我们可以指定我们要采用的 metric，以及它们的类型：
 
 ```yaml
 spec:
@@ -50,9 +50,9 @@ spec:
     type: GAUGE
 ```
 
-在这里，我们配置了一个服从 [HTTPTrap](https://login.circonus.com/resources/docs/user/Data/CheckTypes/HTTPTrap.html) 检查的 URL 同时间断发送 metric 的 Circonus 处理程序。在这个例子中，我们指定了四个 metric 的集合，以及它们的类型。请注意，我们把 *请求持续时间* 作为一个 *DISTRIBUTION* 类型来收集，将作为 Circonus 中的直方图进行处理。这将保持时间的保真度，而不是对该 metric 做平均，或者在记录之前计算百分位数（这两种技术都失去了信号的原始值）。
+在这里，我们配置了一个服从 [HTTPTrap](https://login.circonus.com/resources/docs/user/Data/CheckTypes/HTTPTrap.html) 检查的 URL 同时间断发送 metric 的 Circonus 处理程序。在这个例子中，我们指定了四个 metric 的集合，以及它们的类型。请注意，我们把`请求持续时间`作为一个 `DISTRIBUTION` 类型来收集，将作为 Circonus 中的直方图进行处理。这将保持时间的保真度，而不是对该 metric 做平均，或者在记录之前计算百分位数（这两种技术都失去了信号的原始值）。
 
-对每个请求，对每个指定的度量请求调用 `*HandleMetric() *` 方法。看如下代码：
+对每个请求，对每个指定的度量请求调用 `HandleMetric()` 方法。看如下代码：
 
 ```go
 // HandleMetric submits metrics to Circonus via circonus-gometrics
@@ -78,7 +78,7 @@ func (h *handler) HandleMetric(ctx context.Context, insts []*metric.Instance) er
 }
 ```
 
-在这里我们可以看到，使用一个 Mixer 的上下文以及一组 metric 实例来调用 *HandleMetric()* 方法，我们遍历每个实例，确定它的类型，并调用适当的 *circonus-gometrics* 方法。在这个框架中，metric 处理器包含一个 *circonus-gometrics* 对象，并提交实际的度量值来实现。设置处理器还是比较复杂的，但并不是最复杂的事情：
+在这里我们可以看到，使用一个 Mixer 的上下文以及一组 metric 实例来调用 `HandleMetric()` 方法，我们遍历每个实例，确定它的类型，并调用适当的 `circonus-gometrics` 方法。在这个框架中，metric 处理器包含一个 `circonus-gometrics` 对象，并提交实际的度量值来实现。设置处理器还是比较复杂的，但并不是最复杂的事情：
 
 ```go
 // Build constructs a circonus-gometrics instance and sets up the handler
@@ -131,7 +131,7 @@ func (b *builder) Build(ctx context.Context, env adapter.Env) (adapter.Handler, 
 }
 ```
 
-Mixer 提供了一个生成器类型，我们定义了构建方法。再次，Mixer 的上下文被传递，以及表示 Mixer 配置的环境变量。我们创建了一个新的 *circonus-gometrics* 对象，并故意禁用了自动 metrics 刷新。我们这样做是因为 Mixer 要求我们在使用 *env.ScheduleDaemon()* 方法时在 panic 处理器中包装所有的 goroutines 。你会注意到我们通过 *context.WithCancel* 创建了自己的 *adapterContext* 。这使得我们可以通过 Mixer 提供的 *Close()* 方法中调用 *h.cancel()* 来关闭 metrics 刷新 goroutine 。我们还希望将任何日志事件从 CGM (*circonus-gometrics*) 发送到 Mixer 的日志中。Mixer 提供了一个基于 glog 的  *env.Logger()* 接口，但 CGM 使用的是标准的 Golang 日志。如何解决这种不匹配的问题？通过一个 logger bridge，任何 CGM 生成的日志记录语句都可以传递给 Mixer。
+Mixer 提供了一个生成器类型，我们定义了构建方法。再次，Mixer 的上下文被传递，以及表示 Mixer 配置的环境变量。我们创建了一个新的 `circonus-gometrics` 对象，并故意禁用了自动 metrics 刷新。我们这样做是因为 Mixer 要求我们在使用 `env.ScheduleDaemon()` 方法时在 panic 处理器中包装所有的 goroutines 。你会注意到我们通过 `context.WithCancel` 创建了自己的 `adapterContext` 。这使得我们可以通过 Mixer 提供的 `Close()` 方法中调用 `h.cancel()` 来关闭 metrics 刷新 goroutine 。我们还希望将任何日志事件从 `CGM (circonus-gometrics)` 发送到 Mixer 的日志中。Mixer 提供了一个基于 glog 的  `env.Logger()` 接口，但 CGM 使用的是标准的 Golang 日志。如何解决这种不匹配的问题？通过一个 logger bridge，任何 CGM 生成的日志记录语句都可以传递给 Mixer。
 
 ```go
 // logToEnvLogger converts CGM log package writes to env.Logger()
@@ -217,7 +217,7 @@ $ wget http://<workerNodeAddress>/<productpage>
 
 示例程序应该启动并运行起来了。如果你在使用 Istio 0.3 或低于此版本的程序，你需要安装我们构建好并嵌入了 Circonus 适配器的镜像。
 
-加载 Circonus 的资源定义（在 Istio 0.3 或 低于此版本上执行此操作）。将此内容保存为 *circonus_crd.yaml*
+加载 Circonus 的资源定义（在 Istio 0.3 或 低于此版本上执行此操作）。将此内容保存为 `circonus_crd.yaml`
 
 ```yaml
 kind: CustomResourceDefinition
@@ -249,7 +249,7 @@ $ kubectl apply -f circonus_crd.yaml
 $ kubectl -n istio-system edit deployment istio-mixer
 ```
 
-修改混合器的二进制*镜像*，来使用 istio-circonus 的镜像：
+修改混合器的二进制`镜像`，来使用 istio-circonus 的镜像：
 
 ```ini
 image: gcr.io/istio-circonus/mixer_debug
