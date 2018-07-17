@@ -5,19 +5,18 @@ draft: false
 banner: "https://ws1.sinaimg.cn/large/006tKfTcgy1ft5wypaul5j31ji15ob2b.jpg"
 author: "丁轶群"
 authorlink: "https://github.com/SecretQY"
-summary: “本文是对Istio 0.8版本代码中的pilot-agent的深度源码解析，作者丁轶群博士，谐云科技CTO。"
+summary: "本文是谐云科技CTO丁轶群博士对Istio 0.8版本代码中的pilot-agent的深度源码解析。"
 tags: ["service mesh","istio"]
 categories: ["istio source deepin","service mesh"]
 keywords: ["service mesh","istio","envoy"]
 ---
 
-## 本文作者
-
-丁轶群博士，谐云科技CTO
-
-2004年作为高级技术顾问加入美国道富银行(浙江)技术中心，负责分布式大型金融系统的设计与研发。2011年开始领导浙江大学开源云计算平台的研发工作，是浙江大学SEL实验室负责人，2013年获得浙江省第一批青年科学家称号，CNCF会员，多次受邀在Cloud Foundry, Docker大会上发表演讲，《Docker：容器与容器云》主要作者之一。
-
 本文分析的istio代码版本为0.8.0，commit为0cd8d67，commit时间为2018年6月18日。
+
+本文为`Service Mesh深度学习系列`之一：
+
+- [Service Mesh深度学习系列part1—istio源码分析之pilot-agent模块分析](/blog/istio-service-mesh-source-code-pilot-agent-deepin)
+- [Service Mesh深度学习系列part2—istio源码分析之pilot-discovery模块分析](/blog/istio-service-mesh-source-code-pilot-discovery-module-deepin)
 
 ## pilot总体架构 
 ![](https://ws4.sinaimg.cn/large/006tKfTcly1ft5wnmvat9j31kw0tu116.jpg)
@@ -77,35 +76,39 @@ pilot-agent的role类型为model包下的Proxy，决定了pilot-agent的“角�
 |Other  |private IP,默认127.0.0.1  | IPAddress | “” |
 
 其中的private ip通过`WaitForPrivateNetwork`函数获得。
-	
-> istio需要从服务注册中心（service registry）获取微服务注册的情况。当前版本中istio可以对接的服务注册中心类型包括：  
->
-> 1. "Mock"  
->
->   MockRegistry is a service registry that contains 2 hard-coded test services
->
-> 2. "Config"  
->
->   ConfigRegistry is a service registry that listens for service entries in a backing ConfigStore
->
-> 3. "Kubernetes" 
->   KubernetesRegistry is a service registry backed by k8s API server
->
-> 4. "Consul" 
->   ConsulRegistry is a service registry backed by Consul
->
-> 5. "Eureka" 
->   EurekaRegistry is a service registry backed by Eureka
->
-> 6. "CloudFoundry" 
->   CloudFoundryRegistry is a service registry backed by Cloud Foundry.
 
-> [官方about文档](https://istio.io/about/intro/)说当前支持Kubernetes, Nomad with Consul，未来准备支持 Cloud Foundry,Apache Mesos。另外根据[官方的feature成熟度文档](https://istio.io/about/feature-stages/)，当前只有Kubernetes的集成达到stable程度，Consul，Eureka和Cloud Foundry都还是alpha水平
+Istio需要从服务注册中心（service registry）获取微服务注册的情况。当前版本中istio可以对接的服务注册中心类型包括：  
+
+**Mock**
+
+MockRegistry is a service registry that contains 2 hard-coded test services
+
+**Config**
+
+ConfigRegistry is a service registry that listens for service entries in a backing ConfigStore
+
+**Kubernetes**
+
+KubernetesRegistry is a service registry backed by k8s API server
+
+**Consul**
+
+ConsulRegistry is a service registry backed by Consul
+
+**Eureka**
+
+EurekaRegistry is a service registry backed by Eureka
+
+**CloudFoundry**
+
+CloudFoundryRegistry is a service registry backed by Cloud Foundry.
+
+> [官方about文档](https://istio.io/about/intro/)说当前支持Kubernetes、Nomad with Consul，未来准备支持 Cloud Foundry、Apache Mesos。另外根据[官方的feature成熟度文档](https://istio.io/about/feature-stages/)，当前只有Kubernetes的集成达到stable程度，Consul、Eureka和Cloud Foundry都还是alpha水平。
 
 ### envoy配置文件及命令行参数
 agent.waitForExit会调用envoy.Run方法启动envoy进程，为此需要获取envoy二进制所在文件系统路径和flag两部分信息：
 
-1. envoy二进制所在文件系统路径：evony.Run通过proxy.config.BinaryPath变量得知envoy二进制所在的文件系统位置，proxy就是envoy对象，config就是pilot-agent的main方法在一开始初始化的proxyConfig对象。里面的BinaryPath在pilot-agent的init方法中被初始化，初始值来自pilot/pkg/model/context.go的DefaultProxyConfig函数，值是`/usr/local/bin/envoy`
+1. envoy二进制所在文件系统路径：evony.Run通过proxy.config.BinaryPath变量得知envoy二进制所在的文件系统位置，proxy就是envoy对象，config就是pilot-agent的main方法在一开始初始化的proxyConfig对象。里面的BinaryPath在pilot-agent的init方法中被初始化，初始值来自`pilot/pkg/model/context.go`的`DefaultProxyConfig`函数，值是`/usr/local/bin/envoy`
 2. envoy的启动flag形式为下面的startupArgs，包含一个`-c`指定的配置文件，还有一些flag。除了下面代码片段中展示的这些flag，还可以根据启动agent时的flag，再加上`--concurrency`, `--service-zone`等flag。
 
 ```go
@@ -120,11 +123,11 @@ startupArgs := []string{"-c", fname,
 ```
 关于以上启动envoy的flag及其值的解释：
 
-1. --restart-epoch：epoch决定了envoy hot restart的顺序，在后面会有详细描述，第一个envoy进程对应的epoch为0，后面新建的envoy进程对应epoch顺序递增1
-2. --drain-time-s：在pilot-agent init函数中指定默认值为2秒，可通过pilot-agent proxy命令的drainDuration flag指定
-3. --parent-shutdown-time-s：在pilot-agent init函数中指定默认值为3秒，可通过pilot-agent proxy命令的parentShutdownDuration flag指定
-4. --service-cluster：在pilot-agent init函数中指定默认值为"istio-proxy"，可通过pilot-agent proxy命令的serviceCluster flag指定
-5. --service-node：将agent.role的Type,IPAddress,ID和Domain用"~"连接起来
+1. `--restart-epoch`：epoch决定了envoy hot restart的顺序，在后面会有详细描述，第一个envoy进程对应的epoch为0，后面新建的envoy进程对应epoch顺序递增1
+2. `--drain-time-s`：在pilot-agent init函数中指定默认值为2秒，可通过pilot-agent proxy命令的drainDuration flag指定
+3. `--parent-shutdown-time-s`：在pilot-agent init函数中指定默认值为3秒，可通过pilot-agent proxy命令的parentShutdownDuration flag指定
+4. `--service-cluster`：在pilot-agent init函数中指定默认值为”istio-proxy"，可通过pilot-agent proxy命令的serviceCluster flag指定
+5. `--service-node`：将agent.role的Type,IPAddress,ID和Domain用”~"连接起来
 
 而上面的`-c`指定的envoy配置文件有几种生成的方式：  
 
@@ -203,4 +206,8 @@ agent会监控chainfile，keyfile和rootcert三个证书文件的变化，如果
 1. [下一代 Service Mesh -- istio 架构分析](https://juejin.im/post/5afad93ef265da0b7e0c6cfb)  
 2. [istio源码分析——pilot-agent如何管理envoy生命周期](https://segmentfault.com/a/1190000015171622)  
 
+## 本文作者
 
+丁轶群博士，谐云科技CTO
+
+2004年作为高级技术顾问加入美国道富银行(浙江)技术中心，负责分布式大型金融系统的设计与研发。2011年开始领导浙江大学开源云计算平台的研发工作，是浙江大学SEL实验室负责人，2013年获得浙江省第一批青年科学家称号，CNCF会员，多次受邀在Cloud Foundry, Docker大会上发表演讲，《Docker：容器与容器云》主要作者之一。
