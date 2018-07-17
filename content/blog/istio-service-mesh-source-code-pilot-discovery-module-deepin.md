@@ -32,24 +32,26 @@ keywords: ["service mesh","istio","envoy"]
 > 对于模块的命名方法，本文采用模块对应源码main.go所在包名称命名法。其他istio分析文章有其他命名方法。比如pilot-agent也被称为istio pilot，因为它在Kubernetes上的部署形式为一个叫istio-pilot的deployment。
 
 ## pilot-discovery的部署存在形式
-pilot-discovery是单独二进制，被封装在Dockerfile.pilot里，在istio-docker.mk里被build成$(HUB)/pilot:$(TAG)镜像。  
-根据istio-pilot.yaml.tmpl，在Kubernetes环境下，pilot镜像并非sidecar的一部分，也不是daemonset在每个机器上都有，而是单独部署成一个replica=1的deployment。  
+pilot-discovery是单独二进制，被封装在`Dockerfile.pilot`里，在`istio-docker.mk`里被build成`$(HUB)/pilot:$(TAG)`镜像。
+
+根据`istio-pilot.yaml.tmpl`，在Kubernetes环境下，pilot镜像并非sidecar的一部分，也不是daemonset在每个机器上都有，而是单独部署成一个replica=1的deployment。  
 
 ## pilot-discovery的功能简述
 pilot-discovery扮演服务注册中心、istio控制平面到Envoy之间的桥梁作用。pilot-discovery的主要功能包括：
 
-1. 监控服务注册中心（如Kubernetes）的服务注册情况。在Kubernetes环境下，会监控`service`、`endpoint`、`pod`、`node`等资源信息
-	. 监控istio控制面信息变化，在Kubernetes环境下，会监控包括`RouteRule`、			`VirtualService`、`Gateway`、`EgressRule`、`ServiceEntry`等以Kubernetes CRD形式存在的istio控制面配置信息。
-3. 将上述两类信息合并组合为Envoy可以理解的（即遵循Envoy data plane api的）配置信息，并将这些信息以gRPC协议提供给Envoy
-## pilot-discovery主要功能分析之一：初始化
-pilot-discovery的初始化主要在pilot-discovery的`init`方法和在`discovery`命令处理流程中调用的`bootstrap.NewServer`完成：  
+1. 监控服务注册中心（如Kubernetes）的服务注册情况。在Kubernetes环境下，会监控`service`、`endpoint`、`pod`、`node`等资源信息。监控istio控制面信息变化，在Kubernetes环境下，会监控包括`RouteRule`、`VirtualService`、`Gateway`、`EgressRule`、`ServiceEntry`等以Kubernetes CRD形式存在的istio控制面配置信息。
+2. 将上述两类信息合并组合为Envoy可以理解的（即遵循Envoy data plane api的）配置信息，并将这些信息以gRPC协议提供给Envoy
 
-1. pilot-discovery的`init`方法为pilot-discovery的`discovery`命令配置一系列flag及其默认值。flag值被保存在bootstrap包的`PilotArgs`对象中  
+## pilot-discovery主要功能分析之一：初始化
+
+pilot-discovery的初始化主要在pilot-discovery的`init`方法和在`discovery`命令处理流程中调用的`bootstrap.NewServer`完成：
+
+1. pilot-discovery的`init`方法为pilot-discovery的`discovery`命令配置一系列flag及其默认值。flag值被保存在bootstrap包的`PilotArgs`对象中 
 2. `bootstrap.NewServer`利用`PilotArgs`构建bootstrap包下的`server`对象
 
-`bootstrap.NewServer`工作流程如下：
+`bootstrap.NewServer`工作流程如下。
 
-### 1. 创建Kubernetes apiserver client（initKubeClient方法）  
+### 1. 创建Kubernetes apiserver client（initKubeClient方法）
 
 根据服务注册中心配置是否包含Kubernetes（一个istio service mesh可以连接多个服务注册中心）创建`kubeClient`，保存在`Server.kubeClient`成员中。`kubeClient`有两种创建方式：
 
@@ -64,10 +66,10 @@ istio支持使用一个istio control plane来管理跨多个Kubernetes集群上�
 
 2. 检测服务注册中心中是否包含Mock类型，是的话直接返回
 
-3. 如果pilot-discovery `discovery`命令的flag `clusterRegistriesConfigMap`不为空，则从本地Kubernetes集群中读取一个包含远程Kubernetes集群访问信息的configmap（configmap所在的默认命名空间为`“istio-system”`，名字通过discovery命令flag `clusterRegistriesConfigMap`设定）。  
+3. 如果pilot-discovery `discovery`命令的flag `clusterRegistriesConfigMap`不为空，则从本地Kubernetes集群中读取一个包含远程Kubernetes集群访问信息的configmap（configmap所在的默认命名空间为`“istio-system”`，名字通过discovery命令flag `clusterRegistriesConfigMap`设定）。 
 
   这个configmap包含Kubernetes远程集群的访问信息，其形式为键值对。其key为cluster唯一标识符，value为一个使用yaml或json编码的`Cluster`对象。  `Cluster`对象的Annotations指定一个本地Kubernetes集群中的secret（secret所在命名空间对应的annotation key为`config.istio.io/accessConfigSecret`，默认为`istio-system`，secret名称对应annotation key为`config.istio.io/accessConfigSecretNamespace`）。 
-  到本地Kubernetes集群中读取secret内容，根据这个内容构建保存在`clusterStore`中的RemoteCluster对象，对应一个远程Kubernetes集群。  
+  到本地Kubernetes集群中读取secret内容，根据这个内容构建保存在`clusterStore`中的RemoteCluster对象，对应一个远程Kubernetes集群。 
 
 ### 3. 读取mesh配置（initMesh方法） 
 
@@ -87,7 +89,7 @@ mesh配置由`MeshConfig`结构体定义，包含`MixerCheckServer`、`MixerRepo
 
 **ii) Kubernetes CRD**
 
-以Kubernetes apiserver作为config store的情况下，config store的初始化流程如下：    
+以Kubernetes apiserver作为config store的情况下，config store的初始化流程如下：
 
 1. 读取pilot-discovery `discovery`命令的`kubeconfig` flag配置的kubeconfig配置文件，flag默认为空。
 
@@ -101,17 +103,17 @@ mesh配置由`MeshConfig`结构体定义，包含`MixerCheckServer`、`MixerRepo
 
 ### 6. 配置与服务注册中心（service registry）的连接（initServiceControllers方法）
 
-istio需要从服务注册中心（service registry）获取服务注册的情况。代表pilot-discovery的server对象包含一个`ServiceController`对象，一个`ServiceController`对象包含一个或多个service controller(是的，这两个名字只有大小写区别)。每个service controller负责连接服务注册中心并同步相关的服务注册信息。  
+istio需要从服务注册中心（service registry）获取服务注册的情况。代表pilot-discovery的server对象包含一个`ServiceController`对象，一个`ServiceController`对象包含一个或多个service controller(是的，这两个名字只有大小写区别)。每个service controller负责连接服务注册中心并同步相关的服务注册信息。
 
-当前istio支持的服务注册中心类型包括ConfigRegistry, MockRegistry, Kubernetes, Consul, Eureka和CloudFoundry。不过仅对Kubernetes服务注册中心的支持成熟度达到stable水平，其他服务注册中心的集成工作成熟度还都处于alpha水平。  
+当前istio支持的服务注册中心类型包括ConfigRegistry, MockRegistry, Kubernetes, Consul, Eureka和CloudFoundry。不过仅对Kubernetes服务注册中心的支持成熟度达到stable水平，其他服务注册中心的集成工作成熟度还都处于alpha水平。
 
 `ServiceController`对象的结构体定义在aggregate包下，从包名可以看出一个`ServiceController`对象是对多个service controller的聚合。所谓聚合，也就是当对`ServiceController`操作时，会影响到其聚合的所有service controller。比如，当我们向`ServiceController`注册一个服务注册信息变更事件处理handler时，实际上会将handler注册到所有的service controller上。
 
-具体service controller对服务注册信息的变更处理流程框架将在本文“pilot-discovery主要功能分析之三：服务注册信息监控与处理”中描述。  
+具体service controller对服务注册信息的变更处理流程框架将在本文“pilot-discovery主要功能分析之三：服务注册信息监控与处理”中描述。
 
 ### 7. 初始化discovery服务（initDiscoveryService）
 
-istio service mesh中的envoy sidecar通过连接pilot-discovery的discovery服务获取服务注册情况、流量控制策略等控制面的控制信息。discovery服务的初始化主要包括如下几步：  
+istio service mesh中的envoy sidecar通过连接pilot-discovery的discovery服务获取服务注册情况、流量控制策略等控制面的控制信息。discovery服务的初始化主要包括如下几步：
 
 **i) 创建对外提供REST协议的discovery服务的discovery service对象**
 
@@ -123,25 +125,25 @@ istio代码在2018年6月的一次commit （e99cad5）中删除了大量与Envoy
 
 与Envoy xds server相关代码分析我们将在系列文章的下一篇分析。
 
-### 8. 打开运行情况检查端口（initMonitor方法）  
+### 8. 打开运行情况检查端口（initMonitor方法）
 
 pilot-discovery默认打开9093端口（端口号可以通过pilot-discovery discovery命令的`monitoringAddr` flag自定义），对外提供HTTP协议的自身运行状态检查监控功能。当前提供`/metrics`和`/version`两个运行状况和基本信息查询URL。
 
-### 9. 监控多Kubernetes集群中远程集群访问信息变化（initMultiClusterController方法）  
+### 9. 监控多Kubernetes集群中远程集群访问信息变化（initMultiClusterController方法）
 
 当使用一个istio控制面构建跨多个Kubernetes集群的service mesh时，远程Kubernetes集群的访问信息保存在secret中，此处使用list/watch监控secret资源的变化。
 
 > 关于上面第五点说的两种config store，代码里实际上还有第三种，通过`PilotArgs.Config.Controller`配置。但pilot-discovery的`init`函数里没找到对应flag。  
 
-以上一系列初始化不候通过bootstrap包的`NewServer`函数带起，在此过程中pilot-discovery已经启动一部分协程，开始一些控制逻辑的循环执行。比如在上述第九步中的多Kubernetes集群访问信息（secret资源）的监控，在`initMonitor`方法中，实际上已经启动协程，利用client-go库开始对secret信息的监控（list/watch）与处理。  
+以上一系列初始化不候通过bootstrap包的`NewServer`函数带起，在此过程中pilot-discovery已经启动一部分协程，开始一些控制逻辑的循环执行。比如在上述第九步中的多Kubernetes集群访问信息（secret资源）的监控，在`initMonitor`方法中，实际上已经启动协程，利用client-go库开始对secret信息的监控（list/watch）与处理。
 
 而pilot-discovery的其他控制逻辑则要在bootstrap包下的`Server.Start`方法启动，而`Start`方法的逻辑是顺序执行之前初始化过程中在`server`对象上注册的一系列启动函数（`startFunc`）。 本文接下来分析pilot-discovery的其他主要控制逻辑。 TODO 整理有哪些startfunc
 
 ## pilot-discovery主要功能分析之二：istio控制面信息监控与处理
 
-istio的用户可以通过istioctl创建`route rule`、`virtualservice`等实现对服务网络中的流量管理等配置建。而这些配置需要保存在config store中。在当前的istio实现中，config store以Kubernetes CRD的形式将`virtualservice`等存储在Kubernetes apiserver之后的etcd中。  
+istio的用户可以通过istioctl创建`route rule`、`virtualservice`等实现对服务网络中的流量管理等配置建。而这些配置需要保存在config store中。在当前的istio实现中，config store以Kubernetes CRD的形式将`virtualservice`等存储在Kubernetes apiserver之后的etcd中。
 
-在前面pilot-discovery初始化第五步骤中pilot-discovery已经完成了`RouteRule`、`VirtualService`等CRD资源在Kubernetes apiserver上的注册，接下来pilot-discovery还需要在initConfigController方法中通过config controller搭建CRD资源对象处理的框架。config controller包含以下3个部分：  
+在前面pilot-discovery初始化第五步骤中pilot-discovery已经完成了`RouteRule`、`VirtualService`等CRD资源在Kubernetes apiserver上的注册，接下来pilot-discovery还需要在initConfigController方法中通过config controller搭建CRD资源对象处理的框架。config controller包含以下3个部分：
 
 **1. client**
 
