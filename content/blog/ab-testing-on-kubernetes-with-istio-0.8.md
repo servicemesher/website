@@ -2,7 +2,7 @@
 title: "使用Istio 0.8对Kubernetes进行A/B测试"
 date: 2018-07-13T12:38:44+08:00
 draft: false
-banner: "https://ws2.sinaimg.cn/large/006tNc79gy1ftbruduenjj31ji15m7wh.jpg"
+banner: "https://ws3.sinaimg.cn/large/006tKfTcgy1ftdx65tgduj30rs0kugov.jpg"
 author: "Alessandro Valcepina"
 authorlink: "https://medium.com/@alessandrovalcepina"
 translator: "张琦翔"
