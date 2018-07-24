@@ -8,14 +8,14 @@ translatorlink: "https://github.com/muercy"
 reviewer: "宋净超"
 reviewerlink: "https://jimmysong.io"
 origininallink: "https://blog.aspenmesh.io/blog/2018/03/service-mesh-architectures/"
-summary: “这是介绍服务网格的架构系列的第二篇文章，本文讲解了Service Mesh术语的含义，为什么说节点代理和Sidecar模型是微服务的新模式和未来。"
+summary: "这是介绍服务网格的架构系列的第二篇文章，本文讲解了Service Mesh术语的含义，为什么说节点代理和Sidecar模型是微服务的新模式和未来。"
 banner: "https://ws3.sinaimg.cn/large/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
 tags: ["service mesh"]
 categories: ["translation"]
 keywords: ["service mesh","服务网格"]
 ---
 
-*注：这是介绍服务网格的软件架构方面系列的第二篇文章。要了解更多，请查看[The Path to Service Mesh](https://blog.aspenmesh.io/blog/2018/03/the-path-to-service-mesh/)。*
+*注：这是介绍服务网格的软件架构方面系列的第二篇文章。要了解更多，请查看[服务网格之路](/blog/the-path-to-service-mesh/)。*
 
 如果你正在围绕微服务构建软件和团队，并且在寻找更快、更灵活的迭代方法。Service Mesh可以在保持（或增强）系统可观察性和控制方面带来帮助。这篇博文中，我将讨论Service Mesh是什么，以及在选择和部署Service Mesh时需要考虑的因素。
 
