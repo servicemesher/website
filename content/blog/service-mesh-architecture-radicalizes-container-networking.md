@@ -10,7 +10,7 @@ translatorlink: "https://github.com/loverto"
 reviewer: "宋净超"
 reviewerlink: "https://jimmysong.io"
 originallink: "https://searchitoperations.techtarget.com/feature/Service-mesh-architecture-radicalizes-container-networking"
-summary: "本文是将您了解和评估何时和如何采纳服务网格的最佳参考资料。本文回顾了服务网格的历史，并采访了创造Service Mesh一词的Buoyant创始人、来自Google的Isito的产品经理和Enovy架构师Matt Klein，分别就谁、何时以何种方式采纳服务网格，服务网格的未来展望给出了答案。"
+summary: "本文将是您了解和评估何时以及如何采纳服务网格的最佳参考资料。本文回顾了服务网格的历史，并采访了创造Service Mesh一词的Buoyant创始人，Istio的产品经理，Enovy的架构师Matt Klein，分别就谁应该何时以何种方式采纳服务网格给出了意见并展望了服务网格的未来。"
 tags: ["service mesh","istio"]
 categories: ["translation"]
 keywords: ["service mesh","服务网格"]
