@@ -1,5 +1,5 @@
 ---
-title: "Istio 1.0发布，核心功能可用于生产！"
+title: "Istio 1.0发布，已生产就绪！"
 date: 2018-07-31T21:44:58+08:00
 draft: false
 banner: "https://ws4.sinaimg.cn/large/0069RVTdgy1fttdt7l2qxj30rs0ku0yj.jpg"
@@ -40,7 +40,7 @@ keywords: ["service mesh","istio"]
 
 ## 快速开始
 
-如果您是 Istio 的新手，并希望将其用于部署，我们很乐意听取您的意见。查看我们的[文档](https://istio.io/zh/docs/)，访问我们的[聊天论坛](https://istio.rocket.chat)或访问[邮件列表](https://groups.google.com/forum/#!forum/istio-dev)。如果您想更深入地为该项目做出贡献，请参加我们的[社区会议](/about/community)并打个招呼。
+如果您是 Istio 的新手，并希望将其用于部署，我们很乐意听取您的意见。查看我们的[文档](https://istio.io/zh/docs/)，访问我们的[聊天论坛](https://istio.rocket.chat)或访问[邮件列表](https://groups.google.com/forum/#!forum/istio-dev)。如果您想更深入地为该项目做出贡献，请参加我们的[社区会议](https://istio.io/zh/about/community)并打个招呼。
 
 ## 最后
 
