@@ -6,6 +6,6 @@ description: >
      <li>日渐强大的生态圈</li>
      <li>支持多Kubernetes集群</li>
      <li>支持进程外Mixer适配器 </li>
-     <li><a href="/blog/annoucing-istio-1.0/">了解详情</a></li>
+     <li><a href="/blog/announcing-istio-1.0/">了解详情</a></li>
    </ul>
 image: "/img/carousel/istio-1.0-zh.png"
