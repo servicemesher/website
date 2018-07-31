@@ -1,12 +1,10 @@
 weight: 3
-title: "Istio"
+title: "Service Mesh Meetup杭州站"
 description: >
   <ul class="list-style-none">
-     <li>改进了流量管理模型</li>
-     <li>Ingress/Egress 网关</li>
-     <li>新的网关支持 SNI</li>
-     <li>支持 Envoy v2 API</li>
-     <li>受限入站端口</li>
-     <li><a href="/blog/istio-0.8-release-note/">了解详情</a></li>
+     <li>6月30日杭州站</li>
+     <li>120余人到场参加</li>
+     <li>5000多人通过直播观看</li>
+     <li><a href="/blog/hangzhou-meetup-20180630">了解详情</a></li>
    </ul>
-image: "/img/carousel/istio.png"
+image: "/img/carousel/hangzhou.png"
