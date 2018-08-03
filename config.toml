@@ -70,10 +70,22 @@ paginate = 10
     pre = "<i class='fa fa-2x fa-github'></i>"
 
 [[menu.topbar]]
+    weight = 2
+    name = "Twitter"
+    url = "https://twitter.com/servicemesher"
+    pre = "<i class='fa fa-2x fa-twitter'></i>"
+
+[[menu.topbar]]
+    weight = 3
+    name = "Slack"
+    url = "https://servicemesher.slack.com"
+    pre = "<i class='fa fa-2x fa-slack'></i>"
+
+[[menu.topbar]]
     weight = 4
-    name = "Email"
-    url = "mailto:jimmysong@jimmysong.io"
-    pre = "<i class='fa fa-2x fa-envelope'></i>"
+    name = "Wechat"
+    url = "/contact"
+    pre = "<i class='fa fa-2x fa-wechat'></i>"
 
 [params]
     viewMorePostLink = "/blog/"
@@ -113,7 +125,7 @@ paginate = 10
 # Enable or disable top bar with social icons
 [params.topbar]
     enable = true
-    text = """<p>ServiceMesher社区，GitHub入口➡</p>
+    text = """<p>社区入口➡</p>
       """
 
 # Enable and disable widgets for the right sidebar
