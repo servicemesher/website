@@ -11,6 +11,8 @@ categories: ["service mesh"]
 keywords: ["service mesh","sofa-mesh","sofa-mosn"]
 ---
 
+SOFAMosn GitHub地址：https://github.com/alipay/sofa-mosn
+
 本文作者：朵晓东，花名奕杉，蚂蚁金服高级技术专家，专注云计算技术及产品。Apache Kylin 创始团队核心成员，蚂蚁金融云 PaaS 创始团队核心成员，Antstack 网络产品负责人，SOFAMesh 创始团队核心成员。
 
 ![朵晓东 service mesh meetup](https://ws1.sinaimg.cn/large/0069RVTdgy1ftvf883plij30sg0j0n1e.jpg)
