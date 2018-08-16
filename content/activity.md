@@ -28,9 +28,9 @@ keywords: ["service mesh","meetup"]
 
 ![](https://ws1.sinaimg.cn/large/006tNbRwly1fu9he4l10cj31400u0dmf.jpg)
 
-**Topic摘要**：网上有很多关于Istio的介绍，但主要的关注是数据平面。所以这次独辟蹊径，给大家解密Istio里强大的控制平面：管理生命周期的Pilot-Agent，自动推送配置的Pilot-Discovery， 生成遥测报告的Mixer以及安全证书管理的Istio_Ca。通过本次分享您将了解其工作原理和现存的问题。
+**Topic摘要**：网上有很多关于Istio的介绍，但主要的关注是数据平面。所以这次独辟蹊径，给大家解密Istio里强大的控制平面：管理生命周期的Pilot-Agent，配置中心Pilot-Discovery， 生成遥测报告的Mixer以及安全证书管理的Istio_Ca。通过本次分享您将了解其工作原理和现存的问题。
 
-**讲师简介**：ETC车宝平台工程师。喜欢开源，个人开源项目“Jaeger PHP Client”。喜欢研究源码，对NSQ、Jaeger、Istio（控制平面）等go语言开源项目都进行过研究。除了代码还喜欢爬山和第二天睡醒后全身酸疼的感觉。
+**讲师简介**：朱经惠，ETC车宝平台工程师。喜欢开源，个人开源项目“Jaeger PHP Client”，喜欢研究源码，对NSQ、Jaeger、Istio（控制平面）等go语言开源项目进行过研究。除了代码还喜欢爬山和第二天睡醒后全身酸疼的感觉。
 
 ------
 
