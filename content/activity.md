@@ -12,7 +12,9 @@ keywords: ["service mesh","meetup"]
 
 [点击报名](http://www.huodongxing.com/event/3453378014200)
 
-![Service Mesh Meetup 深圳报名](https://ws4.sinaimg.cn/large/006tNbRwly1fubueaoz3yj315p2q9qv7.jpg)
+![Service Mesh Meetup 深圳报名](https://ws3.sinaimg.cn/large/006tNbRwly1fucjro7qoyj315p2q9qv7.jpg)
+
+
 
 ## 讲师与Topic介绍
 
@@ -22,7 +24,7 @@ keywords: ["service mesh","meetup"]
 
 **Topic摘要**：随着1.0版本在上月底的发布，标志着Istio作为最火热的ServcieMesh框架已经逐渐成熟。本次议题中将以典型的灰度发布为例，分享华为云容器服务在Istio的实践，以及Istio和Kubernetes的完美结合释放云原生应用的核心优势，加速企业微服务技术转型。
 
-**讲师简介**：华为云微服务平台架构师，现负责华为云容器服务Istio产品化工作。参与华为PaaS平台产品设计研发，在Kubernets容器服务、微服务架构、云服务目录、大数据、APM、DevOpS工具等多个领域有深入研究与实践。曾供职于趋势科技。
+**讲师简介**：华为云微服务平台架构师，现负责华为云容器服务Istio产品化工作。参与华为PaaS平台产品设计研发，在Kubernetes容器服务、微服务架构、云服务目录、大数据、APM、DevOpS工具等多个领域有深入研究与实践。曾供职于趋势科技。
 
 ### 朱经惠 （联邦车网）——Istio控制平面组件原理解析
 
