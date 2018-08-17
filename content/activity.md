@@ -75,6 +75,10 @@ keywords: ["service mesh","meetup"]
 
 ![img](https://cdn.nlark.com/lark/0/2018/png/24761/1534300175162-9bc41dfb-a1d1-436c-a52c-a324da59b1df.png)
 
+## 独家视频直播
+
+![img](https://ws1.sinaimg.cn/large/00704eQkgy1fswks89xukj30b4035jsf.jpg)
+
 ## 关于ServiceMesher
 
 这里是ServiceMesher社区，Service Mesh人共同的家园。我们的使命是：传播Service Mesh技术、加强行业内部交流、促进开源文化构建、推动Service Mesh在企业落地，官方网站：[http://www.servicemesher.com](http://www.servicemesher.com/)
