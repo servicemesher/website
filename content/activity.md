@@ -23,7 +23,7 @@ keywords: ["service mesh","meetup"]
 - 邵俊雄（蚂蚁金服）：SOFAMesh 的通用协议扩展
 - 杨文（JEX）：Kubernetes、Service Mesh、CI/CD 实践
 
-[查看深圳站回顾](blog/shenzhen-meetup-20180825)
+[查看深圳站回顾](/blog/service-mesh-meetup-shenzhen-20180825)
 
 视频回放：http://www.itdks.com/eventlist/detail/2549
 
@@ -58,4 +58,5 @@ keywords: ["service mesh","meetup"]
 - 徐运元（谐云科技）：Service Mesh 结合容器云平台的思考与实践
 
 [查看杭州站回顾](/blog/hangzhou-meetup-20180630)
+
 视频回放：http://www.itdks.com/eventlist/detail/2311
