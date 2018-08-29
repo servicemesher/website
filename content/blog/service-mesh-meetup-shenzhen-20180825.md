@@ -1,5 +1,5 @@
 ---
-title: "Service Mesh Meetup深圳站回顾"
+title: "第三届Service Mesh Meetup深圳站回顾"
 date: 2018-08-27T11:40:45+08:00
 draft: false
 banner: "https://ws2.sinaimg.cn/large/006tNbRwly1fuoa8b64wqj31ji15mx6s.jpg"
@@ -7,7 +7,7 @@ author: "宋净超"
 authorlink: "https://jimmysong.io"
 summary: "ServiceMesher社区和蚂蚁金服联合主办、SOFAStack社区协办的第三届Service Mesh Meetup深圳站收官，华为张超盟、蚂蚁金服熊啸、JEX杨文、联邦车网朱经惠给大家带来分享。"
 tags: ["meetup"]
-categories: ["Service Mesh"]
+categories: ["meetup"]
 keywords: ["service mesh","meetup"]
 ---
 
