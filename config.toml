@@ -160,7 +160,7 @@ paginate = 10
     enable = true
     icon = "fa fa-pagelines"
     title = "参与进来"
-    subtitle = "加入 Service Mesh 爱好者社区"
+    subtitle = "加入 ServiceMesher 社区"
     link_url = "/contact"
     link_text = "查看加入方式"
 
