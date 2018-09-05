@@ -40,7 +40,7 @@ SOFAMesh在产品路线上，选择了跟随社区主流，我们选择了目前
 
 SOFAMesh将在兼容Istio整体架构和协议的基础上，做出部分调整：
 
-![SOFAMesh architecture](https://ws3.sinaimg.cn/large/006tKfTcgy1ft798kjr0mj31kw1biagi.jpg)
+![SOFAMesh architecture](https://ws4.sinaimg.cn/large/006tNbRwgy1fuyr4vizzwj31kw1biq98.jpg)
 
 1. **使用Golang语言开发全新的Sidecar，替代Envoy**
 2. **为了避免Mixer带来的性能瓶颈，合并Mixer部分功能进入Sidecar**
