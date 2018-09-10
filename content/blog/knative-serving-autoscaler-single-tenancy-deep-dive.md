@@ -4,10 +4,10 @@ date: 2018-08-07T22:20:49+08:00
 draft: false
 banner: "https://ws3.sinaimg.cn/large/0069RVTdgy1fu1i0mvc5yj31ji15ob2b.jpg"
 author: "陈有坤"
-summary: "我们都是知道Kubernetes中个资源对象叫 autoscaler，该对象在serverless架构中更是不可或缺，有了它可以负责应用的自动水平伸缩，用户再也不用关心示例的个数和资源消耗，本文是来自阿里巴巴UC事业群基础研发部的陈有坤同学对Knative的解析之autoscaler部分。"
-tags: ["knative","istio","kubernetes"]
-categories: ["knative"]
-keywords: ["service mesh","knative","istio","kubernetes"]
+summary: "我们都是知道Kubernetes中个资源对象叫autoscaler，该对象在serverless架构中更是不可或缺，有了它可以负责应用的自动水平伸缩，用户再也不用关心示例的个数和资源消耗，本文是来自阿里巴巴UC事业群基础研发部的陈有坤同学对Knative的解析之autoscaler部分。"
+tags: ["knative","istio","kubernetes","serverless"]
+categories: ["serverless"]
+keywords: ["service mesh","knative","istio","kubernetes","serverless"]
 ---
 
 > 我们都是知道Kubernetes中个资源对象叫 autoscaler，该对象在serverless架构中更是不可或缺，有了它可以负责应用的自动水平伸缩，用户再也不用关心示例的个数和资源消耗，本文是来自阿里巴巴UC事业群基础研发部的陈有坤同学对Knative的解析之autoscaler部分，还有大量的解析等待放出，起关注本站的后续内容。
