@@ -52,6 +52,12 @@ paginate = 10
     weight = 3
 
 [[menu.main]]
+    parent="docs"
+    name="Weekly"
+    url = "/categories/weekly"
+    weight = 4
+
+[[menu.main]]
     name = "活动"
     identifier = "activity"
     url  = "/activity/"
