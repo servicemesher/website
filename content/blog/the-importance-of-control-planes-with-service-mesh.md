@@ -30,7 +30,7 @@ keywords: ["service mesh","服务网格"]
 
 控制平面的选择也可能受所需控制范围的影响。我的同事[Rafi之前在QCon SF讨论过这个问题](https://www.infoq.com/news/2017/11/service-oriented-development)，集中或分散运维的要求肯定会影响控制平面的实施。这也直接关系到控制影响应该是本地的还是全局的。例如，运维团队可能希望指定全局合理的默认值和安全措施。但是，在前线工作的开发团队需要对其本地服务进行细粒度控制，并且可能（如果他们正在接受“自由和责任”模式）覆盖安全措施的能力。Matt还在最近的[QCon纽约演讲](https://www.infoq.com/news/2018/07/qcon-klein-service-mesh)中谈到了本地/全局互动，并展示了Lyft团队为服务到服务和边缘/入口代理创建的仪表板：
 
-![](https://cdn-images-1.medium.com/max/800/1*QjLNa1Wh0Y_F87JghLpPUA.png) 
+![](https://ws3.sinaimg.cn/large/006tNbRwgy1fv6sw7u1sxj30m80p577s.jpg) 
 
 ## 东西向流量与南北向流量
 
