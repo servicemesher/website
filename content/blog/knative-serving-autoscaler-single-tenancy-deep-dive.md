@@ -34,7 +34,7 @@ Knative致力于提供可重用的“通用模式和最佳实践组合”实现�
 
 > 以上内容引用自： [InfoQ | 谷歌发布Knative：用于构建、部署和管理Serverless工作负载的Kubernetes框架](http://www.infoq.com/cn/news/2018/07/knative-kubernetes-serverless)
 
-以上是对Knative的基本介绍，关于Knative的更多信息大家可以关注其GitHub：https://github.com/knative，我们都是知道Kubernetes中个资源对象叫`autoscaler`，该对象在serverless架构中是不可或缺的，有了它可以负责应用的自动水平伸缩，用户再也不用关心示例的个数和资源消耗，下文是来自阿里巴巴UC事业群的陈有坤同学对Knative的解析。
+以上是对Knative的基本介绍，关于Knative的更多信息大家可以关注其GitHub：<https://github.com/knative>，我们都是知道Kubernetes中个资源对象叫`autoscaler`，该对象在serverless架构中是不可或缺的，有了它可以负责应用的自动水平伸缩，用户再也不用关心示例的个数和资源消耗，下文是来自阿里巴巴UC事业群的陈有坤同学对Knative的解析。
 
 ------
 

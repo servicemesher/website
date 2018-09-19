@@ -28,7 +28,7 @@ keywords: ["service mesh","istio","envoy"]
 1. **discovery service**：从Kubernetes apiserver list/watch `service`、`endpoint`、`pod`、`node`等资源信息，监听istio控制平面配置信息（Kubernetes CRD）， 翻译为Envoy可以直接理解的配置格式。
 2. **proxy**：也就是Envoy，直接连接discovery service，间接地从Kubernetes apiserver等服务注册中心获取集群中微服务的注册情况
 3. **agent**：本文分析对象pilot-agent，生成Envoy配置文件，管理Envoy生命周期
-4. **service A/B**：使用了istio的应用，如Service A/B，的进出网络流量会被proxy接管
+4. **service A/B**：使用了istio的应用，如Service A/B的进出网络流量会被proxy接管
 
 > 对于模块的命名方法，本文采用模块对应源码main.go所在包名称命名法。其他istio分析文章有其他命名方法。比如pilot-agent也被称为istio pilot，因为它在Kubernetes上的部署形式为一个叫istio-pilot的deployment。
 
