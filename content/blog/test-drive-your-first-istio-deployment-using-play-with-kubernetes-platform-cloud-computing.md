@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: [“service mesh","微服务","服务网格"]
 ---
 
-![Kubernetes and Istio](http://ww1.sinaimg.cn/large/6286a305ly1fux7dq9d14j20jg08cju2.jpg)
+![Kubernetes and Istio](https://ww1.sinaimg.cn/large/6286a305ly1fux7dq9d14j20jg08cju2.jpg)
 
 作为一名全栈开发，假如最近花了不少时间开发应用，肯定已经理解了微服务架构下要面临的一系列全新挑战。尽管应用已经从庞大的单体应用转变成了开发更快、弹性更好、更小也更聚焦的微服务，但现实是，开发者需要开始操心将这些服务集成到分布式系统中的问题了，包括服务发现、负载均衡、注册、容错、监控、路由、兼容和安全等。
 
