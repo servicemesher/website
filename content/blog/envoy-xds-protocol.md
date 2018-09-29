@@ -60,6 +60,7 @@ Envoy 通过查询文件或管理服务器来动态发现资源。概括地讲�
 - [RDS： `envoy.api.v2.RouteConfiguration`](https://github.com/envoyproxy/data-plane-api/blob/master/envoy/api/v2/rds.proto)
 - [CDS： `envoy.api.v2.Cluster`](https://github.com/envoyproxy/data-plane-api/blob/master/envoy/api/v2/cds.proto)
 - [EDS： `envoy.api.v2.ClusterLoadAssignment`](https://github.com/envoyproxy/data-plane-api/blob/master/envoy/api/v2/eds.proto)
+- [SDS：`envoy.api.v2.Auth.Secret`](https://github.com/envoyproxy/data-plane-api/blob/master/envoy/api/v2/auth/cert.proto)
 
 [_类型 URL_](https://developers.google.com/protocol-buffers/docs/proto3#any) 的概念如下所示，其采用 `type.googleapis.com/<resource type>` 的形式，例如 CDS 对应于  `type.googleapis.com/envoy.api.v2.Cluster`。在 Envoy 的请求和管理服务器的响应中，都包括了资源类型 URL。
 
