@@ -53,8 +53,8 @@ paginate = 10
 
 [[menu.main]]
     parent="docs"
-    name="Weekly"
-    url = "/categories/weekly"
+    name="SOFAMesh"
+    url = "/categories/sofamesh"
     weight = 4
 
 [[menu.main]]
@@ -62,6 +62,18 @@ paginate = 10
     identifier = "activity"
     url  = "/activity/"
     weight = 4
+
+[[menu.main]]
+    parent="activity"
+    name = "作者投稿"
+    url  = "/authors/"
+    weight = 1
+
+[[menu.main]]
+    parent="activity"
+    name = "译者投稿"
+    url  = "/translators/"
+    weight = 2
 
 [[menu.main]]
     name = "联系我们"
