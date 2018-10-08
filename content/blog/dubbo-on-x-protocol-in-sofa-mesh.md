@@ -8,7 +8,7 @@ authorlink: "https://github.com/alipay/sofa-mesh"
 originallink: "https://github.com/alipay/sofa-mesh/tree/x-protocol-quickstart/samples/e2e-dubbo/platform/kube"
 summary: "本文将以 Dubbo 为例，演示 SOFAMesh 中 Dubbo on x-protocol 场景下 Service Mesh 路由功能，涵盖 Version route 、Weighted route 功能。"
 tags: ["sofamesh","dubbo","x-protocol","ant financial"]
-categories: ["service mesh"]
+categories: ["sofamesh"]
 keywords: ["service mesh","服务网格","sofamesh","蚂蚁金服"]
 ---
 
