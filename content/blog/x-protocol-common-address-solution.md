@@ -1,5 +1,5 @@
 ---
-title: "SOFAMesh中的多协议通用解决方案X-protocol介绍系列（1）——DNS通用寻址方案"
+title: "SOFAMesh中的多协议通用解决方案x-protocol介绍系列（1）——DNS通用寻址方案"
 date: 2018-10-08T14:58:03+08:00
 draft: false
 banner: "https://ws4.sinaimg.cn/large/006tNbRwly1fw0twx3z2mj30rs0kujtn.jpg"
