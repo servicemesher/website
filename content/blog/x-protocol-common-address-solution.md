@@ -10,9 +10,10 @@ summary: "在本系列文章中，我们将详解Service Mesh中的多协议解�
 tags: ["x-protocol","sofamesh"]
 categories: ["sofamesh"]
 keywords: ["service mesh","服务网格","x-protocol"]
+aliases: ["/blog/xprotocol-common-address-solution/"]
 ---
 
-> 在本系列文章中，我们将对此进行详解Service Mesh中的多协议解决方案x-protocol，首先介绍的是“DNS通用寻址方案“。
+> 在本系列文章中，我们将对此进行详解SOFAMesh中的多协议解决方案x-protocol，首先介绍的是“DNS通用寻址方案“。
 
 ## 前言
 
