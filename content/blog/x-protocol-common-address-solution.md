@@ -9,11 +9,15 @@ originallink: "https://skyao.io/post/201809-xprotocol-common-address-solution/"
 summary: "在本系列文章中，我们将详解Service Mesh中的多协议解决方案x-protocol，首先介绍的是DNS通用寻址方案。"
 tags: ["x-protocol","sofamesh"]
 categories: ["sofamesh"]
-keywords: ["service mesh","服务网格","x-protocol"]
+keywords: ["service mesh","服务网格","x-protocol","sofamesh"]
 aliases: ["/blog/xprotocol-common-address-solution/"]
 ---
 
-> 在本系列文章中，我们将对此进行详解SOFAMesh中的多协议解决方案x-protocol，首先介绍的是“DNS通用寻址方案“。
+> 本文是SOFAMesh中的多协议通用解决方案x-protocol介绍系列文章之一。
+>
+> [SOFAMesh中的多协议通用解决方案x-protocol介绍系列（1）——DNS通用寻址方案](/blog/x-protocol-common-address-solution/)
+>
+> [SOFAMesh中的多协议通用解决方案x-protocol介绍系列（2）——快速解码转发](/blog/x-protocol-rapid-decode-forward/)
 
 ## 前言
 
