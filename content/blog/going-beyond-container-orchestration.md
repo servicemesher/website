@@ -40,7 +40,7 @@ Service Mesh通过在Kubernetes的一些列pod中注入sidecar代理能够很好
 
 这些指标包含提供给网格的更高阶数据点，并启用更高级的网络以确保对请求的最快可用响应。在Service Mesh中重试和断路器由sidecar代理处理，这减轻了开发人员将运维代码引入其微服务的负担。由于sidecar代理不受限于L4负载均衡（TCP），所以靠L7负载均衡（应用程序和API层）它支持更高级别的消息路由技术。
 
-![](https://aspenmesh.io/wp-content/uploads/2018/09/service-mesh-vs-container-orch.jpg)
+![](https://ws4.sinaimg.cn/large/006tNbRwly1fw4jtsdrhyj31df0lpdlt.jpg)
 
 容器编排是一个很好的基础设施，但企业组织需要的不仅仅是一个良好的基础设施。他们需要能够与堆栈上层的服务进行交互的能力，这需要使用指标和现代架构去实现。
 
