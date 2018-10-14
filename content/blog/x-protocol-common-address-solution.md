@@ -18,6 +18,8 @@ aliases: ["/blog/xprotocol-common-address-solution/"]
 > [SOFAMesh中的多协议通用解决方案x-protocol介绍系列（1）——DNS通用寻址方案](/blog/x-protocol-common-address-solution/)
 >
 > [SOFAMesh中的多协议通用解决方案x-protocol介绍系列（2）——快速解码转发](/blog/x-protocol-rapid-decode-forward/)
+>
+> [SOFAMesh中的多协议通用解决方案x-protocol介绍系列（3）——TCP协议扩展](/blog/x-protocol-tcp-protocol-extension/)
 
 ## 前言
 
