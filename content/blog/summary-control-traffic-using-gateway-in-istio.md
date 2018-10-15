@@ -1,7 +1,7 @@
 ---
 title: "Istio Ingress Gateway中的Envoy Listener和Route解析"
-date: 2018-10-14T19:37:37+08:00
-draft: true
+date: 2018-10-15T15:24:37+08:00
+draft: false
 banner: "https://ws4.sinaimg.cn/large/006tNbRwly1fw867vtusqj30rs0kudth.jpg"
 author: "沈旭光"
 authorlink: "https://github.com/shenxg13/istio-no-best-practice"
@@ -12,17 +12,13 @@ categories: ["istio"]
 keywords: ["service mesh","服务网格","ingress gateway"]
 ---
 
-> 如果mesh是Gondor，那ingress gateway就是The Argonath。
-
-<br/>
-
 ![](https://ws2.sinaimg.cn/large/006tNbRwly1fw7vchevggj30xu0cwq5i.jpg)
 
 <br/>
 
-# 非TLS单主机环境
+## 非TLS单主机环境
 
-## 相关拓扑
+### 相关拓扑
 
 ![](https://ws4.sinaimg.cn/large/006tNbRwly1fw7h9huwyqj31kw29gnpd.jpg)
 
@@ -42,7 +38,7 @@ keywords: ["service mesh","服务网格","ingress gateway"]
 
 <br/>
 
-## 相关配置
+### 相关配置
 
 ```bash
 ipvsadm -A -t 192.168.0.62:6280 -s wrr -p 300
@@ -104,9 +100,9 @@ spec:
 
 <br/>
 
-# TLS单主机环境
+## TLS单主机环境
 
-## 相关拓扑
+### 相关拓扑
 
 ![](https://ws4.sinaimg.cn/large/006tNbRwly1fw7vl2suq5j31kw2hk4qq.jpg)
 
@@ -118,7 +114,7 @@ spec:
 
 <br/>
 
-## 相关配置
+### 相关配置
 
 ```bash
 ipvsadm -A -t 192.168.0.62:443 -s wrr -p 300
@@ -931,9 +927,9 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 <br/>
 
-# mTLS单主机环境
+## mTLS单主机环境
 
-## 相关拓扑
+### 相关拓扑
 
 ![](https://ws3.sinaimg.cn/large/006tNbRwly1fw7vowvpd2j31kw2i5e82.jpg)
 
@@ -946,7 +942,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 <br/>
 
-## 相关配置
+### 相关配置
 
 ```bash
 openssl req \
@@ -1404,9 +1400,9 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 <br/>
 
-# 非TLS多主机环境
+## 非TLS多主机环境
 
-## 相关拓扑
+### 相关拓扑
 
 ![](https://ws4.sinaimg.cn/large/006tNbRwly1fw7vtk7zq4j31kw3o84qr.jpg)
 
@@ -1421,7 +1417,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 <br/>
 
-## 相关配置
+### 相关配置
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -1834,9 +1830,9 @@ x-envoy-upstream-service-time: 6
 
 <br/>
 
-# TLS多主机环境
+## TLS多主机环境
 
-## 相关拓扑
+### 相关拓扑
 
 ![](https://ws3.sinaimg.cn/large/006tNbRwly1fw7vwoggx6j31kw3nx4qs.jpg)
 
@@ -1854,7 +1850,7 @@ x-envoy-upstream-service-time: 6
 
 <br/>
 
-## 相关配置
+### 相关配置
 
 ```bash
 kubectl create -n istio-system secret tls istio-ingressgateway-httpbin-a-certs --key ./httpbin-a.key --cert ./httpbin-a.crt
