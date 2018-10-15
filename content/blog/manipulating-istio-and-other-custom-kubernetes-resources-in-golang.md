@@ -204,4 +204,4 @@ spec:
 在采用这种方法时使用了以下几篇文章:
 
 - [Red Hat: Deep Dive: Code Generation for Custom Resources](https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/)
-- [Kubernetes Docs: Custom Resources](
+- [Kubernetes Docs: Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
