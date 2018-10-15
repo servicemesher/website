@@ -14,7 +14,7 @@ keywords: ["service mesh","服务网格","ingress gateway"]
 
 ![](https://ws2.sinaimg.cn/large/006tNbRwly1fw7vchevggj30xu0cwq5i.jpg)
 
-<br/>
+
 
 ## 非TLS单主机环境
 
@@ -36,7 +36,7 @@ keywords: ["service mesh","服务网格","ingress gateway"]
 - virtualservice定义中的http定义了路由规则，路由规则会写入到相应gateway pod的路由表中。
 - gateway pod的监听和路由会通过端口号绑定在一起。
 
-<br/>
+
 
 ### 相关配置
 
@@ -48,7 +48,7 @@ ipvsadm -a -t 192.168.0.62:6280 -r 192.168.0.73:6280 -g
 
 - ipvs相关配置。
 
-<br/>
+
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -69,7 +69,7 @@ spec:
 
 - gateway相关配置。
 
-<br/>
+
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -98,7 +98,7 @@ spec:
 
 - virtualservice相关配置。
 
-<br/>
+
 
 ## TLS单主机环境
 
@@ -112,7 +112,7 @@ spec:
 - 在443中启用simple tls。
 - 指定443的key和cert。
 
-<br/>
+
 
 ### 相关配置
 
@@ -127,7 +127,7 @@ ipvsadm -a -t 192.168.0.62:80 -r 192.168.0.73:80 -g
 
 - ipvs相关配置。
 
-<br/>
+
 
 ```bash
 openssl req \
@@ -147,7 +147,7 @@ openssl x509 \
 
 - 自签名证书相关配置。
 
-<br/>
+
 
 ```bash
 kubectl create -n istio-system secret tls istio-ingressgateway-certs --key ./istio-httpbin.key --cert ./istio-httpbin.crt
@@ -155,7 +155,7 @@ kubectl create -n istio-system secret tls istio-ingressgateway-certs --key ./ist
 
 - k8s secret相关配置。
 
-<br/>
+
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -188,7 +188,7 @@ spec:
 
 - gateway相关配置。
 
-<br/>
+
 
 ```yaml
 kind: VirtualService
@@ -216,7 +216,7 @@ spec:
 
 - virtualservice相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-1.0.2/samples/httpbin]$ istioctl pc listener istio-ingressgateway-7c97674c9c-xfpqt -n istio-system -o json
@@ -470,7 +470,7 @@ spec:
 
 - gateway envoy listener相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-1.0.2/samples/httpbin]$ istioctl pc route istio-ingressgateway-7c97674c9c-xfpqt -n istio-system -o json
@@ -842,7 +842,7 @@ spec:
 
 - gateway envoy route相关配置。
 
-<br/>
+
 
 ```bash
 [~/K8s/istio/istio-1.0.2/samples/certs]$ http http://192.168.0.62/status/418 --verify no --follow -v
@@ -890,7 +890,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 - httpredirect测试结果。
 
-<br/>
+
 
 ```bash
 [~/K8s/istio/istio-1.0.2/samples/certs]$ http https://192.168.0.62/status/418 --verify no -v
@@ -925,7 +925,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 - https测试结果。
 
-<br/>
+
 
 ## mTLS单主机环境
 
@@ -940,7 +940,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 - 指定443的ca cert。
 - 指定允许连接443的san。
 
-<br/>
+
 
 ### 相关配置
 
@@ -958,7 +958,7 @@ openssl x509 \
 
 - client自签名证书相关配置。
 
-<br/>
+
 
 ```bash
 kubectl create -n istio-system secret generic istio-ingressgateway-ca-certs --from-file ./ca.crt
@@ -966,7 +966,7 @@ kubectl create -n istio-system secret generic istio-ingressgateway-ca-certs --fr
 
 - k8s secret相关配置。
 
-<br/>
+
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -994,7 +994,7 @@ spec:
 
 - gateway相关配置。
 
-<br/>
+
 
 ```yaml
 kind: VirtualService
@@ -1022,7 +1022,7 @@ spec:
 
 - virtualservice相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-1.0.2/samples/httpbin]$ istioctl pc listener istio-ingressgateway-7c97674c9c-xfpqt -n istio-system -o json
@@ -1172,7 +1172,7 @@ spec:
 
 - gateway envoy listener相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-1.0.2/samples/httpbin]$ istioctl pc route istio-ingressgateway-7c97674c9c-xfpqt -n istio-system -o json
@@ -1363,7 +1363,7 @@ spec:
 
 - gateway envoy route相关配置。
 
-<br/>
+
 
 ```bash
 [~/K8s/istio/istio-1.0.2/samples/certs]$ http https://192.168.0.62/status/418 --verify no --cert ./istio-is5.crt --cert-key ./istio-is5.key -v
@@ -1398,7 +1398,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 - 测试结果。
 
-<br/>
+
 
 ## 非TLS多主机环境
 
@@ -1415,7 +1415,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 - 在gateway的listnener中生成统一的监听0.0.0.0_80。
 - 在gateway的route中分别生成针对httpbin-a和httpbin-b的虚拟主机。
 
-<br/>
+
 
 ### 相关配置
 
@@ -1461,7 +1461,7 @@ spec:
 - gateway相关配置。
 - 这2个gateway的配置，生成的envoy配置是一致的。
 
-<br/>
+
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -1505,7 +1505,7 @@ spec:
 
 - httpbin-a和httpbin-b的virtualservice相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-azure-1.0.2/samples/httpbin]$ istioctl pc listener istio-ingressgateway-7ffb59776b-bn2sv -n istio-system -o json
@@ -1628,7 +1628,7 @@ spec:
 
 - gateway envoy listener相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-azure-1.0.2/samples/httpbin]$ istioctl pc route istio-ingressgateway-7ffb59776b-bn2sv -n istio-system -o json
@@ -1773,7 +1773,7 @@ spec:
 
 - gateway envoy route相关配置。
 
-<br/>
+
 
 ```bash
 [~/K8s/istio/istio-azure-1.0.2/samples/httpbin]$ http http://httpbin-a.7cb9a9b7b318440399a0.eastus.aksapp.io:80/status/418
@@ -1828,7 +1828,7 @@ x-envoy-upstream-service-time: 6
 
 - 测试结果。
 
-<br/>
+
 
 ## TLS多主机环境
 
@@ -1848,7 +1848,7 @@ x-envoy-upstream-service-time: 6
 - 域名httpbin-a被路由至pod httpbin-a的/status uri。
 - 域名httpbin-b被路由至pod httpbin-b的/headers uri。
 
-<br/>
+
 
 ### 相关配置
 
@@ -1859,7 +1859,7 @@ kubectl create -n istio-system secret tls istio-ingressgateway-httpbin-b-certs -
 
 - k8s secret相关配置。
 
-<br/>
+
 
 ```bash
 helm template install/kubernetes/helm/istio/ --name istio-ingressgateway --namespace istio-system -x charts/gateways/templates/deployment.yaml --set gateways.istio-egressgateway.enabled=false \
@@ -1911,7 +1911,7 @@ helm template install/kubernetes/helm/istio/ --name istio-ingressgateway --names
 - 修改了ingress gateway deployment的配置，可以支持多个证书。
 - 分别包含域名为httpbin-a和httpbin-b的证书。
 
- <br/>
+ 
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -1946,7 +1946,7 @@ spec:
 
 - gateway相关配置。
 
-<br/>
+
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -1990,7 +1990,7 @@ spec:
 
 - httpbin-a和httpbin-b的virtualservice相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-azure-1.0.2/samples/httpbin]$ istioctl pc listener istio-ingressgateway-7ffb59776b-bn2sv -n istio-system -o json
@@ -2262,7 +2262,7 @@ spec:
 
 - gateway envoy listener相关配置。
 
-<br/>
+
 
 ```json
 [~/K8s/istio/istio-azure-1.0.2/samples/httpbin]$ istioctl pc route istio-ingressgateway-7ffb59776b-bn2sv -n istio-system -o json
@@ -2413,7 +2413,7 @@ spec:
 
 - gateway envoy route相关配置。
 
-<br/>
+
 
 ```bash
 [~/K8s/istio/istio-azure-1.0.2/samples/httpbin]$ http https://httpbin-a.7cb9a9b7b318440399a0.eastus.aksapp.io/status/418 --verify no
