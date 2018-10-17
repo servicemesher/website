@@ -3,7 +3,7 @@ title: "第一届Service Mesh Meetup杭州站回顾"
 date: 2018-07-03T12:22:47+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fswkasm3a7j30rs0kue81.jpg"
-author: "Jimmy Song"
+author: "宋净超"
 authorlink: "https://jimmysong.io"
 summary: "2018年6月30日，杭州，蚂蚁Z空间，一大早就下起了雨，我还心想，这雨要是下大了会不会很多人不来了？而且我们还一早就放出了IT大咖说的直播链接。没想到最后现场签到了有120多个小伙伴！视频直播最高峰值800多人同时在线，截止7月1号显示有5340人观看。"
 tags: ["meetup"]

@@ -4,7 +4,7 @@ author: "敖小剑"
 authorlink: "https://skyao.io"
 tags: ["microservices","service mesh"]
 categories: ["service mesh"]
-originallink: "https://skyao.io/publication/service-mesh-rebuild-microservice-market"
+originallink: "https://skyao.io/publication/201805-service-mesh-rebuild-microservice-market/"
 banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frjbqc9faoj30rs0kuwnv.jpg"
 summary: "今天我们不谈技术，不谈架构，也不谈具体的产品，我们来聊一聊在未来一两年之内，Service Mesh技术会在微服务相关的市场带来什么样的变化？"
 date: 2018-05-21T21:48:05+08:00
@@ -14,23 +14,23 @@ keywords: ["service mesh","服务网格","微服务","市场"]
 
 今天我们不谈技术，不谈架构，也不谈具体的产品，我们来聊一聊在未来一两年之内，Service Mesh技术会在微服务相关的市场带来什么样的变化？
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-01.jpg)
+![](https://ws4.sinaimg.cn/large/006tNbRwgy1fwbbyxih7bj31hc0u0whz.jpg)
 
 大家好，我是敖小剑，今天给大家带来的这个主题叫做 “Service Mesh：重塑微服务市场”。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-02.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwgy1fwbbzaaju6j31hc0u0n3r.jpg)
 
 刚才主持人张亮提到说，过去一年Service Mesh成为一个热词。基本上，在国内的话，我差不多是Service Mesh最早的布道师。可能如果大家之前有看相关的资料的话，应该会看到一些我的资料。我先后做过几场的演讲，做过一些技术的分享，也写过很多文章。但在此之前，这些内容可能更多的都是集中在技术领域。那今天我们会特殊一点，我们今天不谈详细的技术，不谈具体的架构，我们也不谈具体的产品。后面的这些名词，Istio/Conduit/Envoy/Linkerd/Nginmesh，这些词可能听过，可能没听过，但没问题，今天这些我们统统都不讲。我们今天要讲另外一个东西：我们会聊一聊在未来一两年之内，Service Mesh技术会在微服务相关的市场带来什么样的变化？
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-03.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwgy1fwbbzn8375j31hc0u0dj5.jpg)
 
 主要内容会是三大块：首先我们会看一下目前微服务的市场的一些现状，然后接下来我们会探讨一下它的商业模式，在第三块，我们会重点讲一下Service Mesh对PaaS的意义。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-04.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwgy1fwbbzsa5poj31hc0u0mzc.jpg)
 
 OK，第一块，微服务的现状。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-05.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwgy1fwbbzy0bbnj31hc0u0jxf.jpg)
 
 我们快速过一下。
 
@@ -40,7 +40,7 @@ OK，第一块，微服务的现状。
 
 实际上，我们之前在谈到Service Mesh技术为什么演进的时候，我们有提到，在Service Mesh之前，第一代的侵入式微服务框架，它的门槛相对稍微高一点，典型的代表的是Dubbo，Spring Cloud。对于传统企业来说，传统企业其实缺乏一些互联网的技术基因，这些包括技术，人才，经验，还有开发流程。在实际的市场当中，我们可以看到，大多数企业，虽然他们试图在微服务方面有一些转变，但实际上，在落地的时候还是会遇到一些问题。目前第二代的Service Mesh技术其实主要是冲着解决这个问题来的。他的思路在于要想办法用Service Mesh这样一个技术来降低微服务落地的门槛，最后帮助传统企业完成整个技术转型。这是目前大的背景和现状，我们下面来详细聊一下在这个背景当中一些具体的东西。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-06.jpg)
+![](https://ws4.sinaimg.cn/large/006tNbRwly1fwbc0abo78j31hc0u0q8m.jpg)
 
 微服务的一个痛点：落地很难。
 
@@ -50,13 +50,13 @@ OK，第一块，微服务的现状。
 
 **因为它落地太难了**。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-07.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fwbc0e9sr0j31hc0u011b.jpg)
 
 落地难的原因是门槛比较高。我们简单的罗列了一下，比如说典型的Spring Cloud，他的技术栈，我们看到的这些特性的列表。大家可以看到非常多的东西，左边这个地方Spring Cloud的各个组件。大家如果用过Spring Cloud的都会比较熟悉。当然两边并不是严格对称，这只是一个示意。
 
 实际上在这样的一个巨大的特性列表和组件列表当中，比较头疼的是：如果你是一个新人的话，你要第一时间掌握的东西其实是非常多的。Hello Would都很简单，但是你真的要掌握，这些东西是要一个一个吃透的。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-08.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwbc25rkv7j31hc0u07d4.jpg)
 
 为什么这个门槛会这么高？在这里面要指出一点，就是说：解决问题的思路有点不太对。
 
@@ -64,13 +64,13 @@ OK，第一块，微服务的现状。
 
 我们再看看右边：你组装出来的东西是什么样子？最上面这个跑车可能是所有人的梦想，对吧？但实际当中，不同的用户，他的能力是不一样的，他的投入也不一样。那他最终得到产出品，很有可能不是上面的这个让大家心动的跑车。很可能只是一个普通的大众，只能只一个QQ，甚至，其实最后一张图非常凄惨：不知道出来的会是什么，很可能是接近无法使用的产品。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-09.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwbc62tu0aj31hc0u0111.jpg)
 
 在下一代的Service Mesh当中，会用其他的方式来完成这个事情。
 
 首先通过智能代理的方式，屏蔽掉大家对底层各个组件的认知。Service Mesh会通过直接使用Sidecar的方式来完成这些功能。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-10.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fwbc69bcrwj31hc0u0gsm.jpg)
 
 从思路上说，在这个时候，最大的事情是**调整战略**。
 
@@ -82,7 +82,7 @@ OK，第一块，微服务的现状。
 
 这是整个Mesh的思路。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-11.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwbc6exb4jj31hc0u0gru.jpg)
 
 在这个思路背后，代表了一个重要的核心理念。我们会看到，第一代的微服务将当时微服务开发的门槛降低了，在第一代微服务之前，你需要一切从零开始，你需要从每一行代码开始。换句话说，在你造整车的时候，你需要从每个螺丝钉开始，这必然是很难的。
 
@@ -94,11 +94,11 @@ OK，这个第一阶段我们讲好。
 
 好，实际上调查的和我们预期的还是有点像的。真正的大家能够把微服务落地的，就是冰山上面露出来的一小部分。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-12.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwbc6nwbacj31hc0u0gnw.jpg)
 
 OK，我们进行第二个探讨：Service Mesh和微服务市场模式的探讨。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-13.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwbc6w3auoj31hc0u0gor.jpg)
 
 我先抛出一个问题：假设现在有一个公司，他要推微服务，但它确实之前没有这样的经验，它可能也缺乏这样的人才，所以在技术能力上它会有些欠缺。那这个时候怎么办？
 
@@ -112,7 +112,7 @@ OK，我们进行第二个探讨：Service Mesh和微服务市场模式的探讨
 
 恩，招人和外包，还有别的吗？OK，好，这位同学至少已经找到了明天早上开始推行微服务的一些方案了。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-14.jpg)
+![](https://ws4.sinaimg.cn/large/006tNbRwly1fwbc72nnp5j31hc0u0n1e.jpg)
 
 OK，我们简单过一下，刚才这个同学这里有一个比较有意思的地方：招人。这个有个比较有意思的东西给大家轻松一下。
 
@@ -122,19 +122,19 @@ OK，我们简单过一下，刚才这个同学这里有一个比较有意思的
 
 那我们现在说说，能买什么？
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-15.jpg)
+![](https://ws4.sinaimg.cn/large/006tNbRwly1fwbc78y0hwj31hc0u0tcp.jpg)
 
 在这个市场，能为微服务的开发提供什么样的产品，什么样的服务吗？刚才同学说了一个：外包。是的，这个很正常。确实有非常之多的外包，但还有两个，一个是咨询，教你怎么做；一个是培训，包括出书也是一种培训，现场培训是另一种。还有一种就是卖产品，微服务相关的各种产品。整个市场会提供这些产品，但我们会注意到：前三者是不一样的。咨询、培训、外包本质上是要提升客户的能力，就是让你的能力更强。如果大家记得前面的那条线的话，现在就是在你考试的时候，让你的考试能力更强。产品是帮你稍微降低一下门槛。比如我告诉你，第五道题的答案是B，你填上就好了。最终达到大家及格的目标，至少起码及格。
 
 整个市场提供的产品，大概是这个样子。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-16.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fwbc7ggf0vj31hc0u044g.jpg)
 
 我们聊另外一个话题，可能更有意思：为什么大家想用微服务？尤其在参加技术大会之后。平时大家苦日子过习惯了，后来某人参加了某个技术大会之后，回来就觉得：平时这苦日子过得有点惨。旁边的这个是麦粒，不知道大家有没有吃过？晒干之后脱皮直接煮着可以吃的，甚至也可以生吃。然后是非常难吃的，很难下咽，但古代，我们的祖先原来就是这么吃下来的。后来发现参加了一场大会之后，发现这个受不了，为什么呢？发现别人吃的是右边的东西。
 
 这个叫什么？不患贫而患不均，对吧？左边这个其实也不是过不下去，但是当你看到右边之后，通常一般人都受不了了。别人告诉你说要去皮，你要磨成粉，之后你要和面，发酵，蒸，然后就有这个吃了。大家一看，开完大会之后就发现，对啊，左边这个麦粒确实没必要这么吃，对不对？
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-17.jpg)
+![](https://ws4.sinaimg.cn/large/006tNbRwly1fwbc9igauij31hc0u0ag1.jpg)
 
 我们现在回到刚才的这个话题：咨询、培训、外包的本质是什么？
 
@@ -148,7 +148,7 @@ OK，我们简单过一下，刚才这个同学这里有一个比较有意思的
 
 但是别忘了：整个事情还是在客户这边的，这个还是自己的事情，如果能力不够，明天的事情还是做不好。今天让别人帮忙蒸好了馒头，明天没人蒸的话，还是得回去啃麦粒。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-18.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwbc9nspdhj31hc0u07ae.jpg)
 
 然后我们可以看到，买到的产品也是不同层次的。
 
@@ -160,7 +160,7 @@ OK，我们简单过一下，刚才这个同学这里有一个比较有意思的
 
 实际上，在市场上能买到的产品，是不同层次的。市场的规律通常是这样，在满足需求的前提之下，最初期的产品都会在第一时间出现，然后逐渐的开始演变，开始向高级产品来演变。对于微服务市场来说，现在的高级产品就是Service Mesh。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-19.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwbc9w0q0oj31hc0u0q87.jpg)
 
 我们回到第二个痛点。前面我们说微服务落地的重点在哪里，第一个是门槛，微服务的门槛高实在是有点高。这里我们看第二个痛点：微服务的市场模式是不太对的。
 
@@ -172,7 +172,7 @@ OK，我们简单过一下，刚才这个同学这里有一个比较有意思的
 
 那客户就要回答说：产品不能解决我的问题，我就继续回到咨询、培训、外包的这个主流上来。这个地方形成一个很要命的恶性循坏。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-20.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwbca471y2j31hc0u0wk5.jpg)
 
 在我之前的经历当中，我是在这个市场的乙方公司做过事情。我们当时其实是面临一个比较难受的事情，就是说：如何在产品和项目之间平衡。我相信这对于所有在微服务市场提供服务的乙方公司来说，都是一个非常非常现实的话题。
 
@@ -184,7 +184,7 @@ OK，我们简单过一下，刚才这个同学这里有一个比较有意思的
 
 我相信在座的如果有做乙方的，包括做内部乙方的，给其他人提供服务、产品来解决问题时，应该都会遇到这两个问题。这个平衡是相当麻烦。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-21.jpg)
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fwbca9k9nuj31hc0u0ter.jpg)
 
 路在哪里？Service Mesh给出几个答案。
 
@@ -194,13 +194,13 @@ OK，我们简单过一下，刚才这个同学这里有一个比较有意思的
 
 我们在前面也提供了一个产品的思路：解决问题的思路要发生变化。要实现产品的升级，不能卖初级产品，要想办法提供最终的成型的成熟的产品。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-22.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fwbcaj01bxj31hc0u0wiw.jpg)
 
 OK，这是Service Mesh在这个时候非常重要的一件事情，就是：可以重建微服务市场的市场模式。
 
 将整个模式牵回到一个正统的**重产品重技术**的途径，也就是说，我们会通过提供更好的产品，然后这个产品可以更多的更普遍地满足客户的需求，从而降低客户的门槛。当客户入门的门槛降低的时候，他对于咨询、培训、外包的需求就会降低。那他会有更多的资金预算投到产品的采购当中，这样会让提供产品的技术公司有更多的利润，然后继续加强产品，形成这样一个良性的循环。这是Service Mesh在整个微服务市场当中非常非常重要的一环，必须要让原来的恶性循环的场景开始向现在这样一个良性循环做转变。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-23.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwbcaq8jkgj31hc0u0gr9.jpg)
 
 我们来详细的过一下，Service Mesh对于微服务市场的核心价值，主要是四块：
 
@@ -218,17 +218,17 @@ OK，这是Service Mesh在这个时候非常重要的一件事情，就是：可
 
 Service Mesh这样的一个技术，对于市场有一个比较好的事情，是说它适合**把规模做大**。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-24.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fwbcb1l92jj31hc0u0wgu.jpg)
 
 OK，我们探讨了service mesh对微服务市场模式的重新塑造。我们现在进入第三段，Service Mesh对于PaaS平台的价值和意义。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-25.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwbcb7blbrj31hc0u0dlz.jpg)
 
 在开始这个话题之前，我们先简单过一下，PaaS的核心价值是什么？它跟Service Mesh又有什么相通的地方？大家记得前面列了四个东西，第一个是易用，对使用者友好，大家会发现PaaS提供的价值也是如此，PaaS也是让大家可以更轻易的更简单的实现整个平台。标准，这个不用说了。专业，大家会发现，其实现在PaaS平台会慢慢的向少数的解决方案集中。基本上已经很少有小公司自己再去做一个自己的PaaS平台了。大规模，大家都有联系到，目前PaaS市场上比较大的一些公有云，会发现这个规模其实是非常可怕。
 
 大部分公有云，如果体积规模发展比较迅速的话，每年乘2是很正常的。我们发现PaaS其实和我们之前谈到的Service Mesh，几乎是一脉相承。为什么？殊路而同归。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-26.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwbcbdvljfj31hc0u07ax.jpg)
 
 PaaS和Service Mesh成功的基础，其实就是在这几个关键的点上。
 
@@ -238,7 +238,7 @@ PaaS和Service Mesh成功的基础，其实就是在这几个关键的点上。
 
 整个PaaS和Service Mesh的生存之道（大家如果有留意到，我们一路下来这个脉络）是说它做了一个重要的事情，就是它实际上是在帮客户做事情：这些事情是客户必须要做的，但是他又不太容易做好。我们的生存之道是帮助客户从这些细节里面解脱出来。客户大多数情况下是业务驱动的，我们要做的就是把所有的他要做又不好做的这些事情都下沉下来，我们帮他做好。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-27.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwbcbjsz50j31hc0u00zq.jpg)
 
 Service Mesh和PaaS在理念上是相通的，Service Mesh对PaaS的价值体现在下面的几个方面：
 
@@ -254,18 +254,18 @@ Service Mesh和PaaS在理念上是相通的，Service Mesh对PaaS的价值体现
 
 这是整个Service Mesh对于PaaS的帮助。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-28.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fwbcbrvq35j31hc0u0ad0.jpg)
 
 我们简单总结一下：Service Mesh技术为PaaS平台提供了一个非常好的应用落地方案。
 
 底层是PaaS，PaaS如果直接接业务的话，通常是比较累的。客户选择用微服务之后，就会选择Spring Cloud之类的东西，还是要自己做一层比较厚的框架层。有Service Mesh技术之后PaaS会更好的对接微服务，对接业务。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-29.jpg)
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fwbcby2p8mj31hc0u0jvg.jpg)
 
 最后我们会提到，Service Mesh和PaaS，我们称之为**绝配**。所谓绝配，是说这样一个搭档相互之间是非常的舒服：让彼此的能力互补，然后增强对方的优点。
 
 在最早的微服务时代，微服务和容器被认为是一对绝配。应该说这两个技术的互补性是非常强的。微服务已经进展到Service Mesh阶段了，而容器经过市场淘汰已经开始向K8S靠拢了。接下来，在这样一个基础上如果能再走一步，当k8s逐步向PaaS平台靠拢，也就说PaaS实际上是一个基于K8S的PaaS。那它和Service Mesh之间的搭档会成为一个新的市场主流，成为一个更好的客户基础。当然现在还没有实现，目前市场上暂时还没有这样的产品，但我相信在未来一两年中这会成为市场的主流。
 
-![img](https://skyao.io/publication/service-mesh-rebuild-microservice-market/images/ppt-30.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fwbcc61wwhj31hc0u0q4i.jpg)
 
 OK，我们今天的内容到这里结束，非常感谢大家，谢谢。

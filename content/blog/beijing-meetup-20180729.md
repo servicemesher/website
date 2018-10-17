@@ -3,7 +3,7 @@ title: "第二届Service Mesh Meetup北京站回顾"
 date: 2018-07-30T19:08:31+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/006tNc79gy1fts3vcjc02j31ji15ob2b.jpg"
-author: "Jimmy Song"
+author: "宋净超"
 authorlink: "https://jimmysong.io"
 summary: "2018年7月29日，北京，中关村e世界，由ServiceMesher社区和蚂蚁金服联合举办的，Sharding-Sphere社区、Apache SkyWalking社区、SOFA社区、新浪微博协办的第二届Service Mesh Meetup北京站圆满落幕。"
 tags: ["meetup"]
