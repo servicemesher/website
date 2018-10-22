@@ -73,7 +73,7 @@ API Gateway支持虚拟主机，提供4层和7层的LB。除此以外，API Gate
 
 引入Mixer进行Metrics收集，后端连接到Promeheus，打算采用自己开发界面对指标进行呈现。
 
-目前采用Zipkin和Envoy直连进行分布式跟踪，后续可能改用jager，因为jager采用了open tracing协议，开放性更好一些，而且是go编写的，和我们目前的技术栈匹配。
+目前采用Zipkin和Envoy直连进行分布式跟踪，后续可能改用jaeger，因为jager采用了open tracing协议，开放性更好一些，而且是go编写的，和我们目前的技术栈匹配。
 
 ## 数据面
 
