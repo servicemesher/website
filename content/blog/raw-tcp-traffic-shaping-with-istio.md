@@ -2,7 +2,7 @@
 title: "Istio1.1.0下的TCP流量控制"
 date: 2018-10-24T11:45:02+08:00
 draft: false
-banner: "https://ws3.sinaimg.cn/large/006tNbRwly1fwj66zu32bj30pd0eatap.jpg"
+banner: "https://ws1.sinaimg.cn/large/006tNbRwly1fwjcioecurj31jm15ottp.jpg"
 author: "Venil Noronha"
 authorlink: "https://venilnoronha.io"
 translator: "马若飞"
