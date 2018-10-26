@@ -46,7 +46,7 @@ keywords: ["service mesh","服务网格","sofamesh","x-protocol"]
 3. 在pilot中需要为新协议生成 Virtual Host 等配置，有 inbound 和 outbound 两份，分别下发到Sidecar
 4. 在Sidecar中，根据下发的 Virtual Host 等配置，进行请求匹配，以决定请求该转发到何处
 
-> 备注：实际下发的配置不止 Virtual Host 配置，为了简单期间，我们仅以 Virtual Host 为例做讲解
+> 备注：实际下发的配置不止 Virtual Host 配置，为了简单起见，我们仅以 Virtual Host 为例做讲解。
 
 其中，protocol encoder和protocol decoder是容易理解的，对于新的通讯协议肯定需要有协议编解码层面的工作必须要完成，这块有工作量是很自然的。
 

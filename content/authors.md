@@ -25,5 +25,6 @@ keywords: ["service mesh"]
 |黄挺 | 1|
 |无钩 | 1|
 |徐亮 | 1|
+|小米 | 1|
 |刘超 | 1|
 投递原创文章请访问 https://github.com/servicemesher/trans
