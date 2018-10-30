@@ -7,7 +7,7 @@ author: "邵俊雄"
 authorlink: "https://github.com/junxiong"
 summary: "本文作者是蚂蚁金服中间件团队的高级技术专家邵俊雄（熊啸），主要负责 SOFAMesh 的开发工作。本文是基于作者在 Service Mesh Meetup #3 深圳的主题分享《SOFAMesh的通用协议扩展》部分内容所整理，完整内容见文末的直播回放。"
 tags: ["ant financial","sofamesh","sofamosn","service mesh",]
-categories: ["service mesh"]
+categories: ["sofamesh"]
 keywords: ["service mesh","sofamesh","sofamosn"]
 ---
 
