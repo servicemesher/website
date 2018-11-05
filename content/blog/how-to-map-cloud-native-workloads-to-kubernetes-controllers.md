@@ -12,7 +12,7 @@ reviewerlink: "https://jimmysong.io"
 originallink: "https://thenewstack.io/how-to-map-cloud-native-workloads-to-kubernetes-controllers/"
 summary: "本文介绍了如何将云原生工作负载映射到Kubernetes中的控制器。"
 tags: ["kubernetes","cloud native"]
-categories: [“translation"]
+categories: ["translation"]
 keywords: ["kubernetes","云原生"]
 ---
 
