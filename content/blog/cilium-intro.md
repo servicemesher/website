@@ -8,8 +8,8 @@ authorlink: "https://jimmysong.io"
 originallink: "https://jimmysong.io/kubernetes-handbook/concepts/cilium.html"
 summary: "Cilium是一个纯开源软件，没有哪家公司提供商业化支持，也不是由某一公司开源，该软件用于透明地保护使用Linux容器管理平台（如Docker和Kubernetes）部署的应用程序服务之间的网络连接。"
 tags: ["cilium"]
-categories: [“service mesh"]
-keywords: ["service mesh","服务网格"]
+categories: ["service mesh"]
+keywords: ["service mesh","服务网格","cilium"]
 ---
 
 Cilium是一个纯开源软件，没有哪家公司提供商业化支持，也不是由某一公司开源，该软件用于透明地保护使用Linux容器管理平台（如Docker和Kubernetes）部署的应用程序服务之间的网络连接。
