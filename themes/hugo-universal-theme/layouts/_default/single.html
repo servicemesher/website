@@ -39,7 +39,10 @@
                             | {{ i18n "translator" }} {{ .Params.translator }}
                             {{ end }}
                             {{ if and (isset .Params "reviewer") (isset .Params "reviewerlink") }}
-                            | {{ i18n "reviewer" }} <a href="{{ .Params.reviewerlink }}">{{ .Params.reviewer }}</a>
+                            | {{ i18n "reviewer" }}
+                            {{ range $index, $reviewer := .Params.reviewer }}
+                            <a href="{{ index $.Params.reviewerlink $index }}"><i>{{ index $.Params.reviewer $index }}</i></a>
+                            {{ end }}
                             {{ else if isset .Params "reviewer" }}
                             | {{ i18n "reviewer" }} {{ .Params.reviewer }}
                             {{ end }}
