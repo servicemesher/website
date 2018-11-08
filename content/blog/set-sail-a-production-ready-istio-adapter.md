@@ -7,8 +7,8 @@ author: "Venil Noronha"
 authorlink: "https://venilnoronha.io/"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://venilnoronha.io/set-sail-a-production-ready-istio-adapter"
 summary: "本文通过示例讲解了如何创建并部署一个生产环境就绪的Istio Adapter。"
 tags: ["istio","tutorial"]

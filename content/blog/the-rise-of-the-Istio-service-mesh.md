@@ -8,8 +8,8 @@ authorlink: "https://www.infoworld.com/article/3273547/containers/the-rise-of-th
 originallink: "https://www.infoworld.com/article/3273547/containers/the-rise-of-the-istio-service-mesh.html"
 translator: "戴佳顺"
 translatorlink: "https://github.com/edwin19861218"
-reviewer: “宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  [“宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 summary: "本文将探讨为什么我会坚信Istio会很受欢迎并给出了四个原因，分别从微服务与转型、微服务先驱Netflix OSS的案例、分布式架构的方面来阐述微服务使用服务网格的必然性。"
 tags: ["istio","service mesh","microservices"]
 categories: ["translation"]

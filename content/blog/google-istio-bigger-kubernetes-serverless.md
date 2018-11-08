@@ -7,8 +7,8 @@ author: "Cilium"
 authorlink: "https://cilium.io"
 translator: "甄中元"
 translatorlink: "https://github.com/meua"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://diginomica.com/2018/08/03/google-istio-bigger-kubernetes-serverless/"
 summary: "Google Cloud采用了Istio服务网格技术来管理微服务，这可能比Kubernetes和无服务器产生更大的影响。你可以在任何你喜欢的云提供商之间自由迁移，且使你上云之路更加平稳。一旦人们熟悉了Kubernetes和Istio的管理和编排方式，上云就不会变得可怕了。"
 tags: ["service mesh","istio","serverless","Google"]

@@ -7,8 +7,8 @@ author: "Alan R. Earls"
 authorlink: "https://www.techtarget.com/contributor/Alan-R-Earls"
 translator: "殷龙飞"
 translatorlink: "https://github.com/loverto"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://searchitoperations.techtarget.com/tip/Istio-service-mesh-tech-boosts-Kubernetes-work-with-trade-offs"
 summary: "本文中各位分析师给出了采纳在Kubernets上运行的Istio service mesh的利弊分析。"
 tags: ["istio","service mesh"]

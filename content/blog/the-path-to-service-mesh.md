@@ -6,8 +6,8 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1frz7j5n8mfj30rs0kuhdt.jpg"
 author: "Aspen Mesh"
 translator: "卢宇亮"
 translatorlink: "https://github.com/LJosef"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 authorlink: "https://aspenmesh.io"
 originallink: "https://blog.aspenmesh.io/blog/2018/03/the-path-to-service-mesh/"
 summary: "通过 Aspen Mesh 之旅，我们带来三个主题的系列博文来讨论我们为什么选择了 Istio。"

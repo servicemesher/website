@@ -7,8 +7,8 @@ author: "Daniel Robinson"
 authorlink: "https://www.nextplatform.com/author/drobinson/"
 translator: "王帅俭"
 translatorlink: "https://github.com/jianzi123"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.nextplatform.com/2018/08/15/istio-aims-to-be-the-mesh-plumbing-for-containerized-microservices/"
 summary: "本文主要是IBM研究员兼云计算CTO Jason McGee对Istio项目的起源、分工与目标的解说。"
 tags: ["IBM","Google","Istio"]

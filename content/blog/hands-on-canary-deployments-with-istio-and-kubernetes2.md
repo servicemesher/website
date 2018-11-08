@@ -7,8 +7,8 @@ author: "Kublr team"
 authorlink: "https://kublr.com"
 translator: "甄中元"
 translatorlink: "https://github.com/meua"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://kublr.com/blog/hands-on-canary-deployments-with-istio-and-kubernetes/"
 summary: "作为Kublr推出的Istio教程第二篇文章本教程将一步步带领你熟悉Istio指令并解释指令的作用，并在Kubernetes集群中实现金丝雀部署。"
 tags: ["istio","kublr",”tutorial","kubernetes"]

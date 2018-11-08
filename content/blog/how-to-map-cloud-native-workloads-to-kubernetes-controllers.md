@@ -7,8 +7,8 @@ author: "Janakiram MSV"
 authorlink: "https://thenewstack.io/author/janakiram/"
 translator: "殷龙飞"
 translatorlink: "https://github.com/loverto"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://thenewstack.io/how-to-map-cloud-native-workloads-to-kubernetes-controllers/"
 summary: "本文介绍了如何将云原生工作负载映射到Kubernetes中的控制器。"
 tags: ["kubernetes","cloud native"]

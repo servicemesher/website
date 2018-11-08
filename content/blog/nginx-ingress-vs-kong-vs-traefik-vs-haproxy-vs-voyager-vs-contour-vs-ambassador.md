@@ -7,8 +7,8 @@ author: "Steven Acreman"
 authorlink: "https://kubedex.com/"
 translator: "甄中元"
 translatorlink: "https://github.com/meua"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://kubedex.com/nginx-ingress-vs-kong-vs-traefik-vs-haproxy-vs-voyager-vs-contour-vs-ambassador/"
 summary: "本文是对可作为Kubernetes中的API网关的开源软件的推荐列表。"
 tags: ["gateway","ingress"]

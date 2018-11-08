@@ -7,8 +7,8 @@ author: "Stephen McPolin & Venil Noronha"
 authorlink: "https://blogs.vmware.com/opensource/author/opensourceteam/"
 translator: "陈冬"
 translatorlink: "https://github.com/shaobai"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://blogs.vmware.com/opensource/2018/10/23/service-mesh-whats-next"
 summary: "本文通过分析服务网格的优势，阐述了其未来的发展情况。"
 tags: ["servcie mesh"]

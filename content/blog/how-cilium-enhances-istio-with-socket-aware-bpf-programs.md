@@ -7,8 +7,8 @@ author: "Cilium"
 authorlink: "https://cilium.io"
 translator: "甄中元"
 translatorlink: "https://github.com/meua"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://cilium.io/blog/2018/08/07/istio-10-cilium/"
 summary: "本博客将介绍BPF和Cilium如何增强Istio的一些细节，主要关注Istio的安全性，开启Istio对外部服务的支持和性能部分。"
 tags: ["cilium","istio"]

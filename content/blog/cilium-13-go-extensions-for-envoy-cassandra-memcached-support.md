@@ -7,8 +7,8 @@ author: "Cilium team"
 authorlink: "https://cilium.io"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://cilium.io/blog/2018/10/23/cilium-13-envoy-go/"
 summary: "本文讲解了具备API感知的网络和安全性管理的开源软件Cilium1.3的新特性，并用示例演示新的Go扩展如何使用。"
 tags: ["cilium","envoy"]

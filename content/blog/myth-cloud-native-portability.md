@@ -7,8 +7,8 @@ author: "Bligin Ibryam"
 authorlink: "https://thenewstack.io/author/bilgin-ibryam/"
 translator: "殷龙飞"
 translatorlink: "https://github.com/loverto"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://thenewstack.io/myth-cloud-native-portability/"
 summary: "本文介绍了云原生的可移植性，告诫读者应该看重生态系统而不是某个具体平台。"
 tags: ["cloud native","kubernetes"]

@@ -9,8 +9,8 @@ summary: "Cookpad是日本的一家分享菜谱和烹调经验的网站，本文
 translator: "殷龙飞"
 translatorlink: "https://github.com/loverto"
 originallink: "http://techlife.cookpad.com/entry/2018/06/11/100355"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 tags: ["envoy","istio","service mesh"]
 categories: ["translation"]
 keywords: ["service mesh","envoy"]

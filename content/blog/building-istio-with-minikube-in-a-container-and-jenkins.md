@@ -6,8 +6,8 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fryzxh051sj30rs0ku0wn.jpg"
 author: "Andrew Jenkins"
 translator: "戴佳顺"
 translatorlink: "https://github.com/edwin19861218"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 authorlink: "https://blog.aspenmesh.io/blog/2018/01/building-istio-with-minikube-in-a-container-and-jenkins/"
 originallink: "https://blog.aspenmesh.io/blog/2018/01/building-istio-with-minikube-in-a-container-and-jenkins/"
 summary: "本文讲述如何制作一个新的 Minikube-in-a-Container 容器和使用 Jenkins Pipeline 来构建和测试 Istio 的流程脚本。"

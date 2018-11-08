@@ -6,8 +6,8 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsxqadfbiwj31ji15o4qr.jpg"
 author: "Daniel Bryant"
 translator: "戴佳顺"
 authorlink: "https://blog.getambassador.io/@danielbryantuk"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://blog.getambassador.io/implementing-a-java-rate-limiting-service-for-the-ambassador-api-gateway-e09d542455da"
 summary: "在本速率限制系列的第三篇文章中，根据实际Java语言编写的案例带领我们使用Ambassador API网关速率限制入门，并将实例部署到Kubernetes中，同时使用Java语言演示基于令牌通算法的速率限制方式。"
 tags: ["rate limiting","distributing system"]

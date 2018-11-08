@@ -8,8 +8,8 @@ authorlink: "https://blog.getambassador.io/@danielbryantuk"
 translator: "戴佳顺"
 translatorlink: "https://github.com/edwin19861218"
 originallink: "https://blog.getambassador.io/rate-limiting-a-useful-tool-with-distributed-systems-6be2b1a4f5f4"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 summary: "在计算领域，速率限制通常用于控制服务发起或消耗的操作速率，或者是请求发送或接收的流量。如果你有一年以上的软件开发经验，那么你应该会遇到这个概念。但是，和很多软件架构所面临的挑战一样，比起实际出现的问题，需要思考的问题会更多。本文概述了现代分布式应用程序中的一些关于速率限制的实现方案、优势和挑战。"
 tags: ["rate limiting","distributing system"]
 categories: ["rate limiting","translation"]

@@ -7,8 +7,8 @@ author: "Robert Whiteley"
 translator: "Grace"
 originallink: "https://mp.weixin.qq.com/s/Q-k0BtUz2U4bWiXXdeaw7g"
 translatorlink: "https://dockone.io"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 authorlink: "https://thenewstack.io/author/robert-whitely/"
 summary: "基于微服务的架构是未来的趋势，但是实现这种架构会面临许多困难。现代应用架构远比过去的架构复杂，因此实现微服务架构将会带来了一系列特殊的挑战，而服务网格可以帮我们解决很多问题。"
 tags: ["service mesh"]

@@ -7,8 +7,8 @@ author: "Eric Lee & Ian Morgan"
 authorlink: "https://www.trulia.com"
 translator: "甄中元"
 translatorlink: "https://github.com/meua"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.trulia.com/blog/tech/microservice-observability-with-istio/"
 summary: "在kubernetes和istio的帮助下，Trulia能够分解PHP单体架构替换成可持续交付的微服务架构。团队不再被迫手动将工具添加到单个代码库或基础架构自动化中。"
 tags: ["istio","kubernetes","trulia"]

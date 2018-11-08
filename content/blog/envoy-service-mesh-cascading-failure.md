@@ -7,8 +7,8 @@ author: "Jose Nino & Daniel Hochman"
 authorlink: "https://www.infoq.com/profile/Jose-Nino"
 translator: "殷龙飞"
 translatorlink: "https://github.com/loverto"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.infoq.com/articles/envoy-service-mesh-cascading-failure"
 summary: "本文分享了Lyft对于Envoy的在服务网格领域的实践，主要为了解决级联故障的问题，以及Lyft对于Envoy的未来规划。"
 tags: ["envoy","lyft","service mesh"]

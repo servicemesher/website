@@ -8,8 +8,8 @@ authorlink: "https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at
 originallink: "https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay"
 translator: "Kael Zhang"
 translatorlink: "http://kaelzhang81.github.io/"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 summary: "本文是WePay（一家做支付平台和风控产品的公司）使用Linkerd作为服务网格的代理的分享文章。"
 tags: ["linkerd"]
 categories: ["translation"]

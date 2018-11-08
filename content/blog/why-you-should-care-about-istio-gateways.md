@@ -7,8 +7,8 @@ author: "Neeraj Poddar"
 authorlink: "https://thenewstack.io/author/neeraj-poddar/"
 translator: "王帅俭"
 translatorlink: "https://github.com/jianzi123"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://thenewstack.io/why-you-should-care-about-istio-gateways/"
 summary: "在Istio中，Gateway控制网格边缘的服务暴露。Gateway允许用户指定L4-L6设置，如端口和TLS设置。对于Ingress流量的L7设置，Istio允许您将网关绑定到VirtualServices。"
 tags: ["istio","gateway"]

@@ -8,8 +8,8 @@ authorlink: "https://blog.getambassador.io/@danielbryantuk"
 translator: "戴佳顺"
 translatorlink: "https://github.com/edwin19861218"
 originallink: "https://blog.getambassador.io/designing-a-rate-limiting-service-for-ambassador-f460e9fabedb"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 summary: "先前关于速率限制文章主要描述如何构建并部署基于Java的速率限制服务，该服务可以和开源的Ambassador API网关以及Kubernetes集成。 大家或许会疑惑怎么样才能更好地设计速率限制服务，尤其是如何保证Ambassador以及其底层的Envoy代理的灵活性？这篇文章将给大家启发。"
 tags: ["rate limiting","distributing system"]
 categories: ["rate limiting","translation"]

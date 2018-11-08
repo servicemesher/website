@@ -7,8 +7,8 @@ author: "Flo Adam"
 authorlink: "https://www.cloudops.com/2018/09/does-the-service-mesh-spell-the-end-for-middleware/"
 translator: "王全根"
 translatorlink: "https://github.com/roganw"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.cloudops.com/2018/09/does-the-service-mesh-spell-the-end-for-middleware/"
 summary: "本文分别介绍了中间件和服务网格，以及两者之间的权衡。使用诸如Istio之类的工具，将中间件的计算能力带入到Kubernetes和基于容器的系统。如果组织架构希望使用服务网格替代某些中间件，则必须重新评估其组织流程和方法论。"
 tags: ["service mesh","middleware"]

@@ -7,8 +7,8 @@ author: "Fred Moyer"
 authorlink: "https://twitter.com/phredmoyer"
 translator: "陈冬"
 translatorlink: "https://github.com/shaobai"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.circonus.com/2017/12/circonus-istio-mixer-adapter/"
 summary: "本文是Circonus公司的人员分享的为Istio mixer开发适配器的过程。"
 tags: ["istio","circonus"]

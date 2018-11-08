@@ -7,8 +7,8 @@ author: "Kublr Team"
 authorlink: "https://kublr.com"
 translator: "甄中元"
 translatorlink: "https://github.com/meua"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://kublr.com/blog/implementing-a-service-mesh-with-istio-to-simplify-microservices-communication/"
 summary: "本文kublr出品的Istio Service Mesh教程的第1部分，主要讲解了Istio的部署和流量路由部分。"
 tags: ["istio","kubernetes","service mesh","kublr"]

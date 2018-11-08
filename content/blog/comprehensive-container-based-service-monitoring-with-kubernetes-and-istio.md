@@ -7,8 +7,8 @@ author: "Fred Moyer"
 authorlink: "https://www.circonus.com/author/fmoyer/"
 translator: "殷龙飞"
 translatorlink: "https://github.com/loverto"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.circonus.com/2018/06/comprehensive-container-based-service-monitoring-with-kubernetes-and-istio/"
 summary: "本文讲述了容器化基础设运维的挑战，Istio给我们带来了哪些便利，怎样通过设置服务级别目标（SLO）、服务级别目标（SLO）、服务级别协议（SLA）、RED仪表板，根据监控数据的分布，进行数据分析来判断性能指标，而不是简单的百分位统计。"
 tags: ["istio","monitoring","sre"]

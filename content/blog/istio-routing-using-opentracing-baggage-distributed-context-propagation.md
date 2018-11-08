@@ -6,8 +6,8 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fs3ujek8rqj30rs0kukfj.jpg"
 author: "Pavol Loffay"
 translator: "崔秀龙"
 translatorlink: "https://blog.fleeto.us"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 authorlink: "https://medium.com/jaegertracing/istio-routing-using-opentracing-baggage-distributed-context-propagation-ed8d787a4bef"
 originallink: "https://medium.com/jaegertracing/istio-routing-using-opentracing-baggage-distributed-context-propagation-ed8d787a4bef"
 summary: "这是一篇关于在 Istio 路由规则中使用 Opentracing Baggage 对流量进行分布式追踪的教程。"

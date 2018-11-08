@@ -6,8 +6,8 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsivgisloaj30rs0kuqsq.jpg"
 author: "Matt Klein"
 translator: "敖小剑"
 translatorlink: "https://skyao.io"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a"
 authrolink: "https://envoyproxy.io"
 summary: "本文是Matt Klein于2017年9月在Meduim上发表的通用数据平面API文章，文中指出了Envoy在API设计上的要点，以及数据平面与控制平面的关系。"

@@ -7,8 +7,8 @@ author: "Envoy Team"
 authorlink: "https://github.com/envoyproxy/"
 translator: "狄卫华"
 translatorlink: "https://github.com/DavadDi"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://github.com/envoyproxy/data-plane-api/blob/master/XDS_PROTOCOL.md"
 summary: "本文翻译自 Envoy 代码库中的文档，本文通过示例详解了 Envoy 的 xDS REST 和 gPRC 协议。"
 tags: ["envoy","xds","grpc"]

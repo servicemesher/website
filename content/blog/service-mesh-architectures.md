@@ -5,8 +5,8 @@ draft: false
 author: "Andrew Jenkins"
 translator: "张保珠"
 translatorlink: "https://github.com/muercy"
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 origininallink: "https://blog.aspenmesh.io/blog/2018/03/service-mesh-architectures/"
 summary: "这是介绍服务网格的架构系列的第二篇文章，本文讲解了Service Mesh术语的含义，为什么说节点代理和Sidecar模型是微服务的新模式和未来。"
 banner: "https://ws3.sinaimg.cn/large/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
