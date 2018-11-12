@@ -1,16 +1,18 @@
 ---
-original: https://medium.com/@tak2siva/why-is-service-mesh-8ebcd6ed9eb5
+originallink: "https://medium.com/@tak2siva/why-is-service-mesh-8ebcd6ed9eb5"
+author: 
 translator: "詹叶"
+author: "shiva"
+authorlink: "https://medium.com/@tak2siva?source=post_header_lockup"
 translatorlink: "https://github.com/heisenbergye"
-reviewer: ["宋净超",”王凯"]
+reviewer: ["宋净超","王凯"]
 title: "为什么要选择Service Mesh？"
 description: "本文讲述互联网应用演进过程，Service Mesh能带来什么好处"
 banner: "https://ws2.sinaimg.cn/large/006tNbRwly1fx5dtjdrmbj31ji15mqva.jpg"
-categories: "translation"
-tags: ["Dokcer","MicroServices","Kubernetes","Monitoring"]
+categories: ["translation"]
+tags: ["Dokcer","MicroServices","Kubernetes","Monitoring","service mesh"]
 date: 2018-11-08T15:20:46+08:00
 reviewerlink:  ["https://jimmysong.io","https://www.github.com/yiduwangkai"]
-originallink: "https://rancher.com/blog/2018/2018-04-23-evaluation-of-serverless-frameworks-for-kbe/"
 ---
 
 除非你长期与世隔绝，否则你应该听说过Kubernetes，他已经称为高速发展的互联网公司的一条准则。最近又有一个热门话题--Service Mesh（服务网格），它已经被这些高速发展公司用来解决一些特定的问题。所以如果你想了解什么是Service Mesh，接下来我可以给你一个更好的解释。
