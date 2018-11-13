@@ -1,12 +1,16 @@
 ---
 original: https://venilnoronha.io/envoy-grpc-and-rate-limiting
 translator: roganw
-reviewer: rootsongjc
+author: "Venil Noronha"
+authorlink: "https://venilnoronha.io/envoy-grpc-and-rate-limiting"
+translatorlink: "https://github.com/roganw"
+reviewer: ["宋净超","王凯","杨传胜"]
 title: "Envoy，gRPC和速率限制"
 description: "本文使用C++构建了客户端/服务端应用，通过Envoy代理和gPRC协议进行通信，然后使用Go语言实现了Envoy速率限制服务。"
 categories: "译文"
 tags: ["Envoy","gRPC","速率限制"]
 date: 2018-11-04
+reviewerlink:  ["https://jimmysong.io","https://www.github.com/yiduwangkai","https://github.com/yangchuansheng"]
 ---
 
 # Envoy，gRPC和速率限制
