@@ -7,12 +7,12 @@ author: "N/A"
 authorlink: ""
 translator: "N/A"
 translatorlink: ""
-reviewer: "宋净超"
-reviewerlink: "https://jimmysong.io"
+reviewer: ["宋净超"]
+reviewerlink: ["https://jimmysong.io"]
 originallink: ""
-summary: "文章摘要"
-tags: [""]
-categories: [""]
+summary: "这里填写文章文章摘要。"
+tags: ["service mesh"]
+categories: ["translation"]
 keywords: ["service mesh","服务网格"]
 ---
 
