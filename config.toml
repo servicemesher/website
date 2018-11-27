@@ -65,15 +65,21 @@ paginate = 10
 
 [[menu.main]]
     parent="activity"
+    name = "Meetup"
+    url  = "/tags/meetup"
+    weight = 1
+
+[[menu.main]]
+    parent="activity"
     name = "作者投稿"
     url  = "/authors/"
-    weight = 1
+    weight = 2
 
 [[menu.main]]
     parent="activity"
     name = "译者投稿"
     url  = "/translators/"
-    weight = 2
+    weight = 3
 
 [[menu.main]]
     name = "联系我们"
