@@ -7,7 +7,7 @@ author: "宋净超"
 authorlink: "https://jimmysong.io"
 summary: "Aspen Mesh这家公司隶属于F5，Aspen Mesh基于Istio 1.0开发，上个周末刚发布了1.0版本，可以申请免费试用。"
 tags: ["aspen mesh","istio","f5"]
-categories: ["news"]
+categories: ["service mesh"]
 keywords: ["service mesh","aspen mesh","服务网格"]
 ---
 
