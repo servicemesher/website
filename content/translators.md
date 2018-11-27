@@ -12,9 +12,9 @@ keywords: ["service mesh"]
 |殷龙飞 | 14|
 |甄中元 | 11|
 |宋净超 | 11|
-|马若飞 | 5|
+|马若飞 | 6|
+|陈冬 | 5|
 |戴佳顺 | 5|
-|陈冬 | 4|
 |崔秀龙 | 4|
 |王帅俭 | 3|
 |王全根 | 3|
@@ -30,8 +30,10 @@ keywords: ["service mesh"]
 |敖小剑 | 1|
 |张琦翔 | 1|
 |张保珠 | 1|
+|季正军 | 1|
 |姜洵 | 1|
 |卢宇亮 | 1|
 |Kael | 1|
+|Jianjun | 1|
 |Grace | 1|
 提交文章线索或译文请访问 https://github.com/servicemesher/trans
