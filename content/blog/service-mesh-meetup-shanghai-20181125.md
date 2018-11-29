@@ -5,7 +5,7 @@ draft: false
 banner: "https://ws4.sinaimg.cn/large/006tNbRwly1fxlj27xa1gj31400u0u0y.jpg"
 author: "宋净超"
 authorlink: "https://jimmysong.io"
-summary: "ServiceMesher社区和蚂蚁金服联合主办、SOFAStack社区协办的第四届Service Mesh Meetup上海站收官，Apache Skywalking 创始人吴晟、蚂蚁金服敖小剑、阿里巴巴 UC 张瑜标(龙轼)、谢云科技徐运元、七牛云的冯玮给大家带来分享。"
+summary: "ServiceMesher社区和蚂蚁金服联合主办、SOFAStack社区协办的第四届Service Mesh Meetup上海站收官，Apache Skywalking 创始人吴晟、蚂蚁金服敖小剑、阿里巴巴 UC 张瑜标(龙轼)、谐云科技徐运元、七牛云的冯玮给大家带来分享。"
 tags: ["meetup"]
 categories: ["meetup"]
 keywords: ["service mesh","meetup"]
