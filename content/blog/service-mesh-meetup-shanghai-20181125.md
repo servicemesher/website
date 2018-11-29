@@ -57,7 +57,7 @@ keywords: ["service mesh","meetup"]
 
 ## 视频回放与资料下载
 
-地址：https://tech.antfin.com/activities/2
+地址：https://tech.antfin.com/activities/2/review
 
 ## 致谢
 
@@ -66,4 +66,4 @@ keywords: ["service mesh","meetup"]
 - 联合主办方[蚂蚁金服金融科技](https://tech.antfin.com/activities/2)
 - [电子工业出版社](https://www.phei.com.cn/)赠书
 - [INNOSPACE+](http://www.innospaceplus.com.cn/)提供场地
-- [谢云科技](http://harmonycloud.cn/)提供茶歇
+- [谐云科技](http://harmonycloud.cn/)提供茶歇
