@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://venilnoronha.io/seamless-cloud-native-apps-with-grpc-web-and-istio"
 summary: "本文构建了一个简单的Web应用，该应用使用emoji替换用户输入文本中的关键字，并使用gRPC-Web和Istio与gRPC后端进行通信。"
 tags: ["grpc","istio","tutorial"]
-categories: ["translation"]
+categories: ["translation","tutorial"]
 keywords: ["service mesh","服务网格","istio","grpc","gprc-web"]
 ---
 
