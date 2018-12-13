@@ -115,9 +115,9 @@ paginate = 10
     viewMorePostLink = "/blog/"
     author = "Jimmy Song(宋净超)"
     defaultKeywords = ["service mesh","服务网格"]
-    defaultDescription = "ServiceMesher|服务网格中文社区"
+    defaultDescription = "Service Mesh|服务网格中文社区"
     # Browser title description
-    description = "ServiceMesher|服务网格中文社区"
+    description = "Service Mesh|服务网格中文社区"
     # Google Maps API key (if not set will default to not passing a key.)
     googleMapsApiKey = ""
     # Baidu统计
@@ -130,7 +130,7 @@ paginate = 10
     # 404 page
     errorimage = "https://ws1.sinaimg.cn/large/00704eQkgy1frkahxdca2j30hd08wq52.jpg"
     email = "jimmysong@jimmysong.io"
-    about_us = "<p>传播Service Mesh技术、加强行业内部交流、促进开源文化构建、推动Service Mesh在企业落地</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1fshv7n2uf7j303k03kweu.jpg>"
+    about_us = "<p>传播Service Mesh技术、构建开源文化、推动Service Mesh在企业中落地</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1fshv7n2uf7j303k03kweu.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
     icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
