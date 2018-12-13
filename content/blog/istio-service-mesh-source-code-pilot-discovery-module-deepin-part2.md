@@ -25,7 +25,7 @@ keywords: ["service mesh","istio","envoy"]
 
 首先我们回顾一下pilot总体架构，上面是[官方关于pilot的架构图](https://github.com/istio/old_pilot_repo/blob/master/doc/design.md)，因为是old_pilot_repo目录下，可能与最新架构有出入，仅供参考。所谓的pilot包含两个组件：pilot-agent和pilot-discovery。图里的agent对应pilot-agent二进制，proxy对应Envoy二进制，它们两个在同一个容器中，discovery service对应pilot-discovery二进制，在另外一个跟应用分开部署的单独的deployment中。
 
-1. **discovery service**：从Kubernetes apiserver list/watch `service`、`endpoint`、`pod`、`node`等资源信息，监听istio控制平面配置信息（如VirtualService、DestinationRule等）， 翻译为Envoy可以直接理解的配置格式。
+1. **discovery service**：从Kubernetes API Server list/watch `service`、`endpoint`、`pod`、`node`等资源信息，监听istio控制平面配置信息（如VirtualService、DestinationRule等）， 翻译为Envoy可以直接理解的配置格式。
 2. **proxy**：也就是Envoy，直接连接discovery service，间接地从Kubernetes等服务注册中心获取集群中微服务的注册情况
 3. **agent**：生成Envoy配置文件，管理Envoy生命周期
 4. **service A/B**：使用了istio的应用，如Service A/B，的进出网络流量会被proxy接管
@@ -41,12 +41,12 @@ keywords: ["service mesh","istio","envoy"]
 1. 来自istioctl的控制面信息，也就是图中的Rules API，如route rule、virtual service等，这些信息以Kubernetes CRD资源形式保存
 2. 来自服务注册中心的服务注册信息，也就是图上的Kubernetes、Mesos、Cloud Foundry等。在Kubernetes环境下包括`pod` 、`service`、`node`、`endpoint`
 
-为了实现istio对不同服务注册中心的支持，如Kubernetes，consul、Cloud Foundry等，pilot-discovery需要对以上两个输入来源的数据有一个统一的存储格式，也就是图中的Abstract Model，这种格式就定义在pilot/pkg/model包下。
+为了实现istio对不同服务注册中心的支持，如Kubernetes、consul、Cloud Foundry等，pilot-discovery需要对以上两个输入来源的数据有一个统一的存储格式，也就是图中的Abstract Model，这种格式就定义在pilot/pkg/model包下。
 
 举例，下面列表罗列了istio Abstract Model中service的一些成员如何跟根据Kubernetes服务注册信息中的service对象转化得到：
 
 1. `HostName`：`<name>.<namespace>.svc.cluster.local`
-   其中`name`和`namespace`分别为Kubernetes service对象的name和所属的namespace。cluster.local为默认domain suffix，可以通过proxy-discovery `discovery`命令的`domain` flag提供自定义值
+   其中`name`和`namespace`分别为Kubernetes service对象的name和所属的namespace。cluster.local为默认domain suffix，可以通过proxy-discovery `discovery`命令的`domain` flag提供自定义值。
 2. `Ports`： 对应Kubernetes service的spec.ports。
 3. `Address`: 对应Kubernetes service的spec.ClusterIP。
 4. `ExternalName`: 对应Kubernetes service的spec.ExternalName。
@@ -74,7 +74,7 @@ keywords: ["service mesh","istio","envoy"]
 
 基于上面介绍的统一数据存储格式Abstract Model，pilot-discovery为数据面（运行在sidecar中的Envoy等proxy组件）提供控制信息服务，也就是所谓的discovery service或者`xds`服务。这里的x是一个代词，类似云计算里的XaaS可以指代IaaS、PaaS、SaaS等。在istio中，`xds`包括`cds`(cluster discovery service)、`lds`(listener discovery service)、`rds`(route discovery service)、`eds`(endpoint discovery service)，而`ads`(aggregated discovery service)是对这些服务的一个统一封装。
 
-以上cluster、endpoint、route等概念的详细介绍和实现细节可以参考Envoy在社区推广的data plane api（github.com/envoyproxy/data-plane-api），这里只做简单介绍：
+以上cluster、endpoint、route等概念的详细介绍和实现细节可以参考Envoy在社区推广的data plane api（<https://github.com/envoyproxy/data-plane-api>），这里只做简单介绍：
 
 1. endpoint：一个具体的“应用实例”，对应ip和端口号，类似Kubernetes中的一个pod。
 2. cluster：一个cluster是一个“应用集群”，它对应提供相同服务的一个或多个endpoint。cluster类似Kubernetes中service的概念，即一个Kubernetes service对应一个或多个用同一镜像启动，提供相同服务的pod。
@@ -94,7 +94,7 @@ pilot-discovery在初始化discovery service（`xds`服务）的过程中（`ini
 
 根据Envoy的data plane api定义，`ads`需要对外提供的gRPC接口`AggregatedDiscoveryServiceServer`只有`StreamAggregatedResources`一个方法。在discovery service初始化过程中创建的pilot/pkg/proxy/envoy/v2包下的`DiscoveryServer`对象实现了gRPC server端接口。
 
-> envoy为方便第三放开发者开发控制面，提供了go-control-plane库。基于go-control-plane库，开发者可以方便地实现基于gRPC协议的discovery service。istio 0.8版使用的go-control-plane版本commit号为`bc01fbf`，在这个版本中`AggregatedDiscoveryServiceServer`接口就只有`StreamAggregatedResources`一个方法。但是在go-control-plane 2018年7月的一次commit中又为`AggregatedDiscoveryServiceServer`接口增加了`IncrementalAggregatedResources`方法，支持更为灵活的discovery service和Envoy之间的交互。
+> envoy为方便第三方开发者开发控制面，提供了go-control-plane库。基于go-control-plane库，开发者可以方便地实现基于gRPC协议的discovery service。istio 0.8版使用的go-control-plane版本commit号为`bc01fbf`，在这个版本中`AggregatedDiscoveryServiceServer`接口就只有`StreamAggregatedResources`一个方法。但是在go-control-plane 2018年7月的一次commit中又为`AggregatedDiscoveryServiceServer`接口增加了`IncrementalAggregatedResources`方法，支持更为灵活的discovery service和Envoy之间的交互。
 
 discovery server的主要逻辑，就是在与每一个Envoy建立一个双向streaming的gRPC连接（Bidirectional streaming RPC）之后：
 
@@ -115,7 +115,7 @@ discovery server从Envoy收到的请求类型为go-control-plane库下的`Discov
 3. `ResourceName`
    Envoy sidecar关注的资源列表，对于`cds`、`lds`来说，`ResourceName`通常是空的，因为Envoy总是需要知道所有的相关数据。而对于`eds`，`rds`来讲，Envoy则可以选择性的指明需要监控的资源对象列表。
 4. `TypeUrl`
-   `ads`服务将原来分开的单独`xds`服务，如`cds`、`lds`等，合并在同一个双向streaming的gRPC连接上。所以当Envoy向discovery server发送`DiscoveryRequest`时，需要使用`TypeUrl`来指明当前请求的服务类型。`TypeUrl`值可以是`cds`、`lds`等
+   `ads`服务将原来分开的单独`xds`服务，如`cds`、`lds`等，合并在同一个双向streaming的gRPC连接上。所以当Envoy向discovery server发送`DiscoveryRequest`时，需要使用`TypeUrl`来指明当前请求的服务类型。`TypeUrl`值可以是`cds`、`lds`等。
 5. `ReponseNonce`
    discovery service的`StreamAggregatedResources`方法提供的双向streaming `ads`服务中，discovery service可以连续向Envoy发送多个`DiscoveryResponse`。当Envoy收到`DiscoveryResponse`后，会发送`DiscoveryRequest`来ACK之前的`DiscoveryResponse`。为了减少歧义，Envoy使用`ReponseNonce`指定当前`DiscoveryRequest`ACK的是之前的哪个`DiscoveryResponse`。具体设置方式就是把`ReponseNonce`指定为需要ACK的`DiscoveryResponse`中的`Nonce`值，关于discovery server如何在`DiscoveryResponse`中设置`Nonce`，详见下文的分析。
 6. `ErrorDetail`
@@ -195,15 +195,15 @@ Envoy发给discovery server的`DiscoveryRequest`中会在`ResourceNames`成员�
 2. `<name>.<namespace>.svc.cluster.local|<port name>|<label>`
    这是被deprecated的cluster命名方法，在代码中被戏称为是来自古希腊时代的命名方式。其中`name`和`namespace`是对应service的name和所属的namespace，`cluster.local`是domain suffix，`port name`是用“,”分隔的一个或多个端口名称，`label`是用“;”分隔的`key=value`形式的一个或多个键值对。
 
-discovery server处理`eds`类型的`DiscoveryRequest`的逻辑相对简单，流程如下：
+Discovery server处理`eds`类型的`DiscoveryRequest`的逻辑相对简单，流程如下：
 
 1. 根据cluster的名称，把对应Kubernetes中service对象的name和所属的namespace解析出来。使用Kubernetes的client-go库中的`SharedIndexInformer`获取Kubernetes中的service对象。
 2. 使用`SharedIndexInformer`获取Kubernetes中的endpoint所有对象（`SharedIndexInformer`包含了本地缓机制，所以并非每次处理`eds`类型的`DiscoveryRequest`都需要从Kubernetes同步大量数据），选择其中name和namespace匹配的endpoint。
-3. 使用subset中的label(不知道subset中的label代表什么意思的同学，请回忆前面分析`cds`中关于subcluster构建过程)，比如`version=v1`，再次过滤上步被筛选过的endpoint
+3. 使用subset中的label（不知道subset中的label代表什么意思的同学，请回忆前面分析`cds`中关于subcluster构建过程），比如`version=v1`，再次过滤上步被筛选过的endpoint。
 4. 获取endpoint的ip、端口和可用域（availability zone）等信息。其中的可用域由endpoint对应的pod所运行的node上的两个“著名”label的value构成（中间用"/"分隔），label的key分别为：`"failure-domain.beta.kubernetes.io/region"`和`"failure-domain.beta.kubernetes.io/zone"`。
 5. 根据可用域信息（locality）将endpoint分组，每个locality对应一个`LocalityLbEndpoints`对象
 
-discovery server在获取endpoint之后，将他们封装在`DiscoveryResponse`中，将`DiscoveryResponse`的类型（即`TypeUrl`）设置为`type.googleapis.com/envoy.api.v2.ClusterLoadAssignment`，`Nonce`设置为当前时间（nonce的解释见本文前面部分）, 启动单独的协程通过与Envoy建立的双向stream gRPC连接发送给Envoy，发送超时为5秒
+Discovery server在获取endpoint之后，将他们封装在`DiscoveryResponse`中，将`DiscoveryResponse`的类型（即`TypeUrl`）设置为`type.googleapis.com/envoy.api.v2.ClusterLoadAssignment`，`Nonce`设置为当前时间（nonce的解释见本文前面部分）, 启动单独的协程通过与Envoy建立的双向stream gRPC连接发送给Envoy，发送超时为5秒。
 
 ## 本文作者
 
