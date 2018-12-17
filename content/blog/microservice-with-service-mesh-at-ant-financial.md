@@ -7,7 +7,7 @@ author: "朵晓东"
 authorlink: "https://github.com/ldxdl"
 summary: "本文根据晓东在 GIAC 上海站的演讲内容整理，完整的分享 PPT 获取方式见文章底部。"
 tags: ["service mesh","ant financial","sofamesh","sofamosn"]
-categories: ["sofamesh"]
+categories: ["sofamosn"]
 keywords: ["service mesh","服务网格",”蚂蚁金服","SOFAMesh","SOFAMosn"]
 ---
 
