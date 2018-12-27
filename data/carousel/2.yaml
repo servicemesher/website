@@ -1,9 +1,10 @@
-weight: 0
-title: "Service Mesh Meetup #3 深圳站"
+weight: 1
+title: "Service Mesh Meetup #4 上海站"
 description: >
   <ul class="list-style-none">
-     <li>2018年8月25日（星期六）</li>
-     <li>深圳彩福大厦4楼名堂共享办公福田微谷店</li>
-     <li><a href="/blog/service-mesh-meetup-shenzhen-20180825">查看回顾</a></li>
+     <li>2018年11月25日（星期日）</li>
+     <li>上海市杨浦区政学路77号 INNOSPACE+</li>
+     <li><a href="/blog/service-mesh-meetup-shanghai-20181125/">查看回顾</a></li>
+     <li><a href="https://tech.antfin.com/activities/2">资料下载</a></li>
    </ul>
-image: "/img/carousel/shenzhen-meetup-photo.jpg"
+image: "/img/carousel/shanghai-meetup.jpg"
