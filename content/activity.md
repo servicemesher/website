@@ -10,6 +10,23 @@ keywords: ["service mesh","meetup"]
 
 历届幻灯片下载地址：https://github.com/servicemesher/meetup-slides
 
+## Service Mesh Meetup #5 广州站
+
+时间：2019年1月6日
+
+地点：广州市天河区黄埔大道西平云路163号广电评语广场 B 塔
+
+讲师与 Topic：
+
+- 郑德惠（唯品会Java资深开发工程师）：唯品会 Service Mesh 的实践分享
+- 陈逸凡（蚂蚁金服资深开发工程师）：SOFAMosn 持续演进路径及实践案例
+- 崔秀龙（HPE 软件分析师）：在网格的边缘试探——企业 Istio 试水指南
+- Roundtable：回顾2018，Service Mesh 蓄势待发：崔秀龙、敖小剑、陈逸凡、郑德惠
+
+[查看广州站回顾](/blog/service-mesh-meetup-guangzhou-20190106/)
+
+视频回放：https://tech.antfin.com/activities/72
+
 ## Service Mesh Meetup #4 上海站
 
 时间：2018年11月25日
@@ -23,7 +40,7 @@ keywords: ["service mesh","meetup"]
 - 徐运元（谐云科技云平台架构师，致力于容器 PaaS 平台、企业级容器云平台的方案设计和技术落地）：探讨和实践基于Isito的微服务治理事件监控
 - 冯玮（七牛容器云平台产品架构师，曾在百度和华为从事公有云领域高性能分布式计算和存储平台的架构设计和产品研发）：Envoy、Contour与Kubernetes实践
 
-[查看上海站回顾](http://localhost:1313/blog/service-mesh-meetup-shanghai-20181125/)
+[查看上海站回顾](/blog/service-mesh-meetup-shanghai-20181125/)
 
 视频回放：https://tech.antfin.com/activities/2
 
