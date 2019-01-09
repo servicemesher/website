@@ -56,3 +56,6 @@ keywords: ["service mesh","meetup"]
 - 联合主办方[蚂蚁金服金融科技](https://tech.antfin.com/activities/2)
 - [电子工业出版社](https://www.phei.com.cn/)赠书
 - 阿里巴巴 UC 提供场地支持
+- [云犀直播](http://www.yunxi.tv/)提供直播支持
+
+![](https://ws1.sinaimg.cn/large/006tNc79ly1fyz1ppp9k7j309c05fwee.jpg)
