@@ -83,7 +83,7 @@ SOA标准的服务注册，服务发现和调用流程如下：
 
 ![Kubernetes下的DNS寻址方式](https://ws2.sinaimg.cn/large/006tNbRwly1fw0u1crhhoj30zz0grad5.jpg)
 
-当部署在Kubernetes下的某个充当客户端的应用发起请求时，如图中的HTTP GET请求，目标URL地址为 “[http://userservice/id/1000221"。请求的寻址方式和过程如下：](http://userservice/id/1000221%22%E3%80%82%E8%AF%B7%E6%B1%82%E7%9A%84%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F%E5%92%8C%E8%BF%87%E7%A8%8B%E5%A6%82%E4%B8%8B%EF%BC%9A)
+当部署在Kubernetes下的某个充当客户端的应用发起请求时，如图中的HTTP GET请求，目标URL地址为 “<http://userservice/id/1000221>"。请求的寻址方式和过程如下：
 
 - 首先进行域名解析，分别尝试解析”userservice”/“userservie.default.svc.cluster.local”等域名，得到ClusterIP
 - 然后客户端发出请求的报文，目标地址为ClusterIP，源地址为当前客户端所在的pod IP（简单起见，端口先忽略）
