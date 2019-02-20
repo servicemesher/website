@@ -199,7 +199,7 @@ paginate = 10
 [params.recent_posts]
     enable = true
     title = "最新博客"
-    subtitle = "社区参与者的博客与最 in 的新闻都在这里"
+    subtitle = "服务网格技术文章一网打尽"
 
 [outputs]
     home = ["HTML", "RSS", "Algolia"]
