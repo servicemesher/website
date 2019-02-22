@@ -397,7 +397,7 @@ Controller的逻辑其实是很简单的：监听CRD实例（以及关联的资�
 
 ### 用例
 
-代码在<http://gitlab.alipay-inc.com/xinjian.sxj/deployment-controller>。
+代码在<https://github.com/songxinjianqwe/deployment-controller>。
 
 MyDeployment是用来模拟Kubernetes提供的Deployment的简化版实现，目前可以做到以下功能：
 
