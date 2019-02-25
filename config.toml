@@ -82,6 +82,13 @@ paginate = 10
     weight = 3
 
 [[menu.main]]
+    parent="activity"
+    name = "Istio知识图谱"
+    url  = "https://github.com/servicemesher/istio-knowledge-map"
+    weight = 4
+
+
+[[menu.main]]
     name = "联系我们"
     url  = "/contact/"
     weight = 5
