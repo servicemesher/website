@@ -64,7 +64,7 @@ Istio 知识图谱 v0.1 在 [Google docs](https://docs.google.com/document/d/1nM
 
 ### 参与方式
 
-如果你想参与本书的撰写或表达对本书的期待，请关注 ServiceMesher 公众号，并在后台回复 `istio handbook` 即可获取联署签名地址和参与方式。
+如果你想参与本书的撰写或表达对本书的期待，请关注 ServiceMesher 公众号，并在后台回复 `istio` 即可获取联署签名地址和参与方式。
 
 下图为本书封面样图，目前该书籍地址：https://github.com/rootsongjc/istio-handbook
 
