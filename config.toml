@@ -10,6 +10,8 @@ disqusShortname = ""
 # Code highlight
 pygmentsUseClasses = false
 pygmentCodeFences = true
+# Enable google analytics by uncomment this
+googleAnalytics = "UA-93485976-2"
 
 # Define the number of posts per page
 paginate = 10
