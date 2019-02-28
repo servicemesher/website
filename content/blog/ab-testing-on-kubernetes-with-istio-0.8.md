@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://medium.com/vamp-io/a-b-testing-on-kubernetes-with-istio-0-8-6323efa2b4e2"
 summary: "本文讲述Vamp（一款商业版的云原生应用平台）如何在Kubernetes上采用Istio进行流量路由的经验"
 tags: ["istio","kubernetes","AB Test","vamp"]
-categories: ["translation"]
+categories: [“practice","translation"]
 keywords: ["service mesh","istio","AB测试","vamp"]
 ---
 

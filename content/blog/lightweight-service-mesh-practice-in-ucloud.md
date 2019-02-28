@@ -8,7 +8,7 @@ authorlink: "https://mp.weixin.qq.com/s/R5lHgGH5jz992S3eL2FTJw"
 originallink: "https://mp.weixin.qq.com/s/R5lHgGH5jz992S3eL2FTJw"
 summary: "本文讲述的是UCloud对Istio做的部分改造，并在内部使用轻量Service Mesh的实践。"
 tags: ["service mesh","UCloud"]
-categories: ["service mesh"]
+categories: ["practice"]
 keywords: ["service mesh","服务网格","UCloud"]
 ---
 

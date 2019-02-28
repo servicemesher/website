@@ -7,7 +7,7 @@ author: "崔秀龙"
 authorlink: "https://blog.fleeto.us"
 summary: "本文根据崔秀龙在 2019 广州 Service Mesh Meetup#5 分享整理。"
 tags: ["service mesh"]
-categories: ["culture"]
+categories: ["practice","culture"]
 keywords: ["service mesh","服务网格"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.infoq.com/articles/envoy-service-mesh-cascading-failure"
 summary: "本文分享了Lyft对于Envoy的在服务网格领域的实践，主要为了解决级联故障的问题，以及Lyft对于Envoy的未来规划。"
 tags: ["envoy","lyft","service mesh"]
-categories: ["translation"]
+categories: ["practice","translation"]
 keywords: ["service mesh"]
 ---
 

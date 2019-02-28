@@ -8,7 +8,7 @@ authorlink: "https://zhuangguanzhang.github.io"
 originallink: "https://zhangguanzhang.github.io/2018/10/12/prometheus-operator/"
 summary: "Prometheus所有的监控的agent底层最终都是查询的/proc和/sys里的信息推送，本文分享了当收集宿主机信息的agent跑在pod中时会遇到的问题。"
 tags: ["kubernetes","prometheus","operator"]
-categories: ["Kubernetes"]
+categories: ["practice"]
 keywords: ["kubernetes","prometheus","operator"]
 ---
 

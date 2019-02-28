@@ -7,7 +7,7 @@ author: "高松"
 authorlink: "https://github.com/Yisaer"
 summary: "本文是酷家乐的Coohom项目使用Istio服务网格的实践经验分享。"
 tags: ["istio","coohom"]
-categories: ["istio"]
+categories: ["practice"]
 keywords: ["service mesh","服务网格","istio","coohom"]
 ---
 

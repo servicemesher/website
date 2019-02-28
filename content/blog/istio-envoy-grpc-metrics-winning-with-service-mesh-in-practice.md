@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://medium.com/pismolabs/istio-envoy-grpc-metrics-winning-with-service-mesh-in-practice-d67a08acd8f7"
 summary: "本文展示的是如何使用 Istio 和 Envoy 来对 gRPC 做度量。"
 tags: ["istio","grpc","envoy","service mesh"]
-categories: ["translation"]
+categories: ["practice","translation"]
 keywords: ["service mesh","服务网格","istio","envoy","grpc"]
 ---
 

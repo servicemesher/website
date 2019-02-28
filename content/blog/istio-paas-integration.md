@@ -8,7 +8,7 @@ authorlink: "https://zhaohuabing.com"
 originallink: "https://zhaohuabing.com/post/2018-10-18-istio-paas-integration/"
 summary: "Istio发布1.0版本后，其服务发现和路由规则功能已基本具备production能力，我们也开始了Istio和公司内部微服务平台的集成工作，打算以Istio为基础打造一个微服务管控中心，在这里把目前的进展和遇到的坑和大家分享一下。"
 tags: ["istio","paas"]
-categories: ["istio"]
+categories: ["practice"]
 keywords: ["service mesh","服务网格","istio","paas"]
 ---
 

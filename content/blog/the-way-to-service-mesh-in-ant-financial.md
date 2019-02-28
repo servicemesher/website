@@ -6,8 +6,8 @@ banner: "https://ws1.sinaimg.cn/large/00704eQkgy1fsy0uinng2j31ji15onpf.jpg"
 author: "敖小剑"
 authorlink: "https://skyao.io"
 summary: "本文是根据蚂蚁金服 Service Mesh 布道师敖小剑在 Service Mesher社区进行的第一次 Meetup 上分享的《大规模微服务架构下的 Service Mesh 探索之路》现场演讲内容实录整理编辑而成，希望能给关注 Service Mesh 产品的朋友们带来帮助和了解。"
-tags: ["service mesh","ant financial"]
-categories: ["sofamesh"]
+tags: ["service mesh","ant financial","sofamesh"]
+categories: ["practice","sofamesh"]
 keywords: ["service mesh"]
 ---
 
