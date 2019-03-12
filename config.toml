@@ -37,33 +37,39 @@ paginate = 10
 
 [[menu.main]]
     parent="docs"
-    name="Awesome"
+    name="Service Mesh列表"
     url = "/awesome-servicemesh/"
     weight = 1
 
 [[menu.main]]
     parent="docs"
-    name="Envoy"
+    name="Envoy官方文档"
     url = "/envoy/"
     weight = 2
 
 [[menu.main]]
     parent="docs"
-    name="Istio"
+    name="Istio中文官网"
     url = "https://preliminary.istio.io/zh/"
     weight = 3
 
 [[menu.main]]
     parent="docs"
-    name="Practice"
+    name="实践汇总"
     url = "/categories/practice/"
     weight = 4
 
 [[menu.main]]
     parent="docs"
-    name="SOFAMesh"
-    url = "/categories/sofamesh"
+    name="Istio Handbook"
+    url = "/istio-handbook/"
     weight = 5
+
+[[menu.main]]
+    parent="docs"
+    name="Knative入门"
+    url = "/getting-started-with-knative/"
+    weight = 6
 
 [[menu.main]]
     name = "活动"
