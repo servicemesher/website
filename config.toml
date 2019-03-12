@@ -43,7 +43,7 @@ paginate = 10
 
 [[menu.main]]
     parent="docs"
-    name="Envoy官方文档"
+    name="Envoy官方文档中文版"
     url = "/envoy/"
     weight = 2
 
