@@ -1,10 +1,11 @@
 weight: 5
-title: "Service Mesh Meetup #2 北京站"
+title: "Istio 1.0发布"
 description: >
   <ul class="list-style-none">
-     <li>2018年7月29日（星期日）</li>
-     <li>北京GDG</li>
-     <li><a href="/blog/beijng-meetup-20180729">查看回顾</a></li>
-     <li><a href="/activity">查看历届Meetup</a></li>
+     <li>2018年7月31日</li>
+     <li>核心功能支持生产</li>
+     <li>支持多Kubernetes集群</li>
+     <li>支持进程外Mixer适配器 </li>
+     <li><a href="/blog/announcing-istio-1.0/">了解详情</a></li>
    </ul>
-image: "/img/carousel/beijing-meetup.jpg"
+image: "/img/carousel/istio-1.0-zh.png"

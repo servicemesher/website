@@ -1,11 +1,11 @@
 weight: 7
-title: "Envoy proxy"
+title: "Service Mesh Meetup #1 杭州站"
 description: >
   <ul class="list-style-none">
-    <li>开源</li>
-    <li>专为云原生应用而设计</li>
-    <li>边缘和服务间代理</li>
-    <li>Istio 默认的数据平面</li>
-    <li><a href="/envoy/">访问 Envoy 中文文档</a></li>
-  </ul>
-image: "/img/carousel/envoy-gitbook.png"
+     <li>2018年6月30日（星期六）</li>
+     <li>杭州蚂蚁 Z 空间</li>
+     <li>120余人到场参加</li>
+     <li>5000多人通过直播观看</li>
+     <li><a href="/blog/hangzhou-meetup-20180630">查看回顾</a></li>
+   </ul>
+image: "/img/carousel/hangzhou.png"
