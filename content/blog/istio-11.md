@@ -36,6 +36,13 @@ Istio 于北京时间今日凌晨4点，太平洋时间下午1点 Istio 1.1 发�
 
 最后，去浏览最新文档，安装 1.1 版本吧！Happy meshing！
 
+## 官方网站
+
+ServiceMesher 社区从 Istio 0.6 版本起一直在维护 Istio 官方文档的[中文页面](https://istio.io/zh)，截止2019年3月19日晚12点已有596个 PR 合并，共维护文档310余篇，感谢大家的努力！部分文档可能稍微滞后于英文版本，同步工作持续进行中，参与进来请访问 <https://github.com/servicemesher/istio-official-translation>
+Istio 官网每个页面右侧都有切换语言按钮，大家可以随时切换中英文版本，还可以提交文档修改，报告网站 Bug 等。
+
+![](https://ws1.sinaimg.cn/large/006tKfTcly1g18w8xo3zzj308c0doq46.jpg)
+
 ## 其他资料
 
 **Istio handbook**
