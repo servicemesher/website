@@ -1,11 +1,11 @@
 weight: 1
-title: "Service Mesh Day" 
+title: "SOFA Meetup #1" 
 description: >
   <ul class="list-style-none">
-     <li>March 29,2019</li>
-     <li>Fairmont Hotel, San Francisco, USA</li>
-     <li><a href="https://ti.to/service-mesh-day/service-mesh-day-2019/discount/community">Register Now(Get 15% off)</a></li>
-     <li>Tetrate.io, Google, CNCF联合主办</li>
-     <li>首届全球Service Mesh大会</li>
+     <li>3月24日（周日）</li>
+     <li>北京中关村创业大街2号楼3层氪空间</li>
+     <li>暨服务注册中心、分布式事务重磅发布</li>
+     <li>SOFA 开源一周年线下庆祝会</li>
+     <li><a href="https://tech.antfin.com/activities/382?chInfo=s">立即报名</a></li>
    </ul>
-image: "/img/carousel/service-mesh-day.jpg"
+image: "/img/carousel/sofa-meetup.png"
