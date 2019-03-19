@@ -6,7 +6,7 @@ banner: "https://ws3.sinaimg.cn/large/006tKfTcly1g18wts57i7j31400u01l1.jpg"
 author: "宋净超"
 authorlink: "https://jimmysong.io"
 originallink: "https://istio.io/zh/blog/2019/announcing-1.1/"
-summary: "Istio 1.1发布了，ServiceMesher 社区同时推出的中文文档。"
+summary: "Istio 1.1发布了，该版本历时8个月，ServiceMesher 社区同时推出了 Istio 中文文档。"
 tags: ["istio"]
 categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
