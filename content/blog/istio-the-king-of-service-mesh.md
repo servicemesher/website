@@ -4,8 +4,8 @@ date: 2019-02-02T15:21:28+08:00
 draft: false
 banner: "https://ws4.sinaimg.cn/large/006tNc79ly1g03ltrocejj31400u0hdv.jpg"
 author: "钟华"
-authorlink: "https://zhongfox.github.io"
-originallink: "https://zhongfox.github.io/2019/01/30/istio/"
+authorlink: "https://imfox.io"
+originallink: "https://imfox.io/2019/01/30/istio/"
 summary: "本文根据钟华在腾讯云容器团队进行的istio主题分享和现场演示整理输出。"
 tags: ["service mesh","istio"]
 categories: ["istio"]

@@ -4,8 +4,8 @@ date: 2019-03-12T19:10:41+08:00
 draft: false
 banner: "https://ws4.sinaimg.cn/large/006tKfTcly1g108dmoahrj31400u0u10.jpg"
 author: "钟华"
-authorlink: "https://imfox.me"
-originallink: "https://imfox.me/2019/03/11/istio-analysis-1/"
+authorlink: "https://imfox.io"
+originallink: "https://imfox.io/2019/03/11/istio-analysis-1/"
 summary: "Istio 作为 Service Mesh 领域的集大成者, 提供了流控, 安全, 遥测等模型, 其功能复杂, 模块众多, 有较高的学习和使用门槛, 本文会对istio 1.1 的各组件进行分析, 希望能帮助读者了解istio各组件的职责、以及相互的协作关系。"
 tags: ["istio"]
 categories: ["istio"]

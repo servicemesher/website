@@ -4,8 +4,8 @@ date: 2019-03-19T12:21:02+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/006tKfTcly1g17zwff4g7j31400u0b2a.jpg"
 author: "钟华"
-authorlink: "https://imfox.me"
-originallink: "https://imfox.me/2019/03/19/istio-analysis-2/"
+authorlink: "https://imfox.io"
+originallink: "https://imfox.io/2019/03/19/istio-analysis-2/"
 summary: "今天我们来分析下 isito-sidecar-injector 组件。"
 tags: ["istio"]
 categories: ["istio"]
