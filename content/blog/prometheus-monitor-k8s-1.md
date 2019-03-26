@@ -32,17 +32,17 @@ keywords: ["service mesh","服务网格","prometheus","kubernetes"]
 - **cAdvisor**:
   来自 Google 的容器监控工具，也是 Kubelet 内置的容器资源收集工具。它会自动收集本机容器 CPU、内存、网络和文件系统的资源占用情况，并对外提供 cAdvisor 原生的 API。随 kubelet 启动   --cadvisor-port = 1
 
-![cadvisor架构](http://dl-blog.laoxianyu.cn/cadvisor.png)
+![](https://ws1.sinaimg.cn/large/006tKfTcly1g1g78rcw8wj30u0129wmo.jpg)
 
 - **Heapster**:
   由于 cAdvisor 只提供了单机的容器资源占用情况，而 Heapster 则提供了整个集群的资源监控（kubernetes 1.11 之前，hpa都是从heapster获取数据），并支持持久化数据存储到 InfluxDB
 
-![heapster架构](http://dl-blog.laoxianyu.cn/heapster.png)
+![](https://ws4.sinaimg.cn/large/006tKfTcly1g1g7911wprj30hs07bdga.jpg)
 
 - **Promethues**:
   提供强大的数据采集、数据存储、数据展示、告警等，天生完美支持kubernetes，CNCF基金会的第二个成员，第一个是Kubernetes。而且Prometheus里面很多思想都来源于Google内部的监控系统Borgmon，可以说是Google的干儿子。
 
-![Prometheus架构](http://dl-blog.laoxianyu.cn/prometheus.png)
+![](https://ws4.sinaimg.cn/large/006tKfTcly1g1g79cw3yjj311j0mjadw.jpg)
 
 - **kube-state-metrics**在这里作为prometheus的一个exporter来使用，提供deployment、daemonset、cronjob等服务的监控数据，由kubernestes官方提供，与prometheus紧密结合。
   更多关于kube-state-metrics的信息：https://github.com/kubernetes/kube-state-metrics
@@ -76,7 +76,7 @@ Prometheus对于应用层的监控，定义了一个良好的规范，只需要�
 
 好在这些问题对Prometheus来说都不是难事，最终，我们采取 Prometheus + kube-state-metrics + Alertmanager + Grafana 架构来做Kubernetes集群监控。监控系统具体架构如下
 
-![k8s监控架构](http://dl-blog.laoxianyu.cn/prometheus-monitor.png)
+![](https://ws4.sinaimg.cn/large/006tKfTcly1g1g79nq0ncj30qq0jq770.jpg)
 
 使用这个架构，那上面所提到的三个问题将不再是问题。
 
