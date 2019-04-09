@@ -5,7 +5,7 @@ draft: false
 banner: "https://ws4.sinaimg.cn/large/006tKfTcly1g0vesgata2j31420u01l1.jpg"
 author: "Nicolas Frankel"
 authorlink: "https://www.exoscale.com/syslog/istio-vs-hystrix-circuit-breaker/"
-translator: "罗光明"
+translator: "罗广明"
 translatorlink: "https://github.com/GuangmingLuo"
 reviewer: ["宋净超"]
 reviewerlink: ["https://jimmysong.io"]
