@@ -4,12 +4,12 @@ date: 2019-04-09T22:42:29+08:00
 draft: false
 banner: "https://ws2.sinaimg.cn/large/006tNc79ly1g1wrp8d29yj31400u0kjm.jpg"
 author: "Christian Posta"
-authorlink: "https://blog.christianpota.com"
+authorlink: "https://blog.christianposta.com"
 translator: "李琪"
 translatorlink: "https://github.com/saberuster"
 reviewer: ["孙海洲","吴钧泽"]
 reviewerlink: ["https://github.com/haiker2011","https://www.wujunze.com/"]
-originallink: ""
+originallink: "https://dzone.com/articles/faas-vs-microservices"
 summary: "本文主要向读者介绍FaaS和微服务架构之间的区别以及如何根据自身情况选择正确的架构方案。"
 tags: ["faas","microservices","serverless"]
 categories: ["translation"]
