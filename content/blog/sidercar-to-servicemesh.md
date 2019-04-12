@@ -15,6 +15,14 @@ keywords: ["service mesh","服务网格","边车模式"]
 
 ![](http://wx1.sinaimg.cn/large/ad5fbf65ly1g18zhnoh76j20dw0dw752.jpg)
 
+在 [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/patterns/) 的云设计模式中是这么介绍边车模式的：
+
+> Deploy components of an application into a separate process or container to provide isolation and encapsulation. 
+
+> --- ***[Sidecar pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar)***
+
+**这里要注意的是： 这里的 Sidecar 是分布式架构中云设计模式的一种，与我们目前在使用的 Istio 或 Linkerd 中的 Sidecar 是设计与实现的区别，后文中提到的边车模式均是指这种设计模式，请勿与 Istio 或 其他 Service Mesh 软件 中的 Sidecar 混淆。**
+
 **边车模式**是一种分布式架构的设计模式。如上图所示，边车就是加装在摩托车旁来达到拓展功能的目的，比如行驶更加稳定，可以拉更多的人和货物，坐在边车上的人可以给驾驶员指路等。边车模式通过给应用服务加装一个“边车”来达到**控制**和**逻辑**的分离的目的。
 
 比如日志记录、监控、流量控制、服务注册、服务发现、服务限流、服务熔断等在业务服务中不需要实现的控制面功能，可以交给“边车”，业务服务只需要专注实现业务逻辑即可。如上图那样，应用服务你只管开好你的车，打仗的事情就交给边车上的代理就好。这与分布式和微服务架构完美契合，真正的实现了控制和逻辑的分离与解耦。
@@ -53,7 +61,7 @@ keywords: ["service mesh","服务网格","边车模式"]
 
 边车模式有效的分离了系统控制和业务逻辑，可以将所有的服务进行统一管理，让开发人员更专注于业务开发，显著的提升开发效率。而遵循这种模式进行实践从很早以前就开始了，开发人员一直试图将上文中我们提到的功能（如：流量控制、服务注册、服务发现、服务限流、服务熔断等）提取成一个标准化的 Sidecar ，通过 Sidecar 代理来与其他系统进行交互，这样可以大大简化业务开发和运维。而随着分布式架构和微服务被越来越多的公司和开发者接受并使用，这一需求日益凸显。
 
-这就是 Service Mesh 服务网格诞生的契机，它是 CNCF（Cloud Native Computing Foundation，云原生基金会）目前主推的新一代微服务架构。 William Morgan 在 [What's a service mesh? And why do I need one?](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/) 中解释了什么是 Service Mesh ，这里也有[译文](https://blog.maoxianplay.com/posts/whats-a-service-mesh-and-why-do-i-need-one/)。
+这就是 Service Mesh 服务网格诞生的契机，它是 CNCF（Cloud Native Computing Foundation，云原生基金会）目前主推的新一代微服务架构。 William Morgan 在 [What's a service mesh? And why do I need one?](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/) 【[译文](https://blog.maoxianplay.com/posts/whats-a-service-mesh-and-why-do-i-need-one/)】中解释了什么是 Service Mesh 。
 
 Service Mesh 有如下几个特点：
 
@@ -67,7 +75,7 @@ Service Mesh 将底层那些难以控制的网络通讯统一管理，诸如：�
 
 ## 你真的需要 Service Mesh 吗？
 
-正如NGINX在其博客上发表的一篇文章名叫 [Do I Need a Service Mesh? ](https://www.nginx.com/blog/do-i-need-a-service-mesh/) ,这里可以看到[译文](http://www.servicemesher.com/blog/do-i-need-a-service-mesh/)，文中提到的：
+正如 NGINX 在其博客上发表的一篇文章名叫 [Do I Need a Service Mesh? ](https://www.nginx.com/blog/do-i-need-a-service-mesh/) 【[译文](http://www.servicemesher.com/blog/do-i-need-a-service-mesh/)】 的文章中提到：
 
 > As the complexity of the application increases, service mesh becomes a realistic alternative to implementing capabilities service-by-service.
 
@@ -78,6 +86,8 @@ Service Mesh 将底层那些难以控制的网络通讯统一管理，诸如：�
 随着我们的微服务越来越细分，我们所要管理的服务正在成倍的增长着，Kubernetes 提供了丰富的功能，使得我们可以快速的部署和调度这些服务，同时也提供了我们熟悉的方式来实现那些复杂的功能，但是当临界点到来时，可能就是我们真正要去考虑使用 Service Mesh 的时候了。
 
 ## 参考
+
+- Sidecar pattern ： https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar
 
 - What's a service mesh? And why do I need one?： https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/ 
 
