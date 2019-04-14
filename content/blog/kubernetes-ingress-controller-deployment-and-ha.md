@@ -258,3 +258,4 @@ Ingress Controller到集群内的路径这部分都有负载均衡了，我们�
 - 所以可以一个vip飘在拥有存活的controller的宿主机上，云上的话就用slb来负载代替vip
 - 最后说说域名请求指向它，如果部署在内网或者办公室啥的，内网有dns server的话把ing的域名全部解析到ingress controller的宿主机ip上，否则要有人访问每个人设置/etc/hosts才能把域名解析来贼麻烦，如果没有dns server可以跑一个external-dns，它的上游dns是公网的dns服务器，办公网内机器的dns server指向它即可，云上的话把域名请求解析到对应ip即可
 - traefik和ingress nginx类似，不过它用go实现的
+- 在一些老版本的ingress nginx的log里会一直刷找不到ingress-nginx的svc不处理的话会狂刷log导致机器load过高,创建一个同名的svc即可解决,例如创建一个不带选择器clusterip为null的，新版本则不会
