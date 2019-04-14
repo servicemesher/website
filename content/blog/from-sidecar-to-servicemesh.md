@@ -2,12 +2,12 @@
 title: "从边车模式到 Service Mesh"
 date: 2019-04-11T16:56:23+08:00
 draft: false
-banner: "https://ws3.sinaimg.cn/large/ad5fbf65gy1g1yqu5v6y7j21qi15on1j.jpg"
+banner: "https://ws2.sinaimg.cn/large/006tNc79ly1g22idd0clrj31400u0nph.jpg"
 author: "郭旭东"
 authorlink: "https://blog.maoxianplay.com/"
 originallink: "https://blog.maoxianplay.com/posts/sidercar-to-servicemesh/"
-summary: "谈谈从边车模式这一分布式架构的设计模式到 Service Mesh 的演变。"
-tags: ["service mesh"]
+summary: "本文谈谈从边车模式这一分布式架构的设计模式到 Service Mesh 的演变。"
+tags: ["service mesh","sidecar"]
 categories: ["service mesh"]
 keywords: ["service mesh","服务网格","边车模式"]
 ---
