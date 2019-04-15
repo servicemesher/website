@@ -1,5 +1,5 @@
 ---
-title: "dashboard在ssl的各种场景下的手动部署"
+title: "k8s dashboard在ssl的各种场景下的手动部署"
 date: 2018-12-27T11:23:34+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/006tNbRwly1fyl57bnk4uj31400u0npf.jpg"
@@ -391,3 +391,7 @@ kubectl -n kube-system get secret -o jsonpath='{range .items[?(@.metadata.annota
 xxxxxxxxxxxxxx
 ```
 最后`Let’s Encrypt`的证书是一次3个月，可以看脚本官方文档去定时获取新的证书然后导入 <https://github.com/Neilpang/acme.sh/wiki/%E8%AF%B4%E6%98%8E> certmanager和acme.sh一样的原理去调用api签署域名证书，有兴趣可以去试试
+参考:
+- https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/tls-termination
+- https://github.com/Neilpang/acme.sh/wiki/dnsapi
+- https://github.com/kubernetes/dashboard/wiki/Certificate-management#public-trusted-certificate-authority
