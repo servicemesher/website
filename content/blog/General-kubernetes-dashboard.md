@@ -434,7 +434,7 @@ subjects:
     namespace: kube-system
 ```
 
-取它token用于登陆dashboard，你在dashboard web上操作集群的时候实际上是拿着你登陆的token的去以api调用kube-apiserver（所以为了没必要我们也可以删掉官方里那个自带的RBAC部分）。
+取它token用于登陆dashboard，你在dashboard web上操作集群的时候实际上是拿着你登陆的token的去以api调用kube-apiserver。
 使用下面命令取上面创建的sa的token：
 
 ```bash
