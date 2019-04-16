@@ -444,6 +444,6 @@ xxxxxxxxxxxxxx
 最后`Let’s Encrypt`的证书是一次3个月，可以看脚本官方文档去定时获取新的证书然后导入 <https://github.com/Neilpang/acme.sh/wiki/%E8%AF%B4%E6%98%8E> certmanager和acme.sh一样的原理去调用api签署域名证书，有兴趣可以去试试
 
 ## 参考:
-- https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/tls-termination
-- https://github.com/Neilpang/acme.sh/wiki/dnsapi
-- https://github.com/kubernetes/dashboard/wiki/Certificate-management#public-trusted-certificate-authority
+- [TLS termination - github.com](https://github.com/kubernetes/ingress-nginx/tree/master/docs/examples/tls-termination)
+- [acme.sh wiki - github.com](https://github.com/Neilpang/acme.sh/wiki/dnsapi)
+- [certmanager trusted github.com](https://github.com/kubernetes/dashboard/wiki/Certificate-management#public-trusted-certificate-authority)
