@@ -262,5 +262,5 @@ Ingress Controller到集群内的路径这部分都有负载均衡了，我们�
 - 在一些老版本的ingress nginx的log里会一直刷找不到ingress-nginx的svc，不处理的话会狂刷log导致机器load过高,创建一个同名的svc即可解决,例如创建一个不带选择器clusterip为null的，新版本则不会
 
 ## 参考:
-- https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md
-- https://kubernetes.github.io/ingress-nginx/deploy/baremetal/
+- [ingress-nginx deploy - github.com](https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md)
+- [ingress-nginx deploy - kubernetes.github.io](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/)
