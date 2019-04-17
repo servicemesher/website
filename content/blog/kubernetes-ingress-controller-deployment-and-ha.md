@@ -19,8 +19,8 @@ keywords: ["Kubernetes"]
 
 - Service实现原理和会应用
 - 知道反向代理原理，了解nginx和apache的vhost概念
-- 了解service的几种类型(Nodeport、clusterip、LB)
-- 四层和七层区别(不明白就这样去理解，七层最常见就是应用层的http，也就是url，四层是传输层，为tcp/udp端口)
+- 了解service的几种类型（Nodeport、clusterip、LB）
+- 四层和七层区别（不明白就这样去理解，七层最常见就是应用层的http，也就是url，四层是传输层，为tcp/udp端口）
 - 域名解析，/etc/hosts等基础知识
 
 ## Ingress Controller介绍
@@ -37,20 +37,22 @@ keywords: ["Kubernetes"]
 
 我们部署在集群里的服务的svc想暴露出来的时候，从长久眼光看和易于管理维护都是用的`Ingress Controller`来处理，clusterip非集群主机无法访问，Nodeport不方便长久管理和效率，LB服务多了不方便因为需要花费额外的钱，externalIPS不好用（后面有空写文章会说它）。
 
-我们跑的大多服务都是应用层http(s)，Ingress Controller使用service或者pod的网络将它暴露在集群外，然后它反向代理集群内的七层服务，通过vhost子域名那样路由到后端的服务，`Ingress Controller`工作架构如下，借用traefik官方的图。
+我们跑的大多服务都是应用层http（s），Ingress Controller使用service或者pod的网络将它暴露在集群外，然后它反向代理集群内的七层服务，通过vhost子域名那样路由到后端的服务，`Ingress Controller`工作架构如下，借用traefik官方的图。
 
-![](https://ws1.sinaimg.cn/large/006tNbRwly1fyl4kdlseyj30mg0dc405.jpg)
+![traefik](https://ws1.sinaimg.cn/large/006tNbRwly1fyl4kdlseyj30mg0dc405.jpg)
 
 你可以将`api.domain.com`进来的流量路由到集群里api的pod，你可以将`backoffice.domain.com`流量路由到backoffice的一组pod上，虽说我们可以自己搭建一个nginx来代替掉`Ingress Controller`，但是要增加代理的service长期来看维护很不方便，在使用上`Ingress Controller`后可以用一种抽象的对象告诉controller添加对应的代理，也就是`kind: Ingress`。它里面描述了从Ingress Controller访问进来的ServerName和web的url要代理到集群里哪个service（以及service的port）等等具体信息。
 
 而官方的`Ingress Nginx`可以视为一个魔改的nginx，拥有集群赋予的RBAC权限后，能够有监听集群Ingress相关的变化能力，用户创建了`kind: Ingress`，
-例如上面trafik图里的Ingress大致就是下面这样。
+例如上面trafik图里的Ingress大致就是下面这样：
 
 ```yaml
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: my-ingress
+  annotations: 
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
   - host: api.mydomain.com
@@ -111,7 +113,7 @@ spec:
 
 ### 测试http 7层负载
 
-部署了官方的ingress nginx后，我部署了一个nginx的pod，为它创建了一个名为nginx的service。
+部署了官方的ingress nginx后，我部署了一个nginx的pod，为它创建了一个名为nginx的service：
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -143,7 +145,7 @@ spec:
       targetPort: 80
 ```
 
-然后创建对应的一个ingress对象来暴露集群里这个nginx的http服务。
+然后创建对应的一个ingress对象来暴露集群里这个nginx的http服务：
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -160,7 +162,7 @@ spec:
           servicePort: 80
 ```
 
-找到ingress nginx的pod名字后通过命令查看里面nginx配置文件能找到有对应的配置段生成。
+找到ingress nginx的pod名字后通过命令查看里面nginx配置文件能找到有对应的配置段生成：
 
 ```yaml
 $ kubectl -n ingress-nginx exec nginx-ingress-controller-6cdcfd8ff9-t5sxl -- cat /etc/nginx/nginx.conf
@@ -185,13 +187,13 @@ $ kubectl -n ingress-nginx exec nginx-ingress-controller-6cdcfd8ff9-t5sxl -- cat
 ...
 ```
 
-找一台非集群的Windows机器(也可以mac，主要是有图形界面且非集群内机器)，设置hosts文件把域名`nginx.testdomain.com`设置到对service的那个externalIPs的ip上，打开浏览器访问`nginx.testdomain.com`即可发现集群内的nginx已经暴露在集群外
+找一台非集群的Windows机器（也可以mac，主要是有图形界面且非集群内机器），设置hosts文件把域名`nginx.testdomain.com`设置到对service的那个externalIPs的ip上，打开浏览器访问`nginx.testdomain.com`即可发现集群内的nginx已经暴露在集群外。
 
-**注意**：Ingress Controller虽然调用的是service，看起来按照nginx来理解转发是client–nginx–svc–pod; 实际上转发是client–nginx–pod，因为已经魔改了不能按照nginx的来理解，是直接负载到svc的endpoint上面的
+**注意**：Ingress Controller虽然调用的是service，看起来按照nginx来理解转发是client–nginx–svc–pod; 实际上转发是client–nginx–pod，因为已经魔改了不能按照nginx的来理解，是直接负载到svc的endpoint上面的。
 
 另外低版本的ingress nginx的args参数`--default-backend-service=$(POD_NAMESPACE)/default-http-backend`，该参数指定ingress nginx的同namespace下名为`default-http-backend`的service作为默认访问的时候页面，通常那个时候是创建一个404页面的的pod和对应service，如果ingress nginx启动的时候没找到这个service会无法启动，新版本不是必须了，好像也自带404页面了。
 
-另外ingress也能多路径，如下。
+另外ingress也能多路径，如下：
 
 ```yaml
 spec:
@@ -211,15 +213,15 @@ spec:
 
 ### 如何来4层负载
 
-我们可以看到ingress nginx的args里有这两行。
+我们可以看到ingress nginx的args里有这两行：
 
-```
+```yaml
 - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
 - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
 ```
 
-从选项和值可以猜测出，要想代理四层(tcp/udp)，得写同namespace里一个名为`tcp-service`和`udp-service`的两个configmap的数据
-四层的话这边我们创建一个mysql的pod，来代理3306端口到集群外面，则需要写tcp-services这个configmap。
+从选项和值可以猜测出，要想代理四层（tcp/udp），得写同namespace里一个名为`tcp-service`和`udp-service`的两个configmap的数据
+四层的话这边我们创建一个mysql的pod，来代理3306端口到集群外面，则需要写tcp-services这个configmap：
 
 ```yaml
 kind: ConfigMap
@@ -245,9 +247,9 @@ Ingress Controller到集群内的路径这部分都有负载均衡了，我们�
 
 - type为`LoadBalancer`的时候手写`externalIPs`很鸡肋，后面会再写文章去讲它
 - type为`LoadBalancer`的时候只有云厂商支持分配公网ip来负载均衡，LoadBalancer 公开的每项服务都将获得自己的 IP 地址，但是需要收费，且自己建立集群无法使用
-- 不创建service，pod直接用hostport，效率等同于`hostnetwork`，如果不代理四层端口还好，代理了需要修改pod的template来滚动更新来让nginx bind的四层端口能映射到宿主机上
+- 不创建service，pod直接用hostport，效率等同于`hostNetwork`，如果不代理四层端口还好，代理了需要修改pod的template来滚动更新来让nginx bind的四层端口能映射到宿主机上
 - `Nodeport`，端口不是web端口（但是可以修改Nodeport的范围改成web端口），如果进来流量负载到Nodeport上可能某个流量路线到某个node上的时候因为`Ingress Controller`的pod不在这个node上，会走这个node的kube-proxy转发到Ingress Controller的pod上，多走一趟路
-- 不创建service，效率最高，也能四层负载的时候不修改pod的template，唯一要注意的是hostnetwork下pod会继承宿主机的网络协议，也就是使用了主机的dns，会导致svc的请求直接走宿主机的上到公网的dns服务器而非集群里的dns server，需要设置pod的`dnsPolicy: ClusterFirstWithHostNet`即可解决
+- 不创建service，效率最高，也能四层负载的时候不修改pod的template，唯一要注意的是`hostNetwork`下pod会继承宿主机的网络协议，也就是使用了主机的dns，会导致svc的请求直接走宿主机的上到公网的dns服务器而非集群里的dns server，需要设置pod的`dnsPolicy: ClusterFirstWithHostNet`即可解决
 
 ## 写在最后
 
@@ -258,3 +260,38 @@ Ingress Controller到集群内的路径这部分都有负载均衡了，我们�
 - 所以可以一个vip飘在拥有存活的controller的宿主机上，云上的话就用slb来负载代替vip
 - 最后说说域名请求指向它，如果部署在内网或者办公室啥的，内网有dns server的话把ing的域名全部解析到ingress controller的宿主机ip上，否则要有人访问每个人设置/etc/hosts才能把域名解析来贼麻烦，如果没有dns server可以跑一个external-dns，它的上游dns是公网的dns服务器，办公网内机器的dns server指向它即可，云上的话把域名请求解析到对应ip即可
 - traefik和ingress nginx类似，不过它用go实现的
+- 在一些老版本的ingress nginx的log里会一直刷找不到ingress-nginx的svc，不处理的话会狂刷log导致机器load过高,创建一个同名的svc即可解决,例如创建一个不带选择器clusterip为null的即可。非要创建port的svc的话参照下面:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  - name: https
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  - name: metrics
+    port: 10254
+    targetPort: 10254
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+```
+
+## 参考:
+
+- [ingress-nginx deploy - github.com](https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md)
+- [ingress-nginx deploy - kubernetes.github.io](https://kubernetes.github.io/ingress-nginx/deploy/baremetal/)
