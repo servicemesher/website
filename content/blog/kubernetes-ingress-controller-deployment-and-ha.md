@@ -1,8 +1,8 @@
 ---
 title: "Kubernetes Ingress Controller的使用介绍及高可用落地"
-date: 2018-12-27T11:23:34+08:00
+date: 2019-04-17T11:23:34+08:00
 draft: false
-banner: "https://ws1.sinaimg.cn/large/006tNbRwly1fyl57bnk4uj31400u0npf.jpg"
+banner: "https://ws4.sinaimg.cn/large/006tNc79ly1g25nhjs0bhj30rs0ku4qp.jpg"
 author: "张馆长"
 authorlink: "https://zhangguanzhang.github.io"
 originallink: "https://zhangguanzhang.github.io/2018/10/06/IngressController/"

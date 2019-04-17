@@ -1,6 +1,6 @@
 ---
 title: "kubernetes dashboard在ssl的各种场景下的手动部署"
-date: 2018-12-27T11:23:34+08:00
+date: 2019-04-17T11:23:34+08:00
 draft: false
 banner: "https://ws1.sinaimg.cn/large/006tNbRwly1fyl57bnk4uj31400u0npf.jpg"
 author: "张馆长"
@@ -24,8 +24,10 @@ keywords: ["Kubernetes","dashboard"]
 以及最后讲解的如何定义带权限的token去利用token登陆dashboard。
 
 
-  先要理解的一点就是JWT（JSON Web Tokens）思想，k8s的很多addon都是pod形式跑的，addon的pod都是要连接kube-apiserver来操作集群来减少运维的工作量和提供方便。addon都是pod，pod操作和查看集群信息需要鉴权。
-  为此k8s使用了RBAC的思想（RBAC思想不是k8s独有的），资源对象和对声明的资源对象的操作权限组合最终落实到`ServiceAccount`上，而每个名为`name`的sa会关联着一个名为`name-token-xxxxx`的secret。
+先要理解的一点就是JWT（JSON Web Tokens）思想，k8s的很多addon都是pod形式跑的，addon的pod都是要连接kube-apiserver来操作集群来减少运维的工作量和提供方便。addon都是pod，pod操作和查看集群信息需要鉴权。
+
+为此k8s使用了RBAC的思想（RBAC思想不是k8s独有的），资源对象和对声明的资源对象的操作权限组合最终落实到`ServiceAccount`上，而每个名为`name`的sa会关联着一个名为`name-token-xxxxx`的secret。
+
 可以通过kubectl describe命令或者api看这个secret实际上就是个token和一个ca.crt。下列命令列出缺省sa default的token和整个集群的ca.crt（jsonpath打印的时候敏感信息是base64编码需要自己解码）:
 
 ```bash
@@ -33,7 +35,6 @@ kubectl get secret -o jsonpath='{range .items[?(@.metadata.annotations.kubernete
 token: ZXlKaGJHY2lPaUpGVXpVeE1pSXNJbXR................
 
 ca.crt: LS0tLS1CRUdJTiBDRVJUS..........................
-
 ```
 
 每个pod都会被kubelet挂载pod声明的ServiceAccount关联的secret的里的ca.crt和token到容器里路径`/var/run/secrets/kubernetes.io/serviceaccount`。
@@ -201,9 +202,11 @@ subjects:
 ...
 ```
 
-这样下进去是强制让登录了，但是token的话（后面说这个token如何创建和获取）是无法登陆的，找到issue说通过kubectl proxy出去的http和直接暴露的http将无法登陆(但是实际上我测了下百度浏览器可以登录。。。。)。
-https://github.com/kubernetes/dashboard/issues/3216
-https://github.com/kubernetes/dashboard/issues/2735
+这样下进去是强制让登录了，但是token的话（后面说这个token如何创建和获取）是无法登陆的，找到issue说通过kubectl proxy出去的http和直接暴露的http将无法登陆（但是实际上我测了下百度浏览器可以登录）。
+
+- https://github.com/kubernetes/dashboard/issues/3216
+- https://github.com/kubernetes/dashboard/issues/2735
+
 但是也不是意味着完全不能用这种方法，可以sa kubernetes-dashboard绑定到集群角色cluster-admin然后外面套层nginx的auth到它，然后配置iptables或者网络设备ACL让dashboard只收到来源ip是nginx。
 
 ## openssl生成证书给dashboard当https证书
@@ -435,6 +438,7 @@ subjects:
 ```
 
 取它token用于登陆dashboard，你在dashboard web上操作集群的时候实际上是拿着你登陆的token的去以api调用kube-apiserver。
+
 使用下面命令取上面创建的sa的token：
 
 ```bash
