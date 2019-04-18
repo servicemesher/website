@@ -370,6 +370,12 @@ type: kubernetes.io/tls
 
 上面直接dashboard使用域名证书会有单点故障，所以实际应用我们可以用高可用的ingress nginx（详见之前的文章）来代理集群内部的dashboard
 这里我使用的是`Ingress nginx`。
+如果没域名的话可以使用openssl生成证书:
+
+```bash
+openssl req -x509 -nodes -days 10000 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=dashboard.example.com/O=dashboard.example.com"
+```
+
 从证书创建tls类型的secret：
 
 ```bash
