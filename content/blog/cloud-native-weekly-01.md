@@ -1,9 +1,9 @@
 ---
-title: "Cloud Native Weekly第一期"
+title: "云原生生态周报（Cloud Native Weekly）第1期"
 date: 2019-04-16T19:35:39+08:00
 draft: false
 banner: "https://ws3.sinaimg.cn/large/006tNc79ly1g24pvm761jj30rs0ku4e2.jpg"
-author: "张磊 临石 禅鸣 至简 宋净超"
+author: "云原生编辑部"
 authorlink: "/"
 summary: "这是 Cloud Native 周报第一期。"
 tags: ["cloud native"]
