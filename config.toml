@@ -149,18 +149,18 @@ paginate = 10
     share = false
 
     # 404 page
-    errorimage = "https://ws1.sinaimg.cn/large/00704eQkgy1frkahxdca2j30hd08wq52.jpg"
+    errorimage = "/img/404.jpg"
     email = "jimmysong@jimmysong.io"
-    about_us = "<p>传播Service Mesh技术、构建开源文化、推动Service Mesh在企业中落地</p><img src=https://ws1.sinaimg.cn/large/00704eQkgy1fshv7n2uf7j303k03kweu.jpg>"
+    about_us = "<p>传播Service Mesh技术、构建开源文化、推动Service Mesh在企业中落地</p><img src=/img/servicemesher-wechat-tiny.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
     icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
     date_format = "2006年1月2日"
-    logo = "https://ws1.sinaimg.cn/large/00704eQkgy1fshutb9ya0j316v09nabp.jpg"
+    logo = "/img/servicemesher-logo.jpg"
     # avatar used for thumbnail on sharing
-    avatar = "https://ws4.sinaimg.cn/large/006tNc79gy1ft0fjbip45j30xd0xbgpl.jpg"
-    logosmall = "https://ws1.sinaimg.cn/large/00704eQkgy1fshuwshsojj30f303ewev.jpg"
-    address = """<p>加我微信（请备注姓名-公司），加入微信交流群，参与社区活动</p><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1g24cgovjotj303k03kq2t.jpg"></p>
+    avatar = "/img/servicemesher-avatar-banner.jpg"
+    logosmall = "/img/logosmall.jpg"
+    address = """<p>加我微信（请备注姓名-公司），加入微信交流群，参与社区活动</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
       """
 
 [Permalinks]
@@ -182,7 +182,7 @@ paginate = 10
 [params.carousel]
     enable = true
     # Set carousel background image
-    background = "https://ws1.sinaimg.cn/large/00704eQkgy1frlkpcfzt4j30zk0k0at2.jpg"
+    background = "/img/home-background.jpg"
     # All carousel items are defined in their own files. You can find example items
     # at 'exampleSite/data/carousel'.
     # For more informtion take a look at the README.

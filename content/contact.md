@@ -25,7 +25,7 @@ id: "contact"
 
 要加入微信交流群，请联系[管理员](https://jimmysong.io/about)，并注明姓名-公司信息
 
-![Jimmy Song ServiceMesher 宋净超](https://ws4.sinaimg.cn/large/006tNc79ly1g24cn4rml6j309k0b9mxf.jpg)
+![Jimmy Song ServiceMesher 宋净超](/img/jimmysong-wechat.jpg)
 
 #### GitHub
 
@@ -41,7 +41,7 @@ https://servicemesher.slack.com
 
 #### 微信公众号
 
-![ServiceMesher微信群二维码](https://ws1.sinaimg.cn/large/00704eQkgy1fshv989hhqj309k09k0t6.jpg)
+![ServiceMesher微信群二维码](/img/servicemesher-wechat-public.jpg)
 
 #### 线下 meetup
 
