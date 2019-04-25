@@ -14,7 +14,7 @@ summary: "Cilium 1.4：多集群服务路由，DNS授权，IPVLAN支持，透明
 tags: ["service mesh"]
 categories: ["translation"]
 keywords: ["service mesh","服务网格"]
-aliases: "/blob/cilium-1.4/"
+aliases: "/blog/cilium-1.4/"
 ---
 
 ![发布概述](61411417ly1g05xmk6vqhj20jg08odga.jpg)
