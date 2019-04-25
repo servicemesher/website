@@ -182,7 +182,7 @@ paginate = 10
 [params.carousel]
     enable = true
     # Set carousel background image
-    background = "/img/home-background.jpg"
+    background = "https://gw.alipayobjects.com/mdn/site_comm/afts/img/A*7D3oTpL_3G0AAAAAAAAAAABjARQnAQ"
     # All carousel items are defined in their own files. You can find example items
     # at 'exampleSite/data/carousel'.
     # For more informtion take a look at the README.
