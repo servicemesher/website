@@ -11,7 +11,7 @@ categories: ["service mesh"]
 keywords: ["service mesh","aspen mesh","服务网格"]
 ---
 
-![](0069RVTdgy1fv4a5pt7z6j30ki0fuab3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/aspen-mesh-released/0069RVTdgy1fv4a5pt7z6j30ki0fuab3.jpg)
 
 Aspen Mesh这家公司隶属于F5，Aspen Mesh基于Istio 1.0开发，这个周末刚发布了1.0版本，可以申请免费试用。
 

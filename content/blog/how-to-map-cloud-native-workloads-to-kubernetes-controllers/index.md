@@ -20,7 +20,7 @@ Kubernetes [不仅仅是一个容器管理工具](https://thenewstack.io/how-kub
 
 DevOps工程师可以将Kubernetes控制器视为指示团队运行的各种工作负载的基础架构需求的手段。他们可以通过声明方法定义所需的配置状态。例如，容器/pod作为ReplicationController的一部分部署保证始终可用。打包为DaemonSet的容器​保证在集群的每个节点上运行。声明式的方法使DevOps团队能够利用代码控制基础架构。下面讨论的一些部署模式遵循不可变基础结构的原则，其中每个新的部署都会导致原子部署。
 
-![](61411417ly1fwrcxotk3xj20r30i2n30.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-to-map-cloud-native-workloads-to-kubernetes-controllers/61411417ly1fwrcxotk3xj20r30i2n30.jpg)
 
 DevOps工程师可以通过声明方法定义所需的配置状态——每个工作负载映射到控制器。
 

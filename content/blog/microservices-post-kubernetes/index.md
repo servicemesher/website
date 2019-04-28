@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: [“service mesh","微服务","服务网格"]
 ---
 
-![](006tNbRwgy1fuxayjq7oej30n30ammzp.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-post-kubernetes/006tNbRwgy1fuxayjq7oej30n30ammzp.jpg)
 
 ## 关键要点
 
@@ -46,7 +46,7 @@ keywords: [“service mesh","微服务","服务网格"]
 
 与 ESB 的不同之处在于，与服务网格不同的是，只有一个集中路由层，每个微服务通常都有自己的路由器—— 一个带有附加中央管理层的代理逻辑的 sidecar 容器。 更重要的是，管道（平台和服务网格）没有任何业务逻辑；它们完全专注于基础架构方面，使服务专注于业务逻辑。 如图所示，这代表了 ESB 和微服务学习的演变，以适应云环境的动态和不可靠特性。
 
-![](006tSBxtly1fuwq6pf4fyj30gn057gnd.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-post-kubernetes/006tSBxtly1fuwq6pf4fyj30gn057gnd.jpg)
 
 **SOA vs MSA 与 CNA**
 
@@ -91,6 +91,6 @@ Kubernetes 拥有 ESB 和微服务的许多知识，因此，它是最终的分�
 
 ## 关于作者
 
-![](006tSBxtly1fuwq6p5tm2j302d02sq2y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-post-kubernetes/006tSBxtly1fuwq6p5tm2j302d02sq2y.jpg)
 
 **Bilgin Ibryam**  （@bibryam）是 Red Hat 的首席架构师，提交者和 ASF 成员。 他是一名开源传播者，博客作者，《Camel Design Patterns》 和 《Kubernetes Patterns》 书籍的作者。 在他的日常工作中，Bilgin 喜欢指导编码和领导开发人员成功构建云原生解决方案。 他目前的工作重点是应用程序集成、分布式系统、消息传递、微服务、devops 和一般的云原生挑战。 你可以在  [Twitter](https://twitter.com/bibryam)、[Linkedin](https://uk.linkedin.com/in/bibryam)  或他的  [博客](http://www.ofbizian.com/) 上找到他 。

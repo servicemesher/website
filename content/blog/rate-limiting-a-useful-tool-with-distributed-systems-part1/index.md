@@ -30,20 +30,20 @@ keywords: ["service mesh","速率限制","分布式系统"]
 
 基于简化的原则，我们假设正在处理点对点通信模型中的速率限制。在这种场景下，你可以在数据发送的“发送端”或数据消费“接收端”中的任何地方实施速率限制，当然还有其他“中间件”选项：
 
-![发送端和接收端](78a165e1gy1fsmq2gb6qhj20lp05wmx4.jpg)
+![发送端和接收端](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/rate-limiting-a-useful-tool-with-distributed-systems-part1/78a165e1gy1fsmq2gb6qhj20lp05wmx4.jpg)
 
 - 你可以控制发送端发送请求的速率 ：通过定义时间限制循环来定期发送API请求。
 - 你可以控制接收端接收请求的速率：在当前任务/线程处理完成之前拒绝新的入站HTTP连接。
 
-![控制速率](78a165e1gy1fsmq7eltt3j20rc06tdfv.jpg)
+![控制速率](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/rate-limiting-a-useful-tool-with-distributed-systems-part1/78a165e1gy1fsmq7eltt3j20rc06tdfv.jpg)
 
 - 你可以使用中间层来缓冲发送的请求：通过将请求放入队列（可以通过定义不同优先级，为请求提供不同级别的SLA）。
 
-![请求缓冲](78a165e1gy1fsmq8on7a0j20lr07eaa2.jpg)
+![请求缓冲](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/rate-limiting-a-useful-tool-with-distributed-systems-part1/78a165e1gy1fsmq8on7a0j20lr07eaa2.jpg)
 
 - 你可以使用中间层来限制发送的请求：通过使用某种形式的代理或网关。这样当下游服务不再接受请求时，它会切换至断路器。
 
-![中间层](78a165e1gy1fsmq9qjzycj20jk06tdgn.jpg)
+![中间层](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/rate-limiting-a-useful-tool-with-distributed-systems-part1/78a165e1gy1fsmq9qjzycj20jk06tdgn.jpg)
 
 ## 如何权衡？
 
@@ -80,7 +80,7 @@ keywords: ["service mesh","速率限制","分布式系统"]
 
 在Java语言中，我经常使用Google开源的 Guava RateLimiter 库来解决这类问题。我写的发送端的应用程序示例就像下面这样：
 
-![Guava案例](78a165e1gy1fsmqalcy5zj20kv03gglu.jpg)
+![Guava案例](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/rate-limiting-a-useful-tool-with-distributed-systems-part1/78a165e1gy1fsmqalcy5zj20kv03gglu.jpg)
 
 这是一个基于  [Guava RateLimiter JavaDoc](https://google.github.io/guava/releases/19.0/api/docs/index.html?com/google/common/util/concurrent/RateLimiter.html)  的简单示例，实际上我可能在任务执行逻辑中增加一些异常处理块。
 
@@ -88,7 +88,7 @@ keywords: ["service mesh","速率限制","分布式系统"]
 
 在这种场景下，可以防止API后端过载的唯一方法是通过对接收端进行速率限制，最好是将限制功能放到如API网关这类外部服务上。
 
-![API Gateway](78a165e1gy1fsmqcco3umj20h80bemxj.jpg)
+![API Gateway](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/rate-limiting-a-useful-tool-with-distributed-systems-part1/78a165e1gy1fsmqcco3umj20h80bemxj.jpg)
 
 ## 结论
 

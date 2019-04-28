@@ -11,13 +11,13 @@ categories: ["culture"]
 keywords: ["开源","GitHub"]
 ---
 
-![](006tNbRwly1fyhtsvj93tj31e00pa7h3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/strange-stories-from-chinese-github-participants/006tNbRwly1fyhtsvj93tj31e00pa7h3.jpg)
 
 > 本篇主要通过对中国开发者在开源社区中的活动的观察，总结了一些有待提升或者存在弊病的现象。这些现象的背后原因可能是开发者的利益诉求，也可能是公司之间的恶性竞争，不管如何，这些行为或多或少给开源社区技术圈子已经带来了一些影响或冲击，甚至可能影响到了外国开发者对中国开源社区的公共印象。希望随着成熟，这样的现象在未来可以有所改善。
 
 前几天某开源前端框架的事件闹得沸沸扬扬，尽管负责团队已经给出了诚恳的道歉并承认了过失，但是这次事件对中国开源社区敲响了警钟。在开源社区合作互赢的前提是相互信任相互负责，随着开源的概念深入中国开发者圈子，我们应该反省并从中吸取教训。大如阿里尚且会犯下错误，如果把同样的责任和权力转移给其他中国技术公司的头上，处理的未可能未必会更合理。与此同时，这次事件也让我们看到开源项目在中国的火爆程度，通过[Github全球开发者的账号统计](https://www.benfrederickson.com/github-developer-locations/)又让我们看到了中国开发者对全球开源社区的力量。甚至在世界已经有了一定的地位，其中尤其以前端项目领先，那么非前端项目呢？
 
-![Github 全球用户分布](006tNbRwly1fyk7s5zugcj31om0u0494.jpg)
+![Github 全球用户分布](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/strange-stories-from-chinese-github-participants/006tNbRwly1fyk7s5zugcj31om0u0494.jpg)
 
 *Github 全球用户分布，中国为仅此于美国的第二大用户来源，数据来源：https://www.benfrederickson.com/github-developer-locations/*
 
@@ -37,7 +37,7 @@ __开源“疯狂英语”__
 
 总的来说，大数量的错别字修改PR提交只是现象，背后的原因待人深思。其实外国人也在提交错别字修改，但是大都是零星的提交远不及中国开发者这样有组织有规模，甚至“军事化”地提交错别字。可能是公司管理层面没有预估到开源技术的投入成本，可能是迫于生存压力。但是如果这样的行为影响到了开源社区的正常维护，还请手下留情。
 
-![](006tNbRwly1fyk7ugkhqfj31in0u07is.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/strange-stories-from-chinese-github-participants/006tNbRwly1fyk7ugkhqfj31in0u07is.jpg)
 
 __开源“苦肉计”__
 

@@ -22,7 +22,7 @@ keywords: ["service mesh","服务网格","knative","serverless"]
 Serving 模块定义一组特定的对象以控制所有功能：Revision（修订版本）、Configuration （配置）、Route（路由）和 Service（服务）。Knative 使用 Kubernetes CRD（自定义资源）的方式实现这些 Kubernetes 对象。下图 2-1 展示所有 Serving 组件对象模型间的关系。在接下去的章节将具体介绍每个部分。
 
 <div align="center">
-<img src="006tKfTcly1g0yrpiumcqj31230u0jxo.jpg" alt="Serving Object Model"/>
+<img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/knative-serving/006tKfTcly1g0yrpiumcqj31230u0jxo.jpg" alt="Serving Object Model"/>
 </div>
 
 
@@ -267,7 +267,7 @@ Autoscaler 也负责缩容至零。Revision 处于 Active (激活) 状态才接�
 <span id="fingure-2-2">*图 2-2 显示 Autoscaler 和 Activator 如何和 Routes 及 Revisions 协同工作。*</span>
 
 <div align="center">
-<img src="006tKfTcly1g0yrmo1t2cj31z70u0afi.jpg" alt="Autoscaler and Activator with Route and Revision" />
+<img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/knative-serving/006tKfTcly1g0yrmo1t2cj31z70u0afi.jpg" alt="Autoscaler and Activator with Route and Revision" />
 </div>
 
 

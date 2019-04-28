@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["service mesh","服务网格","cloud native","云原生","kubernetes"]
 ---
 
-![](61411417ly1fwp5jrtwd4j20i20bwwfl.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/myth-cloud-native-portability/61411417ly1fwp5jrtwd4j20i20bwwfl.jpg)
 
 > 本文最初发表于2017年5月24日。
 
@@ -26,7 +26,7 @@ keywords: ["service mesh","服务网格","cloud native","云原生","kubernetes"
 
 最近我写了一篇由Kubernetes等云原生平台提供的“[为开发者准备的新的分布式原语](http://www.ofbizian.com/2017/04/new-distributed-primitives-for.html)”，以及这些原语如何与开发应用程序的编程原语相结合。 例如，下面看看开发人员必须了解和使用多少 [Kubernetes](https://thenewstack.io/category/kubernetes/) 概念才能有效地运行单个容器化应用程序：
 
-![基于Kubernetes的微服务](61411417ly1fwp5js00wxj20sg0m8wnm.jpg)
+![基于Kubernetes的微服务](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/myth-cloud-native-portability/61411417ly1fwp5js00wxj20sg0m8wnm.jpg)
 
 请记住，此图表不包含DevOps团队的Ops部门必须管理的支持Kubernetes的对象。在操作之前也不需要额外的应用程序支持工具（用于日志管理、监控、跟踪、服务网格等）。
 
@@ -38,7 +38,7 @@ keywords: ["service mesh","服务网格","cloud native","云原生","kubernetes"
 
 上图显示了代码在Kubernetes微服务环境中的小巧程度。 但是，当我们谈论基于生产就绪的微服务系统时，这种情况远未完成。 任何规模庞大的系统都需要集中监控、度量收集、跟踪、服务网格、集成构建和部署工具、管道等工具。
 
-![微服务需求层次](61411417ly1fwp5jsbrzrj20sg0ltk30.jpg)
+![微服务需求层次](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/myth-cloud-native-portability/61411417ly1fwp5jsbrzrj20sg0ltk30.jpg)
 
 [微服务需求层次](https://thenewstack.io/introducing-microservices-hierarchy-needs/)
 
@@ -69,7 +69,7 @@ Kubernetes是此类别中最新的平台之一，但同时也是有史以来最�
 
 作为一个后来者（2014年），Kuebernetes的优势在于从一开始就以容器为中心的架构发展。 而且它基于一个已有十年历史的Google Borg，这意味着原则（不是实施）是成熟的，并在最高级别测试。
 
-![Container Orchestrator调查结果](61411417ly1fwp5jrxbatj20sg0gejry.jpg)
+![Container Orchestrator调查结果](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/myth-cloud-native-portability/61411417ly1fwp5jrxbatj20sg0gejry.jpg)
 
 Sysdig 2017年Docker使用报告中的容器编排
 
@@ -91,6 +91,6 @@ Sysdig 2017年Docker使用报告中的容器编排
 
 ## 关于作者
 
-![](006tSBxtly1fuwq6p5tm2j302d02sq2y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/myth-cloud-native-portability/006tSBxtly1fuwq6p5tm2j302d02sq2y.jpg)
 
 **Bilgin Ibryam**  （@bibryam）是 Red Hat 的首席架构师、提交者和 ASF 成员。 他是一名开源布道师，博客作者，《Camel Design Patterns》 和 《Kubernetes Patterns》 书籍的作者。 在他的日常工作中，Bilgin 喜欢指导编码和领导开发人员成功构建云原生解决方案。 他目前的工作重点是应用程序集成、分布式系统、消息传递、微服务、devops 和一般的云原生挑战。 你可以在  [Twitter](https://twitter.com/bibryam)、[Linkedin](https://uk.linkedin.com/in/bibryam)  或他的  [博客](http://www.ofbizian.com/) 上找到他 。

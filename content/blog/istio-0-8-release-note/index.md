@@ -17,7 +17,7 @@ aliases: "/blog/istio-0.8-release-note"
 
 北京时间 2018 年 6 月 1 日（儿童节）上午 9: 30 Istio 0.8.0 LTS（长期支持版本）发布。该版本除了常见的一堆错误修复和性能改进之外，还包含以下更新和新功能。
 
-![Istio 0.8 发布](00704eQkgy1frvj0gh5pzj30kl0u4q6t.jpg)
+![Istio 0.8 发布](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-0-8-release-note/00704eQkgy1frvj0gh5pzj30kl0u4q6t.jpg)
 
 ### 网络
 

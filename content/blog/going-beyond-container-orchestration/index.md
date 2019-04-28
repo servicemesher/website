@@ -20,7 +20,7 @@ keywords: ["service mesh","服务网格"]
 
 虽然采用率很高，这并不是说组织使用容器的道路就是一帆风顺的。采纳任何一样新技术都是存在挑战的。人们使用容器时最关心的是：网络和管理。其次才去关注安全性和不一致性。
 
-![](006tNbRwly1fw4i0hfkbgj30s80koq5c.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/going-beyond-container-orchestration/006tNbRwly1fw4i0hfkbgj30s80koq5c.jpg)
 
 网络挑战是由于Kubernetes等流行的容器编排软件所带来的。Kubernetes构建的就是要支持微服务架构。这允许开发和运维人员将功能抽象成一组pod，并将其作为“service”暴露出来，并通过定义好的API进行访问。Kubernetes支持DNS和基于TCP的L4负载均衡。
 
@@ -40,7 +40,7 @@ Service Mesh通过在Kubernetes的一些列pod中注入sidecar代理能够很好
 
 这些指标包含提供给网格的更高阶数据点，并启用更高级的网络以确保对请求的最快可用响应。在Service Mesh中重试和断路器由sidecar代理处理，这减轻了开发人员将运维代码引入其微服务的负担。由于sidecar代理不受限于L4负载均衡（TCP），所以靠L7负载均衡（应用程序和API层）它支持更高级别的消息路由技术。
 
-![](006tNbRwly1fw4jtsdrhyj31df0lpdlt.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/going-beyond-container-orchestration/006tNbRwly1fw4jtsdrhyj31df0lpdlt.jpg)
 
 容器编排是一个很好的基础设施，但企业组织需要的不仅仅是一个良好的基础设施。他们需要能够与堆栈上层的服务进行交互的能力，这需要使用指标和现代架构去实现。
 

@@ -28,7 +28,7 @@ Istio [Mixer](https://istio.io/docs/concepts/policies-and-telemetry/overview/) �
 
  以下是一个关于 Mixer 如何与这些外部后端服务交互的架构图：
 
-![](006tNc79gy1ft2kovaczfj319u0zftc9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-circonus-istio-mixer-adapter/006tNc79gy1ft2kovaczfj319u0zftc9.jpg)
 
 Istio 还包含了 StatsD 和 Prometheus 的 metrics 适配器。然而，Circonus 适配器与其他适配器又存在一些区别。首先，Circonus 适配器允许我们将请求持续时间作为一个直方图来收集，而不仅仅是记录固定的百分位数。这使我们能够计算任何时间窗上的任意分位数，并对所收集的直方图进行统计分析。第二，数据可以基本上永久保留。第三，telemetry 数据被保存在持久的环境中，而独立于 Kubernetes 管理的任何短暂资源之外。
 
@@ -153,7 +153,7 @@ func (b logToEnvLogger) Write(msg []byte) (int, error) {
 
 尽管如此，让我们看看在执行过程中是什么样子的。我安装了 Google Kubernetes Engine，使用 Circonus 加载了 Istio 的开发版本，并部署了于 Istio 一起提供的 BookInfo 示例应用程序。下图是从请求到应用程序的请求持续时间分布的热图。你会注意到高亮显示的时间片段的直方图覆盖。我添加了一个覆盖，添加了一个中位数、第九十和百分位的响应时间；在任意的分位数和时间窗上生成这些数据是有可能的，因为我们将原始的数据存储为对数线性直方图。注意，中位数和第九十百分位数是相对固定的，而第九十五百分位数倾向于在几百毫秒的范围内波动。这种类型的深度可观察性可以用来量化 Istio 本身在版本上的表现，因为 Istio 的开发正在快速迭代。或者，更可能的是，它将用来标识部署的应用程序中的问题。如果你的百分位数不符合你的内部服务水平目标 (SLO) ，这是一个很好的标识，说明你有事情需要做了。毕竟，如果有20个用户中有一个在你的应用程序上有低于标准的体验，难道你不想知道吗？
 
-![](006tKfTcly1ft40ca0k7qj30vp0igq6c.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-circonus-istio-mixer-adapter/006tKfTcly1ft40ca0k7qj30vp0igq6c.jpg)
 
 这看起来很有趣，所以让我们来安排如何让这些东西运行起来。首先我们需要一个 Kubernetes 集群。[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/quickstart) 提供了一种快速获取集群的简单方法。
 

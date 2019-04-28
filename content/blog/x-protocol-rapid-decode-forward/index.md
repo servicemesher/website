@@ -51,7 +51,7 @@ keywords: ["service mesh","服务网格","sofamesh","x-protocol"]
 
 首先，毫无疑问的，必须拿到destination/目的地，也就是客户端请求必须通过某种方式明确的告之代理该请求的destination，这样代理程序才能根据这个destionation去找到正确的目标服务器，然后才有后续的连接目标服务器和转发请求等操作。
 
-![](006tNbRwly1fw2zu0jen9j30vs0d475q.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-rapid-decode-forward/006tNbRwly1fw2zu0jen9j30vs0d475q.jpg)
 
 Destination信息的表述形式可能有：
 
@@ -85,7 +85,7 @@ Destination信息在请求报文中的携带方式有：
 
 如何从请求的通讯协议中获取destination？这涉及到具体通讯协议的解码，其中第一个要解决的问题就是如何在连续的TCP报文中将每个请求内容拆分开，这里就涉及到经典的TCP沾包、拆包问题。
 
-![](006tNbRwly1fw2zuc1molj30vw0ayaax.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-rapid-decode-forward/006tNbRwly1fw2zuc1molj30vw0ayaax.jpg)
 
 转发请求时，由于涉及到负载均衡，我们需要将请求发送给多个服务器端实例。因此，有一个非常明确的要求：就是必须以单个请求为单位进行转发。即单个请求必须完整的转发给某台服务器端实例，负载均衡需要以请求为单位，不能将一个请求的多个报文包分别转发到不同的服务器端实例。所以，拆包是请求转发的必备基础。
 
@@ -99,11 +99,11 @@ RequestId用来关联request和对应的response，请求报文中携带一个�
 
 HTTP/1.1不支持多路复用（http1.1有提过支持幂等方法的pipeline机制但是未能普及），用的是经典的ping-pong模式：在请求发送之后，必须独占当前连接，等待服务器端给出这个请求的应答，然后才能释放连接。因此HTTP/1.1下，并发多个请求就必须采用多连接，为了提升性能通常会使用长连接+连接池的设计。而如果有了requestid和多路复用的支持，客户端和Mesh之间理论上就可以只用一条连接（实践中可能会选择建立多条）来支持并发请求：
 
-![](006tNbRwly1fw2zujxeh7j313x0dwtaz.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-rapid-decode-forward/006tNbRwly1fw2zujxeh7j313x0dwtaz.jpg)
 
 而Mesh与服务器（也可能是对端的Mesh）之间，也同样可以受益于多路复用技术，来自不同客户端而去往同一个目的地的请求可以混杂在同一条连接上发送。通过RequestId的关联，Mesh可以正确将reponse发送到请求来自的客户端。
 
-![](006tNbRwly1fw2zuxvz4lj310r0dzwgj.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-rapid-decode-forward/006tNbRwly1fw2zuxvz4lj310r0dzwgj.jpg)
 
 由于篇幅和主题限制，我们不在这里展开多路复用的原理。后面针对每个具体的通讯协议进行分析时再具体看各个协议的支持情况。
 
@@ -131,7 +131,7 @@ SOFARPC 是一款基于 Java 实现的 RPC 服务框架，详细资料可以查�
 
 bolt 是蚂蚁金服集团开放的基于 Netty 开发的网络通信框架，其协议格式是变长，即协议头+payload。具体格式定义如下，以request为例（response类似）：
 
-![](006tNbRwly1fw2zv3sqhij312j0833zq.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-rapid-decode-forward/006tNbRwly1fw2zv3sqhij312j0833zq.jpg)
 
 我们只关注和请求转发直接相关的字段：
 
@@ -172,7 +172,7 @@ HSF协议是经过精心设计工作在4层的私有协议，由于该协议没�
 
 Dubbo协议也是类似的协议头+payload的变长结构，其协议格式如下：
 
-![](006tNbRwly1fw2zvfi4g9j30oh03gmxj.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-rapid-decode-forward/006tNbRwly1fw2zvfi4g9j30oh03gmxj.jpg)
 
 其中long类型的`id`字段用来把请求request和返回的response对应上，即我们所说的`RequestId`。
 
@@ -211,7 +211,7 @@ HTTP/1.1的格式应该大家都熟悉，而在这里，不得不指出，HTTP/1
 
 首先HTTP/2是以帧的方式组织报文的，所有的帧都是变长，固定的9个字节+可变的payload，Length字段指定payload的大小：
 
-![](006tNbRwly1fw2zvsjz65j30jg0650tg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-rapid-decode-forward/006tNbRwly1fw2zvsjz65j30jg0650tg.jpg)
 
 HTTP2的请求和应答，也被称为Message，是由多个帧构成，在去除控制帧之外，Message通常由Header帧开始，后面接CONTINUATION帧和Data帧（也可能没有，如GET请求）。每个帧都可以通过头部的Flags字段来设置END_STREAM标志，表示请求或者应答的结束。即TCP拆包的问题在HTTP/2下是有非常标准而统一的方式完成，完全和HTTP/2上承载的协议无关。
 

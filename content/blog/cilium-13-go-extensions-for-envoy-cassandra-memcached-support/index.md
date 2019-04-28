@@ -18,7 +18,7 @@ keywords: ["service mesh","服务网格"]
 
 # Cilium 1.3：具有Cassandra和Memcached支持的Envoy Go语言扩展
 
-![Cilium Kubernetes](006tNbRwly1fwqjul334zj30je07p0t1.jpg)
+![Cilium Kubernetes](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium-13-go-extensions-for-envoy-cassandra-memcached-support/006tNbRwly1fwqjul334zj30je07p0t1.jpg)
 
 我们很高兴地宣布Cilium 1.3发布了。这个版本加入了几个新特性。主要的亮点是实现了Cassandra和带有策略执行能力的Memcached协议解析器，作为[Envoy](https://github.com/envoyproxy/envoy)的Go语言扩展包。
 
@@ -30,7 +30,7 @@ keywords: ["service mesh","服务网格"]
 
 在Cilium 1.3中，我们引入了Envoy的Go扩展作为其Beta特性。
 
-![Envoy Golang Extension Architecture](006tNbRwly1fwql07xp02j30lp0buaay.jpg)
+![Envoy Golang Extension Architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium-13-go-extensions-for-envoy-cassandra-memcached-support/006tNbRwly1fwql07xp02j30lp0buaay.jpg)
 
 - **扩展的透明注入：**在Cilium的帮助下，连接被透明地重定向到Envoy，而不需要修改应用程序或pod。重定向基于目标端口配置，可以根据labels、IPs、DNS以及ingress和egress连接的服务名称限定到源或目标服务，并通过扩展的名称将连接映射到扩展。重定向是通过CiliumNetworkPolicy CRD或REST API配置的。Envoy可以被配置为在每个pod中作为sidecar或作为每个node的独立代理运行。
 - **完全分布式：**Go扩展完全分布在每个Envoy节点或pod内部，不需要为一个数据处理的集中化控制面板。当然，go扩展本身可以调用任意的外部控制面板组件来报告遥测数据或验证请求。
@@ -59,7 +59,7 @@ Envoy是一个7层代理和通信总线，被设计用于大型的面向服务�
 
 编写Envoy的Go扩展很简单。为说明这一点，我们将为R2-D2控制协议实现一个基本的协议解析器，并实现过滤逻辑用来排除任何包含字符串”C-3PO”的控制请求。
 
-![Envoy Golang Extension Architecture](006tNbRwly1fwvz4inau1j30kg09waal.jpg)
+![Envoy Golang Extension Architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium-13-go-extensions-for-envoy-cassandra-memcached-support/006tNbRwly1fwvz4inau1j30kg09waal.jpg)
 
 要实现扩展的主要API是`OnData()`函数，当Envoy收到通过`CiliumNetworkPolicy`映射到扩展连接的数据时，就会调用这个函数。函数必须解析数据并返回下面的断言之一：
 
@@ -126,7 +126,7 @@ import (
 
 # Cassandra支持（Beta）
 
-![Cassandra Logo](006tNbRwly1fwxc47hgkbj30io07edgp.jpg)
+![Cassandra Logo](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium-13-go-extensions-for-envoy-cassandra-memcached-support/006tNbRwly1fwxc47hgkbj30io07edgp.jpg)
 
 [Cassandra](https://github.com/apache/cassandra) 是一个流行的NoSQL数据库管理系统。它通常被多个服务大规模的访问并在团队间共享。Cilium 1.3引入了对Apache [Cassandra](https://github.com/apache/cassandra) 协议的支持，并提供了可见性和策略执行能力。
 
@@ -175,7 +175,7 @@ ingress:
 
 # Memcached支持（Beta）
 
-![Memcached Logo](006tNbRwly1fwxc9b9qp7j30g607gt97.jpg)
+![Memcached Logo](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium-13-go-extensions-for-envoy-cassandra-memcached-support/006tNbRwly1fwxc9b9qp7j30g607gt97.jpg)
 Memcached是一种流行的基于内存的分布式缓存，通常用于缓存或在服务之间共享数据。随着memcached解析器的golang扩展加入Envoy，Cilium现在可以执行安全规则去限制memcached客户端的某些命令，比如读写，也可以根据key前缀进行限制。
 
 ## 例子：Rebels如何保护共享的memcached服务

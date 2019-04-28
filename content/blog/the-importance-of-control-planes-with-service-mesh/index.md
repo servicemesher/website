@@ -30,7 +30,7 @@ keywords: ["service mesh","服务网格"]
 
 控制平面的选择也可能受所需控制范围的影响。我的同事[Rafi之前在QCon SF讨论过这个问题](https://www.infoq.com/news/2017/11/service-oriented-development)，集中或分散运维的要求肯定会影响控制平面的实施。这也直接关系到控制影响应该是本地的还是全局的。例如，运维团队可能希望指定全局合理的默认值和安全措施。但是，在前线工作的开发团队需要对其本地服务进行细粒度控制，并且可能（如果他们正在接受“自由和责任”模式）覆盖安全措施的能力。Matt还在最近的[QCon纽约演讲](https://www.infoq.com/news/2018/07/qcon-klein-service-mesh)中谈到了本地/全局互动，并展示了Lyft团队为服务到服务和边缘/入口代理创建的仪表板：
 
-![](006tNbRwgy1fv6sw7u1sxj30m80p577s.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-importance-of-control-planes-with-service-mesh/006tNbRwgy1fv6sw7u1sxj30m80p577s.jpg) 
 
 ## 东西向流量与南北向流量
 
@@ -38,7 +38,7 @@ keywords: ["service mesh","服务网格"]
 
 所谓东西向，大家能理解吧？东西向指服务间通讯，也就是A服务调用B服务。对应的还有南北向，南北向通常是指从外部网络进来调用服务，如走API Gateway调用服务。在东西向通讯中，我们有时会需要一个比较特殊的途径，比如说在这个图中，我们有两个集群，两个集群各有各自的服务注册中心。我们通过增强Pilot的方式打通两个注册中心，可以知道对方有什么服务。
 
-![](00704eQkgy1fsy0kakg35j30qo0f0dpi.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-importance-of-control-planes-with-service-mesh/00704eQkgy1fsy0kakg35j30qo0f0dpi.jpg)
 
 _图片来自敖小剑的分享_
 

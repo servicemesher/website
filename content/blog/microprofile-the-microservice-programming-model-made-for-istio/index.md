@@ -20,7 +20,7 @@ keywords: ["service mesh","服务网格","istio","microprofile"]
 
 如果说Spring Cloud是以SpingBoot为核心和基础的微服务架构，那么MicroProfile则是将传统JavaEE轻量化以适应微服务时代的一个体系。作者Emily Jiang，开源项目[eclipse/microprofile](https://github.com/eclipse/microprofile)的contributor之一，在本文中探讨了如何结合MicroProfile与流行的服务网格Istio安全地部署微服务，比较了二者的不同之处，并且阐述了二者共存的生态系统的现状及未来。
 
-![shutterstock.jpg](bf8f1836ly1g0yo4fnavmj209q063jrd.jpg)
+![shutterstock.jpg](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microprofile-the-microservice-programming-model-made-for-istio/bf8f1836ly1g0yo4fnavmj209q063jrd.jpg)
 
 ## MicroProfile in a nutshell
 
@@ -68,7 +68,7 @@ Istio是独立于平台的，设计用于在各种环境中运行，比如Kubern
 
 Istio由一个数据平面和一个控制平面组成 (Istio架构见下图，取自[Istio .io](https://istio.io/))。
 
-![microprofile-istio-1.png](bf8f1836ly1g0yt2h4ed1j20lc0g976a.jpg)
+![microprofile-istio-1.png](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microprofile-the-microservice-programming-model-made-for-istio/bf8f1836ly1g0yt2h4ed1j20lc0g976a.jpg)
 
 ## MicroProfile meets Istio
 
@@ -235,7 +235,7 @@ public Response getPropertiesForHost(
 
 这些API可以通过这个端点查看 `/openapi/ui`
 
-![microprofile-istio-2.png](bf8f1836ly1g102sxzpyfj20lc0l5wjh.jpg)
+![microprofile-istio-2.png](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microprofile-the-microservice-programming-model-made-for-istio/bf8f1836ly1g102sxzpyfj20lc0l5wjh.jpg)
 
 这个规范为Istio提供了一个很好的补充，因为DevOps可以使用它来查找每个JAX-RS端点的详细信息。
 
@@ -346,7 +346,7 @@ Istio的故障恢复是通过Envoy代理来协调出站流量，例如复制请�
 
 让我们将MicroProfile Fault Tolerance与Istio的故障处理进行比较。
 
-![microprofile-istio-3.png](bf8f1836ly1g1030s8iccj20k3099glq.jpg)
+![microprofile-istio-3.png](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microprofile-the-microservice-programming-model-made-for-istio/bf8f1836ly1g1030s8iccj20k3099glq.jpg)
 
 *MicroProfile Fault Tolerance Circuit Breaker* 为客户端所有，客户端之间不共享；Istio断路器为后端服务所有，这意味着多个连接可以构成一个Circuit Breaker。
 
@@ -588,13 +588,13 @@ MP_Fault_Tolerance_NonFallback_Enabled: "false"
 
 如前所述，对于https请求，如果要使用Istio错误处理，则可以通过以下配置禁用MicroProfile容错(回退除外)。可以在configmap中设置相应的属性，如上一节所述，这将禁用相关的容错功能。
 
-![microprofile-istio-4.png](bf8f1836ly1g103drpcf7j20ne0cnq3h.jpg)
+![microprofile-istio-4.png](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microprofile-the-microservice-programming-model-made-for-istio/bf8f1836ly1g103drpcf7j20ne0cnq3h.jpg)
 
 对于Https请求，MicroProfile容错将处理容错功能，因为Istio不能注入错误处理。
 
 该计划是生成Istio配置规则，然后禁用MicroProfile容错，如果Istio可以处理这种情况。
 
-![microprofile-istio-5.png](bf8f1836ly1g103fet880j20lc0gqgmn.jpg)
+![microprofile-istio-5.png](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microprofile-the-microservice-programming-model-made-for-istio/bf8f1836ly1g103fet880j20lc0gqgmn.jpg)
 
 这部分是我的想法，我希望能从公众那里得到更多的反馈。
 

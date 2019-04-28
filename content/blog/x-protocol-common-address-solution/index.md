@@ -81,7 +81,7 @@ SOA标准的服务注册，服务发现和调用流程如下：
 
 在Kubernetes下，如图所示，假定我们部署了一个名为userservice的应用，有三个实例，分别在三个pod中。则应用部署之后，Kubernetes会为这个应用分配ClusterIP和域名，并在DNS中生成一条DNS记录，将域名映射到ClusterIP：
 
-![Kubernetes下的DNS寻址方式](006tNbRwly1fw0u1crhhoj30zz0grad5.jpg)
+![Kubernetes下的DNS寻址方式](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u1crhhoj30zz0grad5.jpg)
 
 当部署在Kubernetes下的某个充当客户端的应用发起请求时，如图中的HTTP GET请求，目标URL地址为 “<http://userservice/id/1000221>"。请求的寻址方式和过程如下：
 
@@ -94,7 +94,7 @@ SOA标准的服务注册，服务发现和调用流程如下：
 
 我们详细看一下请求和应答全称的四个请求包的具体内容（简单起见继续忽略端口）：
 
-![Kubernetes DNS寻址](006tNbRwly1fw0u1t6ucmj31an0hs79k.jpg)
+![Kubernetes DNS寻址](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u1t6ucmj31an0hs79k.jpg)
 
 重点关注请求和应答报文的源地址和目标地址：
 
@@ -112,7 +112,7 @@ kube-proxy在客户端和服务器端之间拦截并修改请求和应答的报�
 
 更深入一步，看kube-proxy在两个拦截和修改报文中的逻辑处理关系，即kube-proxy是如何在收到应答时正确的找回原有的ClusterIP：
 
-![kube-proxy与ClusterIP](006tNbRwly1fw0u2dtdpuj317q0fhtcw.jpg)
+![kube-proxy与ClusterIP](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u2dtdpuj317q0fhtcw.jpg)
 
 1. 在拦截并修改请求报文之后，kube-proxy会保存报文修改的5元组对应关系（5元组指源IP地址，源端口，协议，目的地IP地址，目的地端口）
 2. 在收到应答报文后，根据应答报文中的5元组，在保存的5元组对应关系中，找到对应信息，得到原有的ClusterIP和端口，然后修改应答报文
@@ -129,13 +129,13 @@ kube-proxy在客户端和服务器端之间拦截并修改请求和应答的报�
 
 以客户端的视角看来，这个DNS寻址方式非常的简单直白：
 
-![kube-proxy与DNS](006tNbRwly1fw0u2vhim9j319d0c8goz.jpg)
+![kube-proxy与DNS](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u2vhim9j319d0c8goz.jpg)
 
 ## Istio的DNS寻址方式
 
 Istio的请求寻址方式和普通kubernetes非常相似，原理相同，只是kube-proxy被sidecar取代，然后sidecar的部署方式是在pod内部署，而且客户端和服务器端各有一个sidecar。其他基本一致，除了图中红色文本的部分：
 
-![Istio的DNS寻址方式](006tNbRwly1fw0u3qux0gj31bg0ijgrw.jpg)
+![Istio的DNS寻址方式](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u3qux0gj31bg0ijgrw.jpg)
 
 - iptables在劫持流量时，除了将请求转发到localhost的Sidecar处外，还额外的在请求报文的TCP options 中将 ClusterIP 保存为 original dest。
 - 在 Sidecar （Istio默认是Envoy）中，从请求报文 TCP options 的 original dest 处获取 ClusterIP
@@ -144,7 +144,7 @@ Istio的请求寻址方式和普通kubernetes非常相似，原理相同，只�
 
 看下图就知道了，这是一个 Virtual Host 的示例， Istio 通过 Pilot 将这个规则发送给 Sidecar/Envoy ，依靠这个信息来匹配路由请求找到处理请求的cluster：
 
-![Isito中的Pilot注册信息](006tNbRwly1fw0u495625j30rd0ldgot.jpg)
+![Isito中的Pilot注册信息](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u495625j30rd0ldgot.jpg)
 
 domains中，除了列出域名外，还有一个特殊的IP地址，这个就是Kubernetes服务的 ClusterIP！因此，Sidecar可以通过前面传递过来的 ClusterIP 在这里进行路由匹配（当然也可以从报文中获取destination然后通过域名匹配）。
 
@@ -158,7 +158,7 @@ domains中，除了列出域名外，还有一个特殊的IP地址，这个就�
 
 因此，以客户端的视角看来，Isito的这个DNS寻址方式同样的简单直白！
 
-![客户端请求](006tNbRwly1fw0u5cxd61j30st03wmxk.jpg)
+![客户端请求](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u5cxd61j30st03wmxk.jpg)
 
 ## DNS通用寻址方案
 
@@ -168,17 +168,17 @@ domains中，除了列出域名外，还有一个特殊的IP地址，这个就�
 
 **如何在不修改代码，继续使用接口的情况下，实现在Service Mesh上运行现有的Dubbo/HSF/SOFA等传统SOA应用？**
 
-![DNS通用寻址方案](006tNbRwly1fw0u5kyafgj30zz0grad5.jpg)
+![DNS通用寻址方案](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u5kyafgj30zz0grad5.jpg)
 
 这里有一个关键点：Kubernetes的服务注册是以基于Service或者说基于应用(app name)，而我们的客户端代码是基于接口的。因此，在 Virtual Host 进行路由匹配时，是不能通过域名匹配的。当然，这里理论上还有一个思路，就是将接口注册为Kubernetes Service。但是，还记得要支持接口特殊字符的需求吗？带点号的接口名，Kubernetes是不能接受它作为Service Name的，直接堵死了将接口名注册到Kubernetes Service的道路。
 
-![Istio中注册的服务名称](006tNbRwly1fw0u5v7kktj30rd0ldgot.jpg)
+![Istio中注册的服务名称](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u5v7kktj30rd0ldgot.jpg)
 
 这样，我们就只有一条路可以走了：效仿Istio的做法，通过 ClusterIP 匹配！
 
 而要将接口名（如”com.alipay.demo.interface-1”）和 ClusterIP 关联，最简单直接的方式就是**打通DNS** ：
 
-![Sidecar注册DNS名称](006tNbRwly1fw0u6cxesmj31fn0ffgqm.jpg)
+![Sidecar注册DNS名称](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u6cxesmj31fn0ffgqm.jpg)
 
 只需要在DNS记录中，增加接口到 ClusterIP 的映射，然后就可以完全延续Istio的标准做法！其他的步骤，如域名解析到ClusterIP，iptables拦截并传递ClusterIP，sidecar读取ClusterIP并匹配路由，都完全可以重用原有方案。
 
@@ -188,7 +188,7 @@ domains中，除了列出域名外，还有一个特殊的IP地址，这个就�
 
 为了收集到SOA应用的接口信息，我们还提供了一个 Register Agent 给 Service Controller 收集信息。
 
-![通过CoreDNS注册接口名称](006tNbRwly1fw0u6rzjygj30lb0dc75f.jpg)
+![通过CoreDNS注册接口名称](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u6rzjygj30lb0dc75f.jpg)
 
 详细的实现方案，不在本文中重复讲述，请参阅我们之前的分享文章 [SOFAMesh 的通用协议扩展](https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&mid=2247484175&idx=1&sn=5cb26b1afe615ac7e06b2ccbee6235b3&chksm=faa0ecd5cdd765c3f285bcb3b23f4f1f3e27f6e99021ad4659480ccc47f9bf25a05107f4fee2&mpshare=1&scene=1&srcid=0828t5isWXmyeWhTeoAoeogw&pass_ticket=DqnjSkiuBZW9Oe68Fjiq%2Bqa6fFCyysQTR7Qgd8%2BX9FfooybAg7NXVAQdLmfG6gRX#rd) 中的DNS寻址方案一节。
 

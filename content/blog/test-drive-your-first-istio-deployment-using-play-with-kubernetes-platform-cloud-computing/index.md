@@ -16,15 +16,15 @@ categories: ["translation"]
 keywords: [“service mesh","微服务","服务网格"]
 ---
 
-![Kubernetes and Istio](6286a305ly1fux7dq9d14j20jg08cju2.jpg)
+![Kubernetes and Istio](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fux7dq9d14j20jg08cju2.jpg)
 
 作为一名全栈开发，假如最近花了不少时间开发应用，肯定已经理解了微服务架构下要面临的一系列全新挑战。尽管应用已经从庞大的单体应用转变成了开发更快、弹性更好、更小也更聚焦的微服务，但现实是，开发者需要开始操心将这些服务集成到分布式系统中的问题了，包括服务发现、负载均衡、注册、容错、监控、路由、兼容和安全等。
 
 让我们更详细的拆解微服务架构下开发和运维面临的挑战吧。先来看看第一代简单的 Service Mesh 场景，如下图所示，服务 A 要和 服务 B 通信，没有采用直接通信的方式，请求是通过 NGINX 路由的。NGINX 从 Consul（服务发现工具）查找路由，并在收到 HTTP 502 响应时，自动重试。
 
-![图 1.0 - 一代 Service Mesh](6286a305ly1fux7wkxxawj20jg08cmz4.jpg)
+![图 1.0 - 一代 Service Mesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fux7wkxxawj20jg08cmz4.jpg)
 
-![图 1.1 - 服务增多时，级联失败演示](6286a305ly1fux7ybax2rj20jg09pgpc.jpg)
+![图 1.1 - 服务增多时，级联失败演示](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fux7ybax2rj20jg09pgpc.jpg)
 
 但随着微服务架构的到来，服务数量的增长一发不可收拾，下面列出的是开发和运维团队遇到的问题：
 
@@ -44,7 +44,7 @@ Service Mesh 是 2018 年度最火热的流行词之一，它是微服务的可�
 
 Istio 是完全开源的，可透明的部署在已有的分布式应用上。Istio 1.0 版本在上个月发布，已经生产环境可用。Istio 完全由 Go 语言编写，提供成熟的 API 接口可以接入到任何日志平台、遥测和策略系统中。Istio 在 GitHub 上发布，对系统的性能影响很小，丰富的特性让你可以顺利、高效的运行分布式微服务架构，并提供统一的保护、连接和监控方法。
 
-![图 1.2 Istio 功能](6286a305ly1fuxw8v04rgj20jg09pmyw.jpg)
+![图 1.2 Istio 功能](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxw8v04rgj20jg09pmyw.jpg)
 
 Istio 对系统的影响很小，它在 GitHub 上发布，上个月，Istio 1.0 版本已经发布，并且生产环境可用。
 
@@ -62,7 +62,7 @@ Istio 能带来什么好处呢？
 - 以强身份验证和鉴权的方式，提供了集群内安全的服务间通信。
 - 如何想深入 Istio 架构，我强烈推荐 Istio 官方网站（https://istio.io/zh）。
 
-![](6286a305ly1fuxwajuotmj20jg0dy0uz.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwajuotmj20jg0dy0uz.jpg)
 
 **开始演示！！！**
 
@@ -70,11 +70,11 @@ Istio 能带来什么好处呢？
 
 打开 https://labs.play-with-k8s.com/，访问 Kubernetes Playground。
 
-![](6286a305ly1fuxwcxpg13j20jg0dy76k.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwcxpg13j20jg0dy76k.jpg)
 
 点击 "Login" 按钮，以 Docker Hub 或 GitHub ID 登陆。
 
-![](6286a305ly1fuxwdv6kv0j20nq0byaa1.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwdv6kv0j20nq0byaa1.jpg)
 
 完成本教程，你将获得自己的实验环境。
 
@@ -82,17 +82,17 @@ Istio 能带来什么好处呢？
 
 点击左侧的 "Add New Instance" 来构建你的第一个 Kubernetes 集群节点，自动命名为 "node1"，每个节点都预装来 Docker 社区版（CE）和 Kubeadm。这个节点将成为集群的主节点。
 
-![](6286a305ly1fuxwf2adjdj211o0nq75d.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwf2adjdj211o0nq75d.jpg)
 
 **启动主节点**
 
 用如下脚本初始化主节点（node1）来启动 Kubernetes 集群，复制该脚本内容到文件 bootstrap.sh，并执行命令添加可执行权限：```chmod +x bootstrap.sh```
 
-![](6286a305ly1fuxwgb83gkj20jg04p75i.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwgb83gkj20jg04p75i.jpg)
 
 执行脚本时，作为初始化的一部分，kubeadm 会写入几个必要的配置文件、设置 RBAC 并部署 Kubernetes 控制平面组件（例如 kube-apiserver、kube-dns、kube-proxy、etcd 等）。控制平面组件以 docker 容器形式部署。
 
-![](6286a305ly1fuxwj1mbluj20y004ujrf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1mbluj20y004ujrf.jpg)
 
 复制上面的 kubeadm join token 命令，留作下步使用，此命令用来在集群中加入其他节点。
 
@@ -100,25 +100,25 @@ Istio 能带来什么好处呢？
 
 点击 "Add New Node" 添加新的从节点
 
-![](6286a305ly1fuxwj1ncf3j20sj0a3aam.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1ncf3j20sj0a3aam.jpg)
 
 **验证集群状态**
 
-![](6286a305ly1fuxwj1moxsj20h304rmxc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1moxsj20h304rmxc.jpg)
 
 **验证运行的 Pods**
 
-![](6286a305ly1fuxwj1scslj20to0bfmyo.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1scslj20to0bfmyo.jpg)
 
 **安装 Istio 1.0.0**
 
 Istio 部署在单独的 Kubernetes 命名空间里：istio-system，我们过后再来验证。现在，复制如下内容到文件，命名为 install_istio.sh，并保存。添加可执行权限，运行以安装 Istio 和相关工具。
 
-![](6286a305ly1fuxwj1oor0j20jg05mgn0.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1oor0j20jg05mgn0.jpg)
 
 屏幕上应显示如下内容：
 
-![](6286a305ly1fuxwj1ue42j20k70fb75x.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1ue42j20k70fb75x.jpg)
 
 如上所示，默认会安装 Prometheus、ServiceGraph、Jaeger、Grafana 和 Zipkin。
 
@@ -130,35 +130,35 @@ unable to recognize "install/kubernetes/istio-demo.yaml": no matches for admissi
 
 这是正常的，命令一执行完，可在页面的中央看到一长串展示的端口。
 
-![](6286a305ly1fuxwj1uh9aj20u40jkmz5.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1uh9aj20u40jkmz5.jpg)
 
-![](6286a305ly1fuxwj1wesej20u40jkmz5.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1wesej20u40jkmz5.jpg)
 
 **验证服务**
 
-![](6286a305ly1fuxwj1wxc3j20x10f175z.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1wxc3j20x10f175z.jpg)
 
 **暴露服务**
 
 要暴露 Prometheus、Grafana 和 服务图标服务，需要先删除已有的服务，用 NodePort 替换 ClusterIP，用实例页顶端展示的端口访问服务（如下所示）。
 
-![](6286a305ly1fuxwj1oduej210g07ywfj.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1oduej210g07ywfj.jpg)
 
-![](6286a305ly1fuxwj1x12ej20z80eogn8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1x12ej20z80eogn8.jpg)
 
 点击 "30004" 访问 Grafana 页，点击 "30003" 访问 Prometheus 页。
 
-![](6286a305ly1fuxwj1ysfbj21350ofjsy.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1ysfbj21350ofjsy.jpg)
 
-![](6286a305ly1fuxwj1oe4rj213z0ivq3r.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1oe4rj213z0ivq3r.jpg)
 
 可以如下图所示，选择必要配置查看 Prometheus 度量：
 
-![](6286a305ly1fuxwj1olhxj20rp0fl3yr.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1olhxj20rp0fl3yr.jpg)
 
 在 Grafana 页，添加 Prometheus 数据源，并确认 Dashboard 已经运行。
 
-![](6286a305ly1fuxwj1pomvj20hs0ixdgh.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1pomvj20hs0ixdgh.jpg)
 
 恭喜！你已经将 Istio 部署在 Kubernetes 集群上了，K8S playgroud 上已经安装的服务包括：
 
@@ -172,7 +172,7 @@ unable to recognize "install/kubernetes/istio-demo.yaml": no matches for admissi
 
 Istioctl 是 Istio 的命令行配置工具，可以用来创建、查询、修改和删除 Istio 系统的配置资源。
 
-![](6286a305ly1fuxwj1qvitj213v06it97.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1qvitj213v06it97.jpg)
 
 **部署 BookInfo 应用示例**
 
@@ -180,24 +180,24 @@ Istio 已经安装并验证过了，可以在上面部署示例应用 BookInfo �
 
 **部署 BookInfo 服务**
 
-![](6286a305ly1fuxwj247c0j20jg07gdhv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj247c0j20jg07gdhv.jpg)
 
 **定义入口网关**
 
-![](6286a305ly1fuxwj1rru2j20jg03xdgu.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1rru2j20jg03xdgu.jpg)
 
 **验证 BookInfo 应用**
 
-![](6286a305ly1fuxwj280kwj20jg0d8aew.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj280kwj20jg0d8aew.jpg)
 
-![](6286a305ly1fuxwj27k0kj20jg0k57b9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj27k0kj20jg0k57b9.jpg)
 
 **通过 URL 访问**
 
-![](6286a305ly1fuxwj28b2bj20jg07rwhd.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj28b2bj20jg07rwhd.jpg)
 
 现在应该可以看到 BookInfo 示例了：
 
-![](6286a305ly1fuxwj1ycp2j20jg07rjtf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1ycp2j20jg07rjtf.jpg)
 
 希望本部程能帮你顺利的在 Kubernetes 上部署 Istio。下一篇博客，我将深入 Isito 的内部架构、流量控制、权限和遥测等细节。

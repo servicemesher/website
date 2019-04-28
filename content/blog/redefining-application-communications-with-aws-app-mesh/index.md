@@ -64,7 +64,7 @@ App Mesh致力于提供高度可扩展而灵活的服务网络，支持任何客
 
 我们的目标是消除运维复杂应用的无差别繁重工作。 我们提供工具，服务和可观测性，以确保您可以为自己的架构维护高标准。
 
-![APP mesh](006tKfTcly1g1ppp5q23aj30oz0dnwgb.jpg)
+![APP mesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/redefining-application-communications-with-aws-app-mesh/006tKfTcly1g1ppp5q23aj30oz0dnwgb.jpg)
 
 App Mesh支持服务运行于EKS，ECS，Fargate，EC2和 EC2 上的 Kubernetes。一些客户已经在AWS内的托管平台上运行他们的应用。但是，我们了解许多客户需要能够将跨AWS部署的服务连接到单个网格中。他们可能还需要灵活地在异构的计算资源集合中运行服务。
 

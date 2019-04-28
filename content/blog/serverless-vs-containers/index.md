@@ -30,7 +30,7 @@ keywords: ["无服务器","serverless","容器"]
 
 自从Docker早期可用以来已经走过了漫长的道路。随着我们在容器上运行的系统越来越复杂，我们的需求已经催生了丰富的工具生态系统。
 
-![](61411417ly1fv92pcoc59j218c0wwtb6.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-vs-containers/61411417ly1fv92pcoc59j218c0wwtb6.jpg)
 
 AWS还拥有自己的托管容器服务ECS。这提供了与AWS生态系统其他部分更紧密的集成。
 
@@ -42,7 +42,7 @@ AWS还拥有自己的托管容器服务ECS。这提供了与AWS生态系统其�
 
 除了这些托管服务之外，还有一些解决方案可以让您在自己的Kubernetes集群上运行Serverless。其中包括谷歌和合作公司最近宣布的Knative。虽然这些解决方案试图满足许多开发人员的需求，但我感到他们放弃了Serverless的最佳功能——不必担心服务器！
 
-![](61411417ly1fv92pv9fp4j20y60pw43y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-vs-containers/61411417ly1fv92pv9fp4j20y60pw43y.jpg)
 
 ## 采用趋势
 
@@ -69,7 +69,7 @@ AWS还拥有自己的托管容器服务ECS。这提供了与AWS生态系统其�
 
 构建基于容器的通用计算平台需要大量的工程专业知识和投资，该平台与AWS Lambda等Serverless产品一样高效，可扩展且具有弹性。大多数组织根本没有能力解决这个问题。尽管有大量的时间和金钱投入，但我知道一些大企业在他们的尝试中惨遭失败。
 
-![](61411417ly1fv92q5mvy7j20y01061kx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-vs-containers/61411417ly1fv92q5mvy7j20y01061kx.jpg)
 
 ## 工具支持
 
@@ -93,7 +93,7 @@ Serverless的批评者通常使用供应商锁定作为他们的论据。与此�
 
 对于它所获得的所有关注，供应商锁定对于少数人来说是一种危险。相反，您更有可能找到过度设计的解决方案来阻止供应商锁定，而不是创建其他形式的锁定，无论是内部团队还是其他私有云供应商。
 
-![](61411417ly1fv92qged6ej20y80fijuh.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-vs-containers/61411417ly1fv92qged6ej20y80fijuh.jpg)
 
 同样，这不是新的。几年前我们与ORM进行了同样的辩论。我们创建了所有这些抽象来防止供应商锁定，除了风险从未实现为我们大多数人的问题。所发生的一切都是我们花费了大量精力和时间，并推迟了我们的产品上市时间，因为这些产品从未成为问题。
 
@@ -124,7 +124,7 @@ Serverless为您提供了大量的生产力提升，但却以控制基础架构�
 
 这也是Netflix前云架构师兼现任AWS云计算副总裁Adrian Cockcroft的建议。
 
-![](61411417ly1fv92qojnw5j20yc0ue15k.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-vs-containers/61411417ly1fv92qojnw5j20yc0ue15k.jpg)
 
 我相信我们最终会看到这两种范式的趋同。容器技术最终将成为Serverless \- 想想Fargate，加上每次调用定价模型和毫秒计费。同时，Serverless平台将开放并允许您携带自己的容器。高级用户可以通过提供符合API的子组件进行日志记录等来保留对其基础架构的一些控制。
 

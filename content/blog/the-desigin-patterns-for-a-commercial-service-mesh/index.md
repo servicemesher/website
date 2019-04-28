@@ -14,7 +14,7 @@ keywords: ["service mesh","服务网格","华为","架构设计"]
 
 **作者介绍**：田晓亮，8年软件行业经验，曾就职于三星，2012年进入云计算领域，对PaaS，DevOps，APM有深入的研究和实践经验，方案支撑近千台VM中的应用部署监控。 2016年加入华为担任架构师，负责微服务的Go语言开发框架及Service Mesh设计和落地。
 
-![](00704eQkgy1frtczpjx7bj30q50g5wia.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtczpjx7bj30q50g5wia.jpg)
 
 图1 微服务架构需要解决的问题
 
@@ -60,7 +60,7 @@ keywords: ["service mesh","服务网格","华为","架构设计"]
 - 一般分为应用容器和工具容器，工具容器可以重用。
 
 一个典型的场景如下: 
-![SideCar典型场景](00704eQkgy1frtd20gs5ij30m7083whl.jpg)
+![SideCar典型场景](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd20gs5ij30m7083whl.jpg)
 
 图2 SideCar典型场景
 
@@ -119,7 +119,7 @@ Service mesh最早是由Linkerd给出的定义，我们来看看英文版:
 
 整体架构如下：
 
-![基于NGINX的微服务代理的平台整体架构](00704eQkgy1frtd2d6ichj30q40ftwh9.jpg)
+![基于NGINX的微服务代理的平台整体架构](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd2d6ichj30q40ftwh9.jpg)
 
 图3 基于NGINX的微服务代理的平台整体架构
 
@@ -139,7 +139,7 @@ Service mesh最早是由Linkerd给出的定义，我们来看看英文版:
 
 为了解决这些问题，出现了第二代的解决方案： HSA Sidecar
 
-![HSA Sidecar设计](00704eQkgy1frtd2lg2qvj30q50h9tas.jpg)
+![HSA Sidecar设计](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd2lg2qvj30q50h9tas.jpg)
 
 图4 HSA Sidecar设计
 
@@ -162,7 +162,7 @@ Service Mesh 模式的一种实现。基于自研的Go语言微服务框架（�
 
 注册中心为插件化模块，目前对接了ServiceComb、Service Center，未来还会有更多的系统对接进来 
 
-![可插件化的注册中心](00704eQkgy1frtd39rhawj30on07pwin.jpg)
+![可插件化的注册中心](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd39rhawj30on07pwin.jpg)
 
 图5 可插件化的注册中心
 
@@ -205,7 +205,7 @@ Metrics：提供了主动上报到CSE Dashborad的方式。也可与华为公有
 
 **整体架构**
 
-![CSE Mesher整体架构](00704eQkgy1frtd3kuwbhj30s50dfjx9.jpg)
+![CSE Mesher整体架构](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd3kuwbhj30s50dfjx9.jpg)
 
 图6 CSE Mesher整体架构
 
@@ -213,7 +213,7 @@ Mesher背靠CSE组件，使用微服务引擎中的服务中心与配置中心�
 
 **数据面**
 
-![CSE Mesher数据面](00704eQkgy1frtd4bfb0aj30ku0cqq70.jpg)
+![CSE Mesher数据面](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd4bfb0aj30ku0cqq70.jpg)
 
 图7 CSE Mesher数据面
 
@@ -228,7 +228,7 @@ Mesher背靠CSE组件，使用微服务引擎中的服务中心与配置中心�
 
 **控制面**
 
-![CSE Mesher控制面](00704eQkgy1frtd4nykhmj30o30j1ju1.jpg)
+![CSE Mesher控制面](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd4nykhmj30o30j1ju1.jpg)
 
 图8 CSE Mesher控制面
 
@@ -251,13 +251,13 @@ Mesher背靠CSE组件，使用微服务引擎中的服务中心与配置中心�
 
 ServiceC为裸服务,它既不用mesher也不用SDK，那么起码它需要自己注册到服务中心中，供其它服务发现，否则无法进行访问。
 
-![仅消费者使用Mesher](00704eQkgy1frtd54uqfbj30pu07nadr.jpg)
+![仅消费者使用Mesher](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd54uqfbj30pu07nadr.jpg)
 
 图9 仅消费者使用Mesher
 
 2.消费者与提供者均使用Mesher
 
-![消费者与提供者均使用Mesher](00704eQkgy1frtd8cohrfj30px06x77r.jpg)
+![消费者与提供者均使用Mesher](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd8cohrfj30px06x77r.jpg)
 
 图10 消费者与提供者均使用Mesher
 
@@ -265,14 +265,14 @@ ServiceC为裸服务,它既不用mesher也不用SDK，那么起码它需要自�
 
 3.提供者使用Mesher，消费者A使用ServiceComb SDK进行开发可直接发现服务B，但是消费者C作为裸服务需要自己发现服务B 
 
-![仅提供者使用Mesher](00704eQkgy1frtd5fgwkrj30px06x77r.jpg)
+![仅提供者使用Mesher](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd5fgwkrj30px06x77r.jpg)
 
 图11 仅提供者使用Mesher
 
 **运行时请求处理**
 
 消费者端请求 
-![消费端发送请求流程](00704eQkgy1frtd5rdienj30tw098mys.jpg)
+![消费端发送请求流程](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd5rdienj30tw098mys.jpg)
 
 图12 消费端发送请求流程
 
@@ -291,7 +291,7 @@ SockShop服务将mesher作为代理并使用地址<http://order/list>访问订�
 5. 传输层 
    最终请求通过传输层发送到目标微服务实例 
    提供者端接收请求 
-   ![提供者端接收请求流程](00704eQkgy1frtd6588zpj30tq09dgn3.jpg)
+   ![提供者端接收请求流程](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd6588zpj30tq09dgn3.jpg)
    图13 提供者端接收请求流程
 
 上图为收到远程请求后的处理过程
@@ -301,7 +301,7 @@ SockShop服务将mesher作为代理并使用地址<http://order/list>访问订�
 
 #### 性能对比
 
-![Mesher1.0、Istio 0.1.6 ](00704eQkgy1frtd6gy0m2j30sn0io3zz.jpg)
+![Mesher1.0、Istio 0.1.6 ](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd6gy0m2j30sn0io3zz.jpg)
 
 图14 Mesher1.0、Istio 0.1.6 (Envoy)、Linkerd1.1.3性能对比
 
@@ -310,7 +310,7 @@ SockShop服务将mesher作为代理并使用地址<http://order/list>访问订�
 - Linkerd 作为java实现的service mesh，受到资源占用的拖累，考虑到数据中心成本，不适合作为SideCar和应用部署在一起，相信它的主要场景在于Kubernetes Ingress和Daemonset，并且由于只有数据面，需要和别的生态系统对接获得控制面能力，否则，业务团队又要考虑自己开发控制面。
 - 目前Istio已知问题是每次请求都要调用一次Mixer API来传送metric数据，相信未来版本能够解决，但不能满足我们内部的产品节奏。
 - 作为对比，Mesher通过Channel与Go协程机制主动上报metric数据，以此获得更高的性能，机制如下：模块将数据传送到channel中，协程收到信号并主动上报，在这样的机制下开启监控，性能只有百分之2左右的下降。 
-  ![Metric数据上报机制](00704eQkgy1frtd71w86lj30te0fqdo2.jpg)
+  ![Metric数据上报机制](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-desigin-patterns-for-a-commercial-service-mesh/00704eQkgy1frtd71w86lj30te0fqdo2.jpg)
   图15 Metric数据上报机制
 
 ## 一些思考以及未来

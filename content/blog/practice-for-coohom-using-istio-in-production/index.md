@@ -17,7 +17,7 @@ keywords: ["service mesh","服务网格","istio","coohom"]
 
 本文将会介绍与分享在Coohom项目在使用istio中的一些实践与经验。
 
-![](007pL7qRgy1fwjfpiwu3fj3050050mwx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/practice-for-coohom-using-istio-in-production/007pL7qRgy1fwjfpiwu3fj3050050mwx.jpg)
 
 ## Coohom项目
 
@@ -59,7 +59,7 @@ keywords: ["service mesh","服务网格","istio","coohom"]
 在我们的场景里，基本上所有的Node应用属于第一类，一部分Java应用属于第二类，一部分Java应用属于第三类。
 为了更清楚的表达，我们这里可以想象一个简单的场景:
 
-![](007pL7qRgy1fwji4ujvtzj30mn0hl3zb.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/practice-for-coohom-using-istio-in-production/007pL7qRgy1fwji4ujvtzj30mn0hl3zb.jpg)
 
 从上面的场景我们可以看到，我们有一个页面服务负责渲染并发页面内容到用户的浏览器，用户会从浏览器访问到页面服务和账户服务。
 账户服务负责记录用户名，用户密码等相关信息。账户服务同时还会在权限服务内查看用户是否具有相应的权限，并且页面服务同样也会请求账户服务的某些接口。

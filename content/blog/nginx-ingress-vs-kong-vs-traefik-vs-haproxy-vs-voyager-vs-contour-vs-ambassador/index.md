@@ -20,7 +20,7 @@ keywords: ["service mesh","服务网格"]
 
 下面有个连接可以打开并清晰的看到一个excel表格，包含了图表的详细内容，如果发现不正确的地方，请在文章末尾留言，我将及时修改。
 
-![](006tNbRwgy1fvg5y29nebj31430l2wio.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/nginx-ingress-vs-kong-vs-traefik-vs-haproxy-vs-voyager-vs-contour-vs-ambassador/006tNbRwgy1fvg5y29nebj31430l2wio.jpg)
 
 [查看全表请点击这里](https://docs.google.com/spreadsheets/d/16bxRgpO1H_Bn-5xVZ1WrR_I-0A-GOI6egmhvqqLMOmg/edit?usp=sharing)。
 

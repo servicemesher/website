@@ -12,7 +12,7 @@ categories: ["istio"]
 keywords: ["service mesh","服务网格","istio","istio-ui"]
 ---
 
-![](006tNbRwly1fwh8fn571lj30mv0cwgm8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-ui-tutorial/006tNbRwly1fwh8fn571lj30mv0cwgm8.jpg)
 
 ### 由来
 
@@ -120,7 +120,7 @@ spec:
       protocol: HTTP
 ```
 
-![](006tNbRwly1fwh8fi571cj31160le40d.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-ui-tutorial/006tNbRwly1fwh8fi571cj31160le40d.jpg)
 
 #### 配置VirtualService
 
@@ -151,7 +151,7 @@ spec:
           number: 9080
 ```
 
-![](006tNbRwly1fwh8f4la5vj31160le40r.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-ui-tutorial/006tNbRwly1fwh8f4la5vj31160le40r.jpg)
 
 #### 绑定host
 
@@ -169,7 +169,7 @@ export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o 
 http://productpage.example.com/productpage?u=normal
 ```
 
-![](006tNbRwly1fwh8eyo6nfj31190haq5y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-ui-tutorial/006tNbRwly1fwh8eyo6nfj31190haq5y.jpg)
 
 > ​    至此新手任务已经完成，[istio-ui](https://github.com/jukylin/istio-ui)和官方提供的配置方式区别只是在于线上和线下配置，直接用来做官方的新手任务是一样的效果，而且为了保证原生性，我们并没有对配置进行1byte的修改。
 

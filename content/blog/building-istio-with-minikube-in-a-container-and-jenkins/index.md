@@ -24,7 +24,7 @@ AspenMesh提供一种Istio的分布式架构支持，这意味着即使与上游
 
 这部分描述了我们如何构建一个可以在构建过程中用来运行Istio冒烟测试的Minikube-in-a-container镜像。我们最初不是这么想的，我们最初使用本地localkube环境。我们不能让它在特定环境外工作，我们认为这是由于localkube和minikube之间有一点差异导致的。所以这是一个作为我们修复它使它能正常工作的记录。我们还添加了一些额外选项和工具，以便在生成的容器中使用Istio。这没有什么太多花样，但如果你要做类似的事情，我们希望它给你启发。
 
-![minikube](78a165e1gy1frx72gvbeqj20az0960t7.jpg)
+![minikube](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/building-istio-with-minikube-in-a-container-and-jenkins/78a165e1gy1frx72gvbeqj20az0960t7.jpg)
 
 [Minikube](https://github.com/kubernetes/minikube)可能对你来说是一个可以在随身携带的笔记本上通过虚机运行自己kubernetes集群的非常熟悉的项目。这种方法非常方便，但在某些情况下（比如不提供嵌套虚拟化的云提供商），你就不能或者不希望基于虚机来完成了。由于docker现在可以运行在docker内部，我们决定尝试在docker容器内制作我们自己的kubernetes集群。一个非持久性的kubernetes容器很容易启动，也可进行一些测试，并在完成后进行删除。同时这也非常适合持续集成。
 
@@ -152,7 +152,7 @@ CMD /start.sh & sleep 4 && tail -F /var/log/docker.log /var/log/dind.log /var/lo
 
 现在我们已经构建了Kubernetes-in-a-container环境，我们可以将它用于我们的Istio版本。将构建系统Docker化非常有好处，因为开发人员可以快速创建用于CI构建的真实可用实例。以下是我们用于Istio构建的CI大致架构：
 
-![](78a165e1gy1frx9by15u1j20b20bhdgg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/building-istio-with-minikube-in-a-container-and-jenkins/78a165e1gy1frx9by15u1j20b20bhdgg.jpg)
 
 1. **Jenkins工作节点**： 这是一个让Jenkins运行构建作业的虚拟机。它可能在同一时间被多个不同的构建作业共享。我们在工作节点上安装的任何工具对每个构建作业而言都是本地范围内（因此它不会影响其他构建），同时工作节点生命周期是临时短暂的（我们为了节省成本自动弹性缩放Jenkins工作节点），这一点很重要。
 

@@ -18,7 +18,7 @@ keywords: ["Envoy","gRPC","Rate-Limiting"]
 
 [Envoy](https://www.envoyproxy.io/)是专为Cloud Native应用设计的轻量级服务代理，也是为数不多的支持[gRPC](https://grpc.io/)的代理之一。gRPC是一个基于[HTTP/2](https://en.wikipedia.org/wiki/HTTP/2)的高性能RPC（[远程过程调用](https://en.wikipedia.org/wiki/Remote_procedure_call)）框架，支持多种语言。
 
-![Envoy](006tNbRwly1fx4iq37avnj31kw0j1ju5.jpg)
+![Envoy](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-grpc-and-rate-limiting/006tNbRwly1fx4iq37avnj31kw0j1ju5.jpg)
 
 在这篇文章中，我们将使用gRPC和[Protocol Buffers](https://developers.google.com/protocol-buffers/)构建C++语言版本的[Greeter应用](https://grpc.io/docs/quickstart/cpp.html)，使用[Go](https://golang.org/)语言构建另一个gRPC应用，实现Envoy的[RateLimitService](https://github.com/envoyproxy/envoy/blob/71152b710e3543732464fca57c8f07b7395de68d/api/envoy/service/ratelimit/v2/rls.proto#L11-L15)接口。最后，将Envoy部署为Greeter应用的代理，使用我们的速率限制服务实现[反压机制](https://www.learnenvoy.io/articles/backpressure.html)（backpressure）。
 
@@ -28,7 +28,7 @@ keywords: ["Envoy","gRPC","Rate-Limiting"]
 
 以下是Greeter应用的示意图。
 
-![Greeter](006tNbRwly1fx4knp84toj30ex03p0sx.jpg)
+![Greeter](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-grpc-and-rate-limiting/006tNbRwly1fx4knp84toj30ex03p0sx.jpg)
 
 运行Greeter应用时，终端中会有以下输出：
 
@@ -231,7 +231,7 @@ $ for i in {1..4}; do go run cmd/client/main.go; sleep 1; done
 
 现在我们引入Envoy代理，它将来自Greeter客户端的请求路由到Greeter服务端，同时使用我们的速率限制服务检查速率。下图描述了我们最终的部署结构。
 
-![envoy proxy](006tNbRwly1fx4mz6gav7j30m008zmy0.jpg)
+![envoy proxy](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-grpc-and-rate-limiting/006tNbRwly1fx4mz6gav7j30m008zmy0.jpg)
 
 ### 代理配置
 

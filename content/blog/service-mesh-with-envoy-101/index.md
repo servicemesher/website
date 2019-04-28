@@ -22,11 +22,11 @@ keywords: ["service mesh","服务网格","envoy"]
 
 Service Mesh 可以比作是微服务结构中的通信层。每个服务之间来往的所有请求都将通过网格。每个服务都有自己的代理服务，所有这些代理服务共同组成了“服务网格”(Service Mesh)。所以假如一个服务想要和另一个服务通信，他不是直接和这个目标服务通信的，他会先把请求路由给自己本地的代理，再由代理把请求路由到目标服务。从本质上讲，每个服务实例都只知道自己本地的代理，并不知道外面世界是什么样的。
 
-![](7267315bgy1fx9svk4k4kj20dd059wef.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-with-envoy-101/7267315bgy1fx9svk4k4kj20dd059wef.jpg)
 
 当你在谈论 “Service Mesh” 的时候，你肯定也会听到 “Sidecar” 这个词，“SideCar” 就是用于每个服务实例中的代理，每个 “SideCar” 负责一个服务中的一个实例。
 
-![](7267315bgy1fx9td4xqnjj20hd0csthg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-with-envoy-101/7267315bgy1fx9td4xqnjj20hd0csthg.jpg)
 
 ### Service Mesh 能带来什么?
 
@@ -45,7 +45,7 @@ Envoy 是一个用 C++ 编写的高性能代理。绝不是一定要使用 Envoy
 
 好，让我们来搭建一个由3个服务组成的 “Service Mesh”。我们要搭建的“Service Mesh”的结构如下所示，每个服务旁都设置有一个代理。
 
-![](7267315bgy1fxaaka4lvdj20o70a63ys.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-with-envoy-101/7267315bgy1fxaaka4lvdj20o70a63ys.jpg)
 
 ### Front Envoy
 
@@ -424,7 +424,7 @@ services:
 
 本节我们可以看到，如果我们把前面的服务配置都部署在 Kubernetes 上，其整个结构如下所示：
 
-![](7267315bgy1fxde1rkcdwj20he08ymxb.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-with-envoy-101/7267315bgy1fxde1rkcdwj20he08ymxb.jpg)
 
 所以需要修改的配置有：
 

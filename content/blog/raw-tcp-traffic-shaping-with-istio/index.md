@@ -18,7 +18,7 @@ keywords: ["service mesh","服务网格"]
 
 [Istio](https://istio.io/)通过[虚拟服务](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService), [目标规则](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule), [Gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway)等概念提供了复杂的路由机制。Istio 1.0通过[加权路由定义](https://istio.io/docs/tasks/traffic-management/traffic-shifting/#apply-weight-based-routing)启用了HTTP流量转移。我提交的[Envoy](https://github.com/envoyproxy/envoy/pull/4430) 和[Istio](https://github.com/istio/istio/pull/9112)的pull request为TCP/TLS服务提供了类似的特性。这一特性已经在Envoy [1.8.0](https://www.envoyproxy.io/docs/envoy/latest/intro/version_history#oct-4-2018)中发布了。Istio中的这一特性也会在即将发布的[1.1.0](https://github.com/istio/istio/releases/)版本中提供使用。
 
-![Istio](006tNbRwly1fw3hlzj8krj304o06m3ya.jpg)
+![Istio](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/raw-tcp-traffic-shaping-with-istio/006tNbRwly1fw3hlzj8krj304o06m3ya.jpg)
 
 在本文中，我们将用[Go](https://golang.org/)编写的一个简单的TCP Echo服务，用[Docker](https://www.docker.com/)将其容器化并部署到[Kubernetes](https://kubernetes.io/)上，并通过练习Istio的加权TCP路由特性来理解其在生产服务中的行为。
 
@@ -26,7 +26,7 @@ keywords: ["service mesh","服务网格"]
 
 在本文中，我们将创建一个简单的监听连接的TCP服务，并在客户端的请求数据加上一个简单的前缀，将其作为响应返回。图示如下：
 
-![TCP Client - Server Architecture](006tNbRwly1fwgz3b6bpoj30r607qgm6.jpg)
+![TCP Client - Server Architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/raw-tcp-traffic-shaping-with-istio/006tNbRwly1fwgz3b6bpoj30r607qgm6.jpg)
 
 让我们看一下TCP Echo服务端的Go代码：
 
@@ -377,7 +377,7 @@ two Sat Oct 20 04:38:27 UTC 2018
 
 下图能让你很好地了解这个示范的情景：
 
-![Architecture](006tNbRwly1fwhdkuu6sgj30zg0ikmze.jpg)
+![Architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/raw-tcp-traffic-shaping-with-istio/006tNbRwly1fwhdkuu6sgj30zg0ikmze.jpg)
 
 ## 清理
 

@@ -27,7 +27,7 @@ keywords: ["service mesh"]
 
 该报告指出了公司面临的一系列挑战。
 
-![](855e972fly1fto3iki07wj20zh0d9404.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-service-mesh-addresses-3-major-microservices/855e972fly1fto3iki07wj20zh0d9404.jpg)
 
 大量公司既面临着技术上的挑战，同时也面临着组织结构上的挑战。而我将专注于能够用服务网格解决的技术挑战，但值得注意的是，服务网格所做的一件事就是带来一致性，因此可以在团队之间实现相同的愿景，从而减少对某些技能的需求。
 
@@ -47,12 +47,12 @@ keywords: ["service mesh"]
 
 通过服务网格能够获得的另一个有用的功能是收集指标的能力。指标是在各个时间维度上了解应用程序中发生了什么，以及何时它们是健康的或者不健康的关键。服务网格可以从网格中收集遥测数据，并为每一跳产生一致的指标。这样可以更轻松地快速解决问题，并在将来构建更具弹性的应用程序。
 
-![](855e972fly1ftobpzbxnzj20rl0b2mya.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-service-mesh-addresses-3-major-microservices/855e972fly1ftobpzbxnzj20rl0b2mya.jpg)
 
 ## 不同的开发语言和框架
 
 报告受访者指出的另一个主要挑战是在多语言世界中维护分布式架构的挑战。当从单体服务到微服务的转变时，许多公司都面临着一个现实就是，他们必须使用不同的语言和工具来让系统工作起来。大型企业尤其受此影响，因为他们拥有许多大型分布式团队。服务网格通过提供编程语言不可知性来提供一致性，这解决了多语言世界中的不一致性，其中不同的团队（每个团队都有自己的微服务）可能使用不同的编程语言和框架。网格还提供了统一的、覆盖整个应用程序的观测点，用于将可见性和控制性引入应用程序，同时将服务间的通信从隐含的基础架构领域移出到一个可以轻松查看，监视，管理和控制的位置。
 
-![](855e972fly1ftobqt0wv7j20ry0ce0uc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-service-mesh-addresses-3-major-microservices/855e972fly1ftobqt0wv7j20ry0ce0uc.jpg)
 
 微服务很酷，但服务网格使得它更酷。如果您正处于微服务的路途中并且发现难以应付基础架构挑战，那么服务网格可能是正确的答案。如果您对如何充分利用服务网格有任何疑问，请告诉我们，我们的工程团队随时可以与您交流。

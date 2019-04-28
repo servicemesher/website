@@ -11,7 +11,7 @@ categories: ["practice","sofamesh"]
 keywords: ["service mesh","蚂蚁金服","微服务","SOA","SOFA",""]
 ---
 
-![黄挺在GIAC演讲](00704eQkgy1fs9rcu78elj30u00knql3.jpg)
+![黄挺在GIAC演讲](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/migrating-from-classical-soa-to-service-mesh-in-ant-financial/00704eQkgy1fs9rcu78elj30u00knql3.jpg)
 
 >蚂蚁金服在服务化上面已经经过多年的沉淀，支撑了每年双十一的高峰峰值。Service Mesh 作为微服务的一个新方向，在最近两年成为领域的一个大热点，但是如何从经典服务化架构往 Service Mesh 的方向上演进，中间可能会遇到什么样的问题，几乎没有可以借鉴的经验。
 >
@@ -31,11 +31,11 @@ keywords: ["service mesh","蚂蚁金服","微服务","SOA","SOFA",""]
 
 对于多语言的问题来说，Service Mesh 其实就很好地解决了这部分的问题，通过 Service Mesh的方案，我们可以尽量把最多的功能从中间件的客户端中移到 Sidecar 中，这样就可以做到一次实现，就搞定掉所有语言，这个对于基础设施团队来说，在成本和稳定性上都是一个提升。
 
-![SOFA](00704eQkgy1fs9rdr5b6qj30u00c9djg.jpg)
+![SOFA](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/migrating-from-classical-soa-to-service-mesh-in-ant-financial/00704eQkgy1fs9rdr5b6qj30u00c9djg.jpg)
 
 另外的一个问题其实是所有在往云原生架构中转型的公司都会遇到的问题，云原生看起来非常美好，但是我们怎么渐进式的演进到云原生的架构下？特别是对于遗留系统，到底怎么做比较好。当然，一种简单粗暴的方式就是直接用云原生的设施和架构重新写一套，但是这样，投入的成本就非常高，而且重写就意味着可能会引入 Bug，导致线上的稳定性的问题。那么有没有一种方式可以让这些遗留系统非常便捷地享受到云原生带来的好处呢？Service Mesh 其实为我们指明了一个方向，**通过 Service Mesh，我们为遗留系统安上一个 Sidecar，少量地修改遗留系统的配置甚至不用修改遗留系统的配置就可以让遗留系统享受到服务发现，限流熔断，故障注入等等能力。**
 
-![SOFA](00704eQkgy1fs9redau0pj30u00dgtcv.jpg)
+![SOFA](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/migrating-from-classical-soa-to-service-mesh-in-ant-financial/00704eQkgy1fs9redau0pj30u00dgtcv.jpg)
 
 最后我们在蚂蚁金服的服务化的过程中遇到的问题是中间件升级的问题，蚂蚁金融从单体应用演进到服务化的架构，再演进到单元化的架构，再演进到弹性架构，其实伴随了大量中间件升级，每次升级，中间件不用说要出新的版本去提供新的能力，业务系统也需要升级依赖的中间件，这中间再出个 Bug，又得重新升级一遍，不光是中间件研发同学痛苦，应用的研发同学也非常痛苦。
 
@@ -47,7 +47,7 @@ keywords: ["service mesh","蚂蚁金服","微服务","SOA","SOFA",""]
 
 后来蚂蚁自己研发的数据库 OceanBase 也在用一个 Proxy 的方式来屏蔽掉 OceanBase 本身的集群负载，FailOver切换等方面的逻辑，而刚好 Service Mesh 的这种 Sidecar 的模式也是这样的一个思路，这让我们看到将基础设施的能力从应用中下移到 Sidecar 这件事情是一个业界的整体的趋势和方向，通过这种方式应用和中间件的基础设施从此成了两个进程，我们可以针对中间件的基础设施进行单独的升级，而不用和应用的发布升级绑定在一起，这不仅解放了应用研发和基础设施团队，也让基础设施团队的交付能力变地更强，以前可能需要通过半年或者一年甚至更长时间的折腾，才能够将基础设施团队提供的新的能力铺到所有的业务系统中去，现在我们通过一个月的时间，就可以将新能力让所有的业务系统享受到。这也让基础设施团队的中台能力变得更强了。这样我们就可以把我们还是把一些架构当中非常关键的支撑点以及一些逻辑下沉到 Sidecar上面去，因为整个蚂蚁金服的整体架构有非常多的逻辑和能力承载在这一套架构上面的。这些东西我们有一个最大的职责是要支撑它快速向前演进和灵活。
 
-![sofa service mesh](00704eQkgy1fs9rewl7baj30u00snn2v.jpg)
+![sofa service mesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/migrating-from-classical-soa-to-service-mesh-in-ant-financial/00704eQkgy1fs9rewl7baj30u00snn2v.jpg)
 
 ### Service Mesh 的选型
 
@@ -87,7 +87,7 @@ keywords: ["service mesh","蚂蚁金服","微服务","SOA","SOFA",""]
 
 所以，SOFA Mesh 在整体的大图上大概是这样的，我们自研了一个 Golang 的Sidecar，并且把 Mixer 纳入到 Sidecar 中，来防止出现类似于 Istio 那样的性能问题，在 Pilot 和 Auth 这两个角色了，我们选择直接使用Istio 的，然后在上面做一定程度的适配，适配到蚂蚁内部的环境中，然后我们在整个部署上，新增了一个 EdgeSidecar 的角色，来解决跨环境的服务调用的问题。 
 
-![sofa service mesh](00704eQkgy1fs9rguhx74j30u00ii78w.jpg)
+![sofa service mesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/migrating-from-classical-soa-to-service-mesh-in-ant-financial/00704eQkgy1fs9rguhx74j30u00ii78w.jpg)
 
 我知道大家一定对 SOFA Mesh 在蚂蚁内部的落地情况非常感兴趣，目前我们已经落地的场景主要是多语言的场景，解决其他的语言和 SOFA 的通信问题，大约上了二三十个系统。然后我们正在尝试用 SOFA Mesh 去更好地解决服务间调用的安全，以及蓝绿发布的问题，在异构系统通信的这件事情上，我们也在不久的将来会尝试用 SOFA Mesh 去解决。
 
@@ -97,7 +97,7 @@ keywords: ["service mesh","蚂蚁金服","微服务","SOA","SOFA",""]
 
 下面带来的是GIAC大会中蚂蚁金服高级技术专家与现场参会人员进行关于Service Mesh的问答互动，我们精选了几个比较热门的问答分享给大家。
 
-![SOFA演讲会场](00704eQkgy1fs9rhdorabj30u00gu1g5.jpg)
+![SOFA演讲会场](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/migrating-from-classical-soa-to-service-mesh-in-ant-financial/00704eQkgy1fs9rhdorabj30u00gu1g5.jpg)
 
 #### 一、Mesh的高可用和安全，能否详细说明一下？
 

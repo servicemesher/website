@@ -40,7 +40,7 @@ Service Mesh 提供了一种透明的、与编程语言无关的方式，使网�
 
 一般来说，Istio Service Mesh 由两部分组成。1. 由 Envoy 代理组成的数据面板，它能够拦截网络请求，并控制服务之间的通信。2. 支持服务的运行时管理的控制面板，它提供策略实施、遥测数据收集以及证书轮换等功能。
 
-![](006tNc79gy1ft3i9x8n1gj30go0cz0tm.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-future-service-mesh/006tNc79gy1ft3i9x8n1gj30go0cz0tm.jpg)
 
 **图片来源：Istio 项目的 PM，Dan Ciruli**
 
@@ -98,7 +98,7 @@ Istio 的一个重要目标是支持混合型环境。举例来说，用户可�
 
 ## 关于作者
 
-![Jasmine Jaksic](006tNc79gy1ft3i90ydzpj302d02sq2w.jpg)
+![Jasmine Jaksic](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-future-service-mesh/006tNc79gy1ft3i90ydzpj302d02sq2w.jpg)
 
 **Jasmine Jaksic** Jasmine Jaksic 在 Google 担任 [Istio](https://istio.io/) 项目的技术项目经理主管，她在软件产品与服务的开发与支持方面已有15年经验。此外，她也是 [Posture Monitor](https://posturemonitor.org/)的联合创始人之一，该产品的功能是通过 3D 相机进行姿势纠正。她同时也是纽约时报、连线杂志以及赫芬顿邮报的特约撰稿人。欢迎关注她的推特：[@JasmineJaksic](https://twitter.com/JasmineJaksic)。
 

@@ -213,7 +213,7 @@ istio-ingress-7f8468bb7b-pxl94 istio-ingress [2018-01-23T21:01:58.287Z] "GET /.w
 
 
 
-![](61411417ly1fshj4soh0mj20m80j3mzg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-envoy-cert-manager-lets-encrypt-for-tls/61411417ly1fshj4soh0mj20m80j3mzg.jpg)
 
 现在是删除由 Cert-Manager 创建的不需要的东西的时候了。使用您最擅长的 K8s 工具，如仪表板或 kubectl，并从 *istio-system* 命名空间中删除 Service 和 Ingress。它们将被命名为 **cm-istio-ingress-certs-xxxx**。  如果您的证书申请中有许多域名，你应该删除多余的域名。
 
@@ -459,7 +459,7 @@ kubectl -n default apply -f helloworld.yml
 
 请注意，您需要为所有 HTTPS 域名使用一个 Ingress，而为 HTTP 使用一个 Ingress  ...这里仅显示HTTPS：
 
-![](61411417ly1fshj4vatnoj20m80j376n.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-envoy-cert-manager-lets-encrypt-for-tls/61411417ly1fshj4vatnoj20m80j376n.jpg)
 
 验证完成后，Cert-Manager 应该删除 istio-system 命名空间中的 Token-Exchange pod。是的，一旦 Cert-Manager 与Let's Encrypt 服务器达成一致，他们将交换用于续订的永久密钥。无需使用 pod ，甚至 Services 和 Ingress，至少如果你确定你不需要添加或改变证书中的某些东西。
 

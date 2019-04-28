@@ -28,7 +28,7 @@ keywords: ["service mesh","istio","serverless","fn function"]
 
 为了解释这是如何工作的，我们将开始运行一个 Kubernetes 服务（`myapp`）和两个特定版本的应用程序部署（`v1`和`v2`）。
 
-![](61411417ly1fsoyerrbpzj20sa09c74h.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyerrbpzj20sa09c74h.jpg)
 
 在上图中，我们有 `myapp` 一个选择器设置为 Kubernetes 的服务 `app=myapp` ，这意味着它将查找具有 `app=myapp` 标签集的所有 Pod，并将流量发送给它们。基本上，如果您执行此操作，`curl myapp-service` 您将从运行 v1 版本应用程序的 pod 或运行 v2 版本的 pod 获得响应。
 
@@ -38,7 +38,7 @@ keywords: ["service mesh","istio","serverless","fn function"]
 
 进入 Istio 环节。为了能够做到更智能化和基于权重的路由，我们需要安装 [Istio](http://istio.io)，然后将代理注入到我们的每个[容器中](http://istio.io)，如下面的另一个图片所示。下图中的每个 pod 都有一个带有 Istio 代理的容器（用蓝色图标表示）和运行应用的容器。在上图中，我们只有一个容器在每个 pod 中运行——应用程序容器。
 
-![](61411417ly1fsoyg6hkmsj20sa09cglu.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyg6hkmsj20sa09cglu.jpg)
 
 > 请注意，Istio 比图中显示的要多得多。我没有展示在 Kubernetes 集群上部署的其他 Istio Pod 和服务——注入的 Istio 代理与这些 Pod 和服务进行通信，以便知道如何正确路由流量。有关 Istio 不同部分的深入解释，请参阅[此处](https://istio.io/docs/concepts/traffic-management/overview/)的文档。
 
@@ -46,11 +46,11 @@ keywords: ["service mesh","istio","serverless","fn function"]
 
 就像 Kubernetes 一样，Istio 路由规则也是使用 YAML 定义的，它们看起来像这样：
 
-![](61411417ly1fsoyh7i2qnj20o60hcta2.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyh7i2qnj20o60hcta2.jpg)
 
 上述路由规则接收请求`myapp-service`并将其重新路由到标记为 Pod 的请求`version=v1` 。这就是具有上述路由规则的图表的样子：
 
-![](61411417ly1fsoyhoj9ngj20sa0gkaai.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyhoj9ngj20sa0gkaai.jpg)
 
 底部的 Istio 大图标代表 Istio 部署/服务，其中包括正在读取的路由规则。这些规则然后用于重新配置在每个 pod 内运行的 Istio 代理 sidecar。
 
@@ -62,7 +62,7 @@ keywords: ["service mesh","istio","serverless","fn function"]
 
 我们将从 Kubernetes 上的一些 [Fn](http://fnproject.io) 片段的基本图表开始。您可以使用 [Helm chart](http://github.com/fnproject/fn-helm) 将 Fn 部署在您的 Kubernetes 集群之上。
 
-![](61411417ly1fsoyhzsbtfj20ca09jq33.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyhzsbtfj20ca09jq33.jpg)
 
 图表顶部的 Fn API 服务是 Fn 的入口点，它用于管理您的 Function（创建，部署，运行等）——这是`FN_API_URL`在 Fn 项目中引用的 URL 。
 
@@ -109,7 +109,7 @@ cd ..
 
 打开这`func.go`两个目录并更新返回的消息以包含版本号——我们这样做的原因是可以快速区分哪个 Function 被调用。以下是v1的`func.go`的样子（`Hello V1`）：
 
-![](61411417ly1fsoyii51b6j215u0fedhe.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyii51b6j215u0fedhe.jpg)
 
 更改完成后就可以将这些功能部署到在 Kubernetes 上运行的 Fn 服务。为此，您必须将`FN_REGISTRY`环境变量设置为指向您的 Docker 镜像仓库的用户名。
 
@@ -156,7 +156,7 @@ $ curl http://localhost/r/hello-app/v1
 
 这是图中表示的上述想法：
 
-![](61411417ly1fsoyiscib2j20ce0jogm3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyiscib2j20ce0jogm3.jpg)
 
 我们有一个服务代表我们的应用程序和两个特定于版本的部署，并直接路由到 Fn 服务中运行的 Function 。
 
@@ -197,17 +197,17 @@ location / {
 
 以下是 deployment 文件的摘录，以显示我们如何设置`UPSTREAM`、 `ROUTE`  环境变量和设置标签。
 
-![](61411417ly1fsoyjnxkj2j20si0m60uq.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyjnxkj2j20si0m60uq.jpg)
 
 `UPSTREAM`和`ROUTE`环境变量由 simple-proxy 容器读取，Nginx 的配置文件会根据这些值生成。
 
 服务的 YAML 文件也没什么特别，我们只是将选择器设置为`app: hello-app` ：
 
-![](61411417ly1fsoyk1a1pmj20si0jata9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyk1a1pmj20si0jata9.jpg)
 
 最后一部分是 Istio ingress，我们设置了将所有传入流量路由到后端服务的规则：
 
-![](61411417ly1fsoyki4sz2j20si0jagnc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoyki4sz2j20si0jagnc.jpg)
 
 要部署这些，您可以使用`kubectl`来部署 ingress 和服务，使用`istioctl kube-inject`来注入 Istio 代理。
 
@@ -243,19 +243,19 @@ $ while true; do sleep 1; curl http://localhost:8082;done
 
 在我们的服务和部署已启动并运行（和正在运行）的情况下，我们可以为 Fn 函数创建 Istio 路由规则。让我们以一个简单的 v1 规则开始，该规则将所有对 `hello-app-service` 的调用（`weight: 100`）路由到标记为的 `v1`的 pod 上：
 
-![](61411417ly1fsoykynfcsj20si0hcwfx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoykynfcsj20si0hcwfx.jpg)
 
 您可以通过运行应用此规则`kubectl apply -f v1-rule.yaml`。查看运行中的路由的最佳方法是运行一个连续调用端点的循环——这样您就可以看到混合（v1/v2）和全部v1的响应。
 
 就像我们将 `v1` 的路由规则定义为 100% 的权重那样，我们可以类似地定义一条规则将所有内容路由到`v2`，或者将规则路由 50％ 的流量 `v1` 和 50％ 的流量`v2`，如下面的演示所示。
 
-![](61411417ly1fsoysfirnig20f80a0dli.gif)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsoysfirnig20f80a0dli.gif)
 
 一旦我证明了这一点，简单的 curl 命令，好了，我停下来：）
 
 幸运的是，[Chad Arimura](https://medium.com/@carimura/the-importance-of-devops-to-serverless-f671070efb9) 在他关于 DevOps 对无服务器的重要性的文章中进一步说明了这一点（警报：DevOps 不会消失）。他使用 Spinnaker 对在实际 Kubernetes 集群上运行的 Fn 函数进行加权蓝绿部署。看看他的演示视频：
 
-![](61411417ly1fsozs9eudag20w00k0kk0.gif)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/traffic-routing-between-fn-functions-using-fn-project-and-istio-fd/61411417ly1fsozs9eudag20w00k0kk0.gif)
 
 ### 结论
 

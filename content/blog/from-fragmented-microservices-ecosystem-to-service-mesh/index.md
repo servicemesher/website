@@ -18,7 +18,7 @@ keywords: ["service mesh","服务网格","微服务"]
 
 在过去几年中，我们注意到应用程序架构正在迅速转变为分布式微服务架构——单体和庞大的应用程序被分解为更小的单个服务，其可被独立修改、构建、部署和管理。这种模式的主要优点就是简洁和快速，同时由于其对其他服务的依赖性很小或者完全没有依赖，更易于升级和独立扩展。这与敏捷和DevOps理念非常吻合，这种模式也已经被许多规模化的Web公司成功采用。过去的许多年中，这些公司中的大多数都能够很好地采用这种模式，但是近几年中成功将这种模式发扬光大的两大推手非Docker和Kubernetes莫属。Docker简化了将微服务构建为Linux容器的过程，Kubernetes则能够以资源优化的方式来部署、管理和扩展服务。
 
-![](006tNbRwly1fy6290u94jj30p70cn763.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/from-fragmented-microservices-ecosystem-to-service-mesh/006tNbRwly1fy6290u94jj30p70cn763.jpg)
 
 ## 应用架构演进
 
@@ -26,13 +26,13 @@ keywords: ["service mesh","服务网格","微服务"]
 
 虽然微服务架构提供了灵活性，但其也带有复杂性。Kubernetes在部署和管理微服务方面发挥了非常重要的作用，但我们需要的不仅仅是单一的运行在生产环境中的云原生应用程序——还需要在服务发现、安全性、流量管理等方面需要更加深入的了解。尤其是在相互通信的成千上百个服务经常被删除、生产、扩展和更新的复杂环境下，深入的了解更加有必要性。
 
-![](006tNbRwly1fy6296ogt3j30qf0b9wfx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/from-fragmented-microservices-ecosystem-to-service-mesh/006tNbRwly1fy6296ogt3j30qf0b9wfx.jpg)
 
 ## 微服务架构面临的挑战
 
 这种规模化和动态化对于早期运行单体程序和管理应用程序的基础设施带来了具体的转变。为支持这种动态环境，新一代架构需要在生态系统中补充大量的新技术。为了交付所有的用户场景，我们需要在基础架构栈的每个级别上提供多个解决方案。根据需要，基础架构人员开始将这些技术集成到平台上，但这也意味着程序开发人员需要额外的负担来支持这些技术。
 
-![](006tNbRwly1fy629doo63j30rd0cedif.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/from-fragmented-microservices-ecosystem-to-service-mesh/006tNbRwly1fy629doo63j30rd0cedif.jpg)
 
 ## 基础架构栈高层视图
 

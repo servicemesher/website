@@ -28,7 +28,7 @@ Istio 是 IBM、Google 和 Lyft 合作创建的项目，旨在帮助您应对这
 
 ## 流程
 
-![IStio部署和使用流程图](00704eQkgy1fs1ew7msf1j32kn19zwmb.jpg)
+![IStio部署和使用流程图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/manage-microservices-traffic-using-istio/00704eQkgy1fs1ew7msf1j32kn19zwmb.jpg)
 
 1. 用户在 Kubernetes 上部署其配置的应用程序。应用程序 `BookInfo` 由四个微服务组成。该应用中的微服务使用不同的语言编写——Python、Java、Ruby 和 Node.js。`Reivew` 微服务使用 Java 编写，有三个不同的版本。
 2. 为了使应用程序能够利用 Istio 的功能，用户将向微服务中注入 Istio envoy。Envoy 使用 sidecar 的方式部署在微服务中。将 Envoy 注入到微服务中也意味着使用 Envoy sidecar 管理该服务的所有入口和出口流量。然后用户访问运行在 Istio 上的应用程序。

@@ -15,7 +15,7 @@ keywords: ["service mesh","服务网格","knative","serverless"]
 
 [Knative](https://github.com/knative) 是一个基于 Kubernetes 的，用于构建、部署和管理现代 serverless 应用的平台。*Getting Started with Knative* 是一本由 Pivotal 公司赞助 O’Reilly 出品的电子书，本书中文版由 ServiceMesher 社区自发翻译，从今天起 ServiceMesher 社区将陆续为大家推出本书的中文译文。
 
-![](006tKfTcly1g0yocivk0jj30p011iat3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/knative-overview/006tKfTcly1g0yocivk0jj30p011iat3.jpg)
 
 # 前言
 

@@ -31,7 +31,7 @@ keywords: ["gitops","kubecon","git","CI/CD","Istio","weavecloud"]
 
 通过使用 Git 这样的声明式工具可以对整套配置文件做版本控制。通过将 Git 作为唯一的配置来源，可以很方便的复制整套基础架构，从而将系统的平均恢复时间从几小时缩短到几分钟。
 
-![](00704eQkgy1fruc9ao41vj317o0oqq80.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gitops-for-istio-manage-istio-config-like-code/00704eQkgy1fruc9ao41vj317o0oqq80.jpg)
 
 ### GitOps 赋能开发人员拥抱运维
 
@@ -53,11 +53,11 @@ keywords: ["gitops","kubecon","git","CI/CD","Istio","weavecloud"]
 
 通过 operator 模式，集群将始终与 Git 中签入的内容保持同步。Weave Flux 是开源的，它是使用 Istio 演示下面的金丝雀部署的基础，您可以使用 operator 管理集群中的更改。
 
-![](00704eQkgy1fruc9qogakj312t0ls41d.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gitops-for-istio-manage-istio-config-like-code/00704eQkgy1fruc9qogakj312t0ls41d.jpg)
 
 无论是开发流程还是生产流程，还是从预发到合并到生产，operator 都会将更改 pull 到集群中，即使是有多个更改也能以原子的方式部署。
 
-![](00704eQkgy1fruca1y7xqj312p0jmn09.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gitops-for-istio-manage-istio-config-like-code/00704eQkgy1fruca1y7xqj312p0jmn09.jpg)
 
 ### Istio 的 GitOps 工作流程
 
@@ -65,7 +65,7 @@ keywords: ["gitops","kubecon","git","CI/CD","Istio","weavecloud"]
 
 Istio 是一年前发布的服务网格。它是一个专用的基础设施层，用于为微服务架构中的所有服务间交互提供服务。Istio 中的所有操作都是通过声明式配置文件驱动的。也就是说像 Istio 这样的服务网格可以让开发人员在 Git 中像管理代码一样完全的管理服务行为。
 
-![](00704eQkgy1frucacq5nij317u0oo46y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gitops-for-istio-manage-istio-config-like-code/00704eQkgy1frucacq5nij317u0oo46y.jpg)
 
 借助 Git 工作流程，开发人员可以对 Istio 中的任何内容进行建模，包括服务行为及其交互，如超时、断路器、流量路由、负载均衡及 A/B 测试和金丝雀发布等。
 
@@ -80,7 +80,7 @@ Istio 有四个广泛的领域应用，都是通过声明式配置驱动的：
 
 因为所有这些领域都可以跨越组织内的不同团队，所以这使得在 Istio 上管理应用程序尤其具有挑战性。
 
-![](00704eQkgy1frucalfge7j317u0oq7aq.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gitops-for-istio-manage-istio-config-like-code/00704eQkgy1frucalfge7j317u0oq7aq.jpg)
 
 这些配置驱动的很多设置是跨团队的。例如，有的团队想用 Zipkin 进行跟踪，而另一个团队可能想用 Jaeger。这些决策可以针对某一项服务进行，也可以跨服务进行。当决策跨越团队时，审批工作流程将变得更加复杂，并不总是原子性的。金丝雀发布不是原子的一次性事情。
 
@@ -92,7 +92,7 @@ Stefan Prodan 向我们展示了如何使用带有 Weave Flux 和 Prometheus 的
 
 但通过使用 GitOps 工作流程，您可以通过 Git 控制您的金丝雀，而不是设置两个独立的服务器。当出现问题时，可以回滚到旧版本，并且可以在金丝雀部署分支上进行迭代，并继续发布，直到满足预期为止。
 
-![](00704eQkgy1frucatn3n3j312q0lw102.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gitops-for-istio-manage-istio-config-like-code/00704eQkgy1frucatn3n3j312q0lw102.jpg)
 
 #### 在 Weave Cloud 中，Git 控制的金丝雀发布具有完全可观察性
 

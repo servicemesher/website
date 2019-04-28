@@ -11,7 +11,7 @@ categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 
-![](006tNbRwly1fwka4u4wtfj31kw0tb7wi.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/006tNbRwly1fwka4u4wtfj31kw0tb7wi.jpg)
 
 > 用[Istio](https://istio.io/zh)治理服务时须通过istioctl或kubectl，这种方式可能存在一些问题。因此小米武汉研发中心推出Naftis，帮助用户更轻松地管理Istio。
 
@@ -168,7 +168,7 @@ npm run dev
 
 Dashboard页面集成了一些常用的图表，比如请求成功率、4XX请求数量等。
 
-![集成了一些常用的图表，比如请求成功率、4XX请求数量等](889d06cbgy1fwjbpzdo15j20zk0j3gp9.jpg)
+![集成了一些常用的图表，比如请求成功率、4XX请求数量等](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzdo15j20zk0j3gp9.jpg)
 
 ### 服务管理
 
@@ -176,13 +176,13 @@ Dashboard页面集成了一些常用的图表，比如请求成功率、4XX请�
 
 服务详情页面可以查看查看已部署到Kubernetes中服务信息。
 
-![查看已部署到k8s中服务信息](889d06cbgy1fwjbpzlkpaj20zk0sn798.jpg)
+![查看已部署到k8s中服务信息](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzlkpaj20zk0sn798.jpg)
 
 #### 服务Pod和拓扑图等
 
 服务详情页面可以查看指定服务Pod和拓扑图等信息。
 
-![Services-Pod](889d06cbgy1fwjbpzdu3kj20zk0tg78s.jpg)
+![Services-Pod](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzdu3kj20zk0tg78s.jpg)
 
 ### 任务模板管理
 
@@ -190,39 +190,39 @@ Dashboard页面集成了一些常用的图表，比如请求成功率、4XX请�
 
 任务模板列表也可以查看已经添加好的任务模板卡片列表。
 
-![任务模板列表](889d06cbgy1fwjbpze4dxj20zk0hqad7.jpg)
+![任务模板列表](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpze4dxj20zk0hqad7.jpg)
 
 #### 查看指定模板
 
 点击“查看模板”可以查看指定模板信息。
 
-![查看指定模板](889d06cbgy1fwjbpzgotbj20zk0io417.jpg)
+![查看指定模板](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzgotbj20zk0io417.jpg)
 
 #### 新增模板
 
 点击“新增模板”可以向系统中新增自定义模板。
 
-![新增模板](889d06cbgy1fwjbpzk3gkj20zk0ion0d.jpg)
+![新增模板](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzk3gkj20zk0ion0d.jpg)
 
 #### 创建任务
 
 初始化变量值。
 
-![创建任务-第一步](889d06cbgy1fwjbpzcuinj20zk0iota3.jpg)
+![创建任务-第一步](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzcuinj20zk0iota3.jpg)
 
 确认变量值。
 
-![创建任务-第二步](889d06cbgy1fwjbpzibuqj20zk0ioabm.jpg)
+![创建任务-第二步](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzibuqj20zk0ioabm.jpg)
 
 提交创建任务的分步表单。
 
-![创建任务-第三步](889d06cbgy1fwjbpzifhzj20zk0ix75v.jpg)
+![创建任务-第三步](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzifhzj20zk0ix75v.jpg)
 
 #### Istio诊断
 
 Istio诊断页面可以查看Istio Service和Pod状态。
 
-![查看Istio状态](889d06cbgy1fwjbpzmzflj20zk0v5dlf.jpg)
+![查看Istio状态](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/naftis-istio-dashboard-xiaomi/889d06cbgy1fwjbpzmzflj20zk0v5dlf.jpg)
 
 ## Docker镜像
 

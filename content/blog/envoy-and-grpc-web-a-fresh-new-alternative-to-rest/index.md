@@ -26,7 +26,7 @@ keywords: ["service mesh","服务网格","envoy","grpc-web"]
 
 下图展示了基于gRPC服务架构构建Web App的两种方式。左边是传统的REST方式。右边是gRPC-Web方式。
 
-![](005UD0i6ly1fzl31y3zjdj31jk0drdib.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-and-grpc-web-a-fresh-new-alternative-to-rest/005UD0i6ly1fzl31y3zjdj31jk0drdib.jpg)
 
 左图所示，REST API只是作为Web App和后端gRPC服务的连接点。在大部分场景下，REST 服务就是简单的将HTTP调用转换成gRPC调用。
 
@@ -44,7 +44,7 @@ keywords: ["service mesh","服务网格","envoy","grpc-web"]
 
 下图中展示了Envoy结合gRPC-Web使用。图中Web App调用了一个gRPC服务，该服务又依赖另外两个gRPC服务。Envoy 将 HTTP/1.1 请求转换成 HTTP/2 请求。底层其实还是需要进行HTTP协议的转换，但客户端和服务端都不需要考虑HTTP层的问题。
 
-![](005UD0i6ly1fzl32s48tnj31ep0lemyf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-and-grpc-web-a-fresh-new-alternative-to-rest/005UD0i6ly1fzl32s48tnj31ep0lemyf.jpg)
 
 gRPC-Web明显优于REST，因为它只需开发者创建一个Envoy并做一些基础配置，而不需要自己创建转换层。
 

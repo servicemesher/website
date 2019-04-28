@@ -28,7 +28,7 @@ keywords: ["service mesh","服务网格","envoy"]
 
 Envoy目前不支持任何浮点统计数据。
 
-![](006tNbRwly1fxv00zgfu2j30m804ugmh.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv00zgfu2j30m804ugmh.jpg)
 
 <center>Envoy生成很多对调试分布式系统有用的数据！</center>
 
@@ -50,7 +50,7 @@ Envoy统计子系统的总体目标如下：
 
 ## 数据架构
 
-![](006tNbRwly1fxv13dqf7mj30m808zwf9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv13dqf7mj30m808zwf9.jpg)
 
 <center>图1：高级统计架构，蓝色统计数据显示了一个作用域分组。</center>
 
@@ -88,7 +88,7 @@ stat存储是Envoy内部的一个单例对象，并提供了一个简单的接�
 
 #### 统计项
 
-![](006tNbRwly1fxv1793dqqj30m8028glv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv1793dqqj30m8028glv.jpg)
 
 <center>图2：共享内存中单独的计数器/计量统计项</center>
 
@@ -102,7 +102,7 @@ stat存储是Envoy内部的一个单例对象，并提供了一个简单的接�
 
 #### 存储
 
-![](006tNbRwly1fxv1e9mvjdj30m80f1gn7.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv1e9mvjdj30m80f1gn7.jpg)
 
 <center>图3:线程本地热重启支持的存储体系结构</center>
 

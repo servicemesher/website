@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["service mesh","服务网格"]
 ---
 
-![](007ackX3ly1frux62q06sj333415oqv5.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-path-to-service-mesh/007ackX3ly1frux62q06sj333415oqv5.jpg)
 
 当我们谈论服务网格的时候，有几个问题经常被提及。这些问题的范围覆盖从简单的了解服务网格的历史，到产品和架构相关的比较深入的技术问题。
 

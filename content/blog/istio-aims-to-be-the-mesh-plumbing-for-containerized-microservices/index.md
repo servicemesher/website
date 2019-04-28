@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["service mesh","IBM","Google","Istio"]
 ---
 
-![](0069RVTdly1fupfdbzbm4j30iu0altbn.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-aims-to-be-the-mesh-plumbing-for-containerized-microservices/0069RVTdly1fupfdbzbm4j30iu0altbn.jpg)
 
 > 本文原标题为：Istio目标是成为容器化微服务的网状管道
 
@@ -51,7 +51,7 @@ Istio还有自己的API，允许用户将其插入现有的后端系统，例如
 
 根据谷歌的说法，Istio的监控功能使用户能够测量服务之间的实际流量，例如每秒请求数，错误率和延迟，还可以生成依赖关系图，以便用户可以看到服务如何相互影响。
 
-![](0069RVTdly1fupgnkp2owj30iu08rwfg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-aims-to-be-the-mesh-plumbing-for-containerized-microservices/0069RVTdly1fupgnkp2owj30iu08rwfg.jpg)
 
 通过Envoy sidecar代理，Istio还可以在每个服务调用时使用双向TLS身份验证（mTLS），加密并使用户能够在基础架构范围内对每个调用进行授权。
 

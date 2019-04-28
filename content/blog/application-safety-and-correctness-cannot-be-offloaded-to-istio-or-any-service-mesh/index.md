@@ -68,7 +68,7 @@ Istio 建立在容器和 Kubernetes 的一些目标之上：提供有价值的�
 
 例如：在 Saltzer 的论文中，他们使用从应用程序 A 传输文件到应用程序 B 的示例：
 
-![](006tNbRwgy1fuibtn8kvfj31fc0v2ju4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwgy1fuibtn8kvfj31fc0v2ju4.jpg)
 
 我们需要做什么（安全）来保证文件被正确的传送到？在图中的任何一点都有能出现错误：
 
@@ -78,7 +78,7 @@ Istio 建立在容器和 Kubernetes 的一些目标之上：提供有价值的�
 
 我们可以进行优化，例如使用更可靠的传输，如 TCP 协议或消息队列，但是 TCP 不知道“正确传输文件”的语意，所以我们期望的最好结果至少是当我们在网络上处理事情时，网络是可靠的。
 
-![](006tNbRwgy1fuiihqrv73j31es0eqjsf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwgy1fuiihqrv73j31es0eqjsf.jpg)
 
 为了完整的实现端到端的正确性，我们可能需要使用一些类似文件校验的东西，与文件一起在文件初始化时写入，然后在 B 接收文件时校验其校验和。然而，我们在校验传输的正确性（实现细节），其职责在于找出解决方案并使其正确，而不是使用 TCP 或者消息队列。
 
@@ -103,7 +103,7 @@ Istio 建立在容器和 Kubernetes 的一些目标之上：提供有价值的�
 
 可以使用一个简单的例子，”在购物车中添加一个项目“，我们可以来说明这个概念：
 
-![](006tNbRwgy1fuikdn3j02j31ks0oa77e.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwgy1fuikdn3j02j31ks0oa77e.jpg)
 
 当一个用户在点击“加入购物车”功能时，用户期望看到的是商品已经加入到他们的购物车中。在系统中，这可能涉及到对推荐引擎的协调、调用顺序（嘿，我们把它加入到购物车中了，想知道是否计算推荐报价来配合它）、库存服务和其他服务等，然后再调用服务插入购物车。我们需要能够将消息转换到不同的后端，处理失败（并回滚我们发起的任何更改），并且在每个服务中我们都需要可以处理重复。如果由于某种原因，调用变得很慢，但用户又再次点击了“加入购物车”时怎么办呢？如果用户这么做了，那么再多可靠的基础设施也拯救不了我们；我们需要在应用程序中检测和实现重复检查/幂等服务。
 
@@ -135,11 +135,11 @@ Istio 建立在容器和 Kubernetes 的一些目标之上：提供有价值的�
 
 在过去，我们试图将这些领域中的职责混合在一起。我们会做一些事情，比如把所有东西都推入集中式基础设施中，这样它基本上就100%可用的（应用程序网络+应用系统集成）。我们将应用程序的关注点放在集中的基础设施中（它本应该使我们更加敏捷），但是当需要对应用程序做快速的更改时，却遇到了瓶颈和僵化的问题。这些动态体现在我们实现企业服务总线（ESB）的方式上：
 
-![](006tNbRwly1fuit5y2mn6j311g0x418y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwly1fuit5y2mn6j311g0x418y.jpg)
 
 或者，我认为大型云厂商（Netflix、Amazon、Twitter 等）以及认识到了这些模式的“应用程序职责”方面，并将应用程序网络代码混合到应用程序中。想想像 Netflix OSS ，有用于断路器、客户端负载均衡、服务发现等不同的库。
 
-![](006tNbRwly1fuitn6o25ij30yy0x0408.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwly1fuitn6o25ij30yy0x0408.jpg)
 
 如你所知，围绕应用程序网络的 Netflix OSS 库非常关注 Java。当组织开始采用 Netflix OSS 以及类似spring-cloud-netflix 这样的衍生产品时，他们就会遇到这样一个事实：一旦开始添加其他语言时，操作这样的架构就变的令人望而却步了。Netflix 已经非常成熟了并且实现了自动化，但其他公司并不是 Netflix 。在尝试操作应用程序库和框架来解决应用程序联网问题是遇到的一些问题：
 
@@ -151,7 +151,7 @@ Istio 建立在容器和 Kubernetes 的一些目标之上：提供有价值的�
 
 Istio 和服务网格的总体目标是解决应用程序网络类问题。将这些问题的解决方案迁移到服务网格中是可操作性的优化。但这并不意味着它不再是应用程序的责任，而是意味着这些功能的实现存在于进程之外了，并且必须是可配置的。
 
-![](006tNbRwly1fuiuklgkjxj31060wyt9g.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwly1fuiuklgkjxj31060wyt9g.jpg)
 
 通过这样做，我们可以通过以下操作来优化可操作性:
 
@@ -175,7 +175,7 @@ Istio 有助于解决应用程序网络类问题，但是应用程序集成类�
 - Retries, timeouts
 - [Backend/legacy systems integration](https://github.com/apache/camel/blob/master/components/readme.adoc)
 
-![](006tNbRwly1fuiv4suzo8j316m0xataq.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwly1fuiv4suzo8j316m0xataq.jpg)
 
 其他框架包括 [Spring Integration](https://spring.io/projects/spring-integration)，甚至还有 WSO2 中一个有趣的新编程语言 [Ballerina](https://ballerina.io/) 。请注意，重用现有的模式和构造是非常好的，特别是当这些模式相对于您选择的语言来说成熟时，但是这些模式都不需要您使用框架。
 
@@ -183,7 +183,7 @@ Istio 有助于解决应用程序网络类问题，但是应用程序集成类�
 
 关于微服务，我有一个朋友提出了一个问题，关于微服务的“智能端点和dumb pipe”这句话很吸引人，但很简单，“让基础设施智能化”是个前提：
 
-![](006tNbRwly1fuivligg5sj30g50cygmn.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-safety-and-correctness-cannot-be-offloaded-to-istio-or-any-service-mesh/006tNbRwly1fuivligg5sj30g50cygmn.jpg)
 
 管道仍然是dumb的；我们不是通过使用服务网格将应用程序的正确性和安全性的应用程序逻辑强制加入基础设施中。我们只是使它更可靠，优化运维方面，并简化应用程序必须实现的内容（不必为此负责）。如果你不认同或者有其他想法，请随时在 Twitter 上留言或联系 [@christianposta](https://twitter.com/christianposta) 。
 

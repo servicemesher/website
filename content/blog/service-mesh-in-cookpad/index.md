@@ -63,7 +63,7 @@ Cookpad 中的服务网格使用 Envoy 作为 data-plane，并创建了我们自
 
 关于负载均衡，我最初是为 Internal ELB 设计的，但 gRPC 应用程序的基础架构也符合要求（我们的 gRPC 应用程序已经在生产环境中使用此机制），我们使用 SDS（Service Discovery Service）API（简单地使用内部 ELB（NLB 或 TCP 模式 CLB）的 服务端侧负载均衡不均衡而在性能方面具有缺陷，并且在可获得的度量方面也是不够的）准备了客户端负载均衡。我们在 ECS 任务中部署了一个 sidecar 容器，用于对应用程序容器执行健康检查并在 SDS API 中注册连接目标信息。
 
-![](61411417ly1fs7pzdtqd9j20n60dq40a.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pzdtqd9j20n60dq40a.jpg)
 
 度量指标（metric）的配置如下所示：
 
@@ -76,31 +76,31 @@ Cookpad 中的服务网格使用 Envoy 作为 data-plane，并创建了我们自
 
 如果您在不使用 ECS 或 Docker 的情况下直接在 EC2 实例上运行应用程序进程，则 Envoy 进程作为守护进程直接在实例中运行，但架构几乎相同。有一个原因是没有将 Prometheus 直接设置为 Envoy ，因为我们仍然无法从 Envoy 的 Prometheus 兼容端点中提取[直方图度量](https://github.com/envoyproxy/envoy/issues/1947)。由于这将在未来得到改善，我们计划在当时消除 stasd\_exporter。
 
-![](61411417ly1fs7pv3rapdj20sg0qvgpb.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pv3rapdj20sg0qvgpb.jpg)
 
 在 Grafana 上，仪表板和 Envoy 的整个仪表板都为每项服务做好准备，例如上游 RPS 和超时发生。我们还将准备一个服务大小和服务粒度的仪表板。
 
 每个服务的仪表板：
 
-![](61411417ly1fs7pv4dqikj20sg0mp11e.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pv4dqikj20sg0mp11e.jpg)
 
 例如，上游故障时的断路器相关指标：
 
-![](61411417ly1fs7pv4kw6vj20i40d9q41.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pv4kw6vj20i40d9q41.jpg)
 
 Envoy 的仪表板：
 
-![](61411417ly1fs7pv4rqrij20sg0qa49n.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pv4rqrij20sg0qa49n.jpg)
 
 使用 Netflix 开发的 Vizceral 可视化服务配置。为了实现，我们开发了 [promviz](https://github.com/nghialv/promviz) 和 [promviz-front](https://github.com/mjhd-devlion/promviz-front) 的 fork（为了方便用 nginx 交付并符合 Cookpad 中的服务组合）。由于我们仅在某些服务中引入，因此当前显示的节点数量很少，但我们提供了以下仪表板。
 
 每个 region 的服务配置图、RPS、错误率：
 
-![](61411417ly1fs7pv47xzjj20sg0gxdjd.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pv47xzjj20sg0gxdjd.jpg)
 
 特定服务的 downstream/upstream：
 
-![](61411417ly1fs7pv3xymcj20sg0i2acs.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pv3xymcj20sg0i2acs.jpg)
 
 另外，作为服务网格的一个子系统，你必须部署网关从开发商手中获得 staging 环境的 gRPC 服务器应用程序（假设使用客户端负载均衡进行访问，我们需要一个组件来解决它）。它是通过将 SDS API 和 Envoy 与管理称为 [hako-console](http://techlife.cookpad.com/entry/2018/04/02/140846) 的内部应用程序的软件相结合而构建的。
 
@@ -109,7 +109,7 @@ Envoy 的仪表板：
 - Gateway app 根据响应从 SDS API 获取实际连接目的地
 - 从开发人员手中引用 AWS ELB Network Load Balancer，Gateway app 执行路由
 
-![](61411417ly1fs7pv42jzej20sg0mmtaz.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-in-cookpad/61411417ly1fs7pv42jzej20sg0mmtaz.jpg)
 
 ## 效果
 

@@ -25,7 +25,7 @@ keywords: ["service mesh","istio"]
 
 整个配置生效的流程图如下所示：
 
-![](00704eQkgy1fsy1yl5d3hj30jg0g73zi.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-deepin-part2-serivce-management-workflow/00704eQkgy1fsy1yl5d3hj30jg0g73zi.jpg)
 
  配置文件解析
 
@@ -366,7 +366,7 @@ func (ds *DiscoveryService) Register(container *restful.Container) {
 
 结合上文中贴出的流程图
 
- ![](00704eQkgy1fsy28k49sdj30jg0g73zi.jpg)
+ ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-deepin-part2-serivce-management-workflow/00704eQkgy1fsy28k49sdj30jg0g73zi.jpg)
 
 **总结如下**
 

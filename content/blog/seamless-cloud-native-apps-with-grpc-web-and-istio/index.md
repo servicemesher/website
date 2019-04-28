@@ -18,9 +18,9 @@ keywords: ["service mesh","服务网格","istio","grpc","gprc-web"]
 
 [gRPC-Web](https://github.com/grpc/grpc-web)使Web应用能够通过类似于Envoy的代理访问gRPC后端。Envoy是Istio的默认代理，因此，我们可以利用Istio的[EnvoyFilter](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#EnvoyFilter)构件来创建无缝连接的云原生应用。
 
-![grpc](006tNbRwly1fxnm8x3odlj308c02zdfy.jpg) 
+![grpc](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/seamless-cloud-native-apps-with-grpc-web-and-istio/006tNbRwly1fxnm8x3odlj308c02zdfy.jpg) 
 
-![istio](006tNbRwly1fxnm9cn3xjj302s046748.jpg)
+![istio](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/seamless-cloud-native-apps-with-grpc-web-and-istio/006tNbRwly1fxnm9cn3xjj302s046748.jpg)
 
 ## 介绍
 
@@ -39,7 +39,7 @@ keywords: ["service mesh","服务网格","istio","grpc","gprc-web"]
 
 让我们进一步理解emoji服务的最终架构是什么样子。
 
-![architecture](006tNbRwly1fxnmaqiaqfj30gc08yaax.jpg)
+![architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/seamless-cloud-native-apps-with-grpc-web-and-istio/006tNbRwly1fxnmaqiaqfj30gc08yaax.jpg)
 
 简而言之，只要用户提供一些文本，Web应用就会利用gRPC-Web库向Istio Gatway发送HTTP请求。然后，Istio网关将HTTP请求路由到emoji服务旁运行的Proxy sidecar，后者使用Envoy的[gRPC-Web](https://www.envoyproxy.io/docs/envoy/latest/configuration/http_filters/grpc_web_filter) filter将HTTP调用转换成gRPC调用。
 
@@ -457,11 +457,11 @@ Serving HTTP on 0.0.0.0 port 8080 ...
 
 如果一切顺利，你将拥有一个功能完整的基于gRPC-Web的Web应用，如下所示。
 
-![web](006tNbRwly1fxoshsy5ltg30bc02a0sz.gif)
+![web](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/seamless-cloud-native-apps-with-grpc-web-and-istio/006tNbRwly1fxoshsy5ltg30bc02a0sz.gif)
 
 如果你在Chrome等浏览器上打开开发者工具，你将会看到如下所示的gRPC-Web HTTP请求。
 
-![chrome](006tNbRwly1fxou9b402nj30in0hi0uo.jpg)
+![chrome](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/seamless-cloud-native-apps-with-grpc-web-and-istio/006tNbRwly1fxou9b402nj30in0hi0uo.jpg)
 
 ## 结论
 

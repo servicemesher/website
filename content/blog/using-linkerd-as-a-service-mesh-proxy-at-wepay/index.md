@@ -20,7 +20,7 @@ keywords: ["service mesh","linkerd","wepay","服务网格"]
 
 在本系列的第一部分中，我们将看看曾使用过的一些路由和负载均衡选项并将它们与服务网格代理进行比较，以及它们是如何改变我们基础设施的运行方式的。
 
-![数据面板使用sidecar代理模式](b4e0632fgy1fsfoiygfruj20ie0gfgmw.jpg)
+![数据面板使用sidecar代理模式](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/b4e0632fgy1fsfoiygfruj20ie0gfgmw.jpg)
 
 图1.数据面板使用sidecar代理模式
 
@@ -36,7 +36,7 @@ keywords: ["service mesh","linkerd","wepay","服务网格"]
 
 在WePay我们目前正在GKE中运行许多微服务（Sx）。 在同一个数据中心一些微服务与其他微服务通信，如下图所示：
 
-![使用GKE和NGINX的简单负载均衡](b4e0632fgy1fsfoiypj5yj20b60d974p.jpg)
+![使用GKE和NGINX的简单负载均衡](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/b4e0632fgy1fsfoiypj5yj20b60d974p.jpg)
 
 图2.使用GKE和NGINX的简单负载均衡
 
@@ -57,7 +57,7 @@ keywords: ["service mesh","linkerd","wepay","服务网格"]
 
 Envoy和Linkerd都可以访问一些更复杂的负载均衡算法，但Linkerd聚焦于[性能调优](https://blog.buoyant.io/2017/01/31/making-things-faster-by-adding-more-steps/)及其平台使用的是[Finagle](https://twitter.github.io/finagle/)，使其成为负载均衡的最佳选择。
 
-![Sidecar模式处理负载均衡](b4e0632fgy1fsfoiywhuqj20fa0e50te.jpg)
+![Sidecar模式处理负载均衡](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/b4e0632fgy1fsfoiywhuqj20fa0e50te.jpg)
 
 图3. Sidecar模式处理负载均衡
 
@@ -65,7 +65,7 @@ Envoy和Linkerd都可以访问一些更复杂的负载均衡算法，但Linkerd�
 
 除基本的负载均衡功能外，Linkerd还支持Kubernetes DaemonSet，使负载均衡更接近每个Kubernetes节点边缘。从资源分配的角度看，这同样显著降低了在大型集群中运行代理的成本。
 
-![DaemonSet代理模式](00704eQkgy1fsgc5lihpkj30fa0e5q3u.jpg)
+![DaemonSet代理模式](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/00704eQkgy1fsgc5lihpkj30fa0e5q3u.jpg)
 
 图4.DaemonSet代理模式
 
@@ -77,7 +77,7 @@ Envoy和Linkerd都可以访问一些更复杂的负载均衡算法，但Linkerd�
 
 此外，为任意微服务提供HTTP和HTTP/2（gRPC）的能力，以及在我们的基础设施中同时支持多种协议的需求，意味着多协议支持已经成为为我们的基础设施选择代理服务器的一项艰巨任务。
 
-![代理在相同的设置中接收和转发gRPC和HTTP](b4e0632fgy1fsfoiykzugj20h40dot9a.jpg)
+![代理在相同的设置中接收和转发gRPC和HTTP](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/b4e0632fgy1fsfoiykzugj20h40dot9a.jpg)
 
 图5.代理在相同的设置中接收和转发gRPC和HTTP
 
@@ -89,9 +89,9 @@ Envoy和Linkerd都可以访问一些更复杂的负载均衡算法，但Linkerd�
 
 在基础设施中，我们利用[Prometheus](https://prometheus.io/)来监控Kubernetes、微服务及其他内部服务。 [Envoy需要额外的一个步骤](https://www.datawire.io/faster/ambassador-prometheus/)才能使用Prometheus，但使用Linkerd的即用型[Prometheus遥测插件](https://linkerd.io/administration/telemetry/)，我们可以更容易地启动和运行各种指标视图，而无需额外的服务将服务网格代理胶合到我们的可视化仪表板：
 
-![集群和应用程序级别代理指标视图](b4e0632fgy1fsfoiytks8j21xg072mz2.jpg)
+![集群和应用程序级别代理指标视图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/b4e0632fgy1fsfoiytks8j21xg072mz2.jpg)
 
-![集群和应用程序级别代理指标视图](b4e0632fgy1fsfoiz6wbij21xg0vtwks.jpg)
+![集群和应用程序级别代理指标视图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/b4e0632fgy1fsfoiz6wbij21xg0vtwks.jpg)
 
 图6.集群和应用程序级别代理指标视图
 
@@ -105,7 +105,7 @@ Envoy和Linkerd都可以访问一些更复杂的负载均衡算法，但Linkerd�
 
 在使用sidecar代理模式的环境设置中，工作方式有所不同的是SSL握手的每个服务TLS证书。
 
-![用于SSL握手的每个服务TLS证书](b4e0632fgy1fsfoiz1aqlj20h40cnaan.jpg)
+![用于SSL握手的每个服务TLS证书](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-linkerd-as-a-service-mesh-proxy-at-wepay/b4e0632fgy1fsfoiz1aqlj20h40cnaan.jpg)
 
 图7.用于SSL握手的每个服务TLS证书
 

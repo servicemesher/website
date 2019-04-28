@@ -33,7 +33,7 @@ Istio 1.0版本只支持在单个网络，即Mesh中的服务只能连接在一�
 
 在电信的NFV（网络功能虚拟化）领域中，已经有多个针对Kubernetes的多网络平面解决方案。其中一个[Kubernetes推荐的方案](https://kubernetes.io/docs/concepts/cluster-administration/networking/)是中兴通讯提供的[Knitter](https://github.com/ZTE/Knitter/)开源实现。下图展示了Knitter是如何实现Kubernetes的多网络平面支持的。
 
-![](006tNbRwgy1fyc7fxczghj30zz0gu0vc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/multi-network-interfaces-for-istio/006tNbRwgy1fyc7fxczghj30zz0gu0vc.jpg)
 
 Kubernetes多网络平面开源项目[Knitter](https://github.com/ZTE/Knitter/)
 
@@ -45,7 +45,7 @@ Kubernetes多网络平面开源项目[Knitter](https://github.com/ZTE/Knitter/)
 
 下图描述了在多网络平面场景下 Istio 1.1存在的问题。
 
-![](006tNbRwgy1fyc7gf6gcaj30m809zgnf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/multi-network-interfaces-for-istio/006tNbRwgy1fyc7gf6gcaj30m809zgnf.jpg)
 
 Istio在多网络平面场景下的问题
 
@@ -73,7 +73,7 @@ Istio在多网络平面场景下的问题
 
 从上面的描述可以看到，要支持多网络平面，Istio需要修改Pilot生成Outbound Listener的代码实现，下图描述了修改后的处理逻辑。
 
-![](006tNbRwgy1fyc7gnvm1vj30m80ac760.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/multi-network-interfaces-for-istio/006tNbRwgy1fyc7gnvm1vj30m80ac760.jpg)
 
 Istio多网络平面解决方案
 

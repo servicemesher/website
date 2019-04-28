@@ -32,7 +32,7 @@ keywords: ["service mesh","服务网格","event mesh","event driven"]
 
 事件网格对于事件驱动的应用程序，就好比是服务网格对于 RESTful 应用程序：一个架构层，无论在哪里部署这些应用程序（非云、公有云或者私有云），都可以动态路由某个应用程序的事件并使其被其他应用程序所接收。 事件网格由内部连通的 Event broker(事件代理)网络来创建和启用。
 
-![](006tNbRwly1fxmu7vq7crj30kh0cajsy.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-meet-event-mesh/006tNbRwly1fxmu7vq7crj30kh0cajsy.jpg)
 
 ## Event Mesh vs. Service Mesh
 

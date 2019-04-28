@@ -87,7 +87,7 @@ Q: 好的，我给您一个 Kubernetes，然后给你一个 基础 OS Pod “菜
 
 部署完成的结构图大概如下所示：
 
-![](006tKfTcly1g0d0l7cowtj30zo0dedgy.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-data-center-os-kubernetes/006tKfTcly1g0d0l7cowtj30zo0dedgy.jpg) 
 
 ##### 没有 Kubernetes 之前的部署
 
@@ -144,7 +144,7 @@ $ kubectl apply -f ./nginx.yaml
 
 访问刚部署的 HTTP 服务:
 
-![](006tKfTcly1g0d0mmkficj311c0lyq69.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-data-center-os-kubernetes/006tKfTcly1g0d0mmkficj311c0lyq69.jpg) 
 
 发生了什么？这里大概简单的介绍一下我们的“菜单”：
 
@@ -240,7 +240,7 @@ spec:
 
 **一个简单的图将它们串起来：**
 
-![](006tKfTcly1g0d0nds0wmj31v60u0wl1.jpg)  
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-data-center-os-kubernetes/006tKfTcly1g0d0nds0wmj31v60u0wl1.jpg)  
 
 上图展示了我们的 My-App-Operator 的 “厨师长” 的关系图。当我们需要一个 "my-app" 应用实例时，我们只要告诉我们的 “厨师长” 是需要多少副本数的实例。我们的 “厨师长”  自动将需求转化成 Deployment，其它的功能就完全依靠了 “Deployment 厨师长”。
 
@@ -254,7 +254,7 @@ spec:
 
 这3件事情，其实就是 Controller 模式的核心三件事：
 
-![](006tKfTcly1g0d0o7mda6j319k0u0di3.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-data-center-os-kubernetes/006tKfTcly1g0d0o7mda6j319k0u0di3.jpg) 
 
 那么用 Kubernetes 写一个 Operator 需要多久？
 

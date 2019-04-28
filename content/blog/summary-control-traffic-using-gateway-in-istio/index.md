@@ -12,7 +12,7 @@ categories: ["istio"]
 keywords: ["service mesh","服务网格","ingress gateway"]
 ---
 
-![](006tNbRwly1fw7vchevggj30xu0cwq5i.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fw7vchevggj30xu0cwq5i.jpg)
 
 - gateway定义用于配置在mesh边缘，到mesh的tcp和http的负载均衡。
 
@@ -20,7 +20,7 @@ keywords: ["service mesh","服务网格","ingress gateway"]
 
 ### 相关拓扑
 
-![](006tNbRwly1fwvgzlp7z2j31g21lvwl8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwvgzlp7z2j31g21lvwl8.jpg)
 
 - 使用azure aks环境。
 - ingress gateway的service类型为loadbalancer。
@@ -29,7 +29,7 @@ keywords: ["service mesh","服务网格","ingress gateway"]
 
 
 
-![](006tNbRwly1fwvbny77fbj31kw24l4hn.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwvbny77fbj31kw24l4hn.jpg)
 
 - 增加gateway定义。
 - gateway定义中的selector会将该设置与相应的gateway pod绑定。
@@ -133,7 +133,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 ### 相关拓扑
 
-![](006tNbRwly1fwvh1kuhgpj31g21lv7az.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwvh1kuhgpj31g21lv7az.jpg)
 
 - 使用azure aks环境。
 - ingress gateway的service类型为loadbalancer。
@@ -144,7 +144,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 
 
-![](006tNbRwly1fwvh283d8ij31kw2cdtz8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwvh283d8ij31kw2cdtz8.jpg)
 
 - 增加gateway定义。
 - gateway定义中的监听端口包括80和443。
@@ -332,7 +332,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 ### 相关拓扑
 
-![](006tNbRwly1fwwfxwn47kj31g21lv459.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwwfxwn47kj31g21lv459.jpg)
 
 - 使用azure aks环境。
 - ingress gateway的service类型为loadbalancer。
@@ -343,7 +343,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 
 
-![](006tNbRwly1fwwfynfmf5j31kw22k1fp.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwwfynfmf5j31kw22k1fp.jpg)
 
 - 增加gateway定义。
 - gateway定义中的监听端口443。
@@ -484,7 +484,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 ### 相关拓扑
 
-![](006tNbRwly1fwwi9rvcrpj31g21j1n4s.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwwi9rvcrpj31g21j1n4s.jpg)
 
 - 使用azure aks环境。
 - ingress gateway的service类型为loadbalancer。
@@ -495,7 +495,7 @@ x-more-info: http://tools.ietf.org/html/rfc2324
 
 
 
-![](006tNbRwly1fwwk8t9x7oj31kw1ogkgw.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwwk8t9x7oj31kw1ogkgw.jpg)
 
 - 为2个主机配置统一的gateway定义。
 - 为2个主机分别配置virtualservice定义。
@@ -658,7 +658,7 @@ x-envoy-upstream-service-time: 7
 
 ### 相关拓扑
 
-![](006tNbRwly1fwwkizdfefj31g21j1gt7.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwwkizdfefj31g21j1gt7.jpg)
 
 - 使用azure aks环境。
 - ingress gateway的service类型为loadbalancer。
@@ -669,7 +669,7 @@ x-envoy-upstream-service-time: 7
 
 
 
-![](006tNbRwly1fwwkjjhqctj31kw2257wh.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/summary-control-traffic-using-gateway-in-istio/006tNbRwly1fwwkjjhqctj31kw2257wh.jpg)
 
 - 为2个主机分别配置gateway中的server定义。
 - 为2个主机的server定义中增加证书的定义，每个server使用不同的证书。

@@ -14,7 +14,7 @@ categories: ["translation"]
 keywords: ["service mesh","服务网格","linkerd"]
 ---
 
-![Linkerd](006tNbRwgy1fven4mbx0kj30db02xmxa.jpg)
+![Linkerd](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/linkerd-2-0-in-general-availability/006tNbRwgy1fven4mbx0kj30db02xmxa.jpg)
 
 今天，[云原生计算基金会](https://www.cncf.io/)（CNCF）和[Linkerd的维护者](https://linkerd.io/)很高兴地宣布Linkerd 2.0 GA发布。
 

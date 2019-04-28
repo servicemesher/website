@@ -13,11 +13,11 @@ keywords: ["service mesh","服务网格","supergloo","cloud native","云原生",
 
 笔者2017年就曾注意到 [solo.io](https://solo.io) 这家公司，它的创始人 Idit 曾在 KubeCon 上分享过 Squash，去年11月推出了 SuperGloo 服务网格编排器再起吸引了我的注意，但最重要的一件事是，Christian Posta 于2018年1月3号宣布加盟 solo.io，这让我很惊讶，我原以为他会加入 T 公司。
 
-![Idit Levine](006tNc79ly1fytdun4dmuj30b40b4mxz.jpg)
+![Idit Levine](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/supergloo-a-service-mesh-orchestrator/006tNc79ly1fytdun4dmuj30b40b4mxz.jpg)
 
 [Idit Levine](https://twitter.com/Idit_Levine) 现为 [solo.io](https://solo.io) 的创始人，这是一个很小的 base 在马塞诸塞州剑桥市的创业公司，这家公司致力于云原生的混合云解决方案。曾是 EMC 云管理部门的 CTO，也是其全球 CTO 办公室的成员，她专注于整个堆栈，微服务，云原生应用和 PaaS 的管理和协调（M＆O）。当她加入 DynamicOps（vCAC，现在是 VMware 的一部分）作为其首批员工之一时，Idit 对云产生了浓厚的兴趣。 随后，她参与了 Verizon Terremark 的下一代公有云的开发，并担任 Intigua 的代理 CTO，Intigua 是一家专注于容器和管理技术的创业公司。
 
-![Christian Posta](006tNc79ly1fytdu4jr8mj30b40b40ta.jpg)
+![Christian Posta](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/supergloo-a-service-mesh-orchestrator/006tNc79ly1fytdu4jr8mj30b40b40ta.jpg)
 
 [Christian Posta](https://twitter.com/christianposta)，前 Red Hat 架构师今年年初刚刚加入 [solo.io](https://solo.io)，成为 solo.io 的 Filed CTO（负责售前、售后与布道的首席架构师），详见 [New Adventure Starts at solo.io](http://blog.christianposta.com/career/new-adventure-starts-at-solo-io/)。
 
@@ -25,7 +25,7 @@ keywords: ["service mesh","服务网格","supergloo","cloud native","云原生",
 
 Solo.io 这家公司有一系列项目，其中有三个都以 Gloo 命名，这些都是与 Service Mesh 相关的。
 
-![Gloos](006tNc79ly1fytdw9zmrgj31je0fadlr.jpg)
+![Gloos](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/supergloo-a-service-mesh-orchestrator/006tNc79ly1fytdw9zmrgj31je0fadlr.jpg)
 
 - [Gloo](https://github.com/solo-io/gloo)：混合云上的 API Gateway，可作为 Kubernetes Ingress controller
 - GlooE：Gloo 的商业化版本
@@ -33,7 +33,7 @@ Solo.io 这家公司有一系列项目，其中有三个都以 Gloo 命名，这
 
 还有一些列开发者工具。
 
-![](006tNc79ly1fyte4gfpmbj31je0futey.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/supergloo-a-service-mesh-orchestrator/006tNc79ly1fyte4gfpmbj31je0futey.jpg)
 
 - [Sqoop](https://github.com/solo-io/sqoop)：Gloo 支持的 GraphQL 引擎
 - [unik](https://github.com/solo-io/unik)：Unikernel 和 microVM 编译和管理
@@ -49,7 +49,7 @@ Solo.io 这家公司有一系列项目，其中有三个都以 Gloo 命名，这
 
 ## SuperGloo 的特点
 
-![](006tNc79ly1fyte9m3qdhj318g0rtq8f.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/supergloo-a-service-mesh-orchestrator/006tNc79ly1fyte9m3qdhj318g0rtq8f.jpg)
 
 *图片来自 [medium](https://medium.com/solo-io/https-medium-com-solo-io-supergloo-ff2aae1fb96f)*
 

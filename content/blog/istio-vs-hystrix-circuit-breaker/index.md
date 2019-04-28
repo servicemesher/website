@@ -28,7 +28,7 @@ keywords: ["service mesh","服务网格","istio","spring cloud","hystrix"]
 
 断路器模式是微服务体系结构中广泛采用的模式之一。我们将比较使用两种不同方法实现它的优缺点: Hystrix和Istio。
 
-![istio-vs-hystrix.jpg](bf8f1836ly1g0vdlvuhijj20xc0hggnu.jpg)
+![istio-vs-hystrix.jpg](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-vs-hystrix-circuit-breaker/bf8f1836ly1g0vdlvuhijj20xc0hggnu.jpg)
 
 ## 微服务同步通信的核心问题
 
@@ -72,7 +72,7 @@ keywords: ["service mesh","服务网格","istio","spring cloud","hystrix"]
 
 这可以用下图来总结:
 
-![state-diagram.jpg](bf8f1836ly1g0vdvft88xj21gk0qiwih.jpg)
+![state-diagram.jpg](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-vs-hystrix-circuit-breaker/bf8f1836ly1g0vdvft88xj21gk0qiwih.jpg)
 
 ## Istio断路器
 
@@ -94,7 +94,7 @@ Istio的控制平面在底层集群管理平台(如Kubernetes、Mesos等)上提�
 
 正如我们所说，Istio构建在您选择的集群管理平台上，并要求应用程序在这个平台部署。Kubernetes通过`DestinationRule`实现断路器模式，或者更具体的路径`TrafficPolicy`(原`断路器`)->`OutlierDetection`，根据以下模型: 
 
-![istio-class-diagram.jpg](bf8f1836ly1g0vdwafn1kj21qv18tn4m.jpg)
+![istio-class-diagram.jpg](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-vs-hystrix-circuit-breaker/bf8f1836ly1g0vdwafn1kj21qv18tn4m.jpg)
 
 参数如下:
 
@@ -148,7 +148,7 @@ Hystrix提供了一个断路器实现，允许在电路打开时执行fallback�
 
 这是Hystrix模型的一个非常简单的类图:
 
-![hystrix-class-diagram.jpg](bf8f1836ly1g0vdwaxlekj21fz1rbak7.jpg)
+![hystrix-class-diagram.jpg](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-vs-hystrix-circuit-breaker/bf8f1836ly1g0vdwaxlekj21fz1rbak7.jpg)
 
 最关键的地方就在 `HystrixCommand`方法 `run()`和 `getFallback()`:
 

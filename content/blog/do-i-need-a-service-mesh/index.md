@@ -30,7 +30,7 @@ keywords: ["service mesh","服务网格"]
 
 这些功能对于简单和易于理解的应用程序来说已经足够了， [遗留的应用已经被容器化](https://www.docker.com/solutions/MTA)。 它们允许你满怀信心地部署应用，根据需要扩容，避免意外故障，并实现简单的访问控制。
 
-![1](006tKfTcly1g1byouk0a6j30sg0da3zi.jpg)
+![1](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/do-i-need-a-service-mesh/006tKfTcly1g1byouk0a6j30sg0da3zi.jpg)
 
 ① Kubernetes 提供了带有服务发现和负载均衡的4层网络。② NGINX入口控制器负责把外部连接负载均衡到运行在Kubernetes集群的服务。
 
@@ -51,7 +51,7 @@ Kubernetes在它的API中提供了一个入口（Ingress）资源对象。 这�
 - 要调试这些问题，可以将[分布式追踪](https://opentracing.io/docs/overview/tracers/)嵌入到每个微服务中（支持多种语言和框架）。
 - 为实现高级的负载均衡策略、蓝绿部署、金丝雀发布和熔断器，你可以选择性的部署代理和负载均衡器。
 
-![2](006tKfTcly1g1d0pnxtybj30sg0brdgp.jpg)
+![2](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/do-i-need-a-service-mesh/006tKfTcly1g1d0pnxtybj30sg0brdgp.jpg)
 
 独立的微服务可以使用**Prometheus导出器， 分布式追踪器， 双向TLS和SPIEE进行扩展**。代理可以被部署为独立的服务如①，或者像②一样提供中央路由网格。
 
@@ -69,7 +69,7 @@ Kubernetes在它的API中提供了一个入口（Ingress）资源对象。 这�
 
 服务网格技术仍然是一项新技术，只有很少的生产环境的部署。早期的部署建立在复杂的、自主开发的解决方案之上，具体到每个采用者的需求。一种更为普遍的方法正在出现，称为“sidecar代理”模式。该方法在每个服务实例边部署一个7层代理；这些代理捕获所有的网络流量，并以一致的方式提供额外的功能——双向TLS、追踪、度量、流量控制等。
 
-![3](006tKfTcly1g1d19j3xxqj30sg0e0wg0.jpg)
+![3](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/do-i-need-a-service-mesh/006tKfTcly1g1d19j3xxqj30sg0e0wg0.jpg)
 
 在服务网格中，每个容器都包含一个嵌入式代理，它拦截所有的进出流量。代理代替服务处理加密、监视和跟踪，并实现高级的流量管理。
 
@@ -79,7 +79,7 @@ Kubernetes在它的API中提供了一个入口（Ingress）资源对象。 这�
 
 2019年初，仅在急需短期方案，并且其它解决方案的局限性导致需求无法被满足的情况下，才需要考虑采用仍属早期阶段的服务网格技术。当前服务网格实现的不成熟和快速变化使得部署它们的成本和风险很高。随着技术的成熟，成本和风险将会降低，采用服务网格的时间点将会越来越近。
 
-![4](006tKfTcly1g1d1iior8kj30sg0fxjs0.jpg)
+![4](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/do-i-need-a-service-mesh/006tKfTcly1g1d1iior8kj30sg0fxjs0.jpg)
 
 随着应用程序复杂性的增加，服务网格将成为实现服务到服务的能力的现实选择。
 

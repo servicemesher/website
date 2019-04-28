@@ -220,7 +220,7 @@ kubectl apply -f ./grafana-virtual-service.yaml
 ## 使用Flagger部署web应用
 
 Flagger包含一个Kubernetes deployment和一个可选的horizontal pod autoscaler（HPA），然后创建一些资源对象（Kubernetes deployments， ClusterIP services和Istio virtual services）。这些资源对象会在网络上暴露应用并实现金丝雀分析和升级。
-![](0071hauBly1g1u72wr801j30rs0cdq4w.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/automated-canary-deployments-with-flagger-and-istio/0071hauBly1g1u72wr801j30rs0cdq4w.jpg)
 创建一个test namespace，并开启Istio sidecar注入：
 
 ```bash
@@ -315,7 +315,7 @@ virtualservice.networking.istio.io/podinfo
 ## 自动金丝雀分析和升级
 
 Flagger实现了一个控制循环，逐渐将流量转移到金丝雀，同时测量HTTP请求成功率等关键性能指标，请求平均持续时间以及pod健康状态。根据对KPI的分析，升级或中止金丝雀部署，并将分析结果发送到Slack。
-![](0071hauBgy1g1uawf9vhqj30rs0a976b.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/automated-canary-deployments-with-flagger-and-istio/0071hauBgy1g1uawf9vhqj30rs0a976b.jpg)
 以下对象的更改会触发金丝雀部署：
 
 - Deployment PodSpec（容器image，command，ports，env等）
@@ -355,7 +355,7 @@ Promotion completed! Scaling down podinfo.test
 
 在分析过程中，可以使用Grafana监控金丝雀的进展：
 
-![](0071hauBly1g1ubacxpukj30rs0mhjvg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/automated-canary-deployments-with-flagger-and-istio/0071hauBly1g1ubacxpukj30rs0mhjvg.jpg)
 
 请注意，如果在金丝雀分析期间对deployment应用新的更改，Flagger将重新启动分析阶段。
 
@@ -371,7 +371,7 @@ prod        backend   Failed        0        2019-01-14T17:05:07Z
 
 如果你启用了Slack通知，则会收到以下消息：
 
-![](0071hauBly1g1ubdv033ej30rs0ap400.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/automated-canary-deployments-with-flagger-and-istio/0071hauBly1g1ubdv033ej30rs0ap400.jpg)
 
 ## 自动回滚
 
@@ -425,7 +425,7 @@ Canary failed! Scaling down podinfo.test
 
 如果你启用了Slack通知，当超出了进度超时，或者分析达到了最大失败次数，你将收到一条消息：
 
-![](0071hauBly1g1uc4hvoo6j30rs05ymy8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/automated-canary-deployments-with-flagger-and-istio/0071hauBly1g1uc4hvoo6j30rs05ymy8.jpg)
 
 # 总结
 

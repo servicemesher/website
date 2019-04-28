@@ -26,11 +26,11 @@ Netflix详细的介绍过混沌工程实践以及故障注入、熔断、限流�
 
 1. 把这些功能和公司用到的所有语言的网络库打包到一起，并为所有的服务和团队维护它们。
 
-![](005UD0i6ly1fzodfkzee3j30go09s3yt.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-kubernetes-service-mesh/005UD0i6ly1fzodfkzee3j30go09s3yt.jpg)
 
 2. 通过服务网格透明的提供这些功能。Istio使用的就是这种方式。Istio把[Envoy代理](https://www.envoyproxy.io/)作为每个pod的sidecar运行并通过Istio的控制平面来动态的配置Envoy从而实现这些功能。具体如下图所示:
 
-![](006tKfTcly1g0crgzxldoj30z10u0437.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-kubernetes-service-mesh/006tKfTcly1g0crgzxldoj30z10u0437.jpg)
 
 利用基于Envoy的sidecar机制，Istio无需修改应用代码就可以完成嵌入。Envoy代理容器的所有网络流量，而Istio的控制平面可以动态配置Envoy的策略。因此Istio可以在对应用透明的前提下提供诸如TLS双向验证、限流和熔断等功能。
 

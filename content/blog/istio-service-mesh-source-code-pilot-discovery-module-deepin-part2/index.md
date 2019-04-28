@@ -21,7 +21,7 @@ keywords: ["service mesh","istio","envoy"]
 
 ## pilot总体架构
 
-![](006tKfTcgy1ftppxdcmwvj31kw0vvtdl.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-service-mesh-source-code-pilot-discovery-module-deepin-part2/006tKfTcgy1ftppxdcmwvj31kw0vvtdl.jpg)
 
 首先我们回顾一下pilot总体架构，上面是[官方关于pilot的架构图](https://github.com/istio/old_pilot_repo/blob/master/doc/design.md)，因为是old_pilot_repo目录下，可能与最新架构有出入，仅供参考。所谓的pilot包含两个组件：pilot-agent和pilot-discovery。图里的agent对应pilot-agent二进制，proxy对应Envoy二进制，它们两个在同一个容器中，discovery service对应pilot-discovery二进制，在另外一个跟应用分开部署的单独的deployment中。
 
@@ -34,7 +34,7 @@ keywords: ["service mesh","istio","envoy"]
 
 ## pilot-discovery的统一存储模型（Abstract Model）
 
-![](006tKfTcgy1ftppyenvgyj30la0fudhb.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-service-mesh-source-code-pilot-discovery-module-deepin-part2/006tKfTcgy1ftppyenvgyj30la0fudhb.jpg)
 
 根据上面官方的pilot-discovery架构图，pilot-discovery有两个输入信息（黄色部分）
 

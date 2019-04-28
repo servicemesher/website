@@ -24,7 +24,7 @@ keywords: ["service mesh","服务网格"]
 
 因为我们认为服务网格是有价值的，而且可以一直存在，所以我们一只在寻求将 VMware 自己的世界级系统管理工具集与服务网格框架进行集成。这里有一个很好的例子，我们最近创建了一个适配器，将 Istio metrics 导出到 VMware 的 Wavefront 监测和分析工具中。如果我们能够将微服务中的更多信息合并到我们的系统管理工具中，我们相信这些工具能够更好的管理系统。
 
-![](006tNbRwgy1fwp4etrgwvj30sg0iz782.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-future-of-service-mesh/006tNbRwgy1fwp4etrgwvj30sg0iz782.jpg)
 
 从我们的角度来看，这样的工作是为了扩大微服务生态系统。然而，服务网格平台本身还不够完善。比如说，Istio 是一个复杂的软件，当它不能正常工作时很难调试。当它在工作，它能很好的帮助你监测你的微服务是否正常运行。当它不能正常工作，又很难弄清楚它为什么不能工作。这种复杂度已被社区中被广泛理解的，并且我们一直在花时间和精力思考如何克服这种复杂性，但目前我们还没有解决这个问题。
 

@@ -20,7 +20,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 你已经浏览了Istio Mixer Adapter的[指南](https://github.com/istio/istio/wiki/Mixer-Out-Of-Process-Adapter-Dev-Guide) ，现在想要发布自己的Adapter？这篇文章将教你创建自己的Adapter，在生产环境的海洋中扬帆起航。
 
-![Istio](006tNbRwly1fw3hlzj8krj304o06m3ya.jpg)
+![Istio](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/set-sail-a-production-ready-istio-adapter/006tNbRwly1fw3hlzj8krj304o06m3ya.jpg)
 
 ## 介绍
 
@@ -40,7 +40,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 让我们首先看看Adapter如何与Istio Mixer结合。Kubernetes在一定程度上抽象了接口；了解这一点对我们来说很重要。
 
-![Istio adapter架构](006tNbRwly1fwbaovn3jgj31j00je0u9.jpg)
+![Istio adapter架构](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/set-sail-a-production-ready-istio-adapter/006tNbRwly1fwbaovn3jgj31j00je0u9.jpg)
 
 下面是对上述架构中的每个元素的简要描述。
 

@@ -781,7 +781,7 @@ spec:
 
 Prometheus-server部署成功之后，在浏览器中可以看到监控数据汇总信息了
 
-![](006tKfTcly1g1g7wq5ye7j30vw0nzmzn.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-monitor-k8s-2/006tKfTcly1g1g7wq5ye7j30vw0nzmzn.jpg)
 
 Status --> Configuration 中可以看到Prometheus-server的配置
 
@@ -895,13 +895,13 @@ alertmanager-dep.yaml定义了Alertmanager的部署。
 
 遵循上篇文章中的架构，展示使用开源的Grafana。Grafana的部署方式就不详细描述了，下面展示两个Dashboard
 
-![](006tKfTcly1g1g7x47mnyj31dj0qsq8i.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-monitor-k8s-2/006tKfTcly1g1g7x47mnyj31dj0qsq8i.jpg)
 
 kubernetes-deployment-dashboard，展示了大多关于deployment的信息。左上角的Cluster选项就是利用prometheus-server-config.yaml中自定义的labels.k8scluster标签实现的。
 
 ------
 
-![](006tKfTcly1g1g7xiruj7j31de0qmdo8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-monitor-k8s-2/006tKfTcly1g1g7xiruj7j31de0qmdo8.jpg)
 
 kubernetes-pod-dashboard，展示的都是关于pod和container的信息，包括CPU、mem使用监控。此页面数据量一般比较大。左上角的Cluster选项也是利用prometheus-server-config.yaml中自定义的labels.k8scluster做的。
 

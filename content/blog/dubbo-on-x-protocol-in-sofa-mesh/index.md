@@ -14,7 +14,7 @@ keywords: ["service mesh","服务网格","sofamesh","蚂蚁金服"]
 
 > 本文作者：彭泽文，阿里巴巴UC事业部高级开发工程师
 
-![sofamesh x-protocol dubbo](0069RVTdgy1fv5t8by8rsj30kk0bkwez.jpg)
+![sofamesh x-protocol dubbo](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/dubbo-on-x-protocol-in-sofa-mesh/0069RVTdgy1fv5t8by8rsj30kk0bkwez.jpg)
 
 X-protocol 的定位是云原生、高性能、低侵入性的通用 Service Mesh 落地方案，依托 Kubernetes 基座，利用其原生的服务注册和服务发现机制，支持各种私有 RPC 协议低成本、易扩展的接入，快速享受 Service Mesh 所带来的红利。
 
@@ -305,6 +305,6 @@ SOFAMesh Github 地址：https://github.com/alipay/sofa-mesh
 - [注入 Istio sidecar - istio.io](https://preliminary.istio.io/zh/docs/setup/kubernetes/sidecar-injection/)
 - [Dubbo quick start - dubbo.incubator.apache.org](https://dubbo.incubator.apache.org/en-us/docs/user/quick-start.html)
 
-![SOFAStack](0069RVTdgy1fv5tavmvpzj31is0n0gpj.jpg)
+![SOFAStack](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/dubbo-on-x-protocol-in-sofa-mesh/0069RVTdgy1fv5tavmvpzj31is0n0gpj.jpg)
 
 关于SOFAMesh的更多信息请访问 http://www.sofastack.tech

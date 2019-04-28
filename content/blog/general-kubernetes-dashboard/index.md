@@ -114,7 +114,7 @@ ca.crt: LS0tLS1CRUdJTiBDRVJUS..........................
 
 `--auto-generate-certificates`从字面意思看是dashboard自己生成https的证书，但是实际上如下面的图这个证书chrome浏览器是不认的其他浏览器不清楚，chrome打开后在网页上是没有无视警告继续的选项，可以自行去试试看，网上也没找到添加例外只找到了全局关闭非权威SSL警告。不推荐这种（或者说这种完全行不通？）
 
-![browser-cannot-continue](005BYqpggy1g22j058fljj30l30grjsz.jpg)
+![browser-cannot-continue](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/general-kubernetes-dashboard/005BYqpggy1g22j058fljj30l30grjsz.jpg)
 
 ### 使用http
 
@@ -297,9 +297,9 @@ acme.sh --issue --dns dns_ali -d *.k8s.youdomain.com
 域名在腾讯云的话确保nameserver设置的是dnspod（好像默认就是这个），我们去dnspod的官网上使用登陆腾讯云的账号（例如我是qq登陆）后在开发者api里开启dnspod的api token。
 注意token在创建的时候只显示一次，记得截图发给自己的时候别点错地方关了，不然得再创建个。
 
-![tx-dns-setting](005BYqpgly1g22j058335j30js0c0t9g.jpg)
+![tx-dns-setting](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/general-kubernetes-dashboard/005BYqpgly1g22j058335j30js0c0t9g.jpg)
 
-![dnspod-getToken](005BYqpggy1g22j0563f6j31060gcq33.jpg)
+![dnspod-getToken](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/general-kubernetes-dashboard/005BYqpggy1g22j0563f6j31060gcq33.jpg)
 
 ```bash
 export DP_Id="1234"
@@ -309,7 +309,7 @@ acme.sh --issue --dns dns_dp -d *.zhangguanzhang.com
 
 运行后会看到文件路径：
 
-![scriptOutput](005BYqpgly1g22j0598m4j31hc0n3wfi.jpg)
+![scriptOutput](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/general-kubernetes-dashboard/005BYqpgly1g22j0598m4j31hc0n3wfi.jpg)
 
 前面证书生成以后， 接下来需要把证书 copy 到真正需要用它的地方。
 注意， 默认生成的证书都放在安装目录下: `~/.acme.sh/`， 请不要直接使用此目录下的文件， 例如: 不要直接让 nginx/apache 的配置文件使用这下面的文件. 这里面的文件都是内部使用， 而且目录结构可能会变化。
@@ -363,7 +363,7 @@ type: kubernetes.io/tls
 
 创建dashboard后在云上的域名控制台设置解析过来，通过https的域名访问。
 
-![results](005BYqpgly1g22j05at9mj31560mf40n.jpg)
+![results](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/general-kubernetes-dashboard/005BYqpgly1g22j05at9mj31560mf40n.jpg)
 
 
 ## Ingress Controller使用域名证书代理dashboard

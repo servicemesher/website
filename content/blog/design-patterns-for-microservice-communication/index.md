@@ -28,7 +28,7 @@ keywords: ["service mesh","服务网格","微服务"]
 
 1. 先从一个简单的例子开始。你需要一个服务A来调用服务B并等待实时数据的响应。这是实现同步的一个很好的选择，因为不会涉及到下游服务。如果使用多个实例，除了负载均衡之外，你不需要为这个用例实现任何复杂的设计模式。
 
-   ![sync flow](006tNbRwly1fxlg5e91x1j30fc04yt8l.jpg)
+   ![sync flow](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/design-patterns-for-microservice-communication/006tNbRwly1fxlg5e91x1j30fc04yt8l.jpg)
 
 2. 现在让我们把它变得更复杂一点。服务A为实时数据调用多个下游服务，如服务B、服务C和服务D。
 
@@ -36,7 +36,7 @@ keywords: ["service mesh","服务网格","微服务"]
 
 - 服务B、服务C和服务D可以并行调用——这种场景被使用在服务彼此独立或服务A可能扮演协调者（Orchestrator）角色时。
 
-  ![sync flow2](006tNbRwly1fxlgbk5vfbj30g609rwei.jpg)
+  ![sync flow2](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/design-patterns-for-microservice-communication/006tNbRwly1fxlgbk5vfbj30g609rwei.jpg)
 
 这会为通信带来复杂性。让我们一个一个地讨论。
 
@@ -84,7 +84,7 @@ keywords: ["service mesh","服务网格","微服务"]
 
 在这种方式中，生产者将消息发送到消息代理，而消费者可以监听代理来接收消息并相应地处理它。在消息处理中有两种模式：一对一和一对多。我们讨论了同步带来的一些复杂性，但是在消息传递中，默认情况下就会消除一些复杂性。例如，服务发现变得无关紧要，因为消费者和生产者都只与消息代理对话。负载均衡是通过扩展消息系统来处理的。失败处理是内建的，主要由message broker负责。RabbitMQ、ActiveMQ和Kafka是云平台中最流行的消息传递解决方案。
 
-![msg flow](006tNbRwly1fxlhh1zzvuj30kj0coaa7.jpg)
+![msg flow](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/design-patterns-for-microservice-communication/006tNbRwly1fxlhh1zzvuj30kj0coaa7.jpg)
 
 ### 事件驱动
 
@@ -94,7 +94,7 @@ keywords: ["service mesh","服务网格","微服务"]
 - 资源 URL —— 这是一个指向代表事件的资源的URL。
 - 仅事件 —— 不会发送负载，消费者将基于事件名称知道如何从其他源（如数据库或队列）检索相关数据。
 
-![event flow](006tNbRwly1fxlhpapghaj30ll0a8mx7.jpg)
+![event flow](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/design-patterns-for-microservice-communication/006tNbRwly1fxlhpapghaj30ll0a8mx7.jpg)
 
 还有其他一些方式，比如编排（choreography），但我个人并不喜欢。它太复杂几乎无法实现，只能通过同步方式来完成。
 

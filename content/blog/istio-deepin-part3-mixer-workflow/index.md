@@ -69,7 +69,7 @@ adapters基于这些attributes来实现日志记录、监控指标采集展示�
 -  [statsd](https://github.com/istio/istio/tree/master/mixer/adapter/statsd)：一款采集汇总应用指标的工具。
 -  [stdio](https://github.com/istio/istio/tree/master/mixer/adapter/stdio)：stdio适配器使Istio能将日志和metrics输出到本地，结合内置的ES、Grafana就可以查看相应的日志或指标了。
 
- ![](00704eQkgy1fsy2ily20sj30jg0qmgnh.jpg)
+ ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-deepin-part3-mixer-workflow/00704eQkgy1fsy2ily20sj30jg0qmgnh.jpg)
 
 ## Template（模板）
 

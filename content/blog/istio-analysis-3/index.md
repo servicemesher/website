@@ -16,9 +16,9 @@ keywords: ["service mesh","服务网格","istio"]
 
 今天我们来解析istio控制面组件Galley。Galley Pod是一个单容器单进程组件, 没有sidecar, 结构独立，职责明确。
 
-![](006tKfTcly1g1nihj4ybjj31850u0dld.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcly1g1nihj4ybjj31850u0dld.jpg)
 
-[查看高清原图](006tKfTcgy1g187dn7s1tj315m0u0x6t.jpg)
+[查看高清原图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcgy1g187dn7s1tj315m0u0x6t.jpg)
 
 前不久istio 1.1 版本正式发布, 其中istio的配置管理机制有较大的改进, 以下是[1.1 release note](https://istio.io/about/notes/1.1/) 中部分说明:
 
@@ -49,7 +49,7 @@ k8s 内置了几十个Resources, istio 创造了50多个CRD, 其复杂度可见�
 
 早期的Galley 仅仅负责对「配置」进行运行时验证, istio 控制面各个组件各自去list/watch 各自关注的「配置」, 以下是istio早期的Configuration flow:
 
-![](006tKfTcly1g1nii10vwuj31d20swjv7.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcly1g1nii10vwuj31d20swjv7.jpg)
 
 越来越多且复杂的「配置」给istio 用户带来了诸多不便, 主要体现在:
 
@@ -65,7 +65,7 @@ k8s 内置了几十个Resources, istio 创造了50多个CRD, 其复杂度可见�
 
 在[istio 庖丁解牛(二) sidecar injector](https://imfox.io/2019/03/19/istio-analysis-2/)中我分析了istio-sidecar-injector 如何利用 MutatingWebhook 来实现sidecar注入, Galley 使用了k8s提供的另一个Admission Webhooks: ValidatingWebhook, 来做配置的验证:
 
-![img](006tKfTcgy1g1mcwsf5ggj30sz0ecjt4.jpg)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcgy1g1mcwsf5ggj30sz0ecjt4.jpg)
 
 istio 需要一个关于ValidatingWebhook的配置项, 用于告诉k8s api server, 哪些CRD应该发往哪个服务的哪个接口去做验证, 该配置名为istio-galley, 简化的内容如下:
 
@@ -134,7 +134,7 @@ MCP 提供了gRPC 的实现, 实现代码参见: <https://github.com/istio/api/t
 
 两种模式的示意图如下:
 
-![img](006tKfTcgy1g1n7omb7vrj30uk0u0452.jpg)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcgy1g1n7omb7vrj30uk0u0452.jpg)
 
 ## Galley 配置管理实现浅析
 
@@ -168,9 +168,9 @@ go server.RunServer(serverArgs, livenessProbeController, readinessProbeControlle
 
 下面是Galley 配置服务结构示意图:
 
-![img](006tKfTcgy1g1mzi3oe9xj31r10u0qgp.jpg)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcgy1g1mzi3oe9xj31r10u0qgp.jpg)
 
-[查看高清原图](006tKfTcgy1g1n8o76s8yj31r10u0trx.jpg)
+[查看高清原图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcgy1g1n8o76s8yj31r10u0trx.jpg)
 
 从上图可以看到, Galley 配置服务主要包括 Processor 和 负责mcp通信的grpc Server.
 
@@ -452,7 +452,7 @@ func (con *connection) queueResponse(resp *WatchResponse) {
 
 最后上一张Galley mcp 服务相关模型UML:
 
-![](006tKfTcly1g1nik3wvyyj30u012w14d.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcly1g1nik3wvyyj30u012w14d.jpg)
 
 [查看高清原图](https://imfox.io/assets/images/istio-a/galley_uml.png)
 

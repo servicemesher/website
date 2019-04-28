@@ -174,7 +174,7 @@ targets：监控数据获取地址
 
 稍等2分钟，也可以看到Prometheus的监控数据了
 
-![](006tKfTcly1g1g855oslzj31f90b5gnk.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-monitor-k8s-3/006tKfTcly1g1g855oslzj31f90b5gnk.jpg)
 
 Grafana监控Alertmanager面板：https://grafana.com/dashboards/9741
 

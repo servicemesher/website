@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["service mesh"]
 ---
 
-![](006tNbRwly1fugglksoz4j318g0r5wr1.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fugglksoz4j318g0r5wr1.jpg)
 
 # 使用Let’s Encrypt在Kubernetes上保护Istio的Ingress services
 
@@ -48,7 +48,7 @@ Let’s Encrypt接受证书授权有两种方法：HTTP和DNS。我们决定首�
 
 我们在[name.com](https://www.name.com/)注册了域名democluster.net。您还可以在Google域名服务里创建域名，但我们已经为此博客帖子提供了一个域名。这是name.com中的域名服务器配置示例。
 
-![](006tNbRwly1fuggenbqltj318g0kv77u.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fuggenbqltj318g0kv77u.jpg)
 
 检查您的域名服务配置是否已更新。域名通过互联网缓存，实际更新可能需要48小时。在我们的案例中花了大约2个小时。
 
@@ -56,7 +56,7 @@ Let’s Encrypt接受证书授权有两种方法：HTTP和DNS。我们决定首�
 
 您可以转到Google DNS页面并打开您的zone，将会有NS类型下的域名服务器列表。
 
-![](006tNbRwly1fuggewu5srj318g0g7wgu.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fuggewu5srj318g0g7wgu.jpg)
 
 创建网关后，Vamp Lamia将为您设置zone记录，然后在UI中列出域名服务。Let’s Encrypt 身份验证需要更新域名服务。
 
@@ -72,7 +72,7 @@ Vamp Lamia定期检查群集并安装缺少的Istio组件并检测新的deployme
 
 对于此demo，您需要添加`google_project_id`和`google_service_account`作为元数据。为此，您必须创建服务帐户并将json文件的内容复制到值区域。
 
-![](006tNbRwly1fuggft0tl6j31jk10dadl.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fuggft0tl6j31jk10dadl.jpg)
 
 我们要创建：
 
@@ -83,29 +83,29 @@ Vamp Lamia定期检查群集并安装缺少的Istio组件并检测新的deployme
 
 创建如下service：
 
-![](006tNbRwly1fuggga5izhj318g0ptmzl.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fuggga5izhj318g0ptmzl.jpg)
 
 创建如下destination rule：
 
-![](006tNbRwly1fugggrx6gvj318g1coadt.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fugggrx6gvj318g1coadt.jpg)
 
 创建如下gateway。
 
 请注意，您需要使用您拥有的domain中的其他主机名。 “Secured Host”将用于注册DNS和Let's Encrypt。 由于TCP协议限制，每个端口只能有一个安全主机。 HTTPS的默认端口是443。
 
-![](006tNbRwly1fugghg6fq1j31jk1990xs.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fugghg6fq1j31jk1990xs.jpg)
 
 创建一个如下 virtual service，在这协议是http，SSL/TLS终止发生在集群边缘，内部服务可以继续使用http。
 
-![](006tNbRwly1fugghxl50jj318g23m445.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fugghxl50jj318g23m445.jpg)
 
 您可能需要等待获取UI中已更新网关的通知。您可以查看“Gateway Details”页面以查看当前域名服务的列表。
 
-![](006tNbRwly1fuggi6si7sj318g0ptacl.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fuggi6si7sj318g0ptacl.jpg)
 
 如果一切顺利，您可以在浏览器上看到你的网站：
 
-![](006tNbRwly1fuggifkpnuj318g0ytn2i.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fuggifkpnuj318g0ytn2i.jpg)
 
 ## 了解原理
 
@@ -113,7 +113,7 @@ Vamp Lamia定期检查群集并安装缺少的Istio组件并检测新的deployme
 
 Vamp Lamia将生成证书，Let's Encrypt使用DNS Challenge进行认证，并使用您的DNS提供商进行设置。此过程的结果也会在Google DNS页面上显示，如下所示：
 
-![](006tNbRwly1fuggiowxisj318g0gw0va.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes/006tNbRwly1fuggiowxisj318g0gw0va.jpg)
 
 当客户端要求证书注册时，Let's Encrypt会要求对该domain进行授权。有两种可能的方式:HTTP challenge和DNS challenge。我们正在使用DNS challenge，因为它更灵活。Let’s Encrypt给出一个摘要哈希，我们在`_acme-challenge.shop.democluster.net`下插入了一条TXT记录。
 

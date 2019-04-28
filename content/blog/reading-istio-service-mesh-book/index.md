@@ -17,7 +17,7 @@ keywords: ["service mesh","服务网格",”istio”,"深入浅出 istio"]
 
 作为一名接触ServiceMesh领域和Istio快小半年的我来说，对于书中一些比较基础的章节和内容快速翻了一翻，同时也对部分对我帮助非常大的章节做了一些总结和心得。在这里用一篇读后感记录我读完以后的感受。
 
-![深入浅出 Istio](006tKfTcly1g0bjlv5csqj30gf0kfabv.jpg)
+![深入浅出 Istio](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/reading-istio-service-mesh-book/006tKfTcly1g0bjlv5csqj30gf0kfabv.jpg)
 
 ## 关于书籍作者
 

@@ -24,7 +24,7 @@ keywords: ["service mesh","服务网格","envoy"]
 
 对 `API` 的使用进行约束的常用方法是启用速率限制。与基于 IP 的速率限制或者 web 框架提供的应用级别速率限制不同，Envoy 允许在 `HTTP` 层实现快速，高性能和可靠的全局速率限制。
 
-![](006tNbRwgy1fwrjjnhj5rj30am0b1aa7.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwrjjnhj5rj30am0b1aa7.jpg)
 
 上图中左侧的 `Service Client` 代表使用率特别高的客户端。在运行期间，它可以使负载均衡后端的所有服务实例流量饱和，并使其他更高优先级的客户端丢弃其请求。
 
@@ -40,11 +40,11 @@ $ make load-test
 echo "GET http://localhost:8080/slow" | vegeta attack -rate=500 -duration=0 | tee results.bin | vegeta report
 ```
 
-![](006tNbRwgy1fwrjy191ohj30lr07jq34.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwrjy191ohj30lr07jq34.jpg)
 
 在模拟后台作业期间，对 API 资源 `/slow` 的访问速率达到了每秒 `3500` 个请求，影响到了其他端点和客户端。
 
-![](006tNbRwgy1fwrk228etaj30nd07m74v.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwrk228etaj30nd07m74v.jpg)
 
 为了解决这个问题，下面的解决方案将使用 Envoy 强制限制请求速率为 `500个请求/秒`。但首先...
 
@@ -76,7 +76,7 @@ Envoy 的 [官方文档](https://www.envoyproxy.io/) 和 ` Matt Klein` 的文章
 
 第一步是将 Envoy 配置为处于批处理作业客户端和 API 负载均衡器之间，客户端向 API 发起的所有请求都会首先经过 Envoy 的处理。首先需要让 Envoy 知道如何连接 API，然后再更新批处理作业的配置，使该客户端向 Envoy 发出请起，而不是直接向 API 发出请求。配置完之后的最终状态如下图所示：
 
-![](006tNbRwgy1fwskywz0cqj30ct0dywf6.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwskywz0cqj30ct0dywf6.jpg)
 
 此步骤仅通过 Envoy 来对 API 流量进行路由，尚未对应用进行速率限制。为了达到限速的目的，我们还需要做一些额外的配置：
 
@@ -168,11 +168,11 @@ $ make load-test LOAD_TEST_TARGET=http://localhost:10000 LOAD_TEST_RATE=500
 echo "GET http://localhost:10000/slow" | vegeta attack -rate=500 -duration=0 | tee results.bin | vegeta report
 ```
 
-![](006tNbRwgy1fwsmozv3daj30nr07lgm9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsmozv3daj30nr07lgm9.jpg)
 
-![](006tNbRwgy1fwsmprdwh2j30br07hq3b.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsmprdwh2j30br07hq3b.jpg)
 
-![](006tNbRwgy1fwsmq2wanfj30nr07kgm6.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsmq2wanfj30nr07kgm6.jpg)
 
 上图显示 Envoy 现在正在接收客户端发送给 API 的所有请求，并将它们发送到上游的负载均衡器！
 
@@ -180,7 +180,7 @@ echo "GET http://localhost:10000/slow" | vegeta attack -rate=500 -duration=0 | t
 
 此步骤将配置运行 Lyft 开源的全局 [速率限制](https://github.com/lyft/ratelimit) 服务。运行该服务非常简单，只需要克隆它的代码仓库，修改一部分配置文件，然后通过 `docker-compose` 启动就行了。
 
-![](006tNbRwgy1fwsmxzrlsmj30hk0dyaav.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsmxzrlsmj30hk0dyaav.jpg)
 
 首先克隆 [Ratelimit 代码仓库](https://github.com/lyft/ratelimit)并修改配置文件，更新 `domain` 字段以及 `descriptor` 字段的 `key` 和 `value`：
 
@@ -209,7 +209,7 @@ $ docker-compose down && docker-compose up
 
 最后一步是配置 Envoy 使用全局速率限制服务，以强制执行速率限制并降低对 API 的请求速率。配置生效后，Envoy 将会检查每个传入连接的速率限制，并根据上面的配置过滤掉一部分请求（限制最多 500 个请求/秒）。
 
-![](006tNbRwgy1fwsnt0oi5gj30hk0de3zb.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsnt0oi5gj30hk0de3zb.jpg)
 
 开启了速率限制的 Envoy 配置文件如下所示：
 
@@ -331,15 +331,15 @@ Error Set:
 
 通过 Envoy 暴露的速率限制指标（`envoy_cluster_ratelimit_over_limit`）或（`4xx` 响应）的速率来绘制仪表板，可以看到相应的可视化图表：
 
-![](006tNbRwgy1fwsohfxmscj30m107iq3k.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsohfxmscj30m107iq3k.jpg)
 
 通过可视化 API 服务实际看到的请求数量，可以证明请求速率在 `500个请求/秒` 上下波动，这正是我们所期望的！
 
-![](006tNbRwgy1fwsongr2zhj30jw07ejrr.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsongr2zhj30jw07ejrr.jpg)
 
 再查看一下 Envoy 传出的 API 连接，可以看到传出请求速率也在 `500个请求/秒` 上下波动！
 
-![](006tNbRwgy1fwsopzl2uhj30l707ijry.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar/006tNbRwgy1fwsopzl2uhj30l707ijry.jpg)
 
 实验成功！
 

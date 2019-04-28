@@ -24,7 +24,7 @@ Istio发布1.0版本后，其服务发现和路由规则功能已基本具备pro
 - 一些有状态的公共服务，例如数据库，FTP服务器，共享缓存等，目前未放入到K8s集群中，但业务服务对这些公共服务存在大量的依赖。
 - 其他未纳入K8S集群的服务，如遗留系统和第三方系统提供的服务。某些业务服务和这些服务之间存在互相访问的需求。
 
-![](006tNbRwly1fwdbmb6kz9j31690jgn1p.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-paas-integration/006tNbRwly1fwdbmb6kz9j31690jgn1p.jpg)
 
 ## 服务注册
 

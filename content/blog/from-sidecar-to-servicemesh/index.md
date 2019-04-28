@@ -15,7 +15,7 @@ keywords: ["service mesh","服务网格","边车模式"]
 
 ## 什么是边车模式
 
-![](ad5fbf65ly1g18zhnoh76j20dw0dw752.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/from-sidecar-to-servicemesh/ad5fbf65ly1g18zhnoh76j20dw0dw752.jpg)
 
 在 [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/patterns/) 的云设计模式中是这么介绍边车模式的：
 
@@ -83,7 +83,7 @@ Service Mesh 将底层那些难以控制的网络通讯统一管理，诸如：�
 
 >随着应用程序复杂性的增加，服务网格将成为实现服务到服务的能力的现实选择。
 
-![](ad5fbf65gy1g1yqgvxvzrj20sg0fxgnw.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/from-sidecar-to-servicemesh/ad5fbf65gy1g1yqgvxvzrj20sg0fxgnw.jpg)
 
 随着我们的微服务越来越细分，我们所要管理的服务正在成倍的增长着，Kubernetes 提供了丰富的功能，使得我们可以快速的部署和调度这些服务，同时也提供了我们熟悉的方式来实现那些复杂的功能，但是当临界点到来时，可能就是我们真正要去考虑使用 Service Mesh 的时候了。
 

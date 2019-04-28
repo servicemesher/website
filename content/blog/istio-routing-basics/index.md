@@ -157,7 +157,7 @@ istio-ingressgateway   LoadBalancer   10.31.247.41   35.240.XX.XXX
 
 当我们用浏览器访问外部地址时，我们应该看到HelloWorld ASP.NET Core程序。
 
-![](8af9f4b8ly1fx7ok0aj8lj218g0ly0yt.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-routing-basics/8af9f4b8ly1fx7ok0aj8lj218g0ly0yt.jpg)
 
 ## DestinationRule
 
@@ -229,9 +229,9 @@ deployment.extensions "aspnetcore-v2" created
 
 如果刷新浏览器，你可以看到VirtualService 在v1 和v2 版本之间切换:
 
-![](8af9f4b8ly1fx7ok0aj8lj218g0ly0yt.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-routing-basics/8af9f4b8ly1fx7ok0aj8lj218g0ly0yt.jpg) 
 
-![](8af9f4b8ly1fx7ol13ivmj218g0ie76h.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-routing-basics/8af9f4b8ly1fx7ol13ivmj218g0ie76h.jpg)
 
 这个结果是预料之中的，因为这两个版本都暴露在相同的Kubernetes服务之后：aspnetcore-service。
 

@@ -27,7 +27,7 @@ Max Kanat-Alexander 在《简约之美：软件设计之道》（Code Simplicity
 
 但目前软件行业的现状大部分面临这样的问题，即无论花多大的成本去测试，真正的用户行为背后的需求总是不可能被完全满足的，缺陷总是会有的，这时我们最后的安全网就是“灰度发布”（又名“金丝雀发布”）。在采用用户真实行为作为终极测试的同时，通过控制变更范围尽可能的减少风险；一旦真的有缺陷可以快速回滚，尽可能以最大程度降低影响。
 
-![金丝雀](00704eQkgy1fsaihrzqrjj30fo0hwgwj.jpg)
+![金丝雀](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/lightweight-service-mesh-practice-in-ucloud/00704eQkgy1fsaihrzqrjj30fo0hwgwj.jpg)
 
 ## 为何采用Service Mesh实现灰度发布
 
@@ -70,7 +70,7 @@ Istio在逻辑上可以分为数据面板和控制面板，这两部分的具体
 
 下图是构成每个面板的不同组件：
 
-![Istio 架构图](00704eQkgy1fsaijefq2qj30hs09e0vi.jpg)
+![Istio 架构图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/lightweight-service-mesh-practice-in-ucloud/00704eQkgy1fsaijefq2qj30hs09e0vi.jpg)
 
 经过一些代码级别的Research之后，我们最终选择了将Pilot从Istio中剥离出来，脱离K8S运行的轻量级Service Mesh方案。
 
@@ -78,13 +78,13 @@ Istio在逻辑上可以分为数据面板和控制面板，这两部分的具体
 
 在Istio中Pilot作为Envoy的控制面板提供集中式流量管理功能的模块，这是实现灰度发布必不可少的功能，事实上也是Service Mesh的核心功能。Mixer提供访问策略和控制功能，Istio-Auth提供安全认证功能，但在UCloud的内网环境下，我们可以将这两个模块去掉。
 
-![Istio Pilot架构图](00704eQkgy1fsaijtidnzj30hs0edq67.jpg)
+![Istio Pilot架构图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/lightweight-service-mesh-practice-in-ucloud/00704eQkgy1fsaijtidnzj30hs0edq67.jpg)
 
 得益于Pilot的良好设计，ETCD Platform很容易实现，进而从ETCD获取Service和ServiceInstance信息。然后我们重写了Pilot的main.go，保留了Pilot的model、proxy和proxy/envoy模块；删除其他的Platform仅保留新增的ETCD Platform。
 
 最后我们在保留完整的Istio DSL支持的同时，得到了完全脱离K8S运行和编译的Pilot。同时我们将Pilot和ETCD gRPC naming and discovery做了深度整合，自动剔除没有在线的ServiceInstance信息。
 
-![YAML](00704eQkgy1fsaik5pa5ej30hs0bg41v.jpg)
+![YAML](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/lightweight-service-mesh-practice-in-ucloud/00704eQkgy1fsaik5pa5ej30hs0bg41v.jpg)
 
 **2.采用docker-compose管理container实现sidecar**
 

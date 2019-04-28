@@ -15,7 +15,7 @@ SOFAMosn GitHub地址：https://github.com/alipay/sofa-mosn
 
 本文作者：朵晓东，花名奕杉，蚂蚁金服高级技术专家，专注云计算技术及产品。Apache Kylin 创始团队核心成员，蚂蚁金融云 PaaS 创始团队核心成员，Antstack 网络产品负责人，SOFAMesh 创始团队核心成员。
 
-![朵晓东 service mesh meetup](0069RVTdgy1ftvf883plij30sg0j0n1e.jpg)
+![朵晓东 service mesh meetup](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvf883plij30sg0j0n1e.jpg)
 
 本文是基于作者在第二届 Service Mesh Meetup 的主题分享《蚂蚁金服 Service Mesh 数据平面 SOFAMosn 深层解密》部分内容所整理，以下是具体内容。关于本次meetup的情况请访问[第二届Service Mesh Meetup北京站回顾](/blog/beijing-meetup-20180729/)。
 
@@ -53,17 +53,17 @@ SOFAMosn GitHub地址：https://github.com/alipay/sofa-mosn
 
 大家看到的图示是基于 Istio 的架构，在数据平面我们使用 SOFAMosn 替代了 Envoy，同时加入了一些蚂蚁实践中摸索的改进，比如说 Mixer 的位置，我们考虑把 Mixer下沉到 SOFAMosn ，比如说对 SOFA，DUBBO 协议的支持等。
 
-![](0069RVTdgy1ftvcgxiw5cj31kw0zk45v.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvcgxiw5cj31kw0zk45v.jpg)
 
  0.1.0 版本的 SOFAMosn 支持了 xDS V0.4 api 核心能力，重点支持了 SOFARPC 协议，并在蚂蚁内部在生产环境使用；同时支持了HTTP/1.1，HTTP/2.0的基本功能，但目前暂未在生产环境使用。
 
-![](0069RVTdgy1ftvchc91q9j31kw0zkgs2.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvchc91q9j31kw0zkgs2.jpg) 
 
 #### 2. SOFAMosn 的核心设计思路
 
 首先，将 SOFAMosn 作为代理处理的数据流划分为4层，在入方向数据依次经过网络 IO 层，二进制协议处理层，协议流程处理层，转发路由处理层；出向与入向过程基本相反。
 
-![](0069RVTdgy1ftvchpmtzoj31kw0zkq9h.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvchpmtzoj31kw0zkq9h.jpg)
 
 了解了分层的基本思路，具体介绍一下各层的具体职能：
 
@@ -72,21 +72,21 @@ SOFAMosn GitHub地址：https://github.com/alipay/sofa-mosn
 - **STREAMING 层**提供向上的协议一致性，负责 STREAM 生命周期，管理 Client / Server 模式的请求流行为，对 Client 端stream 提供池化机制等
 - **Proxy 层**提供路由选择，负载均衡等的能力，让前后端 stream 流转起来。大家可以从这张图清晰的看到单向请求流转的过程。
 
-![](0069RVTdgy1ftvcj3iaa9j31kw0zkn5w.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvcj3iaa9j31kw0zkn5w.jpg)
 
 #### 3. 了解了分层设计及转发流程，我们再看一下线程模型
 
 我们先看看 0.1.0 版本的线程模型，可以看到每个链接的 IO 协程是成对出现的，读协程负责读取，事件机制及 Codec 逻辑，数据上升到 steam 层，具体的 stream 事件由独立的常驻 worker 协程池负责处理。在 0.2.0 版本中我们将会进行多核优化，读协程将不再负责 codec 逻辑，将转发由 codec worker pool 来进行。从发展方向上看，我们会借鉴 SEDA 的思路，将转发流程中每一阶段的处理抽象为一个 stage，通过 task queue，worker 协程池，controller 的机制来对每一个阶段进行处理。从技术实现上看，Golang 实现 SEDA 机制的组件也更简单。
 
-![](0069RVTdgy1ftvcjbqg8zj31kw0zkn5c.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvcjbqg8zj31kw0zkn5c.jpg)
 
-![](0069RVTdgy1ftvcjhuyiuj31kw0zkgu6.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvcjhuyiuj31kw0zkgu6.jpg)
 
 #### 4. SOFAMosn 的模块划分
 
 除了刚才介绍了 4 个核心模块，还有如路由模块负责请求的路由寻址，后端管理模块负责管理后端的生命周期，健康度等。其中蓝色的框是 SOFAMosn 0.1.0 会涉及到的功能模块，红色的虚线框是我们规划去实现，或实验的一些topic。这方面也欢迎大家加入我们一起来建设。
 
-![](0069RVTdgy1ftvcjr017oj31kw0zkqju.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvcjr017oj31kw0zkqju.jpg)
 
 > 最后总结一下，模块化，分层解耦是 SOFAMosn 设计的初衷，此外可编程性，事件机制，扩展性，高吞吐量，都是设计中的重要考量因素。
 
@@ -102,7 +102,7 @@ SOFAMosn GitHub地址：https://github.com/alipay/sofa-mosn
 
 在后端管理功能方面，支持基础负载均衡算法，支持主动健康检查等必须功能。
 
-![](0069RVTdgy1ftvck8jjfgj31kw0zkgu4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvck8jjfgj31kw0zkgu4.jpg)
 
 除核心功能外，SOFAMosn 根据我们落地的一些经验提供了一些亮点功能。
 
@@ -124,11 +124,11 @@ SOFAMosn GitHub地址：https://github.com/alipay/sofa-mosn
 
 首先看绑核，在指定 P=1 的情况下，独占绑核不论在系统调用执行效率，cache locality affinity 两个方面都比更表现更好，整体吞吐量提升大约 30%。其次是内存优化，我们采样了 SLAB-style 的回收机制来提高复用，减少内存 copy；
 
-![](0069RVTdgy1ftvckkrfijj31kw0zkam1.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvckkrfijj31kw0zkam1.jpg)
 
 同时在内存分配上需要考虑 Golang 内存模型的亲和性，尽量减少 arena 区内存申请；最后，大家都知道 Golang的 GC 需要是你要去熟悉并适应他的，很多细节需要关注，尽量减少GC scanobject的压力。
 
-![](0069RVTdgy1ftvckray2rj31kw0zk7ek.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvckray2rj31kw0zk7ek.jpg)
 
 在 IO 方案，Golang 的 IO 模型是同步化的，在读方面既要尽可能多读，又要避免频繁调用 SetReadDeadline 造成的的影响，在我们压测下面频繁调用 SetReadDeadline 会对吞吐量有一定影响。在写方面需要适度 buffer，例如由多 worker 协程驱动造成某个 IO 协程频繁写系统 IO 也会造成吞吐量下降。另一个需要注意的方面是，在多协程场景下需要避免读写频率不均衡，这也是造成整体吞吐量下降的一个潜在原因。另外，如果读或写大量触发，会造成大量系统调用，这会引起 Golang runtime 调度成本升高。在 Golang runtime 调度方面，首先会触发协程调度造成时间消耗，同时 runtime 调度本身没有 OS 线程调度灵敏，也会有一定的时间损耗。同时 OS 系统调用本身也有会耗时，会造成性能下降。
 
@@ -140,23 +140,23 @@ SOFAMosn GitHub地址：https://github.com/alipay/sofa-mosn
 
 介绍完性能优化的一些过程，我们来看一下目前我们在性能优化上的一些结果，即单核 TCP 转发的性能，和单核SOFARPC 转发的性能。可以看到，在单核 TCP 转发场景，SOFAMosn 0.1.0 版本和 Envoy 1.7版本转发性能差距可控，后续版本我们会继续优化。
 
-![](0069RVTdgy1ftvcl25xaej31kw0zkdmu.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvcl25xaej31kw0zkdmu.jpg)
 
-![](0069RVTdgy1ftvclh0lu9j31kw0zktgn.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvclh0lu9j31kw0zktgn.jpg)
 
 此外，前面提到过 TLS 的实现，我们再来看一下性能方面的一些探索。首先介绍了一下测试的场景。在这个场景下，我们发现对于 ECDHE 算法，Golang 原生的实现性能虽然低于Ningx（使用 OpenSSL），但是高于 Golang with boring SSL。通过对具体算法和协议的性能压测，代码调研我们得出如下结论。可以看出对于 ECDHE-P256加密套件，Golang 原生实现的性能是很不错的，可以放心使用。
 
-![](0069RVTdgy1ftvclp075yj31kw0zkdm4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvclp075yj31kw0zkdm4.jpg)
 
 除了这些优化点以后，我们会在后续版本持续进行性能优化，多核优化，内存优化，同时利用用户态，内核态的加速技术来提升 SOFAMosn 的转发性能。在TLS加解密方面，我们将会尝试基于本地加速卡和 Keyless 架构的 Offload 加速，这也是我们在蚂蚁网络从中已经落地的一些技术手段。
 
-![](0069RVTdgy1ftvclv2763j31kw0zkn4s.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvclv2763j31kw0zkn4s.jpg)
 
 ### RoadMap
 
 最后我介绍一下SOFAMosn 的 RoadMap（时间为大体范围，具体发布请关注本公众号）：
 
-![](0069RVTdgy1ftvcm43sg5j31kw0sp1kx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sofa-mosn-deep-dive/0069RVTdgy1ftvcm43sg5j31kw0sp1kx.jpg)
 
 8月第一周我们将发布 SOFAMesh 0.1.0 版本，这个版本重点支持 Proxy 核心能力，支持 xDS V0.4 API 核心功能，支持 SOFARPC 等通信协议。
 

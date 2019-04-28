@@ -24,17 +24,17 @@ keywords: ["service mesh","服务网格","istio"]
 
 当前系统中有 A、B、C 三个服务，服务 A 是上游，服务 B 是中游，服务 C 是下游。它们的调用链如下：
 
-![](006tKfTcgy1g126lbd2g3j304r07jq31.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/circuit-breaking-and-outlier-detection-in-istio/006tKfTcgy1g126lbd2g3j304r07jq31.jpg)
 
 一旦下游服务 C 因某些原因变得不可用，积压了大量请求，服务 B 的请求线程也随之阻塞。线程资源逐渐耗尽，使得服务 B 也变得不可用。紧接着，服务 A 也变为不可用，整个调用链路被拖垮。
 
-![](006tKfTcgy1g126mn4vnrj30kv07j3z8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/circuit-breaking-and-outlier-detection-in-istio/006tKfTcgy1g126mn4vnrj30kv07j3z8.jpg)
 
 像这种调用链路的连锁故障，就是上文所说的服务雪崩效应。
 
 正所谓刮骨疗毒，壮士断腕。在这种时候，就需要我们的熔断机制来挽救整个系统。熔断机制的大体流程如下：
 
-![](006tKfTcgy1g126mv3s9fj30bf0fcgmd.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/circuit-breaking-and-outlier-detection-in-istio/006tKfTcgy1g126mv3s9fj30bf0fcgmd.jpg)
 
 这里需要解释两点：
 
@@ -47,7 +47,7 @@ Istio 是通过 Envoy Proxy 来实现熔断机制的，Envoy 强制在网络层�
 
 该示例的架构如图所示：
 
-![](006tKfTcgy1g126o9utc8j30k208eaax.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/circuit-breaking-and-outlier-detection-in-istio/006tKfTcgy1g126o9utc8j30k208eaax.jpg)
 
 该示例由客户端和服务端组成，其中客户端是一个 Java HTTP 应用程序，被打包在镜像 `docker.io/ceposta/http-envoy-client-standalone:latest` 中，它用来模拟对后端服务 `httpbin` 发起 http 调用，所有的调用首先都会被 Envoy Proxy 拦截。
 

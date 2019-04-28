@@ -22,7 +22,7 @@ keywords: ["service mesh","服务网格","istio","gloo","xds","envoy"]
 
 [Envoy](https://www.envoyproxy.io/) 最近成为一个受欢迎的网络组件。 几年前 Matt Klein [写了一篇博客](https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a) ，讨论了Envoy的动态配置API，以及Envoy发展的历史和动机。 他称该博客为“通用数据平面API”。 由于许多其他项目采用[Envoy](https://www.envoyproxy.io/community) 作为其产品的核心组件，因此对于应用程序/L7网络解决方案而言，毫不夸张地说，“Envoy已成为云原生架构中的通用数据平面”，而不仅仅是简单建立了API标准。
 
-![](61411417ly1g0mfoc0c9yj20dm07faap.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-to-manage-envoy-proxy-at-the-edge-as-a-gateway-or-in-a-mesh/61411417ly1g0mfoc0c9yj20dm07faap.jpg)
 
 此外，由于 [Envoy的通用数据平面API](https://blog.envoyproxy.io/the-universal-data-plane-api-d15cec7a) ，我们已经看到了许多 *管理层* 的实现， 用于配置和驱动基于Envoy的基础架构。 我们将深入探讨为Envoy构建控制平面所需的内容，以便您可以使用此信息来评估哪种类型的基础架构最适合您的组织和使用情况。 因为这是一个广泛的主题，我们将在未来几天发布的多部系列博客中解决它。
 
@@ -34,13 +34,13 @@ keywords: ["service mesh","服务网格","istio","gloo","xds","envoy"]
 - 首选适用于Envoy配置的特定于域的API/对象模型，以更好地适应其工作流程/世界观（与已有方案冲突）
 - 当其组织准备部署时，暂时没有成熟的控制平面（走的太快）
 
-![](61411417ly1g0mforyrc1j20go0digsn.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-to-manage-envoy-proxy-at-the-edge-as-a-gateway-or-in-a-mesh/61411417ly1g0mforyrc1j20go0digsn.jpg)
 
 若是因为一些早期采用者建立了他们自己的定制控制平面，并不意味着你现在也要自己重新开发控制平面。 因为Envoy构建控制平面的项目在去年已经成熟了很多，若你决定重新开发另一个控制平面前你应该探索使用它们。 其次，正如Datawire的人们发现的那样，[丹尼尔·布莱恩特](https://twitter.com/danielbryantuk) 最近明确表示， [为Envoy建造一个控制平面并不适合胆小的人](https://www.infoq.com/articles/ambassador-api-gateway-kubernetes) 。
 
 [我参与](https://www.solo.io/) 了 [几个](https://github.com/istio/istio)为Envoy构建控制平面的[开源项目](https://github.com/solo-io/gloo) 。 例如， [Gloo](https://gloo.solo.io/) 是 [一个功能网关](https://medium.com/solo-io/announcing-gloo-the-function-gateway-3f0860ef6600) ，可以充当非常强大的Kubernetes入口，API网关或功能网关，以简化单体应用到微服务的过渡。 Gloo [有一个Envoy的控制平面](https://gloo.solo.io/introduction/architecture/) ，我们可以在这一系列的帖子中作为一个例子来说明如何构建一个简单的抽象，允许在你需要的控制点上实现可插拔性和可扩展性。 您可以用作参考的其他可靠的控制平面实现是 [Istio](https://istio.io/) 和 [Heptio Contour](https://github.com/heptio/contour) 我们将在整个系列博客中使用这些作为很好的例子。 如果不出意外，您可以了解Envoy控制平面存在哪些选项，并使用它来指导您的实施，如果您必须走这条路。
 
-![](61411417ly1g0mfpbj0hgj21200a840t.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-to-manage-envoy-proxy-at-the-edge-as-a-gateway-or-in-a-mesh/61411417ly1g0mfpbj0hgj21200a840t.jpg)
 
 在这个博客系列中，我们将看看以下几个方面：
 
@@ -65,7 +65,7 @@ keywords: ["service mesh","服务网格","istio","gloo","xds","envoy"]
 - [集群发现服务 \-](https://www.envoyproxy.io/docs/envoy/v1.9.0/configuration/cluster_manager/cds#config-cluster-manager-cds) 用于后端服务的 [CDS](https://www.envoyproxy.io/docs/envoy/v1.9.0/configuration/cluster_manager/cds#config-cluster-manager-cds) ，我们可以将流量路由到该服务
 - [secret发现服务 \-](https://www.envoyproxy.io/docs/envoy/v1.9.0/configuration/secret) 用于分发Secret的 [SDS](https://www.envoyproxy.io/docs/envoy/v1.9.0/configuration/secret) （证书和密钥）
 
-![](61411417ly1g0mfpqxtkyj20p00gm0yz.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-to-manage-envoy-proxy-at-the-edge-as-a-gateway-or-in-a-mesh/61411417ly1g0mfpqxtkyj20p00gm0yz.jpg)
 
 API使用 [proto3 Protocol Buffers](https://www.envoyproxy.io/docs/envoy/v1.9.0/configuration/overview/v2_overview#config-overview-v2) 定义， 甚至还有一些参考实现可用于引导您自己的控制平面：
 

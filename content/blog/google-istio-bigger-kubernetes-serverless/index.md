@@ -16,7 +16,7 @@ categories: ["Istio"]
 keywords: ["service mesh"]
 ---
 
-![](00704eQkly1fug8z3tpgcj30lc0ao44a.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/google-istio-bigger-kubernetes-serverless/00704eQkly1fug8z3tpgcj30lc0ao44a.jpg)
 
 Google Cloud采用了Istio服务网格技术来管理微服务，这可能比Kubernetes和无服务器产生更大的影响。
 

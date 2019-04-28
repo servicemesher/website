@@ -22,7 +22,7 @@ keywords: ["service mesh"]
 
 本书作者是[Lee Calcote](https://twitter.com/lcalcote)，先后在Cisco、Seagate、Solarwind任职负责技术战略决策，参与DMTF（Distributed Management Task Foundation）、CIS（Center for Internet Security），还是CNCF Ambassador、Docker Captain。
 
-![The Enterprise Path to Service Mesh Architectures](006tNbRwly1fu93bicdlfj30fs0nq464.jpg)
+![The Enterprise Path to Service Mesh Architectures](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fu93bicdlfj30fs0nq464.jpg)
 
 *图书封面*
 
@@ -79,7 +79,7 @@ Service Mesh是建立在物理或者虚拟网络层之上的，基于策略的�
 
 本章主要介绍Service Mesh的定义和组成，为什么要使用Service Mesh，它可以带来哪些好处。
 
-![](0069RVTdly1fuafvbnuc7j310a0oqdm9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/0069RVTdly1fuafvbnuc7j310a0oqdm9.jpg)
 
 Service Mesh与传统网络的区别就是**硬件或者虚拟网络**与**软件定义网络（SDN）**的区别，我们从上图中可以看到物理和虚拟网络中比起SDN还多了**管理平面**。
 
@@ -89,13 +89,13 @@ Service Mesh与传统网络的区别就是**硬件或者虚拟网络**与**软�
 
 下图是网状拓扑，所谓网状拓扑就是每个节点都可以跟所有其他节点直接互联，这样而这也是链接数最多一种拓扑，如果有n个节点的话，链接数就是n(n-1)。
 
-![](0069RVTdly1fuaie8jan8j310a0kitem.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/0069RVTdly1fuaie8jan8j310a0kitem.jpg)
 
 ### Service Mesh架构
 
 下图是[Conduit](https://condiut.io) Service Mesh（现在已合并到Linkerd2中了）的架构图，这是Service Mesh的一种典型的架构。
 
-![](0069RVTdly1fuail4d24jj31080rkgr7.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/0069RVTdly1fuail4d24jj31080rkgr7.jpg)
 
 Service Mesh中分为**控制平面**和**数据平面**，当前流行的两款开源的Service Mesh Istio和Linkerd实际上都是这种构造，只不过Istio的划分更清晰，而且部署更零散，很多组件都被拆分，控制平面中包括Mixer、Pilot、Citadel，数据平面默认是用Envoy；而Linkerd中只分为linkerd做数据平面，namerd作为控制平面。
 
@@ -124,7 +124,7 @@ Service Mesh中服务是一等公民，它提供L5的网络流量管理，并提
 
 还是拿Istio做例子，Mixer通过适配器将应用的遥测数据发送给后端监控、日志、认证和份额管理系统。
 
-![](0069RVTdly1fuam4ln45jj30yu0o6wkc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/0069RVTdly1fuam4ln45jj30yu0o6wkc.jpg)
 
 从上图可以看到Mixer适配器可以对接多种监控和日志后端。
 
@@ -136,7 +136,7 @@ Service Mesh中服务是一等公民，它提供L5的网络流量管理，并提
 
 下图是Istio中安全通信路径的示意图。
 
-![](0069RVTdly1fuamvq97cuj30yu0wg7cr.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/0069RVTdly1fuamvq97cuj30yu0wg7cr.jpg)
 
 一般的安全性都是通过证书的方式实现的。Sidecar代理负责证书生命周期的管理，包括证书的生成、分发、刷新和注销。从图中还可以看到，在Pod内部sidecar会与应用容器之间建立本地TCP连接，其中使用mTLS（双向传输层加密）。这一点是非常重要的，因为一个节点上甚至一个Pod内都不一定运行一个容器，容器可能会被暴露到外部访问，保证传输层的双向加密，可以保证流量传输的安全。
 
@@ -148,7 +148,7 @@ Service Mesh中服务是一等公民，它提供L5的网络流量管理，并提
 
 这是本书最有重要的一个观点，重要到要放到副标题，熟悉OSI模型的人都知道L5是什么。
 
-![](0069RVTdly1fuanez4qbtj30v4183n7p.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/0069RVTdly1fuanez4qbtj30v4183n7p.jpg)
 
 *OSI模型（图片来自[CSDN](https://blog.csdn.net/yaopeng_2005/article/details/7064869)）*
 
@@ -159,7 +159,7 @@ Service Mesh是在开发和运维之间植入的一个基础设施层。它将�
 - **产品Owner**可以针对特定服务，根据用户选择的套餐执行配额管理。
 - **开发人员**可随时将新版本功能重定向到beta版本，不需要**运维人员**干涉。
 
-![](006tNbRwly1fubfiiryirj30w20ayjui.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubfiiryirj30w20ayjui.jpg)
 
 这种职责的解耦大大加速了软件的迭代速度，总之你可以把Service Mesh作为OSI模型中的会话层。
 
@@ -187,7 +187,7 @@ Service Mesh是在开发和运维之间植入的一个基础设施层。它将�
 
 下图是一个使用**客户端库**将应用与服务治理紧耦合的示意图。
 
-![](006tNbRwly1fubnx0q9bpj30vq0pq465.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubnx0q9bpj30vq0pq465.jpg)
 
 从图中我们可以看到，应用程序代码与客户端度库紧耦合在一起，不同的服务团队需要一起协调超时和重试机制等。容器编排更适用于分布式应用，API Gateway通常只需要部署在系统边缘即可，不需要在每个应用中都部署，而Service Mesh却需要在每个服务或者说节点中部署。
 
@@ -204,7 +204,7 @@ Service Mesh是在开发和运维之间植入的一个基础设施层。它将�
 
 我们在前面看到了通过**客户端库**来治理服务的架构图，那是我们在改造成Service Mesh架构前使用微服务架构通常的形式，下图是使用Service Mesh架构的最终形式。
 
-![](006tNbRwly1fubs6ts3sgj30vo0osdnj.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubs6ts3sgj30vo0osdnj.jpg)
 
 当然在达到这一最终形态之前我们需要将架构一步步演进，下面给出的是参考的演进路线。
 
@@ -212,7 +212,7 @@ Service Mesh是在开发和运维之间植入的一个基础设施层。它将�
 
 如果你使用的是Kubernetes做容器编排调度，那么在进化到Service Mesh架构之前，通常会使用Ingress Controller，做集群内外流量的反向代理，如使用Traefik或Nginx Ingress Controller。
 
-![](006tNbRwly1fubsk4v16hj30vo0bq75z.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubsk4v16hj30vo0bq75z.jpg)
 
 这样只要利用Kubernetes的原有能力，当你的应用微服务化并容器化需要开放外部访问且只需要L7代理的话这种改造十分简单，但问题是无法管理服务间流量。
 
@@ -220,7 +220,7 @@ Service Mesh是在开发和运维之间植入的一个基础设施层。它将�
 
 Ingress或者边缘代理可以处理进出集群的流量，为了应对集群内的服务间流量管理，我们可以在集群内加一个`Router`层，即路由器层，让集群内所有服务间的流量都通过该路由器。
 
-![](006tNbRwly1fubsxrph3dj30vq0duq53.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubsxrph3dj30vq0duq53.jpg)
 
 这个架构无需对原有的单体应用和新的微服务应用做什么改造，可以很轻易的迁移进来，但是当服务多了管理起来就很麻烦。
 
@@ -228,7 +228,7 @@ Ingress或者边缘代理可以处理进出集群的流量，为了应对集群�
 
 这种架构是在每个节点上都部署一个代理，如果使用Kubernetes来部署的话就是使用`DaemonSet`对象，Linkerd第一代就是使用这种方式部署的，一代的Linkerd使用Scala开发，基于JVM比较消耗资源，二代的Linkerd使用Go开发。
 
-![](006tNbRwly1fubt5a97h7j30vq0bcq5p.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubt5a97h7j30vq0bcq5p.jpg)
 
 这种架构有个好处是每个节点只需要部署一个代理即可，比起在每个应用中都注入一个sidecar的方式更节省资源，而且更适合基于物理机/虚拟机的大型单体应用，但是也有一些副作用，比如粒度还是不够细，如果一个节点出问题，该节点上的所有服务就都会无法访问，对于服务来说不是完全透明的。
 
@@ -236,7 +236,7 @@ Ingress或者边缘代理可以处理进出集群的流量，为了应对集群�
 
 这个一般不会成为典型部署类型，当企业的服务网格架构演进到这一步时通常只会持续很短时间，然后就会增加控制平面。跟前几个阶段最大的不同就是，应用程序和代理被放在了同一个部署单元里，可以对应用程序的流量做更细粒度的控制。
 
-![](006tNbRwly1fubvi0dnhlj30vo0ekwhx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubvi0dnhlj30vo0ekwhx.jpg)
 
 这已经是最接近Service Mesh架构的一种形态了，唯一缺的就是控制平面了。所有的sidecar都支持热加载，配置的变更可以很容易的在流量控制中反应出来，但是如何操作这么多sidecar就需要一个统一的控制平面了。
 
@@ -244,7 +244,7 @@ Ingress或者边缘代理可以处理进出集群的流量，为了应对集群�
 
 下面的示意图是目前大多数Service Mesh的架构图，也可以说是整个Service Mesh架构演进的最终形态。
 
-![](006tNbRwly1fubvr83wvgj30vq0mmdip.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fubvr83wvgj30vq0mmdip.jpg)
 
 这种架构将代理作为整个服务网格中的一部分，使用Kubernetes部署的话，可以通过以sidecar的形式注入，减轻了部署的负担，可以对每个服务的做细粒度权限与流量控制。但有一点不好就是为每个服务都注入一个代理会占用很多资源，因此要想方设法降低每个代理的资源消耗。
 
@@ -260,21 +260,21 @@ Ingress或者边缘代理可以处理进出集群的流量，为了应对集群�
 
 **nginMesh**
 
-![](006tNbRwly1fucp8yralaj30vu0sijx8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fucp8yralaj30vu0sijx8.jpg)
 
 通过扩展Istio Mixer adapter来对接不同的监控后端。
 
-![](006tNbRwly1fucplat3l9j30vo0lw43l.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fucplat3l9j30vo0lw43l.jpg)
 
 **SOFAMosn**
 
 还有蚂蚁金服开源的Go语言版的数据平面[SOFAMosn](https://github.com/alipay/sofa-mosn)，这是也兼容Istio的SOFAMesh的一部分，也可以单独作为代理使用，详见：[SOFAMesh & SOFA MOSN—基于Istio构建的用于应对大规模流量的Service Mesh解决方案](https://jimmysong.io/posts/sofamesh-and-mosn-proxy-sidecar-service-mesh-by-ant-financial/)。
 
-![SOFAMesh](006tNbRwly1fucpano6gsj31kw1biq98.jpg)
+![SOFAMesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fucpano6gsj31kw1biq98.jpg)
 
 [SOFAMosn](https://github.com/alipay/sofa-mosn)的模块架构图。
 
-![SOFAMosn模块架构图](006tNbRwly1fucpc5fn8wj31kw0sfdnu.jpg)
+![SOFAMosn模块架构图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-enterprise-path-to-service-mesh-architectures/006tNbRwly1fucpc5fn8wj31kw0sfdnu.jpg)
 
 在未来我们会看到更多定制的数据平面和Mixer适配器出现。
 

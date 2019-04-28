@@ -18,7 +18,7 @@ keywords: ["service mesh","服务网格"]
 
 Istio正在引发大量的关注，特别是1.0版本发布后。但它是否成为Kubernetes之上的事实的服务网络标准呢？ 我们采访了Red Hat的Istio产品经理“红胡子”Brian Harrington，他的答案是肯定的。“有了Istio，部署很简单，与Kubernetes的集成也是浑然一体的。感觉就应该是这样。“
 
-![红胡子 Brian Harrington](006tNbRwgy1fvcqw67cllj30lc0qodj9.jpg)
+![红胡子 Brian Harrington](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-service-mesh-interview-redbear-brian-harrington/006tNbRwgy1fvcqw67cllj30lc0qodj9.jpg)
 
 图片：红胡子 Brian Harrington
 
@@ -76,4 +76,4 @@ Istio [1.0](https://jaxenter.com/istio-1-0-arrived-core-features-ready-productio
 
 这种趋势甚至反映在围绕Istio模块化的问题上。我觉得服务网格的未来是与Knative和Apache Whisk等技术共生的，它使开发人员能够重新采用“仅做一件事并把它做得好”（do one thing and do it well）的“UNIX哲学”，以建立应用的未来。
 
-![](006tNbRwgy1fvcr3ya379j30sg0j1grh.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-service-mesh-interview-redbear-brian-harrington/006tNbRwgy1fvcr3ya379j30sg0j1grh.jpg)

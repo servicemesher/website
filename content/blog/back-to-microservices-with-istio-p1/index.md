@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 
-![](61411417ly1g0exu1gyo9j20m80bq754.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1gyo9j20m80bq754.jpg)
 
 **Istio** 是一个由Google，IBM和Lyft团队合作开发的开源项目，它提供了基于微服务的应用程序复杂性的解决方案，仅举几例：
 
@@ -38,7 +38,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 你明白了，必须满足所有形式才可以为我们添加一项巨大的服务（有很多不是业务功能的代码）。在本文中，我们将展示Istio如何从我们的服务中删除所有上述交叉问题。
 
-![图1.微服务的形式构成](61411417ly1g0exu1x75cj20ai081t8l.jpg)
+![图1.微服务的形式构成](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1x75cj20ai081t8l.jpg)
 
 **注意**： 本文假设您具有Kubernetes的知识。如果不是这种情况，我建议您阅读 [我对Kubernetes的介绍](https://medium.freecodecamp.org/learn-kubernetes-in-under-3-hours-a-detailed-guide-to-orchestrating-containers-114ff420e882)，然后继续阅读本文。
 
@@ -46,7 +46,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 在没有Istio的世界中，一个服务向另一个服务直接发出请求，并且在发生故障的情况下，服务需要通过重试，超时，打开熔断器等来处理它。
 
-![图2. Kubernetes中的网络流量](61411417ly1g0exu1eu2vj20m8054dg4.jpg)
+![图2. Kubernetes中的网络流量](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1eu2vj20m8054dg4.jpg)
 
 为了解决这个问题，Istio通过与服务完全分离，并通过拦截所有网络通信来提供一种巧妙的解决方案。这样做可以实现：
 
@@ -66,7 +66,7 @@ Istio拦截所有网络流量，并通过在每个pod中注入智能代理作为
 
 注入的代理使Istio能够轻松满足我们的要求。举个例子，我们来看看重试和熔断器功能。
 
-![图3.Envoy如何实现Retries和CircuitBreaking](61411417ly1g0exu34d0gg20m808a1kx.gif)
+![图3.Envoy如何实现Retries和CircuitBreaking](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu34d0gg20m808a1kx.gif)
 
 
 
@@ -89,7 +89,7 @@ Istio拦截所有网络流量，并通过在每个pod中注入智能代理作为
 
 由三个组件组成： **Pilot**、 **Mixer** 和 **Citadel**，它们组合使用Envoys来路由流量，实施策略和收集遥测数据。如下图所示。
 
-![图4.与数据平面相关的控制平面](61411417ly1g0exu2b2mqj20m80eogn9.jpg)
+![图4.与数据平面相关的控制平面](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2b2mqj20m80eogn9.jpg)
 
 Envoy（即数据平面）使用由Istio定义的 [Kubernetes自定义资源定义](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) 进行配置。这意味着对你而言，它只是另一个具有熟悉语法的Kubernetes资源。创建后将由**控制平面**获取，并将其应用于Envoy。
 
@@ -99,7 +99,7 @@ Envoy（即数据平面）使用由Istio定义的 [Kubernetes自定义资源定�
 
 坦率地说，我们的服务对Istio的存在有着尽可能多的了解，就像鱼对水一样，他们会问自己“这到底是什么水？”。
 
-![Victoria Dimitrakopoulos](61411417ly1g0exu1l39rj20m809tqd9.jpg)
+![Victoria Dimitrakopoulos](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1l39rj20m809tqd9.jpg)
 
 这意味着您可以选择一个工作集群，在部署了Istio的组件后，其中的服务将继续工作，并且以相同的方式，您可以删除组件，一切都会很好。可以理解的是，您将失去Istio提供的功能。
 
@@ -168,7 +168,7 @@ $ kubectl get pods -n istio-system
 - **SA\-Logic服务** ：执行sentiment Analysis。
 - **SA反馈服务** ：接收用户关于分析准确性的反馈。
 
-![图6情感分析微服务](61411417ly1g0exu2q2ppj20m80apmxy.jpg)
+![图6情感分析微服务](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2q2ppj20m80apmxy.jpg)
 
 在图6中，除了服务之外，我们还看到Ingress Controller在Kubernetes中将传入的请求路由到适当的服务，Istio使用了一个名为Ingress Gateway的类似概念，将在本文的后续部分中介绍。
 
@@ -214,7 +214,7 @@ sa-web-app-599cf47c7c-s7cvd    2/2       Running   0          12m
 
 视觉呈现在图7中。
 
-![图7.其中一个Pod中的Envoy代理](61411417ly1g0exu2ti9mj209n0dtwf8.jpg)
+![图7.其中一个Pod中的Envoy代理](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2ti9mj209n0dtwf8.jpg)
 
 现在，应用程序启动并运行，我们需要允许传入流量到达我们的应用程序。
 
@@ -283,7 +283,7 @@ VirtualService指示Ingress Gateway如何路由允许进入集群的请求。
 
 对于我们度过即将到来的应用程序请求 **HTTP网关** 必须被路由到 `sa-frontend`，`sa-web-app` 和`sa-feedback` 服务（出了如图8）。
 
-![图8.使用VirtualServices配置的路由](61411417ly1g0exu2n39aj20m80gk75x.jpg)
+![图8.使用VirtualServices配置的路由](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2n39aj20m80gk75x.jpg)
 
 让我们分解以下路由到SA\-Frontend的请求：
 
@@ -337,7 +337,7 @@ virtualservice.networking.istio.io/sa-external-services created
 
 **注意**： 当我们应用Istio资源时，Kubernetes API服务器会创建一个由Istio控制平面接收的事件，然后将新配置应用于每个pod的Envoy代理。Ingress Gateway控制器是另一个由控制平面配置的Envoy，如图9所示。
 
-![图9.配置 **Istio\-IngressGateway** 来路由请求](61411417ly1g0exu1t95sj20m80i2jt1.jpg)
+![图9.配置 **Istio\-IngressGateway** 来路由请求](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1t95sj20m80i2jt1.jpg)
 
 现在可以访问Sentiment Analysis应用程序了 `http://{EXTERNAL-IP}/` 。如果您获得Not Found状态，请不要担心 *有时需要配置生效才能更新envoy的缓存* 。
 
@@ -356,7 +356,7 @@ $ kubectl port-forward \
 
 并 [http://localhost:20001/](http://localhost:20001/) 使用“admin”（不含引号）为用户和密码打开登录。有很多有用的功能，例如检查Istio组件的配置，根据拦截网络请求和回答收集的信息可视化服务，“谁在调用谁？”，“哪个版本的服务有故障？”等等，花一些时间检验Kiali的功能，然后再转到下一节，用Grafana可视化指标！
 
-![图10. Kiali \- 服务可观察性](61411417ly1g0exu28njyj20m80c7mye.jpg)
+![图10. Kiali \- 服务可观察性](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu28njyj20m80c7mye.jpg)
 
 ### Grafana \- 度量可视化
 
@@ -370,7 +370,7 @@ $ kubectl -n istio-system port-forward \
 
 在左上角单击菜单**Home** 并选择 **Istio Service Dashboard** 并在左上角选择以**sa\-web\-app**开头的服务，您将看到收集的指标，如下图所示：
 
-![](61411417ly1g0exu1z8vbj20m80cnabv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1z8vbj20m80cnabv.jpg)
 
 我的妈呀，这是一个没有任何数据的视图，管理层永远不会赞同这一点。让我们通过执行以下命令生成一些负载：
 
@@ -390,13 +390,13 @@ $ while true; do \
 
 我们需要跟踪，因为我们所拥有的服务越多，就越难找出失败的原因。我们来看下面图片中的简单案例：
 
-![图12.通常随机失败的请求](61411417ly1g0exu2ht7hj20m804fjrw.jpg)
+![图12.通常随机失败的请求](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2ht7hj20m804fjrw.jpg)
 
 请求进入，失败，*原因是什么*？*第一次服务*？*还是第二个*？两者都有例外情况，让我们来看看每个日志。你发现自己这么做了多少次？ 我们的工作更像是软件侦探而不是开发人员。
 
 这是微服务中的一个普遍问题，它使用分布式跟踪系统解决，其中服务将唯一的header相互传递，然后将此信息转发到请求跟踪放在一起的分布式跟踪系统。一个例子如图13所示。
 
-![图13.用于标识请求范围的TraceId](61411417ly1g0exu2k4zsj20rs06uwfz.jpg)
+![图13.用于标识请求范围的TraceId](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2k4zsj20rs06uwfz.jpg)
 
 Istio使用Jaeger Tracer实现OpenTracing API，这是一个独立于供应商的框架。要访问Jaegers UI，请执行以下命令：
 
@@ -409,7 +409,7 @@ $ kubectl port-forward -n istio-system \
 
 然后在 [http://localhost:16686](http://localhost:16686/) 中打开UI，选择 **sa\-web\-app** 服务， *如果下拉列表中未显示该*服务，*则在页面上生成一些活动并点击刷新* 。随后单击该按钮 **查找痕迹**， 这显示最近的痕迹，选择任何和所有的痕迹的详细分类将会显示 ，如图14所示。
 
-![图14. Jaeger \- 请求跟踪](61411417ly1g0exu1ca17j20rs0bsgnr.jpg)
+![图14. Jaeger \- 请求跟踪](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1ca17j20rs0bsgnr.jpg)
 
 跟踪显示：
 
@@ -422,7 +422,7 @@ $ kubectl port-forward -n istio-system \
 
 **注意** ：在第4点，我们的应用程序需要获取Istio生成的header，并在下一个请求时将其传递下来，如下图所示。
 
-![](61411417ly1g0exu1odduj20m8055q3r.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1odduj20m8055q3r.jpg)
 
 Istio做主要的繁重工作，因为它在传入的请求上生成header，在每个sidecar上创建新的span，传递它们，但是如果没有我们的服务传递header，我们将失去请求的完整跟踪。
 
@@ -474,7 +474,7 @@ deployment.extensions/sa-frontend-green created
 
 而作为双方部署在标签 `app: sa-frontend` 通过虚拟服务路由的请求 `sa-external-services`  的服务 `sa-frontend` 会被转发到所有的实例，并将于负载采用循环算法，这将导致在图16中提出的负载均衡问题。
 
-![图16.找不到请求的文件](61411417ly1g0exu30v6lj20m80do761.jpg)
+![图16.找不到请求的文件](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu30v6lj20m80do761.jpg)
 
 找不到这些文件，因为它们在应用程序的不同版本中的命名方式不同。让我们验证一下：
 
@@ -498,7 +498,7 @@ $ curl --silent http://$EXTERNAL_IP/ | tr '"' '\n' | grep main
 
 在 **VirtualService** 将请求路由到正确的服务之后，然后使用 **DestinationRules**， 我们可以指定适用于此服务实例的流量的策略，如图17所示。
 
-![图17.使用Istio资源的流量管理](61411417ly1g0exu2yjsuj20rs09e75i.jpg)
+![图17.使用Istio资源的流量管理](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2yjsuj20rs09e75i.jpg)
 
 **注意**： 图17以易于理解的方式可视化Istio资源如何影响网络流量。但是，准确地说，决定将请求转发到哪个实例是由CRD配置的Ingress Gateway的Envoy做出的。
 
@@ -569,11 +569,11 @@ sa-logic-buggy-76dff55847-kx8zz   2/2     app=sa-logic,version=v2
 
 当 `sa-logic` 服务目标pod标记为 `app=sa-logic`时，任何传入请求将在所有实例之间进行负载均衡，如图18所示。
 
-![图18. Round Robin负载均衡](61411417ly1g0exu199gtj20m80f5wgc.jpg)
+![图18. Round Robin负载均衡](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu199gtj20m80f5wgc.jpg)
 
 但我们希望将请求路由到版本为v1的实例，并镜像到版本为v2的实例，如图19所示。
 
-![图19.路由到v1和镜像到v2](61411417ly1g0exu2f7y4j20m80b8q3y.jpg)
+![图19.路由到v1和镜像到v2](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2f7y4j20m80b8q3y.jpg)
 
 这是使用VirtualService与DestinationRule结合实现的，其中目标规则指定到特定子集的子集和VirtualService路由。
 
@@ -651,7 +651,7 @@ $ while true; do curl -v http://$EXTERNAL_IP/sentiment \
 
 检查Grafana中的结果，在那里我们可以看到有错误的版本大约有60％的请求失败，但没有一个失败影响最终用户，因为它们被当前活动的服务响应。
 
-![图20. sa逻辑服务版本的成功率](61411417ly1g0exu2vr8gj20m80b0t9z.jpg)
+![图20. sa逻辑服务版本的成功率](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu2vr8gj20m80b0t9z.jpg)
 
 在本节中，我们第一次看到应用于我们服务的envoy的VirtualService，当对此 `sa-web-app` 提出请求时， `sa-logic`  通过sidecar Envoy，通过VirtualService配置为路由到子集v1并镜像到服务的子集v2 `sa-logic` 。
 
@@ -765,7 +765,7 @@ virtualservice.networking.istio.io/sa-logic configured
 
 并查看Grafana图表，了解成功率的改善情况（如图21所示）。
 
-![图21.使用超时和重试后的改进](61411417ly1g0exu1qjtxj20m80b63zk.jpg)
+![图21.使用超时和重试后的改进](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-p1/61411417ly1g0exu1qjtxj20m80b63zk.jpg)
 
 在 `sa-logic-buggy` 通过执行以下命令 进入下一部分delete 和VirtualService 之前 ：
 

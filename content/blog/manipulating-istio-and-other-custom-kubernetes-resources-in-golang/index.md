@@ -18,7 +18,7 @@ keywords: ["service mesh","服务网格"]
 
 在本文中，我将演示如何使用Golang来操作Kubernetes Custom Resources，以Istio为例。 不需要您了解Istio，我只是用它来展示概念！
 
-![](006tNbRwly1fw6t0va3vij30xc0es0ve.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/manipulating-istio-and-other-custom-kubernetes-resources-in-golang/006tNbRwly1fw6t0va3vij30xc0es0ve.jpg)
 
 [Istio](https://istio.io/)是一个非常受欢迎的服务网格平台，它允许工程师快速地为基于服务的应用程序添加遥测技术、先进的流量管理等功能。
 
@@ -30,7 +30,7 @@ Istio工作原理的一个有趣的地方是，当部署到Kubernetes集群中�
 
 在为集群设置Istio时，您可能要做的一件常见的事情是指定如何路由通信。这可能相当复杂，如下所示:
 
-![](006tNbRwly1fw6uekpw5sj30qo0k0gne.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/manipulating-istio-and-other-custom-kubernetes-resources-in-golang/006tNbRwly1fw6uekpw5sj30qo0k0gne.jpg)
 
 [图1：来自istio.io的Istio流量管理示例](https://istio.io/docs/concepts/traffic-management/)
 

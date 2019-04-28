@@ -48,7 +48,7 @@ Service Mesh仍处于初期阶段，尚未出现成文标准，但是已经有�
 
 软件中库引用的方式是个很自然的选择。它简单明了。在这种架构中，每个微服务应用程序包中都有实现Service Mesh功能的库。像[Hystrix](https://github.com/Netflix/Hystrix)和[Ribbon](https://github.com/Netflix/Hystrix)就是用库的方法。
 
-![picture](006XVfd7gy1ft2yu15ollj30fx0an3z0.jpg)
+![picture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-architectures/006XVfd7gy1ft2yu15ollj30fx0an3z0.jpg)
 
 
 
@@ -68,7 +68,7 @@ Linkerd在Kubernetes上的推荐部署就是这样的。和应用服务代理（
 
 由于每个节点上都需要一个节点代理，因此需要与基础架构进行一些协作，如果没有协作的话此模型就无法工作。通过类比，大多数应用程序会把选择TCP堆栈，猜一个端口号，然后发送或接收TCP数据包的事委托给基础设施（也就是操作系统）。
 
-![agent](006XVfd7gy1ft2yu1ipj2j30gd0b2t9d.jpg)
+![agent](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-architectures/006XVfd7gy1ft2yu1ipj2j30gd0b2t9d.jpg)
 
 
 
@@ -86,7 +86,7 @@ Sidecar是社区的新生儿。这是Istio与Envoy使用的模型。 Conduit也�
 
 Sidecar有利于工作审计，特别是在一些与安全相关的方面。例如：假设我使用Service Mesh来提供零信任模式的安全性。我希望Service Mesh以加密方式去验证客户端和服务器。如果使用节点代理来实现：当我的pod想成为另一个服务器pod的客户端时，节点代理将代表我的pod进行身份验证。节点代理也在服务其他pod，因此必须确保另一个pod不能代表我的pod进行身份验证去欺骗他。如果我们用Sidecar来实现，我pod的Sidecar不会服务于其他pod。我们可以遵循最小特权原则，并在认证密钥，内存和网络功能方面满足这个pod最低限度的需求。
 
-![sidecar](006XVfd7gy1ft2yu1chcrj30gf0awdgg.jpg)
+![sidecar](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-architectures/006XVfd7gy1ft2yu1chcrj30gf0awdgg.jpg)
 
 
 

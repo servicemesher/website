@@ -28,7 +28,7 @@ keywords: ["Envoy","Service Mesh","监控","prometheus","grafana"]
 
 这是我们将要构建的系统概览。
 
-![overall setup](006tNbRwgy1fwx6wg1dscj30m90cg0sy.jpg)
+![overall setup](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-monitoring-with-envoy-service-mesh-prometheus-grafana/006tNbRwgy1fwx6wg1dscj30m90cg0sy.jpg)
 
 ## Statsd
 
@@ -138,7 +138,7 @@ static_resources:
 
 Statsd exporter中的统计信息格式如下图所示
 
-![来自statsd exporter的prometheus格式的指标](006tNbRwgy1fwxf9t7t5bj318g0azgof.jpg)
+![来自statsd exporter的prometheus格式的指标](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-monitoring-with-envoy-service-mesh-prometheus-grafana/006tNbRwgy1fwxf9t7t5bj318g0azgof.jpg)
 
 这里边将有上百个指标，同时，在上面的截图中我们能看到Service A和Service B之间的通信延迟指标。上图的指标是遵循prometheus格式的
 
@@ -170,13 +170,13 @@ scrape_interval的值表示Prometheus从目标处拉取配置的频率。
 
 现在启动Prometheus，里面应该有一些数据了。让我们打开localhost:9090来看一看
 
-![prometheus查询页面](006tNbRwgy1fwy55z3klmj31jk0f6gmd.jpg)
+![prometheus查询页面](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-monitoring-with-envoy-service-mesh-prometheus-grafana/006tNbRwgy1fwy55z3klmj31jk0f6gmd.jpg)
 
 如图所示，可以看到我们的指标。你能做的可不仅仅是选择已有的指标，从[这里](https://prometheus.io/docs/prometheus/latest/querying/basics/)可以阅读关于prometheus查询语言的更多信息。它还可以基于查询结果绘制图表，除此之外还有一个报警系统。
 
 如果我们打开prometheus的targets页面，将能看到所有的拉取目标和它们的健康状态
 
-![prometheus目标](006tNbRwgy1fwy5occy0pj31jk0gbjs6.jpg)
+![prometheus目标](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-monitoring-with-envoy-service-mesh-prometheus-grafana/006tNbRwgy1fwy5occy0pj31jk0gbjs6.jpg)
 
 ## Grafana
 
@@ -281,7 +281,7 @@ dashboard = Dashboard(
 
 所以，启动Grafana时我们只需要传递仪表盘和数据源就好了。当访问http:localhost:3000时，你将看到：
 
-![grafana仪表盘](006tNbRwly1fx6n732mrdj31jk0h7jsc.jpg)
+![grafana仪表盘](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservices-monitoring-with-envoy-service-mesh-prometheus-grafana/006tNbRwly1fx6n732mrdj31jk0h7jsc.jpg)
 
 现在你应该能看到2xx，5xx和延迟的图表，同时还能看到一个下拉菜单，你可以通过它选择源服务和目标服务。关于Grafana还有许多内容我们没有讨论到，包括强大的查询编辑器和告警系统。更重要的是，这一切都是可以通过插件和应用扩展的，可以参考[这里](https://github.com/grafana/kubernetes-app)的例子。如果你正想可视化常见服务如redis，rabbitmq等的指标，grafana有一个[公共仪表盘](https://grafana.com/dashboards)库，你只需要导入它们就可以使用了。使用Grafana 还有一个好处，你可以通过配置文件和代码创建和管理所有东西，而不需要过多地通过UI来操作。
 

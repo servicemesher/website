@@ -46,7 +46,7 @@ Istio是逻辑上分为数据平面（Data Plane）和控制平面（Control Pla
 
 Istio架构图如下所示：
 
-![](00704eQkgy1fsy1vhmk1nj30jg0acq4e.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-deepin-part1-framework-and-environment/00704eQkgy1fsy1vhmk1nj30jg0acq4e.jpg)
 
 - Envoy
    是一个高性能轻量级代理，它掌控了service的入口流量和出口流量，它提供了很多内置功能，如动态负载服务发现、负载均衡、TLS终止、HTTP/2 & gRPC流量代理、熔断、健康检查等功能。

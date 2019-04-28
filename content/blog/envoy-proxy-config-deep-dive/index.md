@@ -14,7 +14,7 @@ keywords: ["service mesh","服务网格","envoy"]
 
 Envoy 是 Istio Service Mesh 中默认的 Sidecar，Istio 在 Enovy 的基础上按照 Envoy 的 xDS 协议扩展了其控制平面，在讲到 Envoy xDS 协议之前还需要我们先熟悉下 Envoy 的基本术语。下面列举了 Envoy 里的基本术语及其数据结构解析，关于 Envoy 的详细介绍请参考 [Envoy 官方文档](http://www.servicemesher.com/envoy/)，至于 Envoy 在 Service Mesh（不仅限于 Istio） 中是如何作为转发代理工作的请参考网易云刘超的这篇[深入解读 Service Mesh 背后的技术细节 ](https://www.cnblogs.com/163yun/p/8962278.html)以及[理解 Istio Service Mesh 中 Envoy 代理 Sidecar 注入及流量劫持](https://jimmysong.io/posts/envoy-sidecar-injection-in-istio-service-mesh-deep-dive/)，本文引用其中的一些观点，详细内容不再赘述。
 
-![Envoy proxy 架构图](006tNbRwly1fy9qkff5nij314k0ts43z.jpg)
+![Envoy proxy 架构图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-proxy-config-deep-dive/006tNbRwly1fy9qkff5nij314k0ts43z.jpg)
 
 ### 基本术语
 
@@ -51,7 +51,7 @@ kubectl -n default exec ratings-v1-7c9949d479-dwkr4 -c istio-proxy curl http://l
 
 将 Envoy 的运行时配置 dump 出来之后你将看到一个长 6000 余行的配置文件。关于该配置文件的介绍请参考 [Envoy v2 API 概览](http://www.servicemesher.com/envoy/configuration/overview/v2_overview.html)。
 
-![Envoy 配置](006tNbRwly1fyb74brsd5j30xg0lojvt.jpg)
+![Envoy 配置](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-proxy-config-deep-dive/006tNbRwly1fyb74brsd5j30xg0lojvt.jpg)
 
 Istio 会在为 Service Mesh 中的每个 Pod 注入 Sidecar 的时候同时为 Envoy 注入 Bootstrap 配置，其余的配置是通过 Pilot 下发的，注意整个数据平面即 Service Mesh 中的 Envoy 的动态配置应该是相同的。您也可以使用上面的命令检查其他 sidecar 的 Envoy 配置是否跟最上面的那个相同。
 
@@ -79,11 +79,11 @@ Istio envoy sidecar proxy 配置中包含以下四个部分。
 
 Enovy 的配置 dump 出来后的结构如下图所示。
 
-![Envoy 配置](006tNbRwly1fy2x2zk1hhj30ee0h9jtg.jpg)
+![Envoy 配置](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-proxy-config-deep-dive/006tNbRwly1fy2x2zk1hhj30ee0h9jtg.jpg)
 
 由于 bootstrap 中的配置是来自 Envoy 启动时加载的静态文件，主要配置了节点信息、tracing、admin 和统计信息收集等信息，这不是本文的重点，大家可以自行研究。
 
-![bootstrap 配置](006tNbRwly1fy2xid761zj30c70ai0tj.jpg)
+![bootstrap 配置](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-proxy-config-deep-dive/006tNbRwly1fy2xid761zj30c70ai0tj.jpg)
 
 上图是 bootstrap 的配置信息。
 

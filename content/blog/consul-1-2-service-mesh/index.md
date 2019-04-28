@@ -22,13 +22,13 @@ keywords: ["service mesh","harshicorp","consul"]
 
 ------
 
-![HarshiCorp Consul](00704eQkgy1fsxqoqdg7mj312e0dw0tr.jpg)
+![HarshiCorp Consul](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/consul-1-2-service-mesh/00704eQkgy1fsxqoqdg7mj312e0dw0tr.jpg)
 
 我们很激动宣布 HashiCorp Consul 1.2 正式发布了。这个版本主要新增了一个新的功能叫做 [Connect](https://www.consul.io/segmentation.html), 它能够将现有的 Consul 集群自动转变为 service mesh （服务网格）的解决方案。Connect 通过自动 TLS 加密和基于鉴权的授权机制支持服务和服务之间的安全通信。
 
 当前全球有数以百万计的机器上正部署着 Consul。当升级到 Consul 1.2 并打开 Connect 功能后，任何现有的集群将立刻变身为支持任何包括物理机、云、容器和调度器等各种平台的 service mesh 方案。
 
-![](00704eQkgy1fswof0iyxxj31rc0py1kx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/consul-1-2-service-mesh/00704eQkgy1fswof0iyxxj31rc0py1kx.jpg)
 
 ## 现代服务网络 Service Mesh
 
@@ -136,7 +136,7 @@ $ psql -h 127.0.0.1 -p 9191 -U mitchellh mydb
 
 服务之间的访问控制通过 “intentions” 进行配置。一个意向（intention）是一条从源到目的服务的允许或拦截规则。Intentions 可以通过 UI 界面、命令行、API 或 Terraform 进行创建。
 
-![](00704eQkgy1fswofx2nh4j30u90k7dhv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/consul-1-2-service-mesh/00704eQkgy1fswofx2nh4j30u90k7dhv.jpg)
 
 按照上述示例，允许从 `db` 服务到 `web` 的访问，可以执行：
 

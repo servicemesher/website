@@ -23,7 +23,7 @@ $ sed -e 's,docker\.io/istio/pilot:,docker.io/cilium/istio_pilot:,' \
 
 Cilium 部署了一个“书店”集群服务为例子来说明，如下，在下发“路由策略”之前流量如下：
 
-![](00704eQkgy1fsu96134y9j30cj09rt93.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/a-new-more-efficient-proxy-model/00704eQkgy1fsu96134y9j30cj09rt93.jpg)
 
 正常流量从书页到详情页，到评论页面
 
@@ -45,13 +45,13 @@ spec:
 
 导流后如下：
 
-![](00704eQkgy1fsu96jwbo7j30jh0d8dgv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/a-new-more-efficient-proxy-model/00704eQkgy1fsu96jwbo7j30jh0d8dgv.jpg)
 
 可见，Cilium 能识别 service-name 和 labels ，并进行导流。策略相当灵活。
 
 Cilium 还做了个性能测试，在 Pod - Proxy - Pod 场景下的请求延迟对比：
 
-![](00704eQkgy1fsu96qkxthj30jg0ay0um.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/a-new-more-efficient-proxy-model/00704eQkgy1fsu96qkxthj30jg0ay0um.jpg)
 
 Cilium 的延迟全部小于当前的 Envoy、Nginx、Haproxy 代理。
 
@@ -83,7 +83,7 @@ Service Mesh 的两个核心组件为控制组件和数据组件，数据组件�
 
 Envoy 与应用部署在一起，提供服务间请求高效转发，并提供扩展接口以实现不同的转发策略，同时上报流量监控数据，提供 HTTP、gRPC、TCP 转发能力。
 
-![](00704eQkgy1fsu97qrffkj31900oqwid.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/a-new-more-efficient-proxy-model/00704eQkgy1fsu97qrffkj31900oqwid.jpg)
 
 一开始 Linked 仅仅只有数据层面，是缺乏控制面的，而 Istio 一开始的定位就很清晰地包括了控制和数据面，后来 Buoyant 公司借鉴 Istio 的思想，开发了与 Istio 竞争的 Conduit，控制面用 Rust 开发，从这个角度讲， Google 似乎看得更远，Buoyant 挺有危机感。
 
@@ -324,7 +324,7 @@ Cilium 就定位为微服务解决网络管理问题。
 
 整体 Cilium 架构如下：
 
-![](00704eQkgy1fsu98qo3jgj318z143gos.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/a-new-more-efficient-proxy-model/00704eQkgy1fsu98qo3jgj318z143gos.jpg)
 
 上层对接控制编排面，下层转换成 BPF 的程序注入到内核网络栈执行。
 

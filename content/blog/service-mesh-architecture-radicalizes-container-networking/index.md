@@ -46,7 +46,7 @@ Morgan 说：“为此消耗大量内存是不最理想的，特别是其价值�
 
 但就在 2017 年初 Buoyant 工程师开始重新考虑其服务网格架构时，Kubernetes 的创造者谷歌和重量级技术公司 IBM 联手  Lyft 公司的 Envory 创建了  [Istio](https://searchmicroservices.techtarget.com/news/450419875/IBM-Google-Lyft-launch-Istio-open-source-microservices-platform)。鉴于其支持者的声誉和谷歌内部管理大规模基于容器的微服务的经验，这种基于容器的服务网格引起了业界的广泛关注。Google 基于其内部的服务控制工具向 Istio 提供控制平面软件，而 IBM 则添加了控制平面工具 Amalgam8。Istio 是基于 Lyft 的 Envoy sidecar 代理，该公司是为了控制平面接收命令而建立的。它可以动态读取到 sidecar 的配置更新，而无需重启 。
 
-![](61411417ly1fsz4wgsjvkj20m80oomy3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-architecture-radicalizes-container-networking/61411417ly1fsz4wgsjvkj20m80oomy3.jpg)
 
 Istio 的支持者正在与 Kubernetes 所在的 CNCF 进行长期管理谈判。他们计划在 2018 年第三季度发布 1.0 版本。
 

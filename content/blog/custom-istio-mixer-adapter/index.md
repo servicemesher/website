@@ -18,7 +18,7 @@ keywords: ["service mesh","服务网格","istio","mixer"]
 
 ## 背景
 
-![](006tKfTcly1g0t2s7z4cxj312c0k3add.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/custom-istio-mixer-adapter/006tKfTcly1g0t2s7z4cxj312c0k3add.jpg)
 
 结合[https://github.com/hb-go/micro-mesh](https://github.com/hb-go/micro-mesh#micro-mesh)的实践场景，需要在`ingressgateway`与`API service`间加入认证&鉴权(JWT&RBAC)，自然考虑Istio提供的[安全](https://istio.io/zh/docs/concepts/security/)方案，但使用JWT做认证鉴权在后端是无状态的，这样在使用场景上有一定限制，如:
 
@@ -42,7 +42,7 @@ keywords: ["service mesh","服务网格","istio","mixer"]
 
 配置关系及执行流程如图：
 
-![](006tKfTcly1g0t2of1ziej31bg0nsdma.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/custom-istio-mixer-adapter/006tKfTcly1g0t2of1ziej31bg0nsdma.jpg)
 
 - 属性：使用`istio`的`attributes`，`istio/mixer/testdata/config/attributes.yaml`
 - 属性与适配器输入映射模板：使用`istio`的`authorization`模板，`istio/mixer/template/authorization/template.yaml`，通过`template.proto`查看协议内容

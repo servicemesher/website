@@ -45,7 +45,7 @@ Istio 项目旨在成为服务网格平台，用户通过平台，可以在此�
 - [DestinationRule](https://istio.io/docs/reference/config/networking/)：如何与特定服务进行交互的规则，包括熔断、负载均衡、mTLS 策略、服务的子集定义等
 - [ServiceEntry](https://istio.io/docs/reference/config/networking/)：显式地将服务添加到 Istio 的服务注册中心
 
-![](006gLaqLgy1g1ocpfgj5dj30ma09dq3j.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-3-domain-specific-configuration/006gLaqLgy1g1ocpfgj5dj30ma09dq3j.jpg)
 
 运行在 Kubernetes 中的所有这些配置对象都实现为 [CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)。
 
@@ -54,7 +54,7 @@ Istio 项目旨在成为服务网格平台，用户通过平台，可以在此�
 - [IngressRoute](https://github.com/heptio/contour/blob/master/docs/ingressroute.md) 是一个 Kubernetes CRD，它提供一个位置来指定 Contour 代理的配置
 - [Ingress 资源支持](https://github.com/heptio/contour/blob/master/docs/annotations.md)，允许你在你的 Kubernetes Ingress 资源上指定注解。
 
-![](006gLaqLly1g1oao8vmp8j30hc05gaa8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-3-domain-specific-configuration/006gLaqLly1g1oao8vmp8j30hc05gaa8.jpg)
 
 在 [Gloo 项目](https://gloo.solo.io/)中，将可用的配置对象分成两个级别：
 
@@ -73,7 +73,7 @@ Gloo 中的面向用户的 API 对象驱动较低层的对象，这些对象最�
 - [Upstream](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/upstream.proto.sk/)：获取关于后端集群和在此上公开的函数的详细信息。您可以将 Gloo 上游与 [Envoy 集群](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/cds.proto)松散地关联起来，但有一个很大的区别:上游可以理解特定端点上可用的实际服务功能（换句话说，了解 `/foo/bar` 和 `/bar/wine`，包括它们的预期参数和参数结构，而不仅仅是 `hostname:port`），后文会详细解释。
 - [Proxy](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/proxy.proto.sk/)：代理是抽象我们可以应用于 Envoy 的所有配置的主要对象。这包括监听器、虚拟主机、路由和上行流。高级对象（VirtualService，Gateway等）用于驱动这个低级代理对象。
 
-![](006gLaqLgy1g1ocrrdccrj30o20dxabd.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-3-domain-specific-configuration/006gLaqLgy1g1ocrrdccrj30o20dxabd.jpg)
 
 Gloo 控件的两层配置之间的分离允许我们在保持配置 Envoy 的简单抽象的同时扩展 Gloo 控制平面功能。本系列的第 4 部分将对此进行更详细的解释。
 

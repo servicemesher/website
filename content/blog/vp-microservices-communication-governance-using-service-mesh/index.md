@@ -187,7 +187,7 @@ Envoy是一个可用于大量多种部署类型的通用工具。这意味着Env
 
 ### 关于小组成员
 
-<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="00704eQkgy1fsj20huc9hj302d02saac.jpg"></div>
+<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/vp-microservices-communication-governance-using-service-mesh/00704eQkgy1fsj20huc9hj302d02saac.jpg"></div>
 
 <span>**Matt Klein**是Lyft的软件工程师和Envoy的架构师。在过去15年里，Matt一直致力于操作系统、虚拟化、分布式系统、网络以及使系统更易于使用。其中一些亮点包括领导Twitter的C++ L7边缘代理的开发，并致力于亚马逊EC2中的高性能计算和网络。</span>
 
@@ -195,7 +195,7 @@ Envoy是一个可用于大量多种部署类型的通用工具。这意味着Env
 
 ---
 
-<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="00704eQkgy1fsj239n0xdj302d02smxe.jpg"></div>
+<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/vp-microservices-communication-governance-using-service-mesh/00704eQkgy1fsj239n0xdj302d02smxe.jpg"></div>
 
 <span>**Dan Berg**是IBM Cloud部门的杰出工程师。Daniel负责技术战略以及IBM Cloud中提供的容器和微服务平台的实现。在此职位上，Daniel对包括Docker和Kubernetes在内的容器技术有着深厚的知识，并且在构建和运营高可用的云原生服务方面拥有丰富的经验。Daniel也是Istio服务网格项目的核心贡献者。</span>
 
@@ -203,7 +203,7 @@ Envoy是一个可用于大量多种部署类型的通用工具。这意味着Env
 
 ---
 
-<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="00704eQkgy1fsj23q7ii6j302d02sglr.jpg"></div>
+<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/vp-microservices-communication-governance-using-service-mesh/00704eQkgy1fsj23q7ii6j302d02sglr.jpg"></div>
 
 <span>**Priyanka Sharma**是一位热衷于构建开发人员产品并通过开源社区成长的企业家。她目前在[LightStep](http://lightstep.com/)担任开源合作伙伴，并且是[OpenTracing](http://opentracing.io/)项目（[CNCF](http://cncf.io/)项目）的一名贡献者，为分布式跟踪提供独立于供应商的API。她担任HeavyBit（一家开发人员产品的加速器）行业创业公司的顾问。关注她的Twitter[@pritianka](http://twitter.com/pritianka)。</span>
 
@@ -211,7 +211,7 @@ Envoy是一个可用于大量多种部署类型的通用工具。这意味着Env
 
 ---
 
-<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="00704eQkgy1fsj249u6kkj302d02sjrl.jpg"></div>
+<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/vp-microservices-communication-governance-using-service-mesh/00704eQkgy1fsj249u6kkj302d02sjrl.jpg"></div>
 
 <span>**Lachlan Evenson**是云原生布道师。Lachlan花了近两年半的时间与Kubernetes合作，并支持云原生。他是开源软件的信徒，并且是一名活跃的社区成员。Lachlan致力于帮助云原生项目在Azure上运行。</span>
 
@@ -219,7 +219,7 @@ Envoy是一个可用于大量多种部署类型的通用工具。这意味着Env
 
 ---
 
-<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="00704eQkgy1fsj24of3e8j302d02smxa.jpg"></div>
+<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/vp-microservices-communication-governance-using-service-mesh/00704eQkgy1fsj24of3e8j302d02smxa.jpg"></div>
 
 <span>**Varun Talwar**是Google Cloud的产品经理；同时他也是[@grpcio](https://twitter.com/grpcio)和[@IstioMesh](https://twitter.com/IstioMesh)的PM</span>
 
@@ -227,7 +227,7 @@ Envoy是一个可用于大量多种部署类型的通用工具。这意味着Env
 
 ---
 
-<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="00704eQkgy1fsj25lce6dj302d02sjro.jpg"></div>
+<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/vp-microservices-communication-governance-using-service-mesh/00704eQkgy1fsj25lce6dj302d02sjro.jpg"></div>
 
 <span>**Yuri Shkuro**是[Uber](http://eng.uber.com/)的一名工程师，致力于分布式追踪、可靠性和性能。Yuri是[OpenTracing](http://opentracing.io/)标准（[CNCF](http://cncf.io/)项目）的合著者，以及[Jaeger](https://github.com/uber/jaeger/)的技术主管，这是一款来自Uber的开源分布式追踪系统。</span>
 
@@ -235,7 +235,7 @@ Envoy是一个可用于大量多种部署类型的通用工具。这意味着Env
 
 ---
 
-<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="00704eQkgy1fsj266prmfj302d02sdg2.jpg"></div>
+<div style="width:95px; height:auto; float:left; display:inline; margin: 10px 0 10px;"><img src="https://raw.githubusercontent.com/servicemesher/website/master/content/blog/vp-microservices-communication-governance-using-service-mesh/00704eQkgy1fsj266prmfj302d02sdg2.jpg"></div>
 
 <span> **Oliver Gould**是Buoyant的CTO和联合创始人，负责开源服务网格项目Linkerd和Conduit的开源开发工作。在加入Buoyant之前，他是Twitter的一名基础设施工程师，他是可观测性、流量和配置与协调团队的技术负责人。他是Linkerd的创造者，也是Finagle的核心贡献人，Finagle是Twitter、Pinterest、Soundcloud和其他公司使用的RPC库。</span>
 

@@ -17,7 +17,7 @@ keywords: ["service mesh"]
 aliases: "/blog/cilium1.2-dns-security-policies-eks-support-clustermesh-kube-router-integration/"
 ---
 
-![Cilium](006tNbRwly1fuohqoaw4wj310o0qegwa.jpg)
+![Cilium](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium1-2-dns-security-policies-eks-support-clustermesh-kube-router-integration/006tNbRwly1fuohqoaw4wj310o0qegwa.jpg)
 
 我们很高兴地宣布推出Cilium 1.2。该版本引入了几个新功能实现了Cilium用户和社区成员最迫切想要的功能。其中最吸引人的功能之一是引入基于DNS 名称的安全策略，目的是保护对集群外服务的访问。另一个最受关注的问题是加入了连接和保护多个Kubernetes集群的能力。我们将ClusterMesh功能进入Alpha版本。它可以连接和保护在多个Kubernetes集群中运行的pod。Kube-router与Cilium的集成同等重要。DigitalOcean团队的努力使kube-router提供BGP网络与Cilium提供的基于BPF的安全性和负载均衡相结合。整个Cilium开发者社区贡献者总数已增加到85个，在1.1到1.2版本内贡献了579个PR。
 
@@ -25,7 +25,7 @@ aliases: "/blog/cilium1.2-dns-security-policies-eks-support-clustermesh-kube-rou
 
 Cilium是一个开源软件，用于在Kubernetes、Docker和Mesos等Linux容器管理平台部署的应用程序服务之间提供透明连接、保护网络和API。
 
-![](006tNbRwly1fuohq4pg7kj31kw0cjtcq.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium1-2-dns-security-policies-eks-support-clustermesh-kube-router-integration/006tNbRwly1fuohq4pg7kj31kw0cjtcq.jpg)
 
 Cilium是基于一种叫BPF的新内核技术，它使得能够在Linux自身内部动态插入强大的安全性、可见性和网络控制逻辑。除了提供传统的网络级安全性之外，BPF的灵活性还可以在API和进程级别实现安全性，以保护容器或pod内的通信。
 
@@ -103,13 +103,13 @@ Cilium将自动维护相应的基于CIDR的规则，以允许所有pod与所有�
 
 运行多个Kubernetes集群的基本要求之一是如何连接服务以及如何为跨集群交互保证东西流量安全。在Cilium 1.2中，我们将引入多集群中不请求ingress controller或者负载均衡实现不同集群pod之间连接的能力。由于pod间可以直接交互，因此Cilium能够保留其身份认证并对东西向流量实施完整的L3/L4和L7访问控制。
 
-![](006tNbRwly1fuohqzj9tnj30jg08a0ts.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium1-2-dns-security-policies-eks-support-clustermesh-kube-router-integration/006tNbRwly1fuohqzj9tnj30jg08a0ts.jpg)
 
 Cilium使用去中心化的方式创建Cluster Mesh并建立pod身份认证，而不是为所有集群使用单个集中式etcd。用这种方式，每个集群都能独立管理它们pod的身份。每个集群都被赋予一个独立的标识作为身份命名空间。因此pod身份成为集群身份+ pod身份的组合。这种方法易于管理和扩展，而不用协调所有集群中的身份。这种方式与多集群高可用目标保持一致，每个集群的生命周期独立于其他集群的生命周期。查看[多集群安装指南](https://cilium.readthedocs.io/en/stable/install/guides/clustermesh/)试着体验Cilium cluster-mesh。
 
 #### BGP支持：基于Kube-router + Cilium
 
-![](006tNbRwly1fuohrg84iaj30du03ojrm.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium1-2-dns-security-policies-eks-support-clustermesh-kube-router-integration/006tNbRwly1fuohrg84iaj30du03ojrm.jpg)
 
 Kube-router是一个由cloudnativelabs倡议，旨在满足各种Kubernetes网络需求并提供统一的解决方案。从数据转发的角度来看，Kube-router使用BGP来广播和管理集群中所有pod的路由。通过与外部路由器进行BGP配对，Kube-router可以轻松地在Kubernetes pod与集群外部运行的服务之间建立连接。此外，Kube-router创建服务时告知cluster IP，这意味着可以使用单个cluster IP和标准端口从集群外部访问服务。
 
@@ -117,7 +117,7 @@ Kube-router是一个由cloudnativelabs倡议，旨在满足各种Kubernetes网�
 
 #### 支持Istio 1.0
 
-![](006tNbRwly1fuohrvd6guj30e204lweo.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cilium1-2-dns-security-policies-eks-support-clustermesh-kube-router-integration/006tNbRwly1fuohrvd6guj30e204lweo.jpg)
 
 Istio 1.0发布了快一个月了。Cilium已与Istio完美集成，可为Service Mesh架构提供高效的数据转发以及L3/L4和L7安全性。我们在博客 中详细介绍了这一点[Istio 1.0：Cilium如何通过socket感知BPF程序增强Istio](http://www.servicemesher.com/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/)。Cilium 1.2包含了与Istio 1.0集成的几项改进。
 

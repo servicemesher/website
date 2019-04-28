@@ -71,7 +71,7 @@ IBM 为开发者提供了其 Kubernetes 运行时的免费社区版，并包含�
 
 除了脚本之外，还有一个轻量级的 web 界面，用于与其他api进行交互。
 
-![](00704eQkgy1fsqw64mg34j325o0m0n0h.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-is-not-just-for-microservices/00704eQkgy1fsqw64mg34j325o0m0n0h.jpg)
 
 ### Verification
 
@@ -286,7 +286,7 @@ kubectl -n istio-system port-forward $(kubectl -n istio-system get \
 
 在你的浏览器中访问 http://localhost:3000/dashboard/db/istio-dashboard. Istio Dashboard 类似下图:
 
-![](00704eQkgy1fsqw7ej3xrj32gq1iitkr.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-is-not-just-for-microservices/00704eQkgy1fsqw7ej3xrj32gq1iitkr.jpg)
 
 #### Prometheus
 
@@ -299,7 +299,7 @@ kubectl -n istio-system port-forward $(kubectl -n istio-system get \
 
 在你的浏览器中访问 http://localhost:9090/graph。Istio Dashboard 类似下图:
 
-![](00704eQkgy1fsqw7p953dj32oy0ykn5i.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-is-not-just-for-microservices/00704eQkgy1fsqw7p953dj32oy0ykn5i.jpg)
 
 #### Weave Scope
 
@@ -311,7 +311,7 @@ kubectl get service weave-scope-app --namespace=weave -o 'jsonpath={.spec.ports[
 
 Weave Scope 提供了服务图，将用来展示测试过程中执行测试的请求流。Weave Scope Dashboard 类似下图:
 
-![](00704eQkgy1fsqw89uu0wj320619ado4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-is-not-just-for-microservices/00704eQkgy1fsqw89uu0wj320619ado4.jpg)
 
 #### Kiali
 
@@ -323,7 +323,7 @@ kubectl get service kiali --namespace=istio-system -o 'jsonpath={.spec.ports[0].
 
 Kiali 提供了类似于 Weave Scope 的服务图型用于展示历史的请求流以及 K8 环境中其他有趣的视图，例如服务和跟踪。如果要查看此操作的能力，可以在执行加载测试脚本后查看服务图。Kiali Dashboard 类似下图:
 
-![](00704eQkgy1fsqw8n20ugj325e18ejy5.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-is-not-just-for-microservices/00704eQkgy1fsqw8n20ugj325e18ejy5.jpg)
 
 ### 幻灯片
 

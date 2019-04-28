@@ -14,7 +14,7 @@ categories: ["translation"]
 keywords: [“service mesh","服务网格","kong","网关"]
 ---
 
-![第一届Kong Summit](006tNbRwgy1fvfula2g2aj31kw16k7jg.jpg)
+![第一届Kong Summit](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-at-1-0-a-service-control-platform/006tNbRwgy1fvfula2g2aj31kw16k7jg.jpg)
 
 _图片：Kong公司员工们在庆祝第一届Kong Summit举办（来自Kong官方Twitter）_
 
@@ -22,7 +22,7 @@ _图片：Kong公司员工们在庆祝第一届Kong Summit举办（来自Kong官
 
 **Kong 1.0是该公司构建服务控制平台愿景的基础，该平台结合了人工智能、机器学习和其他先进技术，可以促进信息流在服务之间的流动。**
 
-![](006tNbRwgy1fvftotln7rj319y0q4dmg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-at-1-0-a-service-control-platform/006tNbRwgy1fvftotln7rj319y0q4dmg.jpg)
 
 “我们相信未来所有数据都将处于运动状态，并且将从数据池转移到系统间代理信息的地方。Kong最初是一个网关，在1.0发布之后将转型为服务控制平台，“[Geoff Townsend](https://www.linkedin.com/in / geoff-townsend-25058347 /)，Kong工程副总裁。据该公司称，截至目前，该软件已被下载4500万次。
 

@@ -15,15 +15,15 @@ keywords: ["service mesh","sofamesh","sofamosn"]
 >
 > 本文是基于作者在 [Service Mesh Meetup #3 深圳](/blog/service-mesh-meetup-shenzhen-20180825)的主题分享《SOFAMesh的通用协议扩展》部分内容所整理，完整内容见文末的直播回放
 
-![邵俊雄 蚂蚁金服 Service Mesh SOFA MOSN](0069RVTdly1fusppz003uj318w0u0qdx.jpg)
+![邵俊雄 蚂蚁金服 Service Mesh SOFA MOSN](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusppz003uj318w0u0qdx.jpg)
 
 **本次分享主要介绍蚂蚁金服在 SOFAMesh 上开发对 SOFARPC 与 HSF 这两个RPC框架的支持过程中总结出来的通用协议扩展方案**
 
-![](0069RVTdly1fuspj4xg2uj30k00b9wfc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspj4xg2uj30k00b9wfc.jpg)
 
 ## 1. SOFAMesh 介绍
 
-![](0069RVTdly1fuspmec6l4j30k00b9aax.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspmec6l4j30k00b9aax.jpg)
 
 SOFAMesh 是蚂蚁从 ISTIO 上游克隆的开源项目，目的是在 ISTIO 的基础上进行控制平面的发展和创新，同时保持和上游 ISTIO 的同步更新，跟随 ISTIO 的发布节奏，当然也会把一些有价值能力贡献给 ISTIO 社区。
 
@@ -39,7 +39,7 @@ SOFAMesh 的下一步也是要融合到 PAAS 平台里面去，成为 PAAS 平�
 
 ## 2. Service Mesh 落地中的问题
 
-![](0069RVTdly1fuspmm8hvij30k00b93zo.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspmm8hvij30k00b93zo.jpg)
 
 **第二部分是这次分享的重点，主要介绍蚂蚁金服在集成 SOFA/DUBBO 和 HSF 这些框架的过程中碰到的问题和我们的一套通用的解决方案，希望能够加速 Service Mesh 在实际生产中的落地。**
 
@@ -55,13 +55,13 @@ SOFAMesh 的下一步也是要融合到 PAAS 平台里面去，成为 PAAS 平�
 
 ### UC 的 UAE 2.0 平台
 
-![](0069RVTdly1fuspr1ugjqj30k00b9q4c.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspr1ugjqj30k00b9q4c.jpg)
 
 充分利用 Kubernetes 基础设施的能力是未来的方向，只要路走对了，就不怕远，比如说透明路由网络流量是方向，IPTABLES 是一个实现手段，它的性能不够好，那我们就通过引入 Cilium，用 EBPF 代替 IPTABLES。由于 BYPASS 了两次 TCP 协议栈道穿透，转发性能比常用的 loopback 地址 Workaround 方案还要好。更进一步，我们还能把 ISTIO 数据平面的同步检查逻辑，比如访问控制，通过 Cilium 推到内核的虚拟机中执行，从而解决 ISTIO 的另一的性能瓶颈。
 
 Kubernetes 已经成为了云原生的事实标准，我们应该充分利用 Kubernetes 的能力，借用社区的力量发展自己的技术。
 
-![](0069RVTdly1fusprblc3fj30k00b975n.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusprblc3fj30k00b975n.jpg)
 
 Spring cloud kubernetes 项目给 Spring cloud 项目落地 Kubernetes 提供了支持，但是在整合 ISTIO 的时候碰到了问题，即便使用 Kubernetes 作为注册中心，客户端的负载均衡和服务发现组件也会破坏 ISTIO 对请求规格的依赖，经过负载均衡之后发送给 ISTIO 数据平面的 PODIP 无法被正确的路由的后端的集群，既无法匹配到 Virtual Host。我们通过 BeanFactoryPostProcesser 在请求中带上了 Host 头，指向服务在 Kubernetes 中的域名，从而解决了这个问题，也因此认识到，给微服务框架的 SDK打补丁，或者说推动微服务框架轻量化可能是一个实现对业务代码无侵入性，必须的代价。
 
@@ -71,7 +71,7 @@ Envoy 社区目前还没有对非 HTTP 的 RPC 通信协议提供扩展支持，
 
 RPC 服务的容器模型也是个麻烦问题，目前大规模使用的 RPC 框架都是从 SOA 发展过来的，基于的还是传统的容器模型。一个容器中往往同时存在多个服务，各自有自己的版本，ISTIO 基于版本的路由要求每个服务都有自己的 POD 和 Service 定义，否则的话 Traffic Splitting 功能就无法完成。
 
-![](0069RVTdly1fusprfuxzsj30k00b9q4d.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusprfuxzsj30k00b9q4d.jpg)
 
 ISTIO 的控制平面抽象，顶层路由对象是 Virtual Host，Virtual Host 包含一组 Domain，通过 Domain 来选择 Virtual Host，Rate limit 也是定义在 Virtual Host 上面。
 
@@ -81,13 +81,13 @@ Route 上定义了超时，熔断，错误注入的策略。Route 上定义的 H
 
 Route Action 指向后端集群，支持重定向和直接返回，集群通过名字路由，集群的变动受到 Destination Rule 的影响，主要是反应在 Subset 的变化上，权重信息就定义在这里。 
 
-![](0069RVTdly1fuspruhzvvj30k00b9myc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspruhzvvj30k00b9myc.jpg)
 
 SOFA 的注册中心使用 Interface 来识别服务的，服务的配置信息，消费者和提供者列表，以及超时等服务治理信息也定义在注册中心里面，可以认为是一个具备一定服务治理能力的注册中心。
 
 我们希望能够用 Interface 来调用服务，就是为了适应 RPC 框架的这个基于接口名字识别服务的概念模型。体现在 Kubernetes 里面就是用 Interface 名字当做域名，把请求头映射到 HTTP 头，请求参数映射到 Query Parameter，方法名映射到 Path 上。这样，基于 RPC 请求内容的服务治理就可以定义到方法和参数级别了，即便是蚂蚁金服站内复杂路由规则，比如 LDC 单元化流量调拨，也是可以支持的。
 
-![](0069RVTdly1fusps37dvtj30k00b9gmv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusps37dvtj30k00b9gmv.jpg)
 
 我们暂不考虑非 Kubernetes 平台的情况，以支持 DUBBO 作为例子
 
@@ -101,7 +101,7 @@ SOFA 的注册中心使用 Interface 来识别服务的，服务的配置信息�
 
 ## 3. SOFAMesh 的统一解决方案
 
-![](0069RVTdly1fuspsg3qh9j30k00b9jsu.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspsg3qh9j30k00b9jsu.jpg)
 
 考虑到支持不同 RPC框架的大量重复工作和实现过程中的性能保障，我们希望能提供一个统一的解决方案，以高性能和插件化做为重点来支持，并允许用户在性能和功能之间做平衡。
 
@@ -111,11 +111,11 @@ SOFA 的注册中心使用 Interface 来识别服务的，服务的配置信息�
 
 ## 4. DNS 服务寻址方案
 
-![](0069RVTdly1fuspt4o5olj30k00b9jsg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspt4o5olj30k00b9jsg.jpg)
 
 我们会在 Kubernetes 的 DNS 之外额外做一层域名抽象，不受 Kubernetes 的规则的限制，比如，允许用户直接使用 interface 作为域名或者按照组织结构来规划域名的层级关系。Kubernetes 的 namespace 往往被用来作为多租户的解决方案，并不适合用来作为企业内不同部门的逻辑划分。
 
-![](0069RVTdly1fusptd7pmnj30k00b9tab.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusptd7pmnj30k00b9tab.jpg)
 
 有些微服务应用本身没有版本，版本反应在应用中的服务接口上，往往每个接口服务都有其独立的版本，比如 SOFA 应用，其版本体现在服务接口的实例上（参考 SOFA 应用注册中心结构）。
 
@@ -127,11 +127,11 @@ SOFA 的注册中心使用 Interface 来识别服务的，服务的配置信息�
 
 通过 CoreDNS 的 PDSQL 插件支持，为 Cluster VIP 额外添加一个 interface name 的记录。
 
-![](0069RVTdly1fusptj489lj30k00b9759.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusptj489lj30k00b9759.jpg)
 
 我们通过在 Destination Rule 中同时使用 Interface 和 Version 这两个 Label 来选择 Subset，每一个 Subset 都会在 Pilot Discovery 中形成一个可被路由的集群，这样通过 Subset 就可以完成 Traffic Splitting 的功能了。这样一来，蓝绿发布，灰度等能力都可基于这个RPC 接口和版本来做了。
 
-![](0069RVTdly1fusptuwzptj30k00b9q4c.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusptuwzptj30k00b9q4c.jpg)
 
 客户端向 Interface 域名发起请求，通过本地的 resolv.conf 文件指引到 CoreDNS 服务器进行域名解析，得到服务的 Cluster VIP。
 
@@ -143,7 +143,7 @@ SOFAMosn 将请求按照 Pilot Discovery 下发的 Destination Rule 按照权重
 
 Virtual Host 在生成的时候，其域名列表中会包含 Cluster VIP。
 
-![](0069RVTdly1fuspucuaxcj30k00b9my3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspucuaxcj30k00b9my3.jpg)
 
 在寻址方案中，我们为 RPC Service 创建了一个新的 CRD，并创建一个 RPC Service Controller 来 Watch RPC Service。
 
@@ -151,15 +151,15 @@ RPC Service Controller 监听到 RPC Service 更新后，通过关联的 Service
 
 ## 5. X-PROTOCOL 通用协议
 
-![](0069RVTdly1fuspul1v8bj30k00b9jsf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspul1v8bj30k00b9jsf.jpg)
 
 七层代理的性能瓶颈往往是出现在协议数据包的解析上，由于 SIDECAR 的特殊性，它本身往往得不到足够的资源，不得不运行在资源首先的环境，以避免影响应用本身的运行。在实际的部署中，我们常常会把 SIDECARE 限定在单核心上运行，并且限制它能使用的最大内存，这些都让 SIDECAR 的转发性能面临极大的压力。考虑到 ISTIO的复杂路由规则在实际的业务场景中很多时候并不会全部都用到，我们允许用户在性能和功能之间找到一个平衡。
 
-![](0069RVTdly1fusput21o3j30k00b9abg.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fusput21o3j30k00b9abg.jpg)
 
 这个 Listener 的配置是参考 ISTIO 的 HTTP Connection Manager 做的，我们增加了 Downstream Protocol 和 Upstream Protocol 的配置，允许控制层面选择 SOFAMosn 之间的长连接的通行协议，比如使用 HTTP2，利用 HTTP2 的头部压缩能力提高协议的转发性能。x-protocol 配置项对应服务使用的真是通信协议，下发到 SOFAMosn 之后，SOFAMosn 通过分解 x-protocol 协议来进行适配真是请求协议，正确的加载协议插件进行协议处理。
 
-![](0069RVTdly1fuspv01mc0j30k00b93zp.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspv01mc0j30k00b93zp.jpg)
 
 首先操作员在 Kubernetes 中创建 DUBBO 应用的服务，指定其 Port Name 为 x-dubbo-user，这很重要，也是 ISTIO 对 POD 的基本要求。SOFAMesh 监听到服务创建之后，开始在 Pilot 中创建 DUBBO 应用集群的x-protocol 协议的监听器和集群配置，请参考上文的 x-protocol 配置。
 
@@ -177,9 +177,9 @@ DUBBO 请求数据进入 Outbound 的 Downstream 后，SOFAMosn 会生成一个�
 
 Outbound 的 SOFAMosn 收到响应后，拿出响应对象，并通过插件拿回 request id，最后通过 ID 映射关系找回实际的 request id，写回响应对象后，通过 Downstream 返回给应用实例。
 
-![](0069RVTdly1fuspvmkhhvj30k00b9t9s.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspvmkhhvj30k00b9t9s.jpg)
 
-![](0069RVTdly1fuspvsaykoj30k00b9dgv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspvsaykoj30k00b9dgv.jpg)
 
 获得不同层次的能力，所付出的性能开销和接入成本也会不同，可以根据实际情况做出取舍。Golang 的接口特性允许协议插件的开发人员根据需要实现接口，还可以进行接口的组合。
 
@@ -189,7 +189,7 @@ Outbound 的 SOFAMosn 收到响应后，拿出响应对象，并通过插件拿�
 
 更进一步，完全解除协议的头，可以获得将能力最大化，相对的性能开销和成本也同样最大化。
 
-![](0069RVTdly1fuspvwky7ej30k00b93z9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ant-financial-sofamesh-common-protocol-extension/0069RVTdly1fuspvwky7ej30k00b93z9.jpg)
 
 8月底发布的 SOFMesh 版本默认将会用 SOFAMosn 代替 ENVOY 做数据平面，ISTIO 自带的 BookInfo 的例子可以提供给大家试用。我们后续还会提供 SOFA/DUBBO 应用的例子。
 

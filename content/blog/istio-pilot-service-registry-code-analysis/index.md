@@ -27,7 +27,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 Istio源码中，和服务注册相关的对象如下面的UML类图所示。
 
-![](006tKfTcly1g17w6xvf2sj30qk0lz0w3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-pilot-service-registry-code-analysis/006tKfTcly1g17w6xvf2sj30qk0lz0w3.jpg)
 
 ## Service
 
@@ -198,11 +198,11 @@ Service Registry初始化的主要逻辑在Pilot-discovery程序的主函数中�
 在`pilot/pkg/bootstrap/server.go`中，初始化了各种Service Registry，其流程如下图所示：
 （备注： MCP Registry尚在开发过程中）
 
-![](006tKfTcly1g17wcg8egyj30rb0dewgm.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-pilot-service-registry-code-analysis/006tKfTcly1g17wcg8egyj30rb0dewgm.jpg)
 
 Pilot将各个Service Registry(Memory, Kube, Consul)保存在serviceregistry.aggreagete.Controller中进行统一管理，Pilot会从所有类型的Registry中查询服务和服务实例，并监控所有Registry的数据变化,当Registry数据变化后，Pilot会清空其内部的缓存并通过ADS接口向Envoy推送更新。
 
-![](006tKfTcly1g17wcpvssuj30g1054aad.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-pilot-service-registry-code-analysis/006tKfTcly1g17wcpvssuj30g1054aad.jpg)
 
 > 备注：上图中的controller实际上是Service Registry，aggregate controller和具体的各个类型的controller同时实现了Registry要求的controller和discovery interface。
 

@@ -41,7 +41,7 @@ $ git clone git@github.com:danielbryantuk/oreilly-docker-java-shopping.git
 
 第一阶段的服务和部署架构如下图所示：
 
-![第一阶段架构](78a165e1gy1fsvwpjxbzuj20hi0gjdga.jpg)
+![第一阶段架构](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/implementing-a-java-rate-limiting-service-for-the-ambassador-api-gateway-part3/78a165e1gy1fsvwpjxbzuj20hi0gjdga.jpg)
 
 从图中可以看到，Docker Java Shopping应用程序主要由三个服务组成。在先前的教程中，你已经添加Ambassador API网关作为系统的“front door”（大门）。需要注意的是，Ambassador API网关直接使用Web 80号端口，因此需要确保本地运行的其他应用没有占用该端口。
 
@@ -71,7 +71,7 @@ $ kubectl apply -f .
 
 通过以上命令部署，这与之前架构的区别在于添加了`ratelimiter`服务。 这个服务是用Java编写的，且没有使用微服务框架。它发布了一个gRPC端点，可供Ambassador来使用以实现速率限制。这种方案允许灵活定制速率限制算法（关于这点的好处请查看我[以前的文章](https://blog.getambassador.io/rate-limiting-for-api-gateways-892310a2da02)）。
 
-![限速架构](78a165e1gy1fsvwvs0d8kj20hi0gj74v.jpg)
+![限速架构](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/implementing-a-java-rate-limiting-service-for-the-ambassador-api-gateway-part3/78a165e1gy1fsvwvs0d8kj20hi0gj74v.jpg)
 
 ## 探索部署于Kubernetes的限速器服务
 

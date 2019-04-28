@@ -21,7 +21,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 从下图的架构模式中，我们可以看到所有的请求在进入网格时，都会通过istio-ingressgateway这个边缘节点，从而涌现出了一个非常显而易见的想法，即如果我们在所有的请求进入服务网格边缘时，进行特定的检查与策略，那么我们就能将某些不符合某种规则的请求拒绝的网格之外，比如那些携带被主动封禁JWT的HTTP请求。
 
-![](007pL7qRgy1g07dm5m93jj30wa0k2wg9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-istio-mixer-adapter-to-check-jwt/007pL7qRgy1g07dm5m93jj30wa0k2wg9.jpg)
 
 ## 了解Istio Mixer
 
@@ -80,7 +80,7 @@ spec:
 
 在我们的场景中，假设每个请求所携带的JWT的Payload中有一个email属性来作为用户的唯一标识，当业务领域中的账户服务决定封禁某个用户时，他将会通知Adapter-Service，后者将会把这个信息存于某个数据持久服务中，比如Redis服务。当JWT-Adapter服务向Adapter-Service服务询问这个请求是否合法时，Adapter-Service将会通过Payload中Email属性在Redis中查询，如果查询到对应的数据，则代表这个用户被封禁，即这个请求不予通过，反之亦然。
 
-![](007pL7qRgy1g07jnrkcu5j30qm0awgm5.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-istio-mixer-adapter-to-check-jwt/007pL7qRgy1g07jnrkcu5j30qm0awgm5.jpg)
 
 ## 如何自定义编写一个Adapter？
 
@@ -204,4 +204,4 @@ spec:
 
 [Github](https://github.com/Yisaer) [博客RSS订阅](https://yisaer.github.io/atom.xml)
 
-![](007pL7qRgy1g07ln0lyk5j307e07974r.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/using-istio-mixer-adapter-to-check-jwt/007pL7qRgy1g07ln0lyk5j307e07974r.jpg)

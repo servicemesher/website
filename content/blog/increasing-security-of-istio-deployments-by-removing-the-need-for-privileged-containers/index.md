@@ -40,7 +40,7 @@ $ oc adm policy add-scc-to-user privileged -z default -n <target-namespace>
 
 
 
-![istio-pod-network-controller 架构示意图](006tNbRwgy1fvlv897xs7j30ae06qjrr.jpg)
+![istio-pod-network-controller 架构示意图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/increasing-security-of-istio-deployments-by-removing-the-need-for-privileged-containers/006tNbRwgy1fvlv897xs7j30ae06qjrr.jpg)
 
 
 

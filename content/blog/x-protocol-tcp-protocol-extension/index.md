@@ -33,13 +33,13 @@ keywords: ["service mesh","服务网格","sofamesh","x-protocol"]
 
 为此，我们需要考虑在SOFAMesh和SOFAMosn中增加这些通讯协议的支持，尤其是要可以让我们的客户非常方便的扩展支持各种私有TCP协议：
 
-![img](supported-protocol.jpg)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-tcp-protocol-extension/https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-tcp-protocol-extension/supported-protocol.jpg)
 
 ## 实现分析
 
 我们来大体看一下，在SOFAMesh/Istio中要新增一个通讯协议需要有哪些工作：
 
-![img](tbd.jpg)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-tcp-protocol-extension/https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-tcp-protocol-extension/tbd.jpg)
 
 1. protocol decoder：负责解析协议，读取协议字段
 2. protocol encoder：负责生成请求报文，注意通常会有改动，比如修改某些header
@@ -52,11 +52,11 @@ keywords: ["service mesh","服务网格","sofamesh","x-protocol"]
 
 我们来看看第三块的工作量是什么，inbound 和 outbound 的Virtual Host配置示例如下：
 
-![img](outbound.png)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-tcp-protocol-extension/outbound.png)
 
 outbound 配置中，注意 domains 字段是各种域名和ClusterIP，而 routes 中，match是通过prefix来匹配。我们结合HTTP/1.1，domains字段是用来和请求的Host header进行域名匹配的，比如 `Host: istio-telemetry`，这决定了哪些请求是要转发到 istio-telemetry 这个服务的。routes的match用来进行路由匹配的，通过HTTP请求的path进行匹配。
 
-![img](inbound.png)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-tcp-protocol-extension/inbound.png)
 
 inbound 配置类似，只是inbound更简单，domains匹配`*`就可以。
 
@@ -94,7 +94,7 @@ inbound 配置类似，只是inbound更简单，domains匹配`*`就可以。
 
 因此，在x-protocol中，如果需要引入一个新的通讯协议，需要的工作内容只有必不可少的protocol encoder 和 protocol decoder，和实现以下几个接口：
 
-![img](xprotocol-interfaces.png)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-tcp-protocol-extension/xprotocol-interfaces.png)
 
 ## 总结
 

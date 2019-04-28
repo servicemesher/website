@@ -27,7 +27,7 @@ CPU 的使用时间是可压缩的，换句话说它本身无状态，申请资�
 
 在 kubernetes 集群管理中，有一个非常核心的功能：就是为 pod 选择一个主机运行。调度必须满足一定的条件，其中最基本的是主机上要有足够的资源给 pod 使用。
 
-![](006tNbRwly1fyda0hogqpj30d20fwq42.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubernetes-resource-management/006tNbRwly1fyda0hogqpj30d20fwq42.jpg)
 
 资源除了和调度相关之外，还和很多事情紧密相连，这正是这篇文章要解释的。
 

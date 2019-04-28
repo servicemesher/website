@@ -55,7 +55,7 @@ keywords: ["service mesh","服务网格","envoy","jaeger"]
 
 
 
-![service setup](006tNbRwly1fxvygc19pfj30o70a6glq.jpg)
+![service setup](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/distributed-tracing-with-envoy-service-mesh-jaeger/006tNbRwly1fxvygc19pfj30o70a6glq.jpg)
 
 服务安装
 
@@ -223,7 +223,7 @@ func main() {
 
 所有这些完成后，如果您运行`docker-compose up`并访问前端Envoy端点，就会生成追踪信息并推送到Jaeger。Jaeger有一个非常友好的UI界面来展示追踪信息，我们的信息看上去像这样：
 
-![trace from jaeger](006tNbRwly1fxw0rfr8dyj31jk0e8q62.jpg)
+![trace from jaeger](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/distributed-tracing-with-envoy-service-mesh-jaeger/006tNbRwly1fxw0rfr8dyj31jk0e8q62.jpg)
 
 正如你看到的，它提供了总体的时间损耗，系统各部分是时间损耗，哪个服务调用哪个服务，服务和服务的关系（服务b和服务c是兄弟关系）。Jaeger的进一步使用留待你自己去探索。
 

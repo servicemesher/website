@@ -46,7 +46,7 @@ Istio的一个关键特性是它为您的工作负载（例如Pod、Job、基于
 
 该演示是在同一个GCP项目中的两个GKE集群，但是跨越了两个不同的可用区（us-central和us-east）。我们在一个集群上安装Istio 控制平面，在另一个集群上安装Istio的远程组件（包括sidecar代理注入器）。在这两个集群中，我们可以部署跨Kubernetes集群的示例应用程序。
 
-![](740de70aly1g1ufab9cslj212w0kjn0n.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-service-mesh-era-istios-role-in-the-future-of-hybrid-cloud/740de70aly1g1ufab9cslj212w0kjn0n.jpg)
 
 关于这种单一控制平面方法的令人兴奋的事情是，我们不必改变任何有关我们的微服务如何相互通信的信息。例如，前端仍然可以使用本地Kubernetes DNS名称（cartservice:port）调用CartService 。此DNS解析有效，因为同一GCP项目中的GKE pod属于同一虚拟网络，因此允许跨群集进行直接的pod-to-pod通信。
 
@@ -58,7 +58,7 @@ Istio的一个关键特性是它为您的工作负载（例如Pod、Job、基于
 
 该演示使用两个Istio控制平面 - 每个集群一个 - 形成一个双头逻辑服务网格。两个集群间的流量交互是通过Istio的Ingress网关，而不是使用Sidecar代理直接相互通信。Istio Gateway也是一个Envoy代理，但它专门用于进出集群Istio网格的流量。
 
-![](740de70aly1g1uf9x9drej20xc0fediq.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-service-mesh-era-istios-role-in-the-future-of-hybrid-cloud/740de70aly1g1uf9x9drej20xc0fediq.jpg)
 
 为使此设置跨网络分区工作，每个Istio控制平面都有一个特殊的域名服务器（DNS）配置。在此双控制平面拓扑中，Istio安装辅助DNS服务器（CoreDNS），该服务器解析本地集群的外部服务的域名。对于那些外部服务，流量在Istio Ingress网关之间透传，然后转移到相关服务。
 
@@ -70,7 +70,7 @@ Istio的一个关键特性是它为您的工作负载（例如Pod、Job、基于
 
 除了容器之外，许多组织也使用虚拟机（VM）作为补充或者替代来运行其应用程序。如果您正在使用虚拟机，您仍然可以享受Istio网格带来的好处。此演示向您展示如何在GKE上运行Istio时集成Google Compute Engine实例。我们像以前一样部署相同的应用程序 但这一次，一个服务（ProductCatalog）被部署在Kubernetes集群之外的外部虚拟机上运行。
 
-![](740de70aly1g1uf9946qjj212w0n4ae7.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-service-mesh-era-istios-role-in-the-future-of-hybrid-cloud/740de70aly1g1uf9946qjj212w0n4ae7.jpg)
 
 该GCE 虚拟机运行一组最小的Istio组件，以便能够与中心的Istio控制平面通信。然后，我们将Istio ServiceEntry对象部署到GKE集群，该集群在逻辑上将外部ProductCatalog服务添加到网格中。
 

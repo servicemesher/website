@@ -31,7 +31,7 @@ Aspen Mesh的Andrew Jenkins说，转向微服务本身并不能消除复杂性�
 
 **Jenkins** ： 转向微服务本身并不能消除复杂性。任何一个微服务的复杂性都很小，但是整个系统都很复杂。从根本上说，公司希望知道哪个服务正在与哪个服务对话，代表哪个服务对象，然后能够使用策略来控制该通信。
 
-![](61411417ly1fsgj488frxj20ed05zgnh.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/making-most-out-microservices-service-mesh/61411417ly1fsgj488frxj20ed05zgnh.jpg)
 
 **3.组织如何尝试应对这些挑战？**
 

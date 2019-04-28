@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["Serverless","无服务","Kubernetes","FaaS"]
 ---
 
-![](61411417ly1fwtshzvvdnj20m808ct8v.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwtshzvvdnj20m808ct8v.jpg)
 
 # 评估Kubernetes（K8s）的无服务器框架
 
@@ -44,7 +44,7 @@ FaaS框架应该能够在各种基础架构上运行，以实现真正有用，�
 *   声明式地管理服务。
 *   提供一个大盘，来检查应用的健康情况，并通过自动重启，自动复制和自动缩放来进行应用程序的自我修复。
 
-![](61411417ly1fwtsgn1842j20ao07idgj.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwtsgn1842j20ao07idgj.jpg)
 
 #### 无服务器系统可以包括通过客户端请求触发的功能或作为业务服务的一部分执行的功能。这两个过程都可以使用容器集群管理器（如Kubernetes）进行编排。资料来源：dzone.com
 
@@ -254,7 +254,7 @@ kubectl create clusterrolebinding "cluster-admin-$(whoami)" \
 
 Kubernetes集群由主节点和节点资源组成 \- 主节点协调集群，节点运行应用程序，并通过Kubernetes API进行通信。我们使用OpenFaaS CLI构建了容器化应用程序并编写了.yml文件来构建和部署该函数。通过在Kubernetes集群中的节点之间部署该函数，我们允许GKE分发和调度我们的节点资源。我们的节点已经配置了处理容器操作的工具，可以通过kubectl CLI。
 
-![](61411417ly1fwtsgn3annj20d80apmy6.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwtsgn3annj20d80apmy6.jpg)
 
 #### 资料来源：dzone.com
 
@@ -347,7 +347,7 @@ Fission是一个无服务器框架，它进一步抽象出容器镜像，并允�
 
 通过在源码级别进行操作，Fission使用户不必处理容器的镜像构建，将镜像推送到注册表，管理注册表凭据，镜像版本控制和其他管理任务。
 
-![](61411417ly1fwtsgn7oehj20hs0dcglu.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwtsgn7oehj20hs0dcglu.jpg)
 
 #### https://kubernetes.io/blog/2017/01/fission\-serverless\-functions\-as\-service\-for\-kubernetes
 
@@ -413,7 +413,7 @@ Kubeless是一个Kubernetes原生无服务器框架，可以将功能部署在K8
 
     `kubectl proxy --port=8080`
 
-    ![](61411417ly1fwtsjw13nsj218g0jrq81.jpg)
+    ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwtsjw13nsj218g0jrq81.jpg)
 
 
     **可以通过浏览器导航到[http://localhost8080/i](http://localhost8080/ui)来访问仪表板**
@@ -434,11 +434,11 @@ Kubeless是一个Kubernetes原生无服务器框架，可以将功能部署在K8
 
 1.  在K8s群集中部署Kubeless
 
-    ![](61411417ly1fwx4ug1ieuj20jr0c3dgl.jpg)
+    ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwx4ug1ieuj20jr0c3dgl.jpg)
 
     我们将使用此[链接中](https://github.com/kubeless/kubeless/releases) 的清单在K8s群集中部署Kubless。根据清单创建一个kubeless命名空间，一个函数ThirdPartyResource，一个kubeless控制器，并在进程中设置一个kafka，zookeeper StatefulSet。Kubless的一个主要优点是它具有高度的Kubernetes原生特性，它可以设置非rbac和rbac特定环境。下面的屏幕截图显示了如何使用kubectl命令在非rbac环境中部署kubeless。
 
-    ![](61411417ly1fwx4ug4tx0j20hr05bwew.jpg)
+    ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwx4ug4tx0j20hr05bwew.jpg)
 
 1.  创建函数
 
@@ -483,7 +483,7 @@ Fission具有事件驱动架构，使其成为短期无状态应用程序的理�
 
 ## 关于作者
 
-![Hisham](61411417ly1fwtsgn5g0oj206y06y74m.jpg)
+![Hisham](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/evaluation-of-serverless-frameworks-for-kbe/61411417ly1fwtsgn5g0oj206y06y74m.jpg)
 
 ---
 

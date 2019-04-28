@@ -40,7 +40,7 @@ SOFAMesh在产品路线上，选择了跟随社区主流，我们选择了目前
 
 SOFAMesh将在兼容Istio整体架构和协议的基础上，做出部分调整：
 
-![SOFAMesh architecture](006tNbRwgy1fuyr4vizzwj31kw1biq98.jpg)
+![SOFAMesh architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/introducing-sofamesh-a-solution-for-large-scale-service-mesh-by-ant-financial/006tNbRwgy1fuyr4vizzwj31kw1biq98.jpg)
 
 1. **使用Golang语言开发全新的Sidecar，替代Envoy**
 2. **为了避免Mixer带来的性能瓶颈，合并Mixer部分功能进入Sidecar**
@@ -58,7 +58,7 @@ SOFAMesh将在兼容Istio整体架构和协议的基础上，做出部分调整�
 
 SOFAMesh中Golang版本的Sidecar，是一个名为MOSN(Modular Observable Smart Netstub)的全新开发的模块，实现Envoy的功能，兼容Envoy的API，可以和Istio集成。
 
-![SOFAMesh MOSN](006tKfTcgy1ft75ot24lzj31ec18479s.jpg)
+![SOFAMesh MOSN](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/introducing-sofamesh-a-solution-for-large-scale-service-mesh-by-ant-financial/006tKfTcgy1ft75ot24lzj31ec18479s.jpg)
 
 此外，我们会增加对SOFARPC、Dubbo等通讯协议的支持，以便更好的迎合国内用户包括我们自身的实际需求。
 
@@ -70,7 +70,7 @@ SOFAMesh中Golang版本的Sidecar，是一个名为MOSN(Modular Observable Smart
 
 我们将大幅扩展和增强Istio中的Pilot模块：
 
-![SOFAMesh Pilot architecture](006tKfTcgy1ft75pq8rplj31kw19sn5q.jpg)
+![SOFAMesh Pilot architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/introducing-sofamesh-a-solution-for-large-scale-service-mesh-by-ant-financial/006tKfTcgy1ft75pq8rplj31kw19sn5q.jpg)
 
 1. **增加SOFARegistry的Adapter，提供超大规模服务注册和发现的解决方案**
 2. **增加数据同步模块，以实现多个服务注册中心之间的数据交换。**

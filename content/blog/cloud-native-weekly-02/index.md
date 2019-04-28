@@ -11,7 +11,7 @@ categories: ["cloud native weekly"]
 keywords: ["service mesh","服务网格","云原生","cloud native"]
 ---
 
-![](006tNc79ly1g2cdd5x4mfj31uo0m8di3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/cloud-native-weekly-02/006tNc79ly1g2cdd5x4mfj31uo0m8di3.jpg)
 
 本周报由阿里巴巴容器平台联合蚂蚁金服共同发布
 

@@ -36,7 +36,7 @@ Envoy 处理请求的第一件事是确定它的目的地。为此，它使用�
 
 在响应返回的过程中，响应还能够从集群发回之前再次通过过滤器链。同样，根据需要，这些过滤器可能与外部服务器交互，也可能不与外部服务器交互。
 
-![filter chain](006gLaqLly1g109jfa12cg30q10ia3zz.gif)
+![filter chain](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/building-a-control-plane-for-envoy/006gLaqLly1g109jfa12cg30q10ia3zz.gif)
 
 设置过滤器链和配置不同的过滤器及其外部服务器是控制平面的工作之一。使用 xDS API 将此配置信息发送给 Envoy。控制平面的职责是确保 Envoy 总是得到更新，并将任何需要更改其配置的情况通知 Envoy。由于在分布式系统中[“没有现在”](https://queue.acm.org/detail.cfm?id=2745385)，Envoy 的策略是遵循最终一致性的配置模型来处理配置更改。
 

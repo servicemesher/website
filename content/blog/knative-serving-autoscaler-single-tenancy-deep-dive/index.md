@@ -22,7 +22,7 @@ Knative是由谷歌与[Pivotal](https://content.pivotal.io/blog/knative-powerful
 
 Knative构建在Kubernetes和[Istio](https://istio.io/)之上，它的设计考虑到了多种角色通过该框架进行交互，包括开发人员、运维人员和平台提供者。
 
-![](0069RVTdgy1fu1er29srhj30ws0mpgo9.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/knative-serving-autoscaler-single-tenancy-deep-dive/0069RVTdgy1fu1er29srhj30ws0mpgo9.jpg)
 
 Knative所涉及的角色（图片来源于[Knative GitHub仓库](https://github.com/knative/docs/)）
 
@@ -78,7 +78,7 @@ Panic时间窗口默认是6秒，如果在6秒内达到2倍期望的并发，则
 
 # autoscaler单租户图
 
-![](0069RVTdgy1fu1g19gvitj31kw13agrp.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/knative-serving-autoscaler-single-tenancy-deep-dive/0069RVTdgy1fu1g19gvitj31kw13agrp.jpg)
 
 上图基于 https://github.com/knative/serving/blob/master/docs/scaling/DEVELOPMENT.md 绘制。
 

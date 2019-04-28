@@ -17,41 +17,41 @@ keywords: ["service mesh","线下沙龙","meetup"]
 
 了解本次meetup的topic请访问[活动页面](/activity)。
 
-![Service Mesh Meetup](006tNc79gy1fts3o06igyj30sg0j0afk.jpg)
+![Service Mesh Meetup](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3o06igyj30sg0j0afk.jpg)
 
 **张亮（京东金融数据研发负责人）Service Mesh的延伸 —— 论道Database Mesh**
 
-![张亮 京东金融 Service Mesh Meetup](006tNc79gy1fts3ow6pdxj30sg0j0wgn.jpg)
+![张亮 京东金融 Service Mesh Meetup](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3ow6pdxj30sg0j0wgn.jpg)
 
-![张亮 京东金融 Service Mesh Meetup](006tNc79gy1fts3pcqgm9j30sg0j0tcm.jpg)
+![张亮 京东金融 Service Mesh Meetup](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3pcqgm9j30sg0j0tcm.jpg)
 
 **吴晟（Apache SkyWalking创始人），Observability on Service Mesh —— Apache SkyWalking 6.0**
 
-![吴晟 Apache SkyWalking](006tNc79gy1fts3q2ethrj318w0u0tcq.jpg)
+![吴晟 Apache SkyWalking](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3q2ethrj318w0u0tcq.jpg)
 
-![](006tNc79gy1fts3qkcu6vj318w0u07go.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3qkcu6vj318w0u07go.jpg)
 
-![](006tNc79gy1fts3qpj1b9j318w0u0k6r.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3qpj1b9j318w0u0k6r.jpg)
 
 **朵晓东（蚂蚁金服，高级技术专家），蚂蚁金服开源的Service Mesh数据平面SOFA MOSN深层揭秘**
 
-![朵晓东 蚂蚁金服 Service Mesh](006tNc79gy1fts3r3qc16j30sg0j0mzz.jpg)
+![朵晓东 蚂蚁金服 Service Mesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3r3qc16j30sg0j0mzz.jpg)
 
-![朵晓东 Service Mesh 蚂蚁金服](006tNc79gy1fts3reafsmj30sg0j0adi.jpg)
+![朵晓东 Service Mesh 蚂蚁金服](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3reafsmj30sg0j0adi.jpg)
 
 **丁振凯（新浪微博，微博搜索架构师），微博Service Mesh实践 - WeiboMesh**
 
-![丁振凯 新浪微博](006tNc79gy1fts3rw3yerj30sg0j0wgx.jpg)
+![丁振凯 新浪微博](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3rw3yerj30sg0j0wgx.jpg)
 
-![](006tNc79gy1fts3s4hf4xj318w0u0qed.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3s4hf4xj318w0u0qed.jpg)
 
 结束时Service Mesh铁杆粉丝的合影。
 
-![ServiceMesher](006tNc79gy1fts3smgw3rj317s0t8k4l.jpg)
+![ServiceMesher](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3smgw3rj317s0t8k4l.jpg)
 
 最好还要感谢我们的工作人员、志愿者和IT大咖说提供视频直播支持。
 
-![](006tNc79gy1fts3sveslgj318w0u0wr2.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/beijing-meetup-20180729/006tNc79gy1fts3sveslgj318w0u0wr2.jpg)
 
 ServiceMesher社区的使命
 

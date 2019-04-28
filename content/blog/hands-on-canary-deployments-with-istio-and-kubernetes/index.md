@@ -39,17 +39,17 @@ Kubernetes已经拥有开箱即用的“Service Mesh”。它的“service”资
 
 **作为容器sidecar**，将代理注入到每个pod定义中与主服务一起运行。如果使用像Linkerd这样更加“重量级”的代理，这个部署将为每个pod增加约200MB的内存。但如果使用较新的Conduit，每个pod只需10MB左右。Conduit还没有Linkerd的所有功能，所以我们还没有看到两者的最终比较。通常，“每个pod中一个sidecar”是一个不错的选择，这样尽可能的将代理故障限制在单个pod中，不要影响同一主机上的其他pod。
 
-![](006tNbRwgy1furqkue0ofj30sg0bqdhi.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqkue0ofj30sg0bqdhi.jpg)
 
 为什么需要创建Service Mesh架构？让我们看一下不同类型的应用程序架构的两个图表来说明需求。
 
 第一个示例是一个老式基于MVC架构的Web服务，是作为单体架构all-in-one应用程序。可能每天服务数百万个请求，但没有复杂的功能，并且底层服务的通信简单明了：Nginx均衡Apache实例的所有流量，Apache又从数据库/文件存储中获取数据并返回请求页面。这个示例所采用的架构不会从服务网格中获取太多收益。由于单体应用没有采用服务调用的方式，所以所有功能是耦合在一块的，开发者没有开发处理服务间路由和通信的代码。在单体应用，所有核心组件都位于同一台机器上，不通过网络进行通信，没有REST API或gRPC。所有“业务逻辑”都在一个应用程序中，在每个Apache Web服务器上作为整体部署。
 
-![](006tNbRwgy1furqkylpsfj30sg0g675p.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqkylpsfj30sg0g675p.jpg)
 
 第二个例子是一个基于现代微服务架构的应用程序，它有很多进程和幕后逻辑。它做了很多事情，比如学习访问者模式和偏好来个性化他们在网站上的体验，通知用户他们最喜欢的topic更新，等等。您可以想象在所有这些微服务之间发生的许多复杂过程，分布在数千个容器和数百个节点上。请注意，我们的插图非常简化。实际上，我们显示大型云原生应用程序的真实架构中简化了很多细节。
 
-![](006tNbRwgy1furql7tds4j30sg0ihgnv.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furql7tds4j30sg0ihgnv.jpg)
 
 在这个实例程序中我们的每个微服务都有一些代码用于处理彼此间的通信，设置重试策略、超时、异常处理等等（在网络故障的情况下）。我们还看到这是一个多语言环境，其中不同团队使用Scala、Golang、Node.js或Python开发自己的服务组件。所有组件都可以通过REST API或gRPC相互通信，每个团队都花费时间和精力在他们自己的组件中实现通信逻辑,使用他们各自的语言选择，因此他们不能共享彼此的库和函数，至少可以节省时间并使用插入应用程序的所有组件的统一解决方案作为依赖。此外，查询服务发现机制的函数（如Consul或ZooKeeper）或读取外部传递给应用程序的一些配置，需要向Prometheus/InfluxDB报告延迟和响应相关指标。这包括有关缓存响应时间（redis或memcached缓存）的信息，该缓存响应时间通常位于另一个节点上，或者作为整个单独的群集，可能会过载并导致高延迟。除了团队爆炸日志和截止日期临近之外，所有这些都是服务代码的一部分，需要维护。开发人员不愿花时间在代码的运维相关部分任务上，例如添加分布式追踪和监控指标（不喜欢排除故障和分析）或处理可能的网络故障，实施回退和重试预算。
 
@@ -59,7 +59,7 @@ Linkerd和Conduct由Buoyant开发，开发者是一些曾经在Twitter工作的�
 
 让我们看一下从依赖于应用程序的通信逻辑到“Service Mesh”架构的变化。
 
-![](006tNbRwgy1furqle6vqoj30sg0edmz4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqle6vqoj30sg0edmz4.jpg)
 
 最值得注意的是，所有代理都可以在同一个地方配置和更新，通过他们的控制平面（或通过某些存储库中的配置文件， 取决于所选的工具和部署方法），我们可以在数千个代理配置特定规则。因此，路由、负载均衡、度量指标收集、安全策略实施、断路器、数据传输加密，所有这些操作都将严格遵循由集群管理员应用的一系列规则。
 
@@ -75,7 +75,7 @@ Istio是一个集中所有Service Mesh特性的完美例子，它有几个“主
 
 以下是官方网站上Istio架构的图表：
 
-![](006tNbRwgy1furqlqlmubj30sg0gn0uo.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqlqlmubj30sg0gn0uo.jpg)
 
 **译者注**：图中的`istio-auth`现已改名为`citadel`。
 
@@ -126,11 +126,11 @@ kubectl apply -f install/kubernetes/istio-demo.yaml
 
 找到`%USERPROFILE%/.kube/config`文件拷贝到你的宿主机目录下（`~/.kube/config`），调到如下页面：
 
-![](006tNbRwgy1furqmglgcpj30gj06baad.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqmglgcpj30gj06baad.jpg)
 
 使用配置文件中的管理员账号和密码登陆到kubernetes dashboard，你应该能够看到这个仪表盘，点击侧边栏显示的default这个 namespace：
 
-![](006tNbRwgy1furqms3nzxj30rf0mcwh3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqms3nzxj30rf0mcwh3.jpg)
 
 Istio组件将安装到它们自己的namespace中。调到istio下载目录，并执行命令：
 
@@ -140,17 +140,17 @@ kubectl apply -f install/kubernetes/istio-demo.yaml
 
 你将看到一些列的组件被创建，详情请看官方文档或者你也可以打开yaml文件查看相应组件，每个资源都记录在该文件中。然后我们可以浏览namespace并查看所有已成功创建的内容：
 
-![](006tNbRwgy1furqn2nd90j30gs0d0q3w.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqn2nd90j30gs0d0q3w.jpg)
 
 在组件创建期间点击istio-system查看是否有错误或者issue，看起来应该和下面类似：
 
-![](006tNbRwgy1furqnb2booj30ys0gomzz.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqnb2booj30ys0gomzz.jpg)
 
 从图中可以看到有50个事件，你能滚动屏幕去看“成功”状态，并注意有些地方可能存在错误。如果有错误，你可以去github上提交issue。
 
 我们需要找到istio-ingress服务的入口，去了解那里发送流量。回到kubernetes dashboard的侧边栏并跳转到istio-system这个namespace下。如果创建后在这个namespace下不可见，刷新浏览器试试。点击“Services”找到external endpoint，如下图所示：
 
-![](006tNbRwgy1furqnk04ubj31510kpq7b.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqnk04ubj31510kpq7b.jpg)
 
 在我们的例子中，这是AWS弹性负载均衡器，但你可能会看到IP地址，具体取决于集群设置。我们将使用此端点地址访问我们的演示Web服务。
 
@@ -262,7 +262,7 @@ Let’s inspect the pods to see that the Envoy sidecar is present:  kubectl get 
 
 我们可以看到每个pod有两个容器，一个是网站容器，另一个是代理sidecar：
 
-![](006tNbRwgy1furqnsks5bj30lj02sjs1.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqnsks5bj30lj02sjs1.jpg)
 
 我们能够通过执行如下命令查看Envoy运行日志：
 
@@ -359,7 +359,7 @@ kubectl get services istio-ingressgateway -n istio-system
 
 通过点击它访问外部节点。您可能会看到多个链接，因为一个链接指向HTTPS，另一个链接指向负载均衡器的HTTP端口。如果是这样，请仅使用HTTP链接，因为我们没有为本教程设置TLS，您应该看到演示网站的v1页面：
 
-![](006tNbRwgy1furqo88dmmj311q0l078y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hands-on-canary-deployments-with-istio-and-kubernetes/006tNbRwgy1furqo88dmmj311q0l078y.jpg)
 
 为我们demo示例明确配置kubernetes service指向单一部署istio VirtualService。它指明Envoy将访问网站的流量全部路由到v1版本（如果没有Envoy路由策略，kubernetes将会在三本版本的pods轮询请求）。您可以通过更改VirtualService配置的以下部分并重新部署它来更改我们看到的网站版本：
 

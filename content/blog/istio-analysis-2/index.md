@@ -16,9 +16,9 @@ keywords: ["service mesh","服务网格","istio"]
 
 今天我们分析下 istio-sidecar-injector 组件:
 
-![image-20190319105935249](006tKfTcgy1g17x6h2bzzj316f0u0wwn.jpg)
+![image-20190319105935249](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-2/006tKfTcgy1g17x6h2bzzj316f0u0wwn.jpg)
 
-[查看高清原图](006tKfTcgy1g0z3wp5comj315m0u0kjr.jpg)
+[查看高清原图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-2/006tKfTcgy1g0z3wp5comj315m0u0kjr.jpg)
 
 用户空间的Pod要想加入mesh, 首先需要注入sidecar 容器, istio 提供了2种方式实现注入:
 
@@ -30,7 +30,7 @@ keywords: ["service mesh","服务网格","istio"]
 - 名为`istio-init`的initContainer: 通过配置iptables来劫持Pod中的流量
 - 名为`istio-proxy`的sidecar容器: 两个进程pilot-agent和envoy, pilot-agent 进行初始化并启动envoy
 
-![img](006tKfTcgy1g14nv8w2vzj30wq0grtbv.jpg)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-2/006tKfTcgy1g14nv8w2vzj30wq0grtbv.jpg)
 
 ------
 

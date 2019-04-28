@@ -21,7 +21,7 @@ keywords: ["service mesh","服务网格","envoy","kubernetes"]
 
 因为 Istio 基本就是绑定在 Kubernetes 上，下面是我们熟知的 Kubernetes 及 Istio 中共有的服务模型。
 
-![](006tNbRwly1fya24ci2x8j30go0b4ta3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-service-and-traffic-model/006tNbRwly1fya24ci2x8j30go0b4ta3.jpg)
 
 上图是 Kubernetes 中 iptables 代理模式（另外还有 IPVS 模式）下的 service 概念图，管理员可以在 kube-proxy 中配置简单的负载均衡，对整个 node 生效，无法配置到单个服务的负载均衡和其他微服务的高级功能，例如熔断、限流、追踪等，这些功能只能在应用中实现了，而在 Istio 的概念模型中完全去掉了 `kube-proxy`  这个组件，将其分散到每个应用 Pod 中同时部署的 Envoy 中实现。
 
@@ -74,7 +74,7 @@ spec:
 
 Envoy 是 Istio 中默认的 proxy sidecar，负责服务间的流量管控、认证与安全加密、可观察性等。Envoy 中有如下几个重要概念。
 
-![Envoy proxy 架构图](006tNbRwly1fy9qkff5nij314k0ts43z.jpg)
+![Envoy proxy 架构图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-service-and-traffic-model/006tNbRwly1fy9qkff5nij314k0ts43z.jpg)
 
 上图是 Envoy 的架构图。
 
@@ -96,7 +96,7 @@ Listener 使用 listener filter（监听器过滤器）来操作链接的元数�
 
 `VirtualService`、`DestinationRule`、`Gateway`、`ServiceEntry` 和 `EnvoyFilter` 都是 Istio 中为流量管理所创建的 CRD，这些概念其实是做路由管理，而 Kubernetes 中的 service 只是用来做服务发现，所以以上其实也不能成为 Istio 中的服务模型，但其实它们也是用来管理服务的，如果流量不能路由的创建的服务上面去，那服务的存在又有何意义？在 Service Mesh 真正的服务模型还是得从 Envoy 的 [xDS 协议](http://www.servicemesher.com/blog/envoy-xds-protocol/)来看，其中包括了服务的流量治理，服务的断点是通过 EDS 来配置的。
 
-![Istio pilot 架构图](006tKfTcgy1ftczrqzgw5j31kw0t1q7o.jpg)
+![Istio pilot 架构图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-service-and-traffic-model/006tKfTcgy1ftczrqzgw5j31kw0t1q7o.jpg)
 
 上图是 Pilot 设计图，来自[Istio Pilot design overview](https://github.com/istio/old_pilot_repo/blob/master/doc/design.md)。
 

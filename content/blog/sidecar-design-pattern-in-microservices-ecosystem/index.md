@@ -44,7 +44,7 @@ Sidecar 设计模式已经越来越受欢迎，并在社区内得到更广泛的
 
 来自单个服务的所有传入和传出网络流量都流经 Sidecar 代理。 因此，Sidecar 能够管理微服务之间的流量，收集遥测数据并实施相关策略。从某种意义上说，该服务不了解整个网络，只知道附加的 Sidecar 代理。这实际上就是 Sidecar 模式如何工作的本质——将网络依赖性抽象为 Sidecar。
 
-![](855e972fly1ftphar3kl3j210c0imgom.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sidecar-design-pattern-in-microservices-ecosystem/855e972fly1ftphar3kl3j210c0imgom.jpg)
 
 在服务网格中有数据平面和控制平面的概念：
 
@@ -57,7 +57,7 @@ Sidecar 设计模式已经越来越受欢迎，并在社区内得到更广泛的
 
 [https://www.envoyproxy.io](https://www.envoyproxy.io)
 
-![](855e972fly1ftphh5l8plj210n06taau.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/sidecar-design-pattern-in-microservices-ecosystem/855e972fly1ftphh5l8plj210n06taau.jpg)
 
 从单体服务到微服务的转变使组织能够独立且大规模地部署应用程序。 在 Container 和 Kubernetes 世界中，Sidecar 设计模式更适合。Sidecar 从应用程序中抽象出了复杂性，并处理服务发现、流量管理、负载均衡、断路器等功能。
 

@@ -32,7 +32,7 @@ keywords: ["service mesh","istio","微服务"]
 
 Christian Posta的演讲“[微服务中最困难的部分：调用你的服务](https://www.slideshare.net/ceposta/the-hardest-part-of-microservices-calling-your-services)”谈到了一个重要问题。当调用API时，你可能会认为你在处理A和B之间的直接集成调用（下图1）。然而计算机网络并不会针对直接通信进行优化（下图2）。因此在某些情况，尤其当应用处于你正考虑或使用的云环境中时，你不可避免且不得不考虑这些不同的失控物理和虚拟网络设备。例如，就可能存在这样一种情况：其中一台设备的性能低于最佳性能，这将影响整个应用程序的响应时间（下图3）。
 
- ![A和B之间的调用关系图](78a165e1gy1fs7fmkvibwj20jf0dfq40.jpg)
+ ![A和B之间的调用关系图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/the-rise-of-the-Istio-service-mesh/78a165e1gy1fs7fmkvibwj20jf0dfq40.jpg)
 
 ## 微服务先驱和Netflix OSS
 

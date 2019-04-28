@@ -24,7 +24,7 @@ keywords: ["service mesh","服务网格",”中间件"]
 
 如下图所示，中间件的工作方式，是将不同应用的消息汇总到中心化的通信节点。然后将这些消息传递到一系列功能管道，直到“用户注册”服务。消息通过企业服务总线（ESB）进行传输。这种通信方式便于隐藏分布式系统的多样性、硬件和操作系统的差异性。
 
-![中间件](006tNbRwgy1fwg4xtztzlj31kw13sk09.jpg)
+![中间件](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/does-the-service-mesh-spell-the-end-for-middleware/006tNbRwgy1fwg4xtztzlj31kw13sk09.jpg)
 
 随着企业组织持续拥抱容器化，传统中间件的一些问题开始变得愈加明显。DevOps实践鼓励基于分布式系统的现代环境，以及快速、自动化部署的不可变实例。容器的持续集成和持续交付（CI/CD）要求不断地更新应用和工具，而ESB对比并不友好。
 
@@ -40,7 +40,7 @@ keywords: ["service mesh","服务网格",”中间件"]
 
 消息在服务网格内传输，但是消息传递功能在接收消息的服务旁侧执行，每个实例被附加了一个用于在服务网格中来回传递消息的代理。这些代理执行一些传统上由中间件执行的功能，比如消息路由、消息阻塞、服务发现、负载均衡、加解密、认证和授权。此外，它们也支持错误处理、熔断、请求追踪等特性。
 
-![中间件](006tNbRwgy1fwg4xah8wdj31kw104nlp.jpg)
+![中间件](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/does-the-service-mesh-spell-the-end-for-middleware/006tNbRwgy1fwg4xah8wdj31kw104nlp.jpg)
 
 服务网格允许在服务间直接发送消息，而不再通过中间管道。这使得应用的消息传递跟它的服务耦合在一起，而这在大多数中心化应用中是松耦合的。服务网格分布式的特性减轻了单点故障的依赖，并促进了动态变化。
 

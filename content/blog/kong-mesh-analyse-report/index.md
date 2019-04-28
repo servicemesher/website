@@ -25,30 +25,30 @@ Kong社区提供了kong mesh的demo (<https://github.com/Kong/kong-mesh-dist-kub
 
 在客户端节点，每隔两秒会发送一次时间戳到服务端。
 
-![](006tNc79ly1g03s98m3duj30mw06r3ze.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/006tNc79ly1g03s98m3duj30mw06r3ze.jpg) 
 
 服务端节点，每隔两秒打印一次时间戳。
 
-![](006tNc79ly1g03s9ijom2j30b305baae.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/006tNc79ly1g03s9ijom2j30b305baae.jpg)
 
 接下来，我们详细了解一下该demo背后的技术原理。
 
 首先，我们来分析一下kong-mesh业务整体组网：
 
-![](006tNc79ly1g03s9r1zjnj30hv0fz756.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/006tNc79ly1g03s9r1zjnj30hv0fz756.jpg) 
 从组网中可以看出，kong mesh也分控制面与数据面。
 
 控制面为图中kong-admin的POD，3副本实例独立部署，对外提供Admin API供用户设置各种规则配置。
 
 数据面为图中servicea及serviceb的POD，每个POD中会启动一个kong容器作为sidecar，通过iptables规则将外发以及到达的流量劫持到kong容器中，然后kong会根据路由规则将流量转发到对应的实例。下面我们看看POD的部署配置：
 
-![](006tNc79ly1g03s9vlkd8j30nl0fiq3e.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/006tNc79ly1g03s9vlkd8j30nl0fiq3e.jpg) 
 
 部署配置关键点在于流量接管的设置，POD在启动应用前，会使用istio/proxy_init镜像来初始化环境，图中的参数的含义是，使用TProxy（透明代理）的流量接管模式，将发往8080端口（业务serviceb监听端口）的流量通过7000端口（kong监听端口）来进行代理。 
 
 了解清楚该部署配置后，我们就可以比较容易地使用kong来代理http服务了。主要改动点还是在于POD的部署配置的修改。如下图所示： 
 
-![](006tNc79ly1g03sa4pef2j30oc0g4jru.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/006tNc79ly1g03sa4pef2j30oc0g4jru.jpg) 
 
 值得注意的是，代理HTTP服务和代替TCP不一样，属于7层转发，不能使用上文的透明代理方式来进行接管。因此在setup_network的启动参数中，需要指定流量接管模式为REDIRECT，通过iptables显式将报文导入到kong，kong再根据报文内容进行匹配后，再路由到目标服务（大家如果需要http demo的代码，可以到<https://github.com/andrewshan/kong-mesh-http-demo>下载）。
 
@@ -71,12 +71,12 @@ http --ignore-stdin post kong-admin:8001/services/service-b/routes name=service-
 
 规则添加后，分别在services和routes表中可以查询到相关的记录： 
 
-![](006tNc79ly1g03sal2gn3j319m057js4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/006tNc79ly1g03sal2gn3j319m057js4.jpg)
 
 那么问题来了，kong的规则模型具体是什么含义？这些规则是怎么组合工作的呢？ 
 首先，我们先看看kong的规则模型：
 
-![image](0060lm7Tly1g03qgd8vt3j30ih0e93z7.jpg) 
+![image](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/0060lm7Tly1g03qgd8vt3j30ih0e93z7.jpg) 
 
 从图上可见，Service是规则模型的核心，一个Service代表一个目标服务URL。
 
@@ -91,7 +91,7 @@ Target定义的是具体的服务节点实例，可定义权重，一个target�
 
 我们继续看看，kong-mesh本身如何根据这些规则进行路由。 
 
-![](006tNc79ly1g03sayaju0j30wz09dgm2.jpg) 
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kong-mesh-analyse-report/006tNc79ly1g03sayaju0j30wz09dgm2.jpg) 
 
 Kong的路由及负载均衡能力是构建于openresty的access_by_lua以及balancer_by_lua这2个phase之上的。Servicea发送的请求通过iptables将流量导入到客户端侧（servicea-kong），kong收到后，根据请求消息进行route_match，找出匹配的目标service，然后再根据service的可用target进行负载均衡，找到目标serviceb节点实例进行发送。
 

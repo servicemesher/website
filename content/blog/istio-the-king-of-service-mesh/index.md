@@ -38,7 +38,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 ## 1.1 应用通信模式演进: 网络流控进入操作系统
 
-![](006tNc79ly1fzr00rywkoj30nv0cmq4u.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr00rywkoj30nv0cmq4u.jpg)
 
 在计算机网络发展的初期, 开发人员需要在自己的代码中处理服务器之间的网络连接问题, 包括流量控制, 缓存队列, 数据加密等. 在这段时间内底层网络逻辑和业务逻辑是混杂在一起.
 
@@ -48,7 +48,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 ## 1.2 应用通信模式演进: 微服务架构的出现
 
-![](006tNc79ly1fzr00ypnboj30nr0d4ac8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr00ypnboj30nr0d4ac8.jpg)
 
 微服务架构是更为复杂的分布式系统，它给运维带来了更多挑战, 这些挑战主要包括资源的有效管理和服务之间的治理, 如:
 
@@ -76,7 +76,7 @@ Docker 和Kubernetes 技术的流行, 为Pass资源的分配管理和服务的�
 
 ## 1.3 Sidecar 模式的兴起
 
-![](006tNc79ly1fzr0c6zgunj30nt0d1ta5.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr0c6zgunj30nt0d1ta5.jpg)
 
 Sidecar(有时会叫做agent) 在原有的客户端和服务端之间加多了一个代理, 为应用程序提供的额外的功能, 如服务发现, 路由代理, 认证授权, 链路跟踪 等等.
 
@@ -118,7 +118,7 @@ Sidecar(有时会叫做agent) 在原有的客户端和服务端之间加多了�
 
 ## 1.7 Service Mesh 产品简史
 
-![](006tNc79ly1fzr01slci0j30n60gnac3.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr01slci0j30n60gnac3.jpg)
 
 - 2016 年 1 月 15 日，前 Twitter 的基础设施工程师 [William Morgan](https://twitter.com/wm) 和 Oliver Gould，在 GitHub 上发布了 Linkerd 0.0.7 版本，采用Scala编写, 他们同时组建了一个创业小公司 Buoyant，这是业界公认的第一个Service Mesh
 - 2016 年，[Matt Klein](https://twitter.com/mattklein123)在 Lyft 默默地进行 Envoy 的开发。Envoy 诞生的时间其实要比 Linkerd 更早一些，只是在 Lyft 内部不为人所知
@@ -200,7 +200,7 @@ Istio来自希腊语，英文意思是「sail」, 意为「启航」
 
 ## 2.1 Istio 架构
 
-![](006tNc79ly1fzr02d148ij30fj0c1my4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr02d148ij30fj0c1my4.jpg)
 
 Istio Architecture（图片来自[Isio官网文档](https://istio.io/docs/concepts/what-is-istio/))
 
@@ -225,7 +225,7 @@ Istio Architecture（图片来自[Isio官网文档](https://istio.io/docs/concep
 
 下面是我对Istio架构总结的思维导图:
 
-![](006tNc79ly1fzr02jcx0gj30wf0u0jud.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr02jcx0gj30wf0u0jud.jpg)
 
 ------
 
@@ -233,7 +233,7 @@ Istio Architecture（图片来自[Isio官网文档](https://istio.io/docs/concep
 
 以下是Istio官网经典的 BookInfo Demo, 这是一个多语言组成的异构微服务系统:
 
-![](006tNc79ly1fzr02xvs54j30h309qt9n.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr02xvs54j30h309qt9n.jpg)
 
 Bookinfo Application（图片来自[Isio官网文档](https://istio.io/docs/examples/bookinfo/))
 
@@ -886,7 +886,7 @@ ENDPOINT             STATUS      CLUSTER
 
 以下是分布式全链路跟踪示意图:
 
-![](006tNc79ly1fzr03q5ehnj30d207ddgc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr03q5ehnj30d207ddgc.jpg)
 
 一个典型的Trace案例（图片来自[opentracing文档中文版](https://wu-sheng.gitbooks.io/opentracing-io/content/))
 
@@ -894,7 +894,7 @@ ENDPOINT             STATUS      CLUSTER
 
 Jaeger 是Uber 开源的全链路跟踪系统, 符合OpenTracing协议, OpenTracing 和 Jaeger 均是CNCF 成员项目, 以下是Jaeger 架构的示意图:
 
-![](006tNc79ly1fzr03yvpwlj31jw0u0wmd.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr03yvpwlj31jw0u0wmd.jpg)
 
 Jaeger 架构示意图（图片来自[Jaeger官方文档](https://www.jaegertracing.io/docs/1.6/architecture/))
 
@@ -930,7 +930,7 @@ Envoy 原生支持http 链路跟踪:
 
 ## 4.1 Pilot 架构
 
-![](006tNc79ly1fzr04ak32zj30kt0dqjsk.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr04ak32zj30kt0dqjsk.jpg)
 
 Pilot Architecture（图片来自[Isio官网文档](https://istio.io/docs/concepts/traffic-management/))
 
@@ -968,7 +968,7 @@ EnvoyFilter 描述了针对代理服务的过滤器，用来定制由 Istio Pilo
 
 #### Kubernetes Ingress vs Istio Gateway
 
-![](006tNc79ly1fzr04mmy6oj31220f0ju1.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr04mmy6oj31220f0ju1.jpg)
 
 - 合并了L4-6和L7的规范, 对传统技术栈用户的应用迁入不方便
 - 表现力不足:
@@ -1032,7 +1032,7 @@ Istio 没有无降级处理支持: Istio可以提高网格中服务的可靠性�
 
 ## 4.4 Mixer 架构
 
-![](006tNc79ly1fzr052jgbaj30i70e73zq.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr052jgbaj30i70e73zq.jpg)
 
 Mixer Topology（图片来自[Isio官网文档](https://istio.io/docs/concepts/policies-and-telemetry/))
 
@@ -1125,7 +1125,7 @@ Kubernetes 本身已经很复杂, Istio 为了更高层控制的抽象, 又增�
 
 ------
 
-![](006tNc79ly1fzr05l1dnpj30q80jj0v5.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzr05l1dnpj30q80jj0v5.jpg)
 
 ------
 
@@ -1140,4 +1140,4 @@ Kubernetes 本身已经很复杂, Istio 为了更高层控制的抽象, 又增�
 - [Delayering Istio with AppSwitch](https://preliminary.istio.io/blog/2018/delayering-istio/delayering-istio/)
 - [servicemesher 中文社区](http://www.servicemesher.com)
 
-![ServiceMesher社区](006tNc79ly1fzs45dygpyj31jt0beq9s.jpg)
+![ServiceMesher社区](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-the-king-of-service-mesh/006tNc79ly1fzs45dygpyj31jt0beq9s.jpg)

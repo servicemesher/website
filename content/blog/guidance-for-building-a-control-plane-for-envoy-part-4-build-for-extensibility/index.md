@@ -48,7 +48,7 @@ Envoy是一个非常强大的软件，每天都有[新的用例和贡献被提�
 - Google Cloud Functions (https://github.com/solo-io/envoy-google-function)
 - Azure function (https://github.com/solo-io/envoy-azure-functions)
 
-![](006gLaqLgy1g202enyhmsg30q10iajsu.gif)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-4-build-for-extensibility/006gLaqLgy1g202enyhmsg30q10iajsu.gif)
 
 在上面的图示中，您可以看到请求是如果通过Envoy并经过一些过滤器的，这些过滤器具有应用于请求和响应的特定任务。你可以在[Solo.io](https://www.solo.io/)首席执行官/创始人[Idit Levine](https://medium.com/@idit.levine_92620)和Solo.io首席架构师[Yuval Kohavi](https://medium.com/@yuval.kohavi)写的一篇博客文章中读到更多关于[Envoy的功能和构建Gloo的控制平面所做的权衡](https://medium.com/solo-io/building-a-control-plane-for-envoy-7524ceb09876)。
 
@@ -135,7 +135,7 @@ gloo-565659747c-x7lvf            1/1     Running   0          8m
 
 负责此`Proxy`->Envoy xDS转换的组件是`gloo`，它是一个事件驱动组件，通过将`Proxy`对象转换为Envoy的LDS/RDS/CDS/EDS API，负责核心xDS服务和自定义Envoy过滤器的配置。
 
-![](006gLaqLly1g222c27h5dj30ht06174i.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-4-build-for-extensibility/006gLaqLly1g222c27h5dj30ht06174i.jpg)
 
 Gloo知道如何路由到`Upstream`和它上面的函数。[Upstream](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/upstream.proto.sk/)也是Gloo的核心配置对象。我们需要这个`Upstream`对象的原因是，它封装了上游集群功能的更多实现，而不是Envoy所知道的开箱即用的功能。Envoy知道“集群”，但是Gloo(位于Envoy之上)知道其上的函数。此功能支持[功能级路由](https://medium.com/solo-io/announcing-gloo-the-function-gateway-3f0860ef6600)，功能级路由是用于组合新应用程序和API的更强大的路由结构。Envoy从“host:port”端点方面了解集群，但是使用Gloo，我们可以为这些集群附加额外的上下文，以便它们理解“函数”，这些函数可以是REST方法/路径、gRPC操作或Lambda之类的云函数。例如，这里有一个名为`default-petstore-8080`的Gloo上游：
 
@@ -210,7 +210,7 @@ upstreamSpec:
 
 注意，我们有更多责任来确定upstream的函数要公开哪些部分。在这种情况下，上游恰好是一个REST服务，它公开了一个[Open API Spec/Swagger](https://github.com/OAI/OpenAPI-Specification)文档。Gloo自动发现这些信息，并用这些信息丰富这个Upstream对象，然后可以在代理对象中使用这些信息。
 
-![](006gLaqLly1g222ij2oucj30ht0ep0ti.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-4-build-for-extensibility/006gLaqLly1g222ij2oucj30ht0ep0ti.jpg)
 
 回到Gloo控制平面的组件，您将看到一个`discovery`组件，它通过添加“Upstream Discovery Service”(UDS)和“Function Discovery Service”(FDS)来增强Envoy的服务发现API。UDS使用一组插件(参见下一节)自动地从各自的运行时目录中发现`Upstream`。最简单的例子是在Kubernetes中运行时，我们可以自动发现[Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)。Gloo还可以发现来自Consul、AWS和[其他](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/plugins.proto.sk/#a-name-upstreamspec-upstreamspec-a)的`Upstream`。函数发现服务(FDS)评估已经发现的每个`Upstream`，并尝试发现它们的类型(REST、gRPC、GraphQL、AWS Lambda等)。如果FDS能够发现关于上游的这些附加属性，它就会用这些“函数”丰富upstream元数据。
 
@@ -225,11 +225,11 @@ Gloo控制平面中的`discovery`组件仅使用其UDS和FDS服务来发现`Upst
 - [Gateway](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gateway/api/v1/gateway.proto.sk/) — 指定特定监听器端口上可用的路由和API端点，以及每个API的安全性
 - [VirtualService](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gateway/api/v1/virtual_service.proto.sk/) — 将API路由分组到一组“虚拟API”中，这些“虚拟API”可以路由到支持的函数(gRPC、http/1、http/2、lambda等)；让开发人员控制路由如何处理[不同的转换](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/plugins/transformation/transformation.proto.sk/)，以便将前端API与后端API(以及后端可能引入的任何破坏性更改)分离开来
 
-![](006gLaqLly1g223285hajj30o20dxabd.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-4-build-for-extensibility/006gLaqLly1g223285hajj30o20dxabd.jpg)
 
 这些对象允许与`Proxy`对象解耦。当用户使用符合标准的API或是不标准的API创建新的`Gateway`或`VirtualService`对象时，Gloo的`Gateway`组件将接受这些对象(Kubernetes中的crd、Consul中的配置)并更新底层`Proxy`对象。这是扩展Gloo的一种常见模式：首选控件平面组件的可组合性。这允许我们为主观的领域特定对象构建更专门化的控制器，以支持不同的使用。比如[Solo.io](https://www.solo.io/)团队还为Gloo构建了一个名为[Sqoop](https://sqoop.solo.io/)的开源控制器，该控制器遵循相同的模式，并扩展了Gloo API，用于声明基于[GraphQL引擎](https://graphql.org/)的路由规则。在Sqoop中，我们引入[Schema和ResolverMap](https://sqoop.solo.io/introduction/concepts/api_objects/)对象，它们最终组合进Proxy对象，然后将代理对象转换为Envoy xDS。
 
-![](006gLaqLly1g2235n0elij30m80i5jsa.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-part-4-build-for-extensibility/006gLaqLly1g2235n0elij30m80i5jsa.jpg)
 
 构建在基本Gloo对象上的领域特定配置分层的另一个例子是，我们最近在[Knative中使用Gloo代理作为Istio的替代方案](https://medium.com/solo-io/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-324753586f3a)。Knative有一个用来声明集群入口资源的特定对象，称为[ClusterIngress](https://github.com/knative/serving/blob/master/pkg/client/clientset/versioned/typed/networking/v1alpha1/clusteringress.go)对象，如下图所示：
 

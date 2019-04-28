@@ -26,7 +26,7 @@ keywords: ["service mesh","服务网格","istio","envoy","grpc"]
 
 以下是 Istio 的官方拓扑图：
 
-![](006tNbRwgy1fwymh3xq3ij30z00o6abc.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-envoy-grpc-metrics-winning-with-service-mesh-in-practice/006tNbRwgy1fwymh3xq3ij30z00o6abc.jpg)
 
 通过我们的设置，所有的容器会连同一个 istio-proxy 一起创建并部署到 istio-injected 的命名空间中。应用程序将与 istio-proxy (envoy) 进行通信，然后后者将处理所有的链接、mtls 以及其他应用程序的负载均衡。
 
@@ -76,7 +76,7 @@ kubectl label namespace istio-apps istio-injection=enabled
 
 现在我们的环境已经运行起来，让我们思考一下应用程序是如何相互通信的。在网格中的服务通过 envoy 来处理双向通行和负载均衡以达到服务间相互通信。那些不在网格中的服务该如何处理呢？你可能想知道他们如何与我们的服务进行沟通，我们的服务如何与网格外部的服务进行通信。这就是我们配置入口的地方。下图将说明外部服务如何与网格内的应用进行联系的：
 
-![](006tNbRwgy1fwymltt2dxj31ff0quq4b.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-envoy-grpc-metrics-winning-with-service-mesh-in-practice/006tNbRwgy1fwymltt2dxj31ff0quq4b.jpg)
 
 所有外部的流量将通过 Istio-ingressgateway 进入网格中，Istio-ingressgateway 会尝试查找网格内主机与路径匹配一致的虚拟服务。如果未查找到匹配的虚拟服务，则外部服务将访问不到网格内的应用程序。
 
@@ -315,7 +315,7 @@ http://localhost:20001/console/service-graph/istio-apps?layout=cose-bilkent&dura
 
 你可以看到如下界面:
 
-![](006tNbRwgy1fwymwetflpj31es0opmy8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-envoy-grpc-metrics-winning-with-service-mesh-in-practice/006tNbRwgy1fwymwetflpj31es0opmy8.jpg)
 
 这样就成功了，Kiali 还有很多工具有待挖掘。
 
@@ -329,11 +329,11 @@ Jaeger 是一个功能强大的监控工具，可以用来监听请求到执行�
 kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686
 ```
 
-![](006tNbRwgy1fwymxngfikj31eb0o940d.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-envoy-grpc-metrics-winning-with-service-mesh-in-practice/006tNbRwgy1fwymxngfikj31eb0o940d.jpg)
 
 在左边的界面中有一些过滤条件，选择你需要的条件，你可以通过点击查找到的数据查看最新的跟踪路径。选择一条跟踪路径，你可以查看到应用程序中每一个请求的所消耗的准确时间。
 
-![](006tNbRwgy1fwymxyb2c7j31ez0i9taf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-envoy-grpc-metrics-winning-with-service-mesh-in-practice/006tNbRwgy1fwymxyb2c7j31ez0i9taf.jpg)
 
 如果在应用程序中安装了 opentracing 并在每个功能调用的地方都使用到了，则会有更好的体验。
 

@@ -14,7 +14,7 @@ categories: ["translation"]
 keywords: ["service mesh","服务网格"]
 ---
 
-![](006tNbRwgy1fvlunzpjrsj30lq0c00v0.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-on-openshift-technology-preview/006tNbRwgy1fvlunzpjrsj30lq0c00v0.jpg)
 
 Red Hat的OpenShift服务网格技术预览版上线，基于Istio。
 
@@ -57,6 +57,6 @@ Istio技术预览计划旨在通过Istio功能的某个子集收集客户反馈�
 
 不是OpenShift客户？您可以在[这些教程](https://learn.openshift.com/servicemesh/)中了解有关OpenShift上的Istio的更多信息。
 
-![](006tNbRwgy1fvluo924mpj307r05kaa8.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-on-openshift-technology-preview/006tNbRwgy1fvluo924mpj307r05kaa8.jpg)
 
 [了解Istio 1.0和它对您业务的价值。](https://learn.openshift.com/servicemesh/1-introduction)

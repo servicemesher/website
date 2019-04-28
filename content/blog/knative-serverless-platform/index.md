@@ -159,7 +159,7 @@ spec:
 
 下面这张图介绍了 knative serving 各组件之间的关系：
 
-![knative serving architecture](006tNbRwgy1fum2swzqebj31j00to41f.jpg)
+![knative serving architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/knative-serverless-platform/006tNbRwgy1fum2swzqebj31j00to41f.jpg)
 
 - 可以看到，每个 revision 对应了一组 deployment 管理的 pod
 - pod 会自动汇报 metrics 数据到 autoscaler，autoscaler 会根据请求量和资源使用情况修改 deployment 的 replicas 数量，从而实现自动扩缩容。serverless 一个重要的特定是它会 scale to 0 的，也就是当应用没有流量访问时，它会自动销毁所有的 pod
@@ -183,7 +183,7 @@ Note：目前 serverless 的产品和平台很多，每个地方支持的事件�
 
 它们之间的关系流程图如下：
 
-![knative eventing architecture](006tNbRwgy1fum30a10ynj31jm0v2dkq.jpg)
+![knative eventing architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/knative-serverless-platform/006tNbRwgy1fum30a10ynj31jm0v2dkq.jpg)
 
 Bus 是 knative 内部的事件存储层，用户可以选择自己感兴趣的实现，目前支持的方式有：Stub（在内存中实现的简单消息系统）、Kafka、Google PubSub。如果想要事件能够正常运行，必须在 knative 集群中安装其中一个 bus 实现方式。
 

@@ -39,7 +39,7 @@ keywords: ["Kubernetes"]
 
 我们跑的大多服务都是应用层http（s），Ingress Controller使用service或者pod的网络将它暴露在集群外，然后它反向代理集群内的七层服务，通过vhost子域名那样路由到后端的服务，`Ingress Controller`工作架构如下，借用traefik官方的图。
 
-![traefik](006tNbRwly1fyl4kdlseyj30mg0dc405.jpg)
+![traefik](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubernetes-ingress-controller-deployment-and-ha/006tNbRwly1fyl4kdlseyj30mg0dc405.jpg)
 
 你可以将`api.domain.com`进来的流量路由到集群里api的pod，你可以将`backoffice.domain.com`流量路由到backoffice的一组pod上，虽说我们可以自己搭建一个nginx来代替掉`Ingress Controller`，但是要增加代理的service长期来看维护很不方便，在使用上`Ingress Controller`后可以用一种抽象的对象告诉controller添加对应的代理，也就是`kind: Ingress`。它里面描述了从Ingress Controller访问进来的ServerName和web的url要代理到集群里哪个service（以及service的port）等等具体信息。
 

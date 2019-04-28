@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["service mesh","服务网格"]
 ---
 
-![](006tNc79gy1fvmzdkbqh3j30rs0fmta7.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservice-observability-with-istio/006tNc79gy1fvmzdkbqh3j30rs0fmta7.jpg)
 
 > [Trulia](https://www.trulia.com)是一个多功能的房地产网站，为您提供有关待售房屋、出租公寓、邻里洞察、市场和趋势的本地独家新闻，以帮助您确切了解房屋购买、出售或出租的内容、地点和时间。您还可以找到房地产经纪人，查看最近售出的房屋的价格，并查看您所在社区的房屋价值。
 
@@ -26,7 +26,7 @@ Kubernetes和Istio如何帮助Trulia消除PHP单体架构，并用可持续的�
 
 Trulia致力于将 <https://www.trulia.com> 单体应用分解成面向服务（SOA）的架构。所有支持的APIs和服务都将替换成工程部门AWS账号下拥有的各种功能单元。许多遗留AWS服务都是通过AMI映像promotion进行部署的，并使用各种不同的方法实现可观测性。将测量工具添加到代码库和基础架构所需的手动操作一直是个传统痛点。此外，这种用于构建可观测性的手动、个性化方法意味着没有单一的代码库可以在增强和工具上进行协作。
 
-![](006tNc79gy1fvmzdtyqq1j30sg0bpaap.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservice-observability-with-istio/006tNc79gy1fvmzdtyqq1j30sg0bpaap.jpg)
 
 在2017年。我们就决定在同一的编排平台[kubernetes](https://kubernetes.io/)上构建我们所有的微服务。我们希望标准化微服务的指标、监控、流控等技术。
 
@@ -38,7 +38,7 @@ SOA架构没有提供统一的可观测方法。了解微服务生态系统中�
 
 ## 解决途径
 
-![](006tNc79gy1fvmzicivg0j30sg0di75b.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservice-observability-with-istio/006tNc79gy1fvmzicivg0j30sg0di75b.jpg)
 
 我们使用Istio透明代理我们的Kubernetes工作负载中的所有通信。将所有遥测集合移出进程，将其与单个微服务的代码库分离。
 
@@ -50,7 +50,7 @@ Istio由三个部分组成：Pilot、Mixer和Citadel。Pilot管理Envoy实例间
 
 ## Envoy提供的示例指标：
 
-![](006tNc79gy1fvmzlevo8oj30sg0pedl0.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/microservice-observability-with-istio/006tNc79gy1fvmzlevo8oj30sg0pedl0.jpg)
 
 上述在Prometheus中收集的指标，用于报警和Grafana绘图。Envoy 被注入到每个工作负载中，并采集有关请求率、延迟和响应代码等信息。
 

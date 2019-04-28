@@ -18,13 +18,13 @@ keywords: ["service mesh","服务网格","istio"]
 
 sidecar代理模式是一个重要的概念，它允许[Istio](https://istio.io/)为[服务网格](https://en.wikipedia.org/wiki/Microservices#Service_Mesh)中运行的服务提供路由、度量、安全和其他功能。在这篇文章中，我将解释为Istio提供支持的关键技术，同时还将向您展示一种构建简单的HTTP流量嗅探sidecar代理的方法。
 
-![](007uElTfly1g13lok0vq4j318g0lqt8v.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hand-crafting-a-sidecar-proxy-like-istio/007uElTfly1g13lok0vq4j318g0lqt8v.jpg)
 
 ## 引言
 
 服务网格的实现通常依赖于sidecar代理，这些代理使得服务网格能够控制、观察和加密保护应用程序。sidecar代理是反向代理，所有流量在到达目标服务之前流过它。代理将分析流经自己的流量并生成有用的统计信息，而且还能提供灵活的路由功能。此外，代理还可以使用[mTLS](https://venilnoronha.io/a-step-by-step-guide-to-mtls-in-go)来加密保护应用程序流量。
 
-![](007uElTfly1g13lxd0qs0j30mm0a9goa.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hand-crafting-a-sidecar-proxy-like-istio/007uElTfly1g13lxd0qs0j30mm0a9goa.jpg)
 
 在这篇文章中，我们将构建一个简单的sidecar代理，它可以嗅探HTTP流量并生成统计信息，例如请求大小，响应状态等。然后，我们将在[Kubernetes](https://kubernetes.io/) Pod中部署HTTP服务，配置sidecar代理，并检查生成的统计信息。
 
@@ -185,7 +185,7 @@ $ kubectl run -i --rm --restart=Never busybox --image=busybox -- sh -c "ip addr"
 
 `iptables`最简单的用途是将一个端口映射到另一个端口。我们可以利用它来透明地将流量路由到我们的代理。Istio正是基于这个确切的概念来建立它的Pod网络。
 
-![](007uElTfly1g13msbkiasj30so0ab784.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/hand-crafting-a-sidecar-proxy-like-istio/007uElTfly1g13msbkiasj30so0ab784.jpg)
 
 这里的想法是将`eth0`接口上的服务端口（`80`）映射到代理端口（`8000`）。这将确保每当容器尝试通过端口`80`访问服务时，来自容器外部的流量就会路由到代理。如上图所示，我们让`lo`接口将Pod内部流量直接路由到目标服务，即没有跳转到代理服务。
 

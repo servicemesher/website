@@ -32,7 +32,7 @@ keywords: ["service mesh","服务网格","API管理"]
 
 此外，外部开发者可以很容易地发现我提供的API，并使用他们的信用卡以自服务的方式注册订阅计划，而这一切，对我的API代码来说应该是透明的。
 
-![API Management Platform](006tNc79gy1fvpbzdautwj30m80cp412.jpg)
+![API Management Platform](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/api-management-and-service-mesh/006tNc79gy1fvpbzdautwj30m80cp412.jpg)
 
 分析过这些需求之后，我们可以把它们归为以下几类：
 
@@ -44,7 +44,7 @@ keywords: ["service mesh","服务网格","API管理"]
 
 API管理方案是如何做到这些的？这要得益于一个叫做API Gateway的组件。
 
-![API Gateway](006tNc79gy1fvpc2rrv5xj30lq097t90.jpg)
+![API Gateway](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/api-management-and-service-mesh/006tNc79gy1fvpc2rrv5xj30lq097t90.jpg)
 
 这是一个位于调用流程中间环节的组件，所有客户端请求都会经过它，它能够保护你的API端点，并通过与其他API Management组件通信来决定是否让一个用户访问的你的API。
 
@@ -67,7 +67,7 @@ API管理方案是如何做到这些的？这要得益于一个叫做API Gateway
 
 API的背后是什么？多个互相通信的Service，它们之间的交互组成了一个完整的API，每个Service可能由不同的编程语言实现，并且由同一个庞大组织内的不同地区的不同团队进行维护和操作。这听起来耳熟吗？对，微服务！
 
-![Microservice or connected dots](006tNc79gy1fvpc2uooboj30lo0f1wek.jpg)
+![Microservice or connected dots](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/api-management-and-service-mesh/006tNc79gy1fvpc2uooboj30lo0f1wek.jpg)
 
 一个完整的API，由多个Service共同完成，这听起来很棒，但是随着越来越多的团队为新特性或新需求发布新的Service，日渐增长的架构运维复杂度问题就会暴露出来：
 
@@ -90,7 +90,7 @@ API的背后是什么？多个互相通信的Service，它们之间的交互组�
 
 我们来看一下Istio是如何工作的：
 
-![Istio Components diagram](006tNc79gy1fvpc361862j30dc0ao74r.jpg)
+![Istio Components diagram](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/api-management-and-service-mesh/006tNc79gy1fvpc361862j30dc0ao74r.jpg)
 
 Istio使用`sidecar 容器`模式，通过在同一个Pod中运行一个新增的容器实例来扩展核心容器的功能。这个核心容器就是我们的Application，而Sidecar容器，是Istio基于Envoy的代理。
 
@@ -104,7 +104,7 @@ Istio使用`sidecar 容器`模式，通过在同一个Pod中运行一个新增�
 
 这两个方案有一点共同之处：
 
-![common thing](006tNc79gy1fvpc37snftj30xc0lwwhf.jpg)
+![common thing](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/api-management-and-service-mesh/006tNc79gy1fvpc37snftj30xc0lwwhf.jpg)
 
 但是记住这一点很重要，它们的流量限制分别用来处理不同的事务：业务规则和基础设施之间的限制。
 

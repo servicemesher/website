@@ -26,14 +26,14 @@ keywords: ["service mesh","服务网格","微服务"]
 
 这是一种工作保障策略，它让参与项目的每个人在开发和测试中无休止地循环，而无法将服务投入生产环境！首先，一切都从简单开始，逐渐发现有越来越多的功能、业务逻辑被添加到微服务中，最后甚至不得不重新命名整个该死的东西。
 
-![1](006tNc79ly1g23ajtc2kej305k057glt.jpg)
+![1](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/eight-things-leads-to-developing-catastrophic-cloud-native-microservices-system/006tNc79ly1g23ajtc2kej305k057glt.jpg)
 
 <u>临床症状和副作用</u>
 
 - 不断增长的微服务变得过于臃肿，或者域中的每个微服务都调用你的服务。（有时核心微服务具有相同的行为，但你不应该在单个域中看到如此多的这类服务）。这违反了简单、可维护和敏捷的微服务原则。
 - 到处都是重复的微服务/代码。你可以找到一些重复的代码或微服务，它们被复制和部署到其他域中。
 
-![2](006tNc79ly1g23ajj6lw8j305k03swei.jpg)
+![2](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/eight-things-leads-to-developing-catastrophic-cloud-native-microservices-system/006tNc79ly1g23ajj6lw8j305k03swei.jpg)
 
 如果你陷入了无休止的实现和测试地狱，就退一步看看如何分隔域。您是否接受（译注：此处原文有字母丢失）了一个来自其他领域的上下文，或者将不同的概念混合到一个领域中？也许回到设计阶段考虑边界是值得的。为了避免到处重复，请确保有适当的文档，比如在域之间使用OpenAPI标准的文档。
 
@@ -41,7 +41,7 @@ keywords: ["service mesh","服务网格","微服务"]
 
 想吃意面的话这是一个不错的选择。在意面上放些肉丸子让它更美味？在服务中混合一些有状态的进程将会给您带来更多!
 
- ![3](006tNc79ly1g24bk7332yj308w07kmy0.jpg)
+ ![3](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/eight-things-leads-to-developing-catastrophic-cloud-native-microservices-system/006tNc79ly1g24bk7332yj308w07kmy0.jpg)
 混合
 
 - 组合微服务
@@ -68,7 +68,7 @@ keywords: ["service mesh","服务网格","微服务"]
 - 持续的从核心业务更新到更好控制的外部系统。外部系统决定和做出变更请求，更短的反应时间可能会导致问题。
 - 一旦双方建立了契约，就需要特别小心版本的更新。
 
-![3](006tNc79ly1g25q0lfgymj308w07dt9b.jpg)
+![3](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/eight-things-leads-to-developing-catastrophic-cloud-native-microservices-system/006tNc79ly1g25q0lfgymj308w07dt9b.jpg)
 
 部署周期因系统而异，但是与更敏捷、更动态的云原生应用相比，棕色地带的应用（译注：作者本意应该是比喻新旧代码或功能耦合的有污染的应用）生命周期更长。为了更快，请始终考虑在你的棕色/绿色地带的应用程序之间设置一个屏蔽保护。因此，它适应更少的变化，并帮助绿色领域继续进行敏捷开发。在你的核心域微服务中，请避免添加任何依赖于外部消费者或特定于外部消费者的内容，因为这可能导致过多的自定义，从而破坏了确定的上下文边界。确保你有其他面向模块的公共库或外部系统来进行定制，并对内部业务模型隐藏复杂性。
 
@@ -78,7 +78,7 @@ keywords: ["service mesh","服务网格","微服务"]
 
 <u>临床症状和副作用</u>
 
-![4](006tNc79ly1g26lj2v5nsj308w06edgx.jpg)
+![4](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/eight-things-leads-to-developing-catastrophic-cloud-native-microservices-system/006tNc79ly1g26lj2v5nsj308w06edgx.jpg)
 
 - 没有集中控制，所有重试、重路由、版本控制和部署策略都存储在每个独立的实例中。
 - 开发和开发运维人员之间的职责不明确，同样的，对于能够访问环境运行情况的监控来说，网络策略更好。
@@ -98,7 +98,7 @@ keywords: ["service mesh","服务网格","微服务"]
 
 ## 6. 乱序的事件 
 
-![6](006tNc79ly1g26n3fd6mvj308w07omxp.jpg)
+![6](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/eight-things-leads-to-developing-catastrophic-cloud-native-microservices-system/006tNc79ly1g26n3fd6mvj308w07omxp.jpg)
 
 用事件来轰炸系统，把任何事件都通知到每个角落，这会让你的系统超级的反抗！顺便说一下，为什么不把所有的东西都序列化并存储所有的事件呢？为了更好的可追踪性！
 
@@ -121,7 +121,7 @@ keywords: ["service mesh","服务网格","微服务"]
 - 创建了不需要的微服务只是为了确保数据的一致性。
 - 事件到处更新状态。
 
-![7](006tNc79ly1g26qyic03cj308w03saa7.jpg)
+![7](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/eight-things-leads-to-developing-catastrophic-cloud-native-microservices-system/006tNc79ly1g26qyic03cj308w03saa7.jpg)
 
 当您拥有独立的数据源时，就有创建数据孤岛的风险，而且由于微服务的分布式特性和更复杂的数据存储场景，管理数据一致性变得更加困难。你可以开始研究如何使用许多现有的解决方案来捕获数据变更，比如在进程中发生的流事件变更，或者从主存储中监听更改。
 

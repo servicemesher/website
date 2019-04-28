@@ -22,7 +22,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 ## 前言
 
-![istio-monitoring-explained](bf8f1836ly1g229m58cmnj215o0jggrx.jpg)
+![istio-monitoring-explained](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-monitoring-explained/bf8f1836ly1g229m58cmnj215o0jggrx.jpg)
 
 如果我说“服务网格”是当今技术社区的热门话题，没有人会感到惊讶。这个领域最活跃的项目之一是[Istio](https://istio.io/)。它由IBM、谷歌和Lyft联合创建，作为对微服务体系结构已知问题的解决方案。容器和Kubernetes极大地帮助了Istio适配微服务体系结构。然而，与此同时，他们也带来了一系列我们以前没有遇到过的新问题。
 
@@ -42,7 +42,7 @@ Istio采用的方法是暴露和追踪应用程序行为，而不需要接触任
 
 “适配器”是一个附加到“Mixer”的处理程序，负责为后端调整属性数据。后端可以是对该数据感兴趣的任何外部服务。例如，监视工具(如Prometheus或Stackdriver)、授权后端或日志堆栈。
 
-![istio-mixer-diagram](bf8f1836ly1g229z6meb0j20gq088t99.jpg)
+![istio-mixer-diagram](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-monitoring-explained/bf8f1836ly1g229z6meb0j20gq088t99.jpg)
 
 ## 概念解析
 
@@ -190,7 +190,7 @@ spec:
 
 一旦应用了这些定义，Istio将指示Prometheus adapter开始收集并为新的metric服务。如果我们查看Prometheus用户界面，并且查找新的metric，我们应该可以看到以下内容:
 
-![istio-prometheus-graph](bf8f1836ly1g22a7dcfl9j218g0klq5c.jpg)
+![istio-prometheus-graph](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-monitoring-explained/bf8f1836ly1g22a7dcfl9j218g0klq5c.jpg)
 
 ## 结论
 

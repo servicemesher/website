@@ -64,7 +64,7 @@ Istio发送的默认指标有助于了解流量如何在集群中流动。但是
 
 所有这些endpoint端点对于调试Prometheus非常有用：
 
-![](007uElTfly1g0s0xtqjpzj30l40cbtaw.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-metrics-in-istio/007uElTfly1g0s0xtqjpzj30l40cbtaw.jpg)
 
 原来，我需要在我的Pod YAML中添加一些注解，以便Prometheus对它们进行指标抓取。我必须通过这些注解告诉Prometheus哪些Pod需要被抓取指标数据，以及在哪个端口进行抓取：
 
@@ -86,7 +86,7 @@ spec:
 
 添加注解后，我能够在Prometheus中看到我的应用程序的指标数据：
 
-![](007uElTfgy1g0sblvrx4tj30l409p74t.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/application-metrics-in-istio/007uElTfgy1g0sblvrx4tj30l409p74t.jpg)
 
 然而，这只适用于常规Pod，我无法看到启用了mTLS的Pod间的指标数据。
 

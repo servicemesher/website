@@ -143,7 +143,7 @@ ssh_tunnel_open_fail_count 0
 而metrics要么程序定义输出(模块或者自定义开发)，要么用官方的各种exporter(node-exporter，mysqld-exporter，memcached_exporter...)采集要监控的信息占用一个web端口然后输出成metrics格式的信息，prometheus server去收集各个target的metrics存储起来(tsdb)。
 用户可以在prometheus的http页面上用promQL(prometheus的查询语言)或者(grafana数据来源就是用)api去查询一些信息，也可以利用pushgateway去统一采集然后prometheus从pushgateway采集(所以pushgateway类似于zabbix的proxy)，prometheus的工作架构如下图：
 
-![](006tNc79ly1fyzbj3vh0vj30ms0db406.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzbj3vh0vj30ms0db406.jpg)
 
 ### 为什么需要prometheus-operator
 
@@ -159,7 +159,7 @@ Prometheus-operator的本职就是一组用户自定义的CRD资源以及Control
 
 工作架构如下图所示。
 
-![](006tNc79ly1fyzbjl4ql8j31dw0t2djs.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzbjl4ql8j31dw0t2djs.jpg)
 
 ## Demo部署学习
 
@@ -545,9 +545,9 @@ EOF
 
 打开浏览器访问`ip:30900`进入target发现已经监听起来了，对应的config里也有配置生成和导入。
 
-![](006tNc79ly1fyzbkz9djqj314c0fv41z.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzbkz9djqj314c0fv41z.jpg)
 
-![](006tNc79ly1fyzblkgpcnj30r80q8juf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzblkgpcnj30r80q8juf.jpg)
 
 先清理掉上面的，然后我们使用官方提供的全套yaml正式部署`prometheus-operator`。
 
@@ -636,7 +636,7 @@ kubectl -n monitoring get all
 
 #### 坑一
 
-![](006tNc79ly1fyzbmiknc2j30vc07n0u2.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzbmiknc2j30vc07n0u2.jpg)
 这里要注意有一个坑，二进制部署k8s管理组件和新版本kubeadm部署的都会发现在prometheus server的页面上发现`kube-controller`和`kube-schedule`的target为0/0也就是上图所示。这是因为serviceMonitor是根据label去选取svc的，我们可以看到对应的`serviceMonitor`是选取的ns范围是`kube-system`。
 
 ```bash
@@ -853,7 +853,7 @@ spec:
 
 访问prometheus server的web页面我们发现即使创建了svc和注入对应ep的信息在target页面发现prometheus server请求被拒绝。
 
-![](006tNc79ly1fyzbmvpd9bj31g80jndlf.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzbmvpd9bj31g80jndlf.jpg)
 
 在宿主机上我们发现127.0.0.1才能访问，网卡ip不能访问(这里是另一个环境找的，所以ip是192不是前面的172)
 
@@ -894,9 +894,9 @@ sed -ri '/--address/s#=.+#=0.0.0.0#' /etc/kubernetes/manifests/kube-*
 
 通过浏览器查看`prometheus.monitoring.k8s.local`与`grafana.monitoring.k8s.local`是否正常，若沒问题就可以看到下图结果，grafana初始用股名和密码是admin。
 
-![](006tNc79ly1fyzbnfx054j31l40u0qaw.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzbnfx054j31l40u0qaw.jpg)
 
-![](006tNc79ly1fyzbnrpze3j31hc0q2dke.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/prometheus-operator-manual/006tNc79ly1fyzbnrpze3j31hc0q2dke.jpg)
 
 ## 最后
 

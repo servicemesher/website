@@ -16,11 +16,11 @@ categories: ["translation"]
 keywords: ["jenkins","serverless","knative"]
 ---
 
-![Jenkins x](006tNbRwly1fxupra5gsfj30bx0epgn0.jpg)
+![Jenkins x](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-jenkins-with-jenkins-x/006tNbRwly1fxupra5gsfj30bx0epgn0.jpg)
 
 Jenkins服务来源于创建自2004年的Hudson。在软件行业中，Jenkins已经是家喻户晓的明星产品，并且已经是CI和CD的领头羊。到目前为止有超过2050万的Jenkins任务，以及将近20万的Jenkins服务在运行中。这真的是非常惊人的增长速度。
 
-![jenkins的增长变化图](5f3e3349gy1fxsw5vx2ooj20jk0c6gmj.jpg)
+![jenkins的增长变化图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-jenkins-with-jenkins-x/5f3e3349gy1fxsw5vx2ooj20jk0c6gmj.jpg)
 
 上面的增长图说明在技术领域已经有很大的进步，列如云计算和容器，这些变化说明Jenkins在很多方面已经起到了很好的作用，我们应该很好的利用这些影响力。如今，很多公司都开始进行容器化改造，我们希望jenkins能跟上时代的步伐，开始自己的云原生之路。Jenkins应当继续成长，提供更多大家需要的自动化，可靠性，以及更好的开发体验。
 
@@ -73,7 +73,7 @@ Prow同样也将它的配置信息存储在git上，这样在出现问题时可�
 
 详情：
 
-![Credit: thanks to Gareth Evans for the diagram](5f3e3349gy1fxsw5gepi2j20id0jrt9z.jpg)
+![Credit: thanks to Gareth Evans for the diagram](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/serverless-jenkins-with-jenkins-x/5f3e3349gy1fxsw5gepi2j20id0jrt9z.jpg)
 
 使用基于Kubernetes的Jenkins X将会帮你自动安装和配置Prow和Knative，下面我们开始准备进行安装。当创建项目或者引入项目时，jx cli生成了所有需要的配置，并且更新git repo webhook endpoint。
 

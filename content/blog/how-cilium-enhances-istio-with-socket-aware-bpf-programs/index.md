@@ -16,7 +16,7 @@ categories: ["service mesh"]
 keywords: ["service mesh","cilium","BPF"]
 ---
 
-![](0069RVTdly1fu84zi0tigj30td0gk75e.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu84zi0tigj30td0gk75e.jpg)
 
 
 8月1日Istio 1.0 发布，Cilium社区感谢所有Istio贡献者为此付出的巨大努力。我们很幸运能够参与社区活动，为Istio做出贡献，并帮助一些用户通过Istio和Cilium进行生产部署。如果您有兴趣在深入了解技术细节之前了解Istio + Cilium的用户故事，请考虑阅读HP FitStation团队（最大的Cilium + Istio用户之一）发布的以下Istio博客: [Istio是惠普FitStation平台的游戏规则的改变者](https://istio.io/blog/2018/hp/)。
@@ -43,7 +43,7 @@ Cilium的基础是一种名为BPF的新Linux内核技术，这使得能够在Lin
 
 Istio提供了一种通过负载均衡、服务间身份验证、监控等且没有侵入性创建部署服务网络的简便方法。可以通过在整个环境中部署特殊的sidecar代理来添加对服务的支持，该代理拦截微服务之间的所有网络通信，使用Istio的控制平面功能进行配置和管理。
 
-![](0069RVTdly1fu853bzn1aj311o0rs426.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu853bzn1aj311o0rs426.jpg)
 
 您可以在[Istio文档](https://istio.io/zh/docs)中阅读有关Istio概念和架构的更多信息。
 
@@ -60,7 +60,7 @@ Istio和Cilium之间最基本的协作形式是Cilium CNI插件通过将所有si
 
 Istio服务网格架构要求将参与服务网格的所有pod的出站和入站请求的所有网络流量都要重定向到sidecar代理。Sidecar代理将终止所有TCP连接并执行诸如遥测、重试、路由、双向TLS之类的服务和代表服务的授权，并使用辅助所谓的上游TCP连接来到达目的地服务,这正是服务之间支持双向TLS,没有代码侵入性原因所在。然而，当使用标准的基于IP的工具（如iptables）实现重定向时，这种重定向可能会很费事，因为必须多次遍历整个TCP/IP堆栈。
 
-![](0069RVTdly1fu853qn3w1j30fi0bo0tx.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu853qn3w1j30fi0bo0tx.jpg)
 
 Cilium充分使用了一个叫sockmap的令人兴奋的BPF功能。它允许过滤和重定向，基于套接字级别，使Cilium可以socket感知。此socket是应用程序用于发送和接收网络流量的接口。这允许在相同节点上实质上短路TCP socket，从而以完全透明的方式大幅加速应用程序和服务网格的sidecar代理的通信速度。应用程序和sidecar代理都不需要以任何方式进行修改。如果您有兴趣了解有关此用例的更多信息，请参阅位于奥斯汀的KubeCon 2018上的演示文稿——**使用CIlium加速Envoy、Istio和Linux内核（[录像](https://t.co/cx6CQhn1xl)、[幻灯片](https://www.slideshare.net/ThomasGraf5/accelerating-envoy-and-istio-with-cilium-and-the-linux-kernel)）**。
 
@@ -90,7 +90,7 @@ Level 1 安全级别以pod、service为级别保护服务网格。它不提供�
 
 Level 2 安全级别通过使用socket感知BPF程序在socket级别提供分段，在同一个pod中引入容器和进程之间的分段。
 
-![](0069RVTdly1fu854newqhj312w0iijud.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu854newqhj312w0iijud.jpg)
 
 - 强制所有应用流量流经sidecar: 通过使用socket感知BPF策略，Cilium可以确保应用程序的所有通信都必须通过sidecar进行入站和出站连接。保证应用程序容器本身不能从pod外部接收连接，或者在不通过sidecar代理的情况下向pod外部发出请求。
 
@@ -104,19 +104,19 @@ Level 2 安全级别通过使用socket感知BPF程序在socket级别提供分段
 
 Istio依赖于对应用程序协议层（如HTTP）的可见性，以提供诸如基于URI的路由，基于HTTP头的授权和API请求级别遥测和跟踪等功能。通过将双向TLS与Istio Citadel管理的证书相互应用，可以在未加密的服务之间保持应用程序流量并在源服务器和目标服务的sidecar代理之间执行TLS加密来实现此可见性。
 
-![](0069RVTdly1fu854xy8csj312w0f2jsu.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu854xy8csj312w0f2jsu.jpg)
 
 这适用于网格内部服务之间的连接。与网格之外的服务的通信几乎由应用程序本身进行TLS加密保证，以便在不可信的因特网上保护通信。
 
-![](0069RVTdly1fu8555b0z3j312w0e8t9y.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu8555b0z3j312w0e8t9y.jpg)
 
 Linux的kTLS（内核TLS）工作原理最初是由Facebook的Dave Watson提出。它包括将数据的对称加密从应用程序中的SSL库迁移到Linux内核中的socket功能。这项工作的最初动机是纯粹的性能优化，因为使用kTLS比SSL库快3-4％。这对于经过SSL静态数据的提供者有足够的兴趣去继续。这项工作已经合并，并且可以在最新的Linux内核中使用。结合在Linux socket层注入的BPF程序的功能，kTLS实现了数据的透明可见性，否则此时已加密。
 
-![](0069RVTdly1fu855axcscj312w0gdgn4.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu855axcscj312w0gdgn4.jpg)
 
 我们仍在研究这个功能，但有一个初始的功能原型，证明了获得可见性和控制数据的概念，这些数据通常是在应用程序本身中进行TLS加密的。下一步是将此数据提供给sidecar，以便在与外部服务的连接上释放Istio。
 
-![](0069RVTdly1fu855mb70uj312w0lm77l.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-cilium-enhances-istio-with-socket-aware-bpf-programs/0069RVTdly1fu855mb70uj312w0lm77l.jpg)
 
 #### 在没侵入应用程序的情况下kTLS是如何实现透明化的？
 

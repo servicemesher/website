@@ -17,7 +17,7 @@ keywords: ["service mesh","istio","AB测试","vamp"]
 aliases: "/blog/ab-testing-on-kubernetes-with-istio-0.8/"
 ---
 
-![](7134983fgy1ft55myd1kej20kb098dft.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ab-testing-on-kubernetes-with-istio-0-8/7134983fgy1ft55myd1kej20kb098dft.jpg)
 
 这是我们正在发布的系列文章中的第二篇，描述了我们在 Kubernetes 上采用 Istio 进行流量路由的经验。有关我们试图通过Vamp实现的更多详情以及我们选择 Istio 的原因，请参阅我们的[第一篇文章](https://medium.com/vamp-io/putting-istio-to-work-8513f5218c51)。
 
@@ -40,21 +40,21 @@ Vamp Lamia 这个新版本的目标是将 Istio 从 0.7.1 迁移到 0.8 并让�
 现在，足以说 Gateway 是 Istio 对于 Kubernetes Ingress 的等价替代品，因此能让服务在对外暴露，而 Destination Rule 将 deployment 上的标签映射到 subset，提供了一层抽象用于更好地将不同版本的服务分组。
 正如您在下面的屏幕截图中所看到的，只需一些易于理解的参数即可轻松设置这些资源。
 
-![](006tNc79gy1ftbsadc9haj31jk11kq6s.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ab-testing-on-kubernetes-with-istio-0-8/006tNc79gy1ftbsadc9haj31jk11kq6s.jpg)
 
 *服务设置*
 
-![](006tKfTcgy1ftbso5iepqj31jk11kq6s.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ab-testing-on-kubernetes-with-istio-0-8/006tKfTcgy1ftbso5iepqj31jk11kq6s.jpg)
 
 *网关设置*
 
-![](006tKfTcgy1ftbsooaw9nj318g1ks0wz.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ab-testing-on-kubernetes-with-istio-0-8/006tKfTcgy1ftbsooaw9nj318g1ks0wz.jpg)
 
 *目标规则设置*
 
 完成此操作后，您可以开始设置实验本身，例如使用下面显示的配置。
 
-![](006tKfTcgy1ftbsow4ilbj318g1p5tdp.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/ab-testing-on-kubernetes-with-istio-0-8/006tKfTcgy1ftbsow4ilbj318g1p5tdp.jpg)
 
 *实验设置*
 

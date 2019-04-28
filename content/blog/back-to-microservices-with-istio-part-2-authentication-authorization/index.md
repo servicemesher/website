@@ -16,7 +16,7 @@ categories: ["translation"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 
-![](61411417ly1g1bke0q1bnj20m80bqwm6.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-part-2-authentication-authorization/61411417ly1g1bke0q1bnj20m80bqwm6.jpg)
 
 *这篇文章是使用Istio打造微服务*的第二部分，如果没有看第一篇的话，请先看[第一部分内容](http://www.servicemesher.com/blog/back-to-microservices-with-istio-p1/)，因为这篇博客是以第一篇博客为基础进行进一步深入的。
 
@@ -24,7 +24,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 使用Istio后，我们可以把应用层中的重试、超时、断路器、跟踪、监控内容抛弃，以保持我们的服务应用保持在一个简单专注的微型状态，（如图1所示）。此外，我们还启用了高级测试和部署技术，如A/B测试，镜像和金丝雀部署。
 
-![图1.微服务的形式构成](61411417ly1g1bkei4aehj20aj082wf1.jpg)
+![图1.微服务的形式构成](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-part-2-authentication-authorization/61411417ly1g1bkei4aehj20aj082wf1.jpg)
 
 在本文中，我们将带领读者使用Istio来处理身份验证和授权！
 
@@ -42,7 +42,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 要开始使用，请使用您的帐户导航到[Auth0 Portal](https://manage.auth0.com)，在Applications> Default App下创建租户并选择Domain，如下图所示：
 
-![图2. Auth0管理门户中的默认应用程序](61411417ly1g1bkeum2wwj20m80exmzl.jpg)
+![图2. Auth0管理门户中的默认应用程序](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-part-2-authentication-authorization/61411417ly1g1bkeum2wwj20m80exmzl.jpg)
 
 更新文件 `resource-manifests/istio/security/auth-policy.yaml` 以使用您的域名：
 
@@ -75,7 +75,7 @@ policy.authentication.istio.io "auth-policy" created
 
 要验证最终用户的请求，我们需要在Auth0中创建一个API，表示经过身份验证的服务，即：评论，详细信息和评级。要创建API，请导航到 **Auth0 Portal** \> **API** \> **Create API** ，如下图所示。
 
-![图3.在Auth0中创建新API](61411417ly1g1bkg16se5j20m80ivq56.jpg)
+![图3.在Auth0中创建新API](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-part-2-authentication-authorization/61411417ly1g1bkg16se5j20m80ivq56.jpg)
 
 这里的重要信息是稍后在脚本中使用的标识符：
 
@@ -152,7 +152,7 @@ $ kubectl set image deployment/sa-frontend \
 - **用户** ：只能访问SA\-WebApp和SA\-Frontend服务。
 - **版主** ：可以访问所有三项服务。
 
-![图4.授权概念](61411417ly1g1bki3dbfij20m80dcdhb.jpg)
+![图4.授权概念](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-part-2-authentication-authorization/61411417ly1g1bki3dbfij20m80dcdhb.jpg)
 
 要创建用户组，我们将使用Auth0授权扩展，然后使用Istio，我们将为他们提供不同级别的访问权限。
 
@@ -160,7 +160,7 @@ $ kubectl set image deployment/sa-frontend \
 
 在Auth0门户中，导航到Extensions并安装“Auth0 Authorization”扩展。安装完成后，导航到授权扩展并通过单击右上角的租户并选择菜单选项“配置”进行配置。启用组，然后单击 **发布规则** 按钮。
 
-![图5.激活令牌内容中的组](61411417ly1g1bkiopfw9j20m807ndhc.jpg)
+![图5.激活令牌内容中的组](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-part-2-authentication-authorization/61411417ly1g1bkiopfw9j20m807ndhc.jpg)
 
 ### 创建组
 
@@ -174,7 +174,7 @@ $ kubectl set image deployment/sa-frontend \
 
 要在Auth0 Portal中创建规则，请导航到规则，单击“创建规则”并 从模板中 选择一个 **空规则**。
 
-![图6.创建新规则](61411417ly1g1bkizxe7vj20m80c2wga.jpg)
+![图6.创建新规则](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/back-to-microservices-with-istio-part-2-authentication-authorization/61411417ly1g1bkizxe7vj20m80c2wga.jpg)
 
 粘贴下面的代码并保存名为“添加组声明”的新规则。
 
