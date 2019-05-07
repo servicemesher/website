@@ -39,6 +39,10 @@ https://twitter.com/servicemesher
 
 https://servicemesher.slack.com
 
+#### Google Group论坛/邮件组
+
+https://groups.google.com/forum/#!forum/servicemesher
+
 #### 微信公众号
 
 ![ServiceMesher微信群二维码](/img/servicemesher-wechat-public.jpg)
