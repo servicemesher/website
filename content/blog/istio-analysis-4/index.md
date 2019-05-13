@@ -6,7 +6,7 @@ banner: "/img/blog/banners/006tKfTcly1g1o2g4k3ofj31420u0hdw.jpg"
 author: "钟华"
 authorlink: "https://imfox.io"
 originallink: ""
-summary: "Pilot 译为领航员, 在mesh中负责路由领航, 是istio控制面的核心组件"
+summary: "Pilot 译为领航员, 在mesh中负责路由领航, 是istio控制面的核心组件。"
 tags: ["istio"]
 categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
@@ -14,20 +14,20 @@ keywords: ["service mesh","服务网格","istio"]
 
 > 作者: 钟华，腾讯云容器产品中心高级工程师，热衷于容器、微服务、service mesh、istio、devops 等领域技术
 
-今天我们来解析istio控制面组件Pilot, Pilot为整个mesh提供了标准的服务模型, 该标准服务模型独立于各种底层平台, Pilot以插件方式对接不同的服务发现平台, 解析用户输入的流控配置, 转换为统一的服务发现和流量控制模型, 并以xDS方式下发到数据面.
+今天我们来解析istio控制面组件Pilot, Pilot为整个mesh提供了标准的服务模型, 该标准服务模型独立于各种底层平台, Pilot以插件方式对接不同的服务发现平台, 解析用户输入的流控配置, 转换为统一的服务发现和流量控制模型, 并以xDS方式下发到数据面。
 
-Pilot 译为`领航员`, 在mesh中负责路由领航, 是istio控制面的核心组件.
+Pilot 译为`领航员`, 在mesh中负责路由领航, 是istio控制面的核心组件。
 
-在组件拓扑中, Pod  `istio-pilot`包括`istio-proxy`(sidecar)和`discovery`2个容器, pilot核心能力由容器 `discovery`中执行的命令`pilot-discovery discovery`提供.
+在组件拓扑中, Pod  `istio-pilot`包括`istio-proxy`(sidecar)和`discovery`2个容器, pilot核心能力由容器 `discovery`中执行的命令`pilot-discovery discovery`提供。
 
 ![1.jpg](https://i.loli.net/2019/05/13/5cd8da4f2019872241.jpg)
 [查看高清原图](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-analysis-3/006tKfTcgy1g187dn7s1tj315m0u0x6t.jpg)
 
 在源代码中, package [github.com/istio/istio/tree/master/pilot/cmd](https://github.com/istio/istio/tree/master/pilot/cmd) 有三个命令的入口:
 
-- sidecar-injector: 在前面文章中有过介绍
-- pilot-discovery: 控制面pilot核心服务, 本文重点分析
-- pilot-agent: istio 里sidecar中主进程, 用于启动和管控envoy, 后续文章中进行分析.
+- sidecar-injector: 在前面文章中有过介绍。
+- pilot-discovery: 控制面pilot核心服务, 本文重点分析。
+- pilot-agent: istio 里sidecar中主进程, 用于启动和管控envoy, 后续文章中进行分析。
 
 ------
 
@@ -44,23 +44,23 @@ Pilot 译为`领航员`, 在mesh中负责路由领航, 是istio控制面的核�
 
 Pilot 关注的`Config`有2大类(图中进行了颜色区别):
 
-* **Istio Config**: 用户侧提供的流控管理配置, 特别的, 在K8s平台中表现为CRD, 如VirtualService、DestinationRule等
+* **Istio Config**: 用户侧提供的流控管理配置, 特别的, 在K8s平台中表现为CRD, 如VirtualService、DestinationRule等。
 
-* **Service Discovery Config**: 服务发现配置, 包括Services、Endpoints、Nodes等.
+* **Service Discovery Config**: 服务发现配置, 包括Services、Endpoints、Nodes等。
 
-下文中分别以`Istio Config`和`Service Discovery Config`来表示以上2类数据.
+下文中分别以`Istio Config`和`Service Discovery Config`来表示以上2类数据。
 
-Config Ingestion Layer 以插件化的方式对接各种服务发现平台, 这些对接逻辑以in-process方式内嵌在pilot进程中. 包括Kubernetes, Consul, file-based config plugin, MCP 方式等.
+Config Ingestion Layer 以插件化的方式对接各种服务发现平台, 这些对接逻辑以in-process方式内嵌在pilot进程中. 包括Kubernetes, Consul, file-based config plugin, MCP 方式等。
 
 #### 1.2 Core Data Model Layer:
 
-Core Data Model Layer 会缓存上一层(Config Ingestion Layer)获取的配置信息,  根据`Istio Config`和`Service Discovery Config`数据的不同特点, 该层分别使用不同的控制器对其进行处理和存储. 并将来自不同平台的配置信息抽象为统一的服务发现模型, 如Service, ServiceInstance, Registry 等.
+Core Data Model Layer 会缓存上一层(Config Ingestion Layer)获取的配置信息,  根据`Istio Config`和`Service Discovery Config`数据的不同特点, 该层分别使用不同的控制器对其进行处理和存储. 并将来自不同平台的配置信息抽象为统一的服务发现模型, 如Service, ServiceInstance, Registry 等。
 
 #### 1.3 Proxy Serving Layer:
 
-Proxy Serving Layer 负责将上层(Core Data Model Layer)的抽象模型, 转换为具体的xDS协议数据, 并下发到订阅这些数据的数据面.
+Proxy Serving Layer 负责将上层(Core Data Model Layer)的抽象模型, 转换为具体的xDS协议数据, 并下发到订阅这些数据的数据面。
 
-本文将尝试对`pilot-discovery discovery`的处理流程进行分析, 重点关注pilot对k8s平台的适配实现. 后续将对Config转换为Pilot Model和xDS进行分析.
+本文将尝试对`pilot-discovery discovery`的处理流程进行分析, 重点关注pilot对k8s平台的适配实现. 后续将对Config转换为Pilot Model和xDS进行分析。
 
 ------
 
@@ -115,13 +115,13 @@ Config 一词在源码中使用泛滥, 除了上面提及的:`Istio Config`和`S
 
 - `mesh`:
 
-  该配置集为数据面envoy实例提供全局的配置(由pilot下发), 包括mixer地址, 是否开启链路跟踪, 以及其他重要配置开关和默认值等.
+  该配置集为数据面envoy实例提供全局的配置(由pilot下发), 包括mixer地址, 是否开启链路跟踪, 以及其他重要配置开关和默认值等。
 
   参考配置说明: <https://istio.io/docs/reference/config/istio.mesh.v1alpha1/#MeshConfig>
 
 - `meshNetworks`:
 
-  该配置集提供了多集群mesh中网络配置, 主要包括如何在三层网络中路由到各网络的endpoints, 以及各网络独立的服务发现配置.
+  该配置集提供了多集群mesh中网络配置, 主要包括如何在三层网络中路由到各网络的endpoints, 以及各网络独立的服务发现配置。
 
   参考配置说明: <https://istio.io/docs/reference/config/istio.mesh.v1alpha1/#MeshNetworks>
 
@@ -149,7 +149,7 @@ metadata:
   namespace: istio-system
 ```
 
-该configmap的2个data域「mesh」和「meshNetworks」, 分别对应上面的2个网格配置集: . 用户可以通过修改该ConfigMap, 进行网格特定行为调整.
+该configmap的2个data域「mesh」和「meshNetworks」, 分别对应上面的2个网格配置集: . 用户可以通过修改该ConfigMap, 进行网格特定行为调整。
 
 在pilot容器定义中, 默认会将该ConfigMap挂载到`/etc/istio/config`目录, 2个配置集文件将分别位于`/etc/istio/config/mesh`和`/etc/istio/config/meshNetworks`
 
@@ -166,15 +166,15 @@ metadata:
     name: config-volume
 ```
 
-该configMap作为投射卷(projected volume) , kubernetes 会自动维护ConfigMap到文件系统的更新, 因此pilot只需要通过文件系统watch 这2个配置文件变化, 即可实现运行时配置动态修改, 无需重启pilot.
+该configMap作为投射卷(projected volume) , kubernetes 会自动维护ConfigMap到文件系统的更新, 因此pilot只需要通过文件系统watch 这2个配置文件变化, 即可实现运行时配置动态修改, 无需重启pilot。
 
-pilot在watch到「网格配置」变化后, 会触发xDS的重新计算, 并将新的xSD下发到数据面, 从而使得配置修改得以生效.
+pilot在watch到「网格配置」变化后, 会触发xDS的重新计算, 并将新的xSD下发到数据面, 从而使得配置修改得以生效。
 
 ------
 
 ## 4. Config 控制器
 
-控制器模式在k8s里使用非常广泛, 典型的k8s控制器利用informer/reflector 对资源进行List/Watch, 获得资源更新事件, 事件对象入队列, 缓存object到indexer, 然后在控制循环中进行自定义处理.
+控制器模式在k8s里使用非常广泛, 典型的k8s控制器利用informer/reflector 对资源进行List/Watch, 获得资源更新事件, 事件对象入队列, 缓存object到indexer, 然后在控制循环中进行自定义处理。
 
 Pilot对`Service Discovery Config`和`Istio Config`两大类数据的处理, 也是使用控制器模式, 不过Pilot中Config 控制器有特殊之处, 因为适配多种平台, Config 有多种来源可能, 除了k8s informer, 还可能是MCP, 文件系统, 或者consul client等等. 一个典型的Config 控制器, 可以用下图来描述:
 
@@ -182,13 +182,13 @@ Pilot对`Service Discovery Config`和`Istio Config`两大类数据的处理, 也
 
 上图左边是描述Config来源, 右边描述Config 控制器的结构, 可以划分为三个部分:
 
-- Config 控制器要求实现「Controller interface」, 主要接口包括: 为指定config type 添加处理器, 以及启动控制器消费Task的`Run`方法.
-- Config 控制器要求实现「Store Interface」, 主要包括对config 的访问接口. write interfaces 如Create, Update, Delete 主要是提供给 Config Ingestion Layer 使用, read interfaces 如Get, List 主要提供给 Proxy Serving Layer 使用.
-- Config 控制器还包括的其他组件: 主要是 task queue 和 type-handlers 存储.
+- Config 控制器要求实现「Controller interface」, 主要接口包括: 为指定config type 添加处理器, 以及启动控制器消费Task的`Run`方法。
+- Config 控制器要求实现「Store Interface」, 主要包括对config 的访问接口. write interfaces 如Create, Update, Delete 主要是提供给 Config Ingestion Layer 使用, read interfaces 如Get, List 主要提供给 Proxy Serving Layer 使用。
+- Config 控制器还包括的其他组件: 主要是 task queue 和 type-handlers 存储。
 
-Config 控制器会按需构造特定的config 更新事件来源, 如k8s informer、MCP等,  同时通过实现Controller interface, 允许为不同的config type, 添加不同的处理器链, 存储到 type-handlers中. 在接收到config 更新事件后,  Pilot 会将event、object和该type对应的handlers包装成Task,  push到queue中. 最终在`Run`方法中启动对queue中Task的消费.
+Config 控制器会按需构造特定的config 更新事件来源, 如k8s informer、MCP等,  同时通过实现Controller interface, 允许为不同的config type, 添加不同的处理器链, 存储到 type-handlers中. 在接收到config 更新事件后,  Pilot 会将event、object和该type对应的handlers包装成Task,  push到queue中. 最终在`Run`方法中启动对queue中Task的消费。
 
-具体的, Pilot `Service Discovery Config`和`Istio Config`都按照上述控制器模式实现, 下面分别介绍.
+具体的, Pilot `Service Discovery Config`和`Istio Config`都按照上述控制器模式实现, 下面分别介绍。
 
 ------
 
@@ -198,7 +198,7 @@ Istio Config 控制器用于处理istio 流控CRD, 如VirtualService、Destinati
 
 - pilot/pkg/model.ConfigStore
 
-  `ConfigStore`对象利用client-go库从Kubernetes获取route rule、virtual service等CRD形式存在控制面信息，转换为model包下的Config对象，对外提供`Get`、`List`、`Create`、`Update、Delete`等CRUD服务
+  `ConfigStore`对象利用client-go库从Kubernetes获取route rule、virtual service等CRD形式存在控制面信息，转换为model包下的Config对象，对外提供`Get`、`List`、`Create`、`Update、Delete`等CRUD服务。
 
   这是一种「Store Interface」
 
@@ -210,21 +210,21 @@ Istio Config 控制器用于处理istio 流控CRD, 如VirtualService、Destinati
 
 - pilot/pkg/model.ConfigStoreCache
 
-  interface `ConfigStoreCache`  通过 embed 方式扩展了接口`ConfigStore`, `ConfigStoreCache`的主要扩展有: 注册Config变更事件处理函数`RegisterEventHandler `、开始处理流程的`Run` 方法等.
+  interface `ConfigStoreCache`  通过 embed 方式扩展了接口`ConfigStore`, `ConfigStoreCache`的主要扩展有: 注册Config变更事件处理函数`RegisterEventHandler `、开始处理流程的`Run` 方法等。
 
   这是一种「Controller Interface」, 同时也是「Store Interface」
 
 如上所述, inferface `ConfigStoreCache`包括了上一节中要求的2类接口, 目前实现了interface `ConfigStoreCache`的Istio Config 控制器主要有以下三种:
 
-- 以k8s List/Watch方式获取config
+- 以k8s List/Watch方式获取config。
 
   具体实现位于 `pilot\pkg\config\kube\crd.controller`
 
-- 以MCP方式从`ConfigSources`获取, pilot 作为MCP client, `ConfigSources`从全局配置mesh config中获取
+- 以MCP方式从`ConfigSources`获取, pilot 作为MCP client, `ConfigSources`从全局配置mesh config中获取。
 
   具体实现位于 `pilot\pkg\config\coredatamodel.Controller`
 
-- 从本地文件系统中获取, 主要用于测试场景
+- 从本地文件系统中获取, 主要用于测试场景。
 
   具体实现位于` pilot\pkg\config\memory.controller`
 
@@ -241,7 +241,7 @@ type controller struct {
 }
 ```
 
-该controller 同时实现了interface `IstioConfigStore`和`ConfigStoreCache`,  queue 和kinds 属性是用于存储Task的队列和type-handlers的map.
+该controller 同时实现了interface `IstioConfigStore`和`ConfigStoreCache`,  queue 和kinds 属性是用于存储Task的队列和type-handlers的map。
 
 该controller对象在初始化过程中, 会为指定的 istio CRD 创建一个k8s informer, 这些CRD主要是:
 
@@ -267,7 +267,7 @@ IstioConfigTypes = ConfigDescriptor{
 }
 ```
 
-并为每个informer 创建EventHandler, 在EventHandler中会将新的config event 包装为Task, 并push 到queue中.
+并为每个informer 创建EventHandler, 在EventHandler中会将新的config event 包装为Task, 并push 到queue中。
 
 Run 方法进行queue中Task消费, Task中包括了事件类型, 对象, 以及处理函数链:
 
@@ -279,11 +279,11 @@ type Task struct {
 }
 ```
 
-至此, 我们看到了event的 生产和消费, 但不涉及event/Task 是如何消费的.
+至此, 我们看到了event的 生产和消费, 但不涉及event/Task 是如何消费的。
 
-通过调用`RegisterEventHandler`可以添加event/Task的处理器.
+通过调用`RegisterEventHandler`可以添加event/Task的处理器。
 
-但是还没有看到`RegisterEventHandler`的调用, 也就是每种类型的config, 有哪些处理函数, 这个在下文中补充.
+但是还没有看到`RegisterEventHandler`的调用, 也就是每种类型的config, 有哪些处理函数, 这个在下文中补充。
 
 #### 5.2 Istio Config UML
 
@@ -297,13 +297,13 @@ Service Discovery Config 控制器用于处理各平台服务发现数据, 如Se
 
 - pilot/pkg/model.ServiceDiscovery
 
-  对服务发现资源(service/instance等)提供访问方法, 如`Services()` `InstancesByPort()`等.
+  对服务发现资源(service/instance等)提供访问方法, 如`Services()` `InstancesByPort()`等。
 
   这是一种「Store Interface」
 
 - pilot/pkg/model.Controller
 
-  注册Config变更事件处理函数, 包括`AppendServiceHandler()` `AppendInstanceHandler()`, 另外还有控制器启动的`Run()`方法.
+  注册Config变更事件处理函数, 包括`AppendServiceHandler()` `AppendInstanceHandler()`, 另外还有控制器启动的`Run()`方法。
 
   这是一种「Controller Interface」
 
@@ -346,13 +346,13 @@ type Controller struct {
 }
 ```
 
-该聚合控制器也实现了以上2个interface.
+该聚合控制器也实现了以上2个interface。
 
 #### 6.1 k8s Service Discovery Config 控制器
 
 下面我们重点看看k8s Service Discovery Config 控制器的实现:
 
-`pilot\pkg\serviceregistry\kube.Controller`同时实现了上述2个interface, 利用client-go库从Kubernetes获取`pod` 、`service`、`node`、`endpoint`，并将这些CRD转换为istio中Service、ServiceInstance等统一抽象模型.
+`pilot\pkg\serviceregistry\kube.Controller`同时实现了上述2个interface, 利用client-go库从Kubernetes获取`pod` 、`service`、`node`、`endpoint`，并将这些CRD转换为istio中Service、ServiceInstance等统一抽象模型。
 
 ```go
 type Controller struct { // k8s service/node/ep的controller
@@ -389,10 +389,10 @@ func NewController(client kubernetes.Interface, options ControllerOptions) *Cont
 
 总结主要信息:
 
-- k8s Service Discovery Config 控制器订阅的资源变更包括: Services、Endpoints、Nodes、Pod
-- 没有统一的type-handlers, 而是拆分到了多个属性中, 如代码所示包括Controller的属性services, endpoints, nodes和pods.
+- k8s Service Discovery Config 控制器订阅的资源变更包括: Services、Endpoints、Nodes、Pod。
+- 没有统一的type-handlers, 而是拆分到了多个属性中, 如代码所示包括Controller的属性services, endpoints, nodes和pods。
 
-类似Istio Config 控制器,  k8s Service Discovery Config 控制器订阅的资源变更事件也会包装成Task, push 到queue中等待消费, 不在赘述.
+类似Istio Config 控制器,  k8s Service Discovery Config 控制器订阅的资源变更事件也会包装成Task, push 到queue中等待消费, 不在赘述。
 
 #### 6.2 Service Discovery Config UML
 
@@ -402,7 +402,7 @@ func NewController(client kubernetes.Interface, options ControllerOptions) *Cont
 
 ## 7. xDS 服务端
 
-通过上述2类控制器, Pilot 已经可以获得`Istio Config` 和 `Service Discovery Config`的更新, 接下来需要将这些不同平台的数据转换成统一的服务和路由模型, 然后通过xDS下发给数据面代理.
+通过上述2类控制器, Pilot 已经可以获得`Istio Config` 和 `Service Discovery Config`的更新, 接下来需要将这些不同平台的数据转换成统一的服务和路由模型, 然后通过xDS下发给数据面代理。
 
 目前pilot默认创建一个Grpc Server 提供xDS 订阅服务, 在Pilot源码里叫做DiscoveryServer, 简单说下DiscoveryServer的主要逻辑:
 
@@ -419,11 +419,11 @@ type AggregatedDiscoveryServiceServer interface {
 
 接口`StreamAggregatedResources`主要逻辑:
 
-1. DiscoveryServer接受下游的订阅请求, 根据请求的xDS类型, 返回指定的资源, 如CDS/EDS/LDS/RDS.
+1. DiscoveryServer接受下游的订阅请求, 根据请求的xDS类型, 返回指定的资源, 如CDS/EDS/LDS/RDS。
 
-2. DiscoveryServer将连接对象缓存到map中, key为下游node ID 加上连接计数器. 当检测到配置发生变化, 将会触发这些连接上的xDS重新push到下游. 这些配置变化可能是`Istio Config`、`Service Discovery Config`或者网格全局配置集.
+2. DiscoveryServer将连接对象缓存到map中, key为下游node ID 加上连接计数器. 当检测到配置发生变化, 将会触发这些连接上的xDS重新push到下游. 这些配置变化可能是`Istio Config`、`Service Discovery Config`或者网格全局配置集。
 
-`DeltaAggregatedResources`是增量xDS订阅接口, 目前在istio中还未实现.
+`DeltaAggregatedResources`是增量xDS订阅接口, 目前在istio中还未实现。
 
 #### 7.1 DiscoveryServer UML
 
@@ -435,9 +435,9 @@ type AggregatedDiscoveryServiceServer interface {
 
 查阅社区讨论和源码分析, Pilot目前的不足主要有这些方面:
 
-- 多个控制面组件都依赖istio CRD, 如pilot, mixer等, 它们各自去订阅并处理这些CRD, 导致各组件中代码逻辑重复, 项目臃肿.
-- Pilot 项目臃肿的另一个原因是, 以`in-process`方式对接各平台的配置获取和处理, Pilot和这些平台之间并没有明确的接口依赖约定, istio 和其他平台出现接口和数据格式的兼容性, 会是一个潜在风险. (要重视墨菲定律)
-- Pilot 性能问题: Pilot在关注的配置发生变化后, 会重新计算xDS数据, 并触发持有连接的xDS全量下发, DiscoveryServer也没有对配置变化的内容进行分析, 因而存在重复和无用的xDS push. 截止版本1.1, 增量xDS订阅接口在Pilot中还未实现.
+- 多个控制面组件都依赖istio CRD, 如pilot, mixer等, 它们各自去订阅并处理这些CRD, 导致各组件中代码逻辑重复, 项目臃肿。
+- Pilot 项目臃肿的另一个原因是, 以`in-process`方式对接各平台的配置获取和处理, Pilot和这些平台之间并没有明确的接口依赖约定, istio 和其他平台出现接口和数据格式的兼容性, 会是一个潜在风险. (要重视墨菲定律)。
+- Pilot 性能问题: Pilot在关注的配置发生变化后, 会重新计算xDS数据, 并触发持有连接的xDS全量下发, DiscoveryServer也没有对配置变化的内容进行分析, 因而存在重复和无用的xDS push. 截止版本1.1, 增量xDS订阅接口在Pilot中还未实现。
 
 下图是社区对Pilot解耦的方案提议:
 
@@ -446,11 +446,11 @@ type AggregatedDiscoveryServiceServer interface {
 
 简要说明:
 
-- 使用统一配置管理器(`Galley`)来处理isito CRD的处理, 通过MCP进行下发, Galley作为MCP 服务端, Pilot/Mixer等作为MCP 客户端. 在istio 1.1 中, Galley的以上功能以及发布, 并作为默认的配置处理方式, 只是1.1 中还保留了旧的实现代码, Pilot/Mixer 可以选择独立List/Watch Istio CRD, 未来随着Galley功能的增强和稳定, 旧的实现应该会被移除.
-- 提议设计新的gRPC双向流协议: Mesh Configuration Protocol (MCP), 对配置进行抽象, 聚合和传输. (类似xDS grpc), 以此将Pilot中配置对接逻辑从in-process 逐步改造为out-of-process方式.
+- 使用统一配置管理器(`Galley`)来处理isito CRD的处理, 通过MCP进行下发, Galley作为MCP 服务端, Pilot/Mixer等作为MCP 客户端. 在istio 1.1 中, Galley的以上功能以及发布, 并作为默认的配置处理方式, 只是1.1 中还保留了旧的实现代码, Pilot/Mixer 可以选择独立List/Watch Istio CRD, 未来随着Galley功能的增强和稳定, 旧的实现应该会被移除。
+- 提议设计新的gRPC双向流协议: Mesh Configuration Protocol (MCP), 对配置进行抽象, 聚合和传输. (类似xDS grpc), 以此将Pilot中配置对接逻辑从in-process 逐步改造为out-of-process方式。
 
 ------
 
-以上对Pilot的能力和结构进行了分析, 下一篇文章将分析Pilot是如何将Config 转为为xDS.
+以上对Pilot的能力和结构进行了分析, 下一篇文章将分析Pilot是如何将Config 转为为xDS。
 
 
