@@ -215,7 +215,7 @@ image: "img/carousel/envoy-gitbook.png"
 - weight：权重，决定显示顺序
 - title：标题
 - description：支持HTML
-- image：显示的图片
+- image：显示的图片，建议的分辨率是 1600 * 880，或者该比例的图片也可以
 
 可以配置多个页面，每个页面分别在一个YAML文件中配置，可以配置多个，建议是偶数个，因为这样当在大页面中显示会比较好看。
 
