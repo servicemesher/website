@@ -404,9 +404,9 @@ func NewController(client kubernetes.Interface, options ControllerOptions) *Cont
 
 通过上述2类控制器, Pilot 已经可以获得`Istio Config` 和 `Service Discovery Config`的更新, 接下来需要将这些不同平台的数据转换成统一的服务和路由模型, 然后通过xDS下发给数据面代理。
 
-目前pilot默认创建一个Grpc Server 提供xDS 订阅服务, 在Pilot源码里叫做DiscoveryServer, 简单说下DiscoveryServer的主要逻辑:
+目前pilot默认创建一个gRPC Server 提供xDS 订阅服务, 在Pilot源码里叫做DiscoveryServer, 简单说下DiscoveryServer的主要逻辑:
 
-该Grpc Server 需要实现2个接口:
+该gRPC Server 需要实现2个接口:
 
 ```go
 // AggregatedDiscoveryServiceServer is the server API for AggregatedDiscoveryService service.
@@ -446,8 +446,8 @@ type AggregatedDiscoveryServiceServer interface {
 
 简要说明:
 
-- 使用统一配置管理器(`Galley`)来处理isito CRD的处理, 通过MCP进行下发, Galley作为MCP 服务端, Pilot/Mixer等作为MCP 客户端. 在istio 1.1 中, Galley的以上功能以及发布, 并作为默认的配置处理方式, 只是1.1 中还保留了旧的实现代码, Pilot/Mixer 可以选择独立List/Watch Istio CRD, 未来随着Galley功能的增强和稳定, 旧的实现应该会被移除。
-- 提议设计新的gRPC双向流协议: Mesh Configuration Protocol (MCP), 对配置进行抽象, 聚合和传输. (类似xDS grpc), 以此将Pilot中配置对接逻辑从in-process 逐步改造为out-of-process方式。
+- 使用统一配置管理器(`Galley`)来处理isito CRD的处理, 通过MCP进行下发, Galley作为MCP 服务端, Pilot/Mixer等作为MCP 客户端. 在istio 1.1 中, Galley的以上功能已经发布, 并作为默认的配置处理方式, 只是1.1 中还保留了旧的实现代码, Pilot/Mixer 可以选择独立List/Watch Istio CRD, 未来随着Galley功能的增强和稳定, 旧的实现应该会被移除。
+- 提议设计新的gRPC双向流协议: Mesh Configuration Protocol (MCP), 对配置进行抽象, 聚合和传输. (类似xDS gRPC), 以此将Pilot中配置对接逻辑从in-process 逐步改造为out-of-process方式。
 
 ------
 
