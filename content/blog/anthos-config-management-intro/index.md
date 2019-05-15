@@ -1,5 +1,5 @@
 ---
-title: "Google混合云多云平台Anthos Config Mangement产品设计分析"
+title: "Google混合云多云平台Anthos Config Management产品设计分析"
 date: 2019-05-08T22:40:05+08:00
 draft: false
 banner: "/img/blog/banners/00704eQkgy1fs3o6ljkknj30rs0ku4qp.jpg"
@@ -17,7 +17,7 @@ keywords: ["service mesh","istio","gitops","混合云","antnos","google"]
 
 ### Hello World Demo
 
-大家可以看Arctiq公司搞的修改node数量Demo：https://www.arctiq.ca/our-blog/2019/4/9/gke-on-prem-and-anthos-config-management/
+大家可以看Arctiq公司搞的修改node数量Demo：<https://www.arctiq.ca/our-blog/2019/4/9/gke-on-prem-and-anthos-config-management/>
 
 简单说，当你修改某个git管理下的yaml配置文件，里面描述了某个GKE私有集群某个cluster的node数量，然后Anthos Config Management会帮你自动的发命令并让节点数量变成你想要的那个。
 
@@ -75,7 +75,7 @@ keywords: ["service mesh","istio","gitops","混合云","antnos","google"]
 
 ![acm2.jpg](https://ata2-img.cn-hangzhou.oss-pub.aliyun-inc.com/6587d93de31ac21cdb7c0aad02223d7f.jpg)
 
-是的，这张图在组件上画的非常清晰，Anthos Config Mangement，在运行形态上是一个k8s的operator，部署在多个集群里面，并且应该可以从同一个远程git repo里面读取配置，从这个[demo库](https://github.com/GoogleCloudPlatform/csp-config-management)里面，我们可以看到这个operator读取git库的配置
+是的，这张图在组件上画的非常清晰，Anthos Config Management，在运行形态上是一个k8s的operator，部署在多个集群里面，并且应该可以从同一个远程git repo里面读取配置，从这个[demo库](https://github.com/GoogleCloudPlatform/csp-config-management)里面，我们可以看到这个operator读取git库的配置
 
 ```yaml
 apiVersion: addons.sigs.k8s.io/v1alpha1
@@ -91,7 +91,7 @@ spec:
     policyDir: foo-corp
 ```
 
-这里几个参数清晰的标明，Anthos Config Mangement会去每5秒钟读取一次git repo的0.1.0分支，并按照这个分支上的配置来进行后续的操作。那么，这些操作具体能干啥，怎么干呢？[官方文档](https://cloud.google.com/anthos/docs/concepts/anthos-overview#centralized_config_management)实在是太可怜了，就几句话就想打发我们，不过，从Demo里面我们可以试图寻找这些功能和配置的对应关系。读者可以把[demo库](https://github.com/GoogleCloudPlatform/csp-config-management) git clone下来，比对着看。
+这里几个参数清晰的标明，Anthos Config Management会去每5秒钟读取一次git repo的0.1.0分支，并按照这个分支上的配置来进行后续的操作。那么，这些操作具体能干啥，怎么干呢？[官方文档](https://cloud.google.com/anthos/docs/concepts/anthos-overview#centralized_config_management)实在是太可怜了，就几句话就想打发我们，不过，从Demo里面我们可以试图寻找这些功能和配置的对应关系。读者可以把[demo库](https://github.com/GoogleCloudPlatform/csp-config-management) git clone下来，比对着看。
 
 官方的功能描述是：
 
@@ -161,10 +161,10 @@ Anthos是在多k8s集群的场景下，想到了这两点
 
 ## 参考
 
-- Anthos深度分析，看懂谷歌云的三级火箭：https://www.tmtpost.com/3895215.html
-- 关于Anthos：https://toutiao.io/posts/2a1ymm/preview
-- Anthos Config Management官方文档：https://cloud.google.com/anthos/docs/concepts/anthos-overview#centralized_config_management
-- 产品主页：https://cloud.google.com/anthos-config-management/
-- 官方Demo：https://github.com/GoogleCloudPlatform/csp-config-management
-- Arctiq公司搞的修改node数量Demo：https://www.arctiq.ca/our-blog/2019/4/9/gke-on-prem-and-anthos-config-management/
-- 另一个Demo：https://www.youtube.com/watch?v=00f7aE8cfY0
+- Anthos深度分析，看懂谷歌云的三级火箭：<https://www.tmtpost.com/3895215.html>
+- 关于Anthos：<https://toutiao.io/posts/2a1ymm/preview>
+- Anthos Config Management官方文档：<https://cloud.google.com/anthos/docs/concepts/anthos-overview#centralized_config_management>
+- 产品主页：<https://cloud.google.com/anthos-config-management/>
+- 官方Demo：<https://github.com/GoogleCloudPlatform/csp-config-management>
+- Arctiq公司搞的修改node数量Demo：<https://www.arctiq.ca/our-blog/2019/4/9/gke-on-prem-and-anthos-config-management/>
+- 另一个Demo：<https://www.youtube.com/watch?v=00f7aE8cfY0>
