@@ -5,6 +5,10 @@ draft: false
 banner: "/img/blog/banners/006tNbRwly1fw867vtusqj30rs0kudth.jpg"
 author: "Christian Posta"
 authorlink: "https://github.com/shenxg13/istio-no-best-practice"
+translator: "周雨青"
+translatorlink: "https://github.com/wikiios"
+reviewer: ["孙海洲"]
+reviewerlink: "https://github.com/haiker2011"
 originallink: "https://github.com/shenxg13/istio-no-best-practice/blob/master/summary-control-traffic-using-gateway-in-istio.md"
 summary: "本文主要向读者介绍在FAAS和微服务架构之间的区别以及如何根据自身情况选择正确的架构方案。"
 tags: ["service mesh","ingresss","api gateway"]
