@@ -1,7 +1,4 @@
 ---
-author: "Diógenes Rettori"
-translator: "haiker2011"
----
 title: "Solo.io打造的Gloo——Knative中Istio的替代方案"
 date: 2019-05-16T12:20:44+08:00
 draft: false
