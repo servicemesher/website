@@ -22,7 +22,7 @@ keywords: ["service mesh","服务网格","istio", "API Gateway", "Ingress"]
 
 ## Cluster IP
 
-Kubernetes以Pod作为应用部署的最小单位。kubernetes会根据Pod的声明对其进行调度，包括创建、销毁、迁移、水平伸缩等，因此Pod 的IP地址不是固定的，不方便直接采用Pod IP对服务进行访问。
+Kubernetes以Pod作为应用部署的最小单位。Kubernetes会根据Pod的声明对其进行调度，包括创建、销毁、迁移、水平伸缩等，因此Pod 的IP地址不是固定的，不方便直接采用Pod IP对服务进行访问。
 
 为解决该问题，Kubernetes提供了Service资源，Service对提供同一个服务的多个Pod进行聚合。一个Service提供一个虚拟的Cluster IP，后端对应一个或者多个提供服务的Pod。在集群中访问该Service时，采用Cluster IP即可，Kube-proxy负责将发送到Cluster IP的请求转发到后端的Pod上。
 
@@ -71,9 +71,9 @@ Kubernetes的Pod IP和Cluster IP都只能在集群内部访问，而我们通常
 
 NodePort在集群中的主机节点上为Service提供一个代理端口，以允许从主机网络上对Service进行访问。Kubernetes官网文档只介绍了NodePort的功能，并未对其实现原理进行解释。下面我们通过实验来分析NodePort的实现机制。
 
-www.katacoda.com 这个网站提供了一个交互式的Kubernetes playground，注册即可免费实验kubernetes的相关功能，下面我们就使用Katacoda来分析Nodeport的实现原理。
+www.katacoda.com 这个网站提供了一个交互式的Kubernetes playground，注册即可免费实验Kubernetes的相关功能，下面我们就使用Katacoda来分析Nodeport的实现原理。
 
-在浏览器中输入这个网址：https://www.katacoda.com/courses/kubernetes/networking-introduction， 打开后会提供了一个实验用的Kubernetes集群，并可以通过网元模拟Terminal连接到集群的Master节点。
+在浏览器中输入这个网址：https://www.katacoda.com/courses/Kubernetes/networking-introduction， 打开后会提供了一个实验用的Kubernetes集群，并可以通过网元模拟Terminal连接到集群的Master节点。
 
 执行下面的命令创建一个nodeport类型的service。
 
@@ -82,12 +82,12 @@ kubectl apply -f nodeport.yaml
 ```
 
 
-查看创建的service，可以看到kubernetes创建了一个名为webapp-nodeport-svc的service，并为该service在主机节点上创建了30080这个Nodeport。
+查看创建的service，可以看到Kubernetes创建了一个名为webapp-nodeport-svc的service，并为该service在主机节点上创建了30080这个Nodeport。
 
 ```bash
 master $ kubectl get svc
 NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP        36m
+Kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP        36m
 webapp1-nodeport-svc   NodePort    10.103.188.73   <none>        80:30080/TCP   3m
 ```
 
@@ -154,7 +154,7 @@ NodePort的流量转发机制和Cluster IP的iptables模式类似，唯一不同
 NodePort提供了一种从外部网络访问Kubernetes集群内部Service的方法，但该方法存在下面一些限制，导致这种方式主要适用于程序开发，不适合用于产品部署。
 
 * Kubernetes cluster host的IP必须是一个well-known IP，即客户端必须知道该IP。但Cluster中的host是被作为资源池看待的，可以增加删除，每个host的IP一般也是动态分配的，因此并不能认为host IP对客户端而言是well-known IP。
-* 客户端访问某一个固定的host IP的方式存在单点故障。假如一台host宕机了，kubernetes cluster会把应用 reload到另一节点上，但客户端就无法通过该host的nodeport访问应用了。
+* 客户端访问某一个固定的host IP的方式存在单点故障。假如一台host宕机了，Kubernetes cluster会把应用 reload到另一节点上，但客户端就无法通过该host的nodeport访问应用了。
 * 通过一个主机节点作为网络入口，在网络流量较大时存在性能瓶颈。
 
 为了解决这些问题，Kubernetes提供了LoadBalancer。通过将Service定义为LoadBalancer类型，Kubernetes在主机节点的NodePort前提供了一个四层的负载均衡器。该四层负载均衡器负责将外部网络流量分发到后面的多个节点的NodePort端口上。
@@ -277,7 +277,7 @@ API Gateway需求中很大一部分需要根据不同的应用系统进行定制
 
 ## 参考
 
-- <a id="ref01">[Virtual IPs and Service Proxie - kubernetes.io](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
+- <a id="ref01">[Virtual IPs and Service Proxie - Kubernetes.io](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
 - [如何从外部访问Kubernetes集群中的应用？ - zhaohuabing.com](https://zhaohuabing.com/2017/11/28/access-application-from-outside/)
-- [The obstacles to put Istio into production and how we solve them - kubernetes.io](https://zhaohuabing.com/post/2018-12-27-the-obstacles-to-put-istio-into-production/#service-mesh-and-api-gateway)
-- [Kubernetes NodePort vs LoadBalancer vs Ingress? When should I use what? - medium.com](https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0)
+- [The obstacles to put Istio into production and how we solve them - Kubernetes.io](https://zhaohuabing.com/post/2018-12-27-the-obstacles-to-put-istio-into-production/#service-mesh-and-api-gateway)
+- [Kubernetes NodePort vs LoadBalancer vs Ingress? When should I use what? - medium.com](https://medium.com/google-cloud/Kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0)
