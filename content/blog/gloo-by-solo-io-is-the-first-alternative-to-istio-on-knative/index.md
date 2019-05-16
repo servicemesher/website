@@ -44,7 +44,7 @@ Kubernetes上的*传统*工作负载，比如web应用程序，需要一个运�
 
 * 一个或多个[Knative Revision](https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision)，运行时，Revision会变成Kubernetes Pod。
 
-![](./gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-1.png)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-1.png)
 
 深入到流量管理部分，Knative service有一个名为[Activator](https://github.com/knative/serving/tree/master/pkg/activator)的组件，它负责报告某个工作负载需要运行相应数量的pod来处理请求。
 
@@ -52,7 +52,7 @@ Kubernetes上的*传统*工作负载，比如web应用程序，需要一个运�
 
 如果您想知道，还有一些特性允许您预热应用程序，这样就不会阻塞任何请求。这使您能够对是否始终保持Pod运行做出明智的决策。
 
-![](./gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-2.png)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-2.png)
 
 如前所述，一旦有一个修订（一个或多个Pod）来处理请求，流量就可以从Ingress网关流到您的修订。Knative Serving将继续收到请求的通知，以便确定是否需要对服务于修订的Pod进行伸缩。这真的太棒了!
 
@@ -74,7 +74,7 @@ Solo.io拥抱[Istio](https://istio.io/zh/)。我们已经投资构建了一个�
 
 但如果我诚实地评价Istio在Knative上的角色，我的感觉是：
 
-![](./gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-3.png)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-3.png)
 
 Istio提供了一组令人惊讶的特性，但是Knative只使用了其中的一些。作为参考，Istio目前有48个CRD （CustomResourceDefinition对象），其中只有一个主要由Knative（VirtualService）使用。
 
@@ -84,7 +84,7 @@ Istio提供了一组令人惊讶的特性，但是Knative只使用了其中的�
 
 Gloo是下一代API网关，它既满足Knative的需求，又不会带来成熟服务网格技术(Istio就是这种情况)的不必要包袱。
 
-![](./gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-4.png)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-4.png)
 
 [Gloo](https://gloo.solo.io/)建立在Envoy之上，[是Knative第一个官方的Istio替代品](https://knative.dev/docs/install/knative-with-gloo/)。
 
