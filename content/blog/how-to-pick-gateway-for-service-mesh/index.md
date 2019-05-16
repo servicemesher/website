@@ -22,7 +22,7 @@ keywords: ["service mesh","服务网格","istio", "API Gateway", "Ingress"]
 
 ## Cluster IP
 
-Kubernetes以Pod作为应用部署的最小单位。Kubernetes会根据Pod的声明对其进行调度，包括创建、销毁、迁移、水平伸缩等，因此Pod 的IP地址不是固定的，不方便直接采用Pod IP对服务进行访问。
+Kubernetes以Pod作为应用部署的最小单位。Kubernetes会根据Pod的声明对其进行调度，包括创建、销毁、迁移、水平伸缩等，因此Pod的IP地址不是固定的，不方便直接采用Pod IP对服务进行访问。
 
 为解决该问题，Kubernetes提供了Service资源，Service对提供同一个服务的多个Pod进行聚合。一个Service提供一个虚拟的Cluster IP，后端对应一个或者多个提供服务的Pod。在集群中访问该Service时，采用Cluster IP即可，Kube-proxy负责将发送到Cluster IP的请求转发到后端的Pod上。
 
@@ -30,8 +30,8 @@ Kube-proxy是一个运行在每个节点上的go应用程序，支持三种工�
 
 ### userspace 模式
 
-该模式下kube-proxy会为每一个Service创建一个监听端口。发向Cluster IP的请求被Iptables规则重定向到Kube-proxy监听的端口上，Kube-proxy根据LB算法选择一个提供服务的Pod并和其建立链接，以将请求转发到Pod上。<br>
-该模式下，Kube-proxy充当了一个四层Load balancer的角色。由于kube-proxy运行在userspace中，在进行转发处理时会增加两次内核和用户空间之间的数据拷贝，效率较另外两种模式低一些；好处是当后端的Pod不可用时，kube-proxy可以重试其他Pod。
+该模式下Kube-proxy会为每一个Service创建一个监听端口。发向Cluster IP的请求被Iptables规则重定向到Kube-proxy监听的端口上，Kube-proxy根据LB算法选择一个提供服务的Pod并和其建立链接，以将请求转发到Pod上。<br>
+该模式下，Kube-proxy充当了一个四层Load balancer的角色。由于Kube-proxy运行在userspace中，在进行转发处理时会增加两次内核和用户空间之间的数据拷贝，效率较另外两种模式低一些；好处是当后端的Pod不可用时，Kube-proxy可以重试其他Pod。
 
 ![Kube-proxy userspace模式](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-to-pick-gateway-for-service-mesh/6ce41a46gy1g1l4lmw4z7j20m80cj0tq.jpg)
 
@@ -47,7 +47,7 @@ Kube-proxy是一个运行在每个节点上的go应用程序，支持三种工�
 图片来自：[Kubernetes官网文档](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies/)
 
 ### ipvs 模式
-该模式和iptables类似，kube-proxy监控Pod的变化并创建相应的ipvs rules。ipvs也是在kernel模式下通过netfilter实现的，但采用了hash table来存储规则，因此在规则较多的情况下，Ipvs相对iptables转发效率更高。除此以外，ipvs支持更多的LB算法。如果要设置kube-proxy为ipvs模式，必须在操作系统中安装IPVS内核模块。
+该模式和iptables类似，Kube-proxy监控Pod的变化并创建相应的ipvs rules。ipvs也是在kernel模式下通过netfilter实现的，但采用了hash table来存储规则，因此在规则较多的情况下，Ipvs相对iptables转发效率更高。除此以外，ipvs支持更多的LB算法。如果要设置Kube-proxy为ipvs模式，必须在操作系统中安装IPVS内核模块。
 
 ![Kube-proxy ipvs模式](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/how-to-pick-gateway-for-service-mesh/6ce41a46gy1g1l4nvyl1vj20nj0g83zi.jpg)
 
@@ -55,7 +55,7 @@ Kube-proxy是一个运行在每个节点上的go应用程序，支持三种工�
 
 ## Istio Sidecar Proxy
 
-Cluster IP解决了服务之间相互访问的问题，但从上面Kube-proxy的三种模式可以看到，Cluster IP的方式只提供了服务发现和基本的LB功能。如果要为服务间的通信应用灵活的路由规则以及提供Metrics collection，distributed tracing等服务管控功能,就必须得依靠Istio提供的服务网格能力了。
+Cluster IP解决了服务之间相互访问的问题，但从上面Kube-proxy的三种模式可以看到，Cluster IP的方式只提供了服务发现和基本的LB功能。如果要为服务间的通信应用灵活的路由规则以及提供Metrics collection，distributed tracing等服务管控功能，就必须得依靠Istio提供的服务网格能力了。
 
 在Kubernetes中部署Istio后，Istio通过iptables和Sidecar Proxy接管服务之间的通信，服务间的相互通信不再通过Kube-proxy，而是通过Istio的Sidecar Proxy进行。请求流程是这样的：Client发起的请求被iptables重定向到Sidecar Proxy，Sidecar Proxy根据从控制面获取的服务发现信息和路由规则，选择一个后端的Server Pod创建链接，代理并转发Client的请求。
 
@@ -104,7 +104,7 @@ webapp1-nodeport-deployment-785989576b-tpfqr   1/1       Running   0          2m
 
 ```bash
 master $ netstat -lnp|grep 30080
-tcp6       0      0 :::30080                :::*                    LISTEN      7427/kube-proxy
+tcp6       0      0 :::30080                :::*                    LISTEN      7427/Kube-proxy
 ```
 
 下面是Kube-proxy创建的相关iptables规则以及对应的说明。可以看到Kube-proxy为Nodeport创建了相应的IPtable规则，将发向30080这个主机端口上的流量重定向到了后端的两个Pod IP上。
