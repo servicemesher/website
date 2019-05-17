@@ -5,8 +5,8 @@ draft: false
 banner: "/img/blog/banners/6ce41a46gy1g31wxsf5ibj20rs0ku10r.jpg"
 author: "赵化冰"
 authorlink: "https://zhaohuabing.com"
-reviewer: ""
-reviewerlink: ""
+reviewer: "GuangmingLuo"
+reviewerlink: "https://github.com/GuangmingLuo"
 originallink: ""
 summary: "本文将对Service Mesh对外暴露服务的各种方式进行详细介绍和对比分析，并根据分析结果提出一个可用于产品部署的入口网关解决方案。"
 tags: ["istio", "API Gateway", "Ingress"]
@@ -75,7 +75,7 @@ NodePort在集群中的主机节点上为Service提供一个代理端口，以�
 
 www.katacoda.com 这个网站提供了一个交互式的Kubernetes playground，注册即可免费实验Kubernetes的相关功能，下面我们就使用Katacoda来分析Nodeport的实现原理。
 
-在浏览器中输入这个网址：https://www.katacoda.com/courses/Kubernetes/networking-introduction， 打开后会提供了一个实验用的Kubernetes集群，并可以通过网元模拟Terminal连接到集群的Master节点。
+在浏览器中输入这个网址：https://www.katacoda.com/courses/kubernetes/networking-introduction， 打开后会提供了一个实验用的Kubernetes集群，并可以通过网元模拟Terminal连接到集群的Master节点。
 
 执行下面的命令创建一个nodeport类型的service。
 
@@ -121,7 +121,7 @@ master $ kubectl apply -f nodeport.yaml
 ```bash
 master $ kubectl get svc
 NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-Kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP        36m
+kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP        36m
 webapp1-nodeport-svc   NodePort    10.103.188.73   <none>        80:30080/TCP   3m
 ```
 
@@ -311,7 +311,7 @@ API Gateway需求中很大一部分需要根据不同的应用系统进行定制
 
 ## 参考
 
-- <a id="ref01">[Virtual IPs and Service Proxie - Kubernetes.io](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
+- <a id="ref01">[Virtual IPs and Service Proxie - kubernetes.io](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
 - [如何从外部访问Kubernetes集群中的应用？ - zhaohuabing.com](https://zhaohuabing.com/2017/11/28/access-application-from-outside/)
-- [The obstacles to put Istio into production and how we solve them - Kubernetes.io](https://zhaohuabing.com/post/2018-12-27-the-obstacles-to-put-istio-into-production/#service-mesh-and-api-gateway)
-- [Kubernetes NodePort vs LoadBalancer vs Ingress? When should I use what? - medium.com](https://medium.com/google-cloud/Kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0)
+- [The obstacles to put Istio into production and how we solve them - kubernetes.io](https://zhaohuabing.com/post/2018-12-27-the-obstacles-to-put-istio-into-production/#service-mesh-and-api-gateway)
+- [Kubernetes NodePort vs LoadBalancer vs Ingress? When should I use what? - medium.com](https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0)
