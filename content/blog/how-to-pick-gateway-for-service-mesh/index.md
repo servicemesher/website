@@ -5,7 +5,7 @@ draft: false
 banner: "/img/blog/banners/6ce41a46gy1g31wxsf5ibj20rs0ku10r.jpg"
 author: "赵化冰"
 authorlink: "https://zhaohuabing.com"
-reviewer: ["GuangmingLuo"]
+reviewer: ["罗广明"]
 reviewerlink: ["https://github.com/GuangmingLuo"]
 originallink: ""
 summary: "本文将对Service Mesh对外暴露服务的各种方式进行详细介绍和对比分析，并根据分析结果提出一个可用于产品部署的入口网关解决方案。"
