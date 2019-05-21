@@ -72,7 +72,7 @@ paginate = 10
     weight = 6
 
 [[menu.main]]
-    name = "活动"
+    name = "社区"
     identifier = "activity"
     url  = "/activity/"
     weight = 4
