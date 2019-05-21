@@ -26,15 +26,15 @@ keywords: ["service mesh","istio","gitops","混合云","antnos","google"]
 是Google发布的混合云多云平台
 
 1. GKE：Anthos 的命令和控制核心。用户通过 GKE 的控制平面来对分散在 Google 云、私有数据中心一级其它云平台上的基础设施进行管理。
-2. GKE On-Prem：Google 推出了一个基于 Kubernetes 的和 GKE 一致的软件平台。用户能够在任何的兼容硬件上部署这一产品，而 Google 将会对其进行管理。从升级 Kubernetes 版本到应用最新补丁，Google 都视其为 GKE 的逻辑扩展。尤其需要注意的是 GKE On-Prem 运行在 VMWare vSphere 6.5 的虚拟化基础上，Hyper-V 和 KVM 等其它虚拟化技术的支持还在开发之中。
-3. Istio：这一技术让跨平台的联邦网络管理成为可能。Anthos 需要为部署在不同数据中心、GCP 以及其它云上的多种应用程序的组件建立服务网格，Istio 自然是首选。它会和 VMWare NSX、Cisco ACI 以及 Google 自己的 Andromeda 等 SDN 进行无缝集成。已经在网络设施上（例如 F5） 进行投资的客户，可以将 Istio 和负载均衡及防火墙集成起来。
-4. Velostrata：Google 在 2018 年收购了这一云迁移技术，来增强 Kubernetes 的竞争力。Velostrata 的主要功能——在 GCE 实例中复制物理机/虚拟机，并把现有虚拟机转换为 Kubernetes 应用（Pod）。这是业界首个物理机到 Kubernetes 的迁移工具，由 Google 提供。这一技术以 Anthos Migrate 的面目出现，目前是 Beta 阶段。
-5. Anthos 配置管理：Kubernetes 是一个可扩展的策略驱动的平台。Anthos 的客户必须面对运行在不同环境中的多个 Kubernetes，因此 Google 尝试利用 Anthos 来简化配置管理工作。从发布工件、配置项目、网络策略、密文和密码等类型的配置，Anthos 配置管理都能够进行管理并将配置应用到一或多个集群之中。
-6. Stackdriver：Stackdriver 为 Anthos 基础设施和应用提供了可观察性的支持。客户能够使用这一组件跟踪运行在 Anthos集群状态，以及部署在各个托管集群上的应用的健康情况。该组件负责集中地提供监控、日志、跟踪以及观察的支持。
-7. GCP Cloud Interconnect：在企业数据中心以及云基础设施之间的高速互联，是混合云平台的必要条件。Cloud Interconnect 能够在数据中心和云间交付高达 100Gbps 的高速网络。客户也可以使用 Equinix、NTT Communications、Softbanck 等电信厂商的网络将其数据中心延伸到 GCP
-8. GCP Marketplace：Google 为能够在 Kubernetes 上运行的（来自 ISV 和开源的）软件列表。用户能够在 Anthos 中一键部署 Cassandra 数据库或者 GitLab 等软件。最终 Google 可能还会为内部 IT 提供一个私有的 Catalog 服务。
+1. GKE On-Prem：Google 推出了一个基于 Kubernetes 的和 GKE 一致的软件平台。用户能够在任何的兼容硬件上部署这一产品，而 Google 将会对其进行管理。从升级 Kubernetes 版本到应用最新补丁，Google 都视其为 GKE 的逻辑扩展。尤其需要注意的是 GKE On-Prem 运行在 VMWare vSphere 6.5 的虚拟化基础上，Hyper-V 和 KVM 等其它虚拟化技术的支持还在开发之中。
+1. Istio：这一技术让跨平台的联邦网络管理成为可能。Anthos 需要为部署在不同数据中心、GCP 以及其它云上的多种应用程序的组件建立服务网格，Istio 自然是首选。它会和 VMWare NSX、Cisco ACI 以及 Google 自己的 Andromeda 等 SDN 进行无缝集成。已经在网络设施上（例如 F5） 进行投资的客户，可以将 Istio 和负载均衡及防火墙集成起来。
+1. Velostrata：Google 在 2018 年收购了这一云迁移技术，来增强 Kubernetes 的竞争力。Velostrata 的主要功能——在 GCE 实例中复制物理机/虚拟机，并把现有虚拟机转换为 Kubernetes 应用（Pod）。这是业界首个物理机到 Kubernetes 的迁移工具，由 Google 提供。这一技术以 Anthos Migrate 的面目出现，目前是 Beta 阶段。
+1. Anthos 配置管理：Kubernetes 是一个可扩展的策略驱动的平台。Anthos 的客户必须面对运行在不同环境中的多个 Kubernetes，因此 Google 尝试利用 Anthos 来简化配置管理工作。从发布工件、配置项目、网络策略、密文和密码等类型的配置，Anthos 配置管理都能够进行管理并将配置应用到一或多个集群之中。
+1. Stackdriver：Stackdriver 为 Anthos 基础设施和应用提供了可观察性的支持。客户能够使用这一组件跟踪运行在 Anthos集群状态，以及部署在各个托管集群上的应用的健康情况。该组件负责集中地提供监控、日志、跟踪以及观察的支持。
+1. GCP Cloud Interconnect：在企业数据中心以及云基础设施之间的高速互联，是混合云平台的必要条件。Cloud Interconnect 能够在数据中心和云间交付高达 100Gbps 的高速网络。客户也可以使用 Equinix、NTT Communications、Softbank 等电信厂商的网络将其数据中心延伸到 GCP
+1. GCP Marketplace：Google 为能够在 Kubernetes 上运行的（来自 ISV 和开源的）软件列表。用户能够在 Anthos 中一键部署 Cassandra 数据库或者 GitLab 等软件。最终 Google 可能还会为内部 IT 提供一个私有的 Catalog 服务。
 
-大家可以看到，在这8大组件里面，大概只有4和5是最近推出的，其他的早就投入生产并有不少企业在用了，这些组件到底是什么关系？我们把这些组件放到一张图上，就排着这个样子（原谅我忽略了可怜的StackDriver和Marktplace，我假定读者对这2个东西很熟悉）
+大家可以看到，在这8大组件里面，大概只有4和5是最近推出的，其他的早就投入生产并有不少企业在用了，这些组件到底是什么关系？我们把这些组件放到一张图上，就排着这个样子（原谅我忽略了可怜的StackDriver和Marketplace，我假定读者对这2个东西很熟悉）
 
 ![acm.png](https://ata2-img.cn-hangzhou.oss-pub.aliyun-inc.com/14967e6ac3f093b185936e12cc02c46e.png)
 
@@ -45,9 +45,9 @@ keywords: ["service mesh","istio","gitops","混合云","antnos","google"]
 这个词过于宽泛，所以在这里提几个常见的k8s用户场景
 
 1. 你是否碰到过，一个典型的Web应用，在测试环境有一份配置文件（我们假定这个配置文件是一个k8s的deployment的yaml），在准生产环境有一份配置文件，在公有云有一份配置文件，在私有云也有一份配置文件？每次你都复制黏贴并修改一些参数，并指望这些环境能够混合起来给终端用户提供合理的服务，但手工修改往往会造成差错
-2. 你是否碰到过，配置文件存在多个k8s集群里面，每次都要手忙脚乱的用kubectl挨个修改，但没法看到这些配置的历史版本？你可以回滚应用的docker镜像，但你没法回滚配置。如果你是一个资深k8s玩家，你当然知道在etcd的某个角落里面存有所有yaml的历史版本，通过某种黑魔法般的命令行操作你还是可以找回历史的，但肯定没有git那么爽快
+1. 你是否碰到过，配置文件存在多个k8s集群里面，每次都要手忙脚乱的用kubectl挨个修改，但没法看到这些配置的历史版本？你可以回滚应用的docker镜像，但你没法回滚配置。如果你是一个资深k8s玩家，你当然知道在etcd的某个角落里面存有所有yaml的历史版本，通过某种黑魔法般的命令行操作你还是可以找回历史的，但肯定没有git那么爽快
 
-是的，Anthos Config Management就是用来解决这些问题的，并且，是按照[Infrasturce as code](https://cloud.google.com/solutions/infrastructure-as-code/?hl=zh-cn)的理念来做这个事情的
+是的，Anthos Config Management就是用来解决这些问题的，并且，是按照[Infrastructure as code](https://cloud.google.com/solutions/infrastructure-as-code/?hl=zh-cn)的理念来做这个事情的
 
 ### 继续问另外一个问题，为什么配置这么重要？
 
@@ -63,7 +63,7 @@ keywords: ["service mesh","istio","gitops","混合云","antnos","google"]
 
 - git pull
 - read, think, modify
-- git push // all things done automaticlly
+- git push // all things done automatically
 
 是的，你会发现运维工程师的工作流程就和开发工程师一样了！
 
@@ -152,12 +152,12 @@ spec:
 Anthos是在多k8s集群的场景下，想到了这两点
 
 1. 既然k8s把所有东西的状态变为静态的yaml文本描述，那么这些配置存在etcd里面并用kubectl去修改就是低效的，完全可以用git存起来
-2. 这些配置之间是有冗余的，完全可以通过模板化的方式去自动搞定单个应用多集群的配置
+1. 这些配置之间是有冗余的，完全可以通过模板化的方式去自动搞定单个应用多集群的配置
 
 ### 遗留问题
 
 - Anthos Config Management可以替代Federation吗？
-- Anthos Config Management和knative是啥关系？
+- Anthos Config Management和Knative是啥关系？
 
 ## 参考
 
