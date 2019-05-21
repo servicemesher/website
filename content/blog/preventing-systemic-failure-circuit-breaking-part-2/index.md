@@ -1,5 +1,5 @@
 ---
-title: "防止系统故障:熔断-它是什么以及它是如何工作的(第2部分)"
+title: "熔断简介及工作原理详解(第2部分)"
 date: 2019-05-20T12:10:44+08:00
 draft: false
 banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*Ea73SaVMhSMAAAAAAAAAAABjARQnAQ"
