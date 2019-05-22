@@ -6,7 +6,7 @@ hasCJKLanguage = true
 # Site language. Available translations in the theme's `/i18n` directory.
 defaultContentLanguage = "zh"
 # Enable comments by entering your Disqus shortname
-disqusShortname = ""
+disqusShortname = "servicemesher-1"
 # Code highlight
 pygmentsUseClasses = false
 pygmentCodeFences = true
