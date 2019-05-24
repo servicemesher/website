@@ -21,7 +21,7 @@ aliases: "/blog/kubernetes-service-mesh/"
 
 ## 基于Kubernetes的服务网格
 
-**编者按**
+###### 编者按
 
 > 文章介绍了基于Kubernetes的服务网格，简要的说明了服务网格的作用，sidecar的作用以及服务网格两个重要实现：Istio与Linkerd的起源和结构，鼓励大家上手尝试。
 
