@@ -21,7 +21,7 @@ aliases: "/blog/kubernetes-service-mesh/"
 
 ## 基于Kubernetes的服务网格
 
-**编者按**
+编者按
 
 > 文章介绍了基于Kubernetes的服务网格，简要的说明了服务网格的作用，sidecar的作用以及服务网格两个重要实现：Istio与Linkerd的起源和结构，鼓励大家上手尝试。
 
@@ -65,7 +65,7 @@ Linkerd的[入门向导](https://linkerd.io/2/getting-started/)非常不错，�
 
 **Istio**当前支持Kubernetes和[Nomad](https://www.nomadproject.io/)，将来会添加更多的功能。Istio是一个多平台解决方案。它可以做微服务流量管理，策略应用以及聚合采样信息。Istio也是Go语言编写的轻量应用，但不同于Linkerd2，它使用[Envoy](https://www.envoyproxy.io/)来做服务代理。下图说明Istio中各个部分是如何组合工作的:
 
-![istio_architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubernetes-service-mesh/arch.svg)
+![istio_architecture](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubernetes-service-mesh/arch.png)
 
 我喜欢Istio的其中一点是[sidecar自动注入](https://istio.io/docs/setup/kubernetes/sidecar-injection.html#automatic-sidecar-injection)，前提是你已经使用[Helm](https://akomljen.com/package-kubernetes-applications-with-helm/)来发布应用，这样的话就不需要手工把sidecar注入到kubernetes的配置文件里面。
 
