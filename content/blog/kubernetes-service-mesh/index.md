@@ -1,9 +1,9 @@
 ---
-title: "Kubernetes Service Mesh"
+title: "基于 Kubernetes 的 Service Mesh 简介"
 date: 2019-05-20T12:09:44+08:00
 draft: false
 banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*v-tESaIfS8MAAAAAAAAAAABjARQnAQ"
-author: "ALEN KOMLJEN"
+author: "Alen Komjen"
 authorlink: "https://akomljen.com/author/alen/"
 translator: "张成"
 translatorlink: "https://github.com/chengwhynot"
@@ -16,7 +16,6 @@ summary: "文章介绍了为什么要用服务网格，以及简单的介绍了�
 tags: ["service mesh","Istio","Linkerd"]
 categories: ["translation"]
 keywords: ["service mesh","Istio","Linkerd"]
-aliases: "/blog/kubernetes-service-mesh/"
 ---
 
 ## 基于Kubernetes的服务网格
