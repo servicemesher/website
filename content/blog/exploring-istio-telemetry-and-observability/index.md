@@ -4,14 +4,14 @@ author: "Marton Sereg"
 translator: "chengwhynot"
 reviewer: ["",""]
 title: "Istio遥测和可观察性探索"
-summary: "作者是BANZA CLOUD的工程师，文章介绍了istio中，如何结合prometheus进行网络检测，给出了一些示例配置。最后，还推广了一下BANZA CLOUD自家的PIPELINE，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。"
+summary: "文章介绍了istio环境下，如何结合Prometheus进行网络度量指标监测，给出了一些示例配置。最后，还推广了一下BANZA CLOUD自家的PIPELINE，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。"
 categories: "译文"
 tags: ["istio","operator","monitor"]
 originalPublishDate: 2019-05-13
 publishDate: 
 ---
 [编者按]
->作者是BANZA CLOUD的工程师，文章介绍了istio中，如何结合prometheus进行网络检测，给出了一些示例配置。最后，还推广了一下BANZA CLOUD自家的PIPELINE，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。
+>作者是BANZA CLOUD的工程师，文章介绍了istio环境下，如何结合Prometheus进行网络度量指标监测，给出了一些示例配置。最后，还推广了一下BANZA CLOUD自家的PIPELINE，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。
 ## Istio遥测和可观察性探索
 
 Istio的一个核心功能就是网络流量的可观察性。因为所有服务间的通信都通过Envoy代理，而且Istio的控制平面可以从这些代理收集日志和指标，服务网格能够让你深入了解你的网络状况。虽然Istio的基本安装就装好了收集遥测数据所需的全部组件，但是理解这些组件如何配合，并且使他们能够工作在生产环境中却不是一个容易的事情。如果服务网格扩展到跨越多个云服务提供商的多个群集时，或者在一个混合情况下，甚至在边缘计算环境下，这个工作就更加困难。我们在这篇文章中，尽可能解释清楚Istio的遥测是怎么工作的，并且会完整浏览的一些监控例子，包括如何配置Prometheus的目标和尝试不同可用的指标。看完这篇文章，你将会对Banzai云中新的[Pipeline](https://github.com/banzaicloud/pipeline)组件有一个提前了解-它是一个跨云和混合云管理平台，基于顶尖的[Istio运营者](https://github.com/banzaicloud/istio-operator)开发。
