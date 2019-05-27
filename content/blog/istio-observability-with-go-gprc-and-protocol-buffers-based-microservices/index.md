@@ -27,15 +27,15 @@ aliases: "/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-micr
 
 在这篇文章中，我们将考察使用Istio可视化工具来监控基于Go语言的微服务，它们使用 [Protocol Buffers](https://developers.google.com/protocol-buffers/)、[gRPC](https://grpc.io/)和[HTTP/2](https://en.wikipedia.org/wiki/HTTP/2)作为客户端-服务端通信，这与传统的基于REST JSON和HTTP进行通信是不同的。我们将看到Kubernetes、Istio、Envoy和可视化工具如何与gRPC无缝地工作，就像在[Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/)上通过HTTP处理JSON一样。
 
-[![screen_shot_2019-04-18_at_6_03_38_pm](1.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/1.png)
+![screen_shot_2019-04-18_at_6_03_38_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/1.png)
 
 ## 技术
 
-### ![Image result for grpc logo](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/2-1.png)gRPC
+### [![Image result for grpc logo](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/2-1.png)]
 
 根据[gRPC项目](https://grpc.io/)介绍， gRPC是[CNCF](https://www.cncf.io/)的孵化项目，一个现代化的、高性能、开源和通用的[RPC](https://en.wikipedia.org/wiki/remote_procedurere_call)框架，可以在任何地方运行。它使客户端和服务端应用能够透明地通信，并更加容易的构建连接系统。Google是gRPC最初的开发者，多年来一直使用gRPC中的底层技术和概念。当前的实现用于几个谷歌的云产品和对外的API。许多其他组织也在使用它，比如Square、Netflix、CoreOS、Docker、CockroachDB、Cisco、Juniper Networks等。
 
-### ![Image result for google developer](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/3.png)Protocol Buffers
+### ![Image result for google developer](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/3.png)
 
 默认情况下gRPC使用Protocol Buffers。根据[Google官方的介绍](https://developers.google.com/protocol-buffers/)，Protocol Buffers是一种与语言和平台无关的、高效的、可扩展的自动序列化结构化的数据的机制，以便在通信协议、数据存储等方面使用。Protocol Buffers比XML小3到10倍，并且快20到100倍。使用生成数据访问类编译的`.proto`源文件很容易以编程方式使用。
 
@@ -43,7 +43,7 @@ aliases: "/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-micr
 
 Protocol buffers 目前支持生成Java，Python，Objective-C，C++，Dart，Go，Ruby和C#代码。 本文我们使用Go语言编程。你可以从Google的 [开发者页面](https://developers.google.com/protocol-buffers/docs/encoding)了解更多Protobuf二进制格式的信息。
 
-### ![Image result for envoy proxy](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/4-1.png)Envoy Proxy
+### ![Image result for envoy proxy](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/4-1.png)
 
 根据[Istio项目](https://istio.io/docs/concepts/what-is-istio/#envoy)的介绍，Istio使用了一个扩展版本的 [Envoy](https://www.envoyproxy.io/) 代理。Envoy作为sidecar和与它相关的服务部署在同一个Kubernetes Pod中。Envoy由Lyft创建，是一个C++开发的高性能代理，为服务网格中的所有服务传送出入流量。Istio利用了Envoy的许多内置特性，包括动态服务发现，负载均衡，TLS终止，HTTP/2和gRPC代理，熔断、健康检查，灰度发布，故障注入和富指标等。
 
@@ -53,23 +53,23 @@ Protocol buffers 目前支持生成Java，Python，Objective-C，C++，Dart，Go
 
 在前两篇文章中，我们探讨了Istio的可观察性工具，使用了用Go编写的基于RESTful的微服务的API平台，并使用JSON通过HTTP进行服务到服务的通信。API平台由8个基于 [Go](https://golang.org/) 的微服务和一个示例Angular 7，基于[TypeScript](https://en.wikipedia.org/wiki/TypeScript) 的前端web客户端组成。对于基于事件队列的通信，各种服务都依赖于MongoDB和RabbitMQ。下面是使用HTTP传输JSON的平台架构。
 
-[![Golang Service Diagram with Proxy v2](5.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/5.png)
+![Golang Service Diagram with Proxy v2](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/5.png)
 
 下面是Angular 7的web客户端接口。
 
-![screen_shot_2019-04-15_at_10_23_47_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/6.png)
+![screen_shot_2019-04-15_at_10_23_47_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/6.png)
 
 ### 转到 gRPC 和 Protocol Buffers
 
 在本文中，我修改了8个Go微服务使用 [gRPC](https://grpc.io/) 和 [Protocol Buffers](https://developers.google.com/protocol-buffers/)（Google的数据交换格式）。具体来讲，服务使用了Protocol Buffers的[版本3](https://github.com/protocolbuffers/protobuf/releases)（简称proto3）。使用gRPC的方式, 一个gRPC客户端会调用gRPC服务端。平台的一些服务是gRPC服务端，另一些是gRPC客户端，而一些同时充当客户端和服务端，如服务A、B和EE。修改后的体系结构如下所示。
 
-![Golang-Service-Diagram-with-gRPC](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/7.png)
+![Golang-Service-Diagram-with-gRPC](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/7.png)
 
 ### gRPC 网关
 
 假设为了进行这个演示，API的大多数消费者仍然希望使用RESTful JSON通过HTTP API进行通信，我已经向平台添加了一个[gRPC 网关](https://github.com/grpc-ecosystem/grpc-gateway) 作为反向代理。它是一个gRPC到JSON的反向代理，这是一种通用的架构模式，它通过基于HTTP的客户端代理JSON与基于gRPC的微服务进行通信。来自[grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)的GitHub项目的图有效地演示了反向代理是如何工作的。
 
-[![grpc_gateway.png](8.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/8.png)
+![grpc_gateway.png](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/8.png)
 
 *图像来源： <https://github.com/grpc-ecosystem/grpc-gateway>*
 
@@ -322,7 +322,7 @@ docker run -p 8080:8080 -d --name swagger-ui \
 
 Angular UI向“/api/v1/greeting”资源发出HTTP GET请求，该资源被转换为gRPC并代理到Service A，在那里由“greeting”函数处理。
 
-[![screen_shot_2019-04-15_at_9_05_23_pm](9.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/9.png)
+![screen_shot_2019-04-15_at_9_05_23_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/9.png)
 
 ### gRPC 网关反向代理
 
@@ -459,7 +459,7 @@ func main() {
 
 在下面显示的Stackdriver日志中，我们看到JSON有效负载中的一组HTTP请求头的示例，它们从gRPC网关的反向代理被传播到上游基于gRPC的Go服务。头传播确保请求在整个服务调用链上生成完整的分布式追踪。
 
-[![screen_shot_2019-04-15_at_11_10_50_pm](10.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/10.png)
+![screen_shot_2019-04-15_at_11_10_50_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/10.png)
 
 ### Istio 虚拟服务和 CORS
 
@@ -525,11 +525,11 @@ spec:
 
 如果您还记得，Banzai formatter会自动将运行时/堆栈信息（包括函数名和行号）标记在日志消息里；在排查故障时非常有用。我们还使用Logrus的JSON formatter。在下面显示的Stackdriver控制台中，注意下面的每个日志条目如何在消息中包含JSON有效负载，包含日志级别、函数名、日志条目的起始行和消息。
 
-[![screen_shot_2019-04-15_at_11_10_36_pm](11.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/11.png)
+![screen_shot_2019-04-15_at_11_10_36_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/11.png)
 
 下图是一个特定日志条目的JSON有效负载的详细信息。在这个示例中，我们可以看到从下游服务传来的请求头。
 
-[![screen_shot_2019-04-15_at_11_10_50_pm](12.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/12.png)
+![screen_shot_2019-04-15_at_11_10_50_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/12.png)
 
 ## 支柱 2: 度量
 
@@ -539,7 +539,7 @@ spec:
 
 [Prometheus](https://prometheus.io/) 是一个完全开源的社区驱动的系统监控和报警工具集，最初是在2012年左右在SoundCloud开发的。有趣的是，Prometheus在2016年加入了[云原生计算基金会](https://cncf.io/) （CNCF），成为继[Kubernetes](http://kubernetes.io/)之后的第二个托管项目。
 
-[![screen_shot_2019-04-15_at_11_04_54_pm](13.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/13.png)
+![screen_shot_2019-04-15_at_11_04_54_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/13.png)
 
 ### Grafana
 
@@ -547,9 +547,8 @@ Grafana将自己描述为时间序列分析开源软件的领袖。根据[Grafan
 
 [Istio](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/#about-the-grafana-add-on)的Grafana插件是Grafana的一个预配置的实例。Grafana Docker基础镜像已经修改为带有Prometheus数据源和安装好的Istio仪表板。下图展示了看到的两个预先配置的仪表板：Istio Mesh仪表板和Istio性能仪表板。
 
-[![screen_shot_2019-04-15_at_10_45_38_pm](14.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/14.png)
-
-[![screen_shot_2019-04-15_at_10_46_03_pm](15.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/15.png)
+![screen_shot_2019-04-15_at_10_45_38_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/14.png)
+![screen_shot_2019-04-15_at_10_46_03_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/15.png)
 
 ## 支柱 3: 追踪
 
@@ -561,19 +560,19 @@ Grafana将自己描述为时间序列分析开源软件的领袖。根据[Grafan
 
 下面看到的是一个Jaeger UI 追踪视图。在其中有一系列由[hey](https://github.com/rakyll/hey)生成的追踪数据，hey是一个流行的负载生成器和基准测试工具，是Apache Bench （ab）的一个有价值的替代品。与ab不同的是hey支持HTTP/2。在前一篇文章中详细介绍了hey的用法。
 
-[![screen_shot_2019-04-18_at_6_08_21_pm](16.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/16.png)
+![screen_shot_2019-04-18_at_6_08_21_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/16.png)
 
 你可能还记得，一个追踪数据是贯穿系统的执行路径，可以认为是一个span的[有向无环图](https://en.wikipedia.org/wiki/Directed_acyclic_graph) （DAG）。如果你使用过Apache Spark这样的系统，那么你可能已经很熟悉DAG了。
 
-[![screen_shot_2019-04-15_at_11_06_13_pm](17.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/17.png)
+![screen_shot_2019-04-15_at_11_06_13_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/17.png)
 
 下面是Jaeger UI Trace 的详细视图。示例的追踪信息包含了16个span，其中包含9个组件——7个基于go的服务、一个反向代理和一个Istio Ingress网关。每个追踪和span都有时间点。追踪中的根span是Istio Ingress网关。在这个演示中，追踪没有在RabbitMQ消息队列埋点。这意味着您不会看到包含服务D到服务F之间通过RabbitMQ进行解耦的、基于消息通信的追踪信息。
 
-[![screen_shot_2019-04-15_at_11_08_07_pm](18.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/18.png)
+![screen_shot_2019-04-15_at_11_08_07_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/18.png)
 
 在Jaeger UI Trace 详细视图中，您还可以植入一个包含额外元数据的单个span。元数据包括被调用的URL、HTTP方法、响应状态和其他几个报头。
 
-[![screen_shot_2019-04-15_at_11_08_22_pm](19.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/19.png)
+![screen_shot_2019-04-15_at_11_08_22_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/19.png)
 
 ## 微服务的可观察性
 
@@ -585,11 +584,11 @@ Grafana将自己描述为时间序列分析开源软件的领袖。根据[Grafan
 
 Kiali UI中的图形视图是运行在Istio服务网格中的组件的可视化表示。下图显示了过滤集群的dev命名空间，可以注意到Kiali已经映射了平台中的所有组件，以及丰富的元数据，比如它们的版本和通信协议。
 
-[![screen_shot_2019-04-18_at_6_03_38_pm](20.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/20.png)
+![screen_shot_2019-04-18_at_6_03_38_pm](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/20.png)
 
 使用Kiali，我们可以确认服务到服务的IPC协议现在已经由gRPC替换了之前的HTTP。
 
-[![screen_shot_2019-04-14_at_11_15_49_am](21.png)](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/21.png)
+![screen_shot_2019-04-14_at_11_15_49_am](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/istio-observability-with-go-gprc-and-protocol-buffers-based-microservices/21.png)
 
 # 总结
 
