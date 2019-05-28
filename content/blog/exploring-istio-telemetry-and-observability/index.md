@@ -12,6 +12,7 @@ publishDate:
 ---
 [编者按]
 >作者是Banzai Cloud的工程师，文章介绍了istio环境下，如何结合Prometheus进行网络度量指标监测，给出了一些示例配置。最后，还推广了一下Banzai Cloud自家的Pipeline，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。
+
 ## Istio遥测和可观察性探索
 
 Istio的一个核心功能就是网络流量的可观察性。因为所有服务间的通信都通过Envoy代理，而且Istio的控制平面可以从这些代理收集日志和指标，服务网格能够让你深入了解你的网络状况。虽然Istio的基本安装就装好了收集遥测数据所需的全部组件，但是理解这些组件如何配合，并且使他们能够工作在生产环境中却不是一个容易的事情。如果服务网格扩展到跨越多个云服务提供商的多个群集时，或者在混合云情况下，甚至在边缘计算环境下，这个工作就更加困难。我们在这篇文章中，尽可能解释清楚Istio的遥测是怎么工作的，并且会完整浏览一些监控例子，包括如何配置Prometheus的目标和尝试不同可用的指标。看完这篇文章，你将会对Banzai云中新的[Pipeline](https://github.com/banzaicloud/pipeline)组件有一个提前了解-它是一个跨云和混合云管理平台，基于顶尖的[Istio Operator](https://github.com/banzaicloud/istio-operator)开发。
@@ -123,19 +124,19 @@ Istio文档中提到，度量指标的第一个任务就是[Collecting new metri
 
 ```yaml
 sum(rate(istio_requests_total{reporter="source",source_workload="productpage-v1",destination_service_name="reviews"}[1m])) by (source_workload,source_version,destination_service_name,destination_workload,destination_version,request_protocol,response_code)
-{destination_service_name="reviews",destination_version="v2",destination_workload="reviews-v2",request_protocol="http",response_code="200",source_version="v1",source_workload="productpage-v1"}	12.71
-{destination_service_name="reviews",destination_version="v3",destination_workload="reviews-v3",request_protocol="http",response_code="200",source_version="v1",source_workload="productpage-v1"}	12.72
-{destination_service_name="reviews",destination_version="v1",destination_workload="reviews-v1",request_protocol="http",response_code="200",source_version="v1",source_workload="productpage-v1"}	6.35
-{destination_service_name="reviews",destination_version="v1",destination_workload="reviews-v1",request_protocol="http",response_code="503",source_version="v1",source_workload="productpage-v1"}	6.37
+{destination_service_name="reviews",destination_version="v2",destination_workload="reviews-v2",request_protocol="http",response_code="200",source_version="v1",source_workload="productpage-v1"}    12.71
+{destination_service_name="reviews",destination_version="v3",destination_workload="reviews-v3",request_protocol="http",response_code="200",source_version="v1",source_workload="productpage-v1"}    12.72
+{destination_service_name="reviews",destination_version="v1",destination_workload="reviews-v1",request_protocol="http",response_code="200",source_version="v1",source_workload="productpage-v1"}    6.35
+{destination_service_name="reviews",destination_version="v1",destination_workload="reviews-v1",request_protocol="http",response_code="503",source_version="v1",source_workload="productpage-v1"}    6.37
 ```
 
 - `istio_request_duration_seconds` 是收集负载间延迟的直方图。以下示例计算`productpage`和`reviews`服务之间成功请求的第95百分位延迟，并按工作负载子集对结果进行分组。
 
 ```yaml
 histogram_quantile(0.95, sum(rate(istio_request_duration_seconds_bucket{reporter="source",source_workload="productpage-v1",destination_service_name="reviews",response_code="200"}[60m])) by (le,source_workload,source_version,destination_service_name,destination_workload,destination_version,request_protocol))
-{destination_service_name="reviews",destination_version="v2",destination_workload="reviews-v2",request_protocol="http",source_version="v1",source_workload="productpage-v1"}	0.1201
-{destination_service_name="reviews",destination_version="v3",destination_workload="reviews-v3",request_protocol="http",source_version="v1",source_workload="productpage-v1"}	0.1345
-{destination_service_name="reviews",destination_version="v1",destination_workload="reviews-v1",request_protocol="http",source_version="v1",source_workload="productpage-v1"}	0.1234
+{destination_service_name="reviews",destination_version="v2",destination_workload="reviews-v2",request_protocol="http",source_version="v1",source_workload="productpage-v1"}    0.1201
+{destination_service_name="reviews",destination_version="v3",destination_workload="reviews-v3",request_protocol="http",source_version="v1",source_workload="productpage-v1"}    0.1345
+{destination_service_name="reviews",destination_version="v1",destination_workload="reviews-v1",request_protocol="http",source_version="v1",source_workload="productpage-v1"}    0.1234
 ```
 
 - 剩下的两个HTTP度量指标是`istio_request_bytes`和`istio_response_bytes`。 这些也是直方图，可以用与`istio_request_duration_seconds`类似的方式查询。
@@ -213,6 +214,4 @@ Banzai Cloud的[Pipeline](https://github.com/banzaicloud/pipeline)提供了一�
 ### 关于[BANZAI CLOUD](https://banzaicloud.com/)
 
 [Banzai Cloud](https://banzaicloud.com/)改变私有云的构建方式，以简化复杂应用程序的开发，部署和扩展，将Kubernetes和Cloud Native技术的全部功能带给各地的开发人员和企业。
-
-#multicloud #hybridcloud #BanzaiCloud
 如果你对我们的技术或开源项目感兴趣，可以从[GitHub](https://github.com/banzaicloud/pipeline/), [LinkedIn](https://www.linkedin.com/company/banzaicloud/) 或 [Twitter](https://twitter.com/BanzaiCloud?ref_src=twsrc%5Etfw/)来联系我们。
