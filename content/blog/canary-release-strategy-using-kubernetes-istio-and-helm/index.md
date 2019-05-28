@@ -2,7 +2,7 @@
 title: "使用Kubernetes，Istio和Helm实现金丝雀发布"
 date: 2019-05-27T4:55:44+08:00
 draft: false
-banner: ""
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*PD4gRZhfpksAAAAAAAAAAABkARQnAQ"
 author: "Maninderjit (Mani) Bindra"
 authorlink: "https://medium.com/@maninder.bindra"
 translator: "宋歌"
