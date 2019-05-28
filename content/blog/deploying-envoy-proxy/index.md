@@ -2,7 +2,7 @@
 title: "部署Envoy代理来为Monzo提速"
 date: 2019-05-27T4:55:44+08:00
 draft: false
-banner: ""
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*PD4gRZhfpksAAAAAAAAAAABkARQnAQ"
 author: "Suhail Patel"
 authorlink: "https://monzo.com/blog/authors/suhail-patel/"
 translator: "孙海洲"
