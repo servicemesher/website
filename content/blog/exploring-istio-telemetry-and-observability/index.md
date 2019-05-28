@@ -144,7 +144,7 @@ histogram_quantile(0.95, sum(rate(istio_request_duration_seconds_bucket{reporter
 
 如果您仍然对如何在Mixer中配置这些指标感兴趣，可以查看群集中相应的Istio自定义资源。 如果从集群中获得`metric` CRs，它会列出八个不同的资源，这些资源将转换为Prometheus指标：
 
-```
+```shell
 kubectl get metric -n istio-system
 NAME                   AGE
 requestcount           17h
