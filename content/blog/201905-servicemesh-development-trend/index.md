@@ -2,7 +2,7 @@
 title: "Service Mesh发展趋势：云原生中流砥柱"
 date: 2019-05-28T7:15:43+08:00
 draft: false
-banner: "https://raw.githubusercontent.com/servicemesher/website/master/content/blog/201905-servicemesh-development-trend/logo.jpg"
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*uxhbQq6zPjUAAAAAAAAAAABkARQnAQ"
 author: "敖小剑"
 authorlink: "https://skyao.io/"
 summary: "介绍ServiceMesh最新的产品动态，分析其发展趋势和未来走向；结合蚂蚁的上云实践，阐述在云原生背景下Service Mesh的核心价值，和对云原生落地的关键作用。"
