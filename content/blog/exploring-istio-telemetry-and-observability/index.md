@@ -38,7 +38,7 @@ Istio的文档列举了[收集自定义指标](https://istio.io/docs/tasks/telem
 
 如果你只是想试一试Istio，多半你会部署了它的官方工具Helm Chart（我们更推荐[Istio operator](https://github.com/banzaicloud/istio-operator)以获取更好的体验）。Helm Chart默认包含了Prometheus部署并且也已经配置好。但是在生产环境下，你通常需要自定义设置Prometheus以及配置它的收集目标。这样情况下，你需要手工将Istio抓取目标也配置进去。
 
-首先，我们来看看这些目标。如果你打开这里的配置，你会发现Istio给Prometheus添加了十多个job。大部分是从Istio控制平面收集自定义指标的。你可以看到Pilot通过类似`pilot_xds_pushes`, `pilot_xds_push_timeout` and `pilot_total_xds_internal_errors`这些指标上报遥测数据，如`xDS`推送，超时或内部错误。这些job紧跟在组件名称后，并通过Kubernetes服务中`http-monitoring`对应的端口上报。下面列举了一个pilot的例子：
+首先，我们来看看这些目标。如果你打开这里的配置，你会发现Istio给Prometheus添加了十多个job。大部分是从Istio控制平面收集自定义指标的。你可以看到Pilot通过类似`pilot_xds_pushes`, `pilot_xds_push_timeout` 与 `pilot_total_xds_internal_errors`这些指标上报遥测数据，如`xDS`推送，超时或内部错误。这些job紧跟在组件名称后，并通过Kubernetes服务中`http-monitoring`对应的端口上报。下面列举了一个pilot的例子：
 
 ```yaml
 - job_name: 'pilot'
