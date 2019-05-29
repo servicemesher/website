@@ -1,23 +1,26 @@
 ---
-original: "https://banzaicloud.com/blog/istio-telemetry/"
-author: "Marton Sereg"
-translator: "chengwhynot"
-reviewer: ["",""]
 title: "Istio遥测和可观察性探索"
+date: 2019-05-29T17:20:42+08:00
+draft: true
+banner: ""
+author: "Marton Sereg"
+translator: "张成"
+originallink: "https://banzaicloud.com/blog/istio-telemetry/"
+translatorlink: ""
+reviewer:  ["宋净超","孙海洲","罗广明"]
+reviewerlink:  ["https://jimmysong.io"]
+authorlink: ""
 summary: "文章介绍了istio环境下，如何结合Prometheus进行网络度量指标监测，给出了一些示例配置。最后，还推广了一下Banzai Cloud自家的Pipeline，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。"
-categories: "译文"
 tags: ["istio","operator","monitor"]
-originalPublishDate: 2019-05-13
-publishDate: 
+categories: ["translation"]
+keywords: ["service mesh","istio","telemetry"]
 ---
 [编者按]
 >作者是Banzai Cloud的工程师，文章介绍了istio环境下，如何结合Prometheus进行网络度量指标监测，给出了一些示例配置。最后，还推广了一下Banzai Cloud自家的Pipeline，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。
 
-## Istio遥测和可观察性探索
-
 Istio的一个核心功能就是网络流量的可观察性。因为所有服务间的通信都通过Envoy代理，而且Istio的控制平面可以从这些代理收集日志和指标，服务网格能够让你深入了解你的网络状况。虽然Istio的基本安装就装好了收集遥测数据所需的全部组件，但是理解这些组件如何配合，并且使他们能够工作在生产环境中却不是一个容易的事情。如果服务网格扩展到跨越多个云服务提供商的多个群集时，或者在混合云情况下，甚至在边缘计算环境下，这个工作就更加困难。我们在这篇文章中，尽可能解释清楚Istio的遥测是怎么工作的，并且会完整浏览一些监控例子，包括如何配置Prometheus的目标和尝试不同可用的指标。看完这篇文章，你将会对Banzai云中新的[Pipeline](https://github.com/banzaicloud/pipeline)组件有一个提前了解-它是一个跨云和混合云管理平台，基于顶尖的[Istio Operator](https://github.com/banzaicloud/istio-operator)开发。
 
-### Mixer与智能代理（Envoy）
+## Mixer与智能代理（Envoy）
 
 Istio的控制平面由几个不同部分组成，其中一个是Mixer。Mixer自身在Kubernetes里面又有两个不同的独立部署。一个叫做`istio-policy`，另一个叫`istio-telemetry`。就像它们的名字，这些组件负责提供控制策略和遥测数据收集功能。
 
@@ -29,7 +32,7 @@ Istio的控制平面由几个不同部分组成，其中一个是Mixer。Mixer�
 
 ![img](./istio-telemetry.png)
 
-### 配置Prometheus收集网格数据
+## 配置Prometheus收集网格数据
 
 Istio的文档列举了[收集自定义指标](https://istio.io/docs/tasks/telemetry/metrics/collecting-metrics/)，以及[从Prometheus中查询指标](https://istio.io/docs/tasks/telemetry/metrics/querying-metrics/)的例子，但缺少一个重要的内容：理解和配置Prometheus的收集目标。
 
@@ -84,7 +87,7 @@ Mixer通过Pilot来加强Kubernetes中Envoys上报的采样数据，所以从Mix
 
 使用[Helm Chart](https://github.com/helm/charts/tree/master/stable/prometheus)部署Prometheus到群集中，部署目的地添加到`values.yaml`文件，或者直接编辑包含`premetheus.yaml`的`configmap`，并把它挂载到Prometheus的服务端pod上。
 
-#### 使用Prometheus Operator
+### 使用Prometheus Operator
 
 群集中部署Prometheus的一个更好的方法是用[Prometheus Operator](https://github.com/coreos/prometheus-operator/)。这种情况下，目标配置稍稍有点不同-不再直接用`prometheus.yml，`而是通过定义`ServiceMonitor`的自定义资源，来声明一些列用于监控的服务，并且这个operator在后台自动把这些配置转换为Prometheus的`yaml`配置。举个例子，一条收集`mixer`指标的`ServiceMonitor`记录定义如下：
 
@@ -112,7 +115,7 @@ spec:
 
 它示范了通过匹配标签`istio=mixer`以及每5秒查询一次终结点端口`prometheus`和`http-monitoring`的配置。就像上面这个配置，Mixer通过`http-monitoring`端口，提供了关于它自己操作的自定义度量指标，也通过`prometheus`端口提供了聚合的以网络流量服务为中心的一些度量指标。
 
-### 默认度量指标
+## 默认度量指标
 
 Istio文档中提到，度量指标的第一个任务就是[Collecting new metrics](https://istio.io/docs/tasks/telemetry/metrics/collecting-metrics/)。它很好地描述了Istio如何最大化的自定义资源去配置`instance`，`handlers`和`rules`，并演示了如何创建一个自定义的，Istio生成并且自动收集的度量指标，当然这属于高级别的话题范畴。大部分普通场景里，默认的度量值就足够覆盖使用场景了，Istio用户也不需要了解背后的概念。
 
@@ -141,7 +144,7 @@ histogram_quantile(0.95, sum(rate(istio_request_duration_seconds_bucket{reporter
 
 - 剩下的两个HTTP度量指标是`istio_request_bytes`和`istio_response_bytes`。 这些也是直方图，可以用与`istio_request_duration_seconds`类似的方式查询。
 
-#### 默认内部度量指标
+### 默认内部度量指标
 
 如果您仍然对如何在Mixer中配置这些指标感兴趣，可以查看群集中相应的Istio自定义资源。 如果从集群中获得`metric` CRs，它会列出八个不同的资源，这些资源将转换为Prometheus指标：
 
@@ -201,17 +204,17 @@ spec:
 
 如果您仍需要自定义一些有关网络流量的指标，你需要添加这些类型的自定义资源。 为此，您可以参考[Istio文档](https://istio.io/docs/tasks/telemetry/metrics/collecting-metrics/)。
 
-### 用于ISTIO的多/混合云监测和控制平面工具
+## 用于ISTIO的多/混合云监测和控制平面工具
 
 Istio及其遥测组件最初可能会令人生畏，特别是如果涉及多个集群。 我们非常关注简化多集群环境中的服务网格使用，因为我们专注于在Banzai Cloud构建多云和混合云平台。 我们的劳动成果即将发布在KubeCon：一个用于监控和配置服务网格活动的可视化工具。 我们考虑过使用其他工具，如Kiali，但它缺乏多集群支持以及通过UI指定配置选项的能力。 因此，我们最终编写了自己的UI和后端基础架构，以便与服务网格进行通信。 这个新工具将很快在KubeCon上发布，并将作为[Pipeline](https://github.com/banzaicloud/pipeline)平台的一部分提供，敬请期待！
 
 ![img](./uistio.png)
 
-### 关于[PIPELINE](https://github.com/banzaicloud/pipeline)
+## 关于[PIPELINE](https://github.com/banzaicloud/pipeline)
 
 Banzai Cloud的[Pipeline](https://github.com/banzaicloud/pipeline)提供了一个平台，允许企业开发，部署和扩展基于容器的应用程序。 它利用最佳的云组件（如Kubernetes）为开发人员和运维团队创建高效，灵活的环境。 强大的安全措施 - 多身份验证后端，细粒度授权，动态密钥管理，使用TLS的组件之间的自动安全通信，漏洞扫描，静态代码分析，CI / CD等等 -是[流水线平台](https://github.com/banzaicloud/pipeline)的*零级*特征，我们努力为所有企业赋能以实现自动化。
 
-### 关于[BANZAI CLOUD](https://banzaicloud.com/)
+## 关于[BANZAI CLOUD](https://banzaicloud.com/)
 
 [Banzai Cloud](https://banzaicloud.com/)改变私有云的构建方式，以简化复杂应用程序的开发，部署和扩展，将Kubernetes和Cloud Native技术的全部功能带给各地的开发人员和企业。
 如果你对我们的技术或开源项目感兴趣，可以从[GitHub](https://github.com/banzaicloud/pipeline/), [LinkedIn](https://www.linkedin.com/company/banzaicloud/) 或 [Twitter](https://twitter.com/BanzaiCloud?ref_src=twsrc%5Etfw/)来联系我们。
