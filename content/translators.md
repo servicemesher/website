@@ -46,4 +46,4 @@ keywords: ["service mesh"]
 |Kael | 1|
 |Jianjun | 1|
 |Grace | 1|
-提交文章线索或译文请访问 https://github.com/servicemesher/trans
+提交文章线索或译文请访问 https://github.com/servicemesher/website
