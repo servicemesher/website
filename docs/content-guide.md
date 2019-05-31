@@ -2,6 +2,8 @@
 
 本站除主页外的所有内容都是用 Markdown 格式文档编写，然后由 Hugo 渲染出 HTML 页面。所有的 Markdown 内容都保存在 `content` 目录下。
 
+Markdown规则与翻译规范参考[Markdown 语法规范](./markdown-guide.md)。
+
 ## 默认模板
 
 创建博客的默认模版位于 `archetypes/default.md`。
