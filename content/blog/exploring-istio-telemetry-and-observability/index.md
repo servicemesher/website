@@ -31,7 +31,7 @@ Istio的控制平面由几个不同部分组成，其中一个是Mixer。Mixer�
 
 如果你想用一个不同的*adapter* - 如`Stackdriver`- 你需要更新mixer的自定义资源配置。Istio中有几个概念叫做`handlers`，`instances`以及`rules`。`Handlers`决定一系列后端基础设置适配器是怎么工作以及如何操作的，`instances`描述了如何把请求的属性映射到适配器的输入上，最后`rules`把`handlers`和`instances`拼接在一起。这些概念如果你想了解更多，你可以查看[官方文档](https://istio.io/docs/concepts/policies-and-telemetry/#configuration-model)，这篇文章最后也会演示一下一些默认的例子。
 
-![img](./istio-telemetry.png)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/exploring-istio-telemetry-and-observability/istio-telemetry.png)
 
 ## 配置Prometheus收集网格数据
 
@@ -209,7 +209,7 @@ spec:
 
 Istio及其遥测组件最初可能会令人生畏，特别是如果涉及多个集群。 我们非常关注简化多集群环境中的服务网格使用，因为我们专注于在Banzai Cloud构建多云和混合云平台。 我们的劳动成果即将发布在KubeCon：一个用于监控和配置服务网格活动的可视化工具。 我们考虑过使用其他工具，如Kiali，但它缺乏多集群支持以及通过UI指定配置选项的能力。 因此，我们最终编写了自己的UI和后端基础架构，以便与服务网格进行通信。 这个新工具将很快在KubeCon上发布，并将作为[Pipeline](https://github.com/banzaicloud/pipeline)平台的一部分提供，敬请期待！
 
-![img](./uistio.png)
+![img](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/exploring-istio-telemetry-and-observability/uistio.png)
 
 ## 关于[PIPELINE](https://github.com/banzaicloud/pipeline)
 
