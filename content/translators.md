@@ -29,6 +29,7 @@ keywords: ["service mesh"]
 |杨传胜 | 2|
 |李守超 | 2|
 |敖小剑 | 2|
+|张成 | 2|
 |宋歌 | 2|
 |邵思华 | 1|
 |赵化冰 | 1|
@@ -37,7 +38,6 @@ keywords: ["service mesh"]
 |王夕宁 | 1|
 |张琦翔 | 1|
 |张新峰 | 1|
-|张成 | 1|
 |张保珠 | 1|
 |季正军 | 1|
 |姜洵 | 1|
@@ -46,4 +46,4 @@ keywords: ["service mesh"]
 |Kael | 1|
 |Jianjun | 1|
 |Grace | 1|
-提交文章线索或译文请访问 https://github.com/servicemesher/website
+提交文章线索或译文请访问 https://github.com/servicemesher/trans
