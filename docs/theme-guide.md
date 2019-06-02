@@ -215,7 +215,7 @@ image: "img/carousel/envoy-gitbook.png"
 - weight：权重，决定显示顺序
 - title：标题
 - description：支持HTML
-- image：显示的图片
+- image：显示的图片，建议的分辨率是 1600 * 880，或者该比例的图片也可以
 
 可以配置多个页面，每个页面分别在一个YAML文件中配置，可以配置多个，建议是偶数个，因为这样当在大页面中显示会比较好看。
 
@@ -308,29 +308,6 @@ avatar: "https://ws1.sinaimg.cn/large/00704eQkgy1frmobjwmuoj31z21z61ky.jpg"
 | logo.png             | 默认的网站logo，显示在页面左上角                             | 187*42       | 是       |
 
 以上图片是必须在网站中存储和使用的图片，还有一些地方使用图床中的图片，不需要在本地保存，请参考`config.toml`中的说明。
-
-## 设置图床
-
-我们使用的是免费的新浪微博图床，该图床只需要有新浪微博账户即可使用，它有以下特点：
-
-- 上传的图片不会出现在你的个人相册中
-- 可以选择上传原图和缩略图
-- 支持 https
-- 本身是开源的
-
-#### 安装
-
-可以选择安装本地应用，也可以使用 chrome 插件来上传。
-
-**PicGo**
-
-[下载 PicGo](https://github.com/Molunerfinn/PicGo/releases)。PicGo 是一款开源的微博图床工具，使用起来十分简便。可以通过设置微博的用户名密码方式登录，也可以通过设置 Cookie 来登录。
-
-如果选择使用 Cookie 来认证，需要打开 https://weibo.com/minipublish 页面，在 Chrome 中打开调试模式，然后选择【网络】标签页，刷新页面，看到有对 minipublish 的请求，在 Headers 里找到 Cookie，复制它的值填写到 PicGo 的微博设置中即可。
-
-**Chrome 插件**
-
-在 Chrome store 中搜索 “微博图床” 就可以安装了，在 Chrome 浏览器中登陆新浪微博后就可以使用该插件上传图片了。
 
 ## 其它配置
 
