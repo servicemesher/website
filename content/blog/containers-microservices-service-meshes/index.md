@@ -19,7 +19,7 @@ publishDate: 2019-06-02
 
 ![meshes_by_guangmingluo](meshes_by_guangmingluo.jpeg)
 
-*封面图：译者供*
+`封面图：译者供`
 
 ## 前言
 
@@ -75,7 +75,7 @@ dotCloud平台没有与[ClusterIP](https://kubernetes.io/docs/concepts/services-
 
 许多高级服务都可以使用上面描述的路由网格。事实上，dotCloud平台的100多个微服务中有很大一部分是作为常规应用程序部署在dotCloud平台上的。但是，少量的底层服务(特别是实现路由网格的服务)需要一些更简单的东西，需要较少的依赖关系(因为它们不能依靠自己来运行；这是一个古老的“先有鸡还是先有蛋”的问题)。
 
-通过直接在几个关键节点上启动容器，而不是依赖于平台的构建器、调度器和运行器服务，部署了这些底层的基本平台服务。如果您想要与现代容器平台进行比较，这就像直接在节点上启动我们的控制平面，使用 `docker run `，而不是让Kubernetes为我们做这件事。这与[kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/)或[bootkube](https://github.com/kubernetes-incubator/bootkube)在加载自托管集群使用[静态pod](https://kubernetes.io/docs/tasks/administer-cluster/static-pod/)相当类似。
+通过直接在几个关键节点上启动容器，而不是依赖于平台的构建器、调度器和运行器服务，部署了这些底层的基本平台服务。如果您想要与现代容器平台进行比较，这就像直接在节点上启动我们的控制平面，使用 `docker run`，而不是让Kubernetes为我们做这件事。这与[kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/)或[bootkube](https://github.com/kubernetes-incubator/bootkube)在加载自托管集群使用[静态pod](https://kubernetes.io/docs/tasks/administer-cluster/static-pod/)相当类似。
 
 这些服务以一种非常简单粗糙的方式对外开放：有一个YAML文件列出了这些服务，将它们的名称映射到它们的地址；这些服务的每个消费者都需要该YAML文件的副本作为其部署的一部分。
 
