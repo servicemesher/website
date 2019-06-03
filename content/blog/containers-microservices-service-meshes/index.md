@@ -3,13 +3,13 @@ original: https://jpetazzo.github.io/2019/05/17/containers-microservices-service
 author: jpetazzo
 translator: 罗广明
 translatorlink: https://guangmingluo.github.io/guangmingluo.io/
-reviewer: []
+reviewer: [haiker2011]
 title: "容器、微服务和服务网格"
 description: "本文介绍了dotCloud的历史、容器间路由，进而阐述了它与现代服务网格的相同与不同之处，如何实现一个类似的服务网格以及其与Istio的区别。"
 categories: "translation"
 tags: ["istio", "kubernetes", "service-mesh", "SuperGloo"]
 originalPublishDate: 2019-05-17
-publishDate: 2019-06-02
+publishDate: 2019-06-03
 
 ---
 
