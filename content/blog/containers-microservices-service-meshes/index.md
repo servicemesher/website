@@ -1,25 +1,25 @@
 ---
 original: https://jpetazzo.github.io/2019/05/17/containers-microservices-service-meshes/
-author: jpetazzo
-translator: 罗广明
-translatorlink: https://guangmingluo.github.io/guangmingluo.io/
-reviewer: [haiker2011]
-title: "容器、微服务和服务网格"
+author: "Jérôme Petazzoni"
+authorlink: "https://jpetazzo.github.io"
+translator: "罗广明"
+translatorlink: "https://guangmingluo.github.io/guangmingluo.io/"
+reviewer: ["孙海洲"]
+reviewerlink: ["https://github.com/haiker2011"]
+title: "容器、微服务和服务网格简史"
 description: "本文介绍了dotCloud的历史、容器间路由，进而阐述了它与现代服务网格的相同与不同之处，如何实现一个类似的服务网格以及其与Istio的区别。"
 categories: "translation"
 tags: ["istio", "kubernetes", "service-mesh", "SuperGloo"]
 originalPublishDate: 2019-05-17
-publishDate: 2019-06-03
-
+date: 2019-06-03T11:20:34+08:00
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*ynV-TqegwKAAAAAAAAAAAABkARQnAQ"
 ---
 
 ## 编者按
 
 本文通过介绍一个构建和运行微服务的平台dotCloud的历史、容器间路由，进而阐述了它与现代服务网格的相同与不同之处；接着介绍了如何实现一个类似的服务网格以及其与Istio的区别；最后引入了SuperGloo的介绍，一个管理和编排大规模服务网格的开源项目。
 
-![meshes_by_guangmingluo](meshes_by_guangmingluo.jpeg)
-
-`封面图：译者供`
+![banner](https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*ynV-TqegwKAAAAAAAAAAAABkARQnAQ)
 
 ## 前言
 
@@ -83,7 +83,7 @@ dotCloud平台没有与[ClusterIP](https://kubernetes.io/docs/concepts/services-
 
 我们最开始的解决方案是让每个消费者都连接到一个本地代理。消费者不需要知道服务的完整地址+端口，只需要知道它的端口号，并通过“localhost”连接。本地代理将处理该连接，并将其路由到实际后端。现在，当一个后端服务需要移动到另一台机器上，或按比例扩容或缩容，不再需要更新它的所有消费者，我们只需要更新所有这些本地代理；我们不再需要重新启动消费者。
 
-(还计划过将流量封装在TLS连接中，并在接收端使用另一个代理来打开TLS并验证证书，而不涉及该接收服务，该服务将被设置为只接受`localhost`上的连接。稍后会详细介绍。)
+（还计划过将流量封装在TLS连接中，并在接收端使用另一个代理来打开TLS并验证证书，而不涉及该接收服务，该服务将被设置为只接受`localhost`上的连接。稍后会详细介绍。)
 
 这与AirBNB的[SmartStack](https://medium.com/airbnb-engineering/smartstack-service-discovery-in-the-cloud-4b8a080de619)非常相似；与之显著不同的是，SmartStack 被实现并部署到生产环境中，而dotCloud的新内部路由网格在dotCloud转向Docker时被搁置。☺
 
@@ -102,15 +102,15 @@ dotCloud平台没有与[ClusterIP](https://kubernetes.io/docs/concepts/services-
 
 - Istio使用[Envoy Proxy](https://www.envoyproxy.io/)，而不是HAProxy
 - Istio存储后端配置使用Kubernetes API，而不是etcd或Consul
-- 服务在内部子网中分配地址(Kubernetes集群ip地址)，而不是“127.0.0.0/8”
-- Istio有一个额外的组件(Citadel)添加客户端和服务器之间的相互TLS认证
+- 服务在内部子网中分配地址（Kubernetes集群 IP 地址），而不是“127.0.0.0/8”
+- Istio有一个额外的组件（Citadel）添加客户端和服务器之间的相互TLS认证
 - Istio增加了对新功能的支持，如断路，分布式追踪，金丝雀部署…
 
 让我们快速回顾一下这些差异。
 
 ### Envoy代理
 
-Envoy代理是由Lyft撰写。它与其他代理(如HAProxy、NGINX、Traefik……)有许多相似之处，但Lyft编写它是因为它们需要当时这些代理中不存在的功能，而且构建一个新的代理比扩展现有代理更有意义。
+Envoy代理是由Lyft撰写。它与其他代理（如HAProxy、NGINX、Traefik……）有许多相似之处，但Lyft编写它是因为它们需要当时这些代理中不存在的功能，而且构建一个新的代理比扩展现有代理更有意义。
 
 Envoy可以单独使用。如果有一个给定的服务需要连接到其他服务，可以把它连接到Envoy，然后动态地在Envoy上配置和重新配置其他服务的位置，从而得到很多额外的优雅的功能，比如可观测性。不需使用定制的客户端库，也不用在代码中对请求添加追踪，而是将流量定向到Envoy，让它来收集指标。
 
@@ -120,7 +120,7 @@ Envoy可以单独使用。如果有一个给定的服务需要连接到其他服
 
 说到控制平面：Istio的实现依赖于Kubernetes API。*这和使用cond没有太大的不同。* cond依赖etcd或Consul来监视数据存储中的一组键值。Istio依赖Kubernetes API来监视一组Kubernetes资源。
 
-*旁白*：我个人认为阅读这篇文章[Kubernetes API description](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/api-machinery/protobuf.md#proposal-and-motivation)非常有帮助。
+*旁白* ：我个人认为阅读这篇文章[Kubernetes API description](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/api-machinery/protobuf.md#proposal-and-motivation)非常有帮助。
 
 > Kubernetes API服务器是一个“dumb server”，它提供对API资源的存储、版本控制、验证、更新和监视语义。
 
@@ -128,11 +128,11 @@ Istio是为与Kubernetes合作而设计的；如果您想在Kubernetes之外使�
 
 ### 服务地址
 
-Istio依赖于Kubernetes对集群ip地址的分配，因此Istio服务获得一个内部地址(不在“127.0.0.0/8”范围内)。
+Istio依赖于Kubernetes对集群ip地址的分配，因此Istio服务获得一个内部地址（不在“127.0.0.0/8”范围内）。
 
-在没有Istio的Kubernetes集群上，前往给定服务的ClusterIP地址的流量被kube-proxy拦截，并发送到该代理的后端。更具体地说，如果您想了解技术细节：kube-proxy通过设置iptables规则(或IPVS负载均衡器，取决于它是如何设置的)来重写连接到集群IP地址的目标IP地址。
+在没有Istio的Kubernetes集群上，前往给定服务的ClusterIP地址的流量被kube-proxy拦截，并发送到该代理的后端。更具体地说，如果您想了解技术细节：kube-proxy通过设置iptables规则（或IPVS负载均衡器，取决于它是如何设置的）来重写连接到集群IP地址的目标IP地址。
 
-Istio安装在Kubernetes集群上之后，任何变化都不会发生，直到通过将*sidecar*容器注入到使用者pod中，显式地为给定的消费者甚至整个namespace启用Istio。sidecar将运行一个Envoy实例，并设置一些iptables规则来拦截到其他服务的流量，并将这些流量重定向到Envoy。
+Istio安装在Kubernetes集群上之后，任何变化都不会发生，直到通过将 *sidecar* 容器注入到使用者pod中，显式地为给定的消费者甚至整个namespace启用Istio。sidecar将运行一个Envoy实例，并设置一些iptables规则来拦截到其他服务的流量，并将这些流量重定向到Envoy。
 
 结合Kubernetes DNS集成，这意味着我们的代码可以连接到一个服务名，一切都“正常工作”。换句话说，我们的代码将发出一个请求，例如`http://api/v1/users/4242`，`api`被解析至`10.97.105.48`，而一个iptables规则将拦截发送给`10.97.105.48`的连接并且重定向到他们本地Envoy代理，该代理将请求路由到实际的api的后端。唷!
 
@@ -140,7 +140,7 @@ Istio安装在Kubernetes集群上之后，任何变化都不会发生，直到�
 
 Istio还可以使用名为*Citadel*的组件，通过mTLS（双向的TLS）提供端到端加密和身份验证。
 
-*Mixer*，Envoy的另一个功能组件，可以查询*每一个*请求，并对请求做一个ad-hoc决定，该决定取决于各种因素，例如请求头、后端负载…（别担心：有丰富的规则，以确保mixer高度可用，即使它暂时不可用，Envoy可以继续代理流量。)
+*Mixer* ，Envoy的另一个功能组件，可以查询 *每一个* 请求，并对请求做一个ad-hoc决定，该决定取决于各种因素，例如请求头、后端负载…（别担心：有丰富的规则，以确保mixer高度可用，即使它暂时不可用，Envoy可以继续代理流量。）
 
 当然，我提到了可观察性：Envoy在提供分布式追踪的同时收集了大量的度量（metrics）。在微服务架构中，如果单个API请求必须经过微服务A、 B、 C和D，分布式追踪将在进入系统的请求添加一个惟一的标识符，并在流经这些微服务的子请求中保留该标识符，允许收集所有相关的请求调用，它们的延迟等。
 
@@ -148,9 +148,9 @@ Istio还可以使用名为*Citadel*的组件，通过mTLS（双向的TLS）提�
 
 Istio以复杂著称。相比之下，使用我们今天已经拥有的工具，构建像我在本文开头描述的那样的路由网格相对比较简单。那么，构建我们自己的服务网格是否有意义呢?
 
-如果我们有适度一点的需求(比如不需要可观察性，断路器，和其他细节)，我们可能想建立自己的服务网格。但是如果我们正在使用Kubernetes，我们甚至可能不需要这样做，因为Kubernetes已经提供了基本的服务发现和负载平衡。
+如果我们有适度一点的需求（比如不需要可观察性，断路器，和其他细节），我们可能想建立自己的服务网格。但是如果我们正在使用Kubernetes，我们甚至可能不需要这样做，因为Kubernetes已经提供了基本的服务发现和负载平衡。
 
-现在，如果我们有高级一点需求，“购买”服务网格可能是更好的选择。(由于Istio是开源的，所以它并不总是“购买”，但是我们仍然需要投入工程师的时间来理解它是如何工作、部署和运行的。)
+现在，如果我们有高级一点需求，“购买”服务网格可能是更好的选择。（由于Istio是开源的，所以它并不总是“购买”，但是我们仍然需要投入工程师的时间来理解它是如何工作、部署和运行的。）
 
 ## Istio vs. Linkerd vs. Consul Connect
 
