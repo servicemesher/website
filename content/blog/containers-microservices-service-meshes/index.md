@@ -29,7 +29,7 @@ publishDate: 2019-06-02
 
 ## dotCloud的历史
 
-我已经写过关于dotCloud平台的历史和它的一些设计选择，但是我没有过多讨论它的网络层。如果你不想跳进我以前的[关于dotCloud的博客](http://jpetazzo.github.io/2017/02/24/from-dotcloud-to-docker/)，所有你需要知道的是，这是一个PaaS平台，它允许用户运行各种应用程序(Java、PHP、Python…)，支持广泛的数据服务(MongoDB, MySQL,复述,…)和与Heroku类似的工作流：您将把代码推到平台上，平台将负责容器镜像的创建和部署。
+我已经写过关于dotCloud平台的历史和它的一些设计选择，但是我没有过多讨论它的网络层。如果你不想跳进我以前的[关于dotCloud的博客](http://jpetazzo.github.io/2017/02/24/from-dotcloud-to-docker/)，所有你需要知道的是，这是一个PaaS平台，它允许用户运行各种应用程序(Java、PHP、Python…)，支持广泛的数据服务(MongoDB, MySQL, Redis,…)和与Heroku类似的工作流：您将把代码推到平台上，平台将负责容器镜像的创建和部署。
 
 我将告诉您流量是如何在dotCloud平台上路由的；不是因为它是特别强大或者其它(我认为这是好的时间!)，主要是因为，如果需要一种方法在一堆微服务或应用程序之间路由通信，dotCloud的设计可以很容易地与今天的工具由一个合适的团队在很短的时间去实现。因此，它将为我们提供一个很好的比较点：“如果我们自己实现它，我们会得到什么”和“如果我们使用现有的服务网格，我们会得到什么”，也就是这个传统的困境 - “构建vs购买”。
 
@@ -49,7 +49,7 @@ publishDate: 2019-06-02
 
 dotCloud平台没有与[ClusterIP](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/)提供相同的服务: 为了简单起见，从平台内部和外部以相同的方式访问服务。
 
-这已经足够简单了，HTTP和TCP路由网格的最初实现可能都是几百行Python代码，使用的算法相当简单(我敢说，很天真)，但是随着时间的推移，它们不断发展，以处理平台的增长和额外的需求。
+这已经足够简单了，HTTP和TCP路由网格的最初实现可能都是几百行Python代码，使用的算法相当简单(我敢说，相当简单)，但是随着时间的推移，它们不断发展，以处理平台的增长和额外的需求。
 
 它不需要对现有程序代码进行大量重构。[十二因素应用程序](https://12factor.net/)尤其可以直接使用通过环境变量提供的地址信息。
 
@@ -63,7 +63,7 @@ dotCloud平台没有与[ClusterIP](https://kubernetes.io/docs/concepts/services-
 
 现代服务网格做得更好。首先，确保连接在源节点上被路由。逻辑流仍然是“客户端→网格→服务”，但是现在网格在本地运行，而不是在远程节点上，所以“客户端→网格”连接是本地连接，因此非常快(微秒而不是毫秒)。
 
-现代服务网格还实现了更智能的负载平衡算法。通过监控后端健康状况，它们可以在处理速度更快的后端上发送更多的流量，从而提高整体性能。
+现代服务网格还实现了更智能的负载均衡算法。通过监控后端健康状况，它们可以在处理速度更快的后端上发送更多的流量，从而提高整体性能。
 
 现代服务网格的**安全**也更强大。dotCloud路由网格完全在EC2 Classic上运行，并且没有加密流量(假设有人设法嗅探到EC2上的网络流量，那么无论如何都会遇到更大的麻烦)。现代服务网格可以透明地保护我们所有的通信，例如通过相互的TLS身份验证以及后续的加密。
 
@@ -120,7 +120,7 @@ Envoy可以单独使用。如果有一个给定的服务需要连接到其他服
 
 说到控制平面：Istio的实现依赖于Kubernetes API。*这和使用cond没有太大的不同。* cond依赖etcd或Consul来监视数据存储中的一组键值。Istio依赖Kubernetes API来监视一组Kubernetes资源。
 
-*旁白：*我个人认为阅读这篇文章[Kubernetes API description](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/api-machinery/protobuf.md#proposal-and-motivation)非常有帮助。
+*旁白*：我个人认为阅读这篇文章[Kubernetes API description](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/api-machinery/protobuf.md#proposal-and-motivation)非常有帮助。
 
 > Kubernetes API服务器是一个“dumb server”，它提供对API资源的存储、版本控制、验证、更新和监视语义。
 
