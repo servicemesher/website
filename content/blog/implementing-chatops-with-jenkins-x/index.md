@@ -11,9 +11,9 @@ reviewer:  [""]
 reviewerlink:  "https://github.com/"
 originallink: "https://technologyconversations.com/2019/04/24/implementing-chatops-with-jenkins-x/"
 summary: "本文介绍了使用Jenkins X实现ChatOps。很好的阐述了如何使用Jenkins X来实践ChatOps，文中手把手带我们从零开始完成了一次Kubernetes Native的CI/CD之旅。"
-tags: ["servicemesh", "Envoy"]
+tags: ["Jenkins X", "Jenkins X", "Prow"]
 categories: ["translation"]
-keywords: ["servicemesh", "Envoy"]
+keywords: ["Jenkins X", "Jenkins X", "Prow"]
 aliases: "/blog/implementing-chatops-with-jenkins-x/"
 ---
 
