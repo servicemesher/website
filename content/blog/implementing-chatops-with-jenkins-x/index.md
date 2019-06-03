@@ -1,6 +1,6 @@
 ---
 title: "使用Jenkins X实现ChatOps"
-date: 2019-05-27T4:55:44+08:00
+date: 2019-06-3T3:30:44+08:00
 draft: false
 banner: ""
 author: "Viktor Farcic"
