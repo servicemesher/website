@@ -1,10 +1,10 @@
-# 内容管理指南
+## 内容管理指南
 
 本站除主页外的所有内容都是用 Markdown 格式文档编写，然后由 Hugo 渲染出 HTML 页面。所有的 Markdown 内容都保存在 `content` 目录下。
 
 Markdown规则与翻译规范参考[Markdown 语法规范](./markdown-guide.md)。
 
-## 默认模板
+### 默认模板
 
 创建博客的默认模版位于 `archetypes/default.md`。
 
@@ -48,7 +48,7 @@ keywords: [""]
 
 注意：页面右侧的“分类”和“标签“显示的是所有博客的，而非当前博客页面的”分类“和”标签“。
 
-## 创建新的博客
+### 创建新的博客
 
 如果需要创建新的博客，只需要运行下面的命令：
 
@@ -59,7 +59,7 @@ touch content/blog/new-blog/index.md
 
 打开 Markdown 文件，修改文档的元数据，然后就可以欢快的编辑内容了。
 
-## 创建新的 tab 页面
+### 创建新的 tab 页面
 
 使用下面的命令创建新的 tab 页面：
 
@@ -73,9 +73,9 @@ hugo new new-tab.md
 
 ```toml
 [[menu.main]]
-	name = "新的页面"
-	url = "/new-tab/"
-	weight = 6
+    name = "新的页面"
+    url = "/new-tab/"
+    weight = 6
 ```
 
 - name：tab 显示在主页上的名称
