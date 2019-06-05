@@ -28,32 +28,32 @@ publishDate: 2019-06-07
 
 在[前一篇](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-identify-components/) ，我们评估了控制平面可能需要的组件。在本节中，我们将探索特定于域的API在你的控制平面上可能是什么样子的。
 
-## Establishing your control-plane interaction points and API surface
+## 构建你的控制平面和API层面的交互点
 
-Once you’ve thought through what components might make up your control-plane architecture (see previous), you’ll want to consider exactly how your users will interact with the control plane and maybe even more importantly, *who will your users be?* To answer this you’ll have to decide what roles your Envoy-based infrastructure will play and how traffic will traverse your architecture. It could be a combination of
+一旦你考虑了哪些组件可能构成你的控制平面架构（请参阅前面的部分），你会想要确切地考虑用户将如何与控制平面交互，甚至更重要的是，*你的用户是谁？*要回答这个问题，您必须决定基于Envoy的基础架构将扮演什么角色，以及流量将如何通过你的架构。它可以是下面的组合：
 
-- API Management gateway (north/south)
-- Simple Kubernetes edge load balancer / reverse proxy / ingress control (north/south)
-- Shared services proxy (east/west)
-- Per-service sidecar (east/west)
+- API 管理网关（北/南）
+- 简单的Kubernetes边界负载均衡 / 反向代理 / 入口控制 （北/南）
+- 共享的服务代理（东/西）
+- 每个服务的Sidecar （东/西）
 
-For example, the Istio project is intended to be a platform service mesh that platform operators can build tools upon to drive control of the network between your services and applications. Istio’s domain-specific configuration objects for configuring Envoy center around the following objects:
+例如，Istio项目旨在成为服务网格平台，操作员可以在此基础上构建工具来驱动服务和应用程序之间的网络控制。Istio中用于配置Envoy的特定域的配置对象有以下几种：
 
-- [Gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) – define a shared proxy component (capable of cluster ingress) that specifies protocol, TLS, port, and host/authority that can be used to load balance and route traffic
-- [VirtualService](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) – rules for how to interact with a specific service; can specify things like route matching behavior, timeouts, retries, etc
-- [DestinationRule](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) – rules for how to interact with a specific service in terms of circuit breaking, load balancing, mTLS policy, subsets definitions of a service, etc
-- [ServiceEntry](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#ServiceEntry) – explicitly add a service to Istio’s service registry
+- [Gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) – 定义一个共享的代理控件（集群入口能力），指定可用于负载平衡和路由流量的协议、TLS、端口和主机/权限。
+- [VirtualService](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) – 如何与特定服务交互的规则；可以指定诸如路由匹配行为、超时、重试等。
+- [DestinationRule](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) – 如何与特定服务进行交互的规则，包括断路、负载平衡、mTLS策略、服务的子集定义等。
+- [ServiceEntry](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#ServiceEntry) – 显式地将服务添加到Istio的服务注册表。
 
-![img](https://blog.christianposta.com/images/control-plane/istio-crd-pilot.png)
+![img](istio-crd-pilot.png)
 
-Running in Kubernetes, all of those configuration objects are implemented as [CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+在Kubernetes中运行，所有那些配置对象被实现为[CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)。
 
-[Heptio/VMWare Contour](https://github.com/heptio/contour) is intended as a Kubernetes ingress gateway and has a simplified domain-specific configuration model with both a CustomResourceDefinition (CRD) flavor as well as a [Kubernetes Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+[Heptio/VMWare Contour](https://github.com/heptio/contour) 旨在作为Kubernetes的入口网关，并具有简化的特定域的配置模型，同时具有CustomResourceDefinition (CRD)和 [Kubernetes Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/)。
 
-- [IngressRoute](https://github.com/heptio/contour/blob/master/docs/ingressroute.md) which is a Kubernetes CRD that provides a single location to specify configuration for the Contour proxy
-- [Ingress Resource support](https://github.com/heptio/contour/blob/master/docs/annotations.md) which allows you to specify annotations on your Kubernetes Ingress resource if you’re in to that kind of thing
+- [IngressRoute](https://github.com/heptio/contour/blob/master/docs/ingressroute.md) 是一个Kubernetes CRD，提供一个单一位置来指定Contour代理的配置。 
+- [Ingress Resource support](https://github.com/heptio/contour/blob/master/docs/annotations.md) 允许你在Kubernetes Ingress资源上指定注解，如果你愿意这么做。
 
-![img](https://blog.christianposta.com/images/control-plane/contour-crd.png)
+![img](contour-crd.png)
 
 On the [Gloo project](https://gloo.solo.io/) we’ve made the decision to split the available configuration objects into two levels:
 
