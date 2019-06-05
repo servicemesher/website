@@ -15,18 +15,18 @@ publishDate: 2019-06-07
 
 > 本文演示了如何基于Go语言、gRPC和Protobuf技术构建一个微服务，并着重介绍了实现Istio可观测功能的三大支柱：日志、度量和追踪，以及与之对应的工具Logrus、Prometheus、Grafana、Jeager等。通过文章内容和示例代码，读者会对如何构建gRPC技术栈的微服务和使用Istio可视化工具观测服务的实现方案有一个全面的认识。
 
-This is part 3 of a [series](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-to-manage-envoy-proxy-based-infrastructure/) that explores building a control plane for Envoy Proxy.
+这是探索为Envoy构建控制平面[系列文章](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-to-manage-envoy-proxy-based-infrastructure/) 的第3部分。
 
-In this blog series, we’ll take a look at the following areas:
+在这个系列博客中，我们研究了下面的领域：
 
-- [Adopting a mechanism to dynamically update Envoy’s routing, service discovery, and other configuration](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-to-manage-envoy-proxy-based-infrastructure/)
-- [Identifying what components make up your control plane, including backing stores, service discovery APIs, security components, et. al.](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-identify-components/)
-- Establishing any domain-specific configuration objects and APIs that best fit your usecases and organization *(this entry)*
-- [Thinking of how best to make your control plane pluggable where you need it](https://blog.christianposta.com/guidance-for-building-a-control-plane-for-envoy-build-for-pluggability/)
-- [Options for deploying your various control-plane components](https://blog.christianposta.com/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/)
-- Thinking through a testing harness for your control plane
+- [采用一种机制来动态更新Envoy的路由、服务发现和其他配置](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-to-manage-envoy-proxy-based-infrastructure/)
+- [识别构成控制平面的组件，包括后端存储、服务发现API和安全控件等](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-identify-components/)
+- 构建最适合你的用例和组织的特定域的配置对象和API（本文）
+- [考虑如何最好地使你的控制平面可插入在你需要的地方](https://blog.christianposta.com/guidance-for-building-a-control-plane-for-envoy-build-for-pluggability/)
+- [部署各种控制平面组件的选项](https://blog.christianposta.com/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/)
+- 为你的控制平面思考一个测试套件
 
-In the [previous entry](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-identify-components/) we evaluated the components you may need for your control plane. In this section, we explore what a domain-specific API might look like for your control plane.
+在[前一篇](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-identify-components/) ，我们评估了控制平面可能需要的组件。在本节中，我们将探索特定于域的API在你的控制平面上可能是什么样子的。
 
 ## Establishing your control-plane interaction points and API surface
 
