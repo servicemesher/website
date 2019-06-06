@@ -1,16 +1,18 @@
 ---
 title: "使用Jenkins X实现ChatOps"
-date: 2019-06-3T3:30:44+08:00
+date: 2019-06-6T4:30:44+08:00
 draft: false
 banner: ""
 author: "Viktor Farcic"
 authorlink: "https://leanpub.com/u/vfarcic"
 translator: "孙海洲"
 translatorlink: "https://github.com/haiker2011"
-reviewer:  [""]
-reviewerlink:  "https://github.com/"
+reviewer:  ["邱世达"]
+reviewerlink:  "https://github.com/SataQiu"
+reviewer:  ["罗广明"]
+reviewerlink:  "https://github.com/GuangmingLuo"
 originallink: "https://technologyconversations.com/2019/04/24/implementing-chatops-with-jenkins-x/"
-summary: "本文介绍了使用Jenkins X实现ChatOps。很好的阐述了如何使用Jenkins X来实践ChatOps，文中手把手带我们从零开始完成了一次Kubernetes Native的CI/CD之旅。"
+summary: "本文很好的阐述了如何使用Jenkins X来实践ChatOps，文中手把手带我们从零开始完成了一次Kubernetes Native的CI/CD之旅。"
 tags: ["Jenkins X", "Jenkins X", "Prow"]
 categories: ["translation"]
 keywords: ["Jenkins X", "Jenkins X", "Prow"]
@@ -21,15 +23,15 @@ aliases: "/blog/implementing-chatops-with-jenkins-x/"
 
 > 本文介绍了使用Jenkins X实现ChatOps。很好的阐述了如何使用Jenkins X来实践ChatOps，文中手把手带我们从零开始完成了一次Kubernetes Native的CI/CD之旅。
 
-Jenkins X 主逻辑是基于GitOps理念。每个更改都必须用Git记录，并且只允许Git触发集群中发生更改的事件。这种逻辑是Jenkins X的基石，到目前为止，它为我们提供了很好的服务。但是，我们可能还需要执行一些不会导致源代码或配置更改的操作，由此ChatOps就问世。
+Jenkins X 主逻辑是基于GitOps理念。每个更改都必须用Git记录，并且只允许Git触发集群中发生更改的事件。这种逻辑是Jenkins X的基石，到目前为止，它为我们提供了很好的服务。但是，我们可能还需要执行一些不会导致源代码或配置更改的操作，由此ChatOps就问世了。
 
-我们可以将ChatOps定义为对话驱动开发。除了单人团队外，沟通对所有团队都是必不可少的。当我们开发的特性准备好时，我们需要与他人沟通。我们需要请其他人来review我们的变化。我们可能需要请求合并到主分支的权限。我们可能需要沟通的事情是无限的。这并不意味着所有的交流都变成了聊天，而是我们交流的一部分变成了聊天。由系统来决定沟通的哪些部分应该导致操作，以及什么是没有实际结果的纯人与人之间的消息传递。
+我们可以将ChatOps定义为对话驱动开发。除了单人团队外，沟通对其他所有团队都是必不可少的。当我们开发的特性准备好时，我们需要与他人沟通。我们需要请其他人来review我们的变化。我们可能需要请求合并到主分支的权限。我们可能需要沟通的事情是无限多的。这并不意味着所有的交流都变成了聊天，而是我们交流的一部分变成了聊天。由系统来决定沟通的哪些部分应该导致操作，以及什么是没有实际结果的纯人与人之间的消息传递。
 
 我不会用ChatOps的理论和原则来叨扰你们。相反，我们将看看Jenkins X是如何实现ChatOps的。
 
 ## 快速demo上手实践
 
-我们需要一个Kubernetes集群，它具有Jenkins X的无服务器架构（serverless）风格。如果您手头没有一个，可以使用下面的Gist创建一个新的集群，或者在现有集群中安装Jenkins X。请记住，Gist还包含命令，当您完成上手实践后，该命令将允许您销毁集群。
+我们需要一个Kubernetes集群，它具有Jenkins X的无服务器架构（serverless）风格。如果您手头没有一个，可以使用下面的Gist创建一个新的集群，或者在现有集群中安装Jenkins X。请记住，当您完成上手实践后，Gist还包含允许您销毁该集群的命令。
 
 > 首先需要安装`jx`。如果您还没有[安装jx](https://jenkins-x.io/getting-started/install/)，请遵循它的安装教程。
 
@@ -51,7 +53,7 @@ jx create quickstart \
 cd jx-prow
 ```
 
-由于ChatOps主要与pull请求相关，所以我们需要定义谁可以`reviewers`和谁可以`approvers`。我们可以通过修改Jenkins X quickstart创建项目时生成的所有者文件（`OWNERS`）来实现这一点。由于允许PR的发起者更改该文件是不安全的，所以在主分支中起作用的是`OWNERS`文件。这就是我们要探索和修改的。
+由于ChatOps主要与pull请求相关，所以我们需要定义`reviewers`文件和`approvers`文件来决定谁可以review和approve。我们可以通过修改Jenkins X quickstart创建项目时生成的所有者文件（`OWNERS`）来实现这一点。由于允许PR的发起者更改该文件是不安全的，所以在主分支中起作用的是`OWNERS`文件。这就是我们要探索和修改的。
 
 ```bash
 cat OWNERS
@@ -68,11 +70,11 @@ reviewers:
 
 所有者（`OWNERS`）包含负责此存储库的代码库的用户列表。它被划分为`reviewers`和`approvers`两个部分。如果我们想要实现一个两阶段的代码审查流程，其中不同的人将负责review和approve pull请求，这种分割是有用的。然而，这两个角色通常由相同的人执行，所以Jenkins X没有两阶段的开箱即用的评审过程(尽管可以更改)。
 
-接下来，我们需要一个真正的GitHub用户(你的用户除外)，所以请联系你的同事或朋友，让他帮你一把。告诉她你需要她的帮助来完成接下来练习的一些步骤。同时，让她知道你需要了解她的GitHub用户。
+接下来，我们需要一个真正的GitHub用户(你的用户除外)，所以请联系你的同事或朋友，让她帮你一把。告诉她你需要她的帮助来完成接下来练习的一些步骤。同时，让她知道你需要了解她的GitHub用户。
 
 我们将定义两个环境变量，它们将帮助我们创建所有者文件（`OWNERS`）的新版本。`GH_USER`将保存您的用户名，而`GH_APPROVER`将包含允许review和approve您的pull请求的人的用户。通常，我们会有多个approver，这样review和approval任务就会分布到整个团队中。出于演示的目的，你们两个应该足够了。
 
-> 在执行以下命令之前，请替换第一个[…]与您的GitHub用户，第二个与将批准您的PR的人的用户。
+> 在执行以下命令之前，请替换第一个[…]为您的GitHub用户，第二个为将批准您的PR的人的用户。
 
 ```bash
 GH_USER=[…]
@@ -128,9 +130,9 @@ git commit -m "My first PR with prow"
 git push –set-upstream origin chat-ops
 ```
 
-我们创建了一个新的分支`chat-ops`，我们对`README.md`做了一个愚蠢的更改。我们提交了这个commit。
+我们创建了一个新的分支`chat-ops`，对`README.md`做了一个无脑的更改，提交了这个commit。
 
-现在我们已经拥有了更改源代码的分支，我们应该创建一个pull请求。我们可以通过GitHub UI做到这一点。不过有一个更好的方法`.jx`允许我们通过命令行实现这一点。考虑到我更喜欢终端屏幕而不是UI(而您在这方面没有发言权)，我们将选择后者。
+现在我们已经拥有了修改过的源代码的分支，我们应该创建一个pull请求。我们可以通过GitHub UI做到这一点。不过有一个更好的方法`.jx`允许我们通过命令行实现这一点。考虑到我更喜欢终端屏幕而不是UI(而您在这方面没有发言权)，我们将选择后者。
 
 ```bash
 jx create pr \
@@ -141,7 +143,7 @@ jx create pr \
 
 我们创建了一个pull请求，并显示一个带有链接的确认消息。请在您最喜欢的浏览器中打开它。
 
-考虑到没有小猫的公共关系不应该被approve，我们将增加一只小猫。
+考虑到没有小猫的PR不应该被approve，我们将增加一只小猫。
 
 请输入以下PR评论并按下`Comment`按钮。
 
@@ -153,7 +155,7 @@ No PR should be without a kitten
 
 你应该能看到猫的照片。我们并不真正需要它，但是它很好地演示了通过注释进行交流，从而自动执行操作。
 
-当我们创建一个pull请求时，它被自动分配给一个`approvers`。你的同事应该收到一封通知邮件。请让她知道她应该去pull请求(说明在电子邮件中)，键入`/lgtm`(在我看来不错)，并点击`Comment`按钮。
+当我们创建一个pull请求时，它被自动分配给`approvers`列表中某个人。你的同事应该收到一封通知邮件。请让她知道她应该去pull请求(说明在电子邮件中)，键入`/lgtm`(在我看来不错)，并点击`Comment`按钮。
 
 > 请注意`/approve`和`/lgtm`在此上下文中具有相同的目的。我们从一个分支切换到另一个分支，只是为了显示这两个分支都会导致pull请求被合并到主分支。
 
@@ -180,6 +182,6 @@ Approvers can cancel approval by writing /approve cancel in a comment
 
 总之，pull请求得到了批准。结果，Prow将其合并到主分支，并启动了一个Pipeline构建，该构建以将新版本部署到staging环境而告终。
 
-请等到`All checks have passed`消息出现在PR消息中之后，整个流程就结束啦。
+在等到`All checks have passed`消息出现在PR消息中之后，就意味着整个流程已经结束。
 
 这是对Jenkins x中的ChatOps的一个非常快速的概述。现在，您可以卷起袖子，探索Prow、Tekton、Jenkins X Pipeline Operator以及通过serverless Jenkins X bundle提供的其他工具。
