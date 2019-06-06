@@ -55,31 +55,32 @@ publishDate: 2019-06-07
 
 ![img](contour-crd.png)
 
-On the [Gloo project](https://gloo.solo.io/) we’ve made the decision to split the available configuration objects into two levels:
+在[Gloo 项目](https://gloo.solo.io/) 中，我们决定把可用的配置对象分为两层：
 
-- The user-facing configurations for best ergonomics of *user* use cases and leave options for extensibility (more on that in next section)
-- The lower-level configuration that abstracts Envoy but is not expressly intended for direct user manipulation. The higher-level objects get transformed to this lower-level representation which is ultimately what’s used to translate to Envoy xDS APIs. The reasons for this will be clear in the next section.
+- 用户用例的最佳人机工程学的面向用户的配置和可扩展性的选项（下一节将详细介绍）
+- 抽象Envoy但不明确用于直接用户操作的低层配置。较高级别的对象被转换为这种较低级别的表示形式，最终用于转换为Envoy xDS API。原因将在下一节中说明。
 
-For users, Gloo focuses on teams owning their routing configurations since the semantics of the routing (and the available transformations/aggregation capabilities) are heavily influenced by the developers of APIs and microservices. For the user-facing API objects, we use:
+对于用户，Gloo关注负责路由配置的团队，因为路由的语义（以及可用的转换/聚合功能）受到API和微服务开发人员的严重影响。对面向用户的API对象，我们使用：
 
-- [Gateway](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gateway/api/v1/gateway.proto.sk/) – specify the routes and API endpoints available at a specific listener port as well as what security accompanies each API
-- [VirtualService](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gateway/api/v1/virtual_service.proto.sk/) – groups API routes into a set of “virtual APIs” that can route to backed functions (gRPC, http/1, http/2, lambda, etc); gives the developer control over how a route proceeds with [different transformations](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/plugins/transformation/transformation.proto.sk/) in an attempt to decouple the front end API from what exists in the backend (and any breaking changes a backend might introduce)
+- [Gateway](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gateway/api/v1/gateway.proto.sk/) – 指定特定侦听器端口上可用的路由和API端点，以及每个API的安全性
+- [VirtualService](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gateway/api/v1/virtual_service.proto.sk/) – 将API路由分组到一组“虚拟API”中，它们可以路由到支持的协议（gRPC、http/1、http/2、lambda等）；让开发人员控制路由如何处理[不同的转换]
+- (https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/plugins/transformation/transformation.proto.sk/) 试图将前端API与后端中存在的API（以及后端可能引入的任何破坏性更改）解耦
 
-Note these are different than the Istio variants of these objects.
+注意，这些对象与这些对象的Istio变体不同。
 
-The user-facing API objects in Gloo drive the lower-level objects which are then used to ultimately derive the Envoy xDS configurations. For example, Gloo’s lower-level, core API objects are:
+Gloo中面向用户的API对象驱动较低层的对象，这些对象最终用于派生出Envoy的xDS配置。例如，Gloo的低层核心API对象是：
 
-- [Upstream](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/upstream.proto.sk/) – captures the details about backend clusters and the functions that are exposed on this. You can loosely associate a Gloo Upstream with an [Envoy cluster](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/cds.proto) with one big difference: An upstream can understand the actual service functions available at a specific endpoint (in other words, knows about `/foo/bar` and `/bar/wine` including their expected parameters and parameter structure rather than just `hostname:port`). More on that in a second.
-- [Proxy](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/proxy.proto.sk/) – The proxy is the main object that abstracts all of the configuration we can apply to Envoy. This includes listeners, virtual hosts, routes, and upstreams. The higher-level objects (VirtualService, Gateway, etc) are used to drive this lower-level Proxy object.
+- [Upstream](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/upstream.proto.sk/) – 获取后端集群和在上面公开功能的详细信息。您可以松散地将Gloo Upstream与[Envoy 集群](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/cds.proto) 关联起来，但有一个很大的区别： 一个upstream可以理解在一个特点端点的实际的服务函数（换句话说，知道`/foo/bar` 和 `/bar/wine` 以及它们期望的参数和结构，而不仅仅是`hostname:port`）。等下再详细讲。
+- [Proxy](https://gloo.solo.io/v1/github.com/solo-io/gloo/projects/gloo/api/v1/proxy.proto.sk/) – 代理是一个主要的对象，它抽象出了我们可以应用到Envoy的所有配置。这包括监听器、虚拟主机、路由和上游。更高层对象（VirtualService，Gateway等）习惯于驱动这些低层的代理对象。
 
-![img](https://blog.christianposta.com/images/control-plane/gloo-crd.png)
+![img](gloo-crd.png)
 
-The split between the two levels of configuration for the Gloo control allows us to extend the Gloo control-plane capabilities while keeping a simple abstraction to configure Envoy. This is explained in more detail in part 4 of this series.
+Gloo控件的两层配置之间的分离允许我们在保持配置Envoy的简单抽象的同时扩展Gloo控制平面功能。本系列的第4部分将对此进行更详细的解释。
 
-In the previous three examples (Istio, Contour, Gloo) each respective control plane exposes a set of domain-specific configuration objects that are user focused but are ultimately transformed into Envoy configuration and exposed over the xDS data plane API. This provides a decoupling between Envoy and a user’s predisposed way of working and their workflows. Although we’ve seen a few examples of creating a more user and workflow focused domain-specific configuration for abstracting Envoy, that’s not the only way to build up an Envoy control plane. [Booking.com has a great presentation](https://www.slideshare.net/IvanKruglov/ivan-kruglov-introducing-envoybased-service-mesh-at-bookingcom-version-7) on how they stayed much closer to the Envoy configurations and used an engine to just merge all the different teams’ configuration fragments into the actual Envoy configuration.
+在前面的三个示例中(Istio、Contour、Gloo)，每个控制平面公开一组特定域的配置对象，以用户为中心，但最终转换为Envoy配置，并通过xDS数据平面API公开。这提供了Envoy与用户的工作方式及其工作流之间的解耦。尽管我们已经看到了一些为抽象Envoy创建更关注用户和工作流的领域特定配置的例子，但这并不是构建Envoy控制平面的唯一方法。 [Booking.com 有一个非常棒的演示](https://www.slideshare.net/IvanKruglov/ivan-kruglov-introducing-envoybased-service-mesh-at-bookingcom-version-7) ，展示了如何保持与Envoy配置更接近，并使用引擎将所有不同团队的配置片段合并到实际的Envoy配置中。
 
-Alongside considering a domain-specific configuration, you should consider the specific touch points of your API/object model. For example, Kubernetes is very YAML and resource-file focused. You could build a more domain-specific CLI tool (like [OpenShift did with the oc CLI](https://docs.openshift.com/enterprise/3.2/dev_guide/new_app.html#dev-guide-new-app), like Istio [did with istioctl](https://istio.io/docs/reference/commands/istioctl/) and like Gloo [did with glooctl](https://gloo.solo.io/cli/glooctl/)
+除了考虑特定域的配置之外，还应该考虑API/对象模型的特定接触点。例如，Kubernetes非常关注YAML和资源文件。你可以构建一个更特定于领域的CLI工具（像OpenShift [oc CLI](https://docs.openshift.com/enterprise/3.2/dev_guide/new_app.html#dev-guide-new-app)，Istio[istioctl](https://istio.io/docs/reference/commands/istioctl/) 以及Gloo [glooctl](https://gloo.solo.io/cli/glooctl/)
 
 ### Takeaway
 
-When you build an Envoy control plane, you’re doing so with a specific intent or set of architectures/users in mind. You should take this into account and build the right ergonomic, opinionated domain-specific API that suits your users and improves your workflow for operating Envoy. [The Gloo team](https://github.com/solo-io/gloo/graphs/contributors) recommends exploring *existing* Envoy control plane implementations and only building your own if none of the others are suitable. Gloo’s control plane lays the foundation to be extended and customized. As we’ll see in the next entry, it’s possible to build a control plane that is fully extendable to fit many different users, workflows, and operational constraints.
+当你构建一个Envoy控制平面时，你是带着一个特定的意图或一组架构/用户来做这件事的。应该考虑到这一点，并构建适合你的用户并改进你的Envoy操作工作流的符合人体工程学的、有主见的特定域的API。 [Gloo 团队](https://github.com/solo-io/gloo/graphs/contributors) 建议研究现有的Envoy控制平面的实现，只有在其他实现都不合适的情况下才构建自己的Envoy控制平面。Gloo的控制平面为扩展和定制奠定了基础。我们将在下一篇文章中看到，可以构建一个完全可扩展的控制平面，以适应许多不同的用户、工作流和操作约束。
