@@ -1,6 +1,28 @@
+---
+title: "为Envoy构建控制面指南第2部分：识别组件"
+date: 2019-06-11T10:41:16+08:00
+draft: true
+banner: ""
+author: "Christian Posta"
+authorlink: "https://blog.christianposta.com/"
+translator: "张成"
+translatorlink: "https://github.com/chengwhynot"
+reviewer: ["孙海洲"]
+reviewerlink: ["https://github.com/haiker2011"]
+originallink: "https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-identify-components/"
+summary: "本文介绍如何为 Envoy 构建控制面指南的第2部分：识别组件。"
+tags: ["envoy","gloo"]
+categories: ["translation"]
+keywords: ["service mesh","服务网格","Envoy","gloo"]
+---
+
+**编者按**
+
+> 本文介绍如何为 Envoy 构建控制面指南的第2部分：识别控制平面的各个组件。对实施Envoy控制平面需要了解的基础知识很有帮助。也算是Envoy的概念介绍。
+
 在[这个系列文章的前一篇](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-to-manage-envoy-proxy-based-infrastructure/)中，我们浏览了Envoy动态配置对于在云原生环境中运行Envoy是多么的重要。在这篇文章中，我们来一起看看为了支持控制平面，我们需要如何协调各个组件。
 
-## 确认你的控制平面需要什么组件
+## 为Envoy构建控制面指南第2部分：识别组件
 
 由于操作环境的变化很大，因此为Envoy实施控制平面所需的组件也是如此。例如，在一个极端情况下，如果你需要构建时静态生成Envoy文件并发送给Envoy的需求，你需要以下组件来满足：
 
@@ -62,4 +84,4 @@ Contour使用`init-container`为Envoy生成一个静态引导配置文件，告�
 
 确定控制平面所需的核心组件。不要试图构建一个单体的控制平面抽象，因为这将成为维护和更新的噩梦。在松散耦合的体系结构中构建控制平面所需的组件。如果您可以构建在Kubernetes之上，那么这样做：[Kubernetes提供了一个非常强大的集成数据平面](https://medium.com/@allingeek/kubernetes-as-a-common-ops-data-plane-f8f2cf40cd59 )用于操作分布式系统，例如Envoy控制平面。如果你在Kubernetes之上构建一个控制平面，你应该利用[自定义资源定义](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)来驱动配置你的控制平面。有些人选择使用[入口定义](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md)，[服务注释](https://www.getambassador.io/reference/configuration/)，或[配置映射](https://www.youtube.com/watch?v=a1tXFUrqt5M&list=PLj6h78yzYM2PF_iYEBntfR0m4KAZET18Q&index=14&t=0s)来构建他们的控制平面。在Kubernetes CRDs可用之前，这些可能是适当的解决方法，但此时你应该避免这些方法并坚持使用CRDs。就像[Tim Hockin（Kubernetes的创始人）在最近的播客中所说的那样](https://kubernetespodcast.com/episode/041-ingress/)，用于驱动Ingress Gateway资源的注释是一个糟糕的选择。
 
-本系列的下一篇文章实际上已经发布：[为Envoy构建控制平面的指南第3部分 - 域特定配置API](https://blog.christianposta.com/envoy/guidance-for-building-a-control - 平面换特使域特定的配置的API /)
+本系列的下一篇文章实际上已经发布：[为Envoy构建控制平面的指南第3部分 - 域特定配置API](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-domain-specific-configuration-api/)
