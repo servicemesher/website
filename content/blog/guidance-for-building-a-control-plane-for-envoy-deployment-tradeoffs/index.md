@@ -17,7 +17,6 @@ publishDate: 2019-06-12
 
 作为探索为Envoy构建控制平面系列文章的第5部分，本文介绍了部署控制平面的选项与权衡，着重阐述了保持控制平面与数据平面解耦的几大好处，并且在文章结尾建议构建一个可插入的控制平面以支持各种新特性、拓展和适配。
 
-
 ## 前言
 
 这是探索为Envoy构建控制平面[系列文章](https://blog.christianposta.com/envoy/guidfor-build-a-control-plane-to-management-Envoy-Proxy-based-infrastructure/)的第5部分。
