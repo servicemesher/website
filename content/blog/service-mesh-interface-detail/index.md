@@ -2,7 +2,7 @@
 title: "Service Mesh Interface详细介绍"
 date: 2019-06-05T15:54:19+08:00
 draft: false
-banner: "/img/blog/banners/56b75f420a4f45cb8303b3469281a229.jpg"
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*wk5LToh54pQAAAAAAAAAAABkARQnAQ"
 author: "敖小剑"
 authorlink: "https://github.com/skyao"
 summary: "微软最近宣布了 Service Mesh Interface 服务网格规范，定义了通用标准，包含基本特性以满足大多数场景下的通用需求。本文将带您深入了解 Service Mesh Interface。"
