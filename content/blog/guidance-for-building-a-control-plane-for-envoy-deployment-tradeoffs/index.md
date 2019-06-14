@@ -4,12 +4,12 @@ author: Christian Posta
 translator: 罗广明
 translatorlink: https://guangmingluo.github.io/guangmingluo.io/
 reviewer: []
-title: "构建Envoy的控制平面手册第3部分 - 部署的权衡"
+title: "构建Envoy的控制平面手册第5部分 - 部署的权衡"
 description: "本文介绍了部署控制平面的选项与权衡，并且着重阐述了保持控制平面与数据平面解耦的几大好处。"
 categories: "translation"
 tags: ["envoy"]
 originalPublishDate: 2019-02-18
-publishDate: 2019-06-12
+publishDate: 2019-06-14
 
 ---
 
