@@ -3,7 +3,7 @@ original: https://blog.christianposta.com/guidance-for-building-a-control-plane-
 author: Christian Posta
 translator: 罗广明
 translatorlink: https://guangmingluo.github.io/guangmingluo.io/
-reviewer: []
+reviewer: [haiker2011]
 title: "构建Envoy的控制平面手册第5部分 - 部署的权衡"
 description: "本文介绍了部署控制平面的选项与权衡，并且着重阐述了保持控制平面与数据平面解耦的几大好处。"
 categories: "translation"
@@ -15,7 +15,7 @@ publishDate: 2019-06-14
 
 ## 编者按
 
-作为探索为Envoy构建控制平面系列文章的第5部分，本文介绍了部署控制平面的选项与权衡，着重阐述了保持控制平面与数据平面解耦的几大好处，并且在文章结尾建议构建一个可插入的控制平面以支持各种新特性、拓展和适配。
+作为探索为Envoy构建控制平面系列文章的第5部分，本文介绍了部署控制平面的选项与权衡，着重阐述了保持控制平面与数据平面解耦的几大好处，并且在文章结尾建议构建一个可拔插的控制平面以支持各种新特性、拓展和适配。
 
 ## 前言
 
@@ -26,9 +26,9 @@ publishDate: 2019-06-14
 - [构建最适合你的使用场景和组织架构的特定域的配置对象和api](https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-domain-specific-configuration-api/)
 - [考虑如何最好地使你的控制平面可插在你需要它的地方](https://blog.christianposta.com/guidance-for-building-a-control-plane-for-envoy-build-for-pluggability/)
 - 部署各种控制平面组件的选项 (本文)
-- 基于控制平面的测试装置的思考
+- 基于控制平面的测试工具的思考
 
-在上一篇文章中，我们探讨了为什么可插入控制平面对于跟上快速迭代的Envoy API以及与组织可能采用的不同工作流集成至关重要。在本文中，我们将讨论部署各种控制平面组件时的权衡。
+在上一篇文章中，我们探讨了为什么可拔插控制平面对于跟上快速迭代的Envoy API以及与组织可能采用的不同工作流集成至关重要。在本文中，我们将讨论部署各种控制平面组件时的权衡。
 
 ## 部署控制平面组件
 
@@ -71,4 +71,4 @@ Gloo项目作为一个API网关，遵循类似的部署模型。控制平面组�
 
 ## 要点
 
-为Envoy构建控制平面并不容易，一旦您了解了工作流需要从控制平面得到什么，您就需要了解如何最好地部署它。Gloo团队建议构建一个可插入的控制平面，并将其与数据平面分开，原因如上所述。Gloo的体系结构是这样构建的，它使[Gloo团队](https://github.com/solo-io/gloo/graphs/contributor)能够快速添加任何新特性和扩展，以支持任何平台、配置、过滤器，以及更多。
+为Envoy构建控制平面并不容易，一旦您了解了工作流需要从控制平面得到什么，您就需要了解如何最好地部署它。Gloo团队建议构建一个可拔插的控制平面，并将其与数据平面分开，原因如上所述。Gloo的体系结构是这样构建的，它使[Gloo团队](https://github.com/solo-io/gloo/graphs/contributor)能够快速添加任何新特性和扩展，以支持任何平台、配置、过滤器，以及更多。
