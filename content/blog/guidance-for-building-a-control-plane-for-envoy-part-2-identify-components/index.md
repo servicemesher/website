@@ -15,6 +15,7 @@ tags: ["envoy","gloo"]
 categories: ["translation"]
 keywords: ["service mesh","服务网格","Envoy","gloo"]
 ---
+## 为Envoy构建控制面指南第2部分：识别组件
 
 **编者按**
 
@@ -63,18 +64,18 @@ keywords: ["service mesh","服务网格","Envoy","gloo"]
 
 Istio也采用类似的方法来使用通过Kubernetes CRDs配置的松散协调的控制平面组件。 Istio的控制平面由以下部分组成：
 
- - `Istio Pilot`  - 核心xDS服务
- - `Istio Galley`  - 配置/存储抽象
- - `Istio Citadel`  -  CA /证书引擎
- - `Istio Telemetry` - 遥测信号的接收器
- - `Istio Policy` - 一个可插拔的策略引擎
+- `Istio Pilot`  - 核心xDS服务
+- `Istio Galley`  - 配置/存储抽象
+- `Istio Citadel`  -  CA /证书引擎
+- `Istio Telemetry` - 遥测信号的接收器
+- `Istio Policy` - 一个可插拔的策略引擎
 
 ![img](./istio-control-plane.png)
 
 Heptio Contour实际上只有两个组件组成了它的控制平面，但是，由于它完全基于Kubernetes，它实际上利用了很多内置的Kubernetes工具，如Kubernetes API / Storage和CRDs来驱动配置。
 
- - `contour`服务器
- - `init-container` 启动引导
+- `contour`服务器
+- `init-container` 启动引导
 
 ![img](./contour-control-plane.png)
 
