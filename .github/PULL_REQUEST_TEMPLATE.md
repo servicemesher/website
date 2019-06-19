@@ -1,7 +1,7 @@
 请审校者在合并该 PR 前需要检查以下内容：
 
 - [ ] Header 设置正确，包括文章的类型、tag、分类、作者、译者、摘要、reviewer 发布时间等信息
-- [ ] 关联 Issue 编号 https://github.com/servicemesher/website/issues/${ISSUE_ID}
+- [ ] 关联 Issue 编号 [#${ISSUE_ID}](https://github.com/servicemesher/website/issues/${ISSUE_ID})
 - [ ] 该 PR Assigned 给了提交者
 - [ ] 指定了 Reviewer
 - [ ] 为 PR 明确了 label 信息，如 categories、kind、size、tag、status
@@ -12,6 +12,6 @@
 - [ ] 文章标题简短且语义明确
 - [ ] 文章语句通顺，没有语病和格式问题
 - [ ] 文中没有不可达的链接
-- [ ] 提交者同意授权 ServiceMesher 公众号和 http://www.servicemesher.com 发布我原创或翻译的文章
+- [ ] 提交者同意授权 ServiceMesher 公众号和 [http://www.servicemesher.com](http://www.servicemesher.com) 发布我原创或翻译的文章
 
 当所有以上问题都确定之后，可以由管理者合并 PR 并关闭关联 issue。
