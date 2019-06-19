@@ -22,7 +22,7 @@ check_pull_request_content() {
 
 	echo
 	echo "Getting list of changed markdown files..."
-	CHANGED_MARKDOWN_FILES=( $(curl -s -X GET -G $URL | jq -r '.[] | select(.status != "removed") | select(.filename | endswith(".md")) | .filename') )
+	CHANGED_MARKDOWN_FILES=( $(curl --retry 20 -s -X GET -G $URL | jq '.[] | select(.status != "removed") | select(.filename | endswith(".md")) | .filename') )
 	echo "Total changed markdown files: ${#CHANGED_MARKDOWN_FILES[@]}"
 	echo ${CHANGED_MARKDOWN_FILES[@]}
 	echo
