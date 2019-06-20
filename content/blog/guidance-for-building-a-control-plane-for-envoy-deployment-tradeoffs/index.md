@@ -1,15 +1,16 @@
 ---
-original: https://blog.christianposta.com/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/
-author: Christian Posta
+originallink: https://blog.christianposta.com/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/
+author: "Christian Posta"
 translator: 罗广明
 translatorlink: https://guangmingluo.github.io/guangmingluo.io/
-reviewer: [haiker2011]
+reviewer: ["孙海洲"]
+reviewerlink: "https://github.com/haiker2011"
 title: "构建Envoy的控制平面手册第5部分 - 部署的权衡"
 description: "本文介绍了部署控制平面的选项与权衡，并且着重阐述了保持控制平面与数据平面解耦的几大好处。"
 categories: "translation"
 tags: ["envoy"]
-originalPublishDate: 2019-02-18
-publishDate: 2019-06-14
+date: 2019-06-14T10:30:32+08:00
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*Ljs7TovDHLEAAAAAAAAAAABkARQnAQ"
 
 ---
 
@@ -38,15 +39,15 @@ publishDate: 2019-06-14
 
 Gloo项目作为一个API网关，遵循类似的部署模型。控制平面组件与数据平面解耦，Envoy数据平面使用xDS gRPC流来收集关于监听器、路由、端点和集群等的配置。您可以使用Gloo部署与数据平面代理共存的控制面板组件，但不建议这样做。我们稍后会看一些权衡。
 
-![separatecontrolplane](separatecontrolplane.png)
+![separatecontrolplane](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/separatecontrolplane.png)
 
 最后，我们研究了控制平面组件与数据平面的协同部署。在Contour项目中，默认情况下，控制平面组件是与数据平面一起部署的，尽管[存在一个拆分部署的选项](https://github.com/heptio/contour/blob/master/docs/deploy-seperate-pods.md)。Contour实际上利用CRD或Ingress资源进行配置，所以所有的配置文件处理和监控都发生在Kubernetes中。然而，xDS服务却是与数据平面共同部署(同样，这是默认情况—您依然可以将它们拆分)。
 
-![codeployed](codeployed.png)
+![codeployed](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/codeployed.png)
 
 当[eBay为他们的Envoy部署构建了控制平面](https://www.youtube.com/watch?v=a1tXFUrqt5M&list=PLj6h78yzYM2PF_iYEBntfR0m4KAZET18Q&index=14&t=0s)时，他们还将控制平面(discovery pieces)的*部分组件*与数据平面联合部署。他们基本上自己实现了一个控制器来监视CRD、Ingress和服务资源，并且生成配置映射。然后，这些配置映射将由与Pod一起运行的`discovery`容器使用，并随着改动重新热启动，以及更新Envoy。
 
-![](ebay-control-plane.png)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/ebay-control-plane.png)
 
 ![](double-click-ebay-control-plane.png)
 
@@ -56,7 +57,7 @@ Gloo项目作为一个API网关，遵循类似的部署模型。控制平面组�
 
 各种方法都有优缺点。[Gloo团队](https://github.com/solo-io/gloo/graphs/contributor)认为，对于大多数应用场景来说，保持控制平面独立是正确的选择，应该避免将控制平面与数据平面完全部署在一起。
 
-![](separatecontrolplane.png)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/guidance-for-building-a-control-plane-for-envoy-deployment-tradeoffs/separatecontrolplane.png)
 
 如果Envoy是L7网络的核心和灵魂，那么控制平面就是大脑。部署与数据平面分离的控制平面非常重要，原因如下:
 

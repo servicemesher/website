@@ -25,5 +25,5 @@
 - [ ] 已提交 PR
 - [ ] 正在review
 - [ ] review 完成等待发布
-- [ ] 已发布到 http://www.servicemesher.com
+- [ ] 已发布到 [http://www.servicemesher.com](http://www.servicemesher.com)
 - [ ] 已发布到 ServiceMesher 微信公众号
