@@ -17,7 +17,7 @@ keywords: ["enovy","outlier detction"]
 
 ## 前言
 
-很多人学习和使用envoy时，很容易混淆一些概念，比如把异常点驱逐和微服务熔断混为一谈，分不清最大驱逐比与恐慌阈值的区别等。本文将基于envoy官方文档([v1.10.0](https://www.envoyproxy.io/docs/envoy/v1.10.0/))，详细介绍异常点检测的类型、驱逐算法以及相关概念的解析。
+很多人学习和使用envoy时，很容易混淆一些概念，比如把异常点驱逐和微服务熔断混为一谈，分不清最大驱逐比与恐慌阈值的区别等。本文将基于envoy官方文档([v1.10.0](https://www.envoyproxy.io/docs/envoy/v1.10.0/))，详细介绍异常点检测的类型、驱逐算法以及相关概念的解析，并且最后对易混淆的几个概念进行辨析。
 
 ![luoguangming-aoseng](luoguangming-aoseng.jpeg)
 
