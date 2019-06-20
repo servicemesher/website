@@ -1,16 +1,17 @@
 ---
 title: "Envoy功能点详解之异常点检测"
-date: 2019-06-20T15:01:19+08:00
+date: 2019-06-20T15:11:19+08:00
 draft: false
 banner: 
 author: "罗广明"
 authorlink: "https://guangmingluo.github.io/guangmingluo.io/"
-summary: "微软最近宣布了 Service Mesh Interface 服务网格规范，定义了通用标准，包含基本特性以满足大多数场景下的通用需求。本文将带您深入了解 Service Mesh Interface。"
+summary: "很多人把异常点驱逐和熔断混为一谈，分不清最大驱逐比与恐慌阈值的区别等。本文将基于envoy官方文档(v1.10.0)，详细介绍异常点检测的类型、驱逐算法以及相关概念的解析。"
 reviewer:  []
 reviewerlink:  []
 tags: ["envoy"]
 categories: ["service-mesh"]
 keywords: ["enovy","outlier detction"]
+
 
 ---
 
@@ -31,7 +32,7 @@ keywords: ["enovy","outlier detction"]
 1. 主机被确定为异常点。
 2. 如果没有主机被驱逐，Envoy 会立即驱逐主机。否则，它会检查以确保驱逐主机的数量低于允许的阈值（通过 [outlier_detection.max_ejection_percent](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-max-ejection-percent)设置指定）。如果驱逐的主机数量超过阈值，则主机不会被驱逐。
 3. 主机被驱逐的状态会保持一小段时间（以毫秒为单位）。被驱逐意味着该主机被标记为不健康，并且在负载均衡期间不会被使用，除非负载均衡器处于[恐慌](https://www.envoyproxy.io/docs/envoy/v1.10.0/intro/arch_overview/load_balancing/panic_threshold#arch-overview-load-balancing-panic-threshold)状态。被驱逐的时间等于[outlier_detection.base_ejection_time_ms](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-base-ejection-time)的值乘以该主机被驱逐的次数。这意味着，如果该主机连续失败，它被驱逐的时间将越来越长。
-4. 驱逐时间满足后，被驱逐主机将自动恢复服务。通常情况下，异常值检测与主动健康检查([active health checking](https://www.envoyproxy y.io/docs/envoy/v1.10.0/intro/arch_overview/health_checking#arch-overview-health-checking))一起使用，以获得全面的健康检查解决方案。
+4. 驱逐时间满足后，被驱逐主机将自动恢复服务。通常情况下，异常值检测与主动健康检查([active health checking](https://www.envoyproxy.io/docs/envoy/v1.10.0/intro/arch_overview/health_checking#arch-overview-health-checking))一起使用，以获得全面的健康检查解决方案。
 
 ## 检测类型
 
@@ -59,11 +60,11 @@ Envoy支持以下异常点检测类型：
 
 [主动健康检查](https://www.envoyproxy.io/docs/envoy/v1.10.0/intro/arch_overview/health_checking)可以在每个上游集群的基础上进行配置。主动运行健康检查和EDS类型服务发现会同时进行。但是，即使使用其他服务发现类型，也有其他需要进行主动健康检查的情况。Envoy 支持三种不同类型的健康检查（HTTP,  L3/L4, Redis）及各种设置（检查时间间隔、主机不健康标记为故障、主机健康时标记为成功等）。
 
-在同时使用主动健康检查和被动健康检查(异常点检测)时，通常使用较长的健康检查间隔来避免大量的主动健康检查流量。在这种情况下，当使用[/healthcheck/fail](https://www.envoyproxy.io/docs/envoy/v1.10.0/operations/admin#operations-admin-interface-healthcheck-fail)管理端点时，能够快速耗尽上游主机仍然是有用的，[router filter](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/http_filters/router_filter#config-http-filters-router)会在[x-envoy-immediate-health-check-fail](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/http_filters/router_filter#config-http-filters-router-x-envoy-immediate-health-check-fail) header里面响应来支持它的实现。如果header由上游主机设置标记，Envoy将立即将主机标记为主动健康检查失败。注意，只有在主机集群的主动健康检查[已配置](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/cluster_manager/cluster_hc#config-cluster-manager-cluster-hc)时才会发生这种情况。如果Envoy已经通过[/healthcheck/fail](https://www.envoyproxy.io/docs/envoy/v1.10.0/operations/admin#operations-admin-interface-healthcheck-fail)管理端点标记为失败，[健康检查过滤器](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/http_filters/health_check_filter config-http-filters-health-check)将自动设置这个header。
+在同时使用主动健康检查和被动健康检查(异常点检测)时，通常使用较长的健康检查间隔来避免大量的主动健康检查流量。在这种情况下，当使用[/healthcheck/fail](https://www.envoyproxy.io/docs/envoy/v1.10.0/operations/admin#operations-admin-interface-healthcheck-fail)管理端点时，能够快速耗尽上游主机仍然是有用的，[router filter](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/http_filters/router_filter#config-http-filters-router)会在[x-envoy-immediate-health-check-fail](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/http_filters/router_filter#config-http-filters-router-x-envoy-immediate-health-check-fail) header里面响应来支持它的实现。如果header由上游主机设置标记，Envoy将立即将主机标记为主动健康检查失败。注意，只有在主机集群的主动健康检查[已配置](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/cluster_manager/cluster_hc#config-cluster-manager-cluster-hc)时才会发生这种情况。如果Envoy已经通过[/healthcheck/fail](https://www.envoyproxy.io/docs/envoy/v1.10.0/operations/admin#operations-admin-interface-healthcheck-fail)管理端点标记为失败，[健康检查过滤器](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/http_filters/health_check_filter#config-http-filters-health-check)将自动设置这个header。
 
 ### 恐慌阈值
 
-在负载均衡期间，Envoy 通常只会考虑上游集群中健康的主机。但是，如果集群中健康主机的百分比变得过低，envoy 将忽视所有主机中的健康状况和均衡。这被称为*恐慌阈值(panic threshold)*。缺省恐慌阈值是 50％。这可以通过运行时以及[集群配置](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/cds.proto#envoy-api-field-cluster-commonlbconfig-healthy-panic-threshold)进行[配置](http://www.servicemesher.com/envoy/configuration/cluster_manager/cluster_runtime.html#config-cluster-manager-cluster-runtime)。恐慌阈值用于避免在负载增加时主机故障导致整个集群中级联故障的情况。注意：恐慌阈值不同于驱逐算法第2点提到的最大驱逐百分比(outlier_detection.max_ejection_percent)。
+在负载均衡期间，Envoy 通常只会考虑上游集群中健康的主机。但是，如果集群中健康主机的百分比变得过低，envoy 将忽视所有主机中的健康状况和均衡。这被称为*恐慌阈值(panic threshold)*。缺省恐慌阈值是 50％。这可以通过[运行时配置](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/cluster_manager/cluster_runtime#config-cluster-manager-cluster-runtime)、或者[集群配置](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/cds.proto#envoy-api-field-cluster-commonlbconfig-healthy-panic-threshold)进行配置。恐慌阈值用于避免在负载增加时主机故障导致整个集群中级联故障的情况。注意：恐慌阈值不同于驱逐算法第2点提到的最大驱逐百分比(outlier_detection.max_ejection_percent)。
 
 另外，恐慌阈值与优先级协同工作。如果某个优先级的可用主机数量下降，Envoy将尝试将一些流量转移到较低的优先级。如果它成功地在较低的优先级找到足够的可用主机，Envoy将不顾恐慌阈值。在数学术语中，如果所有优先级的规范化(normalized)总可用性为100%，Envoy将忽略恐慌阈值，并继续根据这里描述的算法在优先级之间分配流量负载。然而，当规范化总可用性下降到100%以下时，Envoy假定在所有优先级上都没有足够的可用主机。它将继续跨优先级分配流量负载，但是如果给定优先级的可用性低于panic阈值，则流量将负载均衡到该优先级的所有主机，而不管它们的可用性如何。
 
