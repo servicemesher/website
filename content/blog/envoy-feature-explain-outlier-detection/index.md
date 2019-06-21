@@ -1,11 +1,12 @@
 ---
 title: "Envoy功能点详解之异常点检测"
-date: 2019-06-20T18:31:19+08:00
+date: 2019-06-21T19:20:19+08:00
 draft: false
 banner: 
 author: "罗广明"
 authorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 summary: "很多人把异常点驱逐和微服务熔断混为一谈，分不清最大驱逐比与恐慌阈值的区别等。本文将基于envoy官方文档(v1.10.0)，详细介绍异常点检测的类型、驱逐算法以及相关概念的解析。"
+originallink: 
 reviewer:  []
 reviewerlink:  []
 tags: ["envoy"]
@@ -40,7 +41,7 @@ Envoy支持以下异常点检测类型：
 
 ### 连续返回5xx
 
-如果上游主机返回一些连续的5xx，它将被弹出。注意，在本例中，5xx表示实际的5xx响应码，或者导致HTTP路由器代表上游返回该响应码的事件（重置、连接失败等）。驱逐所需的连续5xx的数量由[outlier_detection.continutive_5xx](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-consecutive-5xx)值控制。
+如果上游主机返回一些连续的5xx，它将被驱逐。注意，在本例中，5xx表示实际的5xx响应码，或者导致HTTP路由器代表上游返回该响应码的事件（重置、连接失败等）。驱逐所需的连续5xx的数量由[outlier_detection.continutive_5xx](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-consecutive-5xx)值控制。
 
 ### 连续网关失败
 
