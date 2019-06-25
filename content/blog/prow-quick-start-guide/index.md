@@ -179,9 +179,9 @@ $ docker run -itd --name prow-hook -p 8088:80 --link kind-control-plane zhangsea
 
 ## 访问 Prow 界面
 
-打开 `deck` 的访问地址（比如 http://localhost:8080） 即可看到 Prow Status 界面。
+打开 `deck` 的访问地址（比如 [http://prow.example.com](http://prow.example.com)） 即可看到 Prow Status 界面。
 ![Prow Status](img-prow-status.png)
-发送一个空的 POST 请求给 `hook` 访问地址的/hook目录（比如 http://localhost:8088/hook ）应该看到如下 `400` 的返回结果。
+发送一个空的 POST 请求给 `hook` 访问地址的/hook目录（比如 [http://prow.example.com/hook](http://prow.example.com/hook) ）应该看到如下 `400` 的返回结果。
 
 ```shell
 $ curl -i -d "" http://localhost:8088/hook
@@ -211,7 +211,7 @@ ultrahook prow 8088
 
 UltraHook 代理启动后会输出一个公网地址，复制这个地址用于在 Github 中添加 Webhook。
 
-```
+```shell
 Authenticated as seanz
 Forwarding activated...
 http://prow.seanz.ultrahook.com -> http://localhost:8088
