@@ -1,10 +1,11 @@
 ---
-title: "ServiceMesher贡献指南"
-description: "ServiceMesher文章贡献指南"
+title: "贡献指南"
+description: "ServiceMesher文章贡献指南。"
 keywords: ["service mesh"]
 ---
 
 总结归纳为下：
+
 文章收录来源分为三类：原创、翻译、转载。
 
 - 原创：管理员会对投稿文章质量做一定的考察，必要的情况下，作者需要联系社区管理员提供相关个人背景信息；对于长期投稿或知名度较高的作者，我们将邀请成为社区的特邀作者，审核和评审流程时间会相应减短。

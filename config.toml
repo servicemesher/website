@@ -103,7 +103,7 @@ paginate = 10
 
 [[menu.main]]
     parent="activity"
-    name = "ServiceMesher贡献指南"
+    name = "贡献指南"
     url  = "/contributing-specification/"
     weight = 5
 
