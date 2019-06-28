@@ -5,8 +5,8 @@ draft: false
 banner: "/img/blog/banners/kubecon-cncf-oss-2019-banner.jpg"
 author: "赵化冰"
 authorlink: "<https://zhaohuabing.com>"
-reviewer: []
-reviewerlink: []
+reviewer: [孙海洲]
+reviewerlink: ["<https://github.com/haiker2011>"]
 originallink: ""
 summary: "奇妙的 2019 KubeCon + ClondNativeCon + Open Source Summit 大会！在这里，我近距离接触了大神 Linus；见到了自 ServiceMesher 社区的很多朋友；还遇到了搞 Kubernetes 的恩格斯后人！"
 tags: []
