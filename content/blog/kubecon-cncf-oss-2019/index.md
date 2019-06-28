@@ -21,7 +21,7 @@ keywords: []
 由于最近两年在从事Service Mesh方面的一些工作，而本次大会中有多个关于Service Mesh和Istio/Envoy相关的议程，我向公司申请报名参加了这次大会。
 
 会议期间上海天气很好，虽然已经是夏天，但这几天的天气并不热，大部分时间天高云淡，中间下了一场小雨。参会地点所在的世博中心在江边，旁边就是世博中国馆，景色很好。
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/scenery1.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/scenery1.jpg)
 
 #  SOFAStack Workshop
 
@@ -32,12 +32,12 @@ keywords: []
 据蚂蚁的同学介绍，相比阿里系的淘宝而言，蚂蚁金服由于历史技术栈的包袱较小，在云原生这一块是跟进得比较快的，其内部策略基本上是全面拥抱云原生的技术栈，因此一些新出的热点技术如Service Mesh，Serverless等很快就会使用。
 
 workshop参与者在蚂蚁同学的指导下创建demo
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/workshop1.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/workshop1.jpg)
 抽奖喜提蚂蚁同学编写的《未来架构-从服务化到云原生》一本
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/workshop2.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/workshop2.jpg)
 
 [SOFAStack Cloud Native Workshop](https://www.sofastack.tech/guides/)
-[使用CloudMesh 轻松体验ServiceMesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/cloudmesh.pdf)
+[使用CloudMesh 轻松体验ServiceMesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/cloudmesh.pdf)
 
 #  Keynote
 
@@ -61,7 +61,7 @@ Zemlin后面是CNCF执行董事Dan Kohn的演讲，Dan没有考虑到中国听�
 最激动人心的时刻莫过于Linux上台了，Linus一上台就开了一个典型的Linus类型的玩笑：I don't like presentation, because I don't like preparing the slides and worrying about the audience's response. So I do talk instead of presentation, if it turns out well, it's my credit; if it sucks, you should blame the one who asks silly questions. 
 
 看着Linus淘气的小眼神，Dirk Hohndel的内心是崩溃的，下面的问题可不能问错了 :-)
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/linus.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/linus.jpg)
 
 当然这只是一个玩笑而已，不过Linus的性格在这个玩笑中也体现无遗。谈话过程中的一个话题也体现了Linus这种我行我素的性格。当问到如何看待技术和市场时，Linus答到：我只关心技术，我认为如果技术够好，就能赢得市场；当然，有时候行动更快的会赢得市场；但是，I just don't care! 大牛就是霸气，按自己的兴趣而活，希望我有一天也能达到这种境界！
 
@@ -85,7 +85,7 @@ Consul connect在进行sidecar导流时没有使用IPTables，而是将所有ups
 HashiCorp的方案主要是面向多云环境以及同时存在Kubernets和VM，bare metal场景的企业用户。其方案和我们目前自己使用的方案比较类似，后面值得长期关注。如果希望了解更多Consul Connect的内容，可以关注HashiCorp的博客及网站： https://www.hashicorp.com/blog/layer-7-observability-with-consul-service-mesh
 
 Nic Jackson讲解Envoy的可观察性
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/hashicorp.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/hashicorp.jpg)
 
 ## 基于Envoy和Apache Skywalking的服务网格的可观察性
 
@@ -98,19 +98,19 @@ Tetrate分享了“基于Envoy和Apache Skywalking的服务网格的可观察性
 我想到的另一个问题是：虽然边缘云和5G这两个词经常一起出现，但其实边缘云和5G并不是强绑定的。很多边缘云的业务场景在4G的速度和带宽下也可以实现，只要在4G网络中部署类似5G UPF的节点，将流量按一定规则导流到边缘云即可。以后会不会出现和4G网络一起部署的边缘云节点呢？
 
 边缘云架构图
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/edgecloud.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/edgecloud.jpg)
 
 ## SPIFFE如何帮助Istio建立服务网格联邦
 
 介绍了一种多个Istio集群（或称为信任域）之间建立相互信任的机制。该机制可以解决跨集群的服务访问的身份认证问题。其基本思路是在两个信任域之间相互交换证书信息，然后使用得到的证书信息对对方的服务进行身份认证。
 
 交换信任域之间的证书信息
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/get-trust-bundle.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/get-trust-bundle.jpg)
 
 用得到的证书信息对来自另一个信任域的请求进行身份认证
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/service-communication.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/service-communication.jpg)
 
-[完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/How-SPIFFE-helps-Istio-in-Service-Mesh- Federation.pdf)
+[完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/How-SPIFFE-helps-Istio-in-Service-Mesh-Federation.pdf)
 
 ## IngressRoute：如何为 Kubernetes 提供更好的 Ingress 对象
 
@@ -123,7 +123,7 @@ Session后和David Cheney交流了两个问题：
 
 其实各个具体的产品对Ingress的要求各不相同，如何在Kubernets自身API的简洁性和产品要求的功能实用性之间进行平衡是一个难题，因此该问题应该还会存在很长时间。我的建议是采用一个API Gateway + Sidecar 来代替 Kubernets Ingress，参见我之前的文章[如何为服务网格选择入口网关？](https://zhaohuabing.com/post/2019-03-29-how-to-choose-ingress-for-service-mesh/)
 
-[完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/Ingressroute.pdf)
+[完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/Ingressroute.pdf)
 
 # 其它
 
@@ -132,14 +132,14 @@ Session后和David Cheney交流了两个问题：
 会场上专门设立了一面job board，可以在上面张贴求职信息或者招聘信息。从内容来看，大部分是和云原生相关的工作岗位，集中在北上深地区。找了很久，没有看到成都的招聘信息，看来成都虽然是西南IT行业的中心，但离北上深还是有不小差距。
 
 从这位同学的发量来看，他应该可以找到一个好工作。
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/job-board.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/job-board.jpg)
 
 ## ServiceMesher社区的朋友
 
 这次大会上见到了很多在ServiceMesher社区中聊过多次，但未曾谋面的朋友，包括小剑，Jimmy，崔总，超盟,fox ...等等, 还有好些以前不认识的同学主动过来给我打招呼说看过我的博客文章。非常高兴能有机会见到这些志同道合的朋友，也希望我们的ServiceMesher社区能越办越好，冲出中国，走向全球!（已经遇到读过我文章的外国朋友向我打听ServiceMesher社区了，他的原话是：Would you agree to say that this is the only place where such in depth material is available?)
 
 ServiceMesher社区的朋友们
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/background.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/background.jpg)
 
 ## 恩格斯也来搞Kubernets了！
 
@@ -147,7 +147,7 @@ ServiceMesher社区的朋友们
 
 聊了一会儿后，他指着自己胸牌上的名字问到，你知道恩格斯吗？我一时还没有回过神来，他又问了一次，你知道恩格斯吗？他在中国很有名的。我这才想起，问到：是那个搞共产主义的恩格斯吗？他兴奋地说，是的，他是我曾曾曾祖父的侄子。What a small world！没想到恩格斯家族也来搞Kubernets了。不过Kubernets的理念和恩格斯、马克思提出的那个世界大同的理想是不是也很相似呢？
 
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/2019-06-25-kubecon-cncf-oss-2019/germany-friend.jpg)
+![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/germany-friend.jpg)
 
 # 参会的几点感想
 
