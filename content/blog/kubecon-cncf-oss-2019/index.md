@@ -33,10 +33,12 @@ keywords: []
 
 workshop参与者在蚂蚁同学的指导下创建demo
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/workshop1.jpg)
+
 抽奖喜提蚂蚁同学编写的《未来架构-从服务化到云原生》一本
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/workshop2.jpg)
 
 [SOFAStack Cloud Native Workshop](https://www.sofastack.tech/guides/)
+
 [使用CloudMesh 轻松体验ServiceMesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/cloudmesh.pdf)
 
 #  Keynote
