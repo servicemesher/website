@@ -4,7 +4,7 @@ date: 2019-06-28T11:05:00+08:00
 draft: false
 banner: "/img/blog/banners/kubecon-cncf-oss-2019-banner.jpg"
 author: "赵化冰"
-authorlink: "https://zhaohuabing.com"
+authorlink: "<https://zhaohuabing.com>"
 reviewer: []
 reviewerlink: []
 originallink: ""
@@ -14,7 +14,7 @@ categories: []
 keywords: []
 ---
 
-# 大会背景介绍
+## 大会背景介绍
 
 2019年6月24-26日，KubeCon + CloudNativeCon + Open Source Summit大会在上海世博中心举行。本次大会是由CNCF的LC3和Linux基金会的OSS两个大会合并而成的，因此规模空前甚大，估计有超过40多个国家，3000多名开发者参与会议。
 
@@ -23,11 +23,11 @@ keywords: []
 会议期间上海天气很好，虽然已经是夏天，但这几天的天气并不热，大部分时间天高云淡，中间下了一场小雨。参会地点所在的世博中心在江边，旁边就是世博中国馆，景色很好。
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/scenery1.jpg)
 
-#  SOFAStack Workshop
+## SOFAStack Workshop
 
-会议第一天参加了蚂蚁金服的SOFAStack Workshop。蚂蚁的同学在国内Service Mesh非常活跃，是中文Istio文档翻译和国内Service Mesh社区 http://servicemesher.com 的主要组织者。像小剑、Jimmy、花肉等，我之前和他们在社区中就很熟悉了，因此这次见面感觉很亲切，就像老朋友重逢一样。
+会议第一天参加了蚂蚁金服的SOFAStack Workshop。蚂蚁的同学在国内Service Mesh非常活跃，是中文Istio文档翻译和国内Service Mesh社区 <http://servicemesher.com> 的主要组织者。像小剑、Jimmy、花肉等，我之前和他们在社区中就很熟悉了，因此这次见面感觉很亲切，就像老朋友重逢一样。
 
-可以看出蚂蚁同学为这次Workshop准备得很充分，提供给参与者的材料非常细致，每一步操作都有详细的指导。蚂蚁同学带着参与workshop的开发者使用SOFAStack在云上创建一个网上书店demo程序，demo涉及了微服务构建，动态策略，分布式事务，Serverless，CloudMesh灰度发布等主要的微服务开发和部署流程。感兴趣的同学可以从该地址查看和下载workshop的相关资料：https://github.com/sofastack-guides/kubecon-workshop-demo-2019
+可以看出蚂蚁同学为这次Workshop准备得很充分，提供给参与者的材料非常细致，每一步操作都有详细的指导。蚂蚁同学带着参与workshop的开发者使用SOFAStack在云上创建一个网上书店demo程序，demo涉及了微服务构建，动态策略，分布式事务，Serverless，CloudMesh灰度发布等主要的微服务开发和部署流程。感兴趣的同学可以从该地址查看和下载workshop的相关资料：<https://github.com/sofastack-guides/kubecon-workshop-demo-2019>
 
 据蚂蚁的同学介绍，相比阿里系的淘宝而言，蚂蚁金服由于历史技术栈的包袱较小，在云原生这一块是跟进得比较快的，其内部策略基本上是全面拥抱云原生的技术栈，因此一些新出的热点技术如Service Mesh，Serverless等很快就会使用。
 
@@ -41,7 +41,7 @@ workshop参与者在蚂蚁同学的指导下创建demo
 
 [使用CloudMesh 轻松体验ServiceMesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/cloudmesh.pdf)
 
-#  Keynote
+## Keynote
 
 大会第二天的Keynote一直是Linux基金会宣传其理念，愿景以及赞助商进行市场宣传的重要活动。但当天最让人期待的莫过于Linus在keynote后的一次嘉宾谈话。为了一睹Linus的真容，很多人一早就在举行活动的red hall前排起了长队。我由于来得较早，非常幸运地抢到了一个较好的位置，位于第六排中间，正好正对台上的演讲嘉宾。
 
@@ -60,7 +60,7 @@ Zemlin后面是CNCF执行董事Dan Kohn的演讲，Dan没有考虑到中国听�
 
 然后是Huawei的赞助广告演讲，印象最深的是华为将开源方舟编译器，看得出是在为鸿蒙操作系统的生态圈布局。
 
-最激动人心的时刻莫过于Linux上台了，Linus一上台就开了一个典型的Linus类型的玩笑：I don't like presentation, because I don't like preparing the slides and worrying about the audience's response. So I do talk instead of presentation, if it turns out well, it's my credit; if it sucks, you should blame the one who asks silly questions. 
+最激动人心的时刻莫过于Linux上台了，Linus一上台就开了一个典型的Linus类型的玩笑：I don't like presentation, because I don't like preparing the slides and worrying about the audience's response. So I do talk instead of presentation, if it turns out well, it's my credit; if it sucks, you should blame the one who asks silly questions.
 
 看着Linus淘气的小眼神，Dirk Hohndel的内心是崩溃的，下面的问题可不能问错了 :-)
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/linus.jpg)
@@ -72,11 +72,11 @@ Zemlin后面是CNCF执行董事Dan Kohn的演讲，Dan没有考虑到中国听�
 * Don't break your users 保持各个版本之间的兼容性，不要影响用户对你的信任
 * Common goal 项目内要有统一的目标和共同的文化，这个目标不是一个非常具体的目标，而是一个类似愿景的长远目标
 
-# 参加的一些Session
+## 参加的一些Session
 
 大会的Session非常多，我根据自己的兴趣选择性地参加了一些Session。
 
-## Envoy的可观察性
+### Envoy的可观察性
 
 该Session的内容本身没有太多特别之处，主要是根据HashiCorp内部使用Envoy的经验讲了Envoy提供了哪些可以用于可观察性的配置/接口。
 
@@ -84,16 +84,16 @@ Zemlin后面是CNCF执行董事Dan Kohn的演讲，Dan没有考虑到中国听�
 
 Consul connect在进行sidecar导流时没有使用IPTables，而是将所有upstream的Service全部映射到了locahost的端口上，并通过Envoy监听Localhost来实现Sidecar流量拦截。这种方式去掉了IPtables，Nic说他们目前的测试性能非常理想。
 
-HashiCorp的方案主要是面向多云环境以及同时存在Kubernets和VM，bare metal场景的企业用户。其方案和我们目前自己使用的方案比较类似，后面值得长期关注。如果希望了解更多Consul Connect的内容，可以关注HashiCorp的博客及网站： https://www.hashicorp.com/blog/layer-7-observability-with-consul-service-mesh
+HashiCorp的方案主要是面向多云环境以及同时存在Kubernets和VM，bare metal场景的企业用户。其方案和我们目前自己使用的方案比较类似，后面值得长期关注。如果希望了解更多Consul Connect的内容，可以关注HashiCorp的博客及网站： <https://www.hashicorp.com/blog/layer-7-observability-with-consul-service-mesh>
 
 Nic Jackson讲解Envoy的可观察性
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/hashicorp.jpg)
 
-## 基于Envoy和Apache Skywalking的服务网格的可观察性
+### 基于Envoy和Apache Skywalking的服务网格的可观察性
 
 Tetrate分享了“基于Envoy和Apache Skywalking的服务网格的可观察性”。通过Envoy的ALS（Access log Service）接口直接从Envoy获取访问日志，并结合Istio对Inbound和Outbound的服务命名规则，以及Sidecar的命名规则分析出网格中服务调用的topo和Metrics信息。该方案直接去掉了Mixer，以解决目前Mixer占用资源较大，以及对服务调用的Latency等问题。该方案的思路很好，但采用了一些Hack，不是一个正式方案，希望以后能正式合入社区。
 
-## 边缘计算的前5大问题
+### 边缘计算的前5大问题
 
 中国移动的一个很有意思的演讲，讲述了目前运营商在进行边缘云试点时遇到的一些实际问题。新技术在工程化时常常会遇到一些意想不到的实际问题，例如该演讲中提到的边缘机房中的电力问题。由于边缘云节点规模较小，一般不会从头创建新的机房，而是选择重用小区目前的机房，因此会遇到电源功率不足和不够稳定的问题。
 
@@ -102,7 +102,7 @@ Tetrate分享了“基于Envoy和Apache Skywalking的服务网格的可观察性
 边缘云架构图
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/edgecloud.jpg)
 
-## SPIFFE如何帮助Istio建立服务网格联邦
+### SPIFFE如何帮助Istio建立服务网格联邦
 
 介绍了一种多个Istio集群（或称为信任域）之间建立相互信任的机制。该机制可以解决跨集群的服务访问的身份认证问题。其基本思路是在两个信任域之间相互交换证书信息，然后使用得到的证书信息对对方的服务进行身份认证。
 
@@ -114,7 +114,7 @@ Tetrate分享了“基于Envoy和Apache Skywalking的服务网格的可观察性
 
 [完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/How-SPIFFE-helps-Istio-in-Service-Mesh-Federation.pdf)
 
-## IngressRoute：如何为 Kubernetes 提供更好的 Ingress 对象
+### IngressRoute：如何为 Kubernetes 提供更好的 Ingress 对象
 
 介绍了Kubernets Ingress的局限性和Contour的解决方案：采用一个新的CRD。Ingress的局限性一直为社区所诟病，Kubernets中的Ingress只是七层代理的一个最小集合，为了解决该问题，几乎每个Ingress Controller项目都使用了自定义的扩展，包括Annotation和自定义CRD两种方式。
 
@@ -127,23 +127,23 @@ Session后和David Cheney交流了两个问题：
 
 [完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/Ingressroute.pdf)
 
-# 其它
+## 其它
 
-## 大会上的job board
+### 大会上的job board
 
 会场上专门设立了一面job board，可以在上面张贴求职信息或者招聘信息。从内容来看，大部分是和云原生相关的工作岗位，集中在北上深地区。找了很久，没有看到成都的招聘信息，看来成都虽然是西南IT行业的中心，但离北上深还是有不小差距。
 
 从这位同学的发量来看，他应该可以找到一个好工作。
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/job-board.jpg)
 
-## ServiceMesher社区的朋友
+### ServiceMesher社区的朋友
 
 这次大会上见到了很多在ServiceMesher社区中聊过多次，但未曾谋面的朋友，包括小剑，Jimmy，崔总，超盟,fox ...等等, 还有好些以前不认识的同学主动过来给我打招呼说看过我的博客文章。非常高兴能有机会见到这些志同道合的朋友，也希望我们的ServiceMesher社区能越办越好，冲出中国，走向全球!（已经遇到读过我文章的外国朋友向我打听ServiceMesher社区了，他的原话是：Would you agree to say that this is the only place where such in depth material is available?)
 
 ServiceMesher社区的朋友们
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/background.jpg)
 
-## 恩格斯也来搞Kubernets了！
+### 恩格斯也来搞Kubernets了！
 
 最后一天中午时，大会的各个厂商开始陆陆续续拆展台了。我领了一个盒饭坐在展馆门口的台阶上吃，旁边一个国外的参会者在等他的朋友，我就和他聊了两句。他来自德国汉堡，是一个服装公司的IT工程师。目前他们公司正在向云上迁移，使用了Private cloud/public cloud的hybrid方案。前端的Web服务器放在AWS上，后端的业务应用放在公司的数据中心，采用VPN连接数据中心和AWS。从他们公司的案例可以看出，混合云方案将在非常长的时间内存在，也难怪在展会上看到了多家做多云管理服务的公司。
 
@@ -151,7 +151,7 @@ ServiceMesher社区的朋友们
 
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/germany-friend.jpg)
 
-# 参会的几点感想
+## 参会的几点感想
 
 * Kubernets已经成为云上的标准，Cloud Native正当时：这个观点是阿里在演讲中提出来的，我非常赞同。从这次大会的参展厂商和技术分享中可以看到，几乎所有的云厂商/运营商/企业都已经采用了容器和Kubernets，并且在积极推进Service Mesh等云原生技术栈的实践和运用。
 * Service Mesh已经从去年的概念阶段逐渐进入试商用阶段，并且成为各大云平台基础设施的一部分。
