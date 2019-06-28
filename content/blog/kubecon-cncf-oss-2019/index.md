@@ -8,7 +8,7 @@ authorlink: "<https://zhaohuabing.com>"
 reviewer: []
 reviewerlink: []
 originallink: ""
-summary: "奇妙的 2019 KubeCon + ClondNativeCon + Open Source Summit 大会！在这里，我近距离接触了大神 Linus；见到了自 ServiceMesher 社区的很多朋友；还遇到了搞 Kubernets 的恩格斯后人！"
+summary: "奇妙的 2019 KubeCon + ClondNativeCon + Open Source Summit 大会！在这里，我近距离接触了大神 Linus；见到了自 ServiceMesher 社区的很多朋友；还遇到了搞 Kubernetes 的恩格斯后人！"
 tags: []
 categories: []
 keywords: []
@@ -48,11 +48,11 @@ workshop参与者在蚂蚁同学的指导下创建demo
 首先是Linux基金执行董事Jim Zemlin的开场演讲，他的演讲中提到几个重要的事实和数据：
 
 * Linux已经成为世界上最重要的软件平台：100%的超级计算机，82%的手机，68%的企业服务器，90%的公有云负载，62%的嵌入式操作系统都运行在Linux上
-* 中国已经成为第二大Kubernets贡献者
+* 中国已经成为第二大Kubernetes贡献者
 * 开源代码通常占现代操作系统代码总量的80%-90%
 * 10%的CNCF会员来自中国，在会议中，宣布了蚂蚁金服充值成为CNCF黄金会员
 
-从他的演讲中可以感受到来自中国的公司和开发者在开源软件，特别是云原生领域中发挥了越来越重要的作用。由于中国的市场体量很大，中国公司在在使用开源软件时会面临一些国外难以遇到的问题，例如如何应对数以亿记的用户量。在解决这些问题的同时，很多中国公司也将这些优化和改进贡献到了上游项目，造福整个开源社区，形成了良性的互动和循环。从后面两天的主题演讲，我也看到中国公司，特别是阿里系在回馈上游开源社区方面是做的非常好的。
+从他的演讲中可以感受到来自中国的公司和开发者在开源软件，特别是云原生领域中发挥了越来越重要的作用。由于中国的市场体量很大，中国公司在在使用开源软件时会面临一些国外难以遇到的问题，例如如何应对数以亿计的用户量。在解决这些问题的同时，很多中国公司也将这些优化和改进贡献到了上游项目，造福整个开源社区，形成了良性的互动和循环。从后面两天的主题演讲，我也看到中国公司，特别是阿里系在回馈上游开源社区方面是做的非常好的。
 
 Zemlin还提到开源蓬勃发展的一个原因是因为开源不是一个零和游戏，无论是开发者，用户还是商业公司都可以从开源中获益。从开发者角度而言，积极参与开源软件可以获得就业市场上广泛认可的能力，而不是只能做一个公司的某个随时被替换的螺丝钉。从商业公司而言，参与和使用开源软件可以借助社区的力量，并且可以很容易招聘到符合自己要求的人才。从用户而言，开源加速了技术的发展，间接降低了用户获取新技术，新产品的成本。
 
@@ -84,7 +84,7 @@ Zemlin后面是CNCF执行董事Dan Kohn的演讲，Dan没有考虑到中国听�
 
 Consul connect在进行sidecar导流时没有使用IPTables，而是将所有upstream的Service全部映射到了locahost的端口上，并通过Envoy监听Localhost来实现Sidecar流量拦截。这种方式去掉了IPtables，Nic说他们目前的测试性能非常理想。
 
-HashiCorp的方案主要是面向多云环境以及同时存在Kubernets和VM，bare metal场景的企业用户。其方案和我们目前自己使用的方案比较类似，后面值得长期关注。如果希望了解更多Consul Connect的内容，可以关注HashiCorp的博客及网站： <https://www.hashicorp.com/blog/layer-7-observability-with-consul-service-mesh>
+HashiCorp的方案主要是面向多云环境以及同时存在Kubernetes和VM，bare metal场景的企业用户。其方案和我们目前自己使用的方案比较类似，后面值得长期关注。如果希望了解更多Consul Connect的内容，可以关注HashiCorp的博客及网站： <https://www.hashicorp.com/blog/layer-7-observability-with-consul-service-mesh>
 
 Nic Jackson讲解Envoy的可观察性
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/hashicorp.jpg)
@@ -116,14 +116,14 @@ Tetrate分享了“基于Envoy和Apache Skywalking的服务网格的可观察性
 
 ### IngressRoute：如何为 Kubernetes 提供更好的 Ingress 对象
 
-介绍了Kubernets Ingress的局限性和Contour的解决方案：采用一个新的CRD。Ingress的局限性一直为社区所诟病，Kubernets中的Ingress只是七层代理的一个最小集合，为了解决该问题，几乎每个Ingress Controller项目都使用了自定义的扩展，包括Annotation和自定义CRD两种方式。
+介绍了Kubernetes Ingress的局限性和Contour的解决方案：采用一个新的CRD。Ingress的局限性一直为社区所诟病，Kubernetes中的Ingress只是七层代理的一个最小集合，为了解决该问题，几乎每个Ingress Controller项目都使用了自定义的扩展，包括Annotation和自定义CRD两种方式。
 
 Session后和David Cheney交流了两个问题：
 
-* 是否会把IngressRoute CRD中的特性贡献到Kubernets社区，他答复说可能会在Kubernets Ingress的下一个版本中加入部分新特性。
+* 是否会把IngressRoute CRD中的特性贡献到Kubernetes社区，他答复说可能会在Kubernetes Ingress的下一个版本中加入部分新特性。
 * Contour是否会和Istio进行集成，以支持Service Mesh的一些特性，例如路由控制等。他答复是很可能会和SMI集成，而不是直接和Istio绑定。
 
-其实各个具体的产品对Ingress的要求各不相同，如何在Kubernets自身API的简洁性和产品要求的功能实用性之间进行平衡是一个难题，因此该问题应该还会存在很长时间。我的建议是采用一个API Gateway + Sidecar 来代替 Kubernets Ingress，参见我之前的文章[如何为服务网格选择入口网关？](https://zhaohuabing.com/post/2019-03-29-how-to-choose-ingress-for-service-mesh/)
+其实各个具体的产品对Ingress的要求各不相同，如何在Kubernetes自身API的简洁性和产品要求的功能实用性之间进行平衡是一个难题，因此该问题应该还会存在很长时间。我的建议是采用一个API Gateway + Sidecar 来代替 Kubernetes Ingress，参见我之前的文章[如何为服务网格选择入口网关？](https://zhaohuabing.com/post/2019-03-29-how-to-choose-ingress-for-service-mesh/)
 
 [完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/Ingressroute.pdf)
 
@@ -143,17 +143,17 @@ Session后和David Cheney交流了两个问题：
 ServiceMesher社区的朋友们
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/background.jpg)
 
-### 恩格斯也来搞Kubernets了！
+### 恩格斯也来搞Kubernetes了！
 
 最后一天中午时，大会的各个厂商开始陆陆续续拆展台了。我领了一个盒饭坐在展馆门口的台阶上吃，旁边一个国外的参会者在等他的朋友，我就和他聊了两句。他来自德国汉堡，是一个服装公司的IT工程师。目前他们公司正在向云上迁移，使用了Private cloud/public cloud的hybrid方案。前端的Web服务器放在AWS上，后端的业务应用放在公司的数据中心，采用VPN连接数据中心和AWS。从他们公司的案例可以看出，混合云方案将在非常长的时间内存在，也难怪在展会上看到了多家做多云管理服务的公司。
 
-聊了一会儿后，他指着自己胸牌上的名字问到，你知道恩格斯吗？我一时还没有回过神来，他又问了一次，你知道恩格斯吗？他在中国很有名的。我这才想起，问到：是那个搞共产主义的恩格斯吗？他兴奋地说，是的，他是我曾曾曾祖父的侄子。What a small world！没想到恩格斯家族也来搞Kubernets了。不过Kubernets的理念和恩格斯、马克思提出的那个世界大同的理想是不是也很相似呢？
+聊了一会儿后，他指着自己胸牌上的名字问到，你知道恩格斯吗？我一时还没有回过神来，他又问了一次，你知道恩格斯吗？他在中国很有名的。我这才想起，问到：是那个搞共产主义的恩格斯吗？他兴奋地说，是的，他是我曾曾曾祖父的侄子。What a small world！没想到恩格斯家族也来搞Kubernetes了。不过Kubernetes的理念和恩格斯、马克思提出的那个世界大同的理想是不是也很相似呢？
 
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/germany-friend.jpg)
 
 ## 参会的几点感想
 
-* Kubernets已经成为云上的标准，Cloud Native正当时：这个观点是阿里在演讲中提出来的，我非常赞同。从这次大会的参展厂商和技术分享中可以看到，几乎所有的云厂商/运营商/企业都已经采用了容器和Kubernets，并且在积极推进Service Mesh等云原生技术栈的实践和运用。
+* Kubernetes已经成为云上的标准，Cloud Native正当时：这个观点是阿里在演讲中提出来的，我非常赞同。从这次大会的参展厂商和技术分享中可以看到，几乎所有的云厂商/运营商/企业都已经采用了容器和Kubernetes，并且在积极推进Service Mesh等云原生技术栈的实践和运用。
 * Service Mesh已经从去年的概念阶段逐渐进入试商用阶段，并且成为各大云平台基础设施的一部分。
 * 由于多厂商竞争和对hybrid cloud的支持要求，SMI（Service Mesh Interface）得到了较多支持，虽然目前还不成熟，但估计在下半年到明年会逐渐成熟并形成生态，到时Istio也不得不加入SMI并对其进行兼容。
 * 对于中小企业而言，hybrid cloud是一个强需求。需要用一个统一的界面来屏蔽差异，共同管理private/public/multi cloud。
