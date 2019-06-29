@@ -10,7 +10,7 @@ keywords: ["service mesh"]
 | 作者 | 文章数 |
 | ---- | ---- |
 |宋净超 | 21|
-|敖小剑 | 15|
+|敖小剑 | 16|
 |崔秀龙 | 6|
 |钟华 | 5|
 |赵化冰 | 5|
@@ -46,4 +46,4 @@ keywords: ["service mesh"]
 |宋欣建 | 1|
 |单家骏 | 1|
 |刘超 | 1|
-投递原创文章请访问 https://github.com/servicemesher/trans
+投递原创文章请访问 https://github.com/servicemesher/website
