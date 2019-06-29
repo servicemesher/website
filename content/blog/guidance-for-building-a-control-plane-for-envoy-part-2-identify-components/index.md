@@ -1,8 +1,8 @@
 ---
 title: "为Envoy构建控制面指南第2部分：识别组件"
-date: 2019-06-11T10:41:16+08:00
-draft: true
-banner: ""
+date: 2019-06-28T10:41:16+08:00
+draft: false
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*AqTUQ7l0B3wAAAAAAAAAAABkARQnAQ"
 author: "Christian Posta"
 authorlink: "https://blog.christianposta.com/"
 translator: "张成"

@@ -5,13 +5,13 @@ draft: false
 banner: "/img/blog/banners/kubecon-cncf-oss-2019-banner.jpg"
 author: "赵化冰"
 authorlink: "https://zhaohuabing.com"
-reviewer: ["孙海洲", "SataQiu"]
+reviewer: ["孙海洲", "邱世达"]
 reviewerlink: ["https://github.com/haiker2011", "https://github.com/SataQiu"]
-originallink: ""
+originallink: "https://zhaohuabing.com/post/2019-06-25-kubecon-cncf-oss-2019/"
 summary: "奇妙的 2019 KubeCon + ClondNativeCon + Open Source Summit 大会！在这里，我近距离接触了大神 Linus；见到了来自 ServiceMesher 社区的很多朋友；还遇到了搞 Kubernetes 的恩格斯后人！"
-tags: []
-categories: []
-keywords: []
+tags: ["kubecon"]
+categories: ["culture"]
+keywords: ["KubeCon China"]
 ---
 
 ## 大会背景介绍
@@ -39,7 +39,7 @@ workshop参与者在蚂蚁同学的指导下创建demo
 
 [SOFAStack Cloud Native Workshop](https://www.sofastack.tech/guides/)
 
-[使用CloudMesh 轻松体验ServiceMesh](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/cloudmesh.pdf)
+[使用CloudMesh 轻松体验ServiceMesh](https://gw.alipayobjects.com/os/basement_prod/c51b71c7-5f85-40a4-9a29-6c2163ef40ba.pdf)
 
 ## Keynote
 
@@ -112,7 +112,7 @@ Tetrate分享了“基于Envoy和Apache Skywalking的服务网格的可观察性
 用得到的证书信息对来自另一个信任域的请求进行身份认证
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/service-communication.jpg)
 
-[完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/How-SPIFFE-helps-Istio-in-Service-Mesh-Federation.pdf)
+[完整PPT链接](https://gw.alipayobjects.com/os/basement_prod/9d99c849-70f5-4b9a-b7d0-d81d596f2ef0.pdf)
 
 ### IngressRoute：如何为 Kubernetes 提供更好的 Ingress 对象
 
@@ -125,7 +125,7 @@ Session后和David Cheney交流了两个问题：
 
 其实各个具体的产品对Ingress的要求各不相同，如何在Kubernetes自身API的简洁性和产品要求的功能实用性之间进行平衡是一个难题，因此该问题应该还会存在很长时间。我的建议是采用一个API Gateway + Sidecar 来代替 Kubernetes Ingress，参见我之前的文章[如何为服务网格选择入口网关？](https://zhaohuabing.com/post/2019-03-29-how-to-choose-ingress-for-service-mesh/)
 
-[完整PPT链接](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/kubecon-cncf-oss-2019/Ingressroute.pdf)
+[完整PPT链接](https://gw.alipayobjects.com/os/basement_prod/f3d52428-06ab-424f-9fab-791dce0183fe.pdf)
 
 ## 其它
 
