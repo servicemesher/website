@@ -7,7 +7,7 @@ author: "罗广明"
 authorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 summary: "很多人把异常点驱逐和微服务熔断混为一谈，分不清最大驱逐比与恐慌阈值的区别等。本文将基于envoy官方文档(v1.10.0)，详细介绍异常点检测的类型、驱逐算法以及相关概念的解析。"
 originallink: 
-reviewer:  []
+reviewer:  [孙海洲]
 reviewerlink:  []
 tags: ["envoy"]
 categories: ["service-mesh"]
@@ -49,7 +49,7 @@ Envoy支持以下异常点检测类型：
 
 ### 成功率
 
-基于成功率的异常点驱逐聚合了集群中每个主机的成功率数据。然后在给定的时间间隔内，基于统计的异常点检测数据对主机进行驱逐。基于成功率的异常点驱逐将不会被计算为. 如果主机的请求量汇总时间间隔小于[outlier_detection.success_rate_request_volume](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-success-rate-request-volume)值，该异常点驱逐将不会被计算。另外，如果一个间隔中具有最小所需请求卷的主机数量小于[outlier_detection.success_rate_minimum_hosts](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-success-rate-minimum-hosts) 值，检测将不能进行。
+基于成功率的异常点驱逐聚合了集群中每个主机的成功率数据。然后在给定的时间间隔内，基于统计的异常点检测数据对主机进行驱逐。如果主机的请求量汇总时间间隔小于[outlier_detection.success_rate_request_volume](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-success-rate-request-volume)值，该异常点驱逐将不会被计算。另外，如果一个间隔中具有最小所需请求卷的主机数量小于[outlier_detection.success_rate_minimum_hosts](https://www.envoyproxy.io/docs/envoy/v1.10.0/api-v2/api/v2/cluster/outlier_detection.proto#envoy-api-field-cluster-outlierdetection-success-rate-minimum-hosts) 值，检测将不能进行。
 
 ## 驱逐事件日志
 
@@ -65,7 +65,7 @@ Envoy支持以下异常点检测类型：
 
 ### 恐慌阈值
 
-在负载均衡期间，Envoy 通常只会考虑上游集群中健康的主机。但是，如果集群中健康主机的百分比变得过低，envoy 将忽视所有主机中的健康状况和均衡。这被称为*恐慌阈值(panic threshold)*。缺省恐慌阈值是 50％。这可以通过[运行时配置](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/cluster_manager/cluster_runtime#config-cluster-manager-cluster-runtime)、或者[集群配置](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/cds.proto#envoy-api-field-cluster-commonlbconfig-healthy-panic-threshold)进行配置。恐慌阈值用于避免在负载增加时主机故障导致整个集群中级联故障的情况。注意：恐慌阈值不同于驱逐算法第2点提到的最大驱逐百分比(outlier_detection.max_ejection_percent)。
+在负载均衡期间，Envoy 通常只会考虑上游集群中健康的主机。但是，如果集群中健康主机的百分比变得过低，envoy 将忽视所有主机中的健康状况和均衡。这被称为*恐慌阈值(panic threshold)*。缺省恐慌阈值是 50％。这可以通过[运行时配置](https://www.envoyproxy.io/docs/envoy/v1.10.0/configuration/cluster_manager/cluster_runtime#config-cluster-manager-cluster-runtime)或者[集群配置](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/cds.proto#envoy-api-field-cluster-commonlbconfig-healthy-panic-threshold)进行配置。恐慌阈值用于避免在负载增加时主机故障导致整个集群中级联故障的情况。注意：恐慌阈值不同于驱逐算法第2点提到的最大驱逐百分比(outlier_detection.max_ejection_percent)。
 
 另外，恐慌阈值与优先级协同工作。如果某个优先级的可用主机数量下降，Envoy将尝试将一些流量转移到较低的优先级。如果它成功地在较低的优先级找到足够的可用主机，Envoy将不顾恐慌阈值。在数学术语中，如果所有优先级的规范化(normalized)总可用性为100%，Envoy将忽略恐慌阈值，并继续根据这里描述的算法在优先级之间分配流量负载。然而，当规范化总可用性下降到100%以下时，Envoy假定在所有优先级上都没有足够的可用主机。它将继续跨优先级分配流量负载，但是如果给定优先级的可用性低于panic阈值，则流量将负载均衡到该优先级的所有主机，而不管它们的可用性如何。
 
@@ -82,9 +82,9 @@ Envoy支持以下异常点检测类型：
 
 结合以上介绍来看，异常点检测是一种被动的健康检查，区别于主动健康检查，它不是向主机发送心跳或者通过长链接探活来判定实例的健康，而是通过对该主机发起的请求的返回值做分析，基于不同的检测类型以及不同的驱逐算法，对目标主机做驱逐或者恢复。
 
-而微服务中的熔断主要是一种系统保护策略，它的基本功能是在检测到故障后切段链路，通过直接返回错误或者fallback值，来直接提高系统可用性，防止该故障程序出现问题蔓延至整个网络造成雪崩效果。笔者以为，envoy中的异常点检测可以理解为"实例级别"的熔断，并且没有半开放状态。关于该实例级别的熔断与公称断路器的区别的详细介绍，可以参考[微服务断路器模式实现：Istio vs Hystrix](http://www.servicemesher.com/blog/istio-vs-hystrix-circuit-breaker/)。
+而微服务中的熔断主要是一种系统保护策略，它的基本功能是在检测到故障后切断链路，通过直接返回错误或者fallback值，来直接提高系统可用性，防止该故障程序出现问题蔓延至整个网络造成雪崩效果。笔者以为，envoy中的异常点检测可以理解为"实例级别"的熔断，并且没有半开放状态。关于该实例级别的熔断与公称断路器的区别的详细介绍，可以参考[微服务断路器模式实现：Istio vs Hystrix](http://www.servicemesher.com/blog/istio-vs-hystrix-circuit-breaker/)。
 
-并且，envoy异常点检测中的'maxEjectionPercent'属性的作用会保持一部分的实例池，即使其中部分实例不可用。其目的是为了避免在负载增加时主机故障导致整个集群中级联故障雪崩，这一点和恐慌阈值的作用相似。但是'maxEjectionPercent'与'panic threshold'的作用域却完全不同。达到恐慌阈值后，流量将负载均衡到该优先级的所有主机，所有主机包括被异常点检测标记为不健康的实例和健康的实例，并且如果如果驱逐达到了‘maxEjectionPercent’设定值，那么这组健康的实例中还可能包含不可用的实例。
+并且，envoy异常点检测中的`maxEjectionPercent`属性的作用会保持一部分的实例池，即使其中部分实例不可用。其目的是为了避免在负载增加时主机故障导致整个集群中级联故障雪崩，这一点和恐慌阈值的作用相似。但是'maxEjectionPercent'与'panic threshold'的作用域却完全不同。达到恐慌阈值后，流量将负载均衡到该优先级的所有主机，所有主机包括被异常点检测标记为不健康的实例和健康的实例，并且如果如果驱逐达到了‘maxEjectionPercent’设定值，那么这组健康的实例中还可能包含不可用的实例。
 
 最后Envoy自身还实现了网络级别的[分布式断路器](https://www.envoyproxy.io/docs/envoy/v1.10.0/intro/arch_overview/circuit_breaking)，这才是istio/envoy提供的"正统"断路器。作为一个分布式短路器，它的特点是在网络级别强制实现断路，而不必为每个应用程序单独配置或者编程，实现零侵入。Envoy支持的分布式断路包括：集群最大连接数、集群最大挂起请求数、集群最大请求数、集群最大活动重试次数等。
 
