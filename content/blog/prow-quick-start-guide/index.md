@@ -1,6 +1,6 @@
 ---
 title: "Prow 快速入门向导"
-date: 2019-06-25T13:13:13+08:00
+date: 2019-07-1T3:13:13+08:00
 draft: false
 banner: "/img/blog/banners/006tKfTcgy1ftpp63o2m2j31ji15okjm.jpg"
 summary: "Prow 是 Google 发起的适应云原生开源项目的 ChatOps 系统。Kubernetes、Istio 等项目都使用 Prow 实现开源协同。我们将以一个测试代码仓库为例，来演示在一个本地k8s集群上使用 Prow 来实现CI/CD的诸多效果。"
@@ -181,7 +181,7 @@ $ docker run -itd --name prow-hook -p 8088:80 --link kind-control-plane zhangsea
 
 打开 `deck` 的访问地址（比如 [http://prow.example.com](http://prow.example.com)） 即可看到 Prow Status 界面。
 ![Prow Status](img-prow-status.png)
-发送一个空的 POST 请求给 `hook` 访问地址的 '/hook' 目录（比如 [http://prow.example.com/hook](http://prow.example.com/hook) ）应该看到如下 `400` 的返回结果。
+发送一个空的 POST 请求给 `hook` 访问地址的 `/hook` 目录（比如 [http://prow.example.com/hook](http://prow.example.com/hook) ）应该看到如下 `400` 的返回结果。
 
 ```shell
 $ curl -i -d "" http://localhost:8088/hook
