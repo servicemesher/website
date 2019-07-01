@@ -23,7 +23,7 @@ Prow 是 Google 发起的适应云原生开源项目的 ChatOps 系统。Kuberne
 
 ## 准备一个k8s集群
 
-Prow 运行在 k8s 集群中，最好运行在有公网IP地址的k8s集群，可以免去 Webhook 转发到麻烦。临时测试可以使用本地集群。我使用 kind 创建一个本地 k8s 集群，使用 minikube 等其他工具都可以。
+Prow 运行在 k8s 集群中，最好运行在有公网IP地址的k8s集群，可以免去 Webhook 转发的麻烦。临时测试可以使用本地集群。我使用 kind 创建一个本地 k8s 集群，使用 minikube 等其他工具都可以。
 
 ```shell
 # 创建一个本地集群
@@ -181,7 +181,7 @@ $ docker run -itd --name prow-hook -p 8088:80 --link kind-control-plane zhangsea
 
 打开 `deck` 的访问地址（比如 [http://prow.example.com](http://prow.example.com)） 即可看到 Prow Status 界面。
 ![Prow Status](img-prow-status.png)
-发送一个空的 POST 请求给 `hook` 访问地址的/hook目录（比如 [http://prow.example.com/hook](http://prow.example.com/hook) ）应该看到如下 `400` 的返回结果。
+发送一个空的 POST 请求给 `hook` 访问地址的 '/hook' 目录（比如 [http://prow.example.com/hook](http://prow.example.com/hook) ）应该看到如下 `400` 的返回结果。
 
 ```shell
 $ curl -i -d "" http://localhost:8088/hook
