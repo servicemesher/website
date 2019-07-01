@@ -1,15 +1,15 @@
 ---
 title: "Prow 快速入门向导"
-date: 2019-07-1T3:13:13+08:00
+date: 2019-07-01T03:13:13+08:00
 draft: false
 banner: "/img/blog/banners/006tKfTcgy1ftpp63o2m2j31ji15okjm.jpg"
 summary: "Prow 是 Google 发起的适应云原生开源项目的 ChatOps 系统。Kubernetes、Istio 等项目都使用 Prow 实现开源协同。我们将以一个测试代码仓库为例，来演示在一个本地k8s集群上使用 Prow 来实现CI/CD的诸多效果。"
 author: "张新峰"
 authorlink: "https://github.com/zhangsean"
 originallink: "https://github.com/zhangsean/prow-quickstart"
-tags: ["prow","chatops","devops","k8s"]
+tags: ["prow","chatops","devops","kubernetes"]
 categories: ["devops"]
-keywords: ["prow","chatops","devops","k8s"]
+keywords: ["prow","chatops","devops","kubernetes"]
 ---
 
 ## 编者按
