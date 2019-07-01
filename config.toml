@@ -101,6 +101,12 @@ paginate = 10
     url  = "https://github.com/servicemesher/istio-knowledge-map"
     weight = 4
 
+[[menu.main]]
+    parent="activity"
+    name = "贡献指南"
+    url  = "/contributing-specification/"
+    weight = 5
+
 
 [[menu.main]]
     name = "联系我们"
