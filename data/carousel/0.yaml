@@ -1,11 +1,9 @@
 weight: 93
-title: "SOFA Meetup #2 上海站"
+title: "KubeCon China"
 description: >
   <ul class="list-style-none">
-     <li>使用 SOFAStack 快速构建微服务</li>
-     <li>分布式事务 Seata 详解</li>
-     <li>与 Spring Cloud 生态的融合案例</li>
-     <li>SQLFlow Demo 首秀</li>
-     <li><a href="https://tech.antfin.com/activities/576?chInfo=service">立即报名</a></li>
+     <li>上海 2019.06.24</li>
+     <li>ServiceMesher 社区代表团合影</li>
+     <li><a href="/blog/kubecon-cncf-oss-2019/">开源社区与朋友们</a></li>
    </ul>
-image: "https://gw.alipayobjects.com/mdn/rms_1d5704/afts/img/A*B3r3S6ystqYAAAAAAAAAAABjARQnAQ"
+image: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*jwDJSLmOaUIAAAAAAAAAAABkARQnAQ"
