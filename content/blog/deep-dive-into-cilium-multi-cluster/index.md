@@ -109,6 +109,7 @@ pod IP路由是多集群能力的基础。 它允许跨集群的pod通过其pod 
 ## 服务发现
 
 Cilium的多集群模型的服务发现是使用标准的Kubernetes [services](https://kubernetes.io/docs/concepts/services-networking/service/) 构建的，旨在对现有的Kubernetes应用程序部署完全透明：
+
 ```yaml
 apiVersion: v1
    kind: Service
@@ -148,6 +149,7 @@ Cilium**不会**跨集群自动传播NetworkPolicy或CiliumNetworkPolicy。 用�
 ### 允许特定集群的交叉路径
 
 可以仅建立适用于特定集群中的pod的策略。 集群名称由Cilium表示为每个pod上的标签，允许匹配的集群名称可以是`endpointSelector`或者是由`toEndpoints`和`fromEndpoints`构造的`matchLabels`标签：
+
 ```yaml
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
@@ -165,13 +167,14 @@ spec:
         name: rebel-base
         io.cilium.k8s.policy.cluster: cluster2
 ```
+
 上面的示例策略将允许cluster1中的`x-wing`与cluster2中的`rebel-base`对话。 除非存在将通信列入白名单的附加策略，否则x-wing将无法与本地集群中的rebel-base通信。
 
 ## 与Istio多集群的关系
 
 这两个项目都是独立的，但可以很好地相互补充。 组合Cilium和Istio多集群的常用方法是使用Cilium的多集群Pod IP路由层来满足[Istio多集群指南](https://istio.io/docs/setup/kubernetes/multicluster-install/)的以下要求：
 
->  *每个集群中的所有pod CIDR必须可以相互路由。*
+> *每个集群中的所有pod CIDR必须可以相互路由。*
 
 此外，Cilium策略执行功能可用于保护与Istio控制平面之间的通信，以及通过不支持的协议（如UDP或IPV6）保护sidecar的旁路尝试，以及防止受损的sidecar代理。
 
