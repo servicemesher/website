@@ -1,6 +1,6 @@
 ---
 title: "深入了解Cilium多集群"
-date: 2019-07-01T13:59:29+08:00
+date: 2019-07-03T10:59:29+08:00
 draft: false
 banner: "/img/blog/banners/bay-blue-boat-296242.jpg"
 author: "Cilium"
