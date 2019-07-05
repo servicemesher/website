@@ -44,7 +44,7 @@ Opentracing的概念模型参见下图：
 
 一个Trace可以看成由多个相互关联的Span组成的有向无环图（DAG图）。下图是一个由8个Span组成的Trace：
 
-```
+```text
 
         [Span A]  ←←←(the root span)
             |
@@ -64,7 +64,7 @@ Opentracing的概念模型参见下图：
 
 上图的trace也可以按照时间先后顺序表示如下：
 
-```
+```text
 ––|–––––––|–––––––|–––––––|–––––––|–––––––|–––––––|–––––––|–> time
 
  [Span A···················································]
@@ -93,7 +93,7 @@ SpanContext是Opentracing中一个让人比较迷惑的概念。在Opentracing�
 
 在基于HTTP协议的分布式调用中，通常会使用HTTP Header来传递SpanContext的内容。常见的Wire Protocol包含Zipkin使用的[b3 HTTP header](https://github.com/openzipkin/b3-propagation)，Jaeger使用的[uber-trace-id HTTP Header](https://www.jaegertracing.io/docs/1.7/client-libraries/#trace-span-identity),LightStep使用的"x-ot-span-context" HTTP Header等。Istio/Envoy支持b3 header和x-ot-span-context header,可以和Zipkin,Jaeger及LightStep对接。其中b3 HTTP header的示例如下：
 
-```
+```text
 X-B3-TraceId: 80f198ee56343ba864fe8b2a57d3eff7
 X-B3-ParentSpanId: 05e3ac9a4f6e3b90
 X-B3-SpanId: e457b5a2e4d86bd1
@@ -143,8 +143,8 @@ private HttpHeaders passTracingHeader(HttpHeaders headers) {
     extractHeader(headers, tracingHeaders, "x-ot-span-context");
     return tracingHeaders;
 }
-
 ```
+
 在Kubernets中部署该程序，查看Istio分布式调用跟踪的效果。
 
 * 首先部署Kubernets cluster，注意需要启用API Server的Webhook选项
@@ -211,8 +211,9 @@ public Tracer jaegerTracer() {
 
 > 注意：
 >
-> * Jaeger tracer缺省使用的是uber-trace-id header,而Istio/Envoy不支持该header。因此需要指定Jaeger tracer使用b3 header格式，以和Istio/Envoy兼容。
-> * Jaeger tracer缺省使用64 bit的trace id, 而Istio/Envoy使用了128 bit的trace id。因此需要指定Jaeger tracer使用128 bit的trace id，以和Istio/Envoy生成的trace id兼容。
+> Jaeger tracer缺省使用的是uber-trace-id header,而Istio/Envoy不支持该header。因此需要指定Jaeger tracer使用b3 header格式，以和Istio/Envoy兼容。
+> 
+> Jaeger tracer缺省使用64 bit的trace id, 而Istio/Envoy使用了128 bit的trace id。因此需要指定Jaeger tracer使用128 bit的trace id，以和Istio/Envoy生成的trace id兼容。
 
 部署采用Opentracing进行HTTP header传递的程序版本，其调用跟踪信息如下所示：
 
@@ -236,6 +237,7 @@ Istio/Envoy提供了跨服务边界的调用链信息，在大部分情况下，
 public @interface Traced {
 }
 ```
+
 ```java
 @Aspect
 @Component
