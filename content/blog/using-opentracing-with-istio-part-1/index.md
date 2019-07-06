@@ -153,7 +153,9 @@ private HttpHeaders passTracingHeader(HttpHeaders headers) {
 
 ```bash
 git clone https://github.com/zhaohuabing/istio-opentracing-demo.git
-kubectl apply -f istio-opentracing-demo/k8s/eshop.yaml
+cd istio-opentracing-demo
+git checkout without-opentracing
+kubectl apply -f k8s/eshop.yaml
 ```
 
 * 在浏览器中打开地址：<http://${NODE_IP}:31380/checkout> ，以触发调用eshop示例程序的REST接口。
@@ -287,6 +289,13 @@ public class BankTransaction {
         }
     }
 }
+```
+
+demo程序的master branch已经加入了方法级代码跟踪，可以直接部署。
+
+```bash
+git checkout master
+kubectl apply -f k8s/eshop.yaml
 ```
 
 效果如下图所示，可以看到trace中增加了transfer和save2db两个方法级的Span。
