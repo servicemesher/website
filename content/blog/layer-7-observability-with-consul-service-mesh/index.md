@@ -15,6 +15,8 @@ categories: ["service mesh"]
 keywords: ["observability","service mesh","consul"]
 ---
 
+*编者按: Consul团队写了一篇易懂、又有实操的如何在Service Mesh中，实现服务的可观察性的文章。即使没有太多基础，也能比较容易的看懂并了解service mesh中，如何实现服务的度量。*
+
 ## 具有Consul服务网格的第7层可观察性
 
 这是系列博客的第二篇文章，重点介绍Consul服务网格中的新功能。
