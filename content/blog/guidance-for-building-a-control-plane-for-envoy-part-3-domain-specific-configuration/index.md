@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://medium.com/solo-io/guidance-for-building-a-control-plane-for-envoy-part-3-domain-specific-configuration-c97e8124b9d1"
 summary: "本文介绍如何为 Envoy 构建控制平面指南的第3部分：领域特定配置。"
 tags: ["service mesh"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","envoy","istio","contour"]
 ---
 

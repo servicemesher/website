@@ -7,7 +7,7 @@ author: "ServiceMesher"
 authorlink: "http://www.servicemesher.com"
 summary: "本章介绍 Knative Serving 组件，描述 Knative Serving 如何部署并为应用和函数 (funtions) 提供服务。"
 tags: ["knative","serverless"]
-categories: ["translation"]
+categories: ["knative"]
 keywords: ["service mesh","服务网格","knative","serverless"]
 ---
 

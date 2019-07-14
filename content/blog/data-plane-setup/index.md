@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://github.com/istio/istio.io/blob/release-1.1/content/blog/2019/data-plane-setup/index.md"
 summary: "本文中我们会深入到 Sidecar 注入模型中，来更清晰的了解 Sidecar 的注入过程。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

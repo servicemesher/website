@@ -12,7 +12,7 @@ reviewerlink:  "https://github.com/SataQiu"
 originallink: "https://medium.com/microsoftazure/canary-release-strategy-using-kubernetes-istio-helm-fb49c0406f07"
 summary: "本文阐述了如何使用Helm和Istio实现手动金丝雀发布"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["istio"]
 aliases: "/blog/canary-release-strategy-using-kubernetes-istio-and-helm/"
 ---

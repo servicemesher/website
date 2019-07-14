@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://www.exoscale.com/syslog/istio-vs-hystrix-circuit-breaker/"
 summary: "由微服务同步通信的核心问题引入，讨论断路器模式，再深入阐述Istio与Hystrix两种断路器的实现原理，最后比较二者的优缺点和选型建议。"
 tags: ["istio","hystrix"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio","spring cloud","hystrix"]
 ---
 

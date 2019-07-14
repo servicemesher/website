@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/wujunze", "https://blog.fleeto.us"]
 originallink: "https://medium.com/solo-io/building-a-control-plane-for-envoy-7524ceb09876"
 summary: "本文介绍如何利用 Gloo 提供的功能，减少自己需要编写的代码。"
 tags: ["istio","envoy","gloo"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","istio","envoy"]
 ---
 

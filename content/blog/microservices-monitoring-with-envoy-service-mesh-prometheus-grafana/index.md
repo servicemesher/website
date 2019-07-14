@@ -12,7 +12,7 @@ reviewerlink:  ["https://www.yangcs.net"]
 originallink: "https://medium.com/@dnivra26/microservices-monitoring-with-envoy-service-mesh-prometheus-grafana-a1c26a8595fc"
 summary: "本文介绍了Envoy service mesh下结合Prometheus和Grafana实现的微服务监控方案。"
 tags: ["Envoy","Service Mesh","Monitor","prometheus","grafana"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["Envoy","Service Mesh","监控","prometheus","grafana"]
 ---
 

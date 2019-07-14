@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://cilium.io/blog/2019/03/12/clustermesh"
 summary: "ClusterMesh是Cilium的多集群实现，可以帮助cilium实现跨数据中心、跨VPC的多K8S集群管理，本文对于ClusterMesh的实现原理进行了深入探讨，并与istio的多集群管理进行了比较。"
 tags: ["service mesh","cilium","BGP"]
-categories: ["translation"]
+categories: ["cilium"]
 keywords: ["service mesh","kubernetes"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 authorlink: ""
 summary: "文章介绍了istio环境下，如何结合Prometheus进行网络度量指标监测，给出了一些示例配置。最后，还推广了一下Banzai Cloud自家的Pipeline，天然支持跨云、混合云情况下的网络度量监测，欢迎体验。"
 tags: ["istio","operator","monitor"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","istio","telemetry"]
 ---
 **编者按**

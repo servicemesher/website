@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "/img/blog/banners/006tNbRwly1fxy3b03ctjj31420u07wk.jpg"
 summary: "本文讲述了Envoy数据统计系统的设计及实现原理。"
 tags: ["envoy"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","envoy"]
 ---
 
@@ -31,7 +31,6 @@ Envoy目前不支持任何浮点统计数据。
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv00zgfu2j30m804ugmh.jpg)
 
 <center>Envoy生成很多对调试分布式系统有用的数据！</center>
-
 ## 统计子系统目标
 
 Envoy统计子系统的总体目标如下：
@@ -53,7 +52,6 @@ Envoy统计子系统的总体目标如下：
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv13dqf7mj30m808zwf9.jpg)
 
 <center>图1：高级统计架构，蓝色统计数据显示了一个作用域分组。</center>
-
 **图1**显示了Envoy数据统计子系统的高级架构。它由以下几个部分组成。
 
 ### 存储
@@ -91,7 +89,6 @@ stat存储是Envoy内部的一个单例对象，并提供了一个简单的接�
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv1793dqqj30m8028glv.jpg)
 
 <center>图2：共享内存中单独的计数器/计量统计项</center>
-
 正如我们在[热重启文章](https://medium.com/@mattklein123/envoy-hot-restart-1d16b14555b5)中已经讨论过的那样，最终，所有统计数据都存储在共享内存中，以便可以在所有进程中使用它们。**图2**显示了单个stat条目。它由以下几个部分组成:
 
 - **Name**：完全解析的属性名，例如`http.admin.downstream_cx_active`。目前限制为128个字符。
@@ -105,7 +102,6 @@ stat存储是Envoy内部的一个单例对象，并提供了一个简单的接�
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/envoy-stats/006tNbRwly1fxv1e9mvjdj30m80f1gn7.jpg)
 
 <center>图3:线程本地热重启支持的存储体系结构</center>
-
 **图3** 显示了Envoy内部使用的线程本地stat存储的设计。这个版本的商店满足了之前发布的所有设计目标。现在我们将详细介绍它的工作原理。
 
 1. 该存储是单例存储，整个Envoy流程都使用它。所有的范围、计数器和标准引用都是从这个单例中心存储库获得的。（本节将不介绍直方图，因为目前直方图不重要，直接刷新到TLS 统计数据接收器）。

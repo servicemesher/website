@@ -12,7 +12,7 @@ reviewerlink:  ["https://www.yangcs.net", "https://www.github.com/yiduwangkai"]
 originallink: "https://venilnoronha.io/envoy-grpc-and-rate-limiting"
 summary: "本文使用C++构建了客户端/服务端应用，通过Envoy代理和gPRC协议进行通信，然后使用Go语言实现了Envoy速率限制服务。"
 tags: ["Envoy","gRPC","Rate-Limiting"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["Envoy","gRPC","Rate-Limiting"] 
 ---
 

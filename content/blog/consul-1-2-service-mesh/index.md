@@ -10,7 +10,7 @@ authorlink: "https://www.hashicorp.com/blog/consul-1-2-service-mesh"
 summary: "本文是 HashiCorp 创始人 Mitchell Hashimoto 在 2018 年 6 月 26 日发布的关于 Consul 1.2 新功能 Service Mesh 的官方介绍。"
 originallink: "https://www.hashicorp.com/blog/consul-1-2-service-mesh"
 tags: ["consul","service mesh","harshicorp"]
-categories: ["translation"]
+categories: ["consul"]
 keywords: ["service mesh","harshicorp","consul"]
 ---
 

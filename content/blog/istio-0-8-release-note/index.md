@@ -10,7 +10,7 @@ translator: "宋净超"
 translatorlink: "https://jimmysong.io"
 summary: "北京时间 2018 年 6 月 1 日（儿童节）上午 9: 30 Istio 0.8.0 LTS（长期支持版本）发布。该版本除了常见的一堆错误修复和性能改进之外，还包含以下更新和新功能。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["istio","istio 0.8","release note"]
 aliases: "/blog/istio-0.8-release-note"
 ---

@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/haiker2011","https://www.wujunze.com/"]
 originallink: "https://dzone.com/articles/faas-vs-microservices"
 summary: "本文主要向读者介绍FaaS和微服务架构之间的区别以及如何根据自身情况选择正确的架构方案。"
 tags: ["faas","microservices","serverless"]
-categories: ["translation"]
+categories: ["serverless"]
 keywords: ["service mesh","服务网格"]
 ---
 

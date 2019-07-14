@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io", "https://www.yangcs.net", "https://www.g
 originallink: "https://rancher.com/blog/2018/2018-04-23-evaluation-of-serverless-frameworks-for-kbe/"
 summary: "本文讲解了如何利用K8S的设计参数和服务编排功能，并将它们与无服务器框架和函数即服务（FaaS）结合起来。"
 tags: ["Serverless","Kubernetes","FaaS","Fission","OpenFaaS","Kubeless"]
-categories: ["translation"]
+categories: ["kubernetes"]
 keywords: ["Serverless","无服务","Kubernetes","FaaS"]
 ---
 

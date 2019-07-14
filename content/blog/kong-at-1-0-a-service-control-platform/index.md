@@ -10,7 +10,7 @@ translatorlink: "https://jimmysong.io"
 originallink: "https://thenewstack.io/kong-at-1-0-a-service-control-platform/"
 summary: "Kong 1.0是该公司构建服务控制平台愿景的基础，该平台结合了人工智能、机器学习和其他先进技术，可以促进信息流在服务之间的流动。"
 tags: ["kong","gateway"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: [“service mesh","服务网格","kong","网关"]
 ---
 

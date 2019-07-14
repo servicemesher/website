@@ -14,7 +14,7 @@ reviewerlink:  "https://github.com/GuangmingLuo"
 originallink: "https://medium.com/solo-io/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative-324753586f3a"
 summary: "本文介绍如何Solo.io公司研发的Gloo产品，可以作为使用Knative时部署Istio的替代方案。"
 tags: ["Kubernetes", "Knative", "Gloo", "Istio", "Serverless"]
-categories: ["translation"]
+categories: ["knative"]
 keywords: ["Kubernetes", "Knative", "Gloo", "Istio", "Serverless"]
 aliases: "/blog/solo-io/gloo-by-solo-io-is-the-first-alternative-to-istio-on-knative/"
 ---

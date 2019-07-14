@@ -14,7 +14,7 @@ reviewerlink:  "https://github.com/loverto"
 originallink: "https://akomljen.com/kubernetes-service-mesh/"
 summary: "文章介绍了为什么要用服务网格，以及简单的介绍了两个重要实现：Istio和Linkerd，鼓励大家上手实验。"
 tags: ["service mesh","Istio","Linkerd"]
-categories: ["translation"]
+categories: ["kubernetes","service mesh"]
 keywords: ["service mesh","Istio","Linkerd"]
 ---
 

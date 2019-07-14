@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://blog.envoyproxy.io/envoy-threading-model-a8d44b922310"
 summary: "Envoy的架构师Matt Klein对Envoy中多线程模型的简单介绍。"
 tags: ["envoy"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","envoy"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink: ["https://blog.fleeto.us","https://github.com/loverto"]
 originallink: "https://content.pivotal.io/blog/knative-whittling-down-the-code"
 summary: "本文介绍如何利用Knative提供的功能，减少自己需要编写的代码。"
 tags: ["knative","serverless"]
-categories: ["translation"]
+categories: ["knative"]
 keywords: ["service mesh","服务网格","knative","serverless","无服务架构"]
 ---
 

@@ -11,7 +11,7 @@ origininallink: "https://blog.aspenmesh.io/blog/2018/03/service-mesh-architectur
 summary: "这是介绍服务网格的架构系列的第二篇文章，本文讲解了Service Mesh术语的含义，为什么说节点代理和Sidecar模型是微服务的新模式和未来。"
 banner: "/img/blog/banners/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
 tags: ["service mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 

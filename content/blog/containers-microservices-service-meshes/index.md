@@ -8,7 +8,7 @@ reviewer: ["孙海洲"]
 reviewerlink: ["https://github.com/haiker2011"]
 title: "容器、微服务和服务网格简史"
 description: "本文介绍了dotCloud的历史、容器间路由，进而阐述了它与现代服务网格的相同与不同之处，如何实现一个类似的服务网格以及其与Istio的区别。"
-categories: "translation"
+categories: "service mesh"
 tags: ["istio", "kubernetes", "service-mesh", "SuperGloo"]
 originalPublishDate: 2019-05-17
 date: 2019-06-03T11:20:34+08:00

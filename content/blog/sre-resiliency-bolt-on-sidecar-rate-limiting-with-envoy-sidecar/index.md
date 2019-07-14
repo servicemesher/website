@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://medium.com/dm03514-tech-blog/sre-resiliency-bolt-on-sidecar-rate-limiting-with-envoy-sidecar-5381bd4a1137"
 summary: "本文详述了如何做速率限制服务来减轻客户端对 API 资源的消耗。"
 tags: ["envoy","service mesh","rate limiting"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","envoy"]
 ---
 

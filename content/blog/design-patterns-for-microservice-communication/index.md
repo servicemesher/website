@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://dzone.com/articles/design-patterns-for-microservice-communication"
 summary: "本文详细的介绍了同步和异步模式下微服务间的通信模式。"
 tags: ["microservice"]
-categories: ["translation"]
+categories: ["microservices"]
 keywords: ["service mesh","服务网格","微服务"]
 ---
 

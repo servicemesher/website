@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://blog.jdriven.com/2018/11/transcoding-grpc-to-http-json-using-envoy/"
 summary: "本文用实例讲解了如何利用Envoy将gRPC转码为HTTP/JSON。"
 tags: ["grpc","envoy"]
-categories: ["translation"]
+categories: ["envoy","grpc"]
 keywords: ["service mesh","服务网格"]
 ---
 
