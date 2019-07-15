@@ -49,7 +49,7 @@ ChatOps 带来了很多好处：
 - 移动友好。只需要在前台与预设好的机器人对话即可完成与后台工具、系统的交互，在移动环境下无需再与众多复杂的工具直接对接，大大提升移动办公的可行性。
 - DevOps 文化打造。用与机器人对话这种简单的方式降低 DevOps 的接受门槛，让这种自动化办公的理念更容易的扩展到团队的每一个角落。
 
-对于 ChatOps 的理解最早要源于在 GitHub 上参与开源项目的一些经历，在向 Kubernetes 相关项目提交 PR 时，会有一个名叫 `k8s-ci-robot` 的小机器人来自动为该 RP 打上标签，并且根据你提交 PR 时的 commit 信息来为你分配 Reviewers，如果没有填的话，则会自动为你分配 Reviewers 等功能。同时可以在 commit 中输入命令，还可以进行其他的操作，详见：[命令列表](https://prow.k8s.io/command-help)。而其实这个机器人的后端就是名为 [Prow](https://github.com/kubernetes/test-infra/tree/master/prow#bots-home) 的由 Google 发起的适应云原生 CI/CD 开源项目，有兴趣的话推荐阅读：[Prow 快速入门向导](https://www.servicemesher.com/blog/prow-quick-start-guide/)。
+对于 ChatOps 的理解最早要源于在 GitHub 上参与开源项目的一些经历，在向 Kubernetes 相关项目提交 PR 时，会有一个名叫 `k8s-ci-robot` 的小机器人来自动为该 RP 打上标签，并且根据你提交 PR 时的 comment 信息来为你分配 Reviewers，如果没有填的话，则会自动为你分配 Reviewers 等功能。同时可以在 comment 中输入命令，还可以进行其他的操作，详见：[命令列表](https://prow.k8s.io/command-help)。而其实这个机器人的后端就是名为 [Prow](https://github.com/kubernetes/test-infra/tree/master/prow#bots-home) 的由 Google 发起的适应云原生 CI/CD 开源项目，有兴趣的话推荐阅读：[Prow 快速入门向导](https://www.servicemesher.com/blog/prow-quick-start-guide/)。
 
 而一篇名为：[《湾区日报是如何运作的？》](https://wanqu.co/b/7/%E6%B9%BE%E5%8C%BA%E6%97%A5%E6%8A%A5%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/) 文章更是让我坚定信心开始开发自己 ChatOps 系统。该文章介绍作者是怎么运营一个名叫湾区日报的个人博客，这个博客通过11个渠道（网站，iOS app，Android app、微博，微信，Twitter，Chrome 浏览器推送、Facebook、邮件订阅、RSS、Telegram）推荐给读者，而这个11个渠道的发布都是通过 slack 和作者开发的小机器人完成。在我还在为使用脚本可以在多渠道发布个人技术博客而沾沾自喜的时候，人家早在多年前就开始使用 ChatOps 模式向多渠道使用多格式自动推送文章了。这也坚定了我开发我们自己的 ChatOps 系统的决心。
 
