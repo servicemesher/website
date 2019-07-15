@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://venilnoronha.io/raw-tcp-traffic-shaping-with-istio-1.1.0"
 summary: "本文通过构建一个简单的echo服务演示了如何在Istio1.1.0下进行TCP流量控制。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格"]
 ---
 

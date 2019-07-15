@@ -1,8 +1,8 @@
 ---
 title: "使用Jenkins X实现ChatOps"
-date: 2019-06-6T4:30:44+08:00
+date: 2019-06-06T4:30:44+08:00
 draft: false
-banner: ""
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*UNy3SKvtH3QAAAAAAAAAAABkARQnAQ"
 author: "Viktor Farcic"
 authorlink: "https://leanpub.com/u/vfarcic"
 translator: "孙海洲"
@@ -14,7 +14,7 @@ reviewerlink:  "https://github.com/GuangmingLuo"
 originallink: "https://technologyconversations.com/2019/04/24/implementing-chatops-with-jenkins-x/"
 summary: "本文很好的阐述了如何使用Jenkins X来实践ChatOps，文中手把手带我们从零开始完成了一次Kubernetes Native的CI/CD之旅。"
 tags: ["Jenkins X", "Jenkins X", "Prow"]
-categories: ["translation"]
+categories: ["devops"]
 keywords: ["Jenkins X", "Jenkins X", "Prow"]
 aliases: "/blog/implementing-chatops-with-jenkins-x/"
 ---
@@ -61,7 +61,7 @@ cat OWNERS
 
 输出如下所示：
 
-```text
+```yaml
 approvers:
 – vfarcic
 reviewers:
@@ -147,7 +147,7 @@ jx create pr \
 
 请输入以下PR评论并按下`Comment`按钮。
 
-```text
+```bash
 No PR should be without a kitten
 
 /meow
@@ -165,7 +165,7 @@ No PR should be without a kitten
 
 例如，批准PR后发送的邮件如下。
 
-```text
+```bash
 [APPROVALNOTIFIER] This PR is APPROVED
 
 This pull-request has been approved by: vfarciccb

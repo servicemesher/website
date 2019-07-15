@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://venilnoronha.io/set-sail-a-production-ready-istio-adapter"
 summary: "本文通过示例讲解了如何创建并部署一个生产环境就绪的Istio Adapter。"
 tags: ["istio","tutorial"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

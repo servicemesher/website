@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://searchitoperations.techtarget.com/tip/Istio-service-mesh-tech-boosts-Kubernetes-work-with-trade-offs"
 summary: "本文中各位分析师给出了采纳在Kubernets上运行的Istio service mesh的利弊分析。"
 tags: ["istio","service mesh"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh"]
 ---
 

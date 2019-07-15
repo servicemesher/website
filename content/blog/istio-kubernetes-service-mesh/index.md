@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://blog.aquasec.com/istio-kubernetes-service-mesh"
 summary: "本文介绍了什么是Istio，并详细分析了Istio的优势，最后分享了关于Istio的一些落地经验。"
 tags: ["istio","microservices"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

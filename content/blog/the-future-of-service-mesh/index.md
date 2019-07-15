@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://blogs.vmware.com/opensource/2018/10/23/service-mesh-whats-next"
 summary: "本文通过分析服务网格的优势，阐述了其未来的发展情况。"
 tags: ["servcie mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 

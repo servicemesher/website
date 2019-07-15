@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://jaxenter.com/istio-service-mesh-interview-harrington-148638.html"
 summary: "Istio能否成为Kubernetes之上的事实的服务网络标准呢？ 我们采访了Red Hat的Istio产品经理“红胡子”Brian Harrington，他的答案是肯定的。"
 tags: ["istio","service mesh"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格"]
 ---
 

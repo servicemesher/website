@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://aspenmesh.io/2018/09/going-beyond-container-orchestration/"
 summary: "容器编排是一个很好的基础设施，但企业组织需要的不仅仅是一个良好的基础设施。他们需要能够与堆栈上层的服务进行交互的能力，这需要使用Service Mesh指标和现代架构去实现。"
 tags: ["service mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 

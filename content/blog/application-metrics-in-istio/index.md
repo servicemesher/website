@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://meteatamel.wordpress.com/2019/01/07/application-metrics-in-istio/"
 summary: "本文介绍了在Istio环境下进行应用程序指标度量的背景知识、一般方法以及可能出现的问题。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio","metric"]
 ---
 

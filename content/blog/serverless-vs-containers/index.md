@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://dzone.com/articles/serverless-vs-containers"
 summary: "本文介绍Serverless与容器的采用率、工具支持以及围绕Serverless和容器化的其他争论。"
 tags: ["serverless","container"]
-categories: ["translation"]
+categories: ["serverless"]
 keywords: ["无服务器","serverless","容器"]
 ---
 

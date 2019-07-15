@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/SataQiu"]
 originallink: "https://medium.com/google-cloud/back-to-microservices-with-istio-part-2-authentication-authorization-b079f77358ac"
 summary: "系列文章使用Istio打造微服务的第2部分。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

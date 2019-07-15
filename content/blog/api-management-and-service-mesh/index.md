@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://itnext.io/api-management-and-service-mesh-e7f0e686090e"
 summary: "本文分别介绍了API Management和Service Mesh，并简单分析了它们的共同点。"
 tags: ["service mesh","API Management"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格","API管理"]
 ---
 

@@ -9,7 +9,7 @@ reviewer: ["宋净超","王凯"]
 title: "为什么要选择Service Mesh？"
 description: "本文讲述互联网应用演进过程，Service Mesh能带来什么好处"
 banner: "/img/blog/banners/006tNbRwly1fx5dtjdrmbj31ji15mqva.jpg"
-categories: ["translation"]
+categories: ["service mesh"]
 tags: ["Docker","MicroServices","Kubernetes","Monitoring","service mesh"]
 date: 2018-11-08T15:20:46+08:00
 reviewerlink:  ["https://jimmysong.io","https://www.github.com/yiduwangkai"]

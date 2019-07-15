@@ -12,7 +12,7 @@ authorlink: "https://aspenmesh.io"
 originallink: "https://blog.aspenmesh.io/blog/2018/03/the-path-to-service-mesh/"
 summary: "通过 Aspen Mesh 之旅，我们带来三个主题的系列博文来讨论我们为什么选择了 Istio。"
 tags: ["service mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 

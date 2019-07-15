@@ -12,7 +12,7 @@ reviewerlink:  "https://github.com/x19990416"
 originallink: "https://monzo.com/blog/2019/04/03/deploying-envoy-proxy/"
 summary: "本文介绍了使用Envoy来加速Monzo，对比了使用Linkerd和Envoy，通过试验证明Envoy拥有更小的延迟。"
 tags: ["servicemesh", "Envoy"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["servicemesh", "Envoy"]
 aliases: "/blog/deploying-envoy-proxy/"
 ---

@@ -13,7 +13,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.linux.com/blog/event/kubecon/2018/4/making-most-out-microservices-service-mesh"
 translatorlink: "https://github.com/loverto"
 tags: ["service mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","AspenMesh"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/haiker2011"]
 originallink: "/img/blog/banners/006tKfTcly1g0ku5ojo3gj31400u07wk.jpg"
 summary: "使用Istio打造微服务的教程（第1部分）。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

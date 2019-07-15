@@ -21,7 +21,7 @@ keywords: ["service mesh"]
 '''> $translators
 echo -e "| 译者 | 文章数 |\n| ---- | ---- |" >> $translators
 cat $formated_json|grep translator|sort -n|cut -d ":" -f2|grep -v "null"|tr -d '"',","|uniq -c|sort -rn|awk '{ print "|" $2 " | " $1 "|"}' >> $translators
-echo -e "提交文章线索或译文请访问 https://github.com/servicemesher/trans" >> $translators
+echo -e "提交文章线索或译文请访问 https://github.com/servicemesher/website" >> $translators
 
 echo -e '''
 ---
@@ -34,6 +34,6 @@ keywords: ["service mesh"]
 '''> $authors
 echo -e "| 作者 | 文章数 |\n| ---- | ---- |" >> $authors
 cat $formated_json|grep author|grep -v "authorlink"|sort|cut -d ":" -f2|tr -d ","'"'|uniq -c|sort -nr|awk '$2 >"z" { print "|" $2 " | " $1 "|"}' >> $authors
-echo -e "投递原创文章请访问 https://github.com/servicemesher/trans" >> $authors
+echo -e "投递原创文章请访问 https://github.com/servicemesher/website" >> $authors
 
 rm $orig_json

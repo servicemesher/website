@@ -26,7 +26,7 @@ keywords: ["service mesh","服务网格","prometheus","kubernetes"]
 
 1、业务侧实现一个接口，返回Prometheus规范化数据，如下：
 
-```
+```json
 traefik_entrypoint_requests_total{code="302",entrypoint="https",method="HEAD",protocol="http"} 1
 traefik_entrypoint_requests_total{code="302",entrypoint="https",method="POST",protocol="http"} 1
 traefik_entrypoint_requests_total{code="304",entrypoint="http",method="GET",protocol="http"} 15
@@ -152,7 +152,8 @@ spec:
 prometheus.io/path可以不用指定了，默认就是 /metrics
 
 现在就可以在Prometheus页面查询到traefik的监控数据了
-![promtheus-traefik](http://dl-blog.laoxianyu.cn/prometheus-traefik.png)
+
+![promtheus-traefik](prometheus-traefik.png)
 
 Grafana监控Traefik面板：https://grafana.com/dashboards/9682
 

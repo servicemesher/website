@@ -10,7 +10,7 @@ authorlink: "https://aspenmesh.io"
 originallink: "https://blog.aspenmesh.io/blog/2018/04/tracing-grpc-with-istio/"
 summary: "本文介绍的是如何在Istio中使用grpc并设置跟踪（tracing）与header传播，包括gRPC到grpc请求传播header、gRPC到HTTP请求传播header、使用grpc-gateway时传播header等"
 tags: ["istio","grpc","tracing"]
-categories: ["translation"]
+categories: ["istio","grpc"]
 keywords: ["service mesh","istio","grpc","tracing"]
 ---
 

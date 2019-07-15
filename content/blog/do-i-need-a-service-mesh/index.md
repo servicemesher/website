@@ -12,7 +12,7 @@ reviewerlink: ["https://blog.fleeto.us","https://github.com/haiker2011"]
 originallink: "https://www.nginx.com/blog/do-i-need-a-service-mesh/"
 summary: "本文对当前的服务网格发展状况进行了分析和预测，建议在适当的时机开始使用服务网格来替代现有解决方案。"
 tags: ["service mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 

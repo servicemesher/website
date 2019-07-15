@@ -13,9 +13,9 @@ keywords: ["service mesh"]
 |马若飞 | 11|
 |甄中元 | 11|
 |宋净超 | 11|
-|孙海洲 | 6|
+|孙海洲 | 7|
+|罗广明 | 6|
 |陈冬 | 5|
-|罗广明 | 5|
 |戴佳顺 | 5|
 |崔秀龙 | 5|
 |王帅俭 | 4|
@@ -23,13 +23,13 @@ keywords: ["service mesh"]
 |狄卫华 | 3|
 |李琪 | 3|
 |李昕阳 | 3|
+|张成 | 3|
 |邱世达 | 2|
 |詹叶 | 2|
 |王凯 | 2|
 |杨传胜 | 2|
 |李守超 | 2|
 |敖小剑 | 2|
-|张成 | 2|
 |宋歌 | 2|
 |邵思华 | 1|
 |赵化冰 | 1|
@@ -46,4 +46,4 @@ keywords: ["service mesh"]
 |Kael | 1|
 |Jianjun | 1|
 |Grace | 1|
-提交文章线索或译文请访问 https://github.com/servicemesher/trans
+提交文章线索或译文请访问 https://github.com/servicemesher/website

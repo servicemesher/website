@@ -12,7 +12,7 @@ authorlink: "https://medium.com/jaegertracing/istio-routing-using-opentracing-ba
 originallink: "https://medium.com/jaegertracing/istio-routing-using-opentracing-baggage-distributed-context-propagation-ed8d787a4bef"
 summary: "这是一篇关于在 Istio 路由规则中使用 Opentracing Baggage 对流量进行分布式追踪的教程。"
 tags: ["istio","opentracing ","baggage","tutorial","tracing"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","istio","opentracing","baggage"]
 ---
 
