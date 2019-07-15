@@ -1,7 +1,8 @@
 ---
+originallink: "https://www.hashicorp.com/blog/layer-7-observability-with-consul-service-mesh"
 title: "具有Consul服务网格的第7层可观察性"
 date: 2019-07-12T00:00:00+08:00
-draft: true
+draft: false
 banner: "/img/blog/banners/franck-v-mMF7N2mNGCg-unsplash.jpg"
 author: "THE CONSUL TEAM"
 authorlink: "https://www.hashicorp.com/"
