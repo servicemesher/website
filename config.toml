@@ -211,7 +211,7 @@ paginate = 10
     # at 'exampleSite/data/testimonials'.
     # For more informtion take a look at the README.
     title = "社区治理委员会"
-    subtitle = "负责社区的日常事务管理"
+    subtitle = "负责社区重大决策及日常事务管理"
 
 [params.see_more]
     enable = true
@@ -232,7 +232,7 @@ paginate = 10
 [params.recent_posts]
     enable = true
     title = "最新博客"
-    subtitle = "服务网格技术文章一网打尽"
+    subtitle = "Kubernetes、Service Mesh 及云原生最新博客"
 
 [outputs]
     home = ["HTML", "RSS", "Algolia"]
