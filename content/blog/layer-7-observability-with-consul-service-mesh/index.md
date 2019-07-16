@@ -1,10 +1,10 @@
 ---
 originallink: "https://www.hashicorp.com/blog/layer-7-observability-with-consul-service-mesh"
-title: "具有Consul服务网格的第7层可观察性"
+title: "Consul Service Mesh的7层网络可观察性"
 date: 2019-07-12T00:00:00+08:00
 draft: false
 banner: "/img/blog/banners/franck-v-mMF7N2mNGCg-unsplash.jpg"
-author: "THE CONSUL TEAM"
+author: "The Consul Team"
 authorlink: "https://www.hashicorp.com/"
 translator: "张成"
 translatorlink: "https://github.com/chengwhynot"
@@ -16,9 +16,9 @@ categories: ["service mesh"]
 keywords: ["observability","service mesh","consul"]
 ---
 
-*编者按: Consul团队写了一篇易懂、又有实操的如何在Service Mesh中，实现服务的可观察性的文章。即使没有太多基础，也能比较容易的看懂并了解service mesh中，如何实现服务的度量。*
+*编者按：Consul团队写了一篇易懂、又有实操的如何在Service Mesh中，实现服务的可观察性的文章。即使没有太多基础，也能比较容易的看懂并了解service mesh中，如何实现服务的度量。*
 
-## 具有Consul服务网格的第7层可观察性
+## Consul Service Mesh 的7层网络可观察性
 
 这是系列博客的第二篇文章，重点介绍Consul服务网格中的新功能。
 
@@ -52,7 +52,9 @@ keywords: ["observability","service mesh","consul"]
 
 服务网格传统上由两个主要组件构成：控制平面和数据平面。 控制平面为网格中的所有正在运行的数据平面提供策略和配置。 数据平面通常是本地代理，作为应用程序的边车运行。 数据平面根据控制平面中的策略和服务图终止所有TLS连接和托管授权。 Consul构成服务网格的控制平面，简化了边车代理的配置，以实现安全的流量通信和度量收集。 Consul旨在支持各种代理作为sidecars，并且目前已经为Envoy提供了一流的支持，因为它具有轻量级的占用空间和可观察性支持。
 
-![Envoy sidecar proxy with its upstream services](1558253731-consul.png)*Consul UI showing the Envoy sidecar proxy and its upstream services*
+![Envoy sidecar proxy with its upstream services](1558253731-consul.png)
+
+*Consul UI showing the Envoy sidecar proxy and its upstream services*
 
 Consul 1.5引入了使用`consul connect envoy`命令立即为Consul Connect中的所有Envoy代理配置度量集合的功能。 在新的发现阶段，此命令从本地Consul代理获取集中存储的代理配置，并使用其值来引导Envoy代理。
 
@@ -60,7 +62,7 @@ Consul 1.5引入了使用`consul connect envoy`命令立即为Consul Connect中�
 
 可以通过创建配置文件来创建集中配置。
 
-``` config
+``` bash
 kind = "proxy-defaults"
 name = "global"
 
@@ -89,7 +91,7 @@ DogStatsD接收器优于statsd，因为它允许标记指标，这对于能够�
 
 Consul将使用该配置生成Envoy设置代理并配置相应统计信息接收器所需的引导配置。一旦Envoy代理被引导，它将开始发出指标。您可以在Prometheus等时间序列存储中捕获这些指标，并在Grafana等工具中查询它们，或将它们发送到托管监控解决方案。下面是一个Prometheus查询示例，您可以根据生成的指标编写，该查询将所有请求时间记录到上游“emojify-api”集群，然后按分位数对它们进行分组
 
-```config
+```bash
 # The response times of the emojify-api upstream, 
 # categorized by quantile 
 sum(envoy_cluster_upstream_rq_time{envoy_cluster_name="emojify-api"} > 0) by (quantile)
@@ -110,7 +112,9 @@ Envoy根据其配置方式发出[大量](https://docs.datadoghq.com/integrations
 - **TCP**：连接，吞吐量等指标
 - **HTTP**：有关HTTP和HTTP/2连接和请求的指标。
 
-![Grafana dashboard containing Envoy metrics](1558253406-dashboard.png)*Grafana dashboard containing Envoy metrics*
+![Grafana dashboard containing Envoy metrics](1558253406-dashboard.png)
+
+*Grafana dashboard containing Envoy metrics*
 
 ### L7可观察性
 
@@ -124,7 +128,7 @@ Envoy根据其配置方式发出[大量](https://docs.datadoghq.com/integrations
 
 您可以通过在配置文件中设置服务默认值来指定服务的协议（请参阅下面的示例）。
 
-``` config
+``` yaml
 kind: "service-defaults"
 name: "emojify-api"
 protocol = "http"
@@ -136,13 +140,15 @@ protocol = "http"
 
 一旦通过Consul指定或发现代理和上游的协议字段，Envoy将配置集群以发出额外的L7指标，HTTP类别和指标的HTTP/GRPC子类别。
 
-![The emojify-cache and emojify-facebox clusters are emitting response codes with their metrics](1558253409-l7metrics.png)*The emojify-cache and emojify-facebox clusters are emitting response codes with their metrics*
+![The emojify-cache and emojify-facebox clusters are emitting response codes with their metrics](1558253409-l7metrics.png)
+
+*The emojify-cache and emojify-facebox clusters are emitting response codes with their metrics*
 
 一旦您在Grafana中获得L7指标，您就可以开始更精确地关联事件，并了解系统中的故障是如何冒泡的。
 
 例如，如果emojify-api上游开始返回5xx响应代码，您可以查看对emojify-cache服务的调用，并查看Get调用是否也失败。
 
-``` config
+``` bash
 # Number of requests to the emojify-upstream, 
 # categorized by resulting response code
 sum(increase(envoy_cluster_upstream_rq_xx{envoy_cluster_name="emojify-api"}[30s])) by (envoy_response_code_class)
@@ -151,15 +157,19 @@ sum(increase(envoy_cluster_upstream_rq_xx{envoy_cluster_name="emojify-api"}[30s]
 sum(increase(envoy_cluster_upstream_rq_retry{envoy_cluster_name="emojify-api"}[30s]))
 ```
 
-![Resulting graph showing the number of requests and retries](1558253412-requestcount.png)*Resulting graph showing the number of requests and retries*
+![Resulting graph showing the number of requests and retries](1558253412-requestcount.png)
 
-``` config
+*Resulting graph showing the number of requests and retries*
+
+``` bash
 # Number of GRPC calls to the emojify-cache upstream, 
 # categorized by function called
 sum(increase(envoy_cluster_grpc_0{envoy_cluster_name="emojify-cache"}[30s])) by (envoy_grpc_bridge_method)
 ```
 
-![Resulting graph showing the GRPC functions and their call count](1558253414-requestgrpc.png)*Resulting graph showing the GRPC functions and their call count*
+![Resulting graph showing the GRPC functions and their call count](1558253414-requestgrpc.png)
+
+*Resulting graph showing the GRPC functions and their call count*
 
 通过使用分布式跟踪，您可以在系统上获得更好的可观察性。 这需要应用程序的一些合作来通过服务调用来发起跟踪和传播跟踪上下文。 可以将服务网格配置为集成并向跟踪添加跨度，以深入了解在代理中花费的时间。 这可以通过`envoy_tracing_json`字段提供，该字段接受JSON格式的Envoy跟踪配置。
 
