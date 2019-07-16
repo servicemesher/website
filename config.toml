@@ -1,4 +1,4 @@
-baseurl = "http://www.servicemesher.com/"
+baseurl = "https://www.servicemesher.com/"
 title = "ServiceMesher"
 theme = "hugo-universal-theme"
 languageCode = "zh"
