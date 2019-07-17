@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/haiker2011"]
 originallink: "https://blog.giantswarm.io/Istio-monitoring-explained/"
 summary: "本文先后阐述服务网格中监控的重要性和Istio相关名词概念，再由一个实例切入，详解在Istio中部署和实现监控的全过程。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

@@ -12,7 +12,7 @@ reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 summary: "本文是WePay（一家做支付平台和风控产品的公司）使用Linkerd作为服务网格的代理的分享文章。"
 tags: ["linkerd"]
-categories: ["practice","translation"]
+categories: ["linkerd","practice"]
 keywords: ["service mesh","linkerd","wepay","服务网格"]
 ---
 

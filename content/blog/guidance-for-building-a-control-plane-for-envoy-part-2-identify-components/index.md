@@ -12,11 +12,9 @@ reviewerlink: ["https://github.com/haiker2011"]
 originallink: "https://blog.christianposta.com/envoy/guidance-for-building-a-control-plane-for-envoy-identify-components/"
 summary: "本文介绍如何为 Envoy 构建控制面指南的第2部分：识别组件。"
 tags: ["envoy","gloo"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","Envoy","gloo"]
 ---
-## 为Envoy构建控制面指南第2部分：识别组件
-
 编者按
 
 > 本文介绍如何为 Envoy 构建控制面指南的第2部分：识别控制平面的各个组件。对实施Envoy控制平面需要了解的基础知识很有帮助。也算是Envoy的概念介绍。

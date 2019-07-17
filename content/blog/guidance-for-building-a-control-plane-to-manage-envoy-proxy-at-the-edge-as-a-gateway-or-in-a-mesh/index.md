@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/haiker2011"]
 originallink: "https://medium.com/solo-io/guidance-for-building-a-control-plane-to-manage-envoy-proxy-at-the-edge-as-a-gateway-or-in-a-mesh-badb6c36a2af"
 summary: "Envoy Proxy构建控制平面指南。"
 tags: ["service mesh","envoy"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","istio","gloo","xds","envoy"]
 ---
 

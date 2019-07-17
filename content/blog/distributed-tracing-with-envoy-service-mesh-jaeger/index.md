@@ -12,7 +12,7 @@ reviewerlink: ["https://yangcs.net"]
 originallink: "https://hackernoon.com/distributed-tracing-with-envoy-service-mesh-jaeger-c365b6191592"
 summary: "本文用实例讲解了如何利用Envoy和Jaeger实现分布式追踪。"
 tags: ["envoy","jaeger"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","envoy","jaeger"]
 ---
 

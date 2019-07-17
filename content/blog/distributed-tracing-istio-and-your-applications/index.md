@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://thenewstack.io/distributed-tracing-istio-and-your-applications/"
 summary: "本文是由Aspen Mesh（隶属于F5）公司的Neeraj Poddar介绍如何在Istio中使用分布式跟踪，需要修改程序才能利用Istio做分布式追踪，Istio报告的Span如何与应用程序创建的Span交互。"
 tags: ["istio","service mesh","tracing"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: [“service mesh”,"分布式跟踪","istio","服务网格"]
 ---
 

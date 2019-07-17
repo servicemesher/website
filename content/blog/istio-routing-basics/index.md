@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://medium.com/google-cloud/istio-routing-basics-14feab3c040e"
 summary: "本文展示了如何从头开始构建Istio应用程序和Istio路由的基础知识。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

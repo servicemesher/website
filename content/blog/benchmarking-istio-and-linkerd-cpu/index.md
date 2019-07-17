@@ -11,7 +11,7 @@ originallink: "https://medium.com/@michael_87395/benchmarking-istio-linkerd-cpu-
 reviewerlink: ["https://jimmysong.io"]
 title: "Istio和Linkerd的CPU基准测试"
 summary: "本文对Istio和Linkerd的CPU使用情况做了基准测试和比较。"
-categories: ["translation"]
+categories: ["istio","linkerd"]
 tags: ["istio","linkerd"]
 keywords: ["service mesh","istio","linkerd"]
 ---

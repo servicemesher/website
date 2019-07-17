@@ -11,8 +11,8 @@ reviewer: ["宋净超","孙海洲"]
 reviewerlink: ["https://jimmysong.io","https://github.com/haiker2011"]
 originallink: "http://wei-meilin.blogspot.com/2019/03/my2cents-eight-things-leads-to.html"
 summary: "本文介绍了作者认为在开发云原生微服务系统时会出现的8个问题，并告诫大家避免犯错。"
-tags: ["microservices"]
-categories: ["translation"]
+tags: ["cloud native"]
+categories: ["cloud native"]
 keywords: ["service mesh","服务网格","微服务"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink: ["https://yangcs.net"]
 originallink: "https://apifriends.com/microservices/istio-microgateway-blog/"
 summary: "本文讲述Istio强大的功能以及Istio组件介绍。"
 tags: ["istio","microgateway"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.circonus.com/2017/12/circonus-istio-mixer-adapter/"
 summary: "本文是Circonus公司的人员分享的为Istio mixer开发适配器的过程。"
 tags: ["istio","circonus"]
-categories: ["practice","translation"]
+categories: ["istio","practice"]
 keywords: ["service mesh","istio","服务网格","circonus"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink: ["https://yangcs.net"]
 originallink: "https://bani.com.br/2018/11/istio-what-happens-when-control-plane-is-down/"
 summary: "本文展示了当Istio控制平面的组件出现故障以后会发生什么现象。"
 tags: ["istio"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

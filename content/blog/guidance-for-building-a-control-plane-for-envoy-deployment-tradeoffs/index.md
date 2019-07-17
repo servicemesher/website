@@ -7,7 +7,7 @@ reviewer: ["孙海洲"]
 reviewerlink: "https://github.com/haiker2011"
 title: "构建Envoy的控制平面手册第5部分 - 部署的权衡"
 description: "本文介绍了部署控制平面的选项与权衡，并且着重阐述了保持控制平面与数据平面解耦的几大好处。"
-categories: "translation"
+categories: "envoy"
 tags: ["envoy"]
 date: 2019-06-14T10:30:32+08:00
 banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*Ljs7TovDHLEAAAAAAAAAAABkARQnAQ"

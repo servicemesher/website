@@ -11,7 +11,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://blog.getambassador.io/rate-limiting-for-api-gateways-892310a2da02"
 summary: "在本速率限制系列的第一篇文章中，介绍了实施速率限制的动机，并讨论了几种实施方案（取决于你是否同时作为通信的发送端和接收端）以及相关的权衡。本文会更加深入地探讨 API 网关速率限制的需求。"
 tags: ["rate limiting","distributing system"]
-categories: ["rate limiting","translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","速率限制","分布式系统"]
 ---
 

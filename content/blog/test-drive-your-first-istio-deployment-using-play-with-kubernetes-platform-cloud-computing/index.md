@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.knowledgehut.com/blog/cloud-computing/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing"
 summary: "在Docker提供的免费的Kubernetes试玩平台上，使用好奇心驱动的方式部署一个Istio Service Mesh。本方式适合没有测试资源又不想自己整环境的，只是想上去爽一把的人士。"
 tags: ["kubernetes","service mesh","microservices"]
-categories: ["translation"]
+categories: ["istio","kubernetes"]
 keywords: [“service mesh","微服务","服务网格"]
 ---
 

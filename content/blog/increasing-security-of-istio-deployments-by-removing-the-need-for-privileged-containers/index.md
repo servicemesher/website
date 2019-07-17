@@ -10,7 +10,7 @@ translatorlink: "https://www.yangcs.net/posts/increasing-security-of-istio-deplo
 originallink: "https://blog.openshift.com/increasing-security-of-istio-deployments-by-removing-the-need-for-privileged-containers/"
 summary: "Red Hat OpenShift通过一个名叫istio-pod-network-controller的 DaemonSet 控制器将配置Pod的iptables规则的逻辑移出Pod本身，从而消除了特权容器的需求来提高Istio Deployment的安全性。"
 tags: ["istio","security","red hat","openshift"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: [“service mesh","服务网格","red hat","红帽","openshift"]
 ---
 

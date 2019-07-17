@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://www.envoyproxy.io/docs/envoy/latest/api-docs/xds_protocol"
 summary: "本文翻译自 Envoy 代码库中的文档，本文通过示例详解了 Envoy 的 xDS REST 和 gPRC 协议。"
 tags: ["envoy","xds","grpc"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","envoy","xds"]
 ---
 

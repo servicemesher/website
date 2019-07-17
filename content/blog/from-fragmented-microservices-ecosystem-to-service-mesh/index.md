@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://blog.avinetworks.com/from-fragmented-microservices-ecosystem-to-service-mesh"
 summary: "本文中概述了应用架构的演进及微服务生态是如何演化到服务网格的。"
 tags: ["service mesh","microservices"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格","微服务"]
 ---
 

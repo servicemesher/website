@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://medium.com/vamp-io/securing-ingress-services-in-istio-with-lets-encrypt-on-kubernetes-f6effd93ef06"
 summary: "这是Vamp在kubernetes之上部署Istio系列文章中的第三篇，内容是关于Vamp试图通过Vamp Lamia实现的更多细节以及我们为什么选择Istio的原因。"
 tags: ["istio","vamp","security","Let's Encrypt","kubernetes"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh"]
 ---
 

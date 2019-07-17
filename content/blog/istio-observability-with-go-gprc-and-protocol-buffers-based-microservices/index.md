@@ -14,7 +14,7 @@ reviewerlink:  "https://github.com/GuangmingLuo"
 originallink: "https://programmaticponderings.com/2019/04/17/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/"
 summary: "文章介绍了为什么要用服务网格，以及简单的介绍了两个重要实现：Istio和Linkerd，鼓励大家上手实验。"
 tags: ["istio","microservice"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["istio","microservice"]
 aliases: "/blog/istio-observability-with-go-grpc-and-protocol-buffers-based-microservices/"
 ---

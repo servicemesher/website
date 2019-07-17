@@ -12,7 +12,7 @@ reviewerlink: ["https://jimmysong.io"]
 originallink: "https://blog.envoyproxy.io/envoy-and-grpc-web-a-fresh-new-alternative-to-rest-6504ce7eb880"
 summary: "本文为大家推荐的是一种REST的替代方案 Envoy + gRPC-Web。"
 tags: ["envoy","grpc-web"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","envoy","grpc-web"]
 ---
 
