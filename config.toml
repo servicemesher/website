@@ -174,6 +174,8 @@ paginate = 10
     logosmall = "/img/logosmall.jpg"
     address = """<p>加我微信（请备注姓名-公司），加入微信交流群，参与社区活动</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
       """
+    # 是否开启评论功能
+    gitalk = true
 
 [Permalinks]
     #blog = "/blog/:year/:month/:day/:filename/"
