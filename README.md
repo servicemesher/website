@@ -7,7 +7,7 @@
 - 构建工具：[hugo](https://gohugo.io)
 - 主题：[hugo-universal](https://github.com/devcows/hugo-universal-theme) 
 - 搜索：[algolia](https://algolia.com)
-- 图床：Github
+- 图床：新浪微博图床
 
 ## 贡献
 
