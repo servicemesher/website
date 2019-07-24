@@ -73,40 +73,45 @@ paginate = 10
 
 [[menu.main]]
     name = "社区"
-    identifier = "activity"
+    identifier = "community"
     url  = "/activity/"
     weight = 4
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "Meetup"
     url  = "/tags/meetup"
     weight = 1
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "作者投稿"
     url  = "/authors/"
     weight = 2
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "译者投稿"
     url  = "/translators/"
     weight = 3
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "Istio知识图谱"
     url  = "https://github.com/servicemesher/istio-knowledge-map"
     weight = 4
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "贡献指南"
     url  = "/contributing-specification/"
     weight = 5
 
+[[menu.main]]
+    parent="community"
+    name = "活动"
+    url  = "/activity/"
+    weight = 6
 
 [[menu.main]]
     name = "联系我们"
