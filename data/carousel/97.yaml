@@ -1,10 +1,11 @@
 weight: 97
-title: "Service Mesh Meetup #6"
+title: "SOFAStack Meetup #3"
 description: >
   <ul class="list-style-none">
-     <li>2019/08/11（星期日）广州</li>
-     <li>Kubernetes、微服务、Service Mesh</li>
-     <li>获取业界一手实践经验<li>
-     <li><a href="https://tech.antfin.com/community/activities/781">点击报名</a></li>
+     <li>SOFARPC 服务框架</li>
+     <li>云原生架构下的可观察性<li>
+     <li>分布式事务 Seata</li>
+     <li>无线自动化测试框架 Soloπ</li>
+     <li><a href="https://tech.antfin.com/community/activities/779?chinfo=sm">点击报名</a></li>
    </ul>
-image: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*10YhSYa9v7oAAAAAAAAAAABkARQnAQ"
+image: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*83zGSpMBH7cAAAAAAAAAAABkARQnAQ"
