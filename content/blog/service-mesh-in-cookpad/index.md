@@ -12,7 +12,7 @@ originallink: "http://techlife.cookpad.com/entry/2018/06/11/100355"
 reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 tags: ["envoy","istio","service mesh"]
-categories: ["practice","translation"]
+categories: ["service mesh","practice"]
 keywords: ["service mesh","envoy"]
 ---
 

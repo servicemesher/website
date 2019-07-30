@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/haiker2011"]
 originallink: "https://venilnoronha.io/hand-crafting-a-sidecar-proxy-like-istio"
 summary: "本文介绍了一种实现简单HTTP流量嗅探代理的基本步骤，并进行了相关实验验证，生动展现了Istio实现流量管理的核心原理与概念。"
 tags: ["istio","sidecar"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 

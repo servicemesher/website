@@ -11,7 +11,7 @@ reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://dwmkerr.com/manipulating-istio-and-other-custom-kubernetes-resources-in-golang"
 summary: "主要介绍了在Golang中操作Istio和其他Kubernetes自定义资源（CRD），主要讲解了除go-client之外的另一种方法。"
-categories: ["translation"]
+categories: ["istio"]
 tags: ["Istio","Kubernetes","golang"]
 keywords: ["service mesh","服务网格"]
 ---

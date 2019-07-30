@@ -10,7 +10,7 @@ authorlink: "https://developer.ibm.com/code/patterns/manage-microservices-traffi
 originallink: "https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/"
 summary: "开发人员正在摆脱大型单体应用的束缚，转而采用小巧而专一的微服务，以加速软件开发并加强系统弹性。为了满足这个新生态的需求，开发人员需要为部署的微服务创建一个具有负载均衡、高级流量管理、请求跟踪和连接功能的服务网络。"
 tags: ["istio","tutorial"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["istio","微服务","IBM","流程"]
 ---
 

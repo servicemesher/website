@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/malphi"]
 originallink: "https://medium.com/solo-io/guidance-for-building-a-control-plane-for-envoy-part-4-build-for-extensibility-40f8ac8e48e"
 summary: "本文介绍如何为 Envoy 构建控制面指南的第4部分：构建的可扩展性。"
 tags: ["envoy","gloo"]
-categories: ["translation"]
+categories: ["envoy"]
 keywords: ["service mesh","服务网格","Envoy","gloo"]
 ---
 

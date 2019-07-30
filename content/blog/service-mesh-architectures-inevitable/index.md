@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://blogs.vmware.com/opensource/2018/10/16/service-mesh-architectures-inevitable/"
 summary: "本文来自VMware开源小组，通过分析服务网格的优势，阐述了其未来的发展情况。"
 tags: ["service mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 

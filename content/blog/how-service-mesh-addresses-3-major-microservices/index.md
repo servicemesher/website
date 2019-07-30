@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://dzone.com/articles/how-service-mesh-addresses-3-major-microservices-c"
 summary: "本文讲述的是企业在实施微服务时遇到的挑战，以及如何使用Service Mesh应对这些挑战。"
 tags: ["service mesh","microservices"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh"]
 ---
 

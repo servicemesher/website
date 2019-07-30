@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://cilium.io/blog/2018/08/21/cilium-12/"
 summary: "Cilum使用Kube-router在Kubernetes Pod与集群外部运行的服务之间建立连接，再引入基于DNS 名称的安全策略保护对集群外服务的访问，再增加Cluster Mesh增加对多Kubernetes集群的支持。"
 tags: ["cilium","kube-router","istio"]
-categories: ["translation"]
+categories: ["cilium"]
 keywords: ["service mesh"]
 aliases: "/blog/cilium1.2-dns-security-policies-eks-support-clustermesh-kube-router-integration/"
 ---

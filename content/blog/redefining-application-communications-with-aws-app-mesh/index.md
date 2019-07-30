@@ -10,7 +10,7 @@ translatorlink: "https://skyao.io"
 originallink: "https://www.allthingsdistributed.com/2019/03/redefining-application-communications-with-aws-app-mesh.html"
 summary: "在 re:Invent 2018，AWS宣布了AWS App Mesh 的公开预览版，App Mesh是一个服务网格，可以轻松监视和控制跨应用的通信。今天，我很高兴地宣布App Mesh 已经可以为用户提供使用了（GA）。"
 tags: ["service mesh","app mesh","aws"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格","aws","appmesh"]
 ---
 

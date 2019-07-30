@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/haiker2011"]
 originallink: "https://jaxenter.com/microprofile-microservices-istio-151156.html"
 summary: "本文探讨了如何结合eclipse/microprofile与流行的服务网格Istio安全地部署微服务。"
 tags: ["istio","microprofile"]
-categories: ["translation"]
+categories: ["istio","microprofile"]
 keywords: ["service mesh","服务网格","istio","microprofile"]
 ---
 

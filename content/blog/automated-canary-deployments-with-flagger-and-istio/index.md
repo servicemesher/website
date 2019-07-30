@@ -12,7 +12,7 @@ reviewerlink: ["https://github.com/haiker2011"]
 originallink: "https://medium.com/google-cloud/automated-canary-deployments-with-flagger-and-istio-ac747827f9d1"
 summary: "本文介绍如何使用Flagger和Istio实现自动化金丝雀部署。"
 tags: ["istio","flagger"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格"]
 ---
 

@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://dzone.com/articles/the-importance-of-control-planes-with-service-mesh"
 summary: "本文将带您了解为什么服务网格和边缘代理如此重要以及它们与持续交付的关系。"
 tags: ["ambassador","envoy","service mesh"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","服务网格"]
 ---
 

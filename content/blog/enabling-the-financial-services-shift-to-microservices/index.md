@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://aspenmesh.io/2018/08/enabling-the-financial-services-shift-to-microservices/"
 summary: "随着初创金融科技公司的竞争，以及客户期望的不断增长，成熟的金融服务公司必须改变他们提供产品和与客户开展业务的方式。在交付层面老系统很难满足这些要求，金融服务公司需要一套灵活、适应性强、可扩展性高、可靠且强大的软件架构。微服务使其成为可能，而服务网络正好满足了微服务大规模管理的需求。 "
 tags: ["service mesh","fintech"]
-categories: ["translation"]
+categories: ["service mesh"]
 keywords: ["service mesh","fintech"]
 ---
 

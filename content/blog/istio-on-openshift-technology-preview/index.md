@@ -10,7 +10,7 @@ translatorlink: "https://jimmysong.io"
 originallink: "https://blog.openshift.com/istio-on-openshift/"
 summary: "技术预览计划将为现有的OpenShift Container Platform客户提供在其OpenShift集群上部署和使用Istio平台的能力。红帽正在提供此计划，旨在收集反馈和经验，同时Red Hat期望在2019自然年提供OpenShift上Istio的全面支持和全面可用性。"
 tags: ["istio","red hat","service mesh","open shift"]
-categories: ["translation"]
+categories: ["istio"]
 keywords: ["service mesh","服务网格"]
 ---
 

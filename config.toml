@@ -1,4 +1,4 @@
-baseurl = "http://www.servicemesher.com/"
+baseurl = "https://www.servicemesher.com/"
 title = "ServiceMesher"
 theme = "hugo-universal-theme"
 languageCode = "zh"
@@ -73,40 +73,45 @@ paginate = 10
 
 [[menu.main]]
     name = "社区"
-    identifier = "activity"
+    identifier = "community"
     url  = "/activity/"
     weight = 4
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "Meetup"
     url  = "/tags/meetup"
     weight = 1
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "作者投稿"
     url  = "/authors/"
     weight = 2
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "译者投稿"
     url  = "/translators/"
     weight = 3
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "Istio知识图谱"
     url  = "https://github.com/servicemesher/istio-knowledge-map"
     weight = 4
 
 [[menu.main]]
-    parent="activity"
+    parent="community"
     name = "贡献指南"
     url  = "/contributing-specification/"
     weight = 5
 
+[[menu.main]]
+    parent="community"
+    name = "活动"
+    url  = "/activity/"
+    weight = 6
 
 [[menu.main]]
     name = "联系我们"
@@ -174,6 +179,8 @@ paginate = 10
     logosmall = "/img/logosmall.jpg"
     address = """<p>加我微信（请备注姓名-公司），加入微信交流群，参与社区活动</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
       """
+    # 是否开启评论功能
+    gitalk = true
 
 [Permalinks]
     #blog = "/blog/:year/:month/:day/:filename/"
@@ -210,8 +217,8 @@ paginate = 10
     # All testimonials are defined in their own files. You can find example items
     # at 'exampleSite/data/testimonials'.
     # For more informtion take a look at the README.
-    title = "公告牌"
-    subtitle = "我们会不定期得在线上和线下举办精彩的活动，敬请关注"
+    title = "社区治理委员会"
+    subtitle = "负责社区重大决策及日常事务管理"
 
 [params.see_more]
     enable = true
@@ -232,7 +239,7 @@ paginate = 10
 [params.recent_posts]
     enable = true
     title = "最新博客"
-    subtitle = "服务网格技术文章一网打尽"
+    subtitle = "Kubernetes、Service Mesh 及云原生最新博客"
 
 [outputs]
     home = ["HTML", "RSS", "Algolia"]

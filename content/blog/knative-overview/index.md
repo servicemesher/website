@@ -7,7 +7,7 @@ author: "ServiceMesher"
 authorlink: "http://www.servicemesher.com"
 summary: "本文是 Knative 入门系列的第一篇，knative 概述。"
 tags: ["knative","serverless"]
-categories: ["translation"]
+categories: ["knative"]
 keywords: ["service mesh","服务网格","knative","serverless"]
 ---
 

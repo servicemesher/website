@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: ""
 summary: "在Kubernetes诞生的前几年微服务还是分布式系统最流行的架构风格。但Kubernetes和云原生运动已经改变了应用程序设计和开发的方方面面。在本文中，我要质疑微服务的一些理念，指明它们在后Kubernetes时代不会再像以前那样强大。"
 tags: ["kubernetes","service mesh","microservices"]
-categories: ["translation"]
+categories: ["service mesh","kubernetes"]
 keywords: [“service mesh","微服务","服务网格"]
 ---
 

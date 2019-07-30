@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://kublr.com/blog/hands-on-canary-deployments-with-istio-and-kubernetes/"
 summary: "作为Kublr推出的Istio教程第二篇文章本教程将一步步带领你熟悉Istio指令并解释指令的作用，并在Kubernetes集群中实现金丝雀部署。"
 tags: ["istio","kublr",”tutorial","kubernetes"]
-categories: ["translation","tutorial"]
+categories: ["istio","tutorial"]
 keywords: ["service mesh","服务网格","kubernetes"]
 ---
 

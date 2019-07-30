@@ -5,7 +5,7 @@ id: "contact"
 
 <center>
 
-这里是Service Mesher社区，Service Mesh人共同的家园。
+这里是ServiceMesher社区，Service Mesh人共同的家园。
 
 ### 我们的使命
 
