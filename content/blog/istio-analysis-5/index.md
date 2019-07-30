@@ -32,11 +32,7 @@ Istio 并不单一领域的技术, 它综合了诸多服务治理领域的解决
 
 本文将对第三种「多网络单控制面」的搭建和连通过程进行分析:
 
-
-
 ![Shared Istio control plane topology spanning multiple Kubernetes clusters using gateways](https://istio.io/docs/setup/kubernetes/install/multicluster/shared-gateways/diagram.svg)
-
-
 
 本文约定术语:
 
@@ -71,7 +67,7 @@ Istio 并不单一领域的技术, 它综合了诸多服务治理领域的解决
 
 ![image-20190729231121442](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-29-151144.png)
 
-#### 2.1 主集群访问子集群 kube api
+### 2.1 主集群访问子集群 kube api
 
 istio 控制面只存在于广州主集群中, 控制面需要能获取到所有集群的服务发现数据, 因此主集群中需要配置子集群的访问凭证:
 
@@ -98,7 +94,7 @@ kubectl label --context=guangzhou secret singapore-secret istio/multiCluster=tru
 
 ![image-20190729172916130](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-29-135224.png)
 
-#### 2.2 将控制面组件暴露给子集群使用
+### 2.2 将控制面组件暴露给子集群使用
 
 在主集群中创建 ingress gateway `meshexpansion-gateway` 将 Pilot, Mixer 和 citadel 暴露给子集群使用:
 
@@ -171,7 +167,7 @@ mixerReportServer: istio-telemetry.istio-system.svc.cluster.local:15004
 
 ![image-20190729173048701](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-29-135216.png)
 
-#### 2.3 数据面创建 ingress gateway
+### 2.3 数据面创建 ingress gateway
 
 每个包含数据面的集群, 都需要提供 ingress gateway, 使得其他集群数据面可以访问本集群数据面服务:
 
@@ -203,7 +199,7 @@ spec:
 
 ![image-20190729173523592](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-29-135209.png)
 
-##### 关于 mTLS 和 AUTO_PASSTHROUGH
+#### 关于 mTLS 和 AUTO_PASSTHROUGH
 
 通常来说, istio Ingress Gateway 需要配套指定服务的 VirtualService, 用以指定 ingress 流量的后端服务. 但在此拓扑中, 该 ingress Gateway 需要作为本数据面所有服务的流量入口. 也就是所有服务共享单个 ingress gateway (单个 IP), 这里其实是利用了 TLS 中的 [SNI(Server Name Indication)](https://en.wikipedia.org/wiki/Server_Name_Indication)。
 
@@ -221,7 +217,7 @@ spec:
 
 Network Filter `envoy.filters.network.sni_cluster` 会利用 SNI 信息来判断 upstream cluster, 该 filter 不会影响非 TLS 的连接。
 
-#### 2.4 控制面 mTLS 认证
+### 2.4 控制面 mTLS 认证
 
 1) 控制面组件`citadel`负责管理网格内的证书, 我们需要给 citadel 提供 ca 证书、秘钥和根证书:
 
@@ -272,7 +268,7 @@ defaultConfig:
 - MUTUAL_TLS
 ```
 
-##### 关于 ControlPlaneAuth
+#### 关于 ControlPlaneAuth
 
 控制面组件开启`MUTUAL_TLS`, 最终会体现到控制面组件(telemetry/policy/pilot)的 envoy xDS 中:
 
@@ -294,8 +290,7 @@ tls_context:
 
 ![image-20190729173651673](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-29-135204.png)
 
-
-#### 2.4 开启服务间 mTLS 认证
+### 2.4 开启服务间 mTLS 认证
 
 使用 istio CRD `MeshPolicy`开启网格全局 mTLS:
 
@@ -348,11 +343,9 @@ spec:
 
 ------
 
-
-
 ## 3. 子集群配置
 
-#### 3.1 部署子集群 istio 配置
+### 3.1 部署子集群 istio 配置
 
 获取主集群控制面的 gateway 地址, 作为子集群访问控制面的入口地址:
 
@@ -395,7 +388,7 @@ export CONTROL_PANEL_GW=$(kubectl --context guangzhou -n istio-system get servic
 % kubectl create secret generic cacerts -n istio-system --from-file=certs/ca-cert.pem --from-file=certs/ca-key.pem --from-file=certs/root-cert.pem --from-file=certs/cert-chain.pem
 ```
 
-#### 3.2 子集群配置解读
+### 3.2 子集群配置解读
 
  子集群中并没有安装 istio 控制面组件, 也不存在任何 istio CRD, 以上操作在子集群中创建了若干 kubernetes 原生资源, 用以实现子集群和主集群的连通, 我们看看其中的一些重要配置:
 
@@ -469,8 +462,6 @@ env:
 - name: ISTIO_META_NETWORK
   value: "network1"
 ```
-
-
 
 ------
 
