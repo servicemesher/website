@@ -2,47 +2,25 @@
 
 Tobias Kunze, June 11, 2019
 
-
-
-Welcome to part 2 of our blog series on the benefits and operational limitations of service meshes. In [part 1](https://glasnostic.com/blog/service-mesh-istio-limits-and-benefits-part-1), we saw how developers can benefit from a service mesh’s ability to provide added observability, traffic control and security capabilities to microservices architectures. In this post, we are going to look at these same three dimensions, but instead of focusing on developer concerns, we are going to dive in and explore a service mesh’s limitations from the perspective of the operations team.
-
-欢迎来到关于服务网格的优势和操作限制的系列文章的第2部分。在[第1部分](https://glasnostic.com/blog/services- mesh-istio- limited -and-benefit -part-1)中，我们了解了开发人员如何从服务网格为微服务体系结构提供附加的可观察性、流量控制和安全功能的能力中获益。在这篇文章中，我们将关注同样的三个维度，但代替开发人员的关注点的，是从操作团队的角度深入研究服务网格的局限性。
-
-
+欢迎来到关于服务网格的优势和操作限制的系列文章的第2部分。在[第1部分](https://glasnostic.com/blog/services- mesh-istio- limited -and-benefit -part-1)中，我们了解了开发人员如何从服务网格为微服务架构提供附加的可观察性、流量控制和安全功能的能力中获益。在这篇文章中，我们将关注同样的三个维度，但不同于开发人员的关注点，我们会从操作团队的角度深入研究服务网格的局限性。
 
 ## 可观测性的限制
 
-Observability consistently tops the wishlist of distributed systems engineers. It is therefore no surprise that service meshes try their best to cater to this need. However, the observability that engineers desire and that service meshes provide does not aim to support traditional operations activities such as capacity planning: it focuses on the development activity of *runtime debugging*.
+可观察性始终是分布式系统工程师的首选。因此，服务网格尽其所能来满足这种需求就不足为奇了。然而，工程师期望的以及服务网格提供的可观察性并没有针对传统的运维行为，比如容量规划：它关注的是*运行时调试*的开发活动。
 
-可观察性始终是分布式系统工程师的首选。因此，服务网格尽其所能来满足这种需求就不足为奇了。然而，工程师希望的可观察性和服务网格提供的可观察性并不旨在支持传统的操作活动，比如容量规划:它关注的是*运行时调试*的开发活动。
+当然，运行时调试要求指标在请求的执行线程上下文中是“可解释的”。这与当今联合的，[有组织发展的服务架构](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary#Organic-Architecture)是不一致的，它的度量标准是不可预测和不确定的。
 
-Runtime debugging, of course, requires that metrics be *interpretable* In the context of a request’s thread of execution. This is at odds with today’s federated, [organically evolving service architectures](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary#Organic-Architecture) whose metrics are increasingly unpredictable and inconclusive.
+如果一个分布式系统的服务构建了一个应用，并且其设计在很长一段时间内保持静态，那么观测这个分布式系统是有意义的。这样的系统可以被基线化和合理化，作为结果，从它们收集到的指标可以被解释——特别是架构主要是同步模式。
 
-当然，运行时调试要求指标在请求的执行线程上下文中是“可解释的”。这与今天的联合的[有机发展的服务架构](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary#Organic-Architecture)是不一致的，它的度量标准越来越不可预测和不确定。
+但是，随着现代企业今天运行的那种联合的、有组织的架构的消失，可解释性也消失了。首先，基线——以及实践人员的“基线理解”——在一个有组织的架构世界中已经过时了。如果没有基线，对度量的最终解释可能会很有挑战。此外，服务的组合减少了单个开发团队的职责范围。联合的、有组织的服务环境是由并行的、在快速决策和学习周期中发展的自我管理团队创建的。换句话说，开发团队只负责少量的服务：他们的控制范围有限。因为没有必要跟踪到不属于团队的依赖，所以可观察性只在开发团队的控制范围内才有意义。在联合的、有组织的架构中，惟一的全局控制视野是负责“整个”服务场景的运维团队，而不仅仅是一组相关服务或应用——换句话说，是“任务控制”的操作团队。
 
-Observing a distributed system makes sense if its services make up a single application whose design remains static over an extended period of time. Such systems can be baselined and reasoned about and, as a result, metrics collected from them can be interpreted—in particular if the architecture is predominantly synchronous.
+可观测性在尺度上也会变成数据密集型。随着联合的、有组织架构的增长，在遥测和追踪中收集的数据量呈指数级增长，而单个服务实例的重要性下降。换句话说，以运行时调试为目标的可观察性导致从业者收集的数据越来越多，而这些数据却越来越不重要。因此，收集到的指标几乎没有可用的。
 
-如果一个分布式系统的服务组成一个应用程序，并且该应用程序的设计在很长一段时间内保持静态，那么观察这个分布式系统是有意义的。这样的系统可以被基线化和推理，因此，从它们收集到的度量可以被解释——特别是如果体系结构主要是同步的。
+随着这些架构的发展，可观察性需要“在技术栈中向上移动”。与收集开发人员能够理解的宠物指标不同，运维人员需要关注更高级别的KPI，让他们能够实时检测和反应。这些KPI需要具有全局的意义。这也是服务网格提供的可观察性不足的地方。由于其固执己见的特性，服务网格往往在企业中被孤立地部署，特别是运行在Kubernetes上的环境中。另一方面，可操作的观察性需要高级的“黄金信号”指标，它可以跨裸机、虚拟机和容器部署以及跨多个区域和云工作。
 
-But interpretability goes away with the kind of federated, organically evolving architectures modern enterprises are running today. For one, baselines—and thus the “baseline understanding” of practitioners—have become obsolete in a world of organically evolving architectures. And without baselines, the conclusive interpretation of metrics can prove challenging. Also, the federation of services reduces the area of responsibility of individual development teams. Federated, organically evolving service landscapes are created by parallel, self-managing teams that develop in rapid decision and learning cycles. In other words, development teams are only responsible for a handful of services: they have a limited horizon of control. Because there is no point tracing into a dependency that teams don’t own, observability only makes sense within a development team’s horizon of control. The only global horizon of control in federated, organically evolving architectures is that of the operations team that is responsible for the *entire* service landscape, not just a set of related services or an application—in other words, the *mission control*operations team.
+总之，服务网格为运行时调试提供了可观察性。这在开发人员的控制范围内是有价值的，但是需要的指标是可以在请求执行的线程上下文中可解释的。然而，在当今联合的、有组织的服务环境中，缺乏基准指标和缩小的控制范围破坏了这种可解释性。
 
-但是，随着现代企业今天运行的那种联合的、有机发展的体系结构的消失，可解释性也消失了。首先，基线——以及实践人员的“基线理解”——在一个有机发展的架构世界中已经过时了。如果没有基线，对度量的最终解释可能会很有挑战性。此外，服务联盟减少了单个开发团队的职责范围。联合的、有机发展的服务环境是由并行的、在快速决策和学习周期中发展的自我管理团队创建的。换句话说，开发团队只负责少量的服务:他们的控制范围有限。因为没有必要跟踪到团队不拥有的依赖项，所以可观察性只在开发团队的控制范围内才有意义。在联合的、有机发展的体系结构中，惟一的全局控制视野是负责“整个”服务场景的操作团队，而不仅仅是一组相关服务或应用程序——换句话说，是“任务控制”操作团队。
-
-Observability also becomes data-heavy at scale. As federated, organically evolving architectures grow, the volume of data collected in telemetry and traces grows exponentially while the importance of individual service instances declines. In other words, observability with the goal of runtime debugging causes practitioners to collect more and more data that is less and less important. As a result, hardly any metric collected is actionable.
-
-可观测性在尺度上也变得数据量大。随着联合的、有机发展的体系结构的增长，在遥测和跟踪中收集的数据量呈指数级增长，而单个服务实例的重要性下降。换句话说，以运行时调试为目标的可观察性导致从业者收集的数据越来越多，而这些数据却越来越不重要。因此，几乎没有任何收集到的度量是可操作的。
-
-As these architectures grow, observability needs to “move up in the stack.” Instead of collecting pet metrics developers can understand, operators need to focus on higher-level KPIs that allow them to *detect and react* in real-time. These KPIs need to be meaningful globally. This is where the observability provided by service meshes falls short as well. Due to their opinionated nature, service meshes tend to be deployed insularly in the enterprise, typically in environments that run on Kubernetes. Operational observability, on the other hand, requires high-level, *golden signal* metrics that work across bare metal, virtual machine and container deployments and across multiple regions and clouds.
-
-随着这些体系结构的发展，可观察性需要“在堆栈中向上移动”。“与收集开发人员能够理解的宠物指标不同，运营商需要关注更高级别的kpi，让他们能够实时‘检测和反应’。”这些kpi需要具有全局意义。这也是服务网格提供的可观察性不足的地方。由于其固执己见的特性，服务网格往往在企业中被孤立地部署，特别是在运行在Kubernetes上的环境中。另一方面，操作可观察性需要高级的“黄金信号”度量，它可以跨裸金属、虚拟机和容器部署以及跨多个区域和云工作。
-
-In summary, service meshes provide observability for runtime debugging. This is valuable within the developer’s horizon of control but requires metrics that can be interpreted within the context of a request’s thread of execution. However, in today’s federated, organically evolving service landscapes, the lack of baseline metrics and a reduced the horizon of control spoils such interpretability.
-
-总之，服务网格为运行时调试提供了可观察性。这在开发人员的控制范围内是有价值的，但是需要可以在请求的执行线程上下文中解释的度量标准。然而，在当今联合的、有机发展的服务环境中，缺乏基线度量和控制范围的缩小破坏了这种可解释性。
-
-Observability for runtime debugging is also data-heavy, leading to the collection of ever more data at an ever higher cost, yet ever lower value. To escape this downward value spiral, observability needs to “move up the stack,” collecting higher-level, global *golden signals* to enable *mission control* operations teams to detect and react in real-time. The observability provided by service meshes is unsuitable for this goal not just because it aims to support runtime debugging, but also because golden signals need to be global and service meshes are too opinionated and invasive to be deployed everywhere.
-
-运行时调试的可观察性也是数据密集型的，这导致以更高的成本收集更多的数据，但价值却更低。为了避免这种价值螺旋下降，可观测性需要“向上移动堆栈”，收集更高级别的全局“黄金信号”，以使“任务控制”操作团队能够实时检测并做出反应。服务网格提供的可观察性不适合这个目标，这不仅是因为它的目标是支持运行时调试，还因为黄金信号需要是全局的，而且服务网格过于自以为是和侵入性，不适合部署在任何地方。
+运行时调试的可观察性也是数据密集型的，这导致以更高的成本收集更多的数据，但价值却更低。为了避免价值的螺旋下降，可观测性需要“向上移动栈”，收集更高级别的全局的*黄金信号*，以使*任务控制*运维团队能够实时检测并做出反应。服务网格提供的可观察性不符合这个目标，这不仅是因为它的目标是支持运行时调试，还因为黄金信号需要是全局的，而且服务网格过于武断和具有侵入，不适合部署在每个地方。
 
 ## 流量控制的限制
 
@@ -67,7 +45,7 @@ Lastly, traffic control of current service mesh implementations is configured vi
 
 In summary, while traffic control provided by service meshes supports a number of developer-oriented control mechanisms like destination rules and virtual service definitions, it does not support non-routing-oriented operational patterns like [backpressure](https://glasnostic.com/blog/preventing-systemic-failure-backpressure) or bulkheads. Service meshes policies are impossible to layer predictably in the face of architectural change and are very difficult to deploy outside of Kubernetes. Service mesh configuration is typically based on deployment descriptors that are bound to get in the way of operations teams when time to remediation is at a premium.
 
-总之,虽然交通控制提供的服务网格支持许多面向开发人员的控制机制(如目的地规则和虚拟服务定义,它不支持non-routing-oriented操作模式[反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或舱壁。面对体系结构更改，服务网格策略不可能预先分层，而且很难部署到Kubernetes之外。服务网格配置通常基于部署描述符，当需要进行补救时，部署描述符必然会妨碍操作团队。
+总之,虽然交通控制提供的服务网格支持许多面向开发人员的控制机制(如目的地规则和虚拟服务定义,它不支持non-routing-oriented操作模式[反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或舱壁。面对架构更改，服务网格策略不可能预先分层，而且很难部署到Kubernetes之外。服务网格配置通常基于部署描述符，当需要进行补救时，部署描述符必然会妨碍操作团队。
 
 ## 安全限制
 
