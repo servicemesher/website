@@ -1,5 +1,5 @@
 ---
-title: "Istio 庖丁解牛五 多集群网格实现分析"
+title: "Istio 庖丁解牛五：多集群网格实现分析"
 date: 2019-07-30T11:24:01+08:00
 draft: false
 banner: "/img/blog/banners/006tKfTcly1g1o2g4k3ofj31420u0hdw.jpg"
