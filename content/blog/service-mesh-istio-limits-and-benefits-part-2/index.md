@@ -24,28 +24,17 @@ Tobias Kunze, June 11, 2019
 
 ## 流量控制的限制
 
-Service meshes evolved as a solution to the problem of how to route service calls to the best target instance, i.e. the instance that can serve the request fastest. This is why service meshes are developer- or “routing-oriented”: they serve the perspective of the developer, who is looking to call a service without having to deal with the intricacies of remote service calls. Because of this, service meshes prove to be not well-suited for managing workloads in an architecture that involves dozens, if not hundreds of microservices which communicate with each other across development teams, business units and even corporate firewalls, i.e. federated service architectures with shifting service-to-service interactions and dependencies that evolve organically over time.
+服务网格的发展是为了解决如何将对服务的调用路由到最佳目标实例，例如可以最快地为请求提供服务的实例。这就是为什么服务网格是面向开发人员或“面向路由”的：它们服务于开发人员的视角，开发人员希望调用服务而不必处理复杂的远程服务调用。因此，服务网格被证明是不适合管理这样一个架构下的工作负载，它涉及了不是数百个也是数十个的微服务之间的跨越开发团队、业务部门甚至是公司防火墙的交互，例如随着时间的推移，具有不断变化的服务到服务交互和依赖关系的组合服务架构会有机地发展。
 
-服务网格的发展是为了解决如何将服务调用路由到最佳目标实例的问题，即可以最快地为请求提供服务的实例。这就是为什么服务网格是面向开发人员或“面向路由”的:它们服务于开发人员的视角，开发人员希望调用服务而不必处理复杂的远程服务调用。因此,服务网格被证明是不适合管理工作负载在一个架构,涉及几十个,如果不是数以百计的microservices相互沟通整个开发团队,业务部门甚至公司防火墙,即联邦服务架构service - to - service交互和依赖关系也发生了变化,随着时间的推移演变有机。
+例如，在服务网格下要表达[*向前*路由策略](https://glasnostic.com/blog/how-canary-deployments-work-1-kubernetes-istio-linkerd#figure-3)和向后的流量控制是比较简单的，而下游客户端如[施加反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或[实现舱壁](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads)就要更加困难，即使不是不可能实现。服务网格的数据平面基于源和目标规则去构建流量决策从理论上讲是可能的，开发人员定位像[Istio](https://glasnostic.com/blog/kubernetes-service-mesh-what-is-istio)这样的控制平面，让他们提供对任意的服务交互集的流量控制。
 
-For instance, while it is relatively straightforward to express a [*forward*routing policy](https://glasnostic.com/blog/how-canary-deployments-work-1-kubernetes-istio-linkerd#figure-3) with a service mesh, expressing policies that control the flow of traffic *backwards*, against downstream clients to e.g. [exert backpressure](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)or [implement bulkheads](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads), is much harder, if not impossible to achieve. While it is in theory possible for a service mesh data plane to make traffic decisions based on both source *and* destination rules, the developer orientation of control planes such as [Istio](https://glasnostic.com/blog/kubernetes-service-mesh-what-is-istio) keeps them from providing traffic control over arbitrary sets of service interactions.
+这种将策略应用于任意服务交互集的能力的缺乏也使得策略的分层变得极其困难。例如，当一个[壁](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads)在两个可用性区域之间，但一个关键服务需要能够在需要是故障转移，这几乎不可能找到正确的服务网格规则的阈值，特别是自动扩展的部署情况下。
 
-例如,是相对简单的表达[*向前*路由策略](https://glasnostic.com/blog/how-canary-deployments-work-1-kubernetes-istio-linkerd#figure-3)与服务网格,表达的政策控制交通流的* *,向后对下游客户如[施加反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或[实现舱壁](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads),即使不是不可能实现，也要困难得多。虽然在理论上是可能的服务网格数据平面交通决策基于源*和*目标规则,开发人员定位等控制飞机[Istio](https://glasnostic.com/blog/kubernetes-service-mesh-what-is-istio)让他们提供流量控制任意的服务交互集。
+然而，对于运维人员来说，最重要的问题是服务网格在kubernetes之外的有限的可部署性——这是他们“固执己见”的直接结果。修改部署和部署过程正确的包括一个数据平面的sidecar通常是不可能的，添加一个虚拟机到服务网格是[最令人费解的](https://istio.io/docs/setup/kubernetes/additional-setup/mesh-expansion/)，但仍然不允许操作员捕捉内部虚拟机的流量。更糟的是，要将现有的非Kubernetes工作负载集成到基于Kubernetes的服务网格中，运维人员不仅需要调整应用程序代码，还需要根据Kubernetes网格进行部署。
 
-This lack of ability to apply policy to arbitrary sets of service interactions also makes it fiendishly hard to layer policies. For instance, when a [bulkhead](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads) is in place between two availability zones, but a critical service needs to be able to fail over when necessary, it is near-impossible to figure out the correct thresholds service mesh rules, in particular if deployments auto-scale.
+最后，通过YAML部署描述配置了当前服务网格实现的流量控制。部署描述是在版本控制中存储配置的一种很好的方法，因此可以用来重建定义良好的初始状态，但是它们不太适合运维团队在遇到困难时需要进行持续、实时的更改。
 
-这种将策略应用于任意服务交互集的能力的缺乏也使得策略的分层变得极其困难。例如,当一个[壁](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads)是两个可用性区域,但一个关键服务需要能够在必要时失败,这是不可能算出正确的阈值服务网格规则,特别是如果部署自动扩展。
-
-Perhaps the most significant problem service meshes present for operators, however, is their limited deployability outside of Kubernetes—a direct result of their “opinionatedness.” Modifying deployments and deployment pipelines to correctly include a data plane sidecar is often impossible and adding a virtual machine to a service mesh is [convoluted at best](https://istio.io/docs/setup/kubernetes/additional-setup/mesh-expansion/), yet still does not enable operators to capture inter-VM traffic. Worse, to integrate existing, non-Kubernetes workloads in a Kubernetes-based service mesh requires operators not only to adapt application code—the resulting deployment is then dependent on the Kubernetes mesh.
-
-然而，对于运营商来说，最重要的问题可能是他们在kubernet.com之外的有限可部署性——这是他们“固执己见”的直接结果。“修改部署和部署正确的管道包括一个数据平面的双轮马车通常是不可能的,添加一个虚拟机服务网格是[复杂的在最好的情况下](https://istio.io/docs/setup/kubernetes/additional-setup/mesh-expansion/),但仍然不允许操作员捕捉inter-VM流量。更糟的是，要将现有的非Kubernetes工作负载集成到基于Kubernetes的服务网格中，操作人员不仅需要调整应用程序代码，还需要根据Kubernetes网格进行部署。
-
-Lastly, traffic control of current service mesh implementations is configured via YAML deployment descriptors. Deployment descriptors are an excellent way to store configuration in version control and thus can be used to reconstruct a well-defined initial state, but they are not very well suited for the continual, real-time changes that operations teams need to make during times of distress.
-最后，通过YAML部署描述符配置了当前服务网格实现的流量控制。部署描述符是在版本控制中存储配置的一种很好的方法，因此可以用来重建定义良好的初始状态，但是它们不太适合操作团队在遇到困难时需要进行的持续、实时的更改。
-
-In summary, while traffic control provided by service meshes supports a number of developer-oriented control mechanisms like destination rules and virtual service definitions, it does not support non-routing-oriented operational patterns like [backpressure](https://glasnostic.com/blog/preventing-systemic-failure-backpressure) or bulkheads. Service meshes policies are impossible to layer predictably in the face of architectural change and are very difficult to deploy outside of Kubernetes. Service mesh configuration is typically based on deployment descriptors that are bound to get in the way of operations teams when time to remediation is at a premium.
-
-总之,虽然交通控制提供的服务网格支持许多面向开发人员的控制机制(如目的地规则和虚拟服务定义,它不支持non-routing-oriented操作模式[反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或舱壁。面对架构更改，服务网格策略不可能预先分层，而且很难部署到Kubernetes之外。服务网格配置通常基于部署描述符，当需要进行补救时，部署描述符必然会妨碍操作团队。
+总之，虽然服务网格提供的流量控制支持许多面向开发人员的控制机制，如目标规则和虚拟服务定义，它不支持面向无路由的操作模式如[反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或舱壁。面对架构更改，服务网格策略不可能预先分层，而且很难部署到Kubernetes之外。服务网格配置通常基于部署描述，当需要进行补救时，这些描述必然会妨碍到运维团队。
 
 ## 安全限制
 
