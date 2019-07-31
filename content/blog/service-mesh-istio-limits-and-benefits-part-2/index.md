@@ -1,8 +1,6 @@
-# 服务网格的三个技术优势及其操作限制 第2部分
+# 服务网格的三个技术优势及其运维局限-第2部分
 
-Tobias Kunze, June 11, 2019
-
-欢迎来到关于服务网格的优势和操作限制的系列文章的第2部分。在[第1部分](https://glasnostic.com/blog/services- mesh-istio- limited -and-benefit -part-1)中，我们了解了开发人员如何从服务网格为微服务架构提供附加的可观察性、流量控制和安全功能的能力中获益。在这篇文章中，我们将关注同样的三个维度，但不同于开发人员的关注点，我们会从操作团队的角度深入研究服务网格的局限性。
+欢迎来到关于服务网格的优势和操作限制的系列文章的第2部分。在[第1部分](https://glasnostic.com/blog/services- mesh-istio- limited -and-benefit -part-1)中，我们了解了开发人员如何从服务网格为微服务架构提供附加的可观察性、流量控制和安全功能的能力中获益。在这篇文章中，我们将关注同样的三个维度，但不同于开发人员的关注点，我们会从运维团队的角度深入研究服务网格的局限性。
 
 ## 可观测性的限制
 
@@ -12,7 +10,7 @@ Tobias Kunze, June 11, 2019
 
 如果一个分布式系统的服务构建了一个应用，并且其设计在很长一段时间内保持静态，那么观测这个分布式系统是有意义的。这样的系统可以被基线化和合理化，作为结果，从它们收集到的指标可以被解释——特别是架构主要是同步模式。
 
-但是，随着现代企业今天运行的那种联合的、有组织的架构的消失，可解释性也消失了。首先，基线——以及实践人员的“基线理解”——在一个有组织的架构世界中已经过时了。如果没有基线，对度量的最终解释可能会很有挑战。此外，服务的组合减少了单个开发团队的职责范围。联合的、有组织的服务环境是由并行的、在快速决策和学习周期中发展的自我管理团队创建的。换句话说，开发团队只负责少量的服务：他们的控制范围有限。因为没有必要跟踪到不属于团队的依赖，所以可观察性只在开发团队的控制范围内才有意义。在联合的、有组织的架构中，惟一的全局控制视野是负责“整个”服务场景的运维团队，而不仅仅是一组相关服务或应用——换句话说，是“任务控制”的操作团队。
+但是，随着现代企业今天运行的那种联合的、有组织的架构的消失，可解释性也消失了。首先，基线——以及实践人员的“基线理解”——在一个有组织的架构世界中已经过时了。如果没有基线，对度量的最终解释可能会很有挑战。此外，服务的组合减少了单个开发团队的职责范围。联合的、有组织的服务环境是由并行的、在快速决策和学习周期中发展的自我管理团队创建的。换句话说，开发团队只负责少量的服务：他们的控制范围有限。因为没有必要跟踪到不属于团队的依赖，所以可观察性只在开发团队的控制范围内才有意义。在联合的、有组织的架构中，惟一的全局控制视野是负责“整个”服务场景的运维团队，而不仅仅是一组相关服务或应用——换句话说，是“任务控制”的运维团队。
 
 可观测性在尺度上也会变成数据密集型。随着联合的、有组织架构的增长，在遥测和追踪中收集的数据量呈指数级增长，而单个服务实例的重要性下降。换句话说，以运行时调试为目标的可观察性导致从业者收集的数据越来越多，而这些数据却越来越不重要。因此，收集到的指标几乎没有可用的。
 
@@ -38,61 +36,36 @@ Tobias Kunze, June 11, 2019
 
 ## 安全限制
 
-By virtue of proxying service-to-service calls, service meshes are in a great position to provide the core set of developer-oriented application security features such as authentication, authorization, accounting, secure transport and service identity. While providing these features out of the box can be a time-saver for application developers, configuring them using YAML deployment descriptors tends to be difficult and error-prone, which obviously detracts from their goals.
+通过代理服务到服务的调用，服务网格可以很好地提供面向开发人员的应用安全特性的核心集，比如身份验证、授权、账号、安全传输和服务标识。虽然为应用开发人员提供这些开箱即用的特性可以节省时间，但是使用YAML部署描述来配置这些特性往往比较困难且容易出错，这显然会降低他们的目标。
 
-通过代理服务到服务的调用，服务网格可以很好地提供面向开发人员的应用程序安全特性的核心集，比如身份验证、授权、会计、安全传输和服务标识。虽然为应用程序开发人员提供开箱即用的这些特性可以节省时间，但是使用YAML部署描述符配置这些特性往往比较困难且容易出错，这显然会降低他们的目标。
+从操作的角度来看，这些*基于服务调用*的安全特性最多只能提供有限的安全，对于运维团队所关心的系统安全问题(如影响可用性、拒绝服务攻击、入侵或分割违规)毫无帮助。
 
-From an operational perspective, these *service-call-based* security features provide limited security at best and do nothing to mitigate the systemic security issues that operations teams care about, such as impacted availability, denial-of-service attacks, intrusions or segmentation violations.
+由于服务网格的固执和侵入性，它们的应用安全特性在异构环境中会发生故障，除了Kubernetes之外，异构环境还包括裸机、虚拟机、PaaS、容器或serverless部署。类似的，当不是所有的服务都有sidecar时服务网格安全特性在Kubernetes环境中也会发生故障，在“服务器sidecar”这个例子中，[由于性能的原因](https://istio.io/docs/concepts/performance-and-scalability/ # latency-for-istio-hahahugoshortcode-s2-hbhb)只有目标服务有sidecar注入。
 
-从操作的角度来看，这些“基于服务调用”的安全特性最多只能提供有限的安全，对于操作团队所关心的系统安全问题(如影响可用性、拒绝服务攻击、入侵或分割违规)毫无帮助。
+面向平台、固执己见的服务网格与应用安全性相结合也有一个影响，那就是大多数的网格与其他安全解决方案不能很好地集成——这是运维团队非常关心的问题。Istio能够使用替代的CA插件，外部工具可以使用YAML部署描述调用`kubectl`来实现与安全性相关的策略，但是由于服务网格不支持策略分层，外部工具不可能正确和安全地实现这些策略。
 
-Due to the opinionated, invasive character of service meshes, their application security features break down in heterogeneous environments that, apart from Kubernetes, also consist of bare metal, virtual machine, PaaS, plain container or serverless deployments. Similarly, service mesh security features break down in Kubernetes environments when not all services have sidecars, as is the case in “server sidecar” deployments, where only the target service has a sidecar injected [for performance reasons](https://istio.io/docs/concepts/performance-and-scalability/#latency-for-istio-hahahugoshortcode-s2-hbhb).
-
-由于服务网格的固执己见和侵入性，它们的应用程序安全特性在异构环境中会崩溃，除了Kubernetes之外，异构环境还包括裸机、虚拟机、PaaS、普通容器或无服务器部署。同样,服务网格安全特性分解Kubernetes环境中不是所有的服务都有sidecar时,在“服务器的双轮马车”一样部署,只有目标服务的双轮马车注入[由于性能的原因](https://istio.io/docs/concepts/performance-and-scalability/ # latency-for-istio-hahahugoshortcode-s2-hbhb)。
-
-The platform-oriented, opinionated approach of service meshes to application security also has the effect that most meshes don’t integrate well with other security solutions—something that operations teams deeply care about. Istio has the ability to use alternative CA plugins and external tools could conceivably call `kubectl` with a YAML deployment descriptor to apply security-relevant policies, but because service meshes don’t support policy layering, it is impossible for external tools to apply such policies correctly and safely.
-
-面向平台、固执己见的服务与应用程序安全性相结合的方法也有一个影响，那就是大多数的服务与其他安全解决方案不能很好地集成—这是操作团队非常关心的问题。Istio能够使用替代的CA插件，外部工具可以使用YAML部署描述符调用“kubectl”来应用与安全性相关的策略，但是由于服务网格不支持策略分层，外部工具不可能正确和安全地应用这些策略。
-
-In summary, services meshes provide a number of application security features that are valuable for developers but contribute little to the more challenging operational security concerns. Because service meshes are opinionated platforms as opposed to being an open tool that collaborates with external security solutions, even the application security provided by them tends to break down quickly in heterogeneous environments.
-
-总之，服务网格提供了许多应用程序安全特性，这些特性对开发人员很有价值，但对更具挑战性的操作安全问题贡献甚微。由于服务网格是自定义的平台，而不是与外部安全解决方案协作的开放工具，因此即使是由它们提供的应用程序安全性在异构环境中也会很快崩溃。
+总之，服务网格提供了许多应用程序的安全特性，这些特性对开发人员很有价值，但对更具挑战性的运维安全问题贡献甚微。由于服务网格是自定义的平台，而不是与外部安全解决方案协作的开放工具，因此即使是由它们提供的应用程序安全性在异构环境中也会很快出现故障。
 
 ## 操作需要
 
-For development teams building microservice applications, service meshes provide many benefits that abstract away the complexities that distributing services brings about. Some of these benefits such as encryption, “intelligent” routing and runtime observability help with operating such applications, but quickly prove to be too limited as applications grow, services become increasingly connected and the business adopts a federated, organically evolving [service landscape](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary#Service-Landscape).
+对于构建微服务应用的开发团队，服务网格提供了许多好处，可以抽象出分布式服务带来的复杂性。其中的一些好处如加密、“智能”路由和运行时可观察性帮助运维这样的应，但很快被证明太有限，随着应用程序的增长，服务会变得更加关联且业务采用联合的，有机发展的[服务场景](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary)。
 
-对于构建微服务应用程序的开发团队，服务网格提供了许多好处，可以抽象出分布式服务带来的复杂性。其中的一些好处,如加密、“智能”路由和运行时可观察性帮助操作这样的应用程序,但很快被证明是太有限,随着应用程序的增长,服务越来越连接和业务采用联合,有机发展[服务景观](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary)服务。
+运维团队需要控制的不仅仅是服务对服务的调用。他们需要能够将[运维模式](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary/#Operational-Patterns-and-Techniques)应用到任意一组交互中。它们还需要能够*分层*的策略，以便能够在不影响彼此的情况下实现它们。运维团队需要能够实时控制服务环境，而不需要管理数百个YAML描述。要做到这一切，他们不需要武断的平台，而是需要与现有工具集成的、应用于整个服务场景的工具，而不影响任何部署。
 
-Operations teams need control over more than just service-to-service calls. They need to be able to apply [operational patterns](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary/#Operational-Patterns-and-Techniques) to arbitrary sets of interactions. They also need to be able to *layer* policies so they can be applied without affecting each other. Operations teams need to be able to control their service landscape in real-time, without having to manage hundreds of YAML descriptors. To do all that, they don’t need opinionated platforms, but instead tools that integrate with existing tools and tools that apply to the entire service landscape, without affecting any deployment.
+因此，如果服务网格技术，其核心是用于开发人员在Kubernetes之上创建复杂度有限的独立应用程序，而不是用于让运维团队确保整个异构和动态服务环境的正确运维，那么我们如何解决必要的运维问题呢?
 
-运营团队需要控制的不仅仅是服务对服务的调用。他们需要能够将[操作模式](https://glasnostic.com/blog/microservices-architecture-patterns- services- mesh-glossary/# operationalpatterns -and- techniques)应用到任意一组交互中。它们还需要能够“分层”策略，以便能够在不影响彼此的情况下应用它们。运营团队需要能够实时控制他们的服务环境，而不需要管理数百个YAML描述符。要做到这一切，他们不需要固执己见的平台，而是需要与现有工具集成的工具，以及应用于整个服务场景的工具，而不影响任何部署。
+- **解决方案1：等待直到服务网格支持运维关注的问题。**对于我们这些将服务网格(特别是Istio)视为每个分布式问题的一体化解决方案的人来说，最简单的解决方案就是等待服务网格支持这些问题。当然，这不大可能发生。服务网格是围绕开发人员的关注点(如服务链接和更智能的实例路由)而设计的，必须进行很大的更改才能支持运维模式，而这通常无法通过管理点对点连接来解决。
+- **解决方案2：在这个问题上投入更多的工程。**工程师的答案是，在这个问题上投入更多的工程。开发人员可以编写策略引擎、粘接代码来集成服务网格安全性和其他安全工具、数据聚合器来收集运维人员需要的高级指标等等。显然，这将耗费更多成本，而且不太可能在短期内令人满意。
+- **解决方案3：采用云流量控制器。**最好的选择是将服务网格留给开发团队，让运维团队采用云流量控制器。这样，运维团队可以检测到[复杂紧急的行为](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary/#Emergent-Behaviors)，并实时纠正，创造他们所需要的自动化来有效的实现需要的运维模式，保证架构的可控。
 
-So, if service meshes are, at their core, a technology for developers creating stand-alone applications with limited complexity on top of Kubernetes, not for operations teams that are responsible for ensuring the correct operation of an entire, heterogeneous and dynamic service landscape, how can we address the necessary operational concerns?
-
-因此，如果服务网格的核心是一种技术，用于开发人员在Kubernetes之上创建复杂度有限的独立应用程序，而不是用于负责确保整个异构动态服务环境的正确操作的操作团队，那么我们如何解决必要的操作问题呢?
-
-- **Solution 1: Wait Until Service Meshes Support Operational Concerns.** The naïve answer for those of us who see service meshes, in particular Istio, as an all-in-one solution to every distributed problem is to simply wait until service meshes support these concerns. Of course, this is unlikely to happen. Service meshes are designed around developer concerns like service linking and smarter instance routing and would have to change considerably to support operational patterns, which generally can’t be addressed by managing point-to-point connections.
-- 对于我们这些将服务网格(特别是Istio)视为每个分布式问题的一体化解决方案的人来说，最简单的解决方案就是等待服务网格支持这些关注点。当然，这不大可能发生。服务网格是围绕开发人员的关注点(如服务链接和更智能的实例路由)设计的，必须进行很大的更改才能支持操作模式，而这通常无法通过管理点对点连接来解决。
-- **Solution 2: Throw More Engineering at the Problem.** The engineer’s answer would be to, well, throw more engineering at the problem. Developers could write a policy engine, glue code to integrate service mesh security with other security tools, data aggregators to collect the high-level metrics that operators need, and so forth. Obviously, this would be quite costly and more than unlikely to work satisfactorily anytime soon.
-- 工程师的答案是，在这个问题上投入更多的工程。开发人员可以编写策略引擎、粘接代码来集成服务网格安全性和其他安全工具、数据聚合器来收集操作人员需要的高级指标，等等。显然，这将是相当昂贵的，而且不太可能在短期内令人满意地工作。
-- **Solution 3: Adopt a Cloud Traffic Controller.** The best alternative is to simply leave service meshes to the development teams and to let operations teams adopt a cloud traffic controller. That way, operations teams can detect [complex emergent behaviors](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary/#Emergent-Behaviors), remediate them in real-time and create the automations they need to effectively apply the operational patterns necessary to keep the architecture under control.
-- 最好的选择是将服务网格留给开发团队，让运营团队采用云流量控制器。这样,运营团队可以检测[复杂紧急行为](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary/#Emergent-Behaviors),实时纠正他们,创造他们所需要的自动化有效应用的操作模式控制架构所必需的。
-
-Glasnostic是这样一个云流量控制器。
+Glasnostic就是这样一个云流量控制器。
 
 <iframe src="https://player.vimeo.com/video/343154979?title=0&amp;profile=0&amp;byline=0&amp;dnt=1&amp;autoplay=1&amp;muted=1&amp;loop=1" allow="autoplay; fullscreen" allowfullscreen="" style="box-sizing: border-box; position: absolute; top: 0px; left: 0px; width: 540px; height: 328.75px; border: none;"></iframe>
 
-**Figure 1:** Glasnostic is a cloud traffic controller that lets operations and security teams control the complex interactions and behaviors among federated microservice applications at scale. Glasnostic是一个云流量控制器，允许操作和安全团队大规模控制联邦微服务应用程序之间的复杂交互和行为。
+**图 1:**是一个云流量控制器，允许运维和安全团队控制微服务应用之间的复杂交互和行为。
 
-Glasnostic is a control plane for service landscapes that helps operations and security teams control the complex interactions and behaviors among federated microservice applications at scale. This is in contrast to service meshes, which manage the service-to-service connections within an application. Glasnostic is an independent solution, not another platform. It requires no sidecars or agents and integrates cleanly into any existing environment.
-
-Glasnostic是一个用于服务环境的控制平面，它帮助操作和安全团队大规模地控制联邦微服务应用程序之间的复杂交互和行为。这与服务网格相反，服务网格管理应用程序中的服务到服务连接。公开化是一个独立的解决方案，而不是另一个平台。它不需要侧车或代理，并且干净地集成到任何现有环境中。
-
-By gaining control over service interactions, teams can control emergent behaviors, prevent cascading failures and avert security breaches.
+Glasnostic是一个用于服务环境的控制平面，它帮助运维和安全团队大规模地控制关联的微服务应用之间的复杂交互和行为。这与服务网格相反，服务网格管理应用程序中的服务到服务连接。Glasnostic是一个独立的解决方案，而不是另一个平台。它不需要sidecar或代理，并且能干净地集成到任何现有环境中。
 
 通过获得对服务交互的控制，团队可以控制紧急行为、防止级联故障和避免安全漏洞。
 
-Glasnostic was founded after learning first-hand that successful architectures are allowed to evolve organically as opposed to being rigidly designed upfront. It uses a unique network-based approach to provide operators with the observability and control they need to detect and remediate emergent behaviors in a service landscape.
-
-Glasnostic是在直接了解到成功的架构可以有机地发展，而不是预先进行严格的设计之后成立的。它使用一种独特的基于网络的方法来为操作人员提供他们需要的可观察性和控制能力，以检测和纠正服务场景中的紧急行为。
+Glasnostic是借鉴了成功的可以有机发展的架构之后才被构建的，它反对预先进行严格的设计。它使用一种独特的基于网络的方法来为运维人员提供他们需要的可观察性和控制能力，以检测和纠正服务场景中的紧急行为。
