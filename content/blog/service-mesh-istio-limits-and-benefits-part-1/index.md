@@ -1,17 +1,17 @@
 ---
 original: https://glasnostic.com/blog/service-mesh-istio-limits-and-benefits-part-1
 author: Tobias Kunze
-date: 2019-07-30T00:00:00+08:00
+date: 2019-07-31T00:00:00+08:00
 draft: false
 banner: "/img/blog/banners/Rundale-Palace-service-mesh.png"
 translator: 罗广明
 translatorlink: https://guangmingluo.github.io/guangmingluo.io/
+reviewer:  [宋净超]
+reviewerlink:  [https://jimmysong.io]
 title: "服务网格的三个技术优势及其运维局限-第1部分"
 description: "本文结合当前服务网格的形势，分析了服务网格的局限性，以及其带来的三个有价值的好处：可观测性、流量控制和安全。"
 categories: "Service Mesh"
 tags: ["Service Mesh"]
-originalPublishDate: 2019-06-04
-publishDate: 2019-07-30
 
 ---
 
@@ -27,11 +27,11 @@ publishDate: 2019-07-30
 
 ## 什么是服务网格？
 
-服务网格是一个专用的基础设施层，它的目标是 “[在微服务架构中实现可靠、快速和安全的服务间调用。](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/)” 它不是一个“服务的网格”，而是一个服务可以插入其中的“代理的网格”，以实现网络的完全抽象化。在典型的服务网格中，这些代理作为sidecar(边车)注入到每个服务部署中。服务不直接通过网络调用服务，而是调用它们的本地sidecar代理，后者代表服务管理请求，从而封装了服务间调用的复杂性。相互连接的sidecar代理实现了所谓的“数据平面”。这与用于配置代理和收集指标的服务网格组件形成对比，这些组件称为服务网格控制平面。
+服务网格是一个专用的基础设施层，它的目标是 “[在微服务架构中实现可靠、快速和安全的服务间调用](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/)”。 它不是一个“服务的网格”，而是一个服务可以插入其中的“代理的网格”，以实现网络的完全抽象化。在典型的服务网格中，这些代理作为sidecar(边车)注入到每个服务部署中。服务不直接通过网络调用服务，而是调用它们的本地sidecar代理，后者代表服务管理请求，从而封装了服务间调用的复杂性。相互连接的sidecar代理实现了所谓的“数据平面”。这与用于配置代理和收集指标的服务网格组件形成对比，这些组件称为服务网格控制平面。
 
 ![service-mesh](service-mesh.png)
 
-*一个典型的服务网格架构：数据平面代理部署为边车，控制平面单独部署。*
+*一个典型的服务网格架构：数据平面代理部署为sidecar，控制平面单独部署。*
 
 简而言之，服务网格旨在解决开发人员在与远程端点通信时面临的许多挑战。服务网格对[运行在容器编排器的“greenfield” 应用](https://glasnostic.com/blog/should-i-use-a-service-mesh)特别有用，例如Kubernetes.
 
