@@ -1,4 +1,25 @@
-# 服务网格的三个技术优势及其运维局限-第2部分
+---
+original: https://glasnostic.com/blog/service-mesh-istio-limits-and-benefits-part-2
+author: Tobias Kunze
+date: 2019-07-31T00:00:00+08:00
+draft: false
+banner: "/img/blog/banners/Rundale-Palace-service-mesh.png"
+translator: 马若飞
+translatorlink: https://github.com/malphi
+reviewer:  [宋净超]
+reviewerlink:  [https://jimmysong.io]
+title: "服务网格的三个技术优势及其运维局限-第2部分"
+description: "本文结合当前服务网格的形势，分析了服务网格的局限性，以及其带来的三个有价值的好处：可观测性、流量控制和安全。"
+categories: "Service Mesh"
+tags: ["Service Mesh"]
+
+---
+
+## 编者按
+
+本文作者洞察全局，高屋建瓴，结合当前服务网格的形势，分析了服务网格普遍的局限性，以及从开发者角度讲述服务网格带来的三个有价值的好处：可观测性、流量控制和安全。本文的观点阐述详细而深刻，涵盖了服务网格的关键性技术与架构，以及许多备受瞩目与广泛探讨的话题。
+
+## 正文
 
 欢迎来到关于服务网格的优势和运维局限的系列文章的第2部分。在[第1部分](https://glasnostic.com/blog/service-mesh-istio-limits-and-benefits-part-1)中，我们了解了开发人员如何从服务网格为微服务架构提供附加的可观察性、流量控制和安全功能的能力中获益。在这篇文章中，我们将关注同样的三个维度，但不同于开发人员关心的问题，我们会从运维团队的角度深入研究服务网格的局限性。
 
