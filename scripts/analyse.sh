@@ -35,5 +35,3 @@ keywords: ["service mesh"]
 echo -e "| 作者 | 文章数 |\n| ---- | ---- |" >> $authors
 cat $formated_json|grep author|grep -v "authorlink"|sort|cut -d ":" -f2|tr -d ","'"'|uniq -c|sort -nr|awk '$2 >"z" { print "|" $2 " | " $1 "|"}' >> $authors
 echo -e "投递原创文章请访问 https://github.com/servicemesher/website" >> $authors
-
-rm $orig_json
