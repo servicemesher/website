@@ -80,14 +80,12 @@ tags: ["Service Mesh"]
 - **解决方案3：采用云流量控制器。**最好的选择是将服务网格留给开发团队，让运维团队采用云流量控制器。这样，运维团队可以检测到[复杂紧急的行为](https://glasnostic.com/blog/microservices-architecture-patterns-service-mesh-glossary/#Emergent-Behaviors)，并实时纠正，创造他们所需要的自动化来有效的实现需要的运维模式，保证架构的可控。
 
 Glasnostic就是这样一个云流量控制器。
-<figure id="figure-1">
 <div class="video-wrapper" style="position: relative;padding-bottom: 56.25%;padding-top: 25px;height: 0;">
-<iframe src="https://player.vimeo.com/video/343154979?title=0&amp;profile=0&amp;byline=0&amp;dnt=1&amp;autoplay=1&amp;muted=1&amp;loop=1" allow="autoplay; fullscreen" allowfullscreen=""></iframe>
+<iframe src="https://player.vimeo.com/video/343154979?title=0&amp;profile=0&amp;byline=0&amp;dnt=1&amp;autoplay=1&amp;muted=1&amp;loop=1" allow="autoplay; fullscreen" allowfullscreen="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"></iframe>
 </div>
-<figcaption>
+
 **图 1:**是一个云流量控制器，允许运维和安全团队控制微服务应用之间的复杂交互和行为。
-</figcaption>
-</figure>
+
 Glasnostic是一个用于服务环境的控制平面，它帮助运维和安全团队大规模地控制关联的微服务应用之间的复杂交互和行为。这与服务网格相反，服务网格管理应用程序中的服务到服务连接。Glasnostic是一个独立的解决方案，而不是另一个平台。它不需要sidecar或代理，并且能干净地集成到任何现有环境中。
 
 通过获得对服务交互的控制，团队可以控制紧急行为、防止级联故障和避免安全漏洞。
