@@ -16,7 +16,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 [上篇文章](http://imfox.io/2019/07/29/istio-analysis-5/)中我们成功将广州和新加坡 2 地的 kubernetes 集群连通为一个服务网格，实现了多集群服务透明共享：recommend v1 和 recommend v2 分别部署在广州和新加坡地域， 但是两地用户都可以无差别的访问到任一版本。
 
-![image-20190730145706365](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132130.png)
+![image-20190730145706365](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132130.png)
 
 接下来我们上述环境中， 尝试几个多集群服务网格的应用场景，包括：
 
@@ -34,15 +34,15 @@ keywords: ["service mesh","服务网格","istio"]
 
 在已部署的环境中， 我们尝试将广州集群中的 recommend v1 服务副本数删除至 0 个，模拟广州集群 recommend 服务实例不可用：
 
-![image-20190730160311846](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132139.png)
+![image-20190730160311846](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132139.png)
 
 这时候我们分别多次访问广州和新加坡商城应用， 发现任一入口访问， 页面都可以正常显示， 且「推荐商品」板块显示的都是 recommend v2 版本， 也就是部署在新加坡地域的有 banner 的版本：
 
- ![image-20190730161028904](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132343.png)
+ ![image-20190730161028904](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132343.png)
 
 现在我们把广州集群 recommend v1 服务扩容为 1 个副本，将新加坡集群 recommend v2 服务副本数降至 0，类似的， 我们可以验证， 两地访问商城应用， 页面显示都正常，而且显示的都是广州集群无 banner 的 recommend v1 版本：
 
-![image-20190730162048948](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132349.png)
+![image-20190730162048948](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132349.png)
 
 ------
 
@@ -75,11 +75,11 @@ env:
 
 稍等片刻，分别通过广州和新加坡地域入口多次访问商城应用，可以发现广州入口一直展示 recommend v1 版本，新加坡地域一直展示 recommend v2 版本：
 
-![image-20190730170628865](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132357.png)
+![image-20190730170628865](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132357.png)
 
 开启「地域感知负载均衡」后， 因为流量都在同一个集群中，所以访问速度开启之前，会提升很多，我们实测一下， 在开启「地域感知负载均衡」前后，使用 ab 工具， 模拟访问 2 个地域各 100 次：
 
-![image-20190730210957025](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132402.png)
+![image-20190730210957025](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132402.png)
 
 上图所示，开启「地域感知负载均衡」功能后，请求平均耗时从大概 1116~ 1159 毫秒下降到了 117~132 毫秒。
 
@@ -156,7 +156,7 @@ spec:
 kubectl --context guangzhou -nbase apply -f install/locality-load-balancing.yaml
 ```
 
-![image-20190731162858461](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132411.png)
+![image-20190731162858461](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132411.png)
 
 广州集群 2 个  recommend 共同组成该地域的服务 endpoints, 广州 recommend 服务的健康度（可用性）可以表示为：
 
@@ -184,11 +184,11 @@ singapore-LB = 100 - guangzhou-LB
 ruby ./install/recommend_stat.rb --ip 134.175.211.151 --count 1000
 ```
 
-![image-20190731203938329](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132416.png)
+![image-20190731203938329](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132416.png)
 
 数据统计可以看出，广州健康副本（v1）由 14 个下降到 10 个的过程中，不会出现流量降级到新加坡，当广州健康副本数低于 10 个后，部分流量将会被负载均衡的新加坡集群：
 
-![image-20190731205538360](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132421.png)
+![image-20190731205538360](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132421.png)
 
 只要广州主集群的健康度不为 0（v1 副本 > 0）, 则第一优先级的广州集群负载流量也会大于 0，保证剩余的可用性尽量满足地域就近负载。
 
