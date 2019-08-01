@@ -3,7 +3,7 @@ original: https://glasnostic.com/blog/service-mesh-istio-limits-and-benefits-par
 author: Tobias Kunze
 date: 2019-07-31T00:00:00+08:00
 draft: false
-banner: "/img/blog/banners/Rundale-Palace-service-mesh.png"
+banner: "/img/blog/banners/limitandbenefit.jpg"
 translator: 马若飞
 translatorlink: https://github.com/malphi
 reviewer:  [宋净超]
@@ -45,15 +45,15 @@ tags: ["Service Mesh"]
 
 服务网格的发展是为了解决如何将对服务的调用路由到最佳目标实例，例如可以最快地为请求提供服务的实例。这就是为什么服务网格是面向开发人员或“面向路由”的：它们服务于开发人员的视角，开发人员希望调用服务而不必处理复杂的远程服务调用。因此，服务网格被证明是不适合管理这样一个架构下的工作负载，它涉及了不是数百个也是数十个的微服务之间的跨越开发团队、业务部门甚至是公司防火墙的交互，例如随着时间的推移，具有不断变化的服务到服务交互和依赖关系的组合服务架构会有机地发展。
 
-例如，在服务网格下要表达[*向前*路由策略](https://glasnostic.com/blog/how-canary-deployments-work-1-kubernetes-istio-linkerd#figure-3)和向后的流量控制是比较简单的，而下游客户端如[施加反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或[实现舱壁](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads)就要更加困难，即使不是不可能实现。服务网格的数据平面基于源和目标规则去构建流量决策从理论上讲是可能的，开发人员定位像[Istio](https://glasnostic.com/blog/kubernetes-service-mesh-what-is-istio)这样的控制平面，让他们提供对任意的服务交互集的流量控制。
+例如，在服务网格下要表达[*向前*路由策略](https://glasnostic.com/blog/how-canary-deployments-work-1-kubernetes-istio-linkerd#figure-3)和向后的流量控制是比较简单的，而下游客户端如[施加backpressure](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或[实现bulkhead](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads)就要更加困难，即使不是不可能实现。服务网格的数据平面基于源和目标规则去构建流量决策从理论上讲是可能的，开发人员定位像[Istio](https://glasnostic.com/blog/kubernetes-service-mesh-what-is-istio)这样的控制平面，让他们提供对任意的服务交互集的流量控制。
 
-这种将策略应用于任意服务交互集的能力的缺乏也使得策略的分层变得极其困难。例如，当一个[壁](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads)在两个可用性区域之间，但一个关键服务需要能够在需要是故障转移，这几乎不可能找到正确的服务网格规则的阈值，特别是自动扩展的部署情况下。
+这种将策略应用于任意服务交互集的能力的缺乏也使得策略的分层变得极其困难。例如，当一个[bulkhead](https://glasnostic.com/blog/preventing-systemic-failure-bulkheads)在两个可用性区域之间，但一个关键服务需要能够在需要是故障转移，这几乎不可能找到正确的服务网格规则的阈值，特别是自动扩展的部署情况下。
 
 然而，对于运维人员来说，最重要的问题是服务网格在kubernetes之外的有限的可部署性——这是他们“固执己见”的直接结果。修改部署和部署过程正确的包括一个数据平面的sidecar通常是不可能的，添加一个虚拟机到服务网格是[最令人费解的](https://istio.io/docs/setup/kubernetes/additional-setup/mesh-expansion/)，但仍然不允许操作员捕捉内部虚拟机的流量。更糟的是，要将现有的非Kubernetes工作负载集成到基于Kubernetes的服务网格中，运维人员不仅需要调整应用程序代码，还需要根据Kubernetes网格进行部署。
 
 最后，通过YAML部署描述配置了当前服务网格实现的流量控制。部署描述是在版本控制中存储配置的一种很好的方法，因此可以用来重建定义良好的初始状态，但是它们不太适合运维团队在遇到困难时需要进行持续、实时的更改。
 
-总之，虽然服务网格提供的流量控制支持许多面向开发人员的控制机制，如目标规则和虚拟服务定义，它不支持面向无路由的操作模式如[反压力](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或舱壁。面对架构更改，服务网格策略不可能预先分层，而且很难部署到Kubernetes之外。服务网格配置通常基于部署描述，当需要进行补救时，这些描述必然会妨碍到运维团队。
+总之，虽然服务网格提供的流量控制支持许多面向开发人员的控制机制，如目标规则和虚拟服务定义，它不支持面向无路由的操作模式如[backpressure](https://glasnostic.com/blog/preventing-systemic-failure-backpressure)或bulkhead。面对架构更改，服务网格策略不可能预先分层，而且很难部署到Kubernetes之外。服务网格配置通常基于部署描述，当需要进行补救时，这些描述必然会妨碍到运维团队。
 
 ## 安全限制
 
