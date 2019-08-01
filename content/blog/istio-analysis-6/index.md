@@ -187,74 +187,8 @@ ruby ./install/recommend_stat.rb --ip 134.175.211.151 --count 1000
 ![image-20190731203938329](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132416.png)
 
 数据统计可以看出，广州健康副本（v1）由 14 个下降到 10 个的过程中，不会出现流量降级到新加坡，当广州健康副本数低于 10 个后，部分流量将会被负载均衡的新加坡集群：
-<div id="container" style="height: 500px;"></div>
-<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-var dom = document.getElementById("container");
-var myChart = echarts.init(dom);
-var app = {};
-option = null;
-app.title = '多 X 轴示例';
-var colors = ['#6DD3C8', '#675bba', '#d14a61'];
-option = {
-    color: colors,
-    tooltip: { trigger: 'none', axisPointer: { type: 'cross' } },
-    legend: { data:['广州 V1 请求数', '新加坡 V2 请求数', 'Errors'] },
-    grid: { top: 70, bottom: 50 },
-    xAxis: [
-        {
-            type: 'category',
-            axisTick: { alignWithLabel: true },
-            axisLine: { onZero: false, lineStyle: { color: colors[1] } },
-            axisPointer: {
-                label: {
-                    formatter: function (params) {
-                        return 'unhealthy:\n副本数  ' + params.value;
-                    }
-                }
-            },
-            data: ['0','1','2','3','4','5','6', '7', '8', '9', '10', '11', '12', '13', '14']
-        },
-        {
-            type: 'category',
-            axisTick: { alignWithLabel: true },
-            axisLine: { onZero: false, lineStyle: { color: colors[0] } },
-            axisPointer: {
-                label: {
-                    formatter: function (params) {
-                        return 'V1:\n副本数  ' + params.value
-                            + (params.seriesData.length ? '\n请求数' + params.seriesData[0].data : '');
-                    }
-                }
-            },
-            data: ["14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1", "0"]
-        }
-    ],
-    yAxis: [ { type: 'value' } ],
-    series: [
-        {
-            name:'广州 V1 请求数',
-            type:'line',
-            xAxisIndex: 1,
-            smooth: true,
-            data: [1000,997,994,994,991,886,803,707,582,504,401,303,208,115,0]
-        },
-        {
-            name:'新加坡 V2 请求数',
-            type:'line',
-            smooth: true,
-            data: [0,0,0,0,0,105,188,284,403,484,587,681,771,870,979]
-        },
-        {
-            name:'Errors',
-            type:'line',
-            smooth: true,
-            data: [0,3,6,6,9,9,9,9,15,12,12,16,21,15,21]
-        }
-    ]
-};
-if (option && typeof option === "object") { myChart.setOption(option, true); }
-</script>
+
+![image-20190731205538360](http://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132421.png)
 
 只要广州主集群的健康度不为 0（v1 副本 > 0）, 则第一优先级的广州集群负载流量也会大于 0，保证剩余的可用性尽量满足地域就近负载。
 
