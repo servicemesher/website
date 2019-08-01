@@ -1,13 +1,13 @@
 ---
 original: https://glasnostic.com/blog/service-mesh-istio-limits-and-benefits-part-2
 author: Tobias Kunze
-date: 2019-07-31T00:00:00+08:00
+date: 2019-08-01T10:42:00+08:00
 draft: false
 banner: "/img/blog/banners/limitandbenefit.jpg"
 translator: 马若飞
 translatorlink: https://github.com/malphi
-reviewer:  [宋净超]
-reviewerlink:  [https://jimmysong.io]
+reviewer:  [罗广明]
+reviewerlink:  [https://github.com/GuangmingLuo]
 title: "服务网格的三个技术优势及其运维局限-第2部分"
 description: "本文结合当前服务网格的形势，分析了服务网格的局限性，以及其带来的三个有价值的好处：可观测性、流量控制和安全。"
 categories: "Service Mesh"
