@@ -13,11 +13,11 @@ keywords: ["ambassador","kubernetes native"]
 
 > 在微服务架构中，api网关是一个十分重要的存在。一方面它为外部的流量访问提供了统一的入口，使得可以方便的进行防火墙的策略实施；另一方面，可以在网关处进行流量控制、认证、授权、灰度、日志收集、性能分析等各种高级功能，使得业务功能与非功能有效解耦，给予了系统架构更大的灵活性。本系列文章尝试分析目前主流的云原生微服务网关，并比较各自的优劣。
 
-### 网关选型标准
+## 网关选型标准
 
 其实kubernetes本身有一个ingress controller，基于nginx或haproxy等7层代理进行流量的转发。不过ingress只能进行简单的反向代理，不支持流控、灰度、认证、授权等网关必备的功能。所以一般意义认为，ingress是一个7层http代理，而非api网关。本系列主要分析ambassador、traefik、kong等具备**微服务**所需能力的网关产品。
 
-### 什么是Ambassador？
+## 什么是Ambassador？
 
 这里引用官网的一段描述
 
@@ -25,7 +25,7 @@ keywords: ["ambassador","kubernetes native"]
 
 注意这里的几个关键词：**envoy**，**kubernetes原生**，**微服务**。现在市面上网关产品不少，不过kubernetes原生的产品倒真的不多。传统的网关产品一般是基于rest api或者yaml文件来进行配置（谁让这些老大哥出来的早呢，他们火的时候k8还没出来呢），而ambassador完全基于k8标准的annotation或者CRD来进行各类配置，没错，非常的**native**。
 
-### Ambassador架构
+## Ambassador架构
 
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-0dcae8cb18297b27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 如果是了解istio的同学，看到这张图会有十分熟悉的感觉，没错，Ambassador也是具有控制平面和数据平面的。数据平面自然是老伙计envoy，Ambassador的控制平面负责监听k8中的service资源的变化，并将配置下发envoy，实际的流量转发通过envoy来完成。（感觉就是一个轻量级的istio）
@@ -38,11 +38,11 @@ keywords: ["ambassador","kubernetes native"]
 4. 新的配置通过基于gRPC的聚合发现服务（ADS）API传递给envoy。
 5. 流量通过重新配置的envoy，而不会断开任何连接。
 
-### 扩展性和可用性
+## 扩展性和可用性
 
 Ambassador依靠Kubernetes实现扩展、高可用性和持久性。所有Ambassador配置都直接存储在Kubernetes中（etcd）；没有数据库。Ambassador被打包成一个单独的容器，其中包含控制平面和一个Ambassador代理实例。默认情况下，Ambassador部署为kubernetes deployment，可以像其他kubernetes deployment一样进行扩展和管理。
 
-### 与其他网关产品比较
+## 与其他网关产品比较
 
 目前主流的网关产品可以分为三类：
 
@@ -58,11 +58,11 @@ Ambassador依靠Kubernetes实现扩展、高可用性和持久性。所有Ambass
 
 一般来说，7层代理可以用作API网关，但需要额外的定制开发来支持微服务用例。事实上，许多API网关都将API网关所需的附加功能打包在L7代理之上。Ambassador使用envoy，而kong使用nginx。
 
-### Istio
+## Istio
 
 Istio是一个基于Envoy的开源服务网格。 服务网格用于管理东/西流量，而API网关用于管理南/北流量。 一般来说，我们发现南/北流量与东/西流量有很大不同（比如说，在南北流量中你无法控制客户端）。
 
-### 安装Ambassador
+## 安装Ambassador
 
 安装非常的简单，直接使用helm安装。如果对于helm还不是很了解，可以参考我之前的文章 [helm介绍](https://www.jianshu.com/p/290f27841b8d)。
 使用helm安装只需要执行如下命令：
@@ -199,7 +199,7 @@ metadata:
 
 下面我们来看一下Ambassador的几个使用场景：
 
-### 用例1：边缘（南/北）路由
+## 用例1：边缘（南/北）路由
 
 这个是平时最常见的使用场景，网关位于整个集群的入口处，统一去做一些流控、鉴权等方面的工作：
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-45238040cc6650c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -214,7 +214,7 @@ metadata:
 saas service中的真实用例：
 ![saas.png](https://upload-images.jianshu.io/upload_images/14871146-7db0c08aafed66b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 用例2：内部（南/北）路由
+## 用例2：内部（南/北）路由
 
 通常来说，企业内部的系统架构会比较复杂，会有多集群或者多租户，比如一个kubernetes的集群和一个vm的集群（可能是openstack），那么在集群之间的流量就是内部的南/北流量，集群之间的流量交互可以通过ambassador完成。
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-90750413b7c7e9f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -228,7 +228,7 @@ saas service中的真实用例：
 saas service中的真实用例：
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-23acd24daab3455b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 用例3：内部（东/西）路由
+## 用例3：内部（东/西）路由
 
 这个场景中Ambassador已经作为集群内部东西向流量的代理了，配合它自己的控制平面，有点service mesh的意思了。区别在于，Ambassador在这个集群里是处于一个中心节点的位置（一个或一组ambassador实例），属于server proxy的范畴，而不是service mesh里面的client proxy（sidecar）。这种架构其实和传统的esb更加的接近。
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-8cec66e2dc3b82c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -247,7 +247,7 @@ saas service的真实用例：
 service mesh的真实用例（与istio集成）：
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-dbefbeb1c9fcf405.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 用例4：流量镜像
+## 用例4：流量镜像
 
 此场景中可以把流量复制一份到其他服务中（影子流量），通常用于监控、测试等场景
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-85a3899f164466c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -258,36 +258,36 @@ service mesh的真实用例（与istio集成）：
 
 > 注意：上面所描述的几个典型场景其实不光可以使用Ambassador，而是适用于各类使用api gateway或者proxy的场景。
 
-### 配置
+## 配置
 
 Ambassador不同版本之间配置方式的变更如下图所示,configmap方式是早期使用方式，目前已经被废弃了，现在更推荐使用CRD方式。
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-d2aac8fb2c0cbeda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#### 加密的配置方式
+### 加密的配置方式
 
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-f9231001054176b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#### 认证的配置方式
+### 认证的配置方式
 
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-38b74b7b5ed93f2e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#### 路由的配置方式
+### 路由的配置方式
 
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-64fc6ccdef6a0386.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#### 跟踪的配置方式
+### 跟踪的配置方式
 
 ![image.png](https://upload-images.jianshu.io/upload_images/14871146-2ed98f1ea3c98531.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### Ambassador的不足
+## Ambassador的不足
 
 Ambassador和同类的网关产品类似，分为社区版及商业版，社区版提供了最基础的路由、限速、TLS加密、跟踪、认证（需要自己实现external third party authentication service）等能力，但是微服务网关中十分重要的OAuth2集成认证、RBAC、custom filter等功能都是需要在pro版中才能实现，这是比较遗憾的一点。尤其是custom filter，根据我们目前的经验，一个能力完整、功能丰富的微服务网关，必然会引入custom filter。而custom filter也需要使用go进行编写，对于不熟悉go的开发人员来说也会比较痛苦。
 
-### 总结
+## 总结
 
 Ambassador作为一个较新推出的开源微服务网关产品，与kubernetes结合的相当好，基于annotation或CRD的配置方式与k8s浑然一体，甚至让人感觉这就是k8s自身功能的一部分，真正做到了`kubernetes native`。而底层基于envoy进行流量代理，也让人不需要太担心性能问题。对于路由、加密、基础认证、链路跟踪等场景，可尝试使用。而对于像`custom filter`、`rbac`、`advanced rate limiting`等场景有需求的用户，使用pro版本可满足要求。本人也与Ambassador开发团队进行了联系，遗憾的是Ambassador目前在国内尚未有reseller，若使用pro版，后期的维护支持也是需要考虑的内容。
 
-### 参考文献
+## 参考文献
 
 - [https://www.getambassador.io](https://www.getambassador.io/)
 - Using Ambassador to build Cloud-Native Applications - Steve Flanders, Omnition @ KubeCon 2019, Shanghai
