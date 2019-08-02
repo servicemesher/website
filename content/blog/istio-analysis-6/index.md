@@ -14,7 +14,7 @@ keywords: ["service mesh","服务网格","istio"]
 
 随着容器技术的流行，大量互联网公司和传统 IT 企业都在尝试应用容器化和服务上云。容器化是一个持续的过程，伴随着多地域部署、安全等级隔离、多云和混合云等复杂的场景需求。
 
-[上篇文章](http://imfox.io/2019/07/29/istio-analysis-5/)中我们成功将广州和新加坡 2 地的 kubernetes 集群连通为一个服务网格，实现了多集群服务透明共享：recommend v1 和 recommend v2 分别部署在广州和新加坡地域， 但是两地用户都可以无差别的访问到任一版本。
+[上篇文章](https://www.servicemesher.com/blog/istio-analysis-5/)中我们成功将广州和新加坡 2 地的 kubernetes 集群连通为一个服务网格，实现了多集群服务透明共享：recommend v1 和 recommend v2 分别部署在广州和新加坡地域， 但是两地用户都可以无差别的访问到任一版本。
 
 ![image-20190730145706365](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2019-07-31-132130.png)
 
