@@ -15,7 +15,7 @@ keywords: ["ambassador","kubernetes native"]
 
 ## 网关选型标准
 
-其实kubernetes本身有一个ingress controller，基于Nginx或HAProxy等7层代理进行流量的转发。不过ingress只能进行简单的反向代理，不支持流控、灰度、认证、授权等网关必备的功能。所以一般意义认为，ingress是一个7层http代理，而非API网关。本系列主要分析Ambassador、Traefik、Kong等具备**微服务**所需能力的网关产品。
+其实kubernetes本身有一个ingress controller，基于Nginx或HAProxy等7层代理进行流量的转发。不过ingress只能进行简单的反向代理，不支持流控、灰度、认证、授权等网关必备的功能。所以一般意义认为，ingress是一个7层http代理，而非api网关。本系列主要分析Ambassador、Traefik、Kong等具备**微服务**所需能力的网关产品。
 
 ## 什么是Ambassador？
 
@@ -23,7 +23,7 @@ keywords: ["ambassador","kubernetes native"]
 
 > Ambassador是一个基于Envoy proxy构建的，kubernetes原生的开源微服务网关。Ambassador在构建之初就致力于支持多个独立的团队，这些团队需要为最终用户快速发布、监控和更新服务。Ambassador还具有Kubernetes ingress和负载均衡的能力。
 
-注意这里的几个关键词：**Envoy**，**kubernetes原生**，**微服务**。现在市面上网关产品不少，不过kubernetes原生的产品倒真的不多。传统的网关产品一般是基于rest API或者yaml文件来进行配置（谁让这些老大哥出来的早呢，他们火的时候k8还没出来呢），而ambassador完全基于k8标准的annotation或者CRD来进行各类配置，没错，非常的**native**。
+注意这里的几个关键词：**Envoy**，**kubernetes原生**，**微服务**。现在市面上网关产品不少，不过Kubernetes原生的产品倒真的不多。传统的网关产品一般是基于rest api或者yaml文件来进行配置（谁让这些老大哥出来的早呢，他们火的时候k8还没出来呢），而Ambassador完全基于k8s标准的annotation或者CRD来进行各类配置，没错，非常的**native**。
 
 ## Ambassador架构
 
@@ -33,9 +33,9 @@ keywords: ["ambassador","kubernetes native"]
 具体流程如下：
 
 1. 服务所有者在kubernetes manifests中定义配置(通过annotation或者CRD)。
-2. 当manifest应用到集群时，kubernetes API会将更改通知Ambassador。
+2. 当manifest应用到集群时，kubernetes api会将更改通知Ambassador。
 3. Ambassador解析更改并将配置转换为一种中间语义。Envoy的配置由该IR生成。
-4. 新的配置通过基于gRPC的聚合发现服务（ADS）API传递给Envoy。
+4. 新的配置通过基于gRPC的聚合发现服务（ADS）api传递给Envoy。
 5. 流量通过重新配置的Envoy，而不会断开任何连接。
 
 ## 扩展性和可用性
@@ -46,17 +46,17 @@ Ambassador依靠Kubernetes实现扩展性、高可用性和持久性。所有Amb
 
 目前主流的网关产品可以分为三类：
 
-- 托管的API网关，比如 [Amazon API gateway](https://aws.amazon.com/API-gateway/)
+- 托管的API网关，比如 [Amazon api gateway](https://aws.amazon.com/api-gateway/)
 - 传统的API网关，比如 [Kong](https://getkong.org/)
 - 7层代理，比如 [Traefik](https://traefik.io/), [NGINX](http://nginx.org/), [HAProxy](http://www.haproxy.org/), or [Envoy](https://www.Envoyproxy.io/), 或者是基于这些代理的 Ingress controllers
 
 所有这些托管的和传统的API网关的问题是：
 
 - 不是自服务的。传统API网关上的管理接口不是为开发人员自服务而设计的，为开发人员提供的安全性和可用性有限。
-- 不是kubernetes原生的。它们通常使用REST APIs进行配置，这使得采用云原生模式（如Gitops和声明式配置）变得很困难。
+- 不是Kubernetes原生的。它们通常使用REST apis进行配置，这使得采用云原生模式（如GitOps和声明式配置）变得很困难。
 - 为API管理而设计，而非微服务。
 
-一般来说，7层代理可以用作API网关，但需要额外的定制开发来支持微服务用例。事实上，许多API网关都将API网关所需的附加功能打包在L7代理之上。Ambassador使用Envoy，而kong使用nginx。
+一般来说，7层代理可以用作API网关，但需要额外的定制开发来支持微服务用例。事实上，许多API网关都将API网关所需的附加功能打包在L7代理之上。Ambassador使用Envoy，而Kong使用Nginx。
 
 ## Istio
 
@@ -86,20 +86,20 @@ ambassador-3655608000-w63zf   1/1       Running   0          2m
 
 ```yaml
 ---
-APIVersion: v1
+apiVersion: v1
 kind: Service
 metadata:
   name: tour
   annotations:
     getambassador.io/config: |
       ---
-      APIVersion: ambassador/v1
+      apiVersion: ambassador/v1
       kind: Mapping
       name: tour-ui_mapping
       prefix: /
       service: tour:5000
       ---
-      APIVersion: ambassador/v1
+      apiVersion: ambassador/v1
       kind: Mapping
       name: tour-backend_mapping
       prefix: /backend/
@@ -119,7 +119,7 @@ spec:
   selector:
     app: tour
 ---
-APIVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tour
@@ -171,20 +171,20 @@ tracingservices.getambassador.io               2019-07-27T11:40:58Z
 其中mapping就是核心资源，用于路由的转发配置，下面是一个mapping资源配置示例
 
 ```yaml
-APIVersion: v1
+apiVersion: v1
 items:
-- APIVersion: getambassador.io/v1
+- apiVersion: getambassador.io/v1
   kind: Mapping
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"APIVersion":"getambassador.io/v1","kind":"Mapping","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"prefix":"/nginx","service":"nginx:80"}}
+        {"apiVersion":"getambassador.io/v1","kind":"Mapping","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"prefix":"/nginx","service":"nginx:80"}}
     creationTimestamp: "2019-07-27T13:36:38Z"
     generation: 1
     name: nginx
     namespace: default
     resourceVersion: "420594"
-    selfLink: /APIs/getambassador.io/v1/namespaces/default/mappings/nginx
+    selfLink: /apis/getambassador.io/v1/namespaces/default/mappings/nginx
     uid: 8f1f4d33-b073-11e9-be4c-0800279f163b
   spec:
     prefix: /nginx
@@ -195,7 +195,7 @@ metadata:
   selfLink: ""
 ```
 
-一旦你修改了service里面的annotation设置，ambassador的控制面会自动将变更下发给Envoy，全程不需要中断服务。（也要感谢Envoy强大的xDS API）
+一旦你修改了service里面的annotation设置，ambassador的控制面会自动将变更下发给Envoy，全程不需要中断服务。（也要感谢Envoy强大的xDS api）
 
 下面我们来看一下Ambassador的几个使用场景：
 
@@ -258,7 +258,7 @@ service mesh的真实用例（与istio集成）：
 - 利用真实的流量/负载
 - 最小化重复资源
 
-> 注意：上面所描述的几个典型场景其实不光可以使用Ambassador，而是适用于各类使用API gateway或者proxy的场景。
+> 注意：上面所描述的几个典型场景其实不光可以使用Ambassador，而是适用于各类使用api gateway或者proxy的场景。
 
 ## 配置
 
