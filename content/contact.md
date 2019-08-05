@@ -5,17 +5,25 @@ id: "contact"
 
 <center>
 
-这里是ServiceMesher社区，Service Mesh人共同的家园。
+## 关于 ServiceMesher 社区
 
-### 我们的使命
+ServiceMesher 社区是由一群拥有相同价值观和理念的志愿者们共同发起，于 2018 年 4 月正式成立。
 
-传播Service Mesh技术
+社区关注领域有：容器、微服务、Service Mesh、Serverless，拥抱开源和云原生，致力于推动 Service Mesh 在中国的蓬勃发展。
 
-加强行业内部交流
+### 社区使命
 
-促进开源文化构建
+传播 Service Mesh 技术
 
-推动Service Mesh在企业落地
+构建开源文化
+
+加强行业交流
+
+推动 Service Mesh 在企业中落地
+
+### 社区愿景
+
+成为 Service Mesh 在中国的布道者和领航者
 
 ---
 
@@ -23,25 +31,25 @@ id: "contact"
 
 #### 微信群
 
-要加入微信交流群，请联系[管理员](https://jimmysong.io/about)，并注明姓名-公司信息
+要加入微信交流群，请扫描下面的二维码，并注明姓名-公司信息
 
 ![Jimmy Song ServiceMesher 宋净超](/img/jimmysong-wechat.jpg)
 
 #### GitHub
 
-https://github.com/servicemesher
+<https://github.com/servicemesher>
 
 #### Twitter
 
-https://twitter.com/servicemesher
+<https://twitter.com/servicemesher>
 
 #### Slack
 
-https://servicemesher.slack.com
+<https://servicemesher.slack.com>
 
 #### Google Group论坛/邮件组
 
-https://groups.google.com/forum/#!forum/servicemesher
+<https://groups.google.com/forum/#!forum/servicemesher>
 
 #### 微信公众号
 
