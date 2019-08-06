@@ -18,19 +18,13 @@ tags: ["Service Mesh"]
 
 > 本文介绍了基准测试
 
-
-
-One of the key features of our container management platform, [Pipeline](https://github.com/banzaicloud/pipeline), as well as our CNCF certified Kubernetes distribution, [PKE](https://github.com/banzaicloud/pke), is their ability to form and run seamlessly across multi- and hybrid-cloud environments. While the needs of [Pipeline](https://github.com/banzaicloud/pipeline) users vary depending on whether they employ a single or multi-cloud approach, they usually build upon one or more of these key features:
-
-我们的容器管理平台[Pipeline](https://github.com/banzaicloud/pipeline)以及CNCF认证的Kubernetes发行版[PKE](https://github.com/banzaicloud/pke)的一个关键特性是，它们能够在多云和混合云环境中无缝地形成和运行。虽然[Pipeline](https://github.com/banzaicloud/pipeline)用户的需求因他们采用的是单一云方法还是多云方法而有所不同，但是他们通常基于这些关键特性中的一个或多个
+我们的容器管理平台[Pipeline](https://github.com/banzaicloud/pipeline)以及CNCF认证的Kubernetes发行版[PKE](https://github.com/banzaicloud/pke)的一个关键特性是，它们能够在多云和混合云环境中无缝地构建并运行。虽然[Pipeline](https://github.com/banzaicloud/pipeline)用户的需求因他们采用的是单一云方法还是多云方法而有所不同，但通常基于这些关键特性中的一个或多个：
 
 - [多云应用管理](https://banzaicloud.com/blog/multi-cloud-apps/)
 - [一个基于Istio的自动化服务网格，用于多云和混合云部署](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/)
 - [基于Kubernetes federation v2（集群联邦）的联合资源和应用部署](https://banzaicloud.com/blog/multi-cloud-fedv2/)
 
-As [Istio operator](https://github.com/banzaicloud/istio-operator)-based multi-cluster and multi/hybrid-cloud adoption increased, so did the demand for the ability to run distributed or decentralized applications wired into a service mesh. One of the managed applications our customers run at scale on Kubernetes is **Apache Kafka**. We believe that the **easiest way to run Apache Kafka on Kubernetes** is to use Banzai Cloud’s [Kafka spotguide](https://banzaicloud.com/tags/kafka/), built on our [Kafka operator](https://banzaicloud.com/blog/kafka-operator/). However, our focus so far has been on automating and operating single cluster Kafka deployments.
-
-随着基于[Istio operator](https://github.com/banzaicloud/istio-operator)的多集群和多混合云采用的增加，对运行连接到服务网格中的分布式或分散应用程序的能力的需求也增加了。我们的客户在Kubernetes上大规模运行的托管应用程序之一是**Apache Kafka**。我们认为，在Kubernetes**上运行Apache Kafka最简单的方法是使用基于我们的[Kafka操作符](https://banzaicloud.com/tags/kafka/)的[Kafka spotguide](https://banzaicloud.com/blog/kafka-operator/)。然而，到目前为止，我们的重点一直是自动化和操作单个集群Kafka部署。
+随着采用基于[Istio operator](https://github.com/banzaicloud/istio-operator)的多集群和多混合云的增加，对运行接入到服务网格中的分布式或分散的应用的能力的需求也增加了。我们的客户在Kubernetes上大规模运行的托管应用之一是**Apache Kafka**。我们认为，**在Kubernetes上运行Apache Kafka最简单的方法**是使用Banzai Cloud的[Kafka spotguide](https://banzaicloud.com/tags/kafka)来构建我们的[Kafka operator](https://banzaicloud.com/blog/kafka-operator/)。然而，到目前为止，我们的重点一直是自动化和操作单个集群Kafka部署。
 
 ## 太长别看（TLDR）
 
@@ -61,27 +55,19 @@ As [Istio operator](https://github.com/banzaicloud/istio-operator)-based multi-c
 
 ## 在Istio服务网格上运行Kafka
 
-There is considerable interest within the Kafka community in the possibility of leveraging more Istio features via out-of-the-box tracing, and mTLS through protocol filters, though these features have different requirements as reflected in Envoy, Istio and on a variety of other GitHub repos and discussion boards. While we’ve already covered most of these features with our [Kafka spotguide](https://banzaicloud.com/tags/kafka/) in the [Pipeline platform](https://beta.banzaicloud.io/) - monitoring, dashboards, secure communication, centralized log collection, autoscaling, Prometheus based alerts, automatic failure recoveries, etc - there was one important feature that we and our customers missed: network failures and multiple network topology support. We’ve previously handled these with [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/) and the [Istio operator](https://github.com/banzaicloud/istio-operator). Now, the time has arrived to explore running Kafka over Istio, and to automate the creation of Kafka clusters across single-cloud multi AZ, multi-cloud and especially hybrid-cloud environments.
-
-Kafka社区对通过开箱即用跟踪利用更多Istio功能的可能性非常感兴趣，并且通过协议过滤器利用mTLS，尽管这些功能有不同的需求，如Envoy、Istio和其他各种GitHub repos和讨论板上所反映的那样。虽然我们已经覆盖大部分的这些特性与我们(卡夫卡spotguide) (https://banzaicloud.com/tags/kafka/)(管道平台)(https://beta.banzaicloud.io/) -监控、仪表板、安全通信、集中的日志收集、自动定量,普罗米修斯警报,自动故障恢复,等等,有一个重要的功能,我们和我们的客户错过了:网络故障和多个网络拓扑结构的支持。我们之前已经处理过[Backyards](https://banzaicloud.com/blog/istio-the- simple -way/)和[Istio操作符](https://github.com/banzaicloud/istio-operator)。现在，探索在Istio上运行Kafka的时机已经到来，并在单云多AZ、多云，特别是混合云环境中自动创建Kafka集群。
+Kafka社区对如何利用更多的Istio功能非常感兴趣，例如开箱即用的Tracing，穿过协议过滤器的mTLS等。尽管这些功能有不同的需求，如Envoy、Istio和其他各种GitHub repos和讨论板上所反映的那样。大部分的这些特性已经在我们的[Pipeline platform](https://beta.banzaicloud.io/)的[Kafka spotguide](https://banzaicloud.com/tags/kafka/)中，包括监控、仪表板、安全通信、集中式的日志收集、自动伸缩,Prometheus警报，自动故障恢复等等。我们和客户错过了一个重要的功能：网络故障和多网络拓扑结构的支持。我们之前已经利用[Backyards](https://banzaicloud.com/blog/istio-the- simple -way/)和[Istio operator](https://github.com/banzaicloud/istio-operator)解决过此问题。现在，探索在Istio上运行Kafka的时机已经到来，并在单云多区、多云，特别是混合云环境中自动创建Kafka集群。
 
 ![setup](https://banzaicloud.com/img/blog/kafka-perf/kafka-multi-perf.png)
 
-> Getting Kafka to run on Istio wasn’t easy; it took time and required heavy expertise in both Kafka and Istio. With more than a little hard work and determination, we accomplished what we set out to do. Then, because that’s how we roll, we automated the whole process to make it as smooth as possible on the [Pipeline platform](https://beta.banzaicloud.io/). For those of you who’d like to go through the work and learn the gotchas - the what’s whats, the ins and outs - we’ll be following up with a deep technical dive in another post soon. Meanwhile, feel free to check out the relevant GitHub repositories.
->
-> 让卡夫卡在Istio上运行并不容易;这需要时间，需要在卡夫卡和Istio方面的大量专业知识。经过一点努力和决心，我们完成了我们开始做的事情。然后，因为这就是我们滚动的方式，所以我们自动化了整个过程，使其在[Pipeline platform]上尽可能平滑(https://beta.banzaicloud.io/)。对于那些想要通读这篇文章并了解问题所在的人——什么是什么，细节和细节——我们很快将在另一篇文章中进行深入的技术探讨。同时，请随意查看相关的GitHub存储库。
+> 让Kafka在Istio上运行并不容易，需要时间以及在Kafka和Istio方面的大量专业知识。经过一番努力和决心，我们完成了要做的事情。然后我们以迭代的方式自动化了整个过程，使其在[Pipeline platform](https://beta.banzaicloud.io/)上运行的尽可能顺利。对于那些想要通读这篇文章并了解问题所在的人——具体的来龙去脉——我们很快将在另一篇文章中进行深入的技术探讨。同时，请随时查看相关的GitHub代码库。
 
 ### 认知偏差
 
-*Cognitive bias is an umbrella term that refers to the systematic ways in which the context and framing of information influence individuals’ judgment and decision-making. There are many kinds of cognitive biases that influence individuals differently, but their common characteristic is that—in step with human individuality—they lead to judgment and decision-making that deviates from rational objectivity.认知偏差是一个概括性术语，指的是信息的环境和框架影响个人判断和决策的系统方式。影响个体的认知偏差有很多种，但它们的共同特征是，与人类的个性相一致，它们会导致判断和决策偏离理性的客观性。*
+*认知偏差是一个概括性术语，指的是信息的上下文和结构影响个人判断和决策的系统方式。影响个体的认知偏差有很多种，但它们的共同特征是，与人类的个性相一致，它们会导致判断和决策偏离理性的客观。*
 
-Since releasing the [Istio operator](https://github.com/banzaicloud/istio-operator), we’ve found ourselves in the middle of a heated debate over Istio. We had already witnessed a similar course of events with Helm (and Helm 3), and we rapidly came to realize that many of the most passionate opinions on this subject were not based on first hand experience. While we sympathize with some of the issues people have with the Istio’s complexity - this was exactly our rationale behind open sourcing our [Istio operator](https://github.com/banzaicloud/istio-operator) and the release of our [Backyards](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/) product - we don’t really agree with most performance-related arguments. Yes, Istio has lots of `convenient`features you may or may not need and some of these might come with some added latency, but the question is, as always, is it worth it?
+自从[Istio operator](https://github.com/banzaicloud/istio-operator)发布以来，我们发现自己陷入了一场关于Istio的激烈辩论中。我们已经在Helm(和Helm 3)中目睹了类似的过程，并且很快意识到关于这个主题的许多最激进的观点并不是基于第一手的经验。当我们与对Istio的复杂性有一些疑问的人产生共鸣的时候——这正是我们开源了[Istio operator](https://github.com/banzaicloud/istio-operator)和发布[Backyards](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/)产品背后的根本原因——我们真的不同意大多数性能相关的争论。是的，Istio有很多“方便”的特性你可能需要也可能不需要，其中一些特性可能会带来额外的延迟，但是问题是和往常一样，这样做是否值得?
 
-自从发布了[Istio操作符](https://github.com/banzaicloud/istio-operator)以来，我们发现自己陷入了一场关于Istio的激烈辩论中。我们已经在Helm(和Helm 3)中目睹了类似的过程，并且我们很快意识到关于这个主题的许多最热烈的观点并不是基于第一手经验。当我们同情人的一些问题与Istio的复杂性——这正是我们开源背后的基本原理(Istio运营商)(https://github.com/banzaicloud/istio-operator)和释放我们的(后院)(https://banzaicloud.com/blog/istio-multicluster-the-easy-way/)产品——我们真的不同意大多数绩效参数。是的，Istio有很多“方便”的特性，您可能不需要，也可能不需要，其中一些特性可能会带来一些额外的延迟，但是问题是，像往常一样，这样做是否值得?
-
-> Note: yes, we’ve witnessed Mixer performance degradation and other issues while running a large Istio cluster with lots of microservices, policy enforcements, and raw telemetry data processing, and we share concerns about these; the Istio community is working on a `mixerless` version - with features mostly pushed down to Envoy.
->
-> 注意:是的，在运行一个包含大量微服务、策略强制和原始遥测数据处理的大型Istio集群时，我们已经看到了混频器性能下降和其他问题，我们对此表示关注;Istio社区正在开发一个“无混合”版本——其功能主要由Envoy提供。
+> 注意：是的，在运行一个包含大量微服务、策略实施和原始遥测数据过程的大型Istio集群时，我们已经看到了Mixer性能下降和其他的问题，对此表示关注；Istio社区正在开发一个`mixerless`版本——其大部分功能会叠加到Envoy上。
 
 ### 做到客观，测量先行
 
