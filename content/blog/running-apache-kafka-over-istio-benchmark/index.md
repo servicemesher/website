@@ -162,7 +162,7 @@ Kafka方面，我们使用了3个topic，partition 数量和 replication 因子�
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-tls-gke.png)
 
-#### Kafka基于Kubernetes - 有Istio
+#### Kafka基于Kubernetes - 且有Istio
 
 我们急切地想知道在Istio中部署和使用Kafka时是否会增加开销和有性能损失。结果很有希望:
 
