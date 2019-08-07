@@ -3,7 +3,7 @@ originallink: "https://banzaicloud.com/blog/kafka-on-istio-performance"
 author: "Balint Molnar"
 date: 2019-08-04T10:42:00+08:00
 draft: false
-banner: "/img/blog/banners//todo"
+banner: "/img/blog/banners/006tKfTcly1g0t1i9oxo4j31400u0npe.jpg"
 translator: "马若飞"
 translatorlink: https://github.com/malphi
 reviewer:  ["罗广明"]
@@ -184,11 +184,11 @@ Kafka方面，我们使用了3个topic，partition 数量和 replication 因子�
 
 #### Kafka基于Kubernetes - 没有Istio
 
-在这个配置下我们得到了一个相当可观的写入速度` 439MB/s `，如果消息的尺寸是512字节，那么它就是`892928 消息/秒`。事实上，我们压榨出了AWS `r5.4xlarge`这种实例的磁盘吞吐量最大的负荷能力。
+在这个配置下我们得到了一个相当可观的写入速度`439MB/s`，如果消息的尺寸是512字节，那么它就是`892928消息/秒`。事实上，我们压榨出了AWS `r5.4xlarge`这种实例的磁盘吞吐量最大的负荷能力。
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-notls-eks.png)
 
-#### Kafka基于Kubernetes 开启TLS - 没有Istio
+#### Kafka基于Kubernetes并开启TLS - 没有Istio
 
 一旦我们再次为Kafka打开SSL/TLS，并进行了多次[基准测试](https://blog.mimacom.com/apache-kafka-with-ssltls-performance/)，就像预期的那样会出现性能损失。Java的SSL/TLS实现性能问题在EKS上和GKE一样存在。不过正如我们之前所说，最近的版本已经有了改进。因此我们将其升级到Java 11，结果如下：
 
@@ -197,7 +197,7 @@ Kafka方面，我们使用了3个topic，partition 数量和 replication 因子�
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kakfa-tls-eks.png)
 
-#### Kafka基于Kubernetes - 没有 Istio
+#### Kafka基于Kubernetes - 没有Istio
 
 和以前一样，结果也很好：
 
@@ -206,7 +206,7 @@ Kafka方面，我们使用了3个topic，partition 数量和 replication 因子�
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-notls-eks-istio.png)
 
-#### Kafka基于Kubernetes - 有Istio并开启mTLS
+#### Kafka基于Kubernetes - 有Istio且开启mTLS
 
 接下来，我们在Istio上启用了mTLS，并重用了相同的Kafka部署。同样的，结果比Kafka在Kubernetes上直接使用SSL/TLS要好。
 
