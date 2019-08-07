@@ -231,72 +231,53 @@ Kafka方面，我们使用了3个topic，partition 数量和 replication 因子�
 
 > 注意，在使用`iperf`进行架构测试期间，仅在网络上启用mTLS就会导致大约20%的性能损耗。
 
-## 跨“racks”(云区域)主题复制的多集群场景
+## 跨“racks”(云区域)topic复制的多集群场景
 
-In this setup we are emulating something closer to production, wherein, for the sake of reusing environmental benchmarks, we stick with the same AWS or Google instances types, but set up multiple clusters on different regions (with topics replicated across cloud regions). Note that the process should be the same, whether we use these multiple clusters across a single cloud provider or across multiple or hybrid clouds. From the perspective of [Backyards](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/) and the [Istio operator](https://github.com/banzaicloud/istio-operator) there is no difference; we support 3 different network topologies.
+在这个设置中，我们模拟的内容更接近于生产环境，为了重用测试环境，我们坚持使用相同配置的AWS或Google实例，但是在不同的区域上设置了多个集群(跨云区域的topic复制)。请注意，无论我们跨单个云提供商使用这些集群，还是跨多个云或混合云来使用这些集群，流程都应该是相同的。从[Backyards](https://banzaicloud.com/blog/istio- multicluster-theeasy -way/)和[Istio operator](https://github.com/banzaicloud/istio-operator)的角度来看没有区别，我们支持3种不同的网络拓扑。
 
-在这个设置中，我们模拟的内容更接近于生产环境，为了重用环境基准，我们坚持使用相同的AWS或谷歌实例类型，但是在不同的区域上设置多个集群(跨云区域复制主题)。请注意，无论我们跨单个云提供者使用这些多个集群，还是跨多个云或混合云使用这些集群，流程都应该是相同的。从[backyard](https://banzaicloud.com/blog/istio- multicluster-theeasy -way/)和[Istio operator](https://github.com/banzaicloud/istio-operator)的角度来看，没有区别;我们支持3种不同的网络拓扑。
+其中一个集群比另一个集群更大，它包含两个broker和两个Zookeeper节点。而另一个集群则各有一个节点。注意，在支持mTLS的**单网格多集群环境**中是绝对必要的。此外我们还设置`min.insync.replicas`为3，让生产者应答所有耐用性相关的请求。
 
-One of the clusters is larger than the other, as it consists of 2 brokers and 2 Zookeeper nodes, whereas the other will have one of each. Note, in a **single mesh multi-cluster**environment enabling mTLS is an absolute must. Also, we set `min.insync.replicas` to 3 again and the producer ACK requirement to all for durability.
+网格是全自动的由 [Istio operator](https://github.com/banzaicloud/istio-operator)提供。
 
-其中一个集群比另一个集群更大，因为它包含两个代理和两个Zookeeper节点，而另一个集群将包含其中一个节点。注意，在支持mTLS的**单网格多集群环境中是绝对必须的。此外，我们还设置了' min.insync '。复制到3和生产者ACK要求所有的持久性。
+### Google GKE <-> GKE
 
-The mesh is automated and provided by the [Istio operator](https://github.com/banzaicloud/istio-operator).
+在这个场景中，我们创建了一个单网格/单Kakfa集群，它跨越两个Google云区域：eu-west1和eu-west4
 
-#### Google GKE <-> GKE
-
-In this scenario we created a single mesh/single Kakfa cluster that spanned two Google Cloud regions: eu-west1 and eu-west4
-
-在这个场景中，我们创建了一个网格/单个Kakfa集群，它跨越两个谷歌云区域:eu-west1和eu-west4
-
-- `211MB/s` throughput
+- 吞吐量`211MB/s`
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-multi-gke.png)
 
-#### Amazon EKS <-> EKS
+### Amazon EKS <-> EKS
 
-In this scenario we created a single mesh/single Kakfa cluster that spanned two AWS regions: eu-north1 and eu-west1
+在这个场景中，我们创建了一个单网格/单Kakfa集群，它横跨两个AWS区域：eu-north1和eu-west1
 
-在这个场景中，我们创建了一个网格/单个Kakfa集群，它横跨两个AWS区域:eu-north1和eu-west1
-
-- `85MB/s` throughput
+- 吞吐量`85MB/s` 
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-multi-eks.png)
 
-#### Google GKE <-> EKS
+### Google GKE <-> EKS
 
-In this scenario we created a single Istio mesh, across multiple clusters that spanned multiple clouds, forming one single Kafka cluster (Google Cloud region is europe-west-3 and AWS region is eu-central-1). As expected, the results were considerably poorer.
+在这个场景中，我们创建了一个单一的Istio网格，它跨越多个集群和多个云，形成了一个单一的Kafka集群(Google云区域是europe-west-3, AWS的区域是eu-central-1)。正如预期的那样，结果要差得多。
 
-在这个场景中，我们创建了一个单一的Istio网格，它跨越多个跨越多个云的集群，形成了一个单一的Kafka集群(谷歌云区域是europe-west-3, AWS区域是eu-central-1)。正如预期的那样，结果要差得多。
-
-- `115MB/s` throughput
+- 吞吐量`115MB/s`
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-multi-eks-gke.png)
 
 ### 多集群结论
 
-From our benchmarks, we can safely say that it’s worth it to give using Kafka in a multi-cloud single-mesh environment a shot. People have different reasons for choosing an environment like Kafka over Istio, but the ease of setup with [Pipeline](https://github.com/banzaicloud/pipeline), the additional security benefits, scalability and durability, [locality based load balancing](https://banzaicloud.com/blog/istio-operator-1.2/) and lots more makes it a perfect choice.
+从基准测试来看，我们可以放心地说，在多云单网格环境中使用Kafka是值得的。人们选择在Istio上部署Kafka这种环境的原因各不相同，但像[Pipeline](https://github.com/banzaicloud/pipeline)这样易于安装，有额外的安全收益，具有可伸缩性和耐用性，[基于本地负载均衡](https://banzaicloud.com/blog/istio-operator-1.2/)和更多特性的工具是一个完美的选择。
 
-从我们的基准测试中，我们可以放心地说，在多云单网格环境中使用Kafka是值得的。的人有不同的原因选择一个环境就像卡夫卡Istio,但易于设置(管道)(https://github.com/banzaicloud/pipeline),额外的安全利益,可伸缩性和耐用性,(基于本地负载均衡)(https://banzaicloud.com/blog/istio -运营商- 1.2 /)和更多的是一个完美的选择。
-
-As already mentioned, one of the next posts in this series will be be about benchmarking/operating an autoscaling hybrid-cloud Kafka cluster, wherein alerts and scaling events are based on Prometheus metrics (we do something similar for autoscaling based on Istio metrics for multiple applications, which we deploy and observe through the mesh - read this older post for details: [Horizontal Pod Autoscaling based on custom Istio metrics](https://banzaicloud.com/blog/k8s-hpa-prom-istio/).)
-
-正如前面提到的,本系列的下一文章之一将是基准测试/操作自动定量混合云卡夫卡集群,在警报和缩放事件是基于普罗米修斯指标(我们做类似的基于Istio的自动定量指标用于多个应用程序,我们通过网格部署和观察——读这老帖子详情:(水平基于定制Istio吊舱自动定量指标)(https://banzaicloud.com/blog/k8s-hpa-prom-istio/)。)
+正如前面提到的,本系列后续的文章之一是关于基准测试/运维一个自动伸缩的混云Kafka集群，警报和缩放事件基于Prometheus的指标(我们对基于Istio指标的多个应用进行类似的自动伸缩，并通过网格部署和观察它们——阅读这篇之前的文章了解详情：[基于自定义Istio指标的Pod水平自动伸缩](https://banzaicloud.com/blog/k8s-hpa-prom-istio/)。)
 
 ## 关于 [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/)
 
-Banzai Cloud’s Backyards is a multi and hybrid-cloud enabled service mesh platform for constructing modern applications. Built on Kubernetes, our [Istio operator](https://github.com/banzaicloud/istio-operator) and [Pipeline](https://github.com/banzaicloud/pipeline)platform enable flexibility, portability and consistency across on-premise datacenters and on **five** cloud environments. Use our simple, yet extremely powerful, UI and CLI, and experience automated canary releases, traffic shifting, routing, secure service communication, in-depth observability and more, for yourself.
-
-板载云的后院是一个多和混合云支持的服务网格平台，用于构建现代应用程序。基于Kubernetes，我们的[Istio操作符](https://github.com/banzaicloud/istio-operator)和[Pipeline](https://github.com/banzaicloud/pipeline)平台支持跨内部数据中心和** 5 **云环境的灵活性、可移植性和一致性。使用我们简单但功能极其强大的UI和CLI，体验自动canary发布、流量转移、路由、安全服务通信、深度可观察性等等。
+Banzai Cloud的Backyards是一个支持多云和混合云的服务网格平台，用于构建现代应用程序。基于Kubernetes，我们的[Istio operator](https://github.com/banzaicloud/istio-operator)和[Pipeline](https://github.com/banzaicloud/pipeline)平台支持跨实体数据中心和**5**个云环境的灵活性、可移植性和一致性。使用简单但功能极其强大的UI和CLI，自己体验自动金丝雀发布、流量转移、路由、安全服务通信、深度的可观察性等特性。
 
 ## 关于 [Pipeline](https://github.com/banzaicloud/pipeline)
 
-Banzai Cloud’s [Pipeline](https://github.com/banzaicloud/pipeline) provides a platform which allows enterprises to develop, deploy and scale container-based applications. It leverages best-of-breed cloud components, such as Kubernetes, to create a highly productive, yet flexible environment for developers and operations teams alike. Strong security measures—multiple authentication backends, fine-grained authorization, dynamic secret management, automated secure communications between components using TLS, vulnerability scans, static code analysis, CI/CD, etc.—are a *tier zero* feature of the [Pipeline](https://github.com/banzaicloud/pipeline) platform, which we strive to automate and enable for all enterprises.
-
-提供一个平台，允许企业开发、部署和扩展基于容器的应用程序。它利用了最好的云组件，比如Kubernetes，为开发人员和运营团队创建了一个高效、灵活的环境。强大的安全measures-multiple认证后端,细粒度的授权、动态秘密管理、自动化组件之间的安全通信使用TLS,漏洞扫描、静态代码分析,CI / CD,如一个零* *层特性(管道)(https://github.com/banzaicloud/pipeline)的平台,我们努力实现自动化,使所有企业。
+Banzai Cloud的 [Pipeline](https://github.com/banzaicloud/pipeline)提供了一个平台，允许企业开发、部署和扩展基于容器的应用程序。它利用了最好的云组件比如Kubernetes，为开发人员和运营团队创建了一个高效、灵活的环境。强大的安全评估——多认证后端，细粒度的授权、动态安全管理、使用TLS，漏洞扫描，静态代码分析，CI/CD等特性的组件之间的自动化安全通信，[Pipeline](https://github.com/banzaicloud/pipeline)是一个**0层（tier zero）**特性的平台，努力使所有企业实现自动化。
 
 ## 关于 [Banzai Cloud](https://banzaicloud.com/)
 
-[Banzai Cloud](https://banzaicloud.com/) is changing how private clouds are built: simplifying the development, deployment, and scaling of complex applications, and putting the power of Kubernetes and Cloud Native technologies in the hands of developers and enterprises, everywhere.
+[Banzai Cloud](https://banzaicloud.com/) 正在改变私有云的构建方式：简化复杂应用程序的开发、部署和扩展，并将Kubernetes和云原生技术的强大功能交到各地的开发人员和企业手中。
 
-正在改变私有云的构建方式:简化复杂应用程序的开发、部署和扩展，并将Kubernetes和云原生技术的强大功能交到各地的开发人员和企业手中。
