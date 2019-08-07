@@ -131,14 +131,12 @@ Kafka方面，我们使用了3个topic，partition 数量和 replication 因子�
 
 ## 基准测试环境
 
-Before getting into Kafka’s benchmark results, we also benchmarked our environments. As Kafka is an extremely data intensive application, we gave special focus to measuring disk speed and network performance; based on our experience, these are the metrics that most affect Kafka. For network performance, we used a tool called `iperf`. Two identical Ubuntu based Pods were created: one, a server, the other, a client.
+在讨论Kafka的基准测试结果之前，我们还对环境进行了测试。由于Kafka是一个极端数据密集型的应用，我们特别关注在测试磁盘速度和网络性能；根据经验，这是对Kafka影响最大的指标。网络性能方面，我们使用了一个名为`iperf`的工具。创建了两个相同的基于Ubuntu的Pod：一个是服务端，另一个是客户端。
 
-在讨论Kafka的基准测试结果之前，我们还对环境进行了基准测试。由于Kafka是一个非常数据密集型的应用程序，我们特别关注测量磁盘速度和网络性能;根据我们的经验，这些是对Kafka影响最大的度量标准。为了提高网络性能，我们使用了一个名为“iperf”的工具。创建了两个相同的基于Ubuntu的pod:一个是服务器，另一个是客户机。
+- 在 Amazon EKS 上我们测量到了 `3.01 Gbits/sec` 的吞吐量。
+- 在 Google GKE 上我们测量到了 `7.60 Gbits/sec` 的吞吐量。
 
-- 在 Amazon EKS 上我们测量的结果 `3.01 Gbits/sec` 的吞吐量。
-- 在 Google GKE 上我们测量的结果 `7.60 Gbits/sec` 的吞吐量。
-
-为了确定磁盘速度，我们使用了一个叫 `dd`的工具在基于容器的Ubuntu系统下。
+为了确定磁盘速度，我们在基于容器的Ubuntu系统下使用了一个叫 `dd`的工具。
 
 - 在Amazon EKS上我们测量的结果是 `437MB/s`  (这与Amazon为该实例和ssd类型提供的内容完全一致)。
 - 在Google GKE上我们测量的结果是 `400MB/s` (这也与谷歌为其实例和ssd类型提供的内容一致)。
@@ -147,115 +145,93 @@ Before getting into Kafka’s benchmark results, we also benchmarked our environ
 
 ## 单集群
 
-#### Google GKE
+### Google GKE
 
-#### Kafka 部署在 Kubernetes - 没有Istio
+#### Kafka部署在Kubernetes - 没有Istio
 
-After the results we got on EKS, we were not surprised that Kafka maxed disk throughput and hit `417MB/s` on GKE. That performce was limited by the instance’s disk IO.
-
-在我们得到关于EKS的结果之后，我们对Kafka使磁盘吞吐量达到最大并在GKE上达到“417MB/s”并不感到惊讶。该性能受到实例的磁盘IO的限制。
+在我们得到关于EKS的结果之后，我们对Kafka在GKE上达到 `417MB/s` 的磁盘吞吐量并不感到惊讶。该性能受到实例的磁盘IO限制。
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-notls-gke.png)
 
-#### Kafka 基于 Kubernetes 开启 TLS - 没有 Istio
+#### Kafka基于Kubernetes 开启TLS - 没有Istio
 
-Once we switch on SSL/TLS for Kafka, as expected and as has been [benchmarked](https://blog.mimacom.com/apache-kafka-with-ssltls-performance/) many times, a performance loss occured. Java’s well known for the poor performance of its SSL/TLS (otherwise pluggable) implementatation, and for the [performace issues](https://issues.apache.org/jira/browse/KAFKA-2561) it causes in Kafka. However, there have been improvements in recent implementations (9+), accordingly, we upgraded to Java 11. Still, the results were as follows:
+一旦我们为Kafka打开SSL/TLS，和预期的一样并且已经多次[基准测试](https://blog.mimacom.com/apache-kafka-with-ssltls-performance/)过，就会出现性能损失。众所周知，Java的SSL/TLS(插件化的)实现性能很差，而且它在Kafka中导致了[性能问题](https://issues.apache.org/jira/browse/KAFKA-2561)。不过在最近的实现版本(9+)中有一些改进，因此我们升级到了Java 11。结果如下:
 
-一旦我们为Kafka打开SSL/TLS，就像预期的那样，并且已经多次基准测试过(https://blog.mimacom.com/apache-kafka-with-ssltls-performance/)，就会出现性能损失。众所周知，Java的SSL/TLS(否则是可插入的)实现性能很差，而且它在Kafka中导致了[performace issues](https://issues.apache.org/jira/browse/KAFKA-2561)。然而，在最近的实现(9+)中有一些改进，因此，我们升级到了Java 11。尽管如此，结果如下:
-
-- `274MB/s` 吞吐量 大约30% 吞吐量损失
-- 和没有TLS比较，包率有大约两倍的提升
+- 吞吐量`274MB/s` ，大约30% 吞吐量损失
+- 和没有TLS比较，包速率有大约两倍的提升
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-tls-gke.png)
 
-#### Kafka 基于 Kubernetes - 有 Istio
+#### Kafka基于Kubernetes - 有Istio
 
-We were eager to see whether there was any added overhead and performance loss when we deployed and used Kafka in Istio. The results were promising:
-
-我们急切地想知道在Istio中部署和使用Kafka时是否会增加开销和性能损失。结果很有希望:
+我们急切地想知道在Istio中部署和使用Kafka时是否会增加开销和有性能损失。结果很有希望:
 
 - 没有性能损失
 - CPU方面略有增加
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-notls-gke-istio.png)
 
-#### Kafka 基于 Kubernetes - 有 Istio 并开启 mTLS 
+#### Kafka基于Kubernetes - 有Istio并开启mTLS 
 
-Next we enabled mTLS on Istio and reused the same Kafka deployment. The results are better than they were for the Kafka on Kubernetes with SSL/TLS scenario.
+接下来，我们在Istio上启用了mTLS，并重用了相同的Kafka部署。结果比基于Kubernetes的Kafka并开启了SSL/TLS的要好。
 
-接下来，我们在Istio上启用了mTLS，并重用了相同的Kafka部署。结果比使用SSL/TLS场景的Kubernetes上的Kafka要好。
-
-- `323MB/s` 吞吐量，大约20% 吞吐量损失
-- 和没有TLS比较大约2倍的包率提升
+- 吞吐量`323MB/s` ，大约20% 吞吐量损失
+- 和没有TLS比较大约有2倍的包速率提升
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-tls-gke-istio.png)
 
-#### Amazon EKS
+### Amazon EKS
 
-#### Kafka 基于 Kubernetes - 没有 Istio
+#### Kafka基于Kubernetes - 没有Istio
 
-With this setup we achieved a considerble write rate of `439MB/s`, which, if messages are 512 bytes, is `892928 Messages/second`. In point of fact, we maxed out the disk throughput provided by AWS for the `r5.4xlarge` instance type.
-
-通过这个设置，我们实现了一个相当可观的写入速度' 439MB/s '，如果消息是512字节，那么它就是' 892928 messages /second '。事实上，我们最大化了AWS为“r5.4xlarge”实例类型提供的磁盘吞吐量。
+在这个配置下我们得到了一个相当可观的写入速度` 439MB/s `，如果消息的尺寸是512字节，那么它就是`892928 消息/秒`。事实上，我们压榨出了AWS `r5.4xlarge`这种实例的磁盘吞吐量最大的负荷能力。
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-notls-eks.png)
 
-#### Kafka 基于 Kubernetes 有 TLS - 没有 Istio
+#### Kafka基于Kubernetes 开启TLS - 没有Istio
 
-Once we switched on SSL/TLS for Kafka, again, as was expected and has been [benchmarked](https://blog.mimacom.com/apache-kafka-with-ssltls-performance/) many times, a performance loss occured. Java’s SSL/TLS implementatation performance issues are just as relevant on EKS as on GKE. However, like we said, there have been improvements in recent implementations. Accordingly, we upgraded to Java 11 but the results were as follows:
+一旦我们再次为Kafka打开SSL/TLS，并进行了多次[基准测试](https://blog.mimacom.com/apache-kafka-with-ssltls-performance/)，就像预期的那样会出现性能损失。Java的SSL/TLS实现性能问题在EKS上和GKE一样存在。不过正如我们之前所说，最近的版本已经有了改进。因此我们将其升级到Java 11，结果如下：
 
-一旦我们再次为Kafka打开SSL/TLS，就像预期的那样，并多次进行了[基准测试](https://blog.mimacom.com/apache-kafka-with-ssltls-performance/)，就会出现性能损失。Java的SSL/TLS实现性能问题与ek和GKE一样相关。然而，正如我们所说，最近的实现已经有了改进。因此，我们将其升级到Java 11，但是结果如下：
-
-- `306MB/s` 吞吐量，大约30% 吞吐量损失
-- 和没有TLS比较，大约2倍包率提升
+- 吞吐量`306MB/s` ，大约30% 吞吐量损失
+- 和没有TLS比较，大约2倍包速率提升
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kakfa-tls-eks.png)
 
-#### Kafka 基于 Kubernetes - 没有 Istio
+#### Kafka基于Kubernetes - 没有 Istio
 
 和以前一样，结果也很好：
 
 - 没有性能损失
-- CPU方面有轻微增加
+- CPU使用方面有轻微增加
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-notls-eks-istio.png)
 
-#### Kafka on Kubernetes - with Istio and mTLS enabled
+#### Kafka基于Kubernetes - 有Istio并开启mTLS
 
-Next we enabled mTLS on Istio and reused the same Kafka deployment. The results, again, are better than for Kafka on Kubernetes with SSL/TLS.
+接下来，我们在Istio上启用了mTLS，并重用了相同的Kafka部署。同样的，结果比Kafka在Kubernetes上直接使用SSL/TLS要好。
 
-接下来，我们在Istio上启用了mTLS，并重用了相同的Kafka部署。同样，结果比Kafka在Kubernetes上使用SSL/TLS要好。
-
-- `340MB/s` 吞吐量，大约20%吞吐量损耗
-- 包率增加了，但低于两倍
+- 吞吐量`340MB/s` ，大约20%吞吐量损耗
+- 包速率增加了，但低于两倍
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-tls-eks-istio.png)
 
-#### Bonus track - Kafka on Linkerd (without mTLS)
+#### 额外的尝试 - Kafka基于Linkerd (关闭mTLS)
 
-We always test all our available options, so we wanted to give this a try with Linkerd. Why? Because we could. While we know that Linkerd can’t meet our customers’ expectations in terms of available features, we still wanted to give it a try. Our expectations were high, but the numbers produced gave us a hard lesson and a helpful reminder in what, exactly, `cognitive bias` is.
+我们测试了所有可用的情况，所以想用Linkerd再尝试一下。为什么？因为我们可以做到。虽然我们知道Linkerd在可用的功能方面不能满足客户期望，但我们仍然想尝试一下。我们的期望值很高，但得出的数字给了我们一个沉重的教训，也提醒了我们什么是`认知偏见`。
 
-我们总是测试所有可用的选项，所以我们想用Linkerd尝试一下。为什么？因为我们可以。虽然我们知道Linkerd在可用特性方面不能满足客户的期望，但我们仍然想尝试一下。我们的期望值很高，但得出的数字给了我们一个沉重的教训，也提醒了我们“认知偏见”到底是什么。
-
-- `246MB/s` 吞吐量
+- 吞吐量`246MB/s` 
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kafka-linkerd.png)
 
-### SINGLE CLUSTER CONCLUSION
+### 单集群结论
 
-Before we move on to our multi-cluster benchmark, let’s evaluate the numbers we have already. We can tell that, in these environments and scenarios, using service mesh without mTLS does not affect Kafka’s performance. The throughput of the underlying disk limits the performance before Kafka hits network, memory or cpu limits.
+在继续多集群基准测试之前，让我们评估一下已有的数据。可以看出，在这些环境和场景中，使用没有mTLS的服务网格不会影响Kafka的性能。在到达网络、内存或CPU瓶颈前，底层磁盘的吞吐量限制了Kafka的性能。
 
-在继续我们的多集群基准测试之前，让我们评估一下已有的数据。我们可以看出，在这些环境和场景中，使用没有mTLS的服务网格不会影响Kafka的性能。底层磁盘的吞吐量限制了Kafka到达网络、内存或cpu限制之前的性能。
+无论是使用Istio还是Kafka自己的SSL/TLS库，都会使Kafka的性能降低约20%。它也增加了一点CPU负载，并使通过网络传输的数据包数量增加了一倍。
 
-Using TLS creates a ~20% throughput degradation in Kafka’s performance, whether using Istio or Kafka’s own SSL/TLS lib. It slightly increases the CPU load and roughly doubles the number of packets transmitted over the network.
+> 注意，在使用`iperf`进行架构测试期间，仅在网络上启用mTLS就会导致大约20%的性能损耗。
 
-无论是使用Istio还是Kafka自己的SSL/TLS库，使用TLS都会使Kafka的性能降低约20%。
-
-> Note that just enabling the mTLS on the network caused a ~20% degredation during the infrastructure test with `iperf` as well
->
-> 注意，在使用“iperf”进行基础设施测试期间，仅在网络上启用mTLS就会导致大约20%的递减
-
-## Multi-cluster scenario with topics replicated across “racks” (cloud regions)
+## 跨“racks”(云区域)主题复制的多集群场景
 
 In this setup we are emulating something closer to production, wherein, for the sake of reusing environmental benchmarks, we stick with the same AWS or Google instances types, but set up multiple clusters on different regions (with topics replicated across cloud regions). Note that the process should be the same, whether we use these multiple clusters across a single cloud provider or across multiple or hybrid clouds. From the perspective of [Backyards](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/) and the [Istio operator](https://github.com/banzaicloud/istio-operator) there is no difference; we support 3 different network topologies.
 
