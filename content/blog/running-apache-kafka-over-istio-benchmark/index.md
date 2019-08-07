@@ -9,14 +9,14 @@ translatorlink: https://github.com/malphi
 reviewer:  ["罗广明"]
 reviewerlink:  ["https://github.com/GuangmingLuo"]
 title: "运行在Istio之上的Apache Kafka —— 基准测试"
-description: "todo"
+description: "作者对在Istio环境下运行的Kafka进行了基准测试，并对测试结果进行了分析"
 categories: ["Service Mesh"]
 tags: ["Service Mesh"]
 ---
 
 ## 编者按
 
-> 本文介绍了基准测试
+> 本文是一篇Kafka的基准测试分析报告，作者详细介绍了测试的环境和配置选择，并在单集群、多集群、多云、混合云等各种场景下进行了A/B测试和性能分析，评估了Istio的引入对性能的影响情况。最后对作者所在公司Banzai Cloud的云产品进行了介绍。
 
 我们的容器管理平台[Pipeline](https://github.com/banzaicloud/pipeline)以及CNCF认证的Kubernetes发行版[PKE](https://github.com/banzaicloud/pke)的一个关键特性是，它们能够在多云和混合云环境中无缝地构建并运行。虽然[Pipeline](https://github.com/banzaicloud/pipeline)用户的需求因他们采用的是单一云方法还是多云方法而有所不同，但通常基于这些关键特性中的一个或多个：
 
@@ -28,7 +28,7 @@ tags: ["Service Mesh"]
 
 ## 太长别看（TLDR）
 
-- 我们已经添加了在Istio上运行Kafka所需的支持 (使用[Kafka](https://github.com/banzaicloud/kafka-operator) 和 [Istio](https://github.com/banzaicloud/istio-operator)操作器，并通过 [Pipeline](https://github.com/banzaicloud/pipeline)编排).
+- 我们已经添加了在Istio上运行Kafka所需的支持 (使用[Kafka](https://github.com/banzaicloud/kafka-operator) 和 [Istio](https://github.com/banzaicloud/istio-operator)操作器，并通过 [Pipeline](https://github.com/banzaicloud/pipeline)编排）.
 - 在Istio上运行Kafka不会增加性能开销 (不同于典型的mTLS，在SSL/TLS上运行Kafka是一样的)。
 - 使用 [Pipeline](https://github.com/banzaicloud/pipeline)，你可以创建跨多云和混合云环境的Kafka集群。
 
@@ -100,7 +100,7 @@ Kafka社区对如何利用更多的Istio功能非常感兴趣，例如开箱即�
 
 > 仅供参考，Amazon在一天剩下的时间里会在30分钟后对小型实例类型磁盘IO进行节流。你可以从 [这里](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html#ebs-optimization-support)读到更多信息。
 
-对于存储，我们请求了Amazon提供的`IOPS SSD（io1)`，在上面列出的实例中，它可以持续的达到437MB/s吞吐量。
+对于存储，我们请求了Amazon提供的`IOPS SSD（io1）`，在上面列出的实例中，它可以持续的达到437MB/s吞吐量。
 
 ### GOOGLE GKE
 
