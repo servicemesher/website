@@ -1,15 +1,15 @@
 ---
 originallink: "https://banzaicloud.com/blog/kafka-on-istio-performance"
 author: "Balint Molnar"
-date: 2019-08-04T10:42:00+08:00
+date: "2019-08-04T10:42:00+08:00"
 draft: false
 banner: "/img/blog/banners/006tKfTcly1g0t1i9oxo4j31400u0npe.jpg"
 translator: "马若飞"
-translatorlink: https://github.com/malphi
-reviewer:  ["罗广明"]
-reviewerlink:  ["https://github.com/GuangmingLuo"]
-title: "运行在Istio之上的Apache Kafka —— 基准测试"
-description: "作者对在Istio环境下运行的Kafka进行了基准测试，并对测试结果进行了分析"
+translatorlink: "https://github.com/malphi"
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
+title: "运行在Istio之上的Apache Kafka——基准测试"
+description: "作者对在Istio环境下运行的Kafka进行了基准测试，并对测试结果进行了分析。"
 categories: ["Service Mesh"]
 tags: ["Service Mesh"]
 ---
