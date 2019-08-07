@@ -71,36 +71,24 @@ Kafka社区对如何利用更多的Istio功能非常感兴趣，例如开箱即�
 
 ### 做到客观，测量先行
 
-Before we could reach a concensus about whether or not to release these features to our customers, we decided to conduct a performance test. We did this using several test scenarios for running Kafka over an Istio-based service mesh. As you might be aware, Kafka is a data intensive application, so we wanted to test it with and without Istio, in order to measure its added overhead. Additionally, we’ve been interested in how Istio handles data intensive applications, where there is a constant high I/O throughput and all its components are maxed out.
-
-在我们就是否向客户发布这些特性达成一致意见之前，我们决定进行一个性能测试。我们使用了几个在基于isti的服务网格上运行Kafka的测试场景来实现这一点。您可能已经注意到，Kafka是一个数据密集型应用程序，因此我们希望使用和不使用Istio对其进行测试，以测量其增加的开销。此外，我们还对Istio如何处理数据密集型应用程序很感兴趣，在这些应用程序中，I/O吞吐量保持不变，并且所有组件都达到了最大。
+在我们就是否向客户发布这些特性达成一致之前，我们决定进行一个性能测试。我们使用了几个在基于Istio服务网格上运行Kafka的测试场景来实现这点。你可能注意到，Kafka是一个数据密集型的应用，因此我们希望通过在依赖和不依赖Istio的两种情况下进行测试，以测量其增加的开销。此外，我们对Istio如何处理数据密集型应用很感兴趣，在这些应用程序中保持I/O吞吐量恒定，让所有组件负荷都达到了最大值。
 
 > 我们使用了新版本的 [Kafka operator](https://github.com/banzaicloud/kafka-operator)，它提供了Istio服务网格的原生支持 (版本 >=0.5.0)。
 
 ## 基准测试安装设置
 
-To validate our multi cloud setup we decided to benchmark Kafka first with various single Kubernetes cluster scenarios:
-
 为了验证我们的多云设置，我们决定先用各种Kubernetes集群场景测试Kafka：
 
-- Single Cluster 3 broker 3 topic with 3 partition and replication-factor set to 3 TLS **disabled**
-- Single Cluster 3 broker 3 topic with 3 partition and replication-factor set to 3 TLS **enabled**
+- 单机群，3个broker，3个topic分3个partition，复制因子设置为3，**关闭TLS**
+- 单机群，3个broker，3个topic分3个partition，复制因子设置为3，**启用TLS**
 
-These setups were necessary to check Kafka’s actual performance in a chosen environment, without potential Istio overhead.
+这些设置对于检查Kafka在选定环境中的实际性能是非常必要的，且没有潜在的Istio开销。
 
-这些设置对于检查Kafka在选定环境中的实际性能是必要的，没有潜在的Istio开销。
+为了对Kafka进行基准测试，我们决定使用两个最流行的云提供商下的Kubernetes解决方案，Amazon EKS和Google GKE。我们希望最小化配置和避免任何潜在的CNI配置不匹配问题，因此决定使用云提供商管理的K8s发行版。
 
-To benchmark Kafka we decided to use the two most popular cloud provider managed Kubernetes solutions, Amazon EKS and Google GKE. We wanted to minimize the configuration surface and any potential CNI configuration missmatches, so we decided to use cloud provider-managed K8s distributions.
+> 在另一篇文章中，我们将发布混合云Kafka集群的基准测试，其中会使用自己的Kubernetes发行版[PKE](https://github.com/banzaicloud/pke)。
 
-为了对Kafka进行基准测试，我们决定使用两个最流行的云提供商managed Kubernetes解决方案，Amazon EKS和谷歌GKE。我们希望最小化配置表面和任何潜在的CNI配置不匹配，因此决定使用云提供程序管理的K8s发行版。
-
-> In another post we’ll be releasing benchmarks for hybrid-cloud Kafka clusters, wherein we use our own Kubernetes distribution, [PKE](https://github.com/banzaicloud/pke).
->
-> 在另一篇文章中，我们将发布混合云Kafka集群的基准测试，其中我们使用自己的Kubernetes发行版[PKE](https://github.com/banzaicloud/pke)。
-
-We wanted to simulate a use case we often seen on our [Pipeline](https://github.com/banzaicloud/pipeline) platform, so we distributed nodes across availability zones, with Zookeeper and clients in different nodes as well.
-
-我们想要模拟我们经常在[Pipeline](https://github.com/banzaicloud/pipeline)平台上看到的一个用例，因此我们跨可用性区域分布节点，Zookeeper和客户机也位于不同的节点中。
+我们想要模拟经常在[Pipeline](https://github.com/banzaicloud/pipeline)平台上的一个用例，因此部署了跨可用区的节点，Zookeeper和客户端也位于不同的节点中。
 
 下面是使用到的实例类型：
 
@@ -112,9 +100,7 @@ We wanted to simulate a use case we often seen on our [Pipeline](https://github.
 
 > 仅供参考，Amazon在一天剩下的时间里会在30分钟后对小型实例类型磁盘IO进行节流。你可以从 [这里](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html#ebs-optimization-support)读到更多信息。
 
-For storage we requested Amazon’s provisioned IOPS SSD(io1), which on the instances listed above can reach 437MB/s throughput, continuously.
-
-对于存储，我们请求Amazon提供的IOPS SSD(io1)，在上面列出的实例中，它可以连续达到437MB/s吞吐量。
+对于存储，我们请求了Amazon提供的`IOPS SSD(io1)`，在上面列出的实例中，它可以持续的达到437MB/s吞吐量。
 
 ### GOOGLE GKE
 
@@ -122,17 +108,13 @@ For storage we requested Amazon’s provisioned IOPS SSD(io1), which on the inst
 | :---------------- | :--------------- | :--------------- |
 | 3x n1-standard-16 | 3x n1-standard-2 | 4x n1-standard-8 |
 
-For storage we requested Google’s `pd-ssd`, which can reach `400MB/s` according to Google’s documentation.
-
-存储方面，我们要求谷歌的' pd-ssd '，根据谷歌的文档，它可以达到' 400MB/s '。
+存储方面，我们设置了Google的`pd-ssd`，根据文档，它可以达到`400MB/s`。
 
 ### KAFKA和加载工具
 
 Kafka方面，我们使用了3个topic，partition 数量和 replication 因子都设置为 3。 基于测试的目的我们使用了默认的配置值，除了 `broker.rack,min.insync.replicas`。
 
-In the benchmark we used our custom built Kafka Docker image `banzaicloud/kafka:2.12-2.1.1`. It uses Java 11, Debian and contains Kafka version 2.1.1. The Kafka containers were configured to use 4 CPU cores and 12GB RAM, with a Java heap size of 10GB.
-
-在基准测试中，我们使用自定义构建的Kafka Docker映像“banzaicloud/ Kafka:2.12-2.1.1”。它使用Java 11、Debian并包含Kafka版本2.1.1。Kafka容器配置为使用4个CPU内核和12GB RAM, Java堆大小为10GB。
+在基准测试中，我们使用自定义构建的Kafka Docker映像`banzaicloud/ Kafka:2.12-2.1.1`。它使用Java 11、Debian并包含2.1.1版本的Kafka。Kafka容器配置为使用4个CPU内核和12GB内存, Java的堆大小为10GB。
 
 > banzaicloud/kafka:2.12-2.1.1 镜像是基于 wurstmeister/kafka:2.12-2.1.1 镜像的， 但为了SSL库的性能提升，我们想用 Java 11 代替 Java 8。
 
@@ -143,13 +125,9 @@ In the benchmark we used our custom built Kafka Docker image `banzaicloud/kafka:
 - required-acks 设置为 all
 - worker设置为20个
 
-To get accurate results, we monitored the entire infrastructure using NodeExporter metrics visualized by Grafana dashboard [1860](https://grafana.com/dashboards/1860). We kept increasing the number of producing clients until we reached the infrastructure’s limit, or Kafka’s.
+为了得到准确的结果，我们使用Grafana 仪表板[1860](https://grafana.com/dashboards/1860)的可视化NodeExporter指标监控整个架构。我们不断增加生产者的数量，直到达到架构或Kafka的极限。
 
-为了得到准确的结果，我们使用Grafana dashboard[1860]可视化的node出口商指标监视整个基础设施(https://grafana.com/dashboards/1860)。我们不断增加生产客户机的数量，直到达到基础设施的极限，或者Kafka的。
-
-> Creating the infrastructure for the benchmark is beyond the scope of this blog, but if you’re interested in reproducing it, we suggest using [Pipeline](https://github.com/banzaicloud/pipeline) and visiting the [Kafka-operator](https://github.com/banzaicloud/kafka-operator/) GitHub repo for more details.
->
-> 创建基准的基础设施已经超出了这篇文章的范围,但是如果你复制它感兴趣,我们建议使用(管道)(https://github.com/banzaicloud/pipeline)和访问(Kafka-operator) (https://github.com/banzaicloud/kafka-operator/) GitHub回购更多细节。
+> 为基准测试创建的架构已经超出了这篇文章的范围，但是如果你对重现它感兴趣，我们建议使用[Pipeline管道](https://github.com/banzaicloud/pipeline)和访问[Kafka-operator](https://github.com/banzaicloud/kafka-operator/) 的GitHub获取更多细节。
 
 ## 基准测试环境
 
