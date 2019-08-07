@@ -197,7 +197,7 @@ Kafka方面，我们使用了3个topic，partition 数量和 replication 因子�
 
 ![img](https://banzaicloud.com/img/blog/kafka-perf/kakfa-tls-eks.png)
 
-#### Kafka基于Kubernetes - 没有Istio
+#### Kafka基于Kubernetes - 有Istio
 
 和以前一样，结果也很好：
 
