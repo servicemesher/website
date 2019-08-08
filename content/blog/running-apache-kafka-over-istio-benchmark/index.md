@@ -28,7 +28,7 @@ tags: ["Service Mesh"]
 
 ## TLDR
 
-- 我们已经添加了在Istio上运行Kafka所需的支持 (使用[Kafka](https://github.com/banzaicloud/kafka-operator) 和 [Istio](https://github.com/banzaicloud/istio-operator)操作器，并通过 [Pipeline](https://github.com/banzaicloud/pipeline)编排）.
+- 我们已经添加了在Istio上运行Kafka所需的支持 (使用[Kafka](https://github.com/banzaicloud/kafka-operator) 和 [Istio operator](https://github.com/banzaicloud/istio-operator)，并通过 [Pipeline](https://github.com/banzaicloud/pipeline)编排）.
 - 在Istio上运行Kafka不会增加性能开销 (不同于典型的mTLS，在SSL/TLS上运行Kafka是一样的)。
 - 使用 [Pipeline](https://github.com/banzaicloud/pipeline)，你可以创建跨多云和混合云环境的Kafka集群。
 
