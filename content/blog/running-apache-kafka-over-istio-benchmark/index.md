@@ -18,15 +18,15 @@ tags: ["Service Mesh"]
 
 > 本文是一篇Kafka的基准测试分析报告，作者详细介绍了测试的环境和配置选择，并在单集群、多集群、多云、混合云等各种场景下进行了A/B测试和性能分析，评估了Istio的引入对性能的影响情况。最后对作者所在公司Banzai Cloud的云产品进行了介绍。
 
-我们的容器管理平台[Pipeline](https://github.com/banzaicloud/pipeline)以及CNCF认证的Kubernetes发行版[PKE](https://github.com/banzaicloud/pke)的一个关键特性是，它们能够在多云和混合云环境中无缝地构建并运行。虽然[Pipeline](https://github.com/banzaicloud/pipeline)用户的需求因他们采用的是单一云方法还是多云方法而有所不同，但通常基于这些关键特性中的一个或多个：
+我们的容器管理平台[Pipeline](https://github.com/banzaicloud/pipeline)以及CNCF认证的Kubernetes发行版[PKE](https://github.com/banzaicloud/pke)的一个关键特性是，它们能够在多云和混合云环境中无缝地构建并运行。虽然[Pipeline](https://github.com/banzaicloud/pipeline)用户的需求因他们采用的是单云方法还是多云方法而有所不同，但通常基于这些关键特性中的一个或多个：
 
 - [多云应用管理](https://banzaicloud.com/blog/multi-cloud-apps/)
 - [一个基于Istio的自动化服务网格，用于多云和混合云部署](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/)
 - [基于Kubernetes federation v2（集群联邦）的联合资源和应用部署](https://banzaicloud.com/blog/multi-cloud-fedv2/)
 
-随着采用基于[Istio operator](https://github.com/banzaicloud/istio-operator)的多集群和多混合云的增加，对运行接入到服务网格中的分布式或分散的应用的能力的需求也增加了。我们的客户在Kubernetes上大规模运行的托管应用之一是**Apache Kafka**。我们认为，**在Kubernetes上运行Apache Kafka最简单的方法**是使用Banzai Cloud的[Kafka spotguide](https://banzaicloud.com/tags/kafka)来构建我们的[Kafka operator](https://banzaicloud.com/blog/kafka-operator/)。然而，到目前为止，我们的重点一直是自动化和操作单个集群Kafka部署。
+随着采用基于[Istio operator](https://github.com/banzaicloud/istio-operator)的多集群和多混合云的增加，对运行接入到服务网格中的分布式或去中心化的应用的能力的需求也增加了。我们的客户在Kubernetes上大规模运行的托管应用之一是**Apache Kafka**。我们认为，**在Kubernetes上运行Apache Kafka最简单的方法**是使用Banzai Cloud的[Kafka spotguide](https://banzaicloud.com/tags/kafka)来构建我们的[Kafka operator](https://banzaicloud.com/blog/kafka-operator/)。然而，到目前为止，我们的重点一直是自动化和操作单个集群Kafka部署。
 
-## 太长别看（TLDR）
+## TLDR
 
 - 我们已经添加了在Istio上运行Kafka所需的支持 (使用[Kafka](https://github.com/banzaicloud/kafka-operator) 和 [Istio](https://github.com/banzaicloud/istio-operator)操作器，并通过 [Pipeline](https://github.com/banzaicloud/pipeline)编排）.
 - 在Istio上运行Kafka不会增加性能开销 (不同于典型的mTLS，在SSL/TLS上运行Kafka是一样的)。
