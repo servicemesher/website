@@ -168,7 +168,7 @@ paginate = 10
     # 404 page
     errorimage = "/img/404.jpg"
     email = "jimmysong@jimmysong.io"
-    about_us = "<p>传播Service Mesh技术、构建开源文化、推动Service Mesh在企业中落地</p><img src=/img/servicemesher-wechat-tiny.jpg>"
+    about_us = "<p>Service Mesh 在中国的布道者和领航者</br>请关注我们的微信公众号</p><img src=/img/servicemesher-wechat-tiny.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
     icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
@@ -177,7 +177,7 @@ paginate = 10
     # avatar used for thumbnail on sharing
     avatar = "/img/servicemesher-avatar-banner.jpg"
     logosmall = "/img/logosmall.jpg"
-    address = """<p>加我微信（请备注姓名-公司），加入微信交流群，参与社区活动</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
+    address = """<p>微信扫码加入交流讨论群</br>请备注姓名-公司信息</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
       """
     # 是否开启评论功能
     gitalk = true
@@ -228,13 +228,13 @@ paginate = 10
     link_url = "/contact"
     link_text = "查看加入方式"
 
-[params.clients]
+[params.partners]
     enable = true
-    # All clients are defined in their own files. You can find example items
-    # at 'exampleSite/data/clients'.
+    # All partners are defined in their own files. You can find example items
+    # at 'data/partners'.
     # For more informtion take a look at the README.
     title = "合作社区"
-    subtitle = ""
+    subtitle = "ServiceMesher 社区合作伙伴"
 
 [params.recent_posts]
     enable = true

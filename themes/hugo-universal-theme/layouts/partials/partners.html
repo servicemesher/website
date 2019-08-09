@@ -1,20 +1,20 @@
-{{ if isset .Site.Params "clients" }}
-{{ if .Site.Params.clients.enable }}
-{{ if gt (len .Site.Data.clients) 0 }}
+{{ if isset .Site.Params "partners" }}
+{{ if .Site.Params.partners.enable }}
+{{ if gt (len .Site.Data.partners) 0 }}
 <section class="bar background-white no-mb">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="heading text-center">
-                    <h2>{{ .Site.Params.clients.title }}</h2>
+                    <h2>{{ .Site.Params.partners.title }}</h2>
                 </div>
 
                 <p class="lead">
-                  {{ .Site.Params.clients.subtitle }}
+                  {{ .Site.Params.partners.subtitle }}
                 </p>
 
                 <ul class="owl-carousel customers">
-                    {{ range .Site.Data.clients }}
+                    {{ range .Site.Data.partners }}
                     <li class="item" title="{{ .name }}">
                         {{ if .url }}
                           <a href="{{ .url }}" target="_blank">
