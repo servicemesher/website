@@ -10,11 +10,28 @@ keywords: ["service mesh","meetup"]
 
 历届幻灯片下载地址：https://github.com/servicemesher/meetup-slides
 
+## Service Mesh Meetup #6 广州站
+
+时间：2019年8月11日
+
+地点：广州市天河区黄埔大道西平云路163号广电平云广场 B 塔
+
+讲师与 Topic：
+
+- 张波（虎牙基础保障部中间件团队负责人）：虎牙直播在微服务改造方面的实践
+- 彭泽文（蚂蚁金服高级开发工程师）：Service Mesh 在蚂蚁金服的生产级安全实践
+- 涂小刚（慧择网运维经理）：基于 Kubernetes 的微服务实践
+- 敖小剑（蚂蚁金服高级技术专家）：Service Mesh 发展趋势（续）：棋到中盘路往何方
+
+[查看广州站回顾](/blog/service-mesh-meetup-guangzhou-20190811/)
+
+视频回放：https://tech.antfin.com/activities/781
+
 ## Service Mesh Meetup #5 广州站
 
 时间：2019年1月6日
 
-地点：广州市天河区黄埔大道西平云路163号广电评语广场 B 塔
+地点：广州市天河区黄埔大道西平云路163号广电平云广场 B 塔
 
 讲师与 Topic：
 
