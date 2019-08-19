@@ -6,7 +6,7 @@ banner: "/img/blog/banners/dna-microservices-ar.jpg"
 author: "Madhuka Udantha"
 authorlink: "https://dzone.com/users/973571/madhuka.html"
 translator: "崔秀龙"
-translatorlink: "https://github.com/malphi"
+translatorlink: "https://github.com/fleeto"
 reviewer: ["宋净超"]
 reviewerlink: ["https://jimmysong.io"]
 originallink: "https://dzone.com/articles/design-patterns-for-microservices-1"
