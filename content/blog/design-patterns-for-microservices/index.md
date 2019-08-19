@@ -5,7 +5,7 @@ draft: false
 banner: "/img/blog/banners/dna-microservices-ar.jpg"
 author: "Madhuka Udantha"
 authorlink: "https://dzone.com/users/973571/madhuka.html"
-translator: "匿名"
+translator: "崔秀龙"
 translatorlink: "https://github.com/malphi"
 reviewer: ["宋净超"]
 reviewerlink: ["https://jimmysong.io"]
