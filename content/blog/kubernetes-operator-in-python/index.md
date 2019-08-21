@@ -17,7 +17,7 @@ banner: "/img/blog/banners/python-banner.png"
 
 ---
 
-![banner](/static/img/blog/banners/python-banner.png)
+![banner](/img/blog/banners/python-banner.png)
 
 ## 编者按
 
@@ -33,7 +33,7 @@ banner: "/img/blog/banners/python-banner.png"
 
 但是，如果缺乏时间或者仅仅是没有动力去学习Go语言呢？在本文中，我们将向您展示如何使用几乎所有DevOps工程师都熟悉的最流行的编程语言之一Python创建一个可靠的operator。
 
-## 欢迎Copyrator — the copy operator!
+## 欢迎Copyrator—the copy operator!
 
 为了使事情变得简单实用，让我们创建一个简单的operator：当出现一个新的namespace，或ConfigMap与Secret之一更改其状态时，复制ConfigMap。从实用的角度来看，我们的新operator可以用于批量更新应用程序的配置（通过更新ConfigMap）或重置Secret，例如用于Docker注册中心的键（当一个Secret添加到namespace时）。
 
