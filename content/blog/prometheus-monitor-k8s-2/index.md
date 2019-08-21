@@ -14,7 +14,7 @@ categories: ["monitoring"]
 keywords: ["service mesh","服务网格","prometheus","kubernetes"]
 ---
 
-# 背景
+## 背景
 
 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod......等等服务，以达到随时掌握Kubernetes集群的内部状况。
 
@@ -22,11 +22,11 @@ keywords: ["service mesh","服务网格","prometheus","kubernetes"]
 
 K8s编排文件可参考 https://github.com/xianyuLuo/prometheus-monitor-kubernetes
 
-# Prometheus部署
+## Prometheus部署
 
 在k8s上部署Prometheus十分简单，下面给的例子中将Prometheus部署到prometheus命名空间。
 
-## 部署——数据采集
+### 部署——数据采集
 
 将kube-state-metrics和prometheus分开部署，先部署prometheus。
 
@@ -531,9 +531,7 @@ kube-state-metrics-svc.yaml定义了kube-state-metrics的暴露方式，这里�
 
 **k8s集群中的prometheus监控到这儿就已经全部OK了，接下来还需要做的是汇总数据、展示数据及告警规则配置。**
 
-## 部署——数据汇总
-
-
+### 部署——数据汇总
 
 #### prometheus-server
 
@@ -610,7 +608,7 @@ scrape_configs：监控数据刮取配置。定义了2个job，分别是federate
 
 prometheus-server-rule-configmap.yaml
 
-```
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -789,7 +787,7 @@ Status --> Rules 中可以看到规则文件内容
 
 Status --> Targets 中可以看到刮取目标的状态信息
 
-# 告警配置
+## 告警配置
 
 遵循上篇文章中的架构，告警使用Prometheus官方提供的组件Alertmanager
 
@@ -891,7 +889,7 @@ spec:
 
 alertmanager-dep.yaml定义了Alertmanager的部署。
 
-# 展示
+## 展示
 
 遵循上篇文章中的架构，展示使用开源的Grafana。Grafana的部署方式就不详细描述了，下面展示两个Dashboard
 
@@ -909,7 +907,7 @@ kubernetes-deployment-dashboard下载地址：https://grafana.com/dashboards/973
 
 kubernetes-pod-dashboard下载地址：https://grafana.com/dashboards/9729
 
-# 结束
+## 结束
 
 详细监控Kubernetes集群本身就是一项复杂的工作，好在有Prometheus、Grafana、kube-state-metrics这些优秀的开源工具，才让我们的工作复杂度得以缓解，Thanks。
 
