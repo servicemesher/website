@@ -12,7 +12,7 @@ reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://dotnetvibes.com/2018/07/23/sidecar-design-pattern-in-your-microservices-ecosystem/"
 summary: "Sidecar 设计模式已经越来越受欢迎，并在社区内得到更广泛的采用。构建具有高度可扩展性、弹性、安全性和可观察性的微服务架构具有挑战性。Service Mesh 架构的发展已经改变了游戏规则。它降低了与微服务架构相关的复杂性，并提供了许多功能，如负载平衡、服务发现、流量管理、熔断、遥测、故障注入等。"
 tags: ["istio","microservices","sidecar"]
-categories: ["microsevices"]
+categories: ["microservices"]
 keywords: ["service mesh","sidecar","微服务"]
 ---
 
