@@ -11,19 +11,19 @@ description: "本文向读者们展示了如何使用流行编程语言Python创
 tags: ["kubernetes"]
 categories: ["kubernetes"]
 keywords: ["kubernetes","operator","python"]
-date: 2019-08-21T10:35:19+08:00
+date: 2019-08-21T10:57:19+08:00
 draft: false
-banner: "/static/img/blog/banners/python-banner.png"
+banner: "/img/blog/banners/python-banner.png"
 
 ---
 
 ![banner](/static/img/blog/banners/python-banner.png)
 
-# 编者按
+## 编者按
 
 云原生领域，Go几乎成了垄断编程语言。本文作者团队另辟蹊径，向读者们展示了如何使用最流行的编程语言之一Python创建一个可靠的Kubernetes operator。
 
-# 前言
+## 前言
 
 目前，人们创建Kubernetes operator时，Go编程语言几乎成了唯一选择。他们的偏好来自如下客观原因:
 
@@ -33,7 +33,7 @@ banner: "/static/img/blog/banners/python-banner.png"
 
 但是，如果缺乏时间或者仅仅是没有动力去学习Go语言呢？在本文中，我们将向您展示如何使用几乎所有DevOps工程师都熟悉的最流行的编程语言之一Python创建一个可靠的operator。
 
-# 欢迎Copyrator — the copy operator!
+## 欢迎Copyrator — the copy operator!
 
 为了使事情变得简单实用，让我们创建一个简单的operator：当出现一个新的namespace，或ConfigMap与Secret之一更改其状态时，复制ConfigMap。从实用的角度来看，我们的新operator可以用于批量更新应用程序的配置（通过更新ConfigMap）或重置Secret，例如用于Docker注册中心的键（当一个Secret添加到namespace时）。
 
@@ -43,7 +43,7 @@ banner: "/static/img/blog/banners/python-banner.png"
 2. Operator是可配置的。我们可以使用命令行参数和环境变量来设置它。
 3. Docker image和Helm chart在创建时考虑到了简单性，因此用户可以毫不费力地将其安装到Kubernetes集群中（基本上只需一个命令）。
 
-# CRD
+## CRD
 
 为了让operator知道要查找哪些资源和在哪里查找，我们需要设置一些规则。每个规则都将表示为一个特定的CRD对象。那么，这个CRD对象应该有哪些字段呢？
 
@@ -139,7 +139,7 @@ def load_crd(namespace, name):
 
 太棒了！现在我们有了一个特定于operator的规则。重要的是，我们已经能够通过所谓的Kubernetes方式做到这一点。
 
-# 环境变量&命令行参数
+## 环境变量&命令行参数
 
 现在是进行基本operator设置的时候了。配置应用程序有两种主要方法:
 
@@ -180,7 +180,7 @@ env:
          fieldPath: metadata.namespace
 ```
 
-# operator的操作逻辑
+## operator的操作逻辑
 
 让我们使用特殊的映射来划分使用ConfigMap和Secret的方法。它们将让我们清楚我们需要什么方法来跟踪和创建一个对象:
 
@@ -300,7 +300,7 @@ copyrator
 └── setup.py # Package description
 ```
 
-# Docker与Helm
+## Docker与Helm
 
 生成的Dockerfile将非常简单：我们将使用基本的*python-alpine*镜像来安装我们的包（该过程还有待后续优化）:
 
@@ -371,7 +371,7 @@ subjects:
   name: {{ .Chart.Name }}
 ```
 
-# 结论
+## 结论
 
 在本文中，我们向您展示了如何为Kubernetes创建自己的基于python的operator。当然，它仍然有改进的空间:您可以通过使其处理多个规则、监视其CRDs中的更改、从并发功能中获益等手段来丰富它……
 
