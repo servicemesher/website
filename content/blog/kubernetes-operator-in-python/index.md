@@ -27,13 +27,13 @@ banner: "/img/blog/banners/python-banner.png"
 
 目前，人们创建Kubernetes operator时，Go编程语言几乎成了唯一选择。他们的偏好来自如下客观原因:
 
-1. 有一个强大的框架用于使用Go开发operator - [Operator SDK](https://github.com/operator-framework/operator-sdk)。
+1. 有一个强大的框架支持基于Go开发operator - [Operator SDK](https://github.com/operator-framework/operator-sdk)。
 2. 许多基于Go的应用程序，如Docker和Kubernetes，已经成为游戏的主导者。用Go编写operator可以让你用同一种语言与生态系统对话。
 3. 基于Go的应用程序的高性能以及开箱即用的并发机制。
 
 但是，如果缺乏时间或者仅仅是没有动力去学习Go语言呢？在本文中，我们将向您展示如何使用几乎所有DevOps工程师都熟悉的最流行的编程语言之一Python创建一个可靠的operator。
 
-## 欢迎Copyrator—the copy operator!
+## 欢迎Copyrator — the copy operator
 
 为了使事情变得简单实用，让我们创建一个简单的operator：当出现一个新的namespace，或ConfigMap与Secret之一更改其状态时，复制ConfigMap。从实用的角度来看，我们的新operator可以用于批量更新应用程序的配置（通过更新ConfigMap）或重置Secret，例如用于Docker注册中心的键（当一个Secret添加到namespace时）。
 
@@ -304,8 +304,11 @@ copyrator
 
 生成的Dockerfile将非常简单：我们将使用基本的*python-alpine*镜像来安装我们的包（该过程还有待后续优化）:
 
-```python
-FROM python:3.7.3-alpine3.9ADD . /appRUN pip3 install /appENTRYPOINT ["copyrator"]
+```dockerfile
+FROM python:3.7.3-alpine3.9
+ADD . /app
+RUN pip3 install /app
+ENTRYPOINT ["copyrator"]
 ```
 
 Copyrator的部署同样很简单：
