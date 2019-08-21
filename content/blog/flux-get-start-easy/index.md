@@ -1,15 +1,15 @@
 ---
 title: "基于Flux项目的云原生GitOps实践"
 date: 2019-08-21T15:39:09+10:00
-draft: true
+draft: false
 banner: "https://susandullink.nl/wp-content/uploads/2017/06/zelfcompassie-1000x750.jpg"
 author: "张哲然"
-authorlink: ""
+authorlink: "https://github.com/youngercloud"
 translator: ""
 translatorlink: ""
-reviewer: [""]
-reviewerlink: ""
-summary: "本文对GitOps理念进行了深入的理解和详细的介绍，并使用Weaveworks开源的GitOps工具Flux通过Git管理Kubernetes集群"
+reviewer: ["宋净超"]
+reviewerlink: "https://jimmysong.io"
+summary: "本文对GitOps理念进行了深入的理解和详细的介绍，并使用Weaveworks开源的GitOps工具Flux通过Git管理Kubernetes集群。"
 tags: ["DevOps"]
 categories: ["DevOps"]
 keywords: ["Flux","GitOps","DevOps"]
