@@ -11,7 +11,7 @@ description: "本文向读者们展示了如何使用流行编程语言Python创
 tags: ["kubernetes"]
 categories: ["kubernetes"]
 keywords: ["kubernetes","operator","python"]
-date: 2019-08-21T10:57:19+08:00
+date: 2019-08-21T11:23:19+08:00
 draft: false
 banner: "/img/blog/banners/python-banner.png"
 
@@ -304,7 +304,7 @@ copyrator
 
 生成的Dockerfile将非常简单：我们将使用基本的*python-alpine*镜像来安装我们的包（该过程还有待后续优化）:
 
-```
+```python
 FROM python:3.7.3-alpine3.9ADD . /appRUN pip3 install /appENTRYPOINT ["copyrator"]
 ```
 
