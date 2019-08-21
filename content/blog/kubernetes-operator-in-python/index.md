@@ -5,8 +5,8 @@ author: "Flant staff"
 authorlink: "https://flant.com/"
 translator: "罗广明"
 translatorlink: "https://guangmingluo.github.io/guangmingluo.io/"
-reviewer:  [""]
-reviewerlink:  [""]
+reviewer:  ["孙海洲"]
+reviewerlink:  ["https://github.com/haiker2011"]
 description: "本文向读者们展示了如何使用流行编程语言Python创建一个可靠实用的operator，并且不依赖于任何框架与SDK。"
 tags: ["kubernetes"]
 categories: ["kubernetes"]
@@ -28,8 +28,8 @@ banner: "/img/blog/banners/python-banner.png"
 目前，人们创建Kubernetes operator时，Go编程语言几乎成了唯一选择。他们的偏好来自如下客观原因:
 
 1. 有一个强大的框架用于使用Go开发operator - [Operator SDK](https://github.com/operator-framework/operator-sdk)。
-2. 许多基于go的应用程序，如Docker和Kubernetes，已经成为游戏的主导者。用Go编写operator可以让你用同一种语言与生态系统对话。
-3. 基于go的应用程序的高性能以及开箱即用的并发机制。
+2. 许多基于Go的应用程序，如Docker和Kubernetes，已经成为游戏的主导者。用Go编写operator可以让你用同一种语言与生态系统对话。
+3. 基于Go的应用程序的高性能以及开箱即用的并发机制。
 
 但是，如果缺乏时间或者仅仅是没有动力去学习Go语言呢？在本文中，我们将向您展示如何使用几乎所有DevOps工程师都熟悉的最流行的编程语言之一Python创建一个可靠的operator。
 
@@ -150,7 +150,7 @@ def load_crd(namespace, name):
 
 下面是一个配置命令行参数检索的例子，适用于我们的情况:
 
-```
+```python
 parser = ArgumentParser(
         description='Copyrator - copy operator.',
         prog='copyrator'
@@ -184,7 +184,7 @@ env:
 
 让我们使用特殊的映射来划分使用ConfigMap和Secret的方法。它们将让我们清楚我们需要什么方法来跟踪和创建一个对象:
 
-```
+```python
 LIST_TYPES_MAP = {
     'configmap': 'list_namespaced_config_map',
     'secret': 'list_namespaced_secret',
@@ -290,7 +290,7 @@ setup(
 
 目前，我们的项目有如下结构：
 
-```
+```scheme
 copyrator
 ├── copyrator
 │ ├── cli.py # Command line operating logic
