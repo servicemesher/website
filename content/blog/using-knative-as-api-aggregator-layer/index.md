@@ -210,7 +210,8 @@ func main() {
 }
 ```
 
-经过上面这一番操作，我们整个调用Serverless函数的网络链路也就最终确定下来，并且在我们的实践中，我们所有使用Serverless的函数在Http Path上都约定以“/faas/”作为Http Path前缀，这样一个来自外部客户端的请求从网关层进入到最终被autoscale-go访问这个网络链路可以分为五部，假设autoscale-go这个程序本身监听了Get请求，“/faas/demo”作为Http Path的请求，然后网关层接收到了"https://www.example.com/faas/golang"的请求。
+经过上面这一番操作，我们整个调用Serverless函数的网络链路也就最终确定下来，并且在我们的实践中，我们所有使用Serverless的函数在Http Path上都约定以“/faas/”作为Http Path前缀，这样一个来自外部客户端的请求从网关层进入到最终被autoscale-go访问这个网络链路可以分为五步。
+假设autoscale-go这个程序本身监听了Get请求，“/faas/demo”作为Http Path的请求，然后网关层接收到了[https://www.example.com/faas/golang](https://www.example.com/faas/golang")的请求。
 
 1. 网关层Nginx Ingress会将https解包成http协议，并且根据Ingress规则将请求转发给proxy-server
 2. proxy-server收到请求后，会根据请求的Http Method与Http Path检索其对应的KSVC，如果检索到，则改写HostName，并转发到对应的Headless Service上。
