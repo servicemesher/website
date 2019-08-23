@@ -18,35 +18,27 @@ tags: ["kubernetes"]
 
 > 本文是 todo
 
-Containers gave birth to more advanced server-side architectures and sophisticated deployment techniques. Containers nowadays are so widespread that there is already a bunch of standard-alike specifications ([1](https://github.com/opencontainers/runtime-spec), [2](https://github.com/opencontainers/image-spec), [3](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/), [4](https://github.com/containernetworking/cni), ...) describing different aspects of the containers universe. Of course, on the lowest level lie Linux primitives such as *namespaces* and *cgroups*. But containerization software is already so massive that it would be barely possible to implement it without its own concern separation layers. What I'm trying to achieve in this **ongoing effort** is to guide myself starting from the lowest layers to the topmost ones, having as much practice (code, installation, configuration, integration, etc) and, of course, **fun** as possible. The content of this page is going to be changing over time, reflecting my understanding of the topic.
 
-容器产生了更高级的服务器端体系结构和更复杂的部署技术。现在容器非常普遍，已经有一堆类似标准的规范描述了容器领域的不同方面。当然，底层是Linux原语，比如名称空间和cgroups。但是，容器化软件已经非常庞大，如果没有它自己的关注点分离层，几乎不可能实现它。在这个持续的过程中，我想要做的是引导自己从最低的层开始，到最高的层，拥有尽可能多的实践(代码、安装、配置、集成等等)，当然，还有尽可能多的乐趣。这一页的内容会随着时间的推移而改变，反映出我对这个主题的理解。
 
-## Container Runtimes
+容器带来了更高级的服务端架构和更复杂的部署技术。容器现在已经普及到有一堆类似标准的规范（[1](https://github.com/opencontainers/runtime-spec), [2](https://github.com/opencontainers/image-spec), [3](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/), [4](https://github.com/containernetworking/cni), ……）描述了容器领域的不同方面。当然，底层是Linux的基本单元，如namespace和cgroups。但是，容器化软件已经变得非常的庞大，如果没有它自己关注的分离层，几乎是不可能实现的。在这个持续努力的过程中，我尝试引导自己从最底层到最高层，拥有尽可能多的实践（代码、安装、配置、集成等等），当然还有尽可能多的乐趣。本篇内容会随着时间的推移而改变，并反映出我对这一主题的理解。
 
-I want to start the journey from the lowest level non-kernel primitive - **container runtime**. The word *runtime* is a bit ambiguous in the containerverse. Each project, company or community has its own and usually context-specific understanding of the term *container runtime*. Mostly, the hallmark of the runtime is defined by the set of responsibilities varying from a bare minimum (creating namespaces, starting *init*process) to comprehensive container management including (but not limiting) images operation. A good overview of runtimes can be found in [this article](https://www.ianlewis.org/en/container-runtimes-part-1-introduction-container-r).
+## 容器运行时
 
-我想从最低级别的非内核原语开始——**容器运行时**。在containerverse中，“运行时”这个词有点含糊不清。每个项目、公司或社区对术语“容器运行时”都有自己的、通常是上下文特定的理解。大多数情况下，运行时的特征是由一组职责定义的，从最基本的职责(创建名称空间、启动*init*进程)到全面的容器管理，包括(但不限于)映像操作。本文对运行时有一个很好的概述
+我想从最低级别的非内核原语开始——**容器运行时**。在容器服务里，*运行时*这个词是有歧义的。每个项目、公司或社区对术语*容器运行时*都有自己的、通常是基于上下文的特定的理解。大多数情况下，运行时的特征是由一组职责定义的，从最基本的职责（创建名称空间、启动*init*进程）到复杂的容器管理，包括（但不限于）镜像操作。[这篇文章](https://www.ianlewis.org/en/container-runtimes-part-1-introduction-container-r)对运行时有一个很好的概述。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/runtime-levels.png)
 
-This section is dedicated to *low-level container runtimes*. A group of big players forming an [Open Container Initiative](https://www.opencontainers.org/) standartized the low-level runtime in the [*OCI runtime specification*](https://github.com/opencontainers/runtime-spec). Making a long story short - a low-level container runtime is a piece of software that takes as an input a folder containing rootfs and a configuration [file] describing container parameters (such as resource limits, mount points, process to start, etc) and as a result the runtime starts an isolated process, i.e. container.
+本节专门讨论低级别的容器运行时。在[*OCI 运行时规范*](https://github.com/opencontainers/runtime-spec)中，组成[Open Container Initiative](https://www.opencontainers.org/)的一些重要参与者对底层运行时进行了标准化。长话短说，低级容器运行时是一个软件，作为一个包含rootfs和配置的目录输入，来描述容器参数（如资源限制、挂载点、流程开始等）并作为运行时启动一个独立进程的结果，即容器。
 
-本节专门讨论*低级容器运行时*。在[*OCI运行时规范*]中，组成[开放容器倡议]的一组大型参与者对底层运行时进行了标准化。长话短说,低级容器运行时是一个软件,作为输入一个文件夹包含rootfs和配置[文件]描述容器参数(如资源限制、挂载点、流程开始,等),因此运行时启动一个孤立的过程,即容器。
-
-As of 2019, the most widely used container runtime is [runc](https://github.com/opencontainers/runc). This project started as a part of Docker (hence it's written in Go) but eventually was extracted and transformed into a self-sufficient CLI tool. It is difficult to overestimate the importance of this component - *runc* is basically a reference implementation of the OCI runtime specification. During our journey we will work a lot with *runc* and here is [an introductory article](https://iximiuz.com/en/posts/implementing-container-runtime-shim/).
-
-到2019年，最广泛使用的容器运行时是[runc](https://github.com/opencontainers/runc)。这个项目最初是Docker的一部分(因此它是用Go编写的)，但最终被提取并转换为一个自给自足的CLI工具。很难高估这个组件的重要性——*runc*基本上是OCI运行时规范的一个参考实现。在我们的旅程中，我们将大量使用*runc*，下面是[一篇介绍性文章](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)。
+到2019年，最广泛使用的容器运行时是[runc](https://github.com/opencontainers/runc)。这个项目最初是Docker的一部分（因此它是用Go编写的），但最终被提取并转换为一个独立的CLI工具。很难高估这个组件的重要性——*runc*基本上是OCI运行时规范的一个参考实现。在我们的实践中将大量使用*runc*，下面是[一篇介绍性文章](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/runc.png)
 
 
 
-One more notable OCI runtime implementation out there is [crun](https://github.com/containers/crun). It's written in C and can be used both as an executable and as a library.
+一个更值得注意的OCI运行时实现是[crun](https://github.com/containers/crun)。它用C语言编写，既可以作为可执行文件，也可以作为库使用。
 
-一个更值得注意的OCI运行时实现是[crun](https://github.com/containers/crun)。它是用C语言编写的，既可以作为可执行文件，也可以作为库使用。
-
-## Container management
+## 容器管理
 
 Using *runc* in command line we can launch as many containers as we want. But what if we need to automate this process? Imagine we need to launch tens of containers keeping track of their statuses. Some of them need to be restarted on failure, resources need to be released on termination, images have to be pulled from registries, inter-containers networks need to be configured and so on. This is already a slightly higher-level job and it's a responsibility of a *container manager*. To be honest, I have no idea whether this term is in common use or not, but I found it convenient to structure things this way. I would classify the following projects as *container managers*: [containerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd), [cri-o](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o), [dockerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd), and [podman](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd).
 
