@@ -5,10 +5,10 @@ authorlink: "https://github.com/Yisaer"
 date: 2019-08-22T14:43:58+08:00
 draft: false
 banner: "/img/blog/banners/using-knative-as-api-aggregator-layer.jpg"
-summary: "本文是介绍通过Knative在实际业务中起到API聚合层的实践"
+summary: "本文是介绍通过Knative在实际业务中起到API聚合层，从而解决在微服务架构中复杂接口痛点的实践。"
 tags: ["knative","serverless"]
 categories: ["serverless"]
-keywords: ["serverless","knative","faas"]
+keywords: ["serverless","knative"]
 ---
 
 
