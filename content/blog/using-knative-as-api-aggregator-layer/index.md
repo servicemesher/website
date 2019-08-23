@@ -11,7 +11,6 @@ categories: ["serverless"]
 keywords: ["serverless","knative"]
 ---
 
-
 <img src="./img/knative-logo-cmyk.png" width="250" height="200" >
 
 ## 前言
@@ -25,7 +24,6 @@ keywords: ["serverless","knative"]
 ## Serverless
 
 Serverless，又或者说无服务器、Faas，几乎是2019年内整个云原生领域甚至是整个互联网技术圈领域内呼声最旺的关键字。当然Serverless并非只是在2019年才开始出现相关的技术，早在2014、2015年的时候，AWS就已经在各个文章、博客渠道上就已经开始宣传与推广自家的AWS Lambda服务了。当然，在如今2019年，国内的各个云服务厂商也都已经开始提供了成熟的Serverless产品，整个云原生开源社区内各个Serverless产品技术也逐渐走向成熟，同时Serverless这一技术落地的场景比起过去几年也越来越清晰、边界也越来越广。如同今年Kubecon上越来越多关于Serverless的议题一样。以及针对Serverless落地的技术分享也越来越多，这块笔者听到的最多的就是关于前端领域和Serverless结合的落地分享了。而在许多开源的Serverless产品中，最饱受关注的莫过于[Knative](https://knative.dev/)了。而在今年8月份，Knative也终于发布了0.8版本，虽然这依然还不是一个生产就绪版本，但是0.8版本在API、稳定性上已经“几乎”可以认为是一个生产就绪版本了。这其中最关键的就是Knative Serving组件的更新了，可以说在Knative Serving 0.7及其之前的版本，这个组件都一直处于一个“几乎”可用的状态，有着不少令人困扰的小bug。好在这些许多影响正常使用的bug都最终在[Knative Serving 0.8版本](https://github.com/knative/serving/releases/tag/v0.8.0)中被修复了。
-
 
 ## Serverless在API聚合层的尝试
 
@@ -76,7 +74,6 @@ autoscale-go-cl5ng-deployment   1/1     1            1           3m15s
 $ kubectl get virtualService | grep 'autoscale-go'
 autoscale-go        [knative-serving/cluster-local-gateway knative-serving/knative-ingress-gateway]   [autoscale-go.istio-test autoscale-go.istio-test.example.com autoscale-go.istio-test.svc autoscale-go.istio-test.svc.cluster.local e6171b7a9294b95cd736d9111a66f2da.probe.invalid]   3m
 autoscale-go-mesh   [mesh]                                                                            [autoscale-go.istio-test.svc.cluster.local 675805e7307e82364d1ccb70387c018e.probe.invalid]
-
 ```
 
 在这里我们先直接看一下Service内autoscale-go的定义，在这里我们可以看到autoscale-go这个Service其实是一个Headless Service，他会将请求直接转发给Istio Ingressgateway，然后我们再查看一下autoscale-go VirtualService的定义。虽然autoscale-go的VirtualService很长，但其实内核非常简单，就是将host满足相关条件的HTTP请求转发到autoscale-go这个KSVC最后对应的服务实例中。
@@ -212,7 +209,7 @@ func main() {
 }
 ```
 
-经过上面这一番操作，我们整个调用Serverless函数的网络链路也就最终确定下来，并且在我们的实践中，我们所有使用Serverless的函数在Http Path上都约定以/faas/作为Http Path前缀，这样一个来自外部客户端的请求从网关层进入到最终被autoscale-go访问这个网络链路可以分为五部，假设autoscale-go这个程序本身监听了Get请求，/faas/demo作为Http Path的请求，然后网关层接收到了https://www.example.com/faas/golang的请求。
+经过上面这一番操作，我们整个调用Serverless函数的网络链路也就最终确定下来，并且在我们的实践中，我们所有使用Serverless的函数在Http Path上都约定以/faas/作为Http Path前缀，这样一个来自外部客户端的请求从网关层进入到最终被autoscale-go访问这个网络链路可以分为五部，假设autoscale-go这个程序本身监听了Get请求，/faas/demo作为Http Path的请求，然后网关层接收到了"https://www.example.com/faas/golang"的请求。
 
 1. 网关层Nginx Ingress会将https解包成http协议，并且根据Ingress规则将请求转发给proxy-server
 2. proxy-server收到请求后，会根据请求的Http Method与Http Path检索其对应的KSVC，如果检索到，则改写HostName，并转发到对应的Headless Service上。
