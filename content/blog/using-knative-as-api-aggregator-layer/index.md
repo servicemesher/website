@@ -2,7 +2,7 @@
 title: "使用Knative作为API聚合层的实践"
 author: "高松"
 authorlink: "https://github.com/Yisaer"
-date: 2019-08-22T14:43:58+08:00
+date: 2019-08-23T16:43:58+08:00
 draft: false
 banner: "/img/blog/banners/using-knative-as-api-aggregator-layer.jpg"
 summary: "本文是介绍通过Knative在实际业务中起到API聚合层，从而解决在微服务架构中复杂接口痛点的实践。"
