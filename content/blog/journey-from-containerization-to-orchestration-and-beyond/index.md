@@ -52,17 +52,13 @@ tags: ["kubernetes"]
 
 #### cri-o
 
-Another container manager example is [cri-o](https://github.com/cri-o/cri-o). While *containerd* evolved as a result of Docker re-architecting, *cri-o* has its roots in the Kubernetes realm. Back in the day, Kubernetes (ab)used Docker to manage containers. However, with rising of [rkt](https://github.com/rkt/rkt) some brave people added support of interchangeably container runtimes in Kubernetes, allowing container management to be done by Docker and/or rkt. This change, however, led to a huge number of conditional code in Kubernetes and nobody likes too many `if`s in the code. As a result, [Container Runtime Interface (CRI)](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/) has been introduced to Kubernetes making it possible to any CRI-compliant higher-level runtimes (i.e. container managers) to be used without any code change on the Kubernetes side. And *cri-o* is a Red Hat's implementation of CRI-complaint runtime. As with *containerd* *cri-o* is also a daemon exposing a [gRPC] server with endpoints to create, start, stop (and many more other actions) containers. Under the hood, *cri-o* can use any OCI-compliant [low-level] runtimes to work with containers but the default one is ~~again~~ *runc*. The main focus of *cri-o* is being a Kubernetes container runtime. The versioning is the same as k8s versioning, the scope of the project is well-defined and the code base is expectedly smaller (as of July 2019 it's around 20 CLOC and it's approximately 5 times less than *containerd*).
-
-另一个容器管理器示例是[crio]。虽然*containerd*是Docker重新架构的结果，但* crio *却起源于Kubernetes领域。在过去，Kubernetes (ab)使用Docker管理容器。然而，随着[rkt]的崛起，一些勇敢的人增加了对Kubernetes中可互换的容器运行时的支持，允许Docker和/或rkt完成容器管理。然而，这种变化导致Kubernetes中有大量的条件代码，没有人喜欢代码中有太多的“if”。因此，[容器运行时接口(CRI)]被引入到Kubernetes中，使得任何符合crie的高级运行时(即容器管理器)都可以在Kubernetes端使用，而无需进行任何代码更改。而* crio *是Red Hat实现的crio -complaint运行时。与*containerd* * crio *一样，它也是一个守护进程，它公开了一个[gRPC]服务器，该服务器具有创建、启动、停止(以及许多其他操作)容器的端点。在底层，* crio *可以使用任何符合oci的[低级]运行时来处理容器，但是默认的运行时仍然是~~ ~ *runc*。* crio *的主要焦点是Kubernetes容器运行时。版本控制与k8s版本控制相同，项目的范围定义良好，代码库预期更小(截止到2019年7月，大约是20个CLOC，大约是*containerd*的5倍)。
+另一个容器管理器是[crio](https://github.com/cri-o/cri-o)。虽然*containerd*是Docker重构的结果，但cri-o却源于Kubernetes领域。在过去，Kubernetes 使用Docker管理容器。然而，随着[rkt](https://github.com/rkt/rkt) 的崛起，一些人增加了在Kubernetes中可互换的容器运行时的支持，允许Docker和/或rkt完成容器管理。这种变化导致Kubernetes中有大量的条件判断，没有人喜欢代码中有太多的“if”。因此，[容器运行时接口（CRI）](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/)被引入到Kubernetes中，使得任何兼容CRI的高级运行时（例如容器管理器）都可以在Kubernetes使用，而无需任何代码的更改。* cri-o *是Red Hat实现的兼容CRI的运行时。与*containerd*和*cri-o*一样，它也是一个守护进程，通过开放[gRPC]服务接口来创建、启动、停止（以及许多其他操作）容器。在底层，* cri-o *可以使用任何符合OCI标准的[低级]运行时和容器工作，默认的运行时仍然是runc。cri-o的主要目标是Kubernetes的容器运行时。版本控制也与K8S一致，项目的范围界定的很好代码库也比期望的更小（截止2019年7月大约是20个CLOC，近似于containerd的5倍）。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/cri-o.png)
 
-*cri-o architecture (image from cri-o.io)*
+*cri-o 架构 (图像来自 cri-o.io)*
 
-The nice thing about specifications is that everything complaint can be used interchangeably. Once CRI has been introduced, a plugin for *containerd*, implementing CRI gRPC server on top of containerd's functionality appeared. The idea happened to be viable and later on, *containerd* itself got a native CRI support. Thus, Kubernetes can use both *cri-o* and *containerd* as a runtime.
-
-规范的好处是所有抱怨都可以互换使用。一旦CRI被引入，一个用于*containerd*的插件就会在containerd的功能之上实现CRI gRPC服务器。这个想法碰巧是可行的，后来，*containerd*本身获得了本地CRI支持。因此，Kubernetes可以同时使用* crio *和*containerd*作为运行时。
+规范的好处是所有抱怨都可以互换使用。一旦CRI被引入，一个*containerd*的插件会在containerd的功能之上实现CRI gRPC服务。这个想法是可行的，所以后来*containerd*获得了原生的CRI支持。因此，Kubernetes可以同时使用crio和containerd作为运行时。
 
 #### dockerd
 
