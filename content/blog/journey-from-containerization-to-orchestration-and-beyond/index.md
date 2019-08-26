@@ -62,47 +62,33 @@ tags: ["kubernetes"]
 
 #### dockerd
 
-One more daemon here is [*dockerd*](https://github.com/moby/moby/tree/master/cmd/dockerd). This daemon is manifold. On the one hand, it exposes an API for [Docker command-line client](https://github.com/docker/cli) which gives us all these famous Docker workflows (`docker pull`, `docker push`, `docker run`, `docker stats`, etc). But since we already know, that this piece of functionality has been extracted to *containerd* it's not a surprise that under the hood *dockerd* relies on *containerd*. But that basically would mean that *dockerd* is just a front-end adapter converting *containerd* API to a historically widely used *docker engine* API.
+还有一个守护进程是[*dockerd*](https://github.com/moby/moby/tree/master/cmd/dockerd)。它是个多面手，一方面，它为[Docker命令行](https://github.com/docker/cli) 公开了一个API，为我们提供了所有这些著名的Docker命令（`Docker pull`、`Docker push`、`Docker run`、`Docker stats`等）。但是我们已经知道这部分功能被提取到了*containerd*中，所以在底层*dockerd*依赖于*containerd*就不足为奇了。但这基本上意味着*dockerd*只是一个前端适配器，它将*containerd* API转换为广泛使用的*docker 引擎* API。
 
-这里还有一个守护进程是[*dockerd*](https://github.com/moby/moby/tree/master/cmd/dockerd)。这个守护进程是多方面的。一方面，它为[Docker命令行客户端]公开了一个API (https://github.com/docker/cli)，它为我们提供了所有这些著名的Docker工作流(' Docker pull '、' Docker push '、' Docker run '、' Docker stats '等)。但是既然我们已经知道，这部分功能已经被提取到*containerd*中，那么在底层*dockerd*依赖于*containerd*就不足为奇了。但这基本上意味着*dockerd*只是一个前端适配器，它将*containerd* API转换为历史上广泛使用的*docker engine* API。
-
-However, [*dockerd*](https://github.com/moby/moby) also provides `compose` and *swarm* things in an attempt to solve container orchestration problem, including multi-machine clusters of containers. As we can see with Kubernetes, this problem is rather hard to address. And having two big responsibilities for a single *dockerd* daemon doesn't sound good to me.
-
-然而，[*dockerd*](https://github.com/moby/moby)也提供了“组合”和“群集”功能，试图解决容器编配问题，包括容器的多机器集群。正如我们在Kubernetes身上看到的，这个问题相当难以解决。对于一个单*dockerd*守护进程来说，同时承担两大职责对我来说并不好。
+然而，[*dockerd*](https://github.com/moby/moby)也提供了`compose`和`swarm`功能，试图解决容器编配问题，包括容器的多机器集群。正如我们在Kubernetes上看到的，这个问题相当难解决。对于一个单*dockerd*守护进程来说，同时承担两大职责并不好。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/dockerd.png)
 
-*dockerd is a part in front of containerd (image from Docker Blog)*
+*dockerd 是 containerd 前端的一部分（图片来源于Docker Blog）*
 
 
 
 #### podman
 
-An interesting exception from this daemons list is [*podman*](https://github.com/containers/libpod). It's yet another Red Hat project and the aim is to provide a library (not a daemon) called `libpod` to manage images, container lifecycles, and pods (groups of containers). And `podman` is a management command-line tool built on top of this library. As a low-level container runtime this project ~~as usual~~ uses *runc*. There is a lot in common between *podman*and *cri-o* (both are Red Hat projects) from the code standpoint. For instance, they both heavily use outstanding [*storage*](https://github.com/containers/storage) and [*image*](https://github.com/containers/image) libraries internally. It seems that there's an ongoing effort to use *libpod*instead of *runc* directly in *cri-o*. Another interesting feature of *podman* is a drop-in replacement of some (most popular?) `docker` commands in a daily workflow. The project claims compatibility (to some extent of course) of the *docker CLI API*.
+守护进程列表中一个有趣的例外是[*podman*](https://github.com/containers/libpod)。这是另一个Red Hat项目，目标是提供一个名为`libpod`的库（而不是守护进程）来管理镜像、容器生命周期和pod（容器组）。`podman`是一个构建在这个库之上的管理命令行工具。作为一个底层的容器运行时，这个项目也是使用*runc*。从代码角度来看，*podman*和* crio *（都是Red Hat项目）有很多共同点。例如，它们都在内部大量使用优秀的[*storage* (https://github.com/containers/storage)和[*image*](https://github.com/containers/image)库。另一项正在进行的工作是在* crio *中直接使用*libpod*而不是*runc*。*podman*的另一个有趣的特性是用drop-in替换一些（最流行的？）日常工作流程中的`docker`命令。该项目声称兼容（当然在一定程度上）*docker CLI API*。
 
-这个守护进程列表中一个有趣的例外是[*podman*](https://github.com/containers/libpod)。这是另一个Red Hat项目，目标是提供一个名为“libpod”的库(而不是守护进程)来管理映像、容器生命周期和pod(容器组)。“podman”是一个构建在这个库之上的管理命令行工具。作为一个底层的容器运行时，这个项目像往常一样使用*runc*。从代码的角度来看，*podman*和* crio *(都是Red Hat项目)有很多共同点。例如，它们都在内部大量使用优秀的[*storage* (https://github.com/containers/storage)和[*image*](https://github.com/containers/image)库。在* crio *中直接使用*libpod*而不是*runc*，这似乎是一项正在进行的工作。*podman*的另一个有趣的特性是用drop-in替换一些(最流行的?)日常工作流程中的“docker”命令。该项目声称兼容(当然在一定程度上)的*docker CLI API*。
+既然我们已经有了*dockerd*、*containerd*或* ciro *，为什么还要启动这样的项目呢？守护进程作为容器管理器的问题是，守护进程大多数时候必须使用*root*权限运行。尽管由于守护进程的整体性，系统中没有*root*权限也可以完成其90%的功能，但是剩下的10%需要以*root*启动守护进程。使用*podman*，最终有可能使用Linux用户namespace拥有无根容器。这可能是一个大问题，特别是在广泛的CI或多租户环境中，因为即使是没有权限的Docker容器实际上也只是系统上的[一个没有root访问权限的内核错误](https://brauner.github.io/2019/02/12/privileged.containes.html)。
 
-Why start a project like this when we already have *dockerd*, *containerd* or *cir-o*? The problem with daemons as container managers is that most of the time a daemon has to be run with *root* privileges. Even though 90% of the daemon's functionality can be hypothetically done without having *root* rights in the system since daemon is a monolithic thing, the remaining 10% requires that the daemon is launched as *root*. With *podman*, it's finally possible to have rootless containers utilizing Linux user namespaces. And this can be a big deal, especially in extensive CI or multi-tenant environments, because even non-privileged Docker containers are actually only [one kernel bug away from gaining root access](https://brauner.github.io/2019/02/12/privileged-containers.html) on the system.
-
-既然我们已经有了*dockerd*、*containerd*或* ciro *，为什么还要启动这样的项目呢?守护进程作为容器管理器的问题是，守护进程大多数时候必须使用*root*特权运行。尽管由于守护进程是一个整体，假设系统中没有*root*权限就可以完成守护进程90%的功能，但是剩下的10%需要以*root*启动守护进程。使用*podman*，最终有可能使用Linux用户名称空间拥有无根容器。这可能是一个大问题，特别是在广泛的CI或多租户环境中，因为即使是非特权Docker容器实际上也只是系统上的一个内核错误(https://brauner.github.io/2019/02/12/privileged.containes.html)。
-
-More information on this intriguing project can be found [here](http://crunchtools.com/podman-and-cri-o-in-rhel-8-and-openshift-4) and [here](https://www.redhat.com/en/blog/why-red-hat-investing-cri-o-and-podman).
-
-关于这个有趣项目的更多信息可以在这里找到(http://crunchtools.com/podmanand -cri-o-in- rhel-8-andopenshift -4)和(https://www.redhat.com/en/blog/why-redhat-investing-cri-o -and-podman)。
+关于这个有趣项目的更多信息可以在 [这里](http://crunchtools.com/podman-and-cri-o-in-rhel-8-and-openshift-4) 和 [这里](https://www.redhat.com/en/blog/why-red-hat-investing-cri-o-and-podman)找到。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/podman.png)
 
 #### conman
 
-Here is my (WiP) [project](https://github.com/iximiuz/conman) aiming at the implementation of a tiny container manager. It's primarily for educational purposes, but the ultimate goal though is to make it CRI-compatible and launch a Kubernetes cluster with *conman* as a container runtime.
+这是我的（WiP）[项目](https://github.com/iximiuz/conman)，目标是实现一个微型容器管理器。它主要用于教学目的，但是最终的目标是使它兼容CRI，并使用*conman*作为容器运行时运行在Kubernetes集群上。
 
-这是我的(WiP)[项目](https://github.com/iximiuz/conman)，目标是实现一个微型容器管理器。它主要用于教学目的，但是最终的目标是使它与cric兼容，并使用*conman*作为容器运行时启动Kubernetes集群。
+### 运行时垫片（shims）
 
-### Runtime shims
-
-If you try it yourself, you would find pretty quickly that using *runc* programmatically from a container manager is a quite tricky task. Following is a list of difficulties need to be addressed.
-
-如果您亲自尝试一下，您会很快发现从容器管理器以编程方式使用*runc*是一项相当棘手的任务。以下是需要解决的困难清单。
+如果你自己尝试一下就会很快发现，以编程方式从容器管理器使用*runc*是一项相当棘手的任务。以下是需要解决的困难清单。
 
 #### Keep containers alive if container manager restarts
 
