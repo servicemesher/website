@@ -9,15 +9,14 @@ translatorlink: "https://github.com/malphi"
 reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 title: "从容器化到编排的旅程"
-description: "作者对在Istio环境下运行的Kafka进行了基准测试，并对测试结果进行了分析。"
-categories: ["kubernetes"]
-tags: ["kubernetes"]
+description: "本文是一篇介绍容器运行时和管理工具的文章，对主要的容器管理工具做了介绍"
+categories: ["container"]
+tags: ["container"]
 ---
 
 ## 编者按
 
-> 本文是 todo
-
+> 本文是一篇介绍容器运行时和管理工具的文章。文中对主要的容器管理项目和技术做了较为详细的介绍和横向对比，并给出了项目的代码库供读者参考。
 
 
 容器带来了更高级的服务端架构和更复杂的部署技术。容器现在已经普及到有一堆类似标准的规范（[1](https://github.com/opencontainers/runtime-spec), [2](https://github.com/opencontainers/image-spec), [3](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/), [4](https://github.com/containernetworking/cni), ……）描述了容器领域的不同方面。当然，底层是Linux的基本单元，如namespace和cgroups。但是，容器化软件已经变得非常的庞大，如果没有它自己关注的分离层，几乎是不可能实现的。在这个持续努力的过程中，我尝试引导自己从最底层到最高层，拥有尽可能多的实践（代码、安装、配置、集成等等），当然还有尽可能多的乐趣。本篇内容会随着时间的推移而改变，并反映出我对这一主题的理解。
@@ -104,130 +103,97 @@ tags: ["kubernetes"]
 
 为了解决所有这些问题（可能还有其他一些问题），通常使用所谓的*运行时垫片*。shim是一个轻量级守护进程，控制一个正在运行的容器。shims的实现有[conmon](https://github.com/containers/conmon)和containerd [*runtime shim*](https://github.com/containerd/containerd/blob/master/runtime/v2/shim.go)。我花了一些时间实现了自己的shim作为[*conman*] (https://github.com/iximiuz/conman)项目的一部分，可以在文章[“实现容器运行时shim”](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)中找到。
 
-### Container Network Interface (CNI)
+### 容器网络接口 (CNI)
 
-Since we have multiple container runtimes (or *managers*) with overlapping responsibilities it's pretty much obvious that we either need to extract networking-related code to a dedicated project and then reuse it, or each runtime should have its own way to configure NIC devices, IP routing, firewalls, and other networking aspects. For instance, both *cri-o* and *containerd* have to create Linux network namespaces and setup Linux `bridge`s and `veth` devices to create sandboxes for Kubernetes pods. To address this problem, [the Container Network Interface](https://github.com/containernetworking/cni) project was introduced.
+我们有多个责任重叠的容器运行时（或管理器），很明显需要提取网络相关的代码到一个专门的项目来复用它，或者每个运行时都应该有自己的方式来配置NIC设备，IP路由，防火墙和网络的其他方面。例如，* crio *和*containerd*都必须创建Linux网络名称空间，并设置Linux `bridge`和` veth`设备来为Kubernetes pods创建沙箱。为了解决这个问题，引入了[容器网络接口](https://github.com/containernetworking/cni)项目。
 
-因为我们有多个容器运行时(或* *经理)责任重叠的很明显,我们需要提取网络相关代码一个专门的项目,然后重用它,或每个运行时都应该有自己的方式来配置网卡设备,IP路由、防火墙和其他网络方面。例如，* crio *和*containerd*都必须创建Linux网络名称空间，并设置Linux ' bridge '和' veth '设备来为Kubernetes pods创建沙箱。为了解决这个问题，引入了[Container Network Interface](https://github.com/containernetworking/cni)项目。
+CNI项目提供了一个定义CNI插件的[容器网络接口规范](https://github.com/containernetworking/cni/blob/master/SPEC.md)。插件是一个可执行的[sic]，容器运行时（或管理器）会调用它来安装（或释放）网络资源。插件可以用来创建网络接口，管理IP地址分配，或者对系统进行一些自定义配置。CNI项目与语言无关，由于插件被定义为可执行的，它可以用于任何编程语言实现的运行时管理系统。CNI项目还为作为一个名为[plugins](https://github.com/containernetworking/plugins)的用于存放最流行的用例的独立的代码库提供了一组参考插件实现。例如[bridge](https://github.com/containernetworking/plugins/treins/main/bridge)、[loopback](https://github.com/containernetworking/plugins/master/plugins/main/loopback)、[flannel](https://github.com/containernetworking/plugins/treins/master/plugins/meta/flannel)等。
 
-The CNI project provides a [Container Network Interface Specification](https://github.com/containernetworking/cni/blob/master/SPEC.md) defining a CNI Plugin. A plugin is an *executable* [sic] which is supposed to be called by container runtime (or manager) to set up (or release) a network resource. Plugins can be used to create a network interface, manage IP addresses allocation, or do some custom configuration of the system. CNI project is language-agnostic, and since a plugin defined as an executable, it can be used in a runtime management system implemented in any programming language. However, CNI project also provides a set of reference plugin implementations for the most popular use cases shipped as a separate repository named [plugins](https://github.com/containernetworking/plugins). Examples are [bridge](https://github.com/containernetworking/plugins/tree/master/plugins/main/bridge), [loopback](https://github.com/containernetworking/plugins/tree/master/plugins/main/loopback), [flannel](https://github.com/containernetworking/plugins/tree/master/plugins/meta/flannel), etc.
+一些第三方项目将其网络相关的功能实现为CNI插件。为了列举一些最著名的项目，这里提到了[Project Calico](https://github.com/projectcalico/cni-plugin)和[Weave](https://github.com/weaveworks/weave)。
 
-CNI项目提供了一个定义CNI插件的[容器网络接口规范](https://github.com/containernetworking/cni/blob/master/SPEC.md)。插件是一个“可执行的”[sic]，容器运行时(或管理器)应该调用它来设置(或释放)网络资源。插件可以用来创建网络接口，管理IP地址分配，或者对系统进行一些自定义配置。CNI项目与语言无关，由于插件定义为可执行文件，所以它可以用于任何编程语言实现的运行时管理系统。然而，CNI项目还为作为一个名为[plugins]的单独存储库(https://github.com/containernetworking/plugins)交付的最流行用例提供了一组参考插件实现。例如[bridge](https://github.com/containernetworking/plugins/treins/main/bridge)、[loopback](https://github.com/containernetworking/plugins/master/plugins/main/loopback)、[flannel](https://github.com/containernetworking/plugins/treins/master/plugins/meta/flannel)等。
+## 编排
 
-Some 3rd party projects implement their network-related functionality as CNI plugins. To name a few most famous things here we should mention [Project Calico](https://github.com/projectcalico/cni-plugin) and [Weave](https://github.com/weaveworks/weave).
-
-一些第三方项目将其网络相关功能实现为CNI插件。为了列举一些最著名的项目，我们应该提到[Project Calico](https://github.com/projectcalico/cni-plugin)和[Weave](https://github.com/weaveworks/weave)。
-
-## Orchestration
-
-Orchestration of the containers is an extra-large topic. In reality, the biggest part of the Kubernetes code addresses rather the orchestration problem than containerization. Thus, orchestration deserves its own article (or a few). Hopefully, they will follow soon.
-
-容器的编制是一个非常大的主题。实际上，Kubernetes代码中最大的部分解决的是编排问题，而不是容器化问题。因此，业务流程应该有自己的文章(或几篇)。希望他们能很快跟进。
+容器的编制是一个非常大的主题。实际上，Kubernetes代码中最大的部分解决的是编排问题，而不是容器化问题。因此，编排应该有自己的文章（或几篇）。希望他们能很快跟进。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/orchestration.png)
 
 
 
-## Notable projects
+## 值得注意的项目
 
 #### [buildah](https://github.com/containers/buildah)
 
-Buildah is a command-line tool to work with [OCI container images](https://github.com/opencontainers/image-spec). It's a part of a group of projects (podman, skopeo, buildah) started by RedHat with an aim at redesigning Docker's way to work with containers (primarily to switch from monolithic and daemon-based to more fine-grained approach).
-
-Buildah是一个命令行工具，用于处理[OCI容器映像](https://github.com/opencontainers/image-spec)。它是RedHat发起的一组项目(podman、skopeo、buildah)的一部分，目的是重新设计Docker处理容器的方法(主要是将单块和基于守护进程的方法转换为更细粒度的方法)。
+Buildah是一个和[OCI容器镜像](https://github.com/opencontainers/image-spec)一起使用的命令行工具。它是RedHat发起的一组项目（podman、skopeo、buildah）的一部分，目的是重新设计Docker处理容器的方法（主要是将单体和基于守护进程的方法转换为更细粒度的方法）。
 
 #### [cni](https://github.com/containernetworking/cni)
 
-CNI Project defines a Container Network Interface plugin specification as well as some Go tools to work with it. For a more in-depth explanation see the corresponding [section of the article](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cni).
-
-CNI项目定义了一个容器网络接口插件规范以及一些Go工具。有关更深入的解释，请参见相应的[文章的部分](https://iximiuz.com/en/posts/jourfrom - containerizationto -orchestra -and-beyond/#cni)。
+CNI项目定义了一个容器网络接口插件规范以及一些Go工具。有关更深入的解释，请参见这篇[文章](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cni)相应的部分。
 
 #### [cni-plugins](https://github.com/containernetworking/plugins)
 
-A home repository for the most popular CNI plugins (such as bridge, host-device, loopback, dhcp, firewall, etc). For a more in-depth explanation see the corresponding [section of the article](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cni).
-
-一个最流行的CNI插件(如网桥、主机设备、环回、dhcp、防火墙等)的主库。有关更深入的解释，请参见相应的[文章的部分](https://iximiuz.com/en/posts/jourfrom - containerizationto -orchestra -and-beyond/#cni)。
+一个最流行的CNI插件（如网桥、主机设备、环回、dhcp、防火墙等）的主库。有关更深入的解释，请参见[文章](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cni)的相应部分。
 
 #### [containerd](https://github.com/containerd/containerd)
 
-A higher-level container runtime (or *container manager*) started as a part of Docker and extracted to an independent project. For a more in-depth explanation see the corresponding [section of the article](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd).
-
-高级容器运行时(或*容器管理器*)作为Docker的一部分启动，并提取到独立的项目中。有关更深入的解释，请参见相应的[文章的部分](https://iximiuz.com/en/posts/jourfrom - containerizationto -管弦乐队和beyond/#containerd)。
+高级容器运行时（或容器管理器）作为Docker的一部分启动，并提取到了独立的项目中。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)。
 
 #### [conmon](https://github.com/containers/conmon)
 
-A tiny OCI runtime shim written in C and used primarily by [cri-o](https://github.com/cri-o/cri-o). It provides synchronization between a parent process (cri-o) and the starting containers, tracking of container exit codes, PTY forwarding, and some other features. For a more in-depth explanation see the corresponding [section of the article](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd).
-
-一个用C语言编写的小型OCI运行时shim，主要由[crio](https://github.com/cri-o/cri-o)使用。它提供了父进程(crio)与启动容器之间的同步、容器出口代码的跟踪、PTY转发和其他一些功能。有关更深入的解释，请参见相应的[文章的部分](https://iximiuz.com/en/posts/jourfrom - containerizationto -管弦乐队和beyond/#containerd)。
+一个用C语言编写的小型OCI运行时shim，主要由[crio](https://github.com/cri-o/cri-o)使用。它提供了父进程（crio）与启动容器之间的同步、容器启动、退出码追踪、PTY转发和其他一些功能。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)。
 
 #### [cri-o](https://github.com/cri-o/cri-o)
 
-Kubernetes-focused container manager following Kubernetes Container Runtime Interface (CRI) specification. The versioning is same as k8s versioning. For a more in-depth explanation see the corresponding [section of the article](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o).
-
-专注于Kubernetes容器管理器，遵循Kubernetes容器运行时接口(CRI)规范。版本控制与k8s版本控制相同。有关更深入的解释，请参见相应的[文章的部分](https://iximiuz.com/en/posts/jourfrom - containerizationto - -and-beyond/#cri-o)。
+专注于Kubernetes容器管理器，遵循Kubernetes容器运行时接口（CRI）规范。版本控制与k8s版本控制相同。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o)。
 
 #### [crun](https://github.com/containers/crun)
 
-Yet another OCI runtime spec implementation. It claims to be a "...fast and low-memory footprint OCI Container Runtime fully written in C." But the most importantly it can be used as a library from any C/C++ code (or providing bindings - from other languages). It allows avoiding some *runc* specific drawbacks caused by its daemon-nature. See [Runtime Shims](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#runtime-shims) section for more.
-
-另一个OCI运行时规范实现。它声称是“……快速和低内存占用OCI容器运行时完全用c编写。但最重要的是，它可以用作任何C/ c++代码(或提供绑定——来自其他语言)的库。它允许避免一些由它的守护进程特性引起的特定的“runc”缺陷。有关更多信息，请参见[Runtime Shims](https://iximiuz.com/en/posts/jourfrom -container erizationto -and-beyond/# Runtime - Shims)一节。
+另一个OCI运行时规范实现。它声称是”快速和低内存占用的OCI容器运行时，完全用C编写“。但最重要的是，它可以用作任何C/C++代码（或提供绑定其他语言）的库。它允许避免一些由它的守护进程特性引起的特定的“runc”缺陷。有关更多信息，请参见[Runtime Shims](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#runtime-shims)一节。
 
 #### [image](https://github.com/containers/image)
 
-An underrated (warn: opinions!) Go library powered such well-known projects as *cri-o*, *podman* and *skopeo*. Probably it's easy to guess by its name - the aim is at working in various way with containers' images and container image registries.
-
-一个被低估的(警告:意见!)Go library为* crio *、*podman*和*skopeo*等知名项目提供了支持。通过它的名称可能很容易猜到—其目的是用各种方式处理容器的映像和容器映像注册表。
+一个被低估的（主观评价）Go工具库，为*crio*、*podman*和*skopeo*等知名项目提供了支持。通过它的名字就很容易猜到——其目的是用各种方式来处理容器镜像和镜像注册表。
 
 #### [lxc](https://github.com/lxc/lxc)
 
-An alternative and low-level container runtime written in C.
+一个由C编写的可替换的低级容器运行时。
 
 #### [lxd](https://github.com/lxc/lxd)
 
-A higher-level container runtime (or *container manager*) written in Go. Under the hood, it uses *lxc* as low-level runtime.
+一个由Go编写的高级容器运行时（或容器管理器）。底层使用lxc作为低级运行时。
 
 #### [moby](https://github.com/moby/moby)
 
-A higher-level container runtime (or *container manager*) formerly known as `docker/docker`. Provides a well-known Docker engine API based on *containerd* functionality. For a more in-depth explanation see the corresponding [section of the article](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd).
-
-高级容器运行时(或*容器管理器*)，以前称为“docker/docker”。提供一个著名的基于*containerd*功能的Docker引擎API。有关更深入的解释，请参见相应的[文章的部分](https://iximiuz.com/en/posts/jourfrom - containerizationto - -and-beyond/#dockerd)。
+高级容器运行时（或容器管理器），以前称为`docker/docker`。提供一个著名的基于*containerd*功能的Docker引擎API。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd)。
 
 #### [OCI distribution spec](https://github.com/opencontainers/distribution-spec)
 
-A specification of a container image distribution (WiP).
+一个容器镜像发布规范（开发中）。
 
 #### [OCI image spec](https://github.com/opencontainers/image-spec)
 
-A specification of a container image.
+一个容器镜像规范。
 
 #### [OCI runtime spec](https://github.com/opencontainers/runtime-spec)
 
-A specification of a [low level] container runtime.
+一个低阶容器运行时规范。
 
 #### [podman](https://github.com/containers/libpod)
 
-A daemon-less Docker replacement. The frontman project of Docker redesign effort. More explanation can be found on [RedHat developers blog](https://developers.redhat.com/blog/2019/02/21/podman-and-buildah-for-docker-users/).
+一个无守护进程的Docker替代品。Docker重新设计的frontman项目。更多信息参见 [RedHat developers blog](https://developers.redhat.com/blog/2019/02/21/podman-and-buildah-for-docker-users/)。
+
 
 #### [rkt](https://github.com/rkt/rkt)
 
-Another container management system. It provides a low-level runtime as well as a higher-level management interface. It advertises to be pod-native. An idea to add *rkt* support to Kubernetes gave birth to CRI specification. The project was started by CoreOS team ~5 years ago, but after its acquisition by RedHat, it is rather stagnating. As of August 2019, the last commit to the project is about 2 months old. **UPDATE**: On August, 16th, CNCF [announced](https://www.cncf.io/blog/2019/08/16/cncf-archives-the-rkt-project/) that the Technical Oversight Committee (TOC) has voted to archive the rkt project.
-
-另一个容器管理系统。它提供了一个低层运行时和一个高层管理接口。它的广告是原生的。向Kubernetes添加*rkt*支持的想法催生了CRI规范。该项目由CoreOS团队于5年前启动，但在被RedHat收购后，却停滞不前。截止到2019年8月，该项目的最后一次承诺已经进行了大约两个月。**更新**:8月16日，CNCF[宣布](https://www.cncf.io/blog/2019/08/16/cncf- archives-rkt -project/)技术监督委员会(TOC)投票决定将rkt项目存档。
+另一个容器管理系统。它提供了一个低阶运行时和一个高阶管理接口。它宣称是Pod原生的。向Kubernetes添加*rkt*支持的想法催生了CRI规范。该项目由CoreOS团队于5年前启动，在被RedHat收购后却停滞不前。截止到2019年8月，该项目的最后一次提交已经是大约两个月前了。**更新**：8月16日，CNCF[宣布](https://www.cncf.io/blog/2019/08/16/cncf-archives-the-rkt-project/)技术监督委员会（TOC）投票决定将rkt项目存档。
 
 #### [runc](https://github.com/opencontainers/runc)
 
-A low-level container runtime and a reference implementation of OCI runtime spec. Started as a part of Docker and extracted to an independent project. Extremely ubiquitous. For a more in-depth explanation see the corresponding [section of the article](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#container-runtimes).
-
-一个低级容器运行时和OCI运行时规范的参考实现。作为Docker的一部分开始并提取到一个独立的项目中。非常普遍。有关更深入的解释，请参见相应的[文章的部分](https://iximiuz.com/en/posts/jourfrom - containerizationto -管弦乐队和beyond/#container-runtimes)。
+一个低阶容器运行时和OCI运行时规范的参考实现。一开始作为Docker的一部分现在提取到了一个独立的项目中，普及度很高。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#container-runtimes)。
 
 #### [skopeo](https://github.com/containers/skopeo)
 
-Skopeo is a command-line utility that performs various operations on container images and image repositories. It's a part of RedHat effort to redesign Docker (see also *podman* and *buildah*) by extracting its responsibilities to dedicated and independent tools.
-
-Skopeo是一个命令行实用程序，它对容器映像和映像存储库执行各种操作。这是RedHat重新设计Docker(参见*podman*和*buildah*)工作的一部分，它将自己的职责分解为专用的和独立的工具。
+Skopeo是一个命令行工具集，对容器镜像和镜像库执行各种操作。这是RedHat重新设计Docker（参见*podman*和*buildah*）工作的一部分，它将自己的职责抽取为专用的和独立的工具。
 
 #### [storage](https://github.com/containers/storage)
 
-An underrated (warn: opinions!) Go library powered such well-known projects as *cri-o*, *podman* and *skopeo*. is a Go library which aims to provide methods for storing filesystem layers, container images, and containers (on disk). It also manages mounting of bundles.
-
-一个被低估的(警告:意见!)Go library为* crio *、*podman*和*skopeo*等知名项目提供了支持。是一个Go库，目的是提供存储文件系统层、容器映像和容器(在磁盘上)的方法。它还管理捆绑包的安装。
+一个被低估的Go类库，为* crio *、*podman*和*skopeo*等知名项目提供了支持。其目的是为存储文件系统层、容器镜像和容器（磁盘上的）提供方法。它还管理bundle的加载。
