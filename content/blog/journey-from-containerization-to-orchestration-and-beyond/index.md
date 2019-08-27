@@ -90,27 +90,19 @@ tags: ["kubernetes"]
 
 如果你自己尝试一下就会很快发现，以编程方式从容器管理器使用*runc*是一项相当棘手的任务。以下是需要解决的困难清单。
 
-#### Keep containers alive if container manager restarts
+#### 在容器管理器重启时保证容器存活
 
-Containers can be long-running while a container manager may need to be restarted due to a crash, or update (or due to unforeseen reasons). It means that we need to make every container instance independent of the container manager process that has launched it. Luckily, *runc* provides a way to detach from a running container via `runc run --detach`. However, we might need to be able to [attach to a running container later on](https://iximiuz.com/en/posts/linux-pty-what-powers-docker-attach-functionality/). For that, *runc* can run a container controlled by a Linux pseudoterminal. However, the master side of the PTY is communicated back to a launching process by passing a PTY master file descriptor though Unix socket (see `runc create --console-socket` option). It means that we need to keep the launching process alive to hold the PTY file descriptor as long as the underlying container instance exists. If we decide to store the master PTY file descriptor in the container manager process, a restart of the manager will lead to loss of such file descriptor and thus to lose an ability to re-attach to running containers. It means that we need a dedicated (and lightweight) wrapper process responsible for the demonization and keeping the collateral state of a running container.
+容器可以长时间运行，而容器管理器可能由于崩溃或更新（或无法预见的原因）而需要重新启动。这意味着我们需要使每个容器实例独立于启动它的容器管理器进程。幸运的是，*runc*提供了一种方式通过命令`runc run --detach`从正在运行的容器中分离。我们也可能需要能够[附加到一个正在运行的容器上](https://iximiuz.com/en/posts/linux-pty-what-powers-docker-attach-functionality/)。为此，*runc*可以运行一个由Linux伪终端控制的容器。但是，通过Unix套接字传递PTY主文件描述符，可以将PTY的master端回传到启动进程（请参阅`runc create --console-socket`选项）。这意味着，只要底层容器实例存在，我们就可以保持启动进程的活动状态，以保存PTY文件描述符。如果我们决定在容器管理器进程中存储主PTY文件描述符，则重新启动该管理器将导致文件描述符的丢失，从而失去重新附加到正在运行的容器的能力。这意味着我们需要一个专用的（轻量级的）包装进程来负责转化和保持运行容器的附属状态。
 
-容器可以长时间运行，而容器管理器可能由于崩溃或更新(或由于无法预见的原因)而需要重新启动。这意味着我们需要使每个容器实例独立于启动它的容器管理器进程。幸运的是，*runc*提供了一种通过“runc run——detach”从正在运行的容器中分离的方法。但是，我们可能需要能够[稍后附加到一个正在运行的容器](https://iximiuz.com/en/posts/linux-pty-what-powers-docker-attach-functionality/)。为此，*runc*可以运行由Linux伪终端控制的容器。但是，通过通过Unix套接字传递PTY主文件描述符，可以将PTY的主端通信回启动进程(请参阅“runc create——console-socket”选项)。这意味着，只要底层容器实例存在，我们就需要保持启动进程的活动状态，以保存PTY文件描述符。如果我们决定在容器管理器进程中存储主PTY文件描述符，则重新启动该管理器将导致丢失该文件描述符，从而失去重新附加到正在运行的容器的能力。这意味着我们需要一个专用的(轻量级的)包装程序来负责妖魔化和保持运行容器的附属状态。
+#### 同步容器管理器和包装的runc实例
 
-#### Synchronize container manager and wrapped runc instance
+由于我们通过添加包装器进程对runc进行了转化，所以需要一个side-channel（也可能是Unix套接字）来将容器的启动传回容器管理器。
 
-Since we have daemonized runc by adding a wrapper process, we need a side-channel (it might again be a Unix socket) to communicate the actual start of the container back to a container manager.
+#### 持续追踪容器退出码（exit code）
 
-由于我们通过添加包装器进程对runc进行了daemon化，所以我们需要一个侧通道(也可能是Unix套接字)来将容器的实际开始部分通信回容器管理器。
+分离容器会导致缺少容器状态更新。我们需要有一种方式将状态反馈给管理器。出于这个目的，文件系统听起来也是一个不错的选择。我们可以让包装器进程等待子*runc*进程终止，然后将它的退出码写到磁盘上预定义的位置。
 
-#### Keep track of container exit code
-
-Having containers detached leads to an absence of container status update. We need to have a way to communicate status back to the manager. For that purpose file system again sounds like a good option. We can teach our wrapper process to wait for the child *runc* process termination and then write its exit code to a predefined location on the disk.
-
-分离容器会导致缺少容器状态更新。我们需要有一种方式将状态反馈给经理。出于这个目的，文件系统听起来也是一个不错的选择。我们可以教包装器进程等待子*runc*进程终止，然后将其退出代码写到磁盘上预定义的位置。
-
-To address all these problems (and probably some other) so-called *runtime shims* are usually used. A shim is a lightweight daemon controlling a running container. Examples of the shims out there are [conmon](https://github.com/containers/conmon) and containerd [*runtime shim*](https://github.com/containerd/containerd/blob/master/runtime/v2/shim.go). I spent some time trying to implement my own shim as a part of the [*conman*](https://github.com/iximiuz/conman) project and the results can be found in the article ["Implementing container runtime shim"](https://iximiuz.com/en/posts/implementing-container-runtime-shim/).
-
-为了解决所有这些问题(可能还有其他一些问题)，通常使用所谓的*运行时垫片*。shim是一个轻量级守护进程，控制一个正在运行的容器。shims的例子有[conmon](https://github.com/containers/conmon)和containerd [*runtime shim*](https://github.com/containerd/containerd/blob/master/runtime/v2/shim.go)。我花了一些时间来实现我自己的shim作为[*conman* (https://github.com/iximiuz/conman)项目的一部分，结果可以在文章[“实现容器运行时shim”(https://iximiuz.com/en/posts/implementing-container-runtime-shim/)中找到。
+为了解决所有这些问题（可能还有其他一些问题），通常使用所谓的*运行时垫片*。shim是一个轻量级守护进程，控制一个正在运行的容器。shims的实现有[conmon](https://github.com/containers/conmon)和containerd [*runtime shim*](https://github.com/containerd/containerd/blob/master/runtime/v2/shim.go)。我花了一些时间实现了自己的shim作为[*conman*] (https://github.com/iximiuz/conman)项目的一部分，可以在文章[“实现容器运行时shim”](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)中找到。
 
 ### Container Network Interface (CNI)
 
