@@ -72,25 +72,25 @@ dockerd 是 containerd 前端的一部分（图片来源于Docker Blog）
 
 ### podman
 
-守护进程列表中一个有趣的例外是[*podman*](https://github.com/containers/libpod)。这是另一个Red Hat项目，目标是提供一个名为`libpod`的库（而不是守护进程）来管理镜像、容器生命周期和pod（容器组）。`podman`是一个构建在这个库之上的管理命令行工具。作为一个底层的容器运行时，这个项目也是使用*runc*。从代码角度来看，*podman*和* crio *（都是Red Hat项目）有很多共同点。例如，它们都在内部大量使用优秀的[*storage* (https://github.com/containers/storage)和[*image*](https://github.com/containers/image)库。另一项正在进行的工作是在* crio *中直接使用*libpod*而不是*runc*。*podman*的另一个有趣的特性是用drop-in替换一些（最流行的？）日常工作流程中的`docker`命令。该项目声称兼容（当然在一定程度上）*docker CLI API*。
+守护进程中一个有趣的例外是[podman](https://github.com/containers/libpod)。这是另一个Red Hat项目，目的是提供一个名为`libpod`的库（而不是守护进程）来管理镜像、容器生命周期和pod（容器组）。`podman`是一个构建在这个库之上的命令行管理工具。作为一个低阶的容器运行时，这个项目也使用runc。从代码角度来看，podman和cri-o （都是Red Hat项目）有很多共同点。例如，它们都在内部使用[storage](https://github.com/containers/storage)和[image](https://github.com/containers/image)库。另一项正在进行的工作是在cri-o中直接使用libpod而不是runc。podman的另一个有趣的特性是用drop-in替换一些（最流行的？）日常工作流程中的`docker`命令。该项目声称兼容（在一定程度上）docker CLI API。
 
-既然我们已经有了*dockerd*、*containerd*或* ciro *，为什么还要启动这样的项目呢？守护进程作为容器管理器的问题是，守护进程大多数时候必须使用*root*权限运行。尽管由于守护进程的整体性，系统中没有*root*权限也可以完成其90%的功能，但是剩下的10%需要以*root*启动守护进程。使用*podman*，最终有可能使用Linux用户namespace拥有无根容器。这可能是一个大问题，特别是在广泛的CI或多租户环境中，因为即使是没有权限的Docker容器实际上也只是系统上的[一个没有root访问权限的内核错误](https://brauner.github.io/2019/02/12/privileged.containes.html)。
+既然我们已经有了dockerd、containerd和cri-o，为什么还要开发这样的项目呢？守护进程作为容器管理器的问题是，它们大多数时候必须使用root权限运行。尽管由于守护进程的整体性，系统中没有root权限也可以完成其90%的功能，但是剩下的10%需要以root启动守护进程。使用podman，最终有可能使Linux用户的namespace拥有无根（rootless）容器。这可能是一个大问题，特别是在广泛的CI或多租户环境中，因为即使是没有权限的Docker容器实际上也只是系统上的[一个没有root访问权限的内核错误](https://brauner.github.io/2019/02/12/privileged.containes.html)。
 
 关于这个有趣项目的更多信息可以在 [这里](http://crunchtools.com/podman-and-cri-o-in-rhel-8-and-openshift-4) 和 [这里](https://www.redhat.com/en/blog/why-red-hat-investing-cri-o-and-podman)找到。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/podman.png)
 
-#### conman
+### conman
 
-这是我的（WiP）[项目](https://github.com/iximiuz/conman)，目标是实现一个微型容器管理器。它主要用于教学目的，但是最终的目标是使它兼容CRI，并使用*conman*作为容器运行时运行在Kubernetes集群上。
+这是我正在做的[项目](https://github.com/iximiuz/conman)，目的是实现一个微型容器管理器。它主要用于教学目的，但是最终的目标是使它兼容CRI，并作为容器运行时运行在Kubernetes集群上。
 
-### 运行时垫片（shims）
+### 运行时垫片（runtime shims）
 
-如果你自己尝试一下就会很快发现，以编程方式从容器管理器使用*runc*是一项相当棘手的任务。以下是需要解决的困难清单。
+如果你自己尝试一下就会很快发现，以编程方式从容器管理器使用runc是一项相当棘手的任务。以下是需要解决的困难清单。
 
 #### 在容器管理器重启时保证容器存活
 
-容器可以长时间运行，而容器管理器可能由于崩溃或更新（或无法预见的原因）而需要重新启动。这意味着我们需要使每个容器实例独立于启动它的容器管理器进程。幸运的是，*runc*提供了一种方式通过命令`runc run --detach`从正在运行的容器中分离。我们也可能需要能够[附加到一个正在运行的容器上](https://iximiuz.com/en/posts/linux-pty-what-powers-docker-attach-functionality/)。为此，*runc*可以运行一个由Linux伪终端控制的容器。但是，通过Unix套接字传递PTY主文件描述符，可以将PTY的master端回传到启动进程（请参阅`runc create --console-socket`选项）。这意味着，只要底层容器实例存在，我们就可以保持启动进程的活动状态，以保存PTY文件描述符。如果我们决定在容器管理器进程中存储主PTY文件描述符，则重新启动该管理器将导致文件描述符的丢失，从而失去重新附加到正在运行的容器的能力。这意味着我们需要一个专用的（轻量级的）包装进程来负责转化和保持运行容器的附属状态。
+容器可以长时间运行，而容器管理器可能由于崩溃或更新（或无法预见的原因）而需要重新启动。这意味着我们需要使每个容器实例独立于启动它的容器管理器进程。幸运的是，runc提供了一种方式通过命令`runc run --detach`从正在运行的容器中分离。我们也可能需要能够[附加到一个正在运行的容器上](https://iximiuz.com/en/posts/linux-pty-what-powers-docker-attach-functionality/)。为此，runc可以运行一个由Linux伪终端控制的容器。通过Unix套接字传递PTY主文件描述符，可以将PTY的master端回传到启动进程（请参阅`runc create --console-socket`选项）。这意味着，只要底层容器实例存在，我们就可以保持启动进程的活动状态，以保存PTY文件描述符。如果我们决定在容器管理器进程中存储主PTY文件描述符，则重新启动该管理器将导致文件描述符的丢失，从而失去重新附着到正在运行的容器的能力。这意味着我们需要一个专用的（轻量级的）包装进程来负责转化和保持运行容器的附属状态。
 
 #### 同步容器管理器和包装的runc实例
 
@@ -98,21 +98,21 @@ dockerd 是 containerd 前端的一部分（图片来源于Docker Blog）
 
 #### 持续追踪容器退出码（exit code）
 
-分离容器会导致缺少容器状态更新。我们需要有一种方式将状态反馈给管理器。出于这个目的，文件系统听起来也是一个不错的选择。我们可以让包装器进程等待子*runc*进程终止，然后将它的退出码写到磁盘上预定义的位置。
+分离容器会导致缺少容器状态更新。我们需要有一种方式将状态反馈给管理器。出于这个目的，文件系统听起来也是一个不错的选择。我们可以让包装器进程等待子runc进程终止，然后将它的退出码写到磁盘上预定义的位置。
 
-为了解决所有这些问题（可能还有其他一些问题），通常使用所谓的*运行时垫片*。shim是一个轻量级守护进程，控制一个正在运行的容器。shims的实现有[conmon](https://github.com/containers/conmon)和containerd [*runtime shim*](https://github.com/containerd/containerd/blob/master/runtime/v2/shim.go)。我花了一些时间实现了自己的shim作为[*conman*] (https://github.com/iximiuz/conman)项目的一部分，可以在文章[“实现容器运行时shim”](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)中找到。
+为了解决所有这些问题（可能还有其他一些问题），通常使用所谓的runtime shims。shim是一个轻量级守护进程，控制一个正在运行的容器。shims的实现有[conmon](https://github.com/containers/conmon)和containerd的 [runtime shim](https://github.com/containerd/containerd/blob/master/runtime/v2/shim.go)。我花了一些时间实现了自己的shim作为[conman](https://github.com/iximiuz/conman)项目的一部分，可以在文章[“实现容器运行时shim”](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)中找到（编者注：此文章还未撰写）。
 
 ### 容器网络接口 (CNI)
 
-我们有多个责任重叠的容器运行时（或管理器），很明显需要提取网络相关的代码到一个专门的项目来复用它，或者每个运行时都应该有自己的方式来配置NIC设备，IP路由，防火墙和网络的其他方面。例如，* crio *和*containerd*都必须创建Linux网络名称空间，并设置Linux `bridge`和` veth`设备来为Kubernetes pods创建沙箱。为了解决这个问题，引入了[容器网络接口](https://github.com/containernetworking/cni)项目。
+我们有多个责任重叠的容器运行时（或管理器），很明显需要提取网络相关的代码到一个专门的项目来复用它，或者每个运行时都应该有自己的方式来配置NIC设备，IP路由，防火墙和网络的其他方面。例如，cri-o和containerd都必须创建Linux网络名称空间，并设置Linux `bridge`和` veth`设备来为Kubernetes pods创建沙箱。为了解决这个问题，引入了[容器网络接口](https://github.com/containernetworking/cni)项目。
 
-CNI项目提供了一个定义CNI插件的[容器网络接口规范](https://github.com/containernetworking/cni/blob/master/SPEC.md)。插件是一个可执行的[sic]，容器运行时（或管理器）会调用它来安装（或释放）网络资源。插件可以用来创建网络接口，管理IP地址分配，或者对系统进行一些自定义配置。CNI项目与语言无关，由于插件被定义为可执行的，它可以用于任何编程语言实现的运行时管理系统。CNI项目还为作为一个名为[plugins](https://github.com/containernetworking/plugins)的用于存放最流行的用例的独立的代码库提供了一组参考插件实现。例如[bridge](https://github.com/containernetworking/plugins/treins/main/bridge)、[loopback](https://github.com/containernetworking/plugins/master/plugins/main/loopback)、[flannel](https://github.com/containernetworking/plugins/treins/master/plugins/meta/flannel)等。
+CNI项目提供了一个定义CNI插件的[容器网络接口规范](https://github.com/containernetworking/cni/blob/master/SPEC.md)。插件是一个可执行的sic，容器运行时（或管理器）会调用它来安装（或释放）网络资源。插件可以用来创建网络接口，管理IP地址分配，或者对系统进行一些自定义配置。CNI项目与语言无关，由于插件被定义为可执行的，它可以用于任何编程语言实现的运行时管理系统。CNI项目还为作为一个名为[plugins](https://github.com/containernetworking/plugins)的用于存放最流行的用例的独立的代码库提供了一组参考插件实现。例如[bridge](https://github.com/containernetworking/plugins/tree/master/plugins/main/bridge)、[loopback](https://github.com/containernetworking/plugins/tree/master/plugins/main/loopback)、[flannel](https://github.com/containernetworking/plugins/tree/master/plugins/meta/flannel)等。
 
-一些第三方项目将其网络相关的功能实现为CNI插件。为了列举一些最著名的项目，这里提到了[Project Calico](https://github.com/projectcalico/cni-plugin)和[Weave](https://github.com/weaveworks/weave)。
+一些第三方项目将其网络相关的功能实现为CNI插件。一些最著名的项目如[Project Calico](https://github.com/projectcalico/cni-plugin)和[Weave](https://github.com/weaveworks/weave)。
 
 ## 编排
 
-容器的编制是一个非常大的主题。实际上，Kubernetes代码中最大的部分解决的是编排问题，而不是容器化问题。因此，编排应该有自己的文章（或几篇）。希望他们能很快跟进。
+容器的编排是一个非常大的主题。实际上，Kubernetes代码中最大的部分就是解决编排问题，而不是容器化问题。因此，编排应该有自己单独的文章（或几篇）而不在本文描述。希望他们能很快跟进。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/orchestration.png)
 
@@ -191,8 +191,8 @@ CNI项目定义了一个容器网络接口插件规范以及一些Go工具。有
 
 #### [skopeo](https://github.com/containers/skopeo)
 
-Skopeo是一个命令行工具集，对容器镜像和镜像库执行各种操作。这是RedHat重新设计Docker（参见*podman*和*buildah*）工作的一部分，它将自己的职责抽取为专用的和独立的工具。
+Skopeo是一个命令行工具集，对容器镜像和镜像库执行各种操作。这是RedHat重新设计Docker（参见podman和buildah）工作的一部分，它将自己的职责抽取为专用的和独立的工具。
 
 #### [storage](https://github.com/containers/storage)
 
-一个被低估的Go类库，为* crio *、*podman*和*skopeo*等知名项目提供了支持。其目的是为存储文件系统层、容器镜像和容器（磁盘上的）提供方法。它还管理bundle的加载。
+一个被低估的Go类库，为crio、podman和skopeo等知名项目提供了支持。其目的是为存储文件系统层、容器镜像和容器（磁盘上的）提供方法。它还管理bundle的加载。
