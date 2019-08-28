@@ -98,7 +98,7 @@ dockerd 是 containerd 前端的一部分（图片来源于Docker Blog）
 
 ### 容器网络接口 (CNI)
 
-我们有多个责任重叠的容器运行时（或管理器），很明显需要提取网络相关的代码到一个专门的项目来复用它，或者每个运行时都应该有自己的方式来配置NIC设备，IP路由，防火墙和网络的其他方面。例如，cri-o和containerd都必须创建Linux网络名称空间，并设置Linux `bridge`和` veth`设备来为Kubernetes pods创建沙箱。为了解决这个问题，引入了[容器网络接口](https://github.com/containernetworking/cni)项目。
+我们有多个责任重叠的容器运行时（或管理器），很明显需要提取网络相关的代码到一个专门的项目来复用它，或者每个运行时都应该有自己的方式来配置NIC设备，IP路由，防火墙和网络的其他方面。例如，cri-o和containerd都必须创建Linux网络名称空间，并设置Linux `bridge`和`veth`设备来为Kubernetes pods创建沙箱。为了解决这个问题，引入了[容器网络接口](https://github.com/containernetworking/cni)项目。
 
 CNI项目提供了一个定义CNI插件的[容器网络接口规范](https://github.com/containernetworking/cni/blob/master/SPEC.md)。插件是一个可执行的sic，容器运行时（或管理器）会调用它来安装（或释放）网络资源。插件可以用来创建网络接口，管理IP地址分配，或者对系统进行一些自定义配置。CNI项目与语言无关，由于插件被定义为可执行的，它可以用于任何编程语言实现的运行时管理系统。CNI项目还为作为一个名为[plugins](https://github.com/containernetworking/plugins)的用于存放最流行的用例的独立的代码库提供了一组参考插件实现。例如[bridge](https://github.com/containernetworking/plugins/tree/master/plugins/main/bridge)、[loopback](https://github.com/containernetworking/plugins/tree/master/plugins/main/loopback)、[flannel](https://github.com/containernetworking/plugins/tree/master/plugins/meta/flannel)等。
 
