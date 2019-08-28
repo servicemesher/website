@@ -18,8 +18,6 @@ tags: ["container"]
 
 > 本文是一篇介绍容器运行时和管理工具的文章。文中对主要的容器管理项目和技术做了较为详细的介绍和横向对比，并给出了项目的代码库供读者参考。
 
-
-
 容器带来了更高级的服务端架构和更复杂的部署技术。目前已经有一堆类似标准的规范（[1](https://github.com/opencontainers/runtime-spec), [2](https://github.com/opencontainers/image-spec), [3](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/), [4](https://github.com/containernetworking/cni), ……）描述了容器领域的方方面面。当然，它的底层是Linux的基本单元，如namespace和cgroups。容器化软件已经变得非常的庞大，如果没有它自己关注的分离层，几乎是不可能实现的。在这个持续努力的过程中，我尝试引导自己从最底层到最高层尽可能多的实践（代码、安装、配置、集成等等），当然还有尽可能多的获得乐趣。本篇内容会随着时间的推移而改变，并反映出我对这一主题的理解。
 
 ## 容器运行时
@@ -34,8 +32,6 @@ tags: ["container"]
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/runc.png)
 
-
-
 一个更值得注意的OCI运行时实现是[crun](https://github.com/containers/crun)。它用C语言编写，既可以作为可执行文件，也可以作为库使用。
 
 ## 容器管理
@@ -47,8 +43,6 @@ tags: ["container"]
 与runc一样，我们可以再次看到Docker的遗产——[containerd](https://github.com/containerd/containerd)曾经是Docker项目的一部分，现在它是一个独立的软件，自称为容器运行时。但显然，它与运行时runc不是同一种类型的运行时。不仅它们的职责不同，其组织形式也不同。runc只是一个命令行工具，containerd是一个长活的守护进程。一个runc实例不能比底层容器进程活得更久。通常，它在`create`调用时启动，然后在`start`时从容器的rootfs中[`exec`](https://linux.die.net/man/3/exec)特定文件。另一方面，containerd可以运行的比成千上万个容器更长久。它更像是一个服务器，侦听传入的请求来启动、停止或报告容器的状态。在幕后，containerd使用runc。它不仅仅是一个容器生命周期管理器，还负责镜像管理（从注册表中拉取和提交镜像，本地存储镜像等等），跨容器联网管理和其他一些功能。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/containerd.png)
-
-
 
 ### cri-o
 
@@ -116,83 +110,80 @@ CNI项目提供了一个定义CNI插件的[容器网络接口规范](https://git
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/orchestration.png)
 
-
-
 ## 值得注意的项目
 
-#### [buildah](https://github.com/containers/buildah)
+### [buildah](https://github.com/containers/buildah)
 
 Buildah是一个和[OCI容器镜像](https://github.com/opencontainers/image-spec)一起使用的命令行工具。它是RedHat发起的一组项目（podman、skopeo、buildah）的一部分，目的是重新设计Docker处理容器的方法（主要是将单体和基于守护进程的方法转换为更细粒度的方法）。
 
-#### [cni](https://github.com/containernetworking/cni)
+### [cni](https://github.com/containernetworking/cni)
 
 CNI项目定义了一个容器网络接口插件规范以及一些Go工具。有关更深入的解释，请参见这篇[文章](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cni)相应的部分。
 
-#### [cni-plugins](https://github.com/containernetworking/plugins)
+### [cni-plugins](https://github.com/containernetworking/plugins)
 
 一个最流行的CNI插件（如网桥、主机设备、环回、dhcp、防火墙等）的主库。有关更深入的解释，请参见[文章](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cni)的相应部分。
 
-#### [containerd](https://github.com/containerd/containerd)
+### [containerd](https://github.com/containerd/containerd)
 
 高级容器运行时（或容器管理器）作为Docker的一部分启动，并提取到了独立的项目中。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)。
 
-#### [conmon](https://github.com/containers/conmon)
+### [conmon](https://github.com/containers/conmon)
 
 一个用C语言编写的小型OCI运行时shim，主要由[crio](https://github.com/cri-o/cri-o)使用。它提供了父进程（crio）与启动容器之间的同步、容器启动、退出码追踪、PTY转发和其他一些功能。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)。
 
-#### [cri-o](https://github.com/cri-o/cri-o)
+### [cri-o](https://github.com/cri-o/cri-o)
 
 专注于Kubernetes容器管理器，遵循Kubernetes容器运行时接口（CRI）规范。版本控制与k8s版本控制相同。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o)。
 
-#### [crun](https://github.com/containers/crun)
+### [crun](https://github.com/containers/crun)
 
 另一个OCI运行时规范实现。它声称是”快速和低内存占用的OCI容器运行时，完全用C编写“。但最重要的是，它可以用作任何C/C++代码（或提供绑定其他语言）的库。它允许避免一些由它的守护进程特性引起的特定的“runc”缺陷。有关更多信息，请参见[Runtime Shims](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#runtime-shims)一节。
 
-#### [image](https://github.com/containers/image)
+### [image](https://github.com/containers/image)
 
 一个被低估的（主观评价）Go工具库，为*crio*、*podman*和*skopeo*等知名项目提供了支持。通过它的名字就很容易猜到——其目的是用各种方式来处理容器镜像和镜像注册表。
 
-#### [lxc](https://github.com/lxc/lxc)
+### [lxc](https://github.com/lxc/lxc)
 
 一个由C编写的可替换的低级容器运行时。
 
-#### [lxd](https://github.com/lxc/lxd)
+### [lxd](https://github.com/lxc/lxd)
 
 一个由Go编写的高级容器运行时（或容器管理器）。底层使用lxc作为低级运行时。
 
-#### [moby](https://github.com/moby/moby)
+### [moby](https://github.com/moby/moby)
 
 高级容器运行时（或容器管理器），以前称为`docker/docker`。提供一个著名的基于*containerd*功能的Docker引擎API。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd)。
 
-#### [OCI distribution spec](https://github.com/opencontainers/distribution-spec)
+### [OCI distribution spec](https://github.com/opencontainers/distribution-spec)
 
 一个容器镜像发布规范（开发中）。
 
-#### [OCI image spec](https://github.com/opencontainers/image-spec)
+### [OCI image spec](https://github.com/opencontainers/image-spec)
 
 一个容器镜像规范。
 
-#### [OCI runtime spec](https://github.com/opencontainers/runtime-spec)
+### [OCI runtime spec](https://github.com/opencontainers/runtime-spec)
 
 一个低阶容器运行时规范。
 
-#### [podman](https://github.com/containers/libpod)
+### [podman](https://github.com/containers/libpod)
 
 一个无守护进程的Docker替代品。Docker重新设计的frontman项目。更多信息参见 [RedHat developers blog](https://developers.redhat.com/blog/2019/02/21/podman-and-buildah-for-docker-users/)。
 
-
-#### [rkt](https://github.com/rkt/rkt)
+### [rkt](https://github.com/rkt/rkt)
 
 另一个容器管理系统。它提供了一个低阶运行时和一个高阶管理接口。它宣称是Pod原生的。向Kubernetes添加*rkt*支持的想法催生了CRI规范。该项目由CoreOS团队于5年前启动，在被RedHat收购后却停滞不前。截止到2019年8月，该项目的最后一次提交已经是大约两个月前了。**更新**：8月16日，CNCF[宣布](https://www.cncf.io/blog/2019/08/16/cncf-archives-the-rkt-project/)技术监督委员会（TOC）投票决定将rkt项目存档。
 
-#### [runc](https://github.com/opencontainers/runc)
+### [runc](https://github.com/opencontainers/runc)
 
 一个低阶容器运行时和OCI运行时规范的参考实现。一开始作为Docker的一部分现在提取到了一个独立的项目中，普及度很高。有关更深入的解释，请参见相应的[部分](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#container-runtimes)。
 
-#### [skopeo](https://github.com/containers/skopeo)
+### [skopeo](https://github.com/containers/skopeo)
 
 Skopeo是一个命令行工具集，对容器镜像和镜像库执行各种操作。这是RedHat重新设计Docker（参见podman和buildah）工作的一部分，它将自己的职责抽取为专用的和独立的工具。
 
-#### [storage](https://github.com/containers/storage)
+### [storage](https://github.com/containers/storage)
 
 一个被低估的Go类库，为crio、podman和skopeo等知名项目提供了支持。其目的是为存储文件系统层、容器镜像和容器（磁盘上的）提供方法。它还管理bundle的加载。
