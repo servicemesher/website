@@ -1,14 +1,14 @@
 ---
 originallink: "https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/"
 author: "Ivan Velichko"
-date: "2019-08-22T10:42:00+08:00"
+date: "2019-08-28T10:42:00+08:00"
 draft: false
 banner: "/img/blog/banners/006tKfTcly1g0t1i9oxo4j31400u0npe.jpg"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
 reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
-title: "从容器化到编排的旅程"
+title: "容器化到编排之旅"
 description: "本文是一篇介绍容器运行时和管理工具的文章，对主要的容器管理工具做了介绍"
 categories: ["container"]
 tags: ["container"]
@@ -19,17 +19,18 @@ tags: ["container"]
 > 本文是一篇介绍容器运行时和管理工具的文章。文中对主要的容器管理项目和技术做了较为详细的介绍和横向对比，并给出了项目的代码库供读者参考。
 
 
-容器带来了更高级的服务端架构和更复杂的部署技术。容器现在已经普及到有一堆类似标准的规范（[1](https://github.com/opencontainers/runtime-spec), [2](https://github.com/opencontainers/image-spec), [3](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/), [4](https://github.com/containernetworking/cni), ……）描述了容器领域的不同方面。当然，底层是Linux的基本单元，如namespace和cgroups。但是，容器化软件已经变得非常的庞大，如果没有它自己关注的分离层，几乎是不可能实现的。在这个持续努力的过程中，我尝试引导自己从最底层到最高层，拥有尽可能多的实践（代码、安装、配置、集成等等），当然还有尽可能多的乐趣。本篇内容会随着时间的推移而改变，并反映出我对这一主题的理解。
+
+容器带来了更高级的服务端架构和更复杂的部署技术。目前已经有一堆类似标准的规范（[1](https://github.com/opencontainers/runtime-spec), [2](https://github.com/opencontainers/image-spec), [3](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/), [4](https://github.com/containernetworking/cni), ……）描述了容器领域的方方面面。当然，它的底层是Linux的基本单元，如namespace和cgroups。容器化软件已经变得非常的庞大，如果没有它自己关注的分离层，几乎是不可能实现的。在这个持续努力的过程中，我尝试引导自己从最底层到最高层尽可能多的实践（代码、安装、配置、集成等等），当然还有尽可能多的获得乐趣。本篇内容会随着时间的推移而改变，并反映出我对这一主题的理解。
 
 ## 容器运行时
 
-我想从最低级别的非内核原语开始——**容器运行时**。在容器服务里，*运行时*这个词是有歧义的。每个项目、公司或社区对术语*容器运行时*都有自己的、通常是基于上下文的特定的理解。大多数情况下，运行时的特征是由一组职责定义的，从最基本的职责（创建名称空间、启动*init*进程）到复杂的容器管理，包括（但不限于）镜像操作。[这篇文章](https://www.ianlewis.org/en/container-runtimes-part-1-introduction-container-r)对运行时有一个很好的概述。
+我想从最底层的非内核原语说起——**容器运行时**。在容器服务里，运行时这个词是有歧义的。每个项目、公司或社区对术语**容器运行时**都有自己的、通常是基于上下文的特定理解。大多数情况下，运行时的特征是由一组职责定义的，从最基本的职责（创建namespace、启动*init*进程）到复杂的容器管理，包括（但不限于）镜像操作。[这篇文章](https://www.ianlewis.org/en/container-runtimes-part-1-introduction-container-r)对运行时有一个很好的概述。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/runtime-levels.png)
 
-本节专门讨论低级别的容器运行时。在[*OCI 运行时规范*](https://github.com/opencontainers/runtime-spec)中，组成[Open Container Initiative](https://www.opencontainers.org/)的一些重要参与者对底层运行时进行了标准化。长话短说，低级容器运行时是一个软件，作为一个包含rootfs和配置的目录输入，来描述容器参数（如资源限制、挂载点、流程开始等）并作为运行时启动一个独立进程的结果，即容器。
+本节专门讨论低阶容器运行时。在[OCI运行时规范](https://github.com/opencontainers/runtime-spec)中，组成[Open Container Initiative](https://www.opencontainers.org/)的一些重要参与者对底层运行时进行了标准化。长话短说，低阶容器运行时是一个软件，作为一个包含rootfs和配置的目录输入，来描述容器参数（如资源限制、挂载点、流程开始等），并作为运行时启动一个独立进程，即容器。
 
-到2019年，最广泛使用的容器运行时是[runc](https://github.com/opencontainers/runc)。这个项目最初是Docker的一部分（因此它是用Go编写的），但最终被提取并转换为一个独立的CLI工具。很难高估这个组件的重要性——*runc*基本上是OCI运行时规范的一个参考实现。在我们的实践中将大量使用*runc*，下面是[一篇介绍性文章](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)。
+到2019年，使用最广泛的容器运行时是[runc](https://github.com/opencontainers/runc)。这个项目最初是Docker的一部分（因此它是用Go编写的），但最终被提取并转换为一个独立的CLI工具。很难高估这个组件的重要性——基本上runc是OCI运行时规范的一个参考实现。在我们的实践中将大量使用runc，下面是[一篇介绍性文章](https://iximiuz.com/en/posts/implementing-container-runtime-shim/)（编者注：页面暂无内容）。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/runc.png)
 
@@ -39,39 +40,37 @@ tags: ["container"]
 
 ## 容器管理
 
-在命令行中可以使用*runc*启动任意数量的容器。但是如果我们需要让这个过程自动化呢？假设我们需要启动数十个容器来跟踪它们的状态。其中一些在失败时需要重启，在终止时需要释放资源，必须从注册中心提取镜像，需要配置容器间网络等等。这已经是一个稍微高级的任务了，并且是“容器管理器”的职责。老实说，我不知道这个词是否常用，但我发现用它来描述很方便。我将以下项目分类为“容器管理器”：[containerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)， [cri-o](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o)， [dockerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd) 和 [podman](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd).
+在命令行中可以使用runc启动任意数量的容器。但是如果我们需要让这个过程自动化呢？假设我们需要启动数十个容器来跟踪它们的状态，其中一些在失败时需要重启，在终止时需要释放资源，必须从注册中心提取镜像，需要配置容器间网络等等。这是一个稍微高级的任务，并且是“容器管理器”的职责。老实说，我不知道这个词是否常用，但我发现用它来描述很合适。我将以下项目分类为“容器管理器”：[containerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)， [cri-o](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o)， [dockerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd) 和 [podman](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#podman).
 
-#### containerd
+### containerd
 
-与*runc*一样，我们可以再次看到Docker的遗产——[*containerd*](https://github.com/containerd/containerd)曾经是原始Docker项目的一部分，而现在*containerd*是一个独立的软件，自称为容器运行时，但显然，它与运行时*runc*不是同一种类型的运行时。不仅*containerd*和*runc*的职责不同，其组织形式也不同。*runc*只是一个命令行工具，*containerd*是一个长活的守护进程。一个*runc*实例不能比底层容器进程活得更长。通常，它在`create`调用时启动，然后在`start`时从容器的rootfs中[`exec`](https://linux.die.net/man/3/exec)特定文件。另一方面，*containerd*可以运行的比成千上万个容器更长久。它更像是一个服务器，侦听传入的请求来启动、停止或报告容器的状态。在幕后*containerd*使用*runc*。*containerd*不仅仅是一个容器生命周期管理器，它还负责镜像管理（从注册表中拉取和提交镜像，本地存储镜像等等），跨容器联网管理和其他一些功能。
+与runc一样，我们可以再次看到Docker的遗产——[containerd](https://github.com/containerd/containerd)曾经是Docker项目的一部分，现在它是一个独立的软件，自称为容器运行时。但显然，它与运行时runc不是同一种类型的运行时。不仅它们的职责不同，其组织形式也不同。runc只是一个命令行工具，containerd是一个长活的守护进程。一个runc实例不能比底层容器进程活得更久。通常，它在`create`调用时启动，然后在`start`时从容器的rootfs中[`exec`](https://linux.die.net/man/3/exec)特定文件。另一方面，containerd可以运行的比成千上万个容器更长久。它更像是一个服务器，侦听传入的请求来启动、停止或报告容器的状态。在幕后，containerd使用runc。它不仅仅是一个容器生命周期管理器，还负责镜像管理（从注册表中拉取和提交镜像，本地存储镜像等等），跨容器联网管理和其他一些功能。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/containerd.png)
 
 
 
-#### cri-o
+### cri-o
 
-另一个容器管理器是[crio](https://github.com/cri-o/cri-o)。虽然*containerd*是Docker重构的结果，但cri-o却源于Kubernetes领域。在过去，Kubernetes 使用Docker管理容器。然而，随着[rkt](https://github.com/rkt/rkt) 的崛起，一些人增加了在Kubernetes中可互换的容器运行时的支持，允许Docker和/或rkt完成容器管理。这种变化导致Kubernetes中有大量的条件判断，没有人喜欢代码中有太多的“if”。因此，[容器运行时接口（CRI）](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/)被引入到Kubernetes中，使得任何兼容CRI的高级运行时（例如容器管理器）都可以在Kubernetes使用，而无需任何代码的更改。* cri-o *是Red Hat实现的兼容CRI的运行时。与*containerd*和*cri-o*一样，它也是一个守护进程，通过开放[gRPC]服务接口来创建、启动、停止（以及许多其他操作）容器。在底层，* cri-o *可以使用任何符合OCI标准的[低级]运行时和容器工作，默认的运行时仍然是runc。cri-o的主要目标是Kubernetes的容器运行时。版本控制也与K8S一致，项目的范围界定的很好代码库也比期望的更小（截止2019年7月大约是20个CLOC，近似于containerd的5倍）。
+另一个容器管理器是[cri-o](https://github.com/cri-o/cri-o)。containerd是Docker重构后的结果，但cri-o却源于Kubernetes领域。在过去，Kubernetes使用Docker管理容器。然而，随着[rkt](https://github.com/rkt/rkt)的崛起，一些人增加了在Kubernetes中可互换容器运行时的支持，允许Docker和/或rkt完成容器管理。这种变化导致Kubernetes中有大量的条件判断，没有人喜欢代码中有太多的“if”。因此，[容器运行时接口（CRI）](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/)被引入到Kubernetes中，这使得任何兼容CRI的高阶运行时（例如容器管理器）都可以在Kubernetes中使用，而无需任何代码的更改。cri-o是RedHat实现的兼容CRI的运行时，与containerd一样，它也是一个守护进程，通过开放一个gRPC服务接口来创建、启动、停止（以及许多其他操作）容器。在底层，cri-o可以使用任何符合OCI标准的低阶运行时和容器工作，默认的运行时仍然是runc。cri-o的主要目标是作为Kubernetes的容器运行时，版本控制也与K8S一致，项目的范围界定的很好，其代码库也比期望的更小（截止2019年7月大约是20个CLOC，近似于containerd的5倍）。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/cri-o.png)
 
-*cri-o 架构 (图像来自 cri-o.io)*
+cri-o 架构 (图像来自 cri-o.io)
 
-规范的好处是所有抱怨都可以互换使用。一旦CRI被引入，一个*containerd*的插件会在containerd的功能之上实现CRI gRPC服务。这个想法是可行的，所以后来*containerd*获得了原生的CRI支持。因此，Kubernetes可以同时使用crio和containerd作为运行时。
+规范的好处是所有符合规范的技术都可以互换使用。一旦CRI被引入，一个containerd的插件就可以在它的功能之上实现CRI的gRPC服务。这个想法是可行的，所以后来containerd获得了原生的CRI支持。因此，Kubernetes可以同时使用cri-o和containerd作为运行时。
 
-#### dockerd
+### dockerd
 
-还有一个守护进程是[*dockerd*](https://github.com/moby/moby/tree/master/cmd/dockerd)。它是个多面手，一方面，它为[Docker命令行](https://github.com/docker/cli) 公开了一个API，为我们提供了所有这些著名的Docker命令（`Docker pull`、`Docker push`、`Docker run`、`Docker stats`等）。但是我们已经知道这部分功能被提取到了*containerd*中，所以在底层*dockerd*依赖于*containerd*就不足为奇了。但这基本上意味着*dockerd*只是一个前端适配器，它将*containerd* API转换为广泛使用的*docker 引擎* API。
+还有一个守护进程是[dockerd](https://github.com/moby/moby/tree/master/cmd/dockerd)，它是个多面手。一方面，它为[Docker命令行](https://github.com/docker/cli) 开放了一个API，为我们提供了所有这些常用的Docker命令（`Docker pull`、`Docker push`、`Docker run`、`Docker stats`等）。但是我们已经知道这部分功能被提取到了containerd中，所以在底层dockerd依赖于containerd就不足为奇了。但这基本上意味着dockerd只是一个前端适配器，它将containerd的API转换为广泛使用的docker引擎的API。
 
-然而，[*dockerd*](https://github.com/moby/moby)也提供了`compose`和`swarm`功能，试图解决容器编配问题，包括容器的多机器集群。正如我们在Kubernetes上看到的，这个问题相当难解决。对于一个单*dockerd*守护进程来说，同时承担两大职责并不好。
+[dockerd](https://github.com/moby/moby)（编者注：原文链接是moby项目）也提供了`compose`和`swarm`功能，试图解决容器编配问题，包括容器的多机器集群。正如我们在Kubernetes上看到的，这个问题相当难解决。对于一个单dockerd守护进程来说，同时承担两大职责并不好。
 
 ![img](https://iximiuz.com/journey-from-containerization-to-orchestration-and-beyond/dockerd.png)
 
-*dockerd 是 containerd 前端的一部分（图片来源于Docker Blog）*
+dockerd 是 containerd 前端的一部分（图片来源于Docker Blog）
 
-
-
-#### podman
+### podman
 
 守护进程列表中一个有趣的例外是[*podman*](https://github.com/containers/libpod)。这是另一个Red Hat项目，目标是提供一个名为`libpod`的库（而不是守护进程）来管理镜像、容器生命周期和pod（容器组）。`podman`是一个构建在这个库之上的管理命令行工具。作为一个底层的容器运行时，这个项目也是使用*runc*。从代码角度来看，*podman*和* crio *（都是Red Hat项目）有很多共同点。例如，它们都在内部大量使用优秀的[*storage* (https://github.com/containers/storage)和[*image*](https://github.com/containers/image)库。另一项正在进行的工作是在* crio *中直接使用*libpod*而不是*runc*。*podman*的另一个有趣的特性是用drop-in替换一些（最流行的？）日常工作流程中的`docker`命令。该项目声称兼容（当然在一定程度上）*docker CLI API*。
 
