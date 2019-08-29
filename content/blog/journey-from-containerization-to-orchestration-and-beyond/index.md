@@ -6,9 +6,9 @@ draft: false
 banner: "/img/blog/banners/006tKfTcly1g0t1i9oxo4j31400u0npe.jpg"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
-reviewer:  ["宋净超"]
-reviewerlink:  ["https://jimmysong.io"]
-title: "容器化到编排之旅"
+reviewer:  ["罗广明"]
+reviewerlink:  ["https://github.com/GuangmingLuo"]
+title: "容器化到容器编排之旅"
 description: "本文是一篇介绍容器运行时和管理工具的文章，对主要的容器管理工具做了介绍"
 categories: ["container"]
 tags: ["container"]
@@ -16,7 +16,9 @@ tags: ["container"]
 
 ## 编者按
 
-> 本文是一篇介绍容器运行时和管理工具的文章。文中对主要的容器管理项目和技术做了较为详细的介绍和横向对比，并给出了项目的代码库供读者参考。
+本文是一篇介绍容器运行时和管理工具的文章。文中对主要的容器管理项目和技术做了较为详细的介绍和横向对比，并给出了项目的代码库供读者参考。
+
+## 前言
 
 容器带来了更高级的服务端架构和更复杂的部署技术。目前已经有一堆类似标准的规范（[1](https://github.com/opencontainers/runtime-spec), [2](https://github.com/opencontainers/image-spec), [3](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/), [4](https://github.com/containernetworking/cni), ……）描述了容器领域的方方面面。当然，它的底层是Linux的基本单元，如namespace和cgroups。容器化软件已经变得非常的庞大，如果没有它自己关注的分离层，几乎是不可能实现的。在这个持续努力的过程中，我尝试引导自己从最底层到最高层尽可能多的实践（代码、安装、配置、集成等等），当然还有尽可能多的获得乐趣。本篇内容会随着时间的推移而改变，并反映出我对这一主题的理解。
 
@@ -36,7 +38,7 @@ tags: ["container"]
 
 ## 容器管理
 
-在命令行中可以使用runc启动任意数量的容器。但是如果我们需要让这个过程自动化呢？假设我们需要启动数十个容器来跟踪它们的状态，其中一些在失败时需要重启，在终止时需要释放资源，必须从注册中心提取镜像，需要配置容器间网络等等。这是一个稍微高级的任务，并且是“容器管理器”的职责。老实说，我不知道这个词是否常用，但我发现用它来描述很合适。我将以下项目分类为“容器管理器”：[containerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)， [cri-o](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o)， [dockerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd) 和 [podman](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#podman).
+在命令行中可以使用runc启动任意数量的容器。但是如果我们需要让这个过程自动化呢？假设我们需要启动数十个容器来跟踪它们的状态，其中一些在失败时需要重启，在终止时需要释放资源，必须从注册中心提取镜像，需要配置容器间网络等等。这是一个稍微高级的任务，并且是“容器管理器”的职责。老实说，我不知道这个词是否常用，但我发现用它来描述很合适。我将以下项目归类为“容器管理器”：[containerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#containerd)， [cri-o](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#cri-o)， [dockerd](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#dockerd) 和 [podman](https://iximiuz.com/en/posts/journey-from-containerization-to-orchestration-and-beyond/#podman).
 
 ### containerd
 
