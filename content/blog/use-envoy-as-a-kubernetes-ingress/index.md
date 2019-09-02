@@ -2,7 +2,7 @@
 title: "Contour 学习笔记（一）：使用 Contour 接管 Kubernetes 的南北流量"
 date: 2019-08-31T22:16:10+08:00
 draft: false 
-banner: "https://hugo-picture.oss-cn-beijing.aliyuncs.com/blog/2019-08-28-080723.png"
+banner: "https://hugo-picture.oss-cn-beijing.aliyuncs.com/blog/2019-09-02-2019-08-28-080723.1.png"
 author: "杨传胜"
 authorlink: "https://www.yangcs.net"
 translator: ""
@@ -43,9 +43,9 @@ Contour Ingress controller 由两个组件组成：
 
 1. 通过 `DaemonSet` 来部署，每个节点上跑一个 Contour 实例（Contour 与 Envoy 在同一个 Pod 中）。
 2. 通过 `Deployment` 来部署，总共跑两个 Contour 实例（Contour 与 Envoy 在同一个 Pod 中）。
-3. 通过 Deployment 来部署 Contour，总共跑两个 Contour 实例；通过 DaemonSet 来部署 Envoy，每个节点上跑一个 Envoy 实例。
+3. 通过 `Deployment` 来部署 Contour，总共跑两个 Contour 实例；通过 `DaemonSet` 来部署 Envoy，每个节点上跑一个 Envoy 实例。
 
-经过老夫目测，第三种方案比较妙，这样可以让 Contour 和 Envoy 这两个组件解耦，可以分别按需对不同的组件进行扩展，具体的优势如下：
+第三种方案比较巧妙，这样可以让 Contour 和 Envoy 这两个组件解耦，可以分别按需对不同的组件进行扩展，具体的优势如下：
 
 + Envoy 以 Daemonset 的形式运行，具有很强的扩展性，后续可通过 `ipvs` 和 `keepalived` 等工具来实现其负载均衡和高可用。
 + Envoy 运行的网络模式是 `hostNetwork`，减少了额外的网络性能损耗。
@@ -53,10 +53,6 @@ Contour Ingress controller 由两个组件组成：
 + 升级 Contour 不需要重启 Envoy。
 
 ![](https://hugo-picture.oss-cn-beijing.aliyuncs.com/blog/2019-08-28-080529.jpg)
-
-听起来好像不错的样子。
-
-![](https://hugo-picture.oss-cn-beijing.aliyuncs.com/blog/2019-08-27-105941.jpg)
 
 我们就采用第三种方案来部署，首先克隆官方仓库，进入 manifest 清单目录：
 
@@ -105,7 +101,7 @@ spec:
 部署：
 
 ```bash
-$ kubectl apply ./
+$ kubectl apply -f ./
 ```
 
 查看状态：
@@ -173,9 +169,9 @@ Contour 同时支持 `Ingress` 资源对象和 `IngressRoute` 资源对象（通
 
 在实践中，将 Ingress 对象转换为 Envoy 配置更加微妙，需要将 Envoy 中的 xDS 配置（包括 `CDS`，`EDS` 和 `RDS`）映射到 Kubernetes 中。Contour 至少需要观察 `Ingress`、`Service` 和 `Endpoint` 这几个资源对象以构建这些服务的响应，它通过 `client-go` 的 [cache/informer](https://www.kubernetes.org.cn/2693.html) 机制免费获得这些 `watchers`。这些 watchers 提供添加，更新和删除对象的边缘触发通知，也可以通过 `watch API` 在本地缓存缓存对象，以便后续查询。
 
-Contour 将收集到的这些对象处理为虚拟主机及其路由规则的**有向非循环图**（DAG），这表明 Contour 将有权构建路由规则的顶级视图，并将群集中的相应服务和TLS秘钥连接在一起。一旦构建了这个新的数据结构，我们就可以轻松实现 `IngressRoute` 对象的验证，授权和分发。改数据结构导出的 `png` 图片如下图所示：
+Contour 将收集到的这些对象处理为虚拟主机及其路由规则的**有向非循环图**（DAG），这表明 Contour 将有权构建路由规则的顶级视图，并将群集中的相应服务和TLS秘钥连接在一起。一旦构建了这个新的数据结构，我们就可以轻松实现 `IngressRoute` 对象的验证，授权和分发。该数据结构导出的 `png` 图片如下图所示：
 
-<center>![](https://hugo-picture.oss-cn-beijing.aliyuncs.com/images/DQTYlY.jpg)</center>
+![](https://hugo-picture.oss-cn-beijing.aliyuncs.com/images/DQTYlY.jpg)
 
 Envoy API 调用和 Kubernetes API 资源之间的映射关系如下：
 
@@ -197,7 +193,7 @@ Envoy API 调用和 Kubernetes API 资源之间的映射关系如下：
 
 ### RDS
 
-`RDS` 更像是 Kubernetes 中的 `Ingress` 资源。RDS 将前缀，路径或正则表达式之一路由到 Envoy 群集。Envoy 集群的名称可以从 Ingress 的 `IngressSpec` 的配置项中获取（比如：`namespace/serviceName_servicePort`），因为这是一个选择器，它会匹配 Service 对象被转换后返回的 CDS 对象。
+`RDS` 更像是 Kubernetes 中的 `Ingress` 资源。RDS 将前缀，路径或正则表达式之一路由到 Envoy 集群。Envoy 集群的名称可以从 Ingress 的 `IngressSpec` 的配置项中获取（比如：`namespace/serviceName_servicePort`），因为这是一个选择器，它会匹配 Service 对象被转换后返回的 CDS 对象。
 
 ## 5. Contour 架构分析
 
