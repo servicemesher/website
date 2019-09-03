@@ -7,8 +7,8 @@ author: "杨传胜"
 authorlink: "https://www.yangcs.net"
 translator: ""
 translatorlink: ""
-reviewer: ["宋净超"]
-reviewerlink: ["https://jimmysong.io"]
+reviewer: ["邱世达","罗广明"]
+reviewerlink: ["https://github.com/SataQiu","https://github.com/GuangmingLuo"]
 originallink: ""
 summary: "Contour 使用 Envoy 作为 Kubernetes 的 Ingress Controller 实现，为大家提供了一条新的 Kubernetes 外部负载均衡实现思路。本文介绍了 Contour 分布式架构的工作原理，Envoy 初始配置以及后续动态配置的下发流程，最后通过 Prometheus-Operator 抓取 Contour 的监控指标。"
 tags: ["contour","envoy","kubernetes"]
