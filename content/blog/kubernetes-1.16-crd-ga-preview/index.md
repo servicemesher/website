@@ -1,6 +1,6 @@
 ---
 title: "全面进化：Kubernetes CRD 1.16 GA前瞻"
-author: "yue9944882"
+author: "Min Kim"
 authorlink: "https://github.com/yue9944882"
 date: 2019-08-29T16:43:58+08:00
 draft: false
@@ -10,8 +10,6 @@ tags: ["CRD","kubernetes"]
 categories: ["kubernetes"]
 keywords: ["kubernetes","CRD"]
 ---
-
-# 全面进化：Kubernetes CRD 1.16 GA前瞻
 
 > 作者: Min Kim(yue9944882)，Kubernetes社区CRD维护者，蚂蚁金服高级研发工程师。Kubernetes 1.16扩展性GA Sprint迭代组成员，主要负责CRD OpenAPI聚合发布相关特性。
 
