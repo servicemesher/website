@@ -50,7 +50,7 @@ paginate = 10
 [[menu.main]]
     parent="docs"
     name="Istio中文官网"
-    url = "https://preliminary.istio.io/zh/"
+    url = "https://istio.io/zh/"
     weight = 3
 
 [[menu.main]]
@@ -72,6 +72,12 @@ paginate = 10
     weight = 6
 
 [[menu.main]]
+    parent="docs"
+    name = "Istio知识图谱"
+    url  = "https://github.com/servicemesher/istio-knowledge-map"
+    weight = 7
+
+[[menu.main]]
     name = "社区"
     identifier = "community"
     url  = "/activity/"
@@ -85,33 +91,27 @@ paginate = 10
 
 [[menu.main]]
     parent="community"
-    name = "作者投稿"
+    name = "作者排行"
     url  = "/authors/"
     weight = 2
 
 [[menu.main]]
     parent="community"
-    name = "译者投稿"
+    name = "译者排行"
     url  = "/translators/"
     weight = 3
 
 [[menu.main]]
     parent="community"
-    name = "Istio知识图谱"
-    url  = "https://github.com/servicemesher/istio-knowledge-map"
-    weight = 4
-
-[[menu.main]]
-    parent="community"
     name = "贡献指南"
     url  = "/contributing-specification/"
-    weight = 5
+    weight = 4
 
 [[menu.main]]
     parent="community"
     name = "活动"
     url  = "/activity/"
-    weight = 6
+    weight = 5
 
 [[menu.main]]
     name = "联系我们"
