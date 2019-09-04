@@ -2,7 +2,7 @@
 
 ## 定义
 
-“社区”是指 [ServiceMesher](https://www.servicemesher.com) 社区。
+“社区”是指 ServiceMesher 社区。
 
 “文章”是指向 ServiceMesher 社区投稿的文章。
 
@@ -12,7 +12,9 @@
 
 “社区官网”是指 <https://www.servicemesher.com>。
 
-“官网 Github”是指 <https://github.com/servicemesher.com/website>。
+“官网 GitHub”是指 <https://github.com/servicemesher/website>。
+
+“PR” 是指在社区官网 GitHub 提交的 Pull Request（<https://github.com/servicemesher/website/pulls>）。
 
 ### 投稿原则
 
@@ -24,21 +26,36 @@
 - 文章应围绕云原生、容器、微服务、DevOps、Kubernetes、Service Mesh、Serverless、安全性、可观察性、社区文化、企业最佳实践等；
 - 文章的理想长度为2000-5000字；
 - 文章中必须包含作者的姓名，公司头衔和简要介绍（仅限专业人士）；
-- 文章可能会在其他平台上以相同署名发布，但必须注明原文出处；
 - 文章必须通过在官网 GitHub 上以提交 PR 的方式提供；
 
 ## 作者义务
 
 文章作者需要履行以下义务：
 
-- 作者有义务回答读者对文章的评论；
-- 作者有义务保障文章的质量；
+- 作者应保障文章的质量；
+- 作者应及时解决文章中发现的问题，以保证内容的正确性；
+- 作者应有针对性的回答一些用户的提问；
+- 作者应及时响应及解决文章中发现的问题；
 
 ## 作者权利
 
 文章作者拥有以下权利：
 
-- 作者可以随时修改和删除已投稿的文章；
+- 作者可以通过提交 PR 的方式修改、增加、删除文章；
 - 若投稿有盈利则作者保留获取盈利的权利；
+
+## 社区义务
+
+社区应履行以下义务：
+
+- 社区应审核提交的文章；
+- 社区应保障文章的质量；
+- 社区在分享文章时应保障作者的署名权利；
+
+## 社区权利
+
+ServiceMesher 社区拥有以下权利：
+
+- 社区可以在其他平台上以相同署名发布文章，但必须注明原文出处；
 
 最终解释权归 ServiceMesher 社区所有。
