@@ -41,7 +41,7 @@ listener:
         - name: {L7-filter-name}
 ```
     
-  [L4 filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/network_filters/network_filters#config-network-filters)主要包括：HTTP connection manager, MySQL proxy, Rate limit, RBAC, Redis proxy, TCP proxy等。[L7 filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/http_filters/http_filters)是L4 filter中[HTTP connection manager](https://www.envoyproxy.io/docs/envoy/latest/configuration/http_conn_man/http_conn_man)下面定义的filter, 主要包括：CORS, External Authorization, Fault Injection, Health check, JWT Authentication, Lua, Rate limit, Router等。无论L4还是L7的filter都是按照指定的次序执行，istio中使用的istio-proxy也是在envoy的基础上额外编译进了istio_authn，mixer等filter， 以实现istio中的policy和telemetry等功能。
+  [L4 filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/network_filters/network_filters#config-network-filters)主要包括：HTTP connection manager, MySQL proxy, Rate limit, RBAC, Redis proxy, TCP proxy等。[L7 filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/http_filters#config-http-filters)是L4 filter中[HTTP connection manager](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/http_conn_man#config-http-conn-man)下面定义的filter, 主要包括：CORS, External Authorization, Fault Injection, Health check, JWT Authentication, Lua, Rate limit, Router等。无论L4还是L7的filter都是按照指定的次序执行，istio中使用的istio-proxy也是在envoy的基础上额外编译进了istio_authn，mixer等filter， 以实现istio中的policy和telemetry等功能。
 
 ## 更近一步：EnvoyFilter案例分析
 假设现在有一个需求，在调用REST接口时候如果header中含有k/v为“foo:bar”的请求要求返回444。 那么我们可以通过EnvoyFilter实现，在sidecar的inbound链中修改监听器配置，在http_connection_manager的第一个位置插入envoy.fault这样一个filter。
