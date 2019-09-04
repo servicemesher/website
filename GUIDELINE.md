@@ -14,7 +14,7 @@
 
 “官网 GitHub”是指 <https://github.com/servicemesher/website>。
 
-”PR“ 是指在社区官网 GitHub 提交的 Pull Request（<https://github.com/servicemesher/website/pulls>）。
+“PR” 是指在社区官网 GitHub 提交的 Pull Request（<https://github.com/servicemesher/website/pulls>）。
 
 ### 投稿原则
 
