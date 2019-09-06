@@ -20,9 +20,9 @@ tags: ["Service Mesh"]
 
 ## 前言
 
-[AWS App Mesh](https://aws.amazon.com/app-mesh/) 可以帮助你运行和监控大规模的HTTP和TCP服务。你可以用一致的方式来路由和监控流量，获得发现问题的能力，并在失败或代码更改后重新路由流量。App Mesh使用开源的[Envoy](https://www.envoyproxy.io/) 代理，让你可以使用来自AWS合作伙伴和开源社区的各种工具。
+[AWS App Mesh](https://aws.amazon.com/app-mesh/) 可以帮助你运行和监控大规模的HTTP和TCP服务。你可以用一致的方式来路由和监控流量，获得发现问题的能力，并在失败或代码更改后重新路由流量。App Mesh使用开源的[Envoy](https://www.envoyproxy.io/)代理，让你可以使用来自AWS合作伙伴和开源社区的各种工具。
 
-服务可以运行在[AWS Fargate](https://aws.amazon.com/fargate/)， [Amazon EC2](https://aws.amazon.com/ec2/)，[Amazon ECS](https://aws.amazon.com/ecs/)， [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/), 或 [Kubernetes](https://aws.amazon.com/kubernetes/)上。每个服务的所有进出流量都经过Envoy代理，以便对其进行路由、塑造、测量和记录。这种额外的间接层让你可以用任何想要的语言构建服务，而不必使用一组公共的通信库。
+服务可以运行在[AWS Fargate](https://aws.amazon.com/fargate/)， [Amazon EC2](https://aws.amazon.com/ec2/)，[Amazon ECS](https://aws.amazon.com/ecs/)， [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/) 或 [Kubernetes](https://aws.amazon.com/kubernetes/)上。每个服务的所有进出流量都经过Envoy代理，以便对其进行路由、塑造、测量和记录。这种额外的间接层让你可以用任何想要的语言构建服务，而不必使用一组公共的通信库。
 
 ## App Mesh基本概念
 
@@ -32,15 +32,15 @@ tags: ["Service Mesh"]
 
 [**虚拟服务**](https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html) – 直接（由虚拟节点）或间接（通过虚拟路由器）提供的服务的抽象（逻辑名称）。网格中的服务使用逻辑名称引用和使用其他服务。
 
-[**虚拟节点**](https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html) – 特定任务组（如ECS服务或Kubernetes部署）或运行在一个或多个EC2实例上的逻辑指针。每个虚拟节点可以通过**侦听器**接受入站流量，并通过**后端**连接到其他虚拟节点。此外，每个节点都有一个服务发现配置（当前是DNS名称），允许其他节点发现任务、pod或实例的IP地址。
+[**虚拟节点**](https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html) – 特定任务组（如ECS服务或Kubernetes部署）或运行在一个或多个EC2实例上的逻辑指针。每个虚拟节点可以通过**侦听器**接受入流量，并通过**后端**连接到其他虚拟节点。此外，每个节点都有一个服务发现配置（当前是DNS名称），允许其他节点发现任务、pod或实例的IP地址。
 
 [**虚拟路由器**](https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html) – 网格中一个或多个虚拟服务的处理器。每个虚拟路由器监听特定端口上的HTTP通信。
 
-[**路由**](https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html) – 路由使用基于前缀的url匹配将流量路由到虚拟节点，每个节点都有可选的权重。权重可用于测试生产环境中的新服务，同时逐渐增加它们处理的流量。
+[**路由**](https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html) – 路由使用基于URL的前缀匹配将流量路由到虚拟节点，每个节点都有可选的权重。权重可用于测试生产环境中的新服务，同时逐渐增加它们处理的流量。
 
 把它们放在一起，每个服务网格包含一组服务，可以通过路由指定的URL路径访问这些服务。网格中，服务通过名称相互引用。
 
-可以从App Mesh控制台、App Mesh CLI或App Mesh API访问App Mesh。我将展示如何使用控制台，并对CLI做简要的介绍。
+可以从App Mesh控制台、App Mesh CLI或App Mesh API访问App Mesh。我将展示如何使用控制台创建网格，并对CLI做简要的介绍。
 
 ## 使用App Mesh控制台
 
@@ -48,7 +48,7 @@ tags: ["Service Mesh"]
 
 ![img](https://media.amazonwebservices.com/blog/2019/am_console_1.png)
 
-输入我的网格名称和第一个虚拟服务（以后可以添加多个），点击下一步：
+输入我的网格和第一个虚拟服务（以后可以添加多个）的名称，点击下一步：
 
 ![img](https://media.amazonwebservices.com/blog/2019/am_step1_2.png)
 
@@ -56,7 +56,7 @@ tags: ["Service Mesh"]
 
 ![img](https://media.amazonwebservices.com/blog/2019/am_step2_1.png)
 
-点击额外配置来设置特定的服务后端（其他服务是一个可以调用的服务）和日志记录：
+点击额外配置来设置特定的服务后端（其他服务是指一个可以调用的服务）和日志记录：
 
 ![img](https://media.amazonwebservices.com/blog/2019/am_step2_p2_2.png)
 
@@ -68,11 +68,11 @@ tags: ["Service Mesh"]
 
 ![img](https://media.amazonwebservices.com/blog/2019/am_step3_p1_1.png)
 
-I can apportion traffic across several virtual nodes (targets) on a percentage basis, and I can use prefix-based routing for incoming traffic:
+可以按百分比在多个虚拟节点（目标）之间分配流量，还可以对入流量使用基于前缀的路由：
 
 ![img](https://media.amazonwebservices.com/blog/2019/am_step3_p2_1.png)
 
-检查一下我的设置并点击创建网格服务：
+最后再检查一下我的设置并点击创建网格服务：
 
 ![img](https://media.amazonwebservices.com/blog/2019/am_review_1.png)
 
@@ -84,7 +84,7 @@ I can apportion traffic across several virtual nodes (targets) on a percentage b
 
 ## 使用AWS App Mesh命令行
 
-App Mesh可以让你以一个简单的JSON形式描述每个组件的类型，并提供了[命令行工具](https://docs.aws.amazon.com/cli/latest/reference/appmesh/)来创建每一个组件（`create-mesh`, `create-virtual-service`, `create-virtual-node`, and `create-virtual-router`）。例如，我可以像这样定义一个虚拟路由：
+App Mesh可以让你以一个简单的JSON形式描述每个类型的组件，并提供了[命令行工具](https://docs.aws.amazon.com/cli/latest/reference/appmesh/)来创建每一个组件（`create-mesh`, `create-virtual-service`, `create-virtual-node`, and `create-virtual-router`）。例如，可以像这样定义一个虚拟路由：
 
 ```json
 {
@@ -111,4 +111,4 @@ $ aws appmesh create-virtual-router --cli-input-json file://serviceA-router.json
 
 ## 当前可用
 
-AWS App Mesh现在是可用的，你可以今天就开始使用它，包括美国东部（维吉尼亚），美国东部（俄亥俄州），美国西部（俄勒冈州），美国西部（加利福尼亚），加拿大（中央）、欧洲（爱尔兰），欧洲（法兰克福），欧洲（伦敦），亚太（孟买），亚太（东京），亚太（悉尼），亚太（新加坡），和亚太（首尔）地区。
+AWS App Mesh现在是可用的，你可以现在就开始使用它，包括的区域有美国东部（维吉尼亚），美国东部（俄亥俄州），美国西部（俄勒冈州），美国西部（加利福尼亚），加拿大（中央）、欧洲（爱尔兰），欧洲（法兰克福），欧洲（伦敦），亚太（孟买），亚太（东京），亚太（悉尼），亚太（新加坡），和亚太（首尔）。
