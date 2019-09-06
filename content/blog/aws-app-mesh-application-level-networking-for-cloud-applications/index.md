@@ -3,7 +3,7 @@ originallink: "https://aws.amazon.com/cn/blogs/aws/aws-app-mesh-application-leve
 author: "Jeff Barr"
 date: "2019-09-06T18:00:00+08:00"
 draft: false
-banner: "/img/blog/banners/006tKfTcly1g0t1i9oxo4j31400u0npe.jpg"
+banner: "/img/blog/banners/006tKfTcgy1ftnl1osmwjj30rs0kub1t.jpg"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
 reviewer:  ["罗广明"]
