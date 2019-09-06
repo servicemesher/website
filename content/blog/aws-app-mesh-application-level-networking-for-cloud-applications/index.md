@@ -16,13 +16,13 @@ tags: ["Service Mesh"]
 
 ## 编者按
 
-[AWS App Mesh](https://aws.amazon.com/app-mesh/) helps you to run and monitor HTTP and TCP services at scale. You get a consistent way to route and monitor traffic, giving you insight into problems and the ability to re-route traffic after failures or code changes. App Mesh uses the open source [Envoy](https://www.envoyproxy.io/) proxy, giving you access to a wide range of tools from AWS partners and the open source community.
 
-AWS App Mesh可以帮助您大规模地运行和监视HTTP和TCP服务。您获得了一种一致的路由和监视流量的方法，使您能够洞察问题，并在失败或代码更改后重新路由流量。App Mesh使用开源的Envoy代理，让您可以访问来自AWS合作伙伴和开源社区的各种工具。
 
-Services can run on [AWS Fargate](https://aws.amazon.com/fargate/), [Amazon EC2](https://aws.amazon.com/ec2/), [Amazon ECS](https://aws.amazon.com/ecs/), [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/), or [Kubernetes](https://aws.amazon.com/kubernetes/). All traffic in and out of the each service goes through the Envoy proxy so that it can be routed, shaped, measured, and logged. This extra level of indirection lets you build your services in any desired languages without having to use a common set of communication libraries.
+## 前言
 
-服务可以运行在AWS Fargate、Amazon EC2、Amazon ECS、Amazon Elastic Container Services for Kubernetes或Kubernetes上。每个服务的所有进出流量都通过Envoy代理，以便对其进行路由、成形、测量和记录。这种额外的间接层让您可以用任何想要的语言构建服务，而不必使用一组公共的通信库。
+[AWS App Mesh](https://aws.amazon.com/app-mesh/) 可以帮助你运行和监控大规模的HTTP和TCP服务。你可以用一致的方式来路由和监控流量，获得发现问题的能力，并在失败或代码更改后重新路由流量。App Mesh使用开源的[Envoy](https://www.envoyproxy.io/) 代理，让你可以使用来自AWS合作伙伴和开源社区的各种工具。
+
+服务可以运行在[AWS Fargate](https://aws.amazon.com/fargate/)， [Amazon EC2](https://aws.amazon.com/ec2/)，[Amazon ECS](https://aws.amazon.com/ecs/)， [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/), 或 [Kubernetes](https://aws.amazon.com/kubernetes/)上。每个服务的所有进出流量都经过Envoy代理，以便对其进行路由、塑造、测量和记录。这种额外的间接层让你可以用任何想要的语言构建服务，而不必使用一组公共的通信库。
 
 ## App Mesh Concepts
 
