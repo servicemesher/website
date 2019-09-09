@@ -2,7 +2,7 @@
 title: "使用spring boot+kubernetes构建完整微服务平台"
 date: 2019-09-02T7:15:43+08:00
 draft: false
-banner: "/img/blog/banners/banner.jpg"
+banner: "/img/blog/banners/banner-fjlajg.jpg"
 author: "陆培尔"
 authorlink: "https://lupeier.com/"
 originallink: "https://lupeier.com/post/use-kubernetes-to-build-microservices/"
@@ -36,7 +36,11 @@ keywords: ["microservices","kubernetes"]
 
 #### Spring Cloud 与 Kubernetes 功能对比
 
-先来看下这张图![image.png](./image.png)可以说，spring cloud关注的功能是kubernetes的一个子集，下面来详细对比一下：
+先来看下这张图。
+
+![image.png](./image.png)
+
+可以说，spring cloud关注的功能是kubernetes的一个子集，下面来详细对比一下：
 
 | 关注点         | Spring Cloud               | Kubernetes                |
 | :------------- | :------------------------- | :------------------------ |
