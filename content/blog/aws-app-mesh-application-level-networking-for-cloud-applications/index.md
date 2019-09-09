@@ -6,8 +6,8 @@ draft: false
 banner: "/img/blog/banners/006tKfTcgy1ftnl1osmwjj30rs0kub1t.jpg"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
-reviewer:  ["罗广明"]
-reviewerlink:  ["https://github.com/GuangmingLuo"]
+reviewer:  ["孙海洲"]
+reviewerlink:  ["https://github.com/haiker2011"]
 title: "AWS App Mesh - 云应用的服务网格"
 description: "本文演示了如何在AWS控制台创建一个App Mesh"
 categories: ["service mesh"]
@@ -22,7 +22,7 @@ tags: ["service mesh"]
 
 [AWS App Mesh](https://aws.amazon.com/app-mesh/) 可以帮助你运行和监控大规模的HTTP和TCP服务。你可以用一致的方式来路由和监控流量，获得发现问题的能力，并在失败或代码更改后重新路由流量。App Mesh使用开源的[Envoy](https://www.envoyproxy.io/)代理，让你可以使用来自AWS合作伙伴和开源社区的各种工具。
 
-服务可以运行在[AWS Fargate](https://aws.amazon.com/fargate/)， [Amazon EC2](https://aws.amazon.com/ec2/)，[Amazon ECS](https://aws.amazon.com/ecs/)， [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/) 或 [Kubernetes](https://aws.amazon.com/kubernetes/)上。每个服务的所有进出流量都经过Envoy代理，以便对其进行路由、塑造、测量和记录。这种额外的间接层让你可以用任何想要的语言构建服务，而不必使用一组公共的通信库。
+服务可以运行在[AWS Fargate](https://aws.amazon.com/fargate/)， [Amazon EC2](https://aws.amazon.com/ec2/)，[Amazon ECS](https://aws.amazon.com/ecs/)， [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/) 或 [Kubernetes](https://aws.amazon.com/kubernetes/)上。每个服务的所有进出流量都经过Envoy代理，以便对其进行路由、可视化、测量和记录。这种额外的间接层让你可以用任何想要的语言构建服务，而不必使用一组公共的通信库。
 
 ## App Mesh基本概念
 
@@ -111,4 +111,4 @@ $ aws appmesh create-virtual-router --cli-input-json file://serviceA-router.json
 
 ## 当前可用
 
-AWS App Mesh现在是可用的，你可以现在就开始使用它，包括的区域有美国东部（维吉尼亚），美国东部（俄亥俄州），美国西部（俄勒冈州），美国西部（加利福尼亚），加拿大（中央）、欧洲（爱尔兰），欧洲（法兰克福），欧洲（伦敦），亚太（孟买），亚太（东京），亚太（悉尼），亚太（新加坡），和亚太（首尔）。
+AWS App Mesh现在是可用的，你可以现在就开始使用它，包括的区域有美国东部（维吉尼亚），美国东部（俄亥俄州），美国西部（俄勒冈州），美国西部（加利福尼亚），加拿大（中央）、欧洲（爱尔兰），欧洲（法兰克福），欧洲（伦敦），亚太（孟买），亚太（东京），亚太（悉尼），亚太（新加坡）和亚太（首尔）。
