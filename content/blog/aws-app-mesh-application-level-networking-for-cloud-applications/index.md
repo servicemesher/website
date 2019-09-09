@@ -10,8 +10,8 @@ reviewer:  ["罗广明"]
 reviewerlink:  ["https://github.com/GuangmingLuo"]
 title: "AWS App Mesh - 云应用的服务网格"
 description: "本文演示了如何在AWS控制台创建一个App Mesh"
-categories: ["Service Mesh"]
-tags: ["Service Mesh"]
+categories: ["service mesh"]
+tags: ["service mesh"]
 ---
 
 ## 编者按
