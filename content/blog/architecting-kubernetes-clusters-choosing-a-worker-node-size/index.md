@@ -6,8 +6,8 @@ draft: false
 banner: "/img/blog/banners/architecting-kubernetes-clusters-choosing-a-worker-node-size.png"
 translator: "邱世达"
 translatorlink: "https://github.com/SataQiu"
-reviewer:  [""]
-reviewerlink:  [""]
+reviewer:  ["孙海洲"]
+reviewerlink:  ["https://github.com/haiker2011"]
 title: "构建 Kubernetes 集群 —— 选择工作节点数量和大小"
 description: "本文从多个维度阐述了使用更少的大节点与更多的小节点来组建 Kubernetes 集群各自的优势与劣势，并结合实践经验给出了选择工作节点数量和大小的一般方法。"
 categories: ["Kubernetes"]
@@ -52,7 +52,7 @@ tags: ["Kubernetes"]
 
 **究竟哪种配置方式更好呢？**
 
-为了解决这个问题，让我们对比下这两个相反的方向（即更少的大节点与更多的小节点）各自的优缺点。
+为了解决这个问题，让我们对比下二者（即更少的大节点与更多的小节点）各自的优缺点。
 
 > 请注意，本文中的“节点”始终代指工作节点。主节点数量和大小的选择是完全不同的主题。
 
@@ -124,7 +124,7 @@ tags: ["Kubernetes"]
 
 因此，如果您有高可用要求，则可能需要集群节点数大于某个下限值。
 
-### 3. 更高的爆炸半径
+### 3. 更大的破坏范围
 
 如果您只有几个工作节点，那么节点失败造成的影响比使用大量节点时的影响要大。
 
@@ -150,7 +150,7 @@ Kubernetes 为云基础架构提供了 Cluster Autoscaler，允许根据当前�
 
 使用更多小节点的优点正对应于使用更少大节点的缺点。
 
-### 1. 减少爆炸半径
+### 1. 减小破坏范围
 
 如果您有更多节点，则每个节点上的 Pod 自然会更少。
 
