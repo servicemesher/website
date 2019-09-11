@@ -11,9 +11,9 @@ description: "本文引述了Kong的CTO对Kuma这款Service Mesh产品的介绍�
 tags: ["service mesh"]
 categories: ["service mesh"]
 keywords: ["service mesh","puma","kong"]
-date: 2019-09-11T11:23:19+08:00
+date: 2019-09-11T21:23:19+08:00
 draft: false
-banner: "/img/blog/banners/kuma-banner.png"
+banner: "/img/blog/banners/kuma-banner.jpeg"
 ---
 
 ## 编者按
