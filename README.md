@@ -9,9 +9,9 @@
 - 搜索：[algolia](https://algolia.com)
 - 图床：Github 或其他支持 https 的图床
 
-## 贡献
+## 投稿和贡献指南
 
-参与贡献前请先查看[贡献和使用说明](CONTRIBUTING.md)。
+投稿和参与贡献前请先查看[贡献和使用说明](CONTRIBUTING.md)。
 
 ## 注意事项
 
