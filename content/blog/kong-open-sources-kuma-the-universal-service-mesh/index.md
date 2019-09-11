@@ -29,9 +29,9 @@ banner: "/img/blog/banners/kuma-banner.jpeg"
 - **网络安全**: 自动mTLS加密。
 - **流量分割**: 灵活的ACL规则。
 - **流量追踪**: 与Zipkin和 Jaeger自动集成。
-- **流量指标**: 与Prometheus/Splunk/ELK字段集成。
+- **流量指标**: 与Prometheus/Splunk/ELK自动集成。
 - **代理配置模版**: 方便进阶(收费)用户配置Envoy。
-- **标签选择器**: 可应用复杂的地域性的、特定于云的和面向团队的策略。
+- **标签选择器**: 可应用不同地域的、特定于云的和面向团队的策略。
 - **平台中立**: 支持K8s, 虚拟机和裸机。
 - **强大的APIM Ingress**: 与Kong网关集成。
 
@@ -45,7 +45,7 @@ Kong正在将其服务网状平台Kuma打造成一个日益复杂的生态系统
 
 Kuma包括一个基于Envoy服务代理的通用控制平面。它结合了数据平面和进阶的控制平面，允许用户使用本地自定义资源定义(CRDs)或RESTful API设置权限、获取指标和设置路由规则。Palladino解释说，早期第一轮的服务网格平台大多缺乏成熟的控制平面，需要大量的二次开发或手工定制。
 
-他解释说：“我们希望90%的[用例](https://www.sdxcentral.com/cloud/definitions/software-defined-everything-part-5-sdx-use-cases/)都易于使用，并且能够快速升级。”。“对于另外10%的用户，我们有一个允许用户深入使用的政策，”他补充说，尽管Kuma的设计是为了方便使用，“但Kuma是为企业设计的，而不是业余爱好者。”
+他解释说：“我们希望90%的[用例](https://www.sdxcentral.com/cloud/definitions/software-defined-everything-part-5-sdx-use-cases/)都易于使用，并且能够快速升级。对于另外10%的用户，我们有一个允许用户深入使用的政策，”他补充说，尽管Kuma的设计是为了方便使用，“但Kuma是为企业设计的，而不是业余爱好者。”
 
 Kuma的特性包括[software-defined security](https://www.sdxcentral.com/security/)，它支持所有四层通信流的[mTLS](https://www.sdxcentral.com/security/definitions/what-is-software-defined-security/)身份验证；能够实现跟踪(trace)和日志(log)记录，从而更好地分析指标；提供流量控制能力，如断路器和健康检查，以增强四层路由。
 
