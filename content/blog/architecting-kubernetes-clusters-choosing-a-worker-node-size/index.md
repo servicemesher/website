@@ -6,8 +6,8 @@ draft: false
 banner: "/img/blog/banners/architecting-kubernetes-clusters-choosing-a-worker-node-size.png"
 translator: "邱世达"
 translatorlink: "https://github.com/SataQiu"
-reviewer:  ["孙海洲"]
-reviewerlink:  ["https://github.com/haiker2011"]
+reviewer:  ["孙海洲","宋净超"]
+reviewerlink:  ["https://github.com/haiker2011","https://github.com/rootsongjc"]
 title: "构建 Kubernetes 集群 —— 选择工作节点数量和大小"
 description: "本文从多个维度阐述了使用更少的大节点与更多的小节点来组建 Kubernetes 集群各自的优势与劣势，并结合实践经验给出了选择工作节点数量和大小的一般方法。"
 categories: ["Kubernetes"]
@@ -26,7 +26,7 @@ tags: ["Kubernetes"]
 
 > 今天问题的答案由 [Daniel Weibel](https://medium.com/@weibeld) 给出。Daniel 是一名软件工程师，同时也是 Learnk8s 的讲师。
 
-*如果您希望在下一期中展示您的问题，请[通过邮件联系我们](hello@learnk8s.io)或者[在 tweet 上 @learnk8s](https://twitter.com/learnk8s)*。
+如果您希望在下一期中展示您的问题，请[通过邮件联系我们](hello@learnk8s.io)或者[在 tweet 上 @learnk8s](https://twitter.com/learnk8s)。
 
 错过了前几期？[点击这里查看往期内容](https://learnk8s.io/bite-sized)。
 
@@ -62,9 +62,11 @@ tags: ["Kubernetes"]
 
 在上面的示例中，这将是一个具有 16 个 CPU 和 16GB 内存的单个工作节点。
 
+### 使用大节点的优势
+
 *让我们来看看这种方法可能具有的优势。*
 
-### 1. 更少的管理开销 
+#### 更少的管理开销 
 
 简单来说，管理少量机器相比管理大量机器会更省力。对节点进行升级和打补丁的操作能很迅速地完成，节点间的同步保持也更容易。此外，对于很少的机器而言，预期故障的绝对数量也会小于使用大量机器的场景。
 
@@ -72,7 +74,7 @@ tags: ["Kubernetes"]
 
 如果您使用云实例（作为托管 Kubernetes 服务的一部分或在云基础架构上安装的 Kubernetes），则实际上是将底层机器的管理外包给了云提供商。因此，管理云中的 10 个节点可能并不比管理云中的单个节点耗费更多管理成本。
 
-### 2. 更低的单节点成本
+#### 更低的单节点成本
 
 虽然高端机器比低端机器更昂贵，但价格上涨不一定是线性的。换句话说，具有 10 个 CPU 和 10GB 内存的单台机器可能比具有 1 个 CPU 和 1GB 内存的 10 台机器便宜。
 
@@ -80,15 +82,17 @@ tags: ["Kubernetes"]
 
 在主要的云提供商 [Amazon Web Services](https://aws.amazon.com/ec2/pricing/on-demand/)、[Google Cloud Platform](https://cloud.google.com/compute/vm-instance-pricing) 和 [Microsoft Azure](https://azure.microsoft.com/en-us/pricing/calculator/#virtual-machines) 的当前定价方案中，实例价格会随容量线性增加。例如，在 Google Cloud Platform 上，64 个 `n1-standard-1` 实例的成本与单个 `n1-standard-64` 实例完全相同——这两种方式都为您提供 64 个 CPU 和 240GB 内存。因此，在云上，您通常无法通过使用更大的机器来节省资金投入。
 
-### 3. 允许运行资源饥饿型应用
+#### 允许运行资源饥饿型应用
 
 具备大型节点可能只是您要在集群中运行的应用程序类型的需求。
 
 例如，如果您有一个需要 8GB 内存的机器学习应用程序，则无法在仅具有 1GB 内存的节点的集群上运行它。但是，您可以在具有 10GB 内存节点的集群上运行它。
 
+### 使用大节点的劣势
+
 *看完了优势，让我们再来看看劣势。*
 
-### 1. 每个节点会运行大量 Pod
+#### 每个节点会运行大量 Pod
 
 在较少的节点上运行相同的工作负载自然意味着在每个节点上运行更多的 Pod。
 
@@ -116,7 +120,7 @@ tags: ["Kubernetes"]
 
 因此，如果您计划为每个节点运行大量 Pod，则应该事先进行测试，看能否按预期那样工作。
 
-### 2. 有限的副本数量
+#### 有限的副本数量
 
 较少的节点可能会限制应用程序的副本数量。
 
@@ -124,7 +128,7 @@ tags: ["Kubernetes"]
 
 因此，如果您有高可用要求，则可能需要集群节点数大于某个下限值。
 
-### 3. 更大的破坏范围
+#### 更大的破坏范围
 
 如果您只有几个工作节点，那么节点失败造成的影响比使用大量节点时的影响要大。
 
@@ -132,7 +136,7 @@ tags: ["Kubernetes"]
 
 因此，如果您想减少硬件故障的影响，则应该选择更多的节点。
 
-### 4. 较大的资源伸缩增量
+#### 较大的资源伸缩增量
 
 Kubernetes 为云基础架构提供了 Cluster Autoscaler，允许根据当前需求自动添加或删除节点。如果使用大型节点，则会有较大的资源伸缩增量，这会使资源扩缩容更加笨重。
 
@@ -148,9 +152,11 @@ Kubernetes 为云基础架构提供了 Cluster Autoscaler，允许根据当前�
 
 ***那它的优缺点又是什么呢？***
 
+### 使用小节点的优势
+
 使用更多小节点的优点正对应于使用更少大节点的缺点。
 
-### 1. 减小破坏范围
+#### 减小破坏范围
 
 如果您有更多节点，则每个节点上的 Pod 自然会更少。
 
@@ -158,7 +164,7 @@ Kubernetes 为云基础架构提供了 Cluster Autoscaler，允许根据当前�
 
 此外，剩余节点上的备用资源很可能足以容纳故障节点的工作负载，因此Kubernetes 可以重新安排所有 Pod，并且您的应用程序可以相对快速地恢复到完全正常的运行状态。
 
-### 2. 允许更多副本数量
+#### 允许更多副本数量
 
 如果您有一个多副本高可用应用程序以及足够的可用节点，Kubernetes 调度程序可以将每个副本分配给不同的节点。
 
@@ -166,9 +172,11 @@ Kubernetes 为云基础架构提供了 Cluster Autoscaler，允许根据当前�
 
 这意味着如果某个节点出现故障，则最多只有一个副本受影响，且您的应用程序仍然可用。
 
+### 使用小节点的劣势
+
 *看了使用更多小节点的优点，那它有什么缺点呢？*
 
-### 1. 较大的节点数量
+#### 较大的节点数量
 
 如果使用较小的节点，则自然需要更多节点来实现给定的集群容量。
 
@@ -206,7 +214,7 @@ Kubernetes controller manager 中的节点控制器定期遍历集群中的所�
 
 > 像 [Virtual Kubelet](https://www.youtube.com/watch?v=v9cwYvuzROs) 这样的新开发产品允许您绕过这些限制，以构建具有大量工作节点的集群。
 
-### 2. 更多的系统开销
+#### 更多的系统开销
 
 Kubernetes 在每个工作节点上运行一组系统守护进程——包括容器运行时（如 Docker）、kube-proxy 和包含 cAdvisor 的 kubelet。
 
@@ -220,7 +228,7 @@ Kubernetes 在每个工作节点上运行一组系统守护进程——包括容
 
 因此，如果您希望最大化基础架构支出的回报，那么您可能会喜欢更少的节点。
 
-### 3. 更低的资源利用率
+#### 更低的资源利用率
 
 如果您使用较小的节点，那么可能会产生大量资源碎片因资源太少而无法分配给任何工作负载，最终保持未使用状态。
 
@@ -228,7 +236,7 @@ Kubernetes 在每个工作节点上运行一组系统守护进程——包括容
 
 因此，如果您想最大限度地减少资源浪费，使用更大的节点可能会带来更好的结果。
 
-### 4. 小节点限制 Pod 运行数量
+#### 小节点限制 Pod 运行数量
 
 在某些云基础架构上，小节点上允许的最大 Pod 数量比您预期的要限制得更多。
 
