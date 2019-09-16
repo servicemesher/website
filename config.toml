@@ -50,7 +50,7 @@ paginate = 10
 [[menu.main]]
     parent="docs"
     name="Istio中文官网"
-    url = "https://istio.io/zh/"
+    url = "https://archive.istio.io/v1.2/zh"
     weight = 3
 
 [[menu.main]]
