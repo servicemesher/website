@@ -20,21 +20,21 @@ tags: ["monitoring"]
 
 ## 为什么自定义指标很重要？
 
-尽管有大量关于这一主题的讨论，但应用程序的自定义指标的重要性怎么强调都不为过。和你为Django应用收集的核心服务指标（应用和web服务器统计数据、关键数据库和缓存操作指标）不同，自定义指标是业务特有的数据点，其边界和阈值只有您自己知道。这是很有趣的事情。
+尽管有大量关于这一主题的讨论，但应用程序的自定义指标的重要性怎么强调都不为过。和为Django应用收集的核心服务指标（应用和web服务器统计数据、关键数据库和缓存操作指标）不同，自定义指标是业务特有的数据点，其边界和阈值只有你自己知道，这其实是很有趣的事情。
 
-怎样的指标才是有用的？考虑下面几点：
+什么样的指标才是有用的？考虑下面几点：
 
-- 运行一个电子商务网站并追踪平均订单数量。可能突然间订单的数量不那么平均了。有了可靠的应用指标和监控，你就可以在[损失殆尽](https://dealbook.nytimes.com/2012/08/02/knight-capital-says-trading-mishap-cost-it-440-million/)之前捕获到Bug。
-- 你正在写一个爬虫，它每小时从一个新闻网站抓取最新的文章。可能突然最近的文章并不新了。可靠的指标和监控可以更早地揭示问题所在。
+- 运行一个电子商务网站并追踪平均订单数量。突然间订单的数量不那么平均了。有了可靠的应用指标和监控，你就可以在[损失殆尽](https://dealbook.nytimes.com/2012/08/02/knight-capital-says-trading-mishap-cost-it-440-million/)之前捕获到Bug。
+- 你正在写一个爬虫，它每小时从一个新闻网站抓取最新的文章。突然最近的文章并不新了。可靠的指标和监控可以更早地揭示问题所在。
 - 我认为你已经理解了重点。
 
 ## 设置Django应用程序
 
-除了明显的依赖（`pip install Django`）之外，我们还需要为宠物项目添加一些额外的包。继续并安装`pip install django-prometheus-client`。这将为我们提供一个Python的Prometheus客户端，以及一些有用的Django hook，包括中间件和一个优雅的DB包装器。接下来，我们将运行Django管理命令来启动项目，更新我们的设置来使用Prometheus客户端，并将Prometheus的URL添加到我们的URL配置中。
+除了明显的依赖（`pip install Django`）之外，我们还需要为宠物项目（译者注：demo）添加一些额外的包。继续并安装`pip install django-prometheus-client`。这将为我们提供一个Python的Prometheus客户端，以及一些有用的Django hook，包括中间件和一个优雅的DB包装器。接下来，我们将运行Django管理命令来启动项目，更新我们的设置来使用Prometheus客户端，并将Prometheus的URL添加到URL配置中。
 
 **启动一个新的项目和应用程序**
 
-为了这篇文章，并且切合我们的[代理品牌](https://www.meanpug.com/)，我们建立一个遛狗服务。请注意，它实际上不会做什么事，但足以作为一个教学示例。执行如下命令：
+为了这篇文章，并且切合[代理的品牌](https://www.meanpug.com/)，我们建立了一个遛狗服务。请注意，它实际上不会做什么事，但足以作为一个教学示例。执行如下命令：
 
 ```bash
 django-admin.py startproject demo
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-现在，我们来添加一些基本的模型和视图。简单起见，我只实现我们将要检测的部分。如果想要完整地示例，可以从这个[demo应用](https://github.com/MeanPug/django-prometheus-demo) 获取源码。
+现在，我们来添加一些基本的模型和视图。简单起见，我只实现将要验证的部分。如果想要完整地示例，可以从这个[demo应用](https://github.com/MeanPug/django-prometheus-demo) 获取源码。
 
 ```python
 # walker/models.py
@@ -222,13 +222,13 @@ urlpatterns = [
 
 ## 添加Prometheus指标
 
-由于`django-prometheus`提供的开箱即用功能，我们可以立即追踪一些基本的模型操作，比如插入和删除。可以在`/metrics`endpoint看到这些：
+由于`django-prometheus`提供了开箱即用功能，我们可以立即追踪一些基本的模型操作，比如插入和删除。可以在`/metrics`endpoint看到这些：
 
 ![django-prometheus default metrics](https://labs.meanpug.com/content/images/2019/09/Screen-Shot-2019-09-07-at-12.18.47-AM.png)*django-prometheus提供的默认指标*
 
 让我们把它变得更有趣点。
 
-添加一个`walker/metrics.py`文件，定义一些要追踪的基本的指标。
+添加一个`walker/metrics.py`文件，定义一些要追踪的基本指标。
 
 ```python
 # walker/metrics.py
@@ -242,7 +242,7 @@ invalid_walks = Counter('invalid_walks', 'number of walks attempted to be starte
 walk_distance = Histogram('walk_distance', 'distribution of distance walked', buckets=[0, 50, 200, 400, 800, 1600, 3200])
 ```
 
-很简单，不是吗？[Prometheus文档](https://prometheus.io/docs/concepts/metric_types/)很好地解释了每种指标类型的用途，简言之，我们使用计数器来表示严格随时间增长的指标，使用直方图来追踪包含值分布的指标。下面开始检测应用的代码。
+很简单，不是吗？[Prometheus文档](https://prometheus.io/docs/concepts/metric_types/)很好地解释了每种指标类型的用途，简言之，我们使用计数器来表示严格随时间增长的指标，使用直方图来追踪包含值分布的指标。下面开始验证应用的代码。
 
 ```python
 # walker/views.py
@@ -285,17 +285,17 @@ class StartWalkView(View):
         return HttpResponseBadRequest(content=f'form validation failed with errors {form.errors}')
 ```
 
-如果我们发送几个样例请求，可以看到新指标已经产生了。
+发送几个样例请求，可以看到新指标已经产生了。
 
 ![custom metrics coming in](https://labs.meanpug.com/content/images/2019/09/custom-application-metrics.png)*显示散步距离和创建散步的指标*
 
-![prometheus custom metrics](https://labs.meanpug.com/content/images/2019/09/custom-metrics-prometheus.png)*我们定义的指标此时已经可以在prometheus里查找到了*
+![prometheus custom metrics](https://labs.meanpug.com/content/images/2019/09/custom-metrics-prometheus.png)*定义的指标此时已经可以在prometheus里查找到了*
 
-至此，我们已经在代码中添加了自定义指标，并整合了应用以追踪指标，并验证了这些指标已在`/metrics` 上更新并可用。让我们继续将仪表化应用部署到Kubernetes集群。
+至此，我们已经在代码中添加了自定义指标，整合了应用以追踪指标，并验证了这些指标已在`/metrics` 上更新并可用。让我们继续将仪表化应用部署到Kubernetes集群。
 
 ## 使用Helm部署应用
 
-我只会列出和追踪和导出指标相关的配置内容，完整的Helm chart部署和服务配置可以在 [demo应用](https://github.com/MeanPug/django-prometheus-demo)中找到。 作为起点，这有一些和导出指标相关的deployment和configmap高亮的部分：
+我只会列出和追踪、导出指标相关的配置内容，完整的Helm chart部署和服务配置可以在 [demo应用](https://github.com/MeanPug/django-prometheus-demo)中找到。 作为起点，这有一些和导出指标相关的deployment和configmap的配置：
 
 ```yaml
 # helm/demo/templates/nginx-conf-configmap.yaml
@@ -397,7 +397,7 @@ kind: Deployment
 没什么神奇的，只是一些YAML而已。有两个重点需要强调一下：
 
 1. 我们通过一个nginx反向代理将`/metrics`放在了验证后面，为location块设置了auth_basic指令集。你可能希望在反向代理之后部署[gunicorn](https://docs.gunicorn.org/en/latest/deploy.html) ，但这样做可以获得保护指标的额外好处。
-2. 我们使用多线程的gunicorn而不是多个worker。虽然您可以为Prometheus客户端启用[多进程模式](https://github.com/prometheus/client_python#multiprocess-mode-gunicorn)，但在Kubernetes环境中，安装会更为复杂。为什么这很重要呢？在一个pod中运行多个worker的风险在于，每个worker将在采集时报告自己的一组指标值。但是，由于服务在Prometheus Kubernetes SD scrape配置中被设置为pod级别 ，这些（潜在的）跳转值将被错误地分类为[计数器重置](https://prometheus.io/docs/concepts/metric_types/#counter)，从而导致测量结果不一致。您并不一定需要遵循上述所有步骤，但重点是：如果你了解的不多，应该从一个单线程+单worker的 gunicorn环境开始，或者从一个单worker+多线程环境开始。
+2. 我们使用多线程的gunicorn而不是多个worker。虽然可以为Prometheus客户端启用[多进程模式](https://github.com/prometheus/client_python#multiprocess-mode-gunicorn)，但在Kubernetes环境中，安装会更为复杂。为什么这很重要呢？在一个pod中运行多个worker的风险在于，每个worker将在采集时报告自己的一组指标值。但是，由于服务在Prometheus Kubernetes SD scrape配置中被设置为pod级别 ，这些（潜在的）跳转值将被错误地分类为[计数器重置](https://prometheus.io/docs/concepts/metric_types/#counter)，从而导致测量结果不一致。你并不一定需要遵循上述所有步骤，但重点是：如果你了解的不多，应该从一个单线程+单worker的gunicorn环境开始，或者从一个单worker+多线程环境开始。
 
 ## 使用Helm部署Prometheus
 
@@ -411,7 +411,7 @@ helm upgrade --install prometheus stable/prometheus
 
 ## 为应用配置Prometheus scrape目标
 
-[Prometheus Helm chart](https://github.com/helm/charts/tree/master/stable/prometheus) 有大量的自定义可选项，不过我们只需要设置`extraScrapeConfigs`。创建一个`values.yaml`文件。你可以直接略过这部分直接使用 [demo应用](https://github.com/MeanPug/django-prometheus-demo) 作为手册。这个文件内容如下：
+[Prometheus Helm chart](https://github.com/helm/charts/tree/master/stable/prometheus) 有大量的自定义可选项，不过我们只需要设置`extraScrapeConfigs`。创建一个`values.yaml`文件。你可以略过这部分直接使用 [demo应用](https://github.com/MeanPug/django-prometheus-demo) 作为参考。文件内容如下：
 
 ```yaml
 extraScrapeConfigs: |
@@ -447,7 +447,7 @@ extraScrapeConfigs: |
         replacement: http
 ```
 
-文件创建完成后，就可以通过下面的操作为prometheus deployment应用更新。
+创建完成后，就可以通过下面的操作为prometheus deployment更新配置。
 
 ```bash
 helm upgrade --install prometheus -f values.yaml
@@ -457,4 +457,4 @@ helm upgrade --install prometheus -f values.yaml
 
 ## 自己动手试试
 
-我要强调一点：捕获自定义的应用程序指标并设置相应的报告和监控是软件工程中最重要的任务之一。幸运的是，将Prometheus指标集成到Django应用程序中实际上非常简单，正如本文展示的那样。如果您想要开始监测自己的应用，请参考完整的[示例应用程序](https://github.com/MeanPug/django-prometheus-demo)，或者直接fork代码库。祝你玩得开心。
+我要强调一点：捕获自定义的应用程序指标并设置相应的报告和监控是软件工程中最重要的任务之一。幸运的是，将Prometheus指标集成到Django应用程序中实际上非常简单，正如本文展示的那样。如果你想要开始监测自己的应用，请参考完整的[示例应用程序](https://github.com/MeanPug/django-prometheus-demo)，或者直接fork代码库。祝你玩得开心。
