@@ -41,6 +41,7 @@ django-admin.py startproject demo
 python manage.py startapp walker
 
 ```
+
 ```python
 
 #settings.py
@@ -113,8 +114,8 @@ class Walk(ExportModelOperationsMixin('walk'), models.Model):
         return f'{self.walker.name} // {self.dog.name} @ {self.start_time} ({self.id})'
         
 ```
-```python
 
+```python
 # walker/views.py
 from django.shortcuts import render, redirect
 from django.views import View
@@ -187,7 +188,6 @@ class StartWalkView(View):
 现在我们有了一个Django项目以及相应的设置，可以为 [django-prometheus](https://github.com/korfuri/django-prometheus)添加需要的配置项了。在 `settings.py`中添加下面的配置：
 
 ```python
-
 INSTALLED_APPS = [
     ...
     'django_prometheus',
