@@ -39,8 +39,10 @@ tags: ["monitoring"]
 ```bash
 django-admin.py startproject demo
 python manage.py startapp walker
+
 ```
 ```python
+
 #settings.py
 
 INSTALLED_APPS = [
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
 现在，我们来添加一些基本的模型和视图。简单起见，我只实现将要验证的部分。如果想要完整地示例，可以从这个[demo应用](https://github.com/MeanPug/django-prometheus-demo) 获取源码。
 
 ```python
+
 # walker/models.py
 from django.db import models
 from django_prometheus.models import ExportModelOperationsMixin
@@ -108,8 +111,10 @@ class Walk(ExportModelOperationsMixin('walk'), models.Model):
 
     def __str__(self):
         return f'{self.walker.name} // {self.dog.name} @ {self.start_time} ({self.id})'
+        
 ```
 ```python
+
 # walker/views.py
 from django.shortcuts import render, redirect
 from django.views import View
@@ -182,6 +187,7 @@ class StartWalkView(View):
 现在我们有了一个Django项目以及相应的设置，可以为 [django-prometheus](https://github.com/korfuri/django-prometheus)添加需要的配置项了。在 `settings.py`中添加下面的配置：
 
 ```python
+
 INSTALLED_APPS = [
     ...
     'django_prometheus',
@@ -453,7 +459,7 @@ extraScrapeConfigs: |
 helm upgrade --install prometheus -f values.yaml
 ```
 
-为验证所有的步骤都配置正确了，打开浏览器输入 http://localhost:9090/targets （假设你已经通过 `port-forward`进入了运行prometheus的Pod）。如果你看到demo应用在target的列表中，说明运行正常了。
+为验证所有的步骤都配置正确了，打开浏览器输入 `http://localhost:9090/targets` （假设你已经通过 `port-forward`进入了运行prometheus的Pod）。如果你看到demo应用在target的列表中，说明运行正常了。
 
 ## 自己动手试试
 
