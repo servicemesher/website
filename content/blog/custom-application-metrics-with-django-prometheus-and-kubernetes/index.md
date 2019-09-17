@@ -3,11 +3,11 @@ originallink: "https://labs.meanpug.com/custom-application-metrics-with-django-p
 author: "Bobby Steinbach"
 date: "2019-09-16T22:00:00+08:00"
 draft: false
-banner: "/img/blog/banners/006tKfTcgy1ftnl1osmwjj30rs0kub1t.jpg"
+banner: "/img/blog/banners/006tNbRwly1fxmupzfpxaj31420u07wl.jpg"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
-reviewer:  [""]
-reviewerlink:  [""]
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 title: "使用Django，Prometheus，和Kubernetes定制应用指标"
 description: "本文演示如果为一个Django应用添加Prometheus自定义指标"
 categories: ["monitoring"]
@@ -104,7 +104,7 @@ class Walk(ExportModelOperationsMixin('walk'), models.Model):
     @property
     def is_complete(self):
         return self.end_time is not None
-        
+
     @classmethod
     def in_progress(cls):
         """ get the list of `Walk`s currently in progress """
@@ -112,7 +112,7 @@ class Walk(ExportModelOperationsMixin('walk'), models.Model):
 
     def __str__(self):
         return f'{self.walker.name} // {self.dog.name} @ {self.start_time} ({self.id})'
-        
+
 ```
 
 ```python
