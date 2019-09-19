@@ -20,34 +20,26 @@ tags: ["istio"]
 
 ## 前言
 
-Istio has been rightfully praised for ushering in `free` *observability* and *secure service to service communication*. Other, more significant features, however, are what truly make Istio the Swiss army knife of service mesh operators; when it comes to meeting SLOs like uptime, latency and error rates, the ability to **manage traffic** between services is absolutely critical.
+Istio因免费的可观察性和安全的服务间通信而受到了赞许。然而，其他更重要的功能使Istio真正成为了服务网格里的瑞士军刀，当遇到运行时长、延迟和错误率等SLO问题时，服务间的流量管理能力是至关重要的。
 
-Istio因引入了免费的可观察性和安全的服务到服务通信而受到了应有的赞扬。然而，其他更重要的功能是真正使Istio成为瑞士军刀服务网格运营商;当遇到正常运行时间、延迟和错误率等SLOs时，管理服务之间通信的能力是绝对关键的。
+在今年早些时候发布 [Istio operator](https://github.com/banzaicloud/istio-operator) 时，我们的目标（除了管理Istio的安装和升级）是为这些出色的流量路由特性提供支持，同时使所有的功能都更加易用。最后，我们创建了一个简单且自动化的服务网格[Backyards](https://banzaicloud.com/blog/istio-the-easy-way/)，它在Istio operator之上提供了管理UI、[CLI](https://github.com/banzaicloud/backyards-cli) 和GraphQL API的能力。Backyards集成到了Banzai云的容器管理平台 [Pipeline](https://github.com/banzaicloud/pipeline)中。它也可以作为一个单一的产品独立工作。当然，将Backyard与Pipeline一起使用为用户提供了各种特别的好处（比如在[多云和混合云](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/)环境中管理应用程序），Backyard也可以被用于任何Kubernetes的安装环境。
 
-When we released the [Istio operator](https://github.com/banzaicloud/istio-operator) earlier this year, our goal (besides managing Istio installation and upgrades) was to provide support for these excellent traffic routing features, while making everything more usable and UX friendly. We ended up creating a simple and automated service mesh, [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/), which features a management UI, [CLI](https://github.com/banzaicloud/backyards-cli) and GraphQL API on top of our [Istio operator](https://github.com/banzaicloud/istio-operator). [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/) is integrated into Banzai Cloud’s container management platform, [Pipeline](https://github.com/banzaicloud/pipeline), however, it also works, and is available, as a standalone product. Naturally, using Backyards with [Pipeline](https://github.com/banzaicloud/pipeline) provides users with a variety of specific benefits (like managing applications in a [multi-cloud and hybrid cloud world](https://banzaicloud.com/blog/istio-multicluster-the-easy-way/)) but Backyards works on any Kubernetes installation.
-
-当我们在今年早些时候发布Istio操作符时，我们的目标(除了管理Istio的安装和升级)是为这些出色的流量路由特性提供支持，同时使所有东西都更加可用和用户体验友好。最后，我们创建了一个简单而自动化的服务网格backyard，它在Istio操作符之上提供了一个管理UI、CLI和GraphQL API。后院集成到板载云的容器管理平台Pipeline中，但是，它也可以工作，并且可以作为一个独立的产品使用。当然，将backyard与Pipeline一起使用为用户提供了各种特定的好处(比如在多云和混合云环境中管理应用程序)，但是backyard可以用于任何Kubernetes安装。
-
-> Some of the related Backyards features we have already blogged about:
+> 我们已经发布了一些和Backyards相关特性的文章：
 >
-> - [Automatic canary deployments with Backyards](https://banzaicloud.com/blog/istio-canary/)
-> - [Traffic shifting](https://banzaicloud.com/blog/istio-traffic-shifting/)
+> - [使用Backyards自动金丝雀部署](https://banzaicloud.com/blog/istio-canary/)
+> - [流量切换](https://banzaicloud.com/blog/istio-traffic-shifting/)
 
 
 
-## Circuit breaking: failure is an option
+## 熔断：失败是一个选项
 
-In microservices architecture, services are written in different languages, deployed across multiple nodes or clusters and have different response times or failure rates. Usually, if a service responds to requests successfully (and in a timely manner), it has performed satisfactorily. However, this is often not the case, and downstream clients need to be protected from excessive slowness of upstream services. Upstream services, in turn, must be protected from being overloaded by a backlog of requests. This becomes more complicated with multiple clients, and can lead to a cascading series of failures throughout the whole infrastructure. The solution to this problem is the time-tested circuit breaker pattern.
+在微服务架构中，服务可能会用不同的语言实现并部署在多个节点或集群上，具有不同的响应时间或故障率。如果服务成功（并且及时地）响应了请求，那么它的性能就算是令人满意的。但经常发生的情况并非如此，下游客户端应该在上游服务过于缓慢时受到保护。反之，上游服务也必须被保护，以免被积压的请求拖垮。在多客户端的情况下会更加复杂，并可能导致整个基础设施出现一系列的连锁故障。这一问题的解决方案是采用经过时间检验的断路器模式。
 
-在微服务体系结构中，服务用不同的语言编写，部署在多个节点或集群上，并且具有不同的响应时间或故障率。通常，如果服务成功地(并且及时地)响应了请求，那么它的性能就令人满意。然而，通常情况并非如此，下游客户端需要受到保护，以避免上游服务过于缓慢。反过来，上游服务必须受到保护，以免被积压的请求过载。对于多个客户机，这将变得更加复杂，并可能导致整个基础设施出现一系列级联故障。解决这一问题的方法是采用经过时间检验的断路器型式。
-
-A circuit breaker can have three states: `closed`, `open` and `half open`, and by default exists in a `closed` state. In the `closed` state, requests succeed or fail until the number of failures reach a predetermined threshold, with no interference from the breaker. When the threshold is reached, the circuit breaker *opens*. When calling a service in an `open`state, the circuit breaker *trips* the requests, which means that it returns an error without attempting to execute the call. In this way, by tripping the request downstream at the client, cascading failures can be prevented in a production system. After a configurable timeout, the circuit breaker enters a `half open` state, in which the failing service is given time to recover from its broken behavior. If requests continue to fail in this state, then the circuit breaker is opened again and keeps tripping requests. Otherwise, if the requests succeed in the `half open` state, then the circuit breaker will *close* and the service will be allowed to handle requests again.
-
-断路器可以有三种状态:关闭、打开和半打开，默认情况下处于关闭状态。在关闭状态下，请求成功或失败，直到故障数量达到预先确定的阈值，而不会受到断路器的干扰。当达到阈值时，断路器就会打开。当调用处于打开状态的服务时，断路器断开请求，这意味着它返回一个错误，而不尝试执行调用。通过这种方式，通过在客户机上断开下游的请求，可以在生产系统中防止级联故障。经过可配置的超时后，断路器进入半打开状态，在这种状态下，故障服务有时间从其中断行为中恢复。如果请求在这种状态下继续失败，则断路器将再次打开并继续跳闸请求。否则，如果请求在半打开状态下成功，则断路器将关闭，服务将被允许再次处理请求。
+一个断路器可以有三种状态：关闭、打开和半开，默认情况下处于关闭状态。在关闭状态下，无论请求成功或失败，到达预先设定的故障数量阈值前，都不会触发断路器。而当达到阈值时，断路器就会打开。当调用处于打开状态的服务时，断路器将断开请求，这意味着它会直接返回一个错误，而不去执行调用行为。通过在客户端断开下游请求的方式，可以在生产环境中防止级联故障的发生。在一个配置的超时发生后，断路器进入半开状态，在这种状态下，故障服务有时间从其中断的行为中恢复。如果请求在这种状态下继续失败，则断路器将再次打开并继续阻断请求。否则断路器将关闭，服务将被允许再次处理请求。
 
 ![Circuit Breaking](https://banzaicloud.com/img/blog/istio/circuit-breaking.png)
 
-## Circuit breaking in [Istio](https://istio.io/)
+## [Istio](https://istio.io/)中的熔断
 
 Istio’s [circuit breaking](https://istio.io/docs/tasks/traffic-management/circuit-breaking/) can be configured in the [TrafficPolicy](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy) field within the `Destination Rule` Istio [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). There are two fields under `TrafficPolicy` which are relevant to circuit breaking: [ConnectionPoolSettings](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#ConnectionPoolSettings) and [OutlierDetection](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#OutlierDetection).
 
@@ -233,7 +225,6 @@ You can easily remove circuit breaking configurations with the `Remove` button.
 To summarize all these UI actions let’s take a look at the following video:
 
 <iframe width="704" height="315" src="https://www.youtube.com/embed/JH2xRv4a37M" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="box-sizing: border-box; color: rgb(83, 83, 83); font-family: Lato; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"></iframe>
-
 
 
 ### CIRCUIT BREAKING USING THE [BACKYARDS-CLI](https://github.com/banzaicloud/backyards-cli)
