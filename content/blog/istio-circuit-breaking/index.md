@@ -41,17 +41,17 @@ Istio因免费的可观察性和安全的服务间通信而受到了赞许。然
 
 ## [Istio](https://istio.io/)中的熔断
 
-Istio’s [circuit breaking](https://istio.io/docs/tasks/traffic-management/circuit-breaking/) can be configured in the [TrafficPolicy](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy) field within the `Destination Rule` Istio [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). There are two fields under `TrafficPolicy` which are relevant to circuit breaking: [ConnectionPoolSettings](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#ConnectionPoolSettings) and [OutlierDetection](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#OutlierDetection).
+Istio的 [熔断](https://istio.io/docs/tasks/traffic-management/circuit-breaking/) 可以在 [流量策略](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy) 中配置。在 Istio的 [自定义资源](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)`Destination Rule`中，`TrafficPolicy`字段下有两个和熔断相关的配置： [ConnectionPoolSettings](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#ConnectionPoolSettings) 和 [OutlierDetection](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#OutlierDetection)。
 
-In `ConnectionPoolSettings`, the volume of connections can be configured for a service. `OutlierDetection` is for controlling the eviction of unhealthy services from the load balancing pool.
+`ConnectionPoolSettings`中可以为服务配置连接的数量。`OutlierDetection`用来控制从负载均衡池中剔除不健康的服务。
 
-I.e. `ConnectionPoolSettings` controls the maximum number of requests, pending requests, retries or timeouts, while `OutlierDetection` controls the number of errors before a service is ejected from the connection pool, and is where minimum ejection duration and maximum ejection percentage can be set. For a full list of fields, check the [documentation](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy).
+例如，`ConnectionPoolSettings`控制请求的最大数量，挂起请求，重试或者超时；`OutlierDetection` 设置服务被从连接池剔除时发生错误的数量，可以设置最小逐出时间和最大逐出百分比。有关完整的字段列表，请参考[文档](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy).
 
-> Istio utilizes the [circuit breaking feature of Envoy](https://www.envoyproxy.io/learn/circuit-breaking) in the background.
+> Istio在底层使用了[Envoy的熔断特性](https://www.envoyproxy.io/learn/circuit-breaking)。
 
-Let’s take a look at a `Destination Rule` with circuit breaking configured:
+让我们来看看`Destination Rule`中有关熔断的配置：
 
-```
+```yaml
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
@@ -72,59 +72,41 @@ spec:
       maxEjectionPercent: 100
 ```
 
-With these settings in the `ConnectionPoolSettings` field, only one connection can be made to the `notifications` service within a given time frame: one pending request with a maximum of one request per connection. If a threshold is reached, the circuit breaker will start tripping requests.
+使用`ConnectionPoolSettings`字段中的这些设置，在给定的时间内只能和`notifications` 服务建立一个连接：每个连接最多只能有一个挂起的请求。如果达到阈值，断路器将开始阻断请求。
 
-The `OutlierDetection` section is set so that it checks whether there is an error calling the service every second. If there is, the service is ejected from the load balancing pool for at least three minutes (the 100% maximum ejection percent indicates that all services can be ejected from the pool at the same time, if necessary).
+`OutlierDetection`部分的设置用来检查每秒调用服务是否有错误发生。如果有，则将服务从负载均衡池中逐出至少三分钟（100%最大弹出百分比表示，如果需要，所有的服务都可以同时被逐出）。
 
-使用ConnectionPoolSettings字段中的这些设置，在给定的时间范围内只能向通知服务进行一个连接:一个挂起的请求，每个连接最多只能有一个请求。如果达到阈值，断路器将开始跳闸请求。
-
-设置了OutlierDetection部分，以便检查是否存在每秒钟调用服务的错误。如果有，则将服务从负载平衡池中弹出至少三分钟(100%最大弹出百分比表示，如果需要，所有服务都可以同时从池中弹出)。
-
-> There’s one thing which you need to pay special attention to when manually creating the `Destination Rule` resource, which is whether or not you have mutual TLS enabled for this service. If you do, you’ll also need to set the field below inside your `Destination Rule`, otherwise your caller services will probably receive 503 responses when calling the `movies` service:
+> 在手动创建`Destination Rule`资源时有一件事需要特别注意，那就是是否为该服务启用了mTLS。如果是的话，还需要在`Destination Rule`中设置如下字段，否则当调用`movies`服务时，调用方可能会收到503错误：
 >
-> 在手动创建目标规则资源时，有一件事需要特别注意，那就是是否为该服务启用了互TLS。如果这样做，还需要在目标规则中设置下面的字段，否则调用方服务时可能会收到503个响应
+> ```yaml
+>trafficPolicy:
+> tls:
+>  mode: ISTIO_MUTUAL
+>   ```
+>    
+> 还可以为特定[名称空间](https://istio.io/docs/tasks/security/authn-policy/#namespace-wide-policy) 或特定[服务](https://istio.io/docs/tasks/security/authn-policy/#service-specific-policy)启用[全局](https://istio.io/docs/tasks/security/authn-policy/#globally-enabling-istio-mutual-tls)的mTLS。您应该了解这些设置以便确定是否把`trafficPolicy.tls.mode`设置为 `ISTIO_MUTUAL`。更重要的是，当你试图配置一个完全不同的特性（例如断路）时，很容易忘记设置此字段。
 >
-> ```
-> trafficPolicy:
->   tls:
->     mode: ISTIO_MUTUAL
-> ```
->
-> Mutual TLS can be enabled [globally](https://istio.io/docs/tasks/security/authn-policy/#globally-enabling-istio-mutual-tls) for a specific [namespace](https://istio.io/docs/tasks/security/authn-policy/#namespace-wide-policy) or for a specific [service](https://istio.io/docs/tasks/security/authn-policy/#service-specific-policy), as well. You should be aware of these settings in order to determine whether you should set `trafficPolicy.tls.mode` to `ISTIO_MUTUAL` or not. More importantly, it is very easy to forget to set this field when you are trying to configure a completely different feature (e.g. circuit breaking).
->
-> 还可以为特定名称空间或特定服务全局启用互TLS。您应该了解这些设置，以便确定是否应该设置trafficPolicy.tls。模式到ISTIO_MUTUAL或not。更重要的是，当您试图配置一个完全不同的特性(例如断路)时，很容易忘记设置此字段。
->
-> Tip: Always think about mutual TLS before creating a `Destination Rule`!
+> 提示：在创建`Destination Rule`前总是考虑mTLS！
 
-To trigger circuit breaker tripping, let’s call the `notifications` service from two connections simultaneously. Remember, the `maxConnections` field is set to one. When we do, we should see 503 responses arriving alongside 200s.
+为了触发断路，让我们同时从两个连接来调用 `notifications`服务。`maxConnections`字段被设置为1。这时应该会看到503与200的响应同时到达。
 
-When a service receives a greater load from a client than it is believed to be able to handle (as configured in the circuit breaker), it starts returning 503 errors before attempting to make a call. This is a way of preventing an error cascade.
+当一个服务从客户端接收到的负载大于它所能处理的负载（如断路器中配置的那样），它会在调用之前返回503错误。这是防止错误级联的一种方法。
 
-为了触发断路器跳闸，让我们同时从两个连接调用通知服务。记住，maxConnections字段被设置为1。当我们这样做时，应该会看到503个响应与200个响应同时到达。
+### 监控断路器
 
-当一个服务从客户端接收到的负载大于它所能处理的负载(如断路器中配置的那样)时，它在尝试调用之前开始返回503个错误。这是防止错误级联的一种方法。
+在生产环境中必须要监控你的服务，以便得到通知并能够在系统发生错误时进行调查。因此，如果你已经为你的服务配置了一个断路器，您就会想知道它什么时候跳闸；断路器触发了百分之多少的请求；何时触发，来自哪个下游客户端？如果你能够回答这些问题，你就可以确定断路器是否工作正常，根据需要微调配置，或者优化服务来处理额外的并发请求。
 
-### MONITORING CIRCUIT BREAKERS
+> 提示：如果你继续阅读，你可以在Backyards UI中看到和配置所有的这些设置。
 
-It is an absolute must that you monitor your services in a production environment, and that you are notified and be able to investigate when errors occur in the system. It stands to reason, then, that if you’ve configured a circuit breaker for your service, you’ll want to know when that breaker is tripped; what percentage of your requests were tripped by the circuit breaker; how many requests were tripped and when, and from which downstream client? If you can answer these questions, you can determine how well your circuit breaker is working, fine tune the circuit breaker configurations as needed, or optimize your service to handle additional concurrent requests.
+让我们看看怎样在Istio里确定熔断器跳闸：
 
-您必须在生产环境中监视您的服务，并且得到通知，并且能够在系统中发生错误时进行调查。因此，如果您已经为您的服务配置了一个断路器，您就会想知道断路器什么时候跳闸;您的请求中有多少百分比被断路器触发;有多少请求被触发，何时触发，来自哪个下游客户端?如果您能够回答这些问题，您就可以确定您的断路器工作得有多好，根据需要微调断路器配置，或者优化您的服务来处理额外的并发请求。
+断路器跳闸时的响应码是503，因此你无法仅根据该响应与其他的503错误区分开来。在Envoy中，有一个计数器叫`upstream_rq_pending_overflow`，它记录了熔断并失败的请求总数。如果为你的服务深入研究Envoy的统计数据就可以获得这些信息，但这并不容易。
 
-> Pro tip: you can see and configure all these (and more) on the Backyards UI if you keep reading.
+除了响应代码，Envoy还返回[响应标志](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log#config-access-log-format-response-flags) ，并且存在一个专用响应标志来表示断路器跳闸：**UO**。如果这个标志只能通过Envoy的日志获得，这将不会特别有用。幸运的是，它在Istio中[实现](https://github.com/istio/istio/pull/9945)了，因此响应标志在Istio指标中是可用的并且能被Prometheus获取到。
 
-Let’s see how to determine the trips caused by the circuit breaker in Istio:
+熔断器的跳闸可以像这样查询到：
 
-The response code in the event of a circuit breaker trip is **503**, so you won’t be able to differentiate it from other 503 errors based merely on that response. In Envoy, there is a counter called `upstream_rq_pending_overflow`, which is the *total number of requests that overflowed the connection pool circuit breaker and were failed*. If you dig into Envoy’s statistics for your service, you can acquire this information, but it’s not particularly easy to reach.
-
-断路器跳闸时的响应代码是503，因此您无法仅根据该响应将其与其他503错误区分开来。在Envoy中，有一个计数器upstream_rq_pending_overflow，它是溢出连接池断路器并失败的请求总数。如果您为您的服务深入研究Envoy的统计数据，您可以获得这些信息，但是要获得这些信息并不容易。
-
-Envoy also returns [response flags](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log#config-access-log-format-response-flags) in addition to response codes, and there exists a dedicated response flag to indicate circuit breaker trips: **UO**. This wouldn’t be particularly helpful if this flag could only be obtained through Envoy logs, but, fortunately, it was [implemented in Istio](https://github.com/istio/istio/pull/9945), so that response flags that are available in Istio metrics and can be fetched by Prometheus.
-
-Envoy除了响应代码外，还返回响应标志，并且存在一个专用响应标志来指示断路器跳闸:UO。如果这个标志只能通过特使日志获得，那么这将不会特别有用，但是，幸运的是，它在Istio中实现了，因此响应标志可以在Istio度量中使用，并且普罗米修斯可以获取这些响应标志。
-
-Circuit breaker trips can be queried like this:
-
-```
+```basic
 sum(istio_requests_total{response_code="503", response_flags="UO"}) by (source_workload, destination_workload, response_code)
 ```
 
@@ -225,8 +207,6 @@ You can easily remove circuit breaking configurations with the `Remove` button.
 To summarize all these UI actions let’s take a look at the following video:
 
 <iframe width="704" height="315" src="https://www.youtube.com/embed/JH2xRv4a37M" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="box-sizing: border-box; color: rgb(83, 83, 83); font-family: Lato; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"></iframe>
-
-
 ### CIRCUIT BREAKING USING THE [BACKYARDS-CLI](https://github.com/banzaicloud/backyards-cli)
 
 As a rule of thumb, everything that can be done through the UI can also be done with the [Backyards CLI](https://github.com/banzaicloud/backyards-cli) tool.
