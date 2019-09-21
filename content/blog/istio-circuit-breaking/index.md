@@ -110,51 +110,39 @@ spec:
 sum(istio_requests_total{response_code="503", response_flags="UO"}) by (source_workload, destination_workload, response_code)
 ```
 
-## Circuit breaking with [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/), the easy way!
+## [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/)的熔断更简单!
 
-When using Backyards, you don’t need to manually edit the `Destination Rules` to set circuit breaking configurations. Instead, you can achieve the same result via a convenient UI, or, if you prefer, through the [Backyards CLI](https://github.com/banzaicloud/backyards-cli) command line tool.
+使用Backyards时，你不需要手动编辑`Destination Rules`来设置断路。可以通过一个方便的UI界面或者（如果您愿意的话）是[Backyards CLI](https://github.com/banzaicloud/backyards-cli) 命令行工具来实现相同的结果。
 
-You don’t need to worry about misconfiguring your `Destination Rules` by forgetting to set `trafficPolicy.tls.mode` to `ISTIO_MUTUAL`. Backyards takes care of this for you; it finds out whether your service has mutual TLS enabled or not and sets the aforementioned field accordingly.
+不必担心由于忘记把`trafficPolicy.tls.mode` 设置为 `ISTIO_MUTUAL`而配错了`Destination Rules`。Backyards会为你解决这个问题；它会找到启用了mTLS的服务并相应地设置上述字段。
 
-当使用后院时，您不需要手动编辑目标规则来设置断路配置。相反，您可以通过一个方便的UI，或者(如果您愿意的话)通过backyard CLI命令行工具来实现相同的结果。
+> 上面只是Backyards验证特性的一个例子，这能避免你设置错误。还有更多的特性。
 
-您不必担心由于忘记设置trafficPolicy.tls而错误配置了目的地规则。ISTIO_MUTUAL模式。后院会为你解决这个问题;它查明您的服务是否启用了互TLS，并相应地设置上述字段。
+在此之上，你可以看到服务和请求的可视化界面和活动仪表板，因此你可以轻松地确定有多少请求被断路器触发，以及它来自哪个调用者和何时触发。
 
-> *The above is just one example of Backyards’ validation features, which can help protect you from potential misconfigurations. There are lots more!*
+## 熔断实战
 
-On top of this, you can see visualizations of and live dashboards for your services and requests, so you can easily determine how many of your requests were tripped by the circuit breaker, and from which caller and when.
+### 创建一个集群
 
-在此之上，您可以看到您的服务和请求的可视化和活动仪表板，因此您可以轻松地确定有多少请求被断路器触发，以及来自哪个调用者和何时触发。
+首先，我们需要一个Kubernetes集群。
 
-## Circuit breaking in action!
+> 我通过[Pipeline platform](https://beta.banzaicloud.io/)的免费开发版本在GKE上创建了一个Kubernetes集群。如果你也想这样做，可以在我们支持的五个云提供商或使用[Pipeline](https://beta.banzaicloud.io/)在本地创建集群。否则，你需要提供自己的Kubernetes集群。
 
-### CREATE A CLUSTER
+### 安装BACKYARDS
 
-First of all, we’ll need a Kubernetes cluster.
+在一个新集群安装Istio，Backyards和demo应用的最简单的办法是使用[Backyards CLI](https://github.com/banzaicloud/backyards-cli)。
 
-> I created a Kubernetes cluster on GKE via the free developer version of the [Pipeline platform](https://beta.banzaicloud.io/). If you’d like to do likewise, go ahead and create your cluster on any of the five cloud providers we support or on-premise using [Pipeline](https://beta.banzaicloud.io/). Otherwise bring your own Kubernetes cluster.
->
-> 我通过管道平台的免费开发人员版本在GKE上创建了一个Kubernetes集群。如果您也想这样做，请继续在我们支持的五个云提供商或使用管道在本地创建集群。否则，请带上您自己的Kubernetes集群。
+你只需要执行下面的命令（集群必须设置了`KUBECONFIG`）：
 
-### INSTALL BACKYARDS
-
-The easiest way by far of installing Istio, Backyards, and a demo application on a brand new cluster is to use the [Backyards CLI](https://github.com/banzaicloud/backyards-cli).
-
-You just need to issue one command (`KUBECONFIG` must be set for your cluster):
-
-```
+```bash
 $ backyards install -a --run-demo
 ```
 
-This command first installs Istio with our open-source [Istio operator](https://github.com/banzaicloud/istio-operator), then installs Backyards itself as well as a demo application for demonstration purposes. After the installation of each component has finished, the Backyards UI will automatically open and send some traffic to the demo application. **By issuing this one simple command you can watch as Backyards starts a brand new Istio cluster in just a few minutes!** Give it a try!
+该命令首先使用我们开源的[Istio operator](https://github.com/banzaicloud/istio-operator)安装Istio，然后安装Backyards和demo应用程序。安装完成后，Backyards UI将自动打开并向demo应用发送一些流量。通过这个简单的命令，您可以看到Backyards在几分钟内启动了一个全新的Istio集群！试试吧！
 
-该命令首先使用我们的开源Istio操作符安装Istio，然后安装后院本身以及演示应用程序。每个组件安装完成后，backyard UI将自动打开并向演示应用程序发送一些流量。通过发出这个简单的命令，您可以看到后院在几分钟内启动了一个全新的Istio集群!试试吧!
-
-> You can do all these steps in sequential order as well. Backyards requires an Istio cluster - if you don’t have one, you can install Istio with `$ backyards istio install`. Once you have Istio installed, you can install Backyards with `$ backyards install`. Finally, you can deploy the demo application with `backyards demoapp install`.
+> 您也可以按顺序执行所有这些步骤。Backyards需要一个Istio集群——如果没有，可以通过`$ backyards istio install`安装Istio。一旦安装了Istio，就可以使用`$ backyards install`安装BackyarBs。最后，使用`$ backyards demoapp install`部署demo应用程序。
 >
-> 您也可以按顺序执行所有这些步骤。后院需要一个Istio集群——如果没有，可以使用$ Backyards Istio install安装Istio。一旦安装了Istio，就可以使用$ backyard install安装backyard。最后，您可以使用backyard demoapp install部署演示应用程序。
->
-> Tip: Backyards is a core component of the [Pipeline](https://github.com/banzaicloud/pipeline) platform - you can try the hosted developer version here: https://beta.banzaicloud.io/ (Service Mesh tab).
+> 提示：Backyards是[Pipeline](https://github.com/banzaicloud/pipeline)平台的核心组件——可以尝试开发者版本：https://beta.banzaicloud.io/ （Service Mesh 标签页）。
 
 
 
