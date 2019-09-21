@@ -1,22 +1,25 @@
 ---
 title: "你必知的Kubernetes 自动缩放"
 date: 2019-09-20T20:50:15+08:00
+draft: true
+author: Juan Ignacio Giro
+authorlink: https://caylent.com/kubernetes-autoscaling
+translator: dfang
+translatorLink: https://github.com/dfang
+reviewer: 
+reviewerLink:
+originalLink: https://caylent.com/kubernetes-autoscaling
+summary: kubernetes 的几种缩放方式
+
+tags: kubernetes、k8s、autoscaler、hpa、vpa、cluster scaler
+categories: kubernetes
+keywords: autoscaler、hpa
+aliases: /blog/k8s-autoscaling-all-you-need-to-know
 ---
 
-<!-- 
-Many Kubernetes users, especially those at enterprise level, swiftly come across the need to autoscale environments. Fortunately, the K8s Horizontal Pod Autoscaler (HPA) allows you to configure your deployments to scale horizontally in a myriad number of ways to do just that. One of the biggest advantages of using Kube Autoscaling is that your Cluster can track the load capabilities of your existing Pods and calculate if more Pods are required or not.
--->
 许多Kubernetes用户，特别是那些企业级用户，很快就遇到了对环境自动缩放的需求。幸运的是，K8s Horizo​​ntal Pod Autoscaler（HPA）允许您将部署配置为以多种方式水平扩展。使用Kube Autoscaling的最大优势之一是您的集群可以跟踪现有Pod的加载能力，并计算是否需要更多的Pod。
 
 ## Kubernetes Autoscaling
-
-<!-- 
-Leverage efficient Kubernetes Autoscaling by harmonizing the two layers of scalability on offer:
-
-1 – Autoscaling at Pod level: This plane includes the Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA); both of which scale your containers available resources
-
-2 – Autoscaling at Cluster level: The Cluster Autoscaler (CA) manages this plane of scalability by scaling the number of nodes inside your Cluster up or down as necessary
--->
 
 通过协调内置的两层可扩展性，可以充分利用高效的Kubernetes Autoscaling：
 
@@ -29,27 +32,13 @@ Leverage efficient Kubernetes Autoscaling by harmonizing the two layers of scala
 
 ### Horizo​​ntal Pod Autoscaler（HPA）
 
-<!-- 
-HPA scales the number of Pod replicas for you in your Cluster. The move is triggered by CPU or memory to scale up or down as necessary. However, it’s possible to configure HPA to scale Pods according to varied, external, and custom metrics (metrics.k8s.io, external.metrics.k8s.io, and custom.metrics.k8s.io). 
--->
 HPA会在集群中为您缩放Pod副本的数量。该操作由CPU或内存触发，以根据需要向上或向下扩展。但是，也可以根据各种外部的和自定义指标（metrics.k8s.io，external.metrics.k8s.io和custom.metrics.k8s.io）来配置HPA以扩展Pod。
 
 ### Vertical Pod Autoscaler（VPA）
 
-<!-- 
-Built predominantly for stateful services, VPA adds CPU or memory to Pods as required—it also works for both stateful and stateless Pods too though. To make these changes, VPA restarts Pods to update new CPU and memory resources, which can be configured to set off in reaction to OOM (out of memory) events. Upon restarting Pods, VPA always ensures there is the minimum number according to the Pods Distribution Budget (PDB) which you can set along with a resource allocation maximum and minimum rate. 
--->
 VPA主要用于有状态服务，它可根据需要为Pod添加CPU或内存 - 它也适用于无状态的Pod。为了应用这些更改，VPA重新启动Pod以更新新的CPU和内存资源，这些资源可以配置为响应OOM（内存不足）事件而启动。重新启动Pod的时候，VPA始终确保根据Pod分配预算（PDB）确定最小数量，您可以设置该资源分配最大和最小速率。
 
 ### Cluster Autoscaler（CA）
-
-<!-- 
-The second layer of autoscaling involves CA, which automatically adjusts the size of the cluster when:
-– Any Pod/s fail to run and fall into a pending state due to insufficient capacity in the Cluster (in which case CA will scale up).
-– Nodes in the cluster have been underutilized for a certain period of time and there is a chance to relocate their pods on reaming nodes (in which case CA will scale down).
-
-CA makes routine checks to determine whether any pods are in a pending state waiting for extra resources or if Cluster nodes are being underutilized. The function then adjusts the number of Cluster nodes accordingly if more resources are required. CA interacts with the cloud provider to request additional nodes or shut down idle ones and ensures the scaled-up Cluster remains within the limitations set by the user. It works with AWS, Azure, and GCP. 
--->
 
 第二层的自动缩放涉及CA，它在以下情况下自动调整集群的大小：
 
@@ -61,16 +50,9 @@ CA进行例行检查以确定是否有任何pod因等待额外资源处于待定
 
 ## 将HPA和CA与Amazon EKS配合使用的5个步骤
 
-<!-- This article offers a step-by-step guide to installing and autoscaling through HPA and CA with an Amazon Elastic Container Service for Kubernetes (Amazon EKS) Cluster. Following the guidelines are two test use case examples to show the features in situ: -->
-
 本文提供了通过适用于Kubernetes（Amazon EKS）集群的Amazon Elastic容器服务，通过HPA和CA安装和自动扩展的分步指南。以下指南是两个测试用例示例：
 
 ### 集群要求
-
-<!-- An [Amazon VPC](https://docs.aws.amazon.com/eks/latest/userguide/create-public-private-vpc.html) and a dedicated security group that meets the necessary set-up for an Amazon EKS Cluster.
-Alternatively, to avoid a manual step-by-step VPC creation, AWS provides a CloudFormation stack which creates a VPC for EKS here.
-The stack is highlighted here.
-An Amazon EKS service role to apply to your Cluster. -->
 
 - 满足EKS集群要求的Amazon VPC 和 一个安全组
 
@@ -78,11 +60,6 @@ An Amazon EKS service role to apply to your Cluster. -->
   > [CloudFormation YAML文件](https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-08-30/amazon-eks-vpc-sample.yaml)
 
 - 应用到集群的[EKS 角色](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
-
-<!-- 1- Create an AWS EKS Cluster (control plane and workers) in line with the official instructions here. Once you launch an Auto Scaling group of worker nodes they can register to your Amazon EKS Cluster and you can begin deploying Kube applications to them.
-2- Deploy a Metrics Server so that HPA can scale Pods in a deployment based on CPU/memory data provided by an API (as described above). The metrics.k8s.io API is usually provided by the metrics-server (which collects the CPU and memory metrics from the Summary API, as exposed by Kubelet on each node).
-3- Add the following policy to the Role created by EKS for the K8S workers & nodes (this is for the K8S CA to work alongside the AWS Autoscaling Group (AWS AG)).
--->
 
 1- 根据[官方指南](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)创建一个AWS EKS 集群(控制面板和和工作节点). 一旦你把工作节点以auto scaling group的形式启动了，它们会自动向EKS集群注册，你就可以开始部署k8s应用了。
 
