@@ -42,6 +42,7 @@ Built predominantly for stateful services, VPA adds CPU or memory to Pods as req
 VPA主要用于有状态服务，它可根据需要为Pod添加CPU或内存 - 它也适用于无状态的Pod。为了应用这些更改，VPA重新启动Pod以更新新的CPU和内存资源，这些资源可以配置为响应OOM（内存不足）事件而启动。重新启动Pod的时候，VPA始终确保根据Pod分配预算（PDB）确定最小数量，您可以设置该资源分配最大和最小速率。
 
 ### Cluster Autoscaler（CA）
+
 <!-- 
 The second layer of autoscaling involves CA, which automatically adjusts the size of the cluster when:
 – Any Pod/s fail to run and fall into a pending state due to insufficient capacity in the Cluster (in which case CA will scale up).
@@ -64,20 +65,19 @@ CA进行例行检查以确定是否有任何pod因等待额外资源处于待定
 
 本文提供了通过适用于Kubernetes（Amazon EKS）集群的Amazon Elastic容器服务，通过HPA和CA安装和自动扩展的分步指南。以下指南是两个测试用例示例：
 
-### 集群要求:
+### 集群要求
 
 <!-- An [Amazon VPC](https://docs.aws.amazon.com/eks/latest/userguide/create-public-private-vpc.html) and a dedicated security group that meets the necessary set-up for an Amazon EKS Cluster.
 Alternatively, to avoid a manual step-by-step VPC creation, AWS provides a CloudFormation stack which creates a VPC for EKS here.
 The stack is highlighted here.
 An Amazon EKS service role to apply to your Cluster. -->
 
-* 满足EKS集群要求的Amazon VPC 和 一个安全组
+- 满足EKS集群要求的Amazon VPC 和 一个安全组
 
-* 或者，为免手动创建VPC，AWS提供了创建了VPC和EKS的[CloudFormation模板](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
+- 或者，为免手动创建VPC，AWS提供了创建了VPC和EKS的[CloudFormation模板](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
+  > [CloudFormation YAML文件](https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-08-30/amazon-eks-vpc-sample.yaml)
 
-[CloudFormation YAML文件](https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-08-30/amazon-eks-vpc-sample.yaml)
-
-* 应用到集群的[EKS 角色]https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
+- 应用到集群的[EKS 角色](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
 
 <!-- 1- Create an AWS EKS Cluster (control plane and workers) in line with the official instructions here. Once you launch an Auto Scaling group of worker nodes they can register to your Amazon EKS Cluster and you can begin deploying Kube applications to them.
 2- Deploy a Metrics Server so that HPA can scale Pods in a deployment based on CPU/memory data provided by an API (as described above). The metrics.k8s.io API is usually provided by the metrics-server (which collects the CPU and memory metrics from the Summary API, as exposed by Kubelet on each node).
@@ -128,7 +128,9 @@ An Amazon EKS service role to apply to your Cluster. -->
 要求:
 
 – 一个运行中的eks集群
+
 – 安装好metric server 
+
 – 安装了k8s cluster autoscaler 特性
 
 1- 部署一个测试app，为app部署创建HPA资源
