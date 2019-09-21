@@ -25,7 +25,6 @@ Leverage efficient Kubernetes Autoscaling by harmonizing the two layers of scala
 
 2 - 集群级别的自动缩放：集群自动调节器（CA）通过在必要时向上或向下扩展集群内的节点数来管理这种可扩展性平面
 
-
 ## Kubernetes Autoscaling 详情：
 
 ### Horizo​​ntal Pod Autoscaler（HPA）
@@ -70,10 +69,9 @@ CA进行例行检查以确定是否有任何pod因等待额外资源处于待定
 <!-- An [Amazon VPC](https://docs.aws.amazon.com/eks/latest/userguide/create-public-private-vpc.html) and a dedicated security group that meets the necessary set-up for an Amazon EKS Cluster.
 Alternatively, to avoid a manual step-by-step VPC creation, AWS provides a CloudFormation stack which creates a VPC for EKS here.
 The stack is highlighted here.
-
 An Amazon EKS service role to apply to your Cluster. -->
 
-* 满足EKS集群要求的Amazon VPC 和 一个安全组
+* 满足EKS集群要求的Amazon VPC 和 一个安全组
 
 * 或者，为免手动创建VPC，AWS提供了创建了VPC和EKS的[CloudFormation模板](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html)
 
@@ -81,11 +79,8 @@ An Amazon EKS service role to apply to your Cluster. -->
 
 * 应用到集群的[EKS 角色]https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
 
-
 <!-- 1- Create an AWS EKS Cluster (control plane and workers) in line with the official instructions here. Once you launch an Auto Scaling group of worker nodes they can register to your Amazon EKS Cluster and you can begin deploying Kube applications to them.
-
 2- Deploy a Metrics Server so that HPA can scale Pods in a deployment based on CPU/memory data provided by an API (as described above). The metrics.k8s.io API is usually provided by the metrics-server (which collects the CPU and memory metrics from the Summary API, as exposed by Kubelet on each node).
-
 3- Add the following policy to the Role created by EKS for the K8S workers & nodes (this is for the K8S CA to work alongside the AWS Autoscaling Group (AWS AG)).
 -->
 
@@ -95,7 +90,7 @@ An Amazon EKS service role to apply to your Cluster. -->
 
 3- 把以下策略应用到EKS创建的worker节点的Role上
 
-```
+```json
 {
 "Version": "2012-10-17",
 "Statement": [
@@ -126,7 +121,6 @@ An Amazon EKS service role to apply to your Cluster. -->
   > k8s.io/cluster-autoscaler/enabled
   > k8s.io/cluster-autoscaler/
 
-
 ### Kubernetes Autoscaling 测试用例 #1
 
 测试k8s hpa 特性和k8s ca 特性同时使用
@@ -143,14 +137,14 @@ An Amazon EKS service role to apply to your Cluster. -->
 
 3- HPA 应该会随着负载的增加开始缩放pod的数量。它会根据hpa资源指定的进行缩放的。在某一时刻，新的POD在等待其他资源的时候会是等待状态。
 
-```
+```yaml
 $ kubectl get nodes -w
 NAME                             STATUS    ROLES     AGE       VERSION
 ip-192-168-189-29.ec2.internal   Ready         1h        v1.10.3
 ip-192-168-200-20.ec2.internal   Ready         1h        v1.10.3
 ```
 
-```
+```yaml
 $ kubectl get Pods -o wide -w
 NAME READY STATUS RESTARTS AGE IP NODE
 ip-192-168-200-20.ec2.internal
@@ -165,7 +159,7 @@ php-apache-8699449574-dn9tb 0/1 Pending 0 17m
 
 4- CA 检测到因为容量不足而进入等待状态的pods，调整AWS 自动缩放组的大小。一个新的节点加入了:
 
-```
+```yaml
 $ kubectl get nodes -w
 NAME                                       STATUS    ROLES     AGE       VERSION
 ip-192-168-189-29.ec2.internal   Ready         2h        v1.10.3
@@ -175,13 +169,13 @@ ip-192-168-92-187.ec2.internal   Ready         34s       v1.10.3
 
 5- HPA能够把等待状态的POD调度到新的节点上了。 平均cpu使用率低于指定的目标，没有必要再调度新的pod了。
 
-```
+```yaml
 $ kubectl get hpa
 NAME         REFERENCE                    TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 php-apache   Deployment/php-apache   40%/50%   2                  25                 20               1h $ kubectl get Pods -o wide -w
 ```
 
-```
+```yaml
 $ kubectl get Pods -o wide -w
 NAME READY STATUS RESTARTS AGE IP NODE
 php-apache-8699449574-4mg7w 1/1 Running 0 25m 192.168.74.4 ip-192-168-92-187
@@ -195,7 +189,7 @@ php-apache-8699449574-cl8lj 1/1 Running 0 35m 192.168.172.71 ip-192-168-189-29
 
 7- CPU平均利用率减小了， 所以HPA开始更改部署里的pod副本数量并杀掉一些pods
 
-```
+```yaml
 $ kubectl get hpa
 NAME         REFERENCE                     TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 php-apache   Deployment/php-apache   47%/50%     2                20                 7                   1h 
@@ -213,7 +207,7 @@ php-apache-8699449574-k5ngv 1/1 Terminating 0 26m 192.168.108.58 ip-192-168-92-1
 
 8- CA 检测到一个节点未充分使用，正在运行的pods能够调度到其他节点上。 
 
-```
+```yaml
 $ kubectl get nodes
 NAME                             STATUS    ROLES     AGE       VERSION
 ip-192-168-189-29.ec2.internal   Ready         2h        v1.10.3
@@ -240,20 +234,20 @@ ip-192-168-200-20.ec2.internal   Ready         2h        v1.10.3
 
 1- 创建2个请求小于1vcpu的deployment
 
-```
+```yaml
 $ kubectl run nginx --image=nginx:latest --requests=cpu=200m
 $ kubectl run nginx2 --image=nginx:latest --requests=cpu=200m
 ```
 
 2- 创建一个新的deployment，请求比剩余的cpu更多的资源
 
-```
+```yaml
 $ kubectl run nginx3 --image=nginx:latest --requests=cpu=1
 ```
 
 3- 新的POD会处于等待状态，因为没有可用的资源：
 
-```
+```yaml
 $ kubectl get Pods -w
 NAME                      READY     STATUS    RESTARTS   AGE
 nginx-5fcb54784c-lcfht    1/1       Running   0          13m
@@ -263,7 +257,7 @@ nginx3-564b575974-xcm5t   0/1       Pending   0          41s
 
 描述pod的时候，可能会看到没有足够的cpu的事件
 
-```
+```yaml
 $ kubectl describe Pod nginx3-564b575974-xcm5t
 …..
 …..
@@ -275,7 +269,7 @@ Warning  FailedScheduling  32s (x7 over 1m)  default-scheduler  0/1 nodes are av
 
 4- CA自动调整集群的大小， 新加了一个节点
 
-```
+```yaml
 $ kubectl get nodes
 NAME                              STATUS    ROLES     AGE       VERSION
 ip-192-168-142-179.ec2.internal   Ready         1m        v1.10.3  <<
@@ -284,7 +278,7 @@ ip-192-168-82-136.ec2.internal     Ready         1h        v1.10.3
 
 5- 集群现在有了足够的资源以运行pod
 
-```
+```yaml
 $ kubectl get Pods
 NAME                      READY     STATUS    RESTARTS   AGE
 nginx-5fcb54784c-lcfht    1/1       Running   0          48m
@@ -294,7 +288,7 @@ nginx3-564b575974-xcm5t   1/1       Running   0          35m
 
 6- 两个部署删除了。 一段时间后，CA检测到集群中的一个节点未被充分利用，运行的pod可以安置到其他存在的节点上。 AWS AG 更新，节点数量减1。
 
-```
+```yaml
 $ kubectl get nodes
 NAME                                      STATUS    ROLES     AGE       VERSION
 ip-192-168-82-136.ec2.internal   Ready         1h          v1.10.3 
