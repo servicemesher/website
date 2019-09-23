@@ -146,53 +146,41 @@ $ backyards install -a --run-demo
 
 
 
-### CIRCUIT BREAKING USING THE BACKYARDS UI
+### 使用BACKYARDS UI
 
-#### Set circuit breaking configurations
+#### 配置熔断
 
-You don’t need to create or edit a `Destination Rule` resource manually, you can easily change the circuit breaker configurations from the UI. Let’s first create a demo circuit breaker.
+你不需要手动创建或编辑`Destination Rule`，可以很容易的在UI界面中改变熔断的配置。让我们先创建一个demo。
 
-> As you will see, Backyards (in constrast to, say, Kiali) is not just a web-based UI built for observability, but is a feature rich management tool for your service mesh, is single- and multi-cluster compatible, and is possessed of a powerful CLI and GraphQL API.
->
-> 正如您将看到的，backyard(与Kiali相比)不仅是为可观察性构建的基于web的UI，而且是针对服务网格的功能丰富的管理工具，支持单集群和多集群，并且具有强大的CLI和GraphQL API。
+> 正如您将看到的，Backyards（与Kiali相比）不仅是为可观察性构建的web UI，而且是具有丰富功能的服务网格管理工具，支持单集群和多集群，并且具有强大的CLI和GraphQL API。
 
 ![Circuit Breaking set](https://banzaicloud.com/img/blog/istio/circuit-breaking-set.png)
 
-#### View circuit breaking configurations
+#### 查看熔断设置
 
-You don’t have to fetch the `Destination Rule` (e.g. with `kubectl`) to see the circuit breaker’s configurations, you can see them on the right side of the Backyards UI when you click on the `notifications` service icon and then toggle the `SHOW CONFIGS` slider.
-
-您不需要获取目标规则(例如kubectl)来查看断路器的配置，当您单击notification service图标并切换SHOW CONFIGS滑块时，您可以在Backyards UI的右侧看到它们。
+您不需要获取`Destination Rule`（例如通过kubectl）来查看断路器的配置，当您点击`notification` 服务图标并切换`SHOW CONFIGS`滑块时，可以在Backyards UI的右侧看到它们。
 
 ![Circuit Breaking view](https://banzaicloud.com/img/blog/istio/circuit-breaking-view.png)
 
-#### Monitor circuit breaking
+#### 监控熔断
 
-With this configuration I’ve just set, when traffic begins to flow from two connections simultaneously, the circuit breaker will start to trip requests. In the Backyards UI, you will see this being vizualized via the graph’s **red edges**. If you click on the service, you’ll learn more about the errors involved, and will see two live Grafana dashboards which specifically show the circuit breaker trips.
+根据刚才的设置，当两个连接同时产生流量时，断路器将发出跳闸请求。在Backyards UI中，您将看到图形的边缘出现了红色。如果单击该服务，您将了解有关错误的更多信息，并将看到两个专门用来显示断路器跳闸的实时Grafana仪表板。
 
-根据我刚刚设置的配置，当两个连接同时开始产生流量时，断路器将开始发出跳闸请求。在backyard UI中，您将看到这是通过图形的红色边缘实现的。如果您单击该服务，您将了解有关错误的更多信息，并将看到两个专门显示断路器跳闸的实时Grafana仪表板。
+第一个仪表板展示了断路器触发的总请求的百分比。当没有断路器错误，而您的服务工作正常，这张图将显示`0% `。否则，您将能够立即看到有多少请求被断路器触发。
 
-The first dashboard details the percentage of total requests that were tripped by the circuit breaker. When there are no circuit breaker errors, and your service works as expected, this graph will show `0%`. Otherwise, you’ll be able to see what percentage of the requests were tripped by the circuit breaker right away.
-
-第一个仪表板详细说明了断路器触发的总请求的百分比。当没有断路器错误，而您的服务工作如预期，这张图将显示' 0% '。否则，您将能够立即看到有多少请求被断路器触发。
-
-The second dashboard provides a breakdown of the trips caused by the circuit breaker by source. If no circuit breaker trips occurred, there will be no spikes in this graph. Otherwise, you’ll see which service caused the circuit breaker to trip, when, and how many times. Malicious clients can be tracked by checking this graph.
-
-第二个仪表板提供了由源断路器引起的跳闸故障。如果没有发生断路器跳闸，则此图中不会出现尖峰。否则，您将看到哪个服务导致断路器跳闸，何时跳闸，跳闸次数。可以通过检查此图跟踪恶意客户机。
+第二个仪表板提供了由源断路器引起的跳闸故障。如果没有发生跳闸，则此图中不会出现尖峰。否则，您将看到哪个服务导致了跳闸，何时跳闸，以及跳闸次数。可以通过此图来追踪恶意的客户端。
 
 ![Circuit Breaking trip](https://banzaicloud.com/img/blog/istio/circuit-breaking-trip.png)
 
-> These are live Grafana dashboards customized in order to display circuit breaker-related information. Grafana and Prometheus are installed with Backyards by default - and lots more dashboards exist to help you dig deep into your service’s metrics.
->
-> 这些是现场定制的Grafana仪表盘，用于显示电路断点相关信息。Grafana和Prometheus在默认情况下安装了后院——还有更多的仪表板可以帮助您深入挖掘服务的度量标准。
+> 这些是实时的Grafana仪表盘，用于显示熔断相关的信息。在默认情况下Backyards集成了Grafana和Prometheus——还有更多的仪表板可以帮助您深入查看服务的指标。
 
-#### Remove circuit breaking configurations
+#### 移除熔断配置
 
-You can easily remove circuit breaking configurations with the `Remove` button.
+可以通过 `Remove` 按钮很容易的移除熔断配置。
 
-#### Circuit breaking on Backyards UI in action
+#### Backyards UI 的熔断实战
 
-To summarize all these UI actions let’s take a look at the following video:
+下面的视频总结了所有这些UI操作：
 
 <iframe width="704" height="315" src="https://www.youtube.com/embed/JH2xRv4a37M" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="box-sizing: border-box; color: rgb(83, 83, 83); font-family: Lato; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"></iframe>
 ### CIRCUIT BREAKING USING THE [BACKYARDS-CLI](https://github.com/banzaicloud/backyards-cli)
