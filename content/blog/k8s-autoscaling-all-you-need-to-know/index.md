@@ -2,7 +2,7 @@
 title: "你必知的Kubernetes 自动缩放"
 date: 2019-09-20T20:50:15+08:00
 draft: false
-banner: "./featured-image-kubernetes-autoscaling.jpg"
+banner: "./kubernetes-autoscaling.jpg"
 author: "Juan Ignacio Giro"
 authorlink: "https://caylent.com/kubernetes-autoscaling"
 translator: "段访"
