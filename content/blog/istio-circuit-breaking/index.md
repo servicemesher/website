@@ -29,8 +29,6 @@ Istio因灵活的可观察性和安全的服务间通信受到了赞许。然而
 > - [使用Backyards自动金丝雀部署](https://banzaicloud.com/blog/istio-canary/)
 > - [流量切换](https://banzaicloud.com/blog/istio-traffic-shifting/)
 
-
-
 ## 熔断：失败是一个选项
 
 在微服务架构中，服务可能会用不同的语言实现并部署在多个节点或集群上，具有不同的响应时间或故障率。如果服务成功（并且及时地）响应了请求，那么它的性能就算是令人满意的。但现实情况并非如此，下游客户端应该在上游服务过于缓慢时受到保护。反之，上游服务也必须被保护，以免被积压的请求拖垮。在多客户端下情况会更加复杂，并可能导致整个基础设施出现一系列的连锁故障。这一问题的解决方案是采用经过时间检验的熔断器模式。
@@ -110,7 +108,7 @@ spec:
 sum(istio_requests_total{response_code="503", response_flags="UO"}) by (source_workload, destination_workload, response_code)
 ```
 
-## [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/)的熔断更简单!
+## [Backyards](https://banzaicloud.com/blog/istio-the-easy-way/)的熔断更简单
 
 使用Backyards时，你不需要手动编辑`Destination Rules`来设置熔断。可以通过一个方便的UI界面或者（如果你愿意的话）是[Backyards CLI](https://github.com/banzaicloud/backyards-cli) 命令行工具来达到相同的结果。
 
@@ -142,13 +140,11 @@ $ backyards install -a --run-demo
 
 > 你也可以按顺序执行所有这些步骤。Backyards需要一个Istio集群——如果没有，可以通过`$ backyards istio install`安装。一旦安装了Istio，就可以使用`$ backyards install`安装Backyards。最后，使用`$ backyards demoapp install`部署demo应用程序。
 >
-> 提示：Backyards是[Pipeline](https://github.com/banzaicloud/pipeline)平台的核心组件——可以尝试开发者版本：https://beta.banzaicloud.io/ （Service Mesh 标签页）。
-
-
+> 提示：Backyards是[Pipeline](https://github.com/banzaicloud/pipeline)平台的核心组件——可以尝试[开发者版本](https://beta.banzaicloud.io/)（Service Mesh 标签页）。
 
 ### 使用BACKYARDS UI创建熔断
 
-#### 配置熔断
+#### 配置熔断器
 
 你不需要手动创建或编辑`Destination Rule`，可以很容易的在UI界面中改变熔断的配置。让我们先创建一个demo。
 
@@ -156,17 +152,17 @@ $ backyards install -a --run-demo
 
 ![Circuit Breaking set](https://banzaicloud.com/img/blog/istio/circuit-breaking-set.png)
 
-#### 查看熔断设置
+#### 查看熔断器设置
 
 你不需要通过`Destination Rule`（例如通过kubectl）来查看熔断器的配置，当你点击`notification` 服务图标并切换`SHOW CONFIGS`滑块时，可以在Backyards UI的右侧看到它们。
 
 ![Circuit Breaking view](https://banzaicloud.com/img/blog/istio/circuit-breaking-view.png)
 
-#### 监控熔断
+#### 监控熔断器
 
 根据刚才的设置，当两个连接同时产生流量时，熔断器将发出跳闸请求。在Backyards UI中，你将看到图形的边缘出现了红色。如果单击该服务，你将了解有关错误的更多信息，并将看到两个专门用来显示熔断器跳闸的实时Grafana仪表板。
 
-第一个仪表板展示了熔断器触发的总请求的百分比。当没有熔断器错误，而你的服务工作正常，这张图将显示`0% `。否则，你将能够立即看到有多少请求被熔断器触发。
+第一个仪表板展示了熔断器触发的总请求的百分比。当没有熔断器错误，而你的服务工作正常，这张图将显示`0%`。否则，你将能够立即看到有多少请求被熔断器触发。
 
 第二个仪表板提供了由源熔断器引起的跳闸故障。如果没有发生跳闸，则此图中不会出现尖峰。否则，你将看到哪个服务导致了跳闸，何时跳闸，以及跳闸次数。可以通过此图来追踪恶意的客户端。
 
@@ -174,7 +170,7 @@ $ backyards install -a --run-demo
 
 > 这些是实时的Grafana仪表盘，用于显示熔断相关的信息。在默认情况下Backyards集成了Grafana和Prometheus——还有更多的仪表板可以帮助你深入查看服务的指标。
 
-#### 移除熔断配置
+#### 移除熔断器配置
 
 可以通过 `Remove` 按钮很容易的移除熔断配置。
 
