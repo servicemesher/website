@@ -3,14 +3,14 @@ title: "你必知的Kubernetes 自动缩放"
 date: 2019-09-20T20:50:15+08:00
 draft: false
 banner: "/img/blog/banners/Featured-image-Kubernetes-autoscaling.png"
-author: Juan Ignacio Giro
+author: "Juan Ignacio Giro"
 authorlink: "https://caylent.com/kubernetes-autoscaling"
-translator: dfang
+translator: "dfang"
 translatorLink: "https://github.com/dfang"
-reviewer: GuangmingLuo
+reviewer: "GuangmingLuo"
 reviewerLink: "https://github.com/GuangmingLuo"
 originalLink: "https://caylent.com/kubernetes-autoscaling"
-summary: "kubernetes 的几种缩放方式"
+summary: "介绍了kubernetes 的几种缩放方式: hpa, vpa, cluster scaler, 并提供了两个测试用例以供测试和学习。"
 tags: ["kubernetes", "k8s", "autoscaler", "hpa", "vpa", "cluster scaler"]
 categories: ["kubernetes"]
 keywords: ["autoscaler", "hpa"]
@@ -23,10 +23,10 @@ keywords: ["autoscaler", "hpa"]
 
 通过协调内置的两层可扩展性，可以充分利用高效的Kubernetes Autoscaling：
 
-1 - Pod级别的自动缩放：包括Horizo​​ntal Pod Autoscaler（HPA）和Vertical Pod Autoscaler（VPA）; 两者都可以扩展容器
+1. Pod级别的自动缩放：包括Horizo​​ntal Pod Autoscaler（HPA）和Vertical Pod Autoscaler（VPA）; 两者都可以扩展容器
 的可用资源
 
-2 - 集群级别的自动缩放：集群自动调节器（CA）通过在必要时向上或向下扩展集群内的节点数来管理这种可扩展性平面
+2. 集群级别的自动缩放：集群自动调节器（CA）通过在必要时向上或向下扩展集群内的节点数来管理这种可扩展性平面
 
 ## Kubernetes Autoscaling 详情：
 
@@ -61,11 +61,11 @@ CA进行例行检查以确定是否有任何pod因等待额外资源处于待定
 
 - 应用到集群的[EKS 角色](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
 
-1- 根据[官方指南](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)创建一个AWS EKS 集群(控制面板和和工作节点). 一旦你把工作节点以auto scaling group的形式启动了，它们会自动向EKS集群注册，你就可以开始部署k8s应用了。
+1. 根据[官方指南](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)创建一个AWS EKS 集群(控制面板和和工作节点). 一旦你把工作节点以auto scaling group的形式启动了，它们会自动向EKS集群注册，你就可以开始部署k8s应用了。
 
-2- 部署度量服务器以便HPA能够根据API提供的CPU/内存数据自动缩放POD副本的数量。 metrics.k8s.io api 通常由metrics-server（负责从summary api收集cpu和内存度量）提供。
+2. 部署度量服务器以便HPA能够根据API提供的CPU/内存数据自动缩放POD副本的数量。 metrics.k8s.io api 通常由metrics-server（负责从summary api收集cpu和内存度量）提供。
 
-3- 把以下策略应用到EKS创建的worker节点的Role上
+3. 把以下策略应用到EKS创建的worker节点的Role上
 
 ```json
 {
@@ -87,11 +87,11 @@ CA进行例行检查以确定是否有任何pod因等待额外资源处于待定
 }
 ```
 
-4- [部署k8s CA特性](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml)
+4. [部署k8s CA特性](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml)
 
 > 根据你使用的linux发行版，你可能需要更新部署文件和证书路径。 例如，如果使用AMI Linux，需要用/etc/ssl/certs/ca-bundle.crt替换/etc/ssl/certs/ca-certificates.crt
 
-5- 更新CA的部署YAML文件，找到指定的AWS AG（k8s.io/cluster-autoscaler/<`CLUSTER NAME`>应该包含真实的集群名称）标签。
+5. 更新CA的部署YAML文件，找到指定的AWS AG（k8s.io/cluster-autoscaler/<`CLUSTER NAME`>应该包含真实的集群名称）标签。
 同时更新`AWS_REGION`环境变量。
 
 把以下tag添加到 AWS AG， 以便 k8s 的 cluster autoscaler 能够自动识别 AWS AG：
@@ -110,11 +110,11 @@ CA进行例行检查以确定是否有任何pod因等待额外资源处于待定
 
 – 安装了k8s cluster autoscaler 特性
 
-1- 部署一个测试app，为app部署创建HPA资源
+1. 部署一个测试app，为app部署创建HPA资源
 
-2- 从不同的地理位置发起请求以增加负载
+2. 从不同的地理位置发起请求以增加负载
 
-3- HPA 应该会随着负载的增加开始缩放pod的数量。它会根据hpa资源指定的进行缩放的。在某一时刻，新的POD在等待其他资源的时候会是等待状态。
+3. HPA 应该会随着负载的增加开始缩放pod的数量。它会根据hpa资源指定的进行缩放的。在某一时刻，新的POD在等待其他资源的时候会是等待状态。
 
 ```bash
 $ kubectl get nodes -w
@@ -136,7 +136,7 @@ php-apache-8699449574-dn9tb 0/1 Pending 0 17m
 ...
 ```
 
-4- CA 检测到因为容量不足而进入等待状态的pods，调整AWS 自动缩放组的大小。一个新的节点加入了:
+4. CA 检测到因为容量不足而进入等待状态的pods，调整AWS 自动缩放组的大小。一个新的节点加入了:
 
 ```bash
 $ kubectl get nodes -w
@@ -146,7 +146,7 @@ ip-192-168-200-20.ec2.internal   Ready         2h        v1.10.3
 ip-192-168-92-187.ec2.internal   Ready         34s       v1.10.3
 ```
 
-5- HPA能够把等待状态的POD调度到新的节点上了。 平均cpu使用率低于指定的目标，没有必要再调度新的pod了。
+5. HPA能够把等待状态的POD调度到新的节点上了。 平均cpu使用率低于指定的目标，没有必要再调度新的pod了。
 
 ```bash
 $ kubectl get hpa
@@ -164,9 +164,9 @@ php-apache-8699449574-cl8lj 1/1 Running 0 35m 192.168.172.71 ip-192-168-189-29
 ...
 ```
 
-6- 关闭几个terminal，停掉一些负载
+6. 关闭几个terminal，停掉一些负载
 
-7- CPU平均利用率减小了， 所以HPA开始更改部署里的pod副本数量并杀掉一些pods
+7. CPU平均利用率减小了， 所以HPA开始更改部署里的pod副本数量并杀掉一些pods
 
 ```bash
 $ kubectl get hpa
@@ -184,7 +184,7 @@ php-apache-8699449574-k5ngv 1/1 Terminating 0 26m 192.168.108.58 ip-192-168-92-1
 ...
 ```
 
-8- CA 检测到一个节点未充分使用，正在运行的pods能够调度到其他节点上。 
+8. CA 检测到一个节点未充分使用，正在运行的pods能够调度到其他节点上。 
 
 ```bash
 $ kubectl get nodes
@@ -199,7 +199,7 @@ ip-192-168-189-29.ec2.internal   Ready         2h        v1.10.3
 ip-192-168-200-20.ec2.internal   Ready         2h        v1.10.3
 ```
 
-9- 在向下缩放的时候，terminal中应该没有明显的timeout
+9. 在向下缩放的时候，terminal中应该没有明显的timeout
 
 ### Kubernetes Autoscaling 测试用例 #2
 
@@ -211,20 +211,20 @@ ip-192-168-200-20.ec2.internal   Ready         2h        v1.10.3
 
 – k8s ca 特性已安装
 
-1- 创建2个请求小于1vcpu的deployment
+1. 创建2个请求小于1vcpu的deployment
 
 ```bash
 $ kubectl run nginx --image=nginx:latest --requests=cpu=200m
 $ kubectl run nginx2 --image=nginx:latest --requests=cpu=200m
 ```
 
-2- 创建一个新的deployment，请求比剩余的cpu更多的资源
+2. 创建一个新的deployment，请求比剩余的cpu更多的资源
 
 ```bash
 $ kubectl run nginx3 --image=nginx:latest --requests=cpu=1
 ```
 
-3- 新的POD会处于等待状态，因为没有可用的资源：
+3. 新的POD会处于等待状态，因为没有可用的资源：
 
 ```bash
 $ kubectl get Pods -w
@@ -246,7 +246,7 @@ Type     Reason            Age               From               Message
 Warning  FailedScheduling  32s (x7 over 1m)  default-scheduler  0/1 nodes are available: 1 Insufficient cpu
 ```
 
-4- CA自动调整集群的大小， 新加了一个节点
+4. CA自动调整集群的大小， 新加了一个节点
 
 ```bash
 $ kubectl get nodes
@@ -255,7 +255,7 @@ ip-192-168-142-179.ec2.internal   Ready         1m        v1.10.3  <<
 ip-192-168-82-136.ec2.internal     Ready         1h        v1.10.3
 ```
 
-5- 集群现在有了足够的资源以运行pod
+5. 集群现在有了足够的资源以运行pod
 
 ```bash
 $ kubectl get Pods
@@ -265,7 +265,7 @@ nginx2-66667bf959-2fmlr   1/1       Running   0          37m
 nginx3-564b575974-xcm5t   1/1       Running   0          35m
 ```
 
-6- 两个部署删除了。 一段时间后，CA检测到集群中的一个节点未被充分利用，运行的pod可以安置到其他存在的节点上。 AWS AG 更新，节点数量减1。
+6. 两个部署删除了。 一段时间后，CA检测到集群中的一个节点未被充分利用，运行的pod可以安置到其他存在的节点上。 AWS AG 更新，节点数量减1。
 
 ```bash
 $ kubectl get nodes
@@ -279,9 +279,9 @@ nginx-5fcb54784c-lcfht   1/1       Running     0                   1h       192.
 
 清除环境的步骤:
 
-1- 删除添加到eks worker节点上Role的自定义策略
+1. 删除添加到eks worker节点上Role的自定义策略
 
-2- 按照这个[指南](https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html)删除这个集群
+2. 按照这个[指南](https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html)删除这个集群
 
 其他的关于kubernetes autoscaling，可以阅读Stefan Prodan的文章 [Kubernetes Horizontal Pod Autoscaler with Prometheus Custom Metrics](https://github.com/stefanprodan/k8s-prom-hpa)
 
