@@ -75,13 +75,13 @@ spec:
 `OutlierDetection`部分的设置用来检查每秒调用服务是否有错误发生。如果有，则将服务从负载均衡池中逐出至少三分钟（100%最大弹出百分比表示，如果需要，所有的服务都可以同时被逐出）。
 
 > 在手动创建`Destination Rule`资源时有一件事需要特别注意，那就是是否为该服务启用了mTLS。如果是的话，还需要在`Destination Rule`中设置如下字段，否则当调用`movies`服务时，调用方可能会收到503错误：
->
-> ```yaml
->trafficPolicy:
-> tls:
->  mode: ISTIO_MUTUAL
->   ```
->    
+
+```yaml
+trafficPolicy:
+   tls:
+  mode: ISTIO_MUTUAL
+```
+
 > 还可以为特定[namespace](https://istio.io/docs/tasks/security/authn-policy/#namespace-wide-policy) 或特定[服务](https://istio.io/docs/tasks/security/authn-policy/#service-specific-policy)启用[全局](https://istio.io/docs/tasks/security/authn-policy/#globally-enabling-istio-mutual-tls)的mTLS。你应该了解这些设置以便确定是否把`trafficPolicy.tls.mode`设置为 `ISTIO_MUTUAL`。更重要的是，当你试图配置一个完全不同的功能（例如熔断）时，很容易忘记设置此字段。
 >
 > 提示：在创建`Destination Rule`前总是考虑mTLS！
@@ -177,7 +177,6 @@ $ backyards install -a --run-demo
 #### Backyards UI 的熔断实战
 
 下面的视频总结了所有这些UI操作（译者注：视频来自YouTube，需科学上网）：
-
 <iframe width="704" height="315" src="https://www.youtube.com/embed/JH2xRv4a37M" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="box-sizing: border-box; color: rgb(83, 83, 83); font-family: Lato; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"></iframe>
 ### 使用[BACKYARDS-CLI](https://github.com/banzaicloud/backyards-cli)创建熔断
 
