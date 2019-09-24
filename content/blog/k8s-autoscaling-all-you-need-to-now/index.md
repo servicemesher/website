@@ -30,7 +30,7 @@ keywords: ["autoscaler", "hpa"]
 
 ## Kubernetes Autoscaling 详情：
 
-### Horizo​​ntal Pod Autoscaler（HPA）
+### Horizontal Pod Autoscaler（HPA）
 
 HPA会在集群中为您缩放Pod副本的数量。该操作由CPU或内存触发，以根据需要向上或向下扩展。但是，也可以根据各种外部的和自定义指标（metrics.k8s.io，external.metrics.k8s.io和custom.metrics.k8s.io）来配置HPA以扩展Pod。
 
@@ -69,21 +69,21 @@ CA进行例行检查以确定是否有任何pod因等待额外资源处于待定
 
 ```json
 {
-"Version": "2012-10-17",
-"Statement": [
-{
-"Effect": "Allow",
-"Action": [
-"autoscaling:DescribeAutoScalingGroups",
-"autoscaling:DescribeAutoScalingInstances",
-"autoscaling:DescribeLaunchConfigurations",
-"autoscaling:DescribeTags",
-"autoscaling:SetDesiredCapacity",
-"autoscaling:TerminateInstanceInAutoScalingGroup"
-],
-"Resource": "*"
-}
-]
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Effect": "Allow",
+         "Action": [
+            "autoscaling:DescribeAutoScalingGroups",
+            "autoscaling:DescribeAutoScalingInstances",
+            "autoscaling:DescribeLaunchConfigurations",
+            "autoscaling:DescribeTags",
+            "autoscaling:SetDesiredCapacity",
+            "autoscaling:TerminateInstanceInAutoScalingGroup"
+         ],
+         "Resource": "*"
+      }
+   ]
 }
 ```
 
