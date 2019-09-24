@@ -2,7 +2,7 @@
 title: "你必知的Kubernetes 自动缩放"
 date: 2019-09-20T20:50:15+08:00
 draft: false
-banner: "/img/blog/banners/Featured-image-Kubernetes-autoscaling.png"
+banner: "/img/blog/banners/Featured-image-Kubernetes-autoscaling.jpg"
 author: "Juan Ignacio Giro"
 authorlink: "https://caylent.com/kubernetes-autoscaling"
 translator: "dfang"
@@ -11,7 +11,7 @@ reviewer: ["GuangmingLuo"]
 reviewerLink: ["https://github.com/GuangmingLuo"]
 originalLink: "https://caylent.com/kubernetes-autoscaling"
 summary: "介绍了kubernetes 的几种缩放方式: hpa, vpa, cluster scaler, 并提供了两个测试用例以供测试和学习。"
-tags: ["kubernetes", "k8s", "autoscaler", "hpa", "vpa", "cluster scaler"]
+tags: ["kubernetes", "autoscaler", "hpa", "vpa", "cluster scaler"]
 categories: ["kubernetes"]
 keywords: ["autoscaler", "hpa"]
 ---
