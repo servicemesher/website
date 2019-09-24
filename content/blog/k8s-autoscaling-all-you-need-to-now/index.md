@@ -2,19 +2,20 @@
 title: "你必知的Kubernetes 自动缩放"
 date: 2019-09-20T20:50:15+08:00
 draft: false
+banner: "/img/blog/banners/Featured-image-Kubernetes-autoscaling.png"
 author: Juan Ignacio Giro
 authorlink: "https://caylent.com/kubernetes-autoscaling"
 translator: dfang
 translatorLink: "https://github.com/dfang"
-reviewer: 
-reviewerLink:
+reviewer: GuangmingLuo
+reviewerLink: "https://github.com/GuangmingLuo"
 originalLink: "https://caylent.com/kubernetes-autoscaling"
 summary: "kubernetes 的几种缩放方式"
 tags: ["kubernetes", "k8s", "autoscaler", "hpa", "vpa", "cluster scaler"]
 categories: ["kubernetes"]
 keywords: ["autoscaler", "hpa"]
-aliases: "/blog/k8s-autoscaling-all-you-need-to-know"
 ---
+
 
 许多Kubernetes用户，特别是那些企业级用户，很快就遇到了对环境自动缩放的需求。幸运的是，K8s Horizo​​ntal Pod Autoscaler（HPA）允许您将部署配置为以多种方式水平扩展。使用Kube Autoscaling的最大优势之一是您的集群可以跟踪现有Pod的加载能力，并计算是否需要更多的Pod。
 
