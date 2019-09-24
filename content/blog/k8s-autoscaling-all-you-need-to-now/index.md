@@ -7,7 +7,7 @@ author: "Juan Ignacio Giro"
 authorlink: "https://caylent.com/kubernetes-autoscaling"
 translator: "dfang"
 translatorLink: "https://github.com/dfang"
-reviewer: "GuangmingLuo"
+reviewer: ["GuangmingLuo"]
 reviewerLink: "https://github.com/GuangmingLuo"
 originalLink: "https://caylent.com/kubernetes-autoscaling"
 summary: "介绍了kubernetes 的几种缩放方式: hpa, vpa, cluster scaler, 并提供了两个测试用例以供测试和学习。"
