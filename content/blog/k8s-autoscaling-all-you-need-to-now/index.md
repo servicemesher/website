@@ -17,7 +17,7 @@ keywords: ["autoscaler", "hpa"]
 ---
 
 
-许多Kubernetes用户，特别是那些企业级用户，很快就遇到了对环境自动缩放的需求。幸运的是，K8s Horizo​​ntal Pod Autoscaler（HPA）允许您将部署配置为以多种方式水平扩展。使用Kube Autoscaling的最大优势之一是您的集群可以跟踪现有Pod的加载能力，并计算是否需要更多的Pod。
+许多Kubernetes用户，特别是那些企业级用户，很快就遇到了对环境自动缩放的需求。幸运的是，K8s Horizontal Pod Autoscaler（HPA）允许您将部署配置为以多种方式水平扩展。使用Kube Autoscaling的最大优势之一是您的集群可以跟踪现有Pod的加载能力，并计算是否需要更多的Pod。
 
 ## Kubernetes Autoscaling
 
