@@ -10,7 +10,7 @@ translatorLink: "https://github.com/dfang"
 reviewer: ["罗广明"]
 reviewerLink: ["https://github.com/GuangmingLuo"]
 originalLink: "https://caylent.com/kubernetes-autoscaling"
-summary: "介绍了kubernetes 的几种缩放方式: hpa, vpa, cluster scaler, 并提供了两个测试用例以供测试和学习。"
+summary: "编者按 介绍了kubernetes 的几种缩放方式: hpa, vpa, cluster scaler, 并提供了两个测试用例以供测试和学习。"
 tags: ["kubernetes", "autoscaler", "hpa", "vpa", "cluster scaler"]
 categories: ["kubernetes"]
 keywords: ["autoscaler", "hpa"]
