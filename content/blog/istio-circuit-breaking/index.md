@@ -176,8 +176,8 @@ $ backyards install -a --run-demo
 
 #### Backyards UI 的熔断实战
 
-下面的视频总结了所有这些UI操作（译者注：视频来自YouTube，需科学上网）：
-<iframe width="704" height="315" src="https://www.youtube.com/embed/JH2xRv4a37M" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="box-sizing: border-box; color: rgb(83, 83, 83); font-family: Lato; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"></iframe>
+这个[视频](https://www.youtube.com/embed/JH2xRv4a37M)总结了所有这些UI操作（译者注：视频来自YouTube）
+
 ### 使用[BACKYARDS-CLI](https://github.com/banzaicloud/backyards-cli)创建熔断
 
 从经验来看，可以从UI界面做的事一定也可以通过 [Backyards CLI](https://github.com/banzaicloud/backyards-cli) 命令行工具完成。
