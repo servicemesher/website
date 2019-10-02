@@ -6,12 +6,12 @@ draft: false
 banner: "/img/blog/banners/006tKfTcly1g0f6h0c0xoj31400u0npe.jpg"
 translator: "马若飞"
 translatorlink: "https://github.com/malphi"
-reviewer:  [""]
-reviewerlink:  [""]
+reviewer:  ["罗广明"]
+reviewerlink:  ["https://github.com/GuangmingLuo"]
 title: "Istio熔断器"
 description: "本文展示了如果通过Backyards创建熔断"
 categories: ["istio"]
-tags: ["istio"]
+tags: ["istio","circuit breaking"]
 ---
 
 ## 编者按
@@ -33,7 +33,7 @@ Istio因灵活的可观察性和安全的服务间通信受到了赞许。然而
 
 在微服务架构中，服务可能会用不同的语言实现并部署在多个节点或集群上，具有不同的响应时间或故障率。如果服务成功（并且及时地）响应了请求，那么它的性能就算是令人满意的。但现实情况并非如此，下游客户端应该在上游服务过于缓慢时受到保护。反之，上游服务也必须被保护，以免被积压的请求拖垮。在多客户端下情况会更加复杂，并可能导致整个基础设施出现一系列的连锁故障。这一问题的解决方案是采用经过时间检验的熔断器模式。
 
-一个熔断器可以有三种状态：关闭、打开和半开，默认情况下处于关闭状态。在关闭状态下，无论请求成功或失败，到达预先设定的故障数量阈值前，都不会触发熔断。而当达到阈值时，熔断器就会打开。当调用处于打开状态的服务时，熔断器将断开请求，这意味着它会直接返回一个错误，而不去执行调用。通过在客户端断开下游请求的方式，可以在生产环境中防止级联故障的发生。在一个配置的超时发生后，熔断器进入半开状态，这种状态下故障服务有时间从其中断的行为中恢复。如果请求在这种状态下继续失败，则熔断器将再次打开并继续阻断请求。否则熔断器将关闭，服务将被允许再次处理请求。
+一个熔断器可以有三种状态：关闭、打开和半开，默认情况下处于关闭状态。在关闭状态下，无论请求成功或失败，到达预先设定的故障数量阈值前，都不会触发熔断。而当达到阈值时，熔断器就会打开。当调用处于打开状态的服务时，熔断器将断开请求，这意味着它会直接返回一个错误，而不去执行调用。通过在客户端断开下游请求的方式，可以在生产环境中防止级联故障的发生。在经过事先配置的超时时长后，熔断器进入半开状态，这种状态下故障服务有时间从其中断的行为中恢复。如果请求在这种状态下继续失败，则熔断器将再次打开并继续阻断请求。否则熔断器将关闭，服务将被允许再次处理请求。
 
 ![Circuit Breaking](https://banzaicloud.com/img/blog/istio/circuit-breaking.png)
 
@@ -41,9 +41,9 @@ Istio因灵活的可观察性和安全的服务间通信受到了赞许。然而
 
 Istio的 [熔断](https://istio.io/docs/tasks/traffic-management/circuit-breaking/) 可以在 [流量策略](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy) 中配置。Istio的 [自定义资源](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)`Destination Rule`里，`TrafficPolicy`字段下有两个和熔断相关的配置： [ConnectionPoolSettings](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#ConnectionPoolSettings) 和 [OutlierDetection](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#OutlierDetection)。
 
-`ConnectionPoolSettings`可以为服务配置连接的数量。`OutlierDetection`用来控制从负载均衡池中剔除不健康的服务。
+`ConnectionPoolSettings`可以为服务配置连接的数量。`OutlierDetection`用来控制从负载均衡池中剔除不健康的实例。
 
-例如，`ConnectionPoolSettings`控制请求的最大数量，挂起请求，重试或者超时；`OutlierDetection` 设置服务被从连接池剔除时发生错误的数量，可以设置最小逐出时间和最大逐出百分比。有关完整的字段列表，请参考[文档](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy).
+例如，`ConnectionPoolSettings`控制请求的最大数量，挂起请求，重试或者超时；`OutlierDetection` 设置服务被从连接池剔除时发生错误的请求数，可以设置最小逐出时间和最大逐出百分比。有关完整的字段列表，请参考[文档](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/#TrafficPolicy).
 
 > Istio在底层使用了[Envoy的熔断特性](https://www.envoyproxy.io/learn/circuit-breaking)。
 
@@ -72,7 +72,7 @@ spec:
 
 使用`ConnectionPoolSettings`字段中的这些设置，在给定的时间内只能和`notifications` 服务建立一个连接：每个连接最多只能有一个挂起的请求。如果达到阈值，熔断器将开始阻断请求。
 
-`OutlierDetection`部分的设置用来检查每秒调用服务是否有错误发生。如果有，则将服务从负载均衡池中逐出至少三分钟（100%最大弹出百分比表示，如果需要，所有的服务都可以同时被逐出）。
+`OutlierDetection`部分的设置用来检查每秒调用服务是否有错误发生。如果有，则将服务从负载均衡池中逐出至少三分钟（100%最大弹出百分比表示，如果需要，所有的服务实例都可以同时被逐出）。
 
 > 在手动创建`Destination Rule`资源时有一件事需要特别注意，那就是是否为该服务启用了mTLS。如果是的话，还需要在`Destination Rule`中设置如下字段，否则当调用`movies`服务时，调用方可能会收到503错误：
 
@@ -305,4 +305,4 @@ $ backyards uninstall -a
 
 使用Backyards，你可以通过UI或CLI命令行工具轻松的配置熔断器。然后通过嵌入的Grafana仪表板从Backyards UI实时的监控熔断器，来查看跳闸率和按源计算的跳闸次数。
 
-下一次我们将接受错误注入，请继续关注！
+下一次我们将介绍错误注入，请继续关注！
