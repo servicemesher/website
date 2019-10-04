@@ -7,14 +7,13 @@ translator: "罗广明"
 translatorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 reviewer:  ["孙海洲"]
 reviewerlink:  ["https://github.com/haiker2011"]
-description: "本文向读者们展示了如何使用流行编程语言Python创建一个可靠实用的operator，并且不依赖于任何框架与SDK。"
+summary: "本文向读者们展示了如何使用流行编程语言Python创建一个可靠实用的operator，并且不依赖于任何框架与SDK。"
 tags: ["kubernetes"]
 categories: ["kubernetes"]
 keywords: ["kubernetes","operator","python"]
 date: 2019-08-21T11:23:19+08:00
 draft: false
 banner: "/img/blog/banners/python-banner.png"
-
 ---
 
 ![banner](/img/blog/banners/python-banner.png)

@@ -7,7 +7,7 @@ translator: "罗广明"
 translatorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 reviewer:  ["马若飞"]
 reviewerlink:  ["https://github.com/malphi"]
-description: "本文引述了Kong的CTO对Kuma这款Service Mesh产品的介绍以及对于SMI的看法。"
+summary: "本文引述了Kong的CTO对Kuma这款Service Mesh产品的介绍以及对于SMI的看法。"
 tags: ["service mesh"]
 categories: ["service mesh"]
 keywords: ["service mesh","puma","kong"]

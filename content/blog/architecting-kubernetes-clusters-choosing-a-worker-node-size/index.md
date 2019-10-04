@@ -9,7 +9,7 @@ translatorlink: "https://github.com/SataQiu"
 reviewer:  ["孙海洲","宋净超"]
 reviewerlink:  ["https://github.com/haiker2011","https://github.com/rootsongjc"]
 title: "构建 Kubernetes 集群 —— 选择工作节点数量和大小"
-description: "本文从多个维度阐述了使用更少的大节点与更多的小节点来组建 Kubernetes 集群各自的优势与劣势，并结合实践经验给出了选择工作节点数量和大小的一般方法。"
+summary: "本文从多个维度阐述了使用更少的大节点与更多的小节点来组建 Kubernetes 集群各自的优势与劣势，并结合实践经验给出了选择工作节点数量和大小的一般方法。"
 categories: ["Kubernetes"]
 tags: ["Kubernetes"]
 ---

@@ -9,7 +9,7 @@ translatorlink: "https://github.com/malphi"
 reviewer:  ["孙海洲"]
 reviewerlink:  ["https://github.com/haiker2011"]
 title: "AWS App Mesh - 云应用的服务网格"
-description: "本文演示了如何在AWS控制台创建一个App Mesh"
+summary: "本文演示了如何在AWS控制台创建一个App Mesh"
 categories: ["service mesh"]
 tags: ["service mesh"]
 ---
