@@ -9,7 +9,7 @@ translatorlink: https://github.com/malphi
 reviewer:  ["罗广明"]
 reviewerlink:  ["https://github.com/GuangmingLuo"]
 title: "服务网格的三个技术优势及其运维局限-第2部分"
-description: "本文结合当前服务网格的形势，分析了服务网格的局限性，以及其带来的三个有价值的好处：可观测性、流量控制和安全。"
+summary: "本文结合当前服务网格的形势，分析了服务网格的局限性，以及其带来的三个有价值的好处：可观测性、流量控制和安全。"
 categories: ["Service Mesh"]
 tags: ["Service Mesh"]
 ---

@@ -9,7 +9,7 @@ translatorlink: "https://github.com/malphi"
 reviewer:  ["罗广明"]
 reviewerlink:  ["https://github.com/GuangmingLuo"]
 title: "容器化到容器编排之旅"
-description: "本文是一篇介绍容器运行时和管理工具的文章，对主要的容器管理工具做了介绍"
+summary: "本文是一篇介绍容器运行时和管理工具的文章，对主要的容器管理工具做了介绍"
 categories: ["container"]
 tags: ["container"]
 ---
