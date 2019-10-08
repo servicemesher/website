@@ -9,7 +9,7 @@ translatorlink: "https://github.com/malphi"
 reviewer:  ["罗广明"]
 reviewerlink:  ["https://github.com/GuangmingLuo"]
 title: "Istio熔断器解析"
-summary: "本文展示了如果通过Backyards创建熔断"
+summary: "本文展示了如果通过Backyards创建熔断。"
 categories: ["istio"]
 tags: ["istio","circuit breaking"]
 ---
