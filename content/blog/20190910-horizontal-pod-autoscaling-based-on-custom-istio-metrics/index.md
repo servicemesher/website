@@ -13,6 +13,7 @@ description: "本文通过spotguides，一个示例spring-boot应用，讲了Ban
 categories: ["service-mesh"]
 tags: ["Kubernetes","Istio"]
 ---
+> 本文通过spotguides——一个示例spring-boot应用，讲了Banzai Cloud是如何通过Istio operator来实现pod水平扩展。
 
 ## 基于自定义Istio指标的Pod水平自动缩放
 
