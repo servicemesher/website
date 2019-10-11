@@ -2,7 +2,7 @@
 title: "linkerd2 proxy destination 原理分析"
 date: 2019-10-10T16:58:27+08:00
 draft: false
-banner: "/img/blog/banners/00704eQkgy1fven1sgw0kj32pa210am1.jpg"
+banner: "/img/blog/banners/00704eQkgy1fqer344dfggj49494elds.jpg"
 author: "李岩"
 authorlink: ""
 summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组件 destination 的原理"
