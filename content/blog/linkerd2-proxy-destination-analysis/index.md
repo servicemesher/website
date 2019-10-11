@@ -4,14 +4,14 @@ date: 2019-10-10T16:58:27+08:00
 draft: false
 banner: "/img/blog/banners/00704eQkgy1fqer344dfggj49494elds.jpg"
 author: "李岩"
-authorlink: ""
-summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组件 destination 的原理"
+authorlink: "https://github.com/huntsman-li"
+summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组件 destination 的原理。"
 tags: ["linkerd"]
 categories: ["linkerd"]
 keywords: ["service mesh","服务网格","sofamesh","x-protocol"]
 ---
 
-作者: 李岩，哗啦啦 mesh团队 架构师，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
+> 作者: 李岩，哗啦啦 mesh团队 架构师，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
 
 ## 概述 
 proxy由rust开发完成，其内部的异步运行时采用了[Tokio](https://tokio-zh.github.io/)框架，服务组件用到了[tower](https://github.com/tower-rs/tower)。
@@ -26,7 +26,7 @@ proxy由rust开发完成，其内部的异步运行时采用了[Tokio](https://t
 
 在ProxyParts::build_proxy_task中会进行一系列的初始化工作，此处只关注dst_svc，其创建代码为：
 
-```
+```rust
             svc::builder()
                .buffer_pending(
                     config.destination_buffer_capacity,
@@ -53,7 +53,7 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
 1. 调用api::client::Destination::new(dst_svc)创建grpc的client端并存于成员变量service
 2. 接着profiles_client对象会被用于inbound和outbound的创建（省略无关代码）：
 
-```
+```rust
     let dst_stack = svc::builder()
        .layer(profiles::router::layer(
             profile_suffixes,
@@ -70,7 +70,7 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
 
 在call中：
 
-```
+```rust
         // Initiate a stream to get route and dst_override updates for this
         // destination.
         let route_stream = match target.get_destination() {
@@ -94,7 +94,7 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
 
 进入get_routes：
 
-```
+```rust
     fn get_routes(&self, dst: &NameAddr) -> Option<Self::Stream> {
         // 创建通道
         let (tx, rx) = mpsc::channel(1);
@@ -123,7 +123,7 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
 
 接着看poll：
 
-```
+```rust
     fn poll(&mut self) -> Poll<Self::Item, Self::Error> {
         loop {
             // 遍历state成员状态
@@ -192,7 +192,7 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
 
 接着 proxy_stream：
 
-```
+```rust
     fn proxy_stream(
         rx: &mut grpc::Streaming<api::DestinationProfile, T::ResponseBody>,
         tx: &mut mpsc::Sender<profiles::Routes>,
@@ -263,4 +263,4 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
    }
 ```
 
-回到MakeSvc::call方法，前面创建的route_stream会被用于创建一个linkerd2_proxy::proxy::http::profiles::router::Service任务对象，并在其poll_ready方法中通过poll_route_stream从route_steam获取profiles::Routes并调用update_routes创建具体可用的路由规则linkerd2_router::Router，然后在call中调用`linkerd2_router::call进行对请求的路由判断。
+回到MakeSvc::call方法，前面创建的route_stream会被用于创建一个linkerd2_proxy::proxy::http::profiles::router::Service任务对象，并在其poll_ready方法中通过poll_route_stream从route_steam获取profiles::Routes并调用update_routes创建具体可用的路由规则linkerd2_router::Router，然后在call中调用`linkerd2_router::call`进行对请求的路由判断。
