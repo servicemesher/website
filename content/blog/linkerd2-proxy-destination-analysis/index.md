@@ -14,6 +14,7 @@ keywords: ["service mesh","服务网格","sofamesh","x-protocol"]
 > 作者: 李岩，哗啦啦 mesh团队 架构师，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
 
 ## 概述 
+
 proxy由rust开发完成，其内部的异步运行时采用了[Tokio](https://tokio-zh.github.io/)框架，服务组件用到了[tower](https://github.com/tower-rs/tower)。
 
 ## 流程分析
@@ -66,6 +67,7 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
 其中profiles::router::layer会创建一个Layer对象，并将profiles_client赋予get_routes成员。然后在service方法中，会调到Layer::layer方法，里面会创建一个MakeSvc对象，其get_routes成员的值即为profiles_client。
 
 ### 运行
+
 新的连接过来时，会调用linkerd2_proxy::proxy::server::Server的serve_connection方法，并最终调用MakeSvc::call方法。
 
 在call中：
