@@ -8,7 +8,7 @@ authorlink: "https://github.com/huntsman-li"
 summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组件 destination 的原理。"
 tags: ["linkerd"]
 categories: ["linkerd"]
-keywords: ["service mesh","服务网格","sofamesh","x-protocol"]
+keywords: ["service mesh","服务网格","linkerd2","linkerd"]
 ---
 
 > 作者: 李岩，哗啦啦 mesh团队 架构师，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
