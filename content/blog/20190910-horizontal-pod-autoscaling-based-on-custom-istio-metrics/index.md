@@ -2,7 +2,7 @@
 originallink: "https://banzaicloud.com/blog/k8s-hpa-prom-istio/"
 author: "Sandor Magyari"
 date: "2019-10-11T18:00:00+08:00"
-draft: true
+draft: false
 banner: "/img/blog/banners/00704eQkgy1fsy2omm18aj30rs0ku7ma.jpg"
 translator: "张成"
 translatorlink: "https://github.com/chengwhynot"
