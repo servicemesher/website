@@ -129,7 +129,7 @@ PUT {{pipeline_url}}/api/v1/orgs/:orgId/clusters/:clusterId/hpa
 
 如果要指定绝对值，可以使用`targetValue`而不是`targetAverageValue`。 不同之处在于，`targetAverageValue`使用当前pod副本计数对获取的度量值进行平均。
 
-[Pipeline]（https://github.com/banzaicloud/pipeline）实际上做的是为您的部署添加以下注释：
+[Pipeline](https://github.com/banzaicloud/pipeline)实际上做的是为您的部署添加以下注释：
 
 ```bash
     hpa.autoscaling.banzaicloud.io/maxReplicas=10
