@@ -24,17 +24,17 @@ tags: ["Kubernetes","Istio"]
 - 基于自定义**Prometheus指标**的扩展
 - 为更复杂的**Prometheus查询**提供扩展支持
 
-随着我们的开源[Istio operator](https://banzaicloud.com/blog/istio-operator/)的发布以及在[Pipeline平台](https://beta.banzaicloud.io/)上广泛引入基于Istio的服务网格(https://beta.banzaicloud.io/)，我们也提供了根据自定义的Istio指标的自动缩放功能。 Prometheus现在提供网络指标，延迟，故障率以及更多指标(默认情况下从Istio中删除)。 我们的[HPA operator](https://banzaicloud.com/blog/k8s-hpa-operator/)根据这些指标决定是否扩展。
+随着我们的开源[Istio operator](https://banzaicloud.com/blog/istio-operator/)的发布以及在[Pipeline平台](https://beta.banzaicloud.io/)上广泛引入基于Istio的[服务网格](https://beta.banzaicloud.io/)，我们也提供了根据自定义的Istio指标的自动缩放功能。 Prometheus现在提供网络指标，延迟，故障率以及更多指标(默认情况下从Istio中删除)。 我们的[HPA operator](https://banzaicloud.com/blog/k8s-hpa-operator/)根据这些指标决定是否扩展。
 
 但是，在使用[Prometheus Adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter)时，我们的方法已不再可行，因此我们决定探索替代方案。
 
 > 如果您错过了我们关于[Pipeline](https://github.com/banzaicloud/pipeline)平台所支持和自动化不同类型的**自动缩放**功能的系列博客，请查看这些早先的帖子：
 >
-> - [Autoscaling Kubernetes集群](https://banzaicloud.com/blog/k8s-cluster-autoscaler/)
-> - [Vertical pod autoscaler](https://banzaicloud.com/blog/k8s-vertical-pod-autoscaler/)
-> - [自定义指标上的水平自动缩放Kubernetes部署](https://banzaicloud.com/blog/k8s-horizontal-pod-autoscaler/)
-> - [Horizontal Pod Autoscaler Kubernetes Operator](https://banzaicloud.com/blog/k8s-hpa-operator/)
-> - [重新加载水平Pod自动调节器操作员](https://banzaicloud.com/blog/k8s-hpa-operator-reloaded/)
+> 1. [Autoscaling Kubernetes集群](https://banzaicloud.com/blog/k8s-cluster-autoscaler/)
+> 1. [Vertical pod autoscaler](https://banzaicloud.com/blog/k8s-vertical-pod-autoscaler/)
+> 1. [自定义指标上的水平自动缩放Kubernetes部署](https://banzaicloud.com/blog/k8s-horizontal-pod-autoscaler/)
+> 1. [Horizontal Pod Autoscaler Kubernetes Operator](https://banzaicloud.com/blog/k8s-hpa-operator/)
+> 1. [重新加载水平Pod自动调节器操作员](https://banzaicloud.com/blog/k8s-hpa-operator-reloaded/)
 
 ### 太长;求总
 
@@ -59,7 +59,7 @@ tags: ["Kubernetes","Istio"]
 
 我在[这个视频](https://banzaicloud.com/img/blog/k8s-hpa-prom-istio/spring_boot_spotguide.mp4)中记录了这些步骤：
 
-一旦你的`Spring Boot`容器和`MySQL`服务器启动并运行，你就可以从**Spotguid 总览**打开演示程序``https://spring-boot-custom-metrics-demo.sancyx5g25.sancyx.beta.banzaicloud.io/actuator/health/kubernetes` 。这是一个演示应用程序，是典型的`Spring` Web应用程序。我们已经创建了一个GitHub 代码库，你可以在里面找到示意代码（就像我们的其他`spotguides`一样）。默认情况下，应用程序URL将仅返回运行状况检查状态，该状态连接到`Kubernetes`活动和准备情况检查。然后，JVM指标将暴露给**Prometheus**，并且repo将集成到我们的CI/CD流中，因此，一旦您提交业务逻辑，它将自动部署到集群。在[这里](http://localhost/blog/spotguides-revisited/)阅读更多关于我们的spotguides。
+一旦你的`Spring Boot`容器和`MySQL`服务器启动并运行，你就可以从**Spotguid 总览**打开[演示程序](https://spring-boot-custom-metrics-demo.sancyx5g25.sancyx.beta.banzaicloud.io/actuator/health/kubernetes)。这是一个演示应用程序，是典型的'Spring Web'应用程序。我们已经创建了一个'GitHub'代码库，你可以在里面找到示意代码（就像我们的其他'spotguides'一样）。默认情况下，应用程序URL将仅返回运行状况检查状态，该状态连接到'Kubernetes'活动和准备情况检查。然后，JVM指标将暴露给**Prometheus**，并且repo将集成到我们的CI/CD流中，因此，一旦您提交业务逻辑，它将自动部署到集群。在[这里](http://localhost/blog/spotguides-revisited/)阅读更多关于我们的spotguides。
 
 您可以从群集列表或详细信息页面下载`Kubernetes`配置，以便稍后从本地计算机获取对群集的`kubectl`访问权限。
 
