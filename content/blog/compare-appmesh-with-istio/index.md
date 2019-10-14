@@ -32,7 +32,7 @@ keywords: ["app mesh","istio"]
 和AWS里很多产品一样，App Mesh也不是独创，而是基于Envoy开发的。AWS这样的闭环生态必然要对其产品进行封装和改进，因此在App Mesh这个产品中提出了下面几个技术术语，我们来一一介绍一下。
 
 - 服务网格（Service mesh）：服务间网络流量的逻辑边界。这个概念比较好理解，就是为使用App mesh的服务圈一个虚拟的边界。
-- 虚拟服务（Virtual services）：是真实服务的抽象。真实服务可以是部署于抽象节点的服务，也可以是简介的通过路由指向的服务。
+- 虚拟服务（Virtual services）：是真实服务的抽象。真实服务可以是部署于抽象节点的服务，也可以是间接的通过路由指向的服务。
 - 虚拟节点（Virtual nodes）：虚拟节点是指向特殊工作组（task group）的逻辑指针。例如AWS的ECS服务，或者Kubernetes的Deployment。可以简单的把它理解为是物理节点或逻辑节点的抽象。
 - Envoy：App Mesh里的数据平面，Sidecar代理。
 - 虚拟路由器（Virtual routers）：用来处理来自虚拟服务的流量。可以理解为它是一组路由规则的封装。
@@ -44,11 +44,35 @@ keywords: ["app mesh","istio"]
 
 那么这些App Mesh自创的术语是否能在Istio中找到相似甚至相同的对象呢？我们用下面的表格做一个对比：
 
-//todo table
+| App Mesh                      | Istio                                                        |
+| ----------------------------- | ------------------------------------------------------------ |
+| 服务网格（Service mesh）      | Istio并未显示的定义这一概念，我们可以认为在一个集群中，由Istio管理的服务集合，它们组成的网络拓扑即是服务网格。 |
+| 虚拟服务（Virtual services）  | Istio中也存在虚拟服务的概念。它的主要功能是定义路由规则，使请求可以根据这些规则被分发到对应的服务。从这一点来说，它和App Mesh的虚拟服务的概念基本上是一致的。 |
+| 虚拟节点（Virtual nodes）     | Istio没有虚拟节点的概念，可以认为类似Kubernetes里的Deployment。 |
+| 虚拟路由器（Virtual routers） | Istio也没有虚拟路由器的概念。                                |
+| 路由（Routes）                | Istio中的目标规则（DestinationRule）和路由的概念类似，为路由设置一些策略。从配置层面讲，其中的子集（subset）和App Mesh路由里选择的目标即虚拟节点对应。但Istio的目标规则更加灵活，也支持更多的路由策略。 |
 
-
+可以从上面的对比看出，App Mesh目前基本上实现了最主要的流量控制（路由）相关的功能，但像超时重试、熔断、流量复制等高级一些的功能还没有提供，有待进一步完善。
 
 ## 架构
+
+AWS App Mesh是一个商业产品，目前还没有找到架构上的技术细节，不过我们依然可以从现有的、公开的文档或介绍种发现一些有用的信息。
+
+![arch1](https://d1.awsstatic-china.com/app-mesh/app-mesh.8b0ce6cfb04a60c4b0317714a5e78d813383b92e.png)
+
+这张官网的结构图中可以看出，每个服务的橙色部分就是Sidecar代理：Envoy。而中间的AWS App Mesh其实就是控制平面，用来控制服务间的交互。那么这个控制平面具体的功能是什么呢？我们可以从今年的AWS Summit的一篇PPT中看到这样的字样：控制平面用来把逻辑意图转换成代理配置，并进行分发。
+
+熟悉Istio架构的朋友有没有觉得似曾相识？没错，这个控制平面的职责和Pilot基本一致。由此可见，不管什么产品的控制平面，也必须具备这些核心的功能。
+
+![arch2](./aws-summit-appmesh.png)
+
+那么在平台的支持方面呢？下面这张图展示了App Mesh可以被运行在如下的基础设施中，包括EKS、ECS、EC2等等。当然，这些都必须存在于AWS这个闭环生态中。
+
+![arch3](https://www.allthingsdistributed.com/images/appmesh.png)
+
+而Istio这方面就相对弱一些。尽管Istio宣称是支持多平台的，但目前来看和Kubernetes还是强依赖。不过它并不受限于单一的云平台，这一点有较大的优势。
+
+从可观测性来看，App Mesh依然发挥了自家生态的优势，可以方便的接入CloudWatch、X-Ray对服务进行观测。另外，App Mesh也提供了更大的灵活性，可以在虚拟节点里配置服务后端（可以是虚拟服务或者ARN），流量可以出站到这些配置的服务。这一点来说，和Istio的Mixer又有了异曲同工之妙。Mixer通过插件方式为Istio提供了极大的可扩展性，App Mesh在这一点上也不算落下风。
 
 ## 功能与实现方式
 
