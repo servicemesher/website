@@ -1,6 +1,6 @@
 ---
 title: "Istio vs AWS App Mesh"
-date: 2019-10-10T16:58:27+08:00
+date: 2019-10-15T16:58:27+08:00
 draft: false
 banner: "/img/blog/banners/00704eQkgy1fqer344dfggj49494elds.jpg"
 author: "马若飞"
@@ -74,41 +74,161 @@ AWS App Mesh是一个商业产品，目前还没有找到架构上的技术细�
 
 从可观测性来看，App Mesh依然发挥了自家生态的优势，可以方便的接入CloudWatch、X-Ray对服务进行观测。另外，App Mesh也提供了更大的灵活性，可以在虚拟节点里配置服务后端（可以是虚拟服务或者ARN），流量可以出站到这些配置的服务。这一点来说，和Istio的Mixer又有了异曲同工之妙。Mixer通过插件方式为Istio提供了极大的可扩展性，App Mesh在这一点上也不算落下风。
 
+Istio的架构大家都非常熟悉了，这里就不再赘述了，感兴趣的同学可以直接去[官网](https://istio.io/docs/concepts/what-is-istio/)查看。
+
 ## 功能与实现方式
 
-### 路由规则
-App Mesh only supports path based routing rules. Istio, on the other hand, supports more options, including routing based on HTTP headers similar to what Application Load Balancers in AWS are now capable of. 
+### 部署
 
-Another implementation difference is in the way you can set up your routing. With App Mesh you need to create a separate service for different versions, whereas with Istio you can set up a `DestinationRule` that allows you to define `subsets` you can reference from your routes. From a building perspective, the two approaches are fairly similar except for where you define the filters.
+Istio部署后类似一个网一样附着在你的Kubernetes集群上， 控制平面会使用你设置的资源；而App Mesh是一种托管方式，只会使用Envoy代理。完整安装后的Istio需要添加50个左右的CRD，而App Mesh只添加了3个CRD：`meshes.appmesh.k8s.aws`，`virtualnodes.appmesh.k8s.aws`和`virtualservices.appmesh.k8s.aws`。这一点也反映出了功能上的区别。
 
-### 认证
+### 流量控制
+尽管两者的数据平面都是基于Envoy，但它们提供的流量控制能力目前还是有比较大的差距的。在路由的设置方面，App Mesh提供了相对比较丰富的匹配策略，基本能满足大部分使用场景，下面是App Mesh控制台里的路由配置截图，可以看出，除了基本的URI前缀、HTTP Method和Scheme外，请求头的匹配也是比较完善的。
 
-auth：The way that access is granted to internal services is different as well. By default, Istio allows access to the services from any pod in the mesh, but you can enable RBAC and ACL controls that allow extensive [authorization settings](https://istio.io/docs/concepts/security/#authorization) including differentiation between methods (GET vs POST for example). As mentioned before, App Mesh disallows access by default so you always need to explicitly grant a Virtual Node access to a Virtual Service, but the controls are limited to allowing or disallowing access to the entire service regardless of method.
-### 健康检查
-While both App Mesh and Istio have support for active health checks that ensure unhealthy members of a service are taken out, Istio goes a bit further with more advanced support for various failure recovery features.
-### 可观察性
-//Observability data can be exported to various AWS and third-party tools, including AWS X-Ray,、、
+![appmesh-route](appmeshroute.png)
 
-### 日志
+Istio的匹配策略更加完善，除了上面提到的，还包括HTTP Autority，端口号，请求参数等，具体信息可以从官方文档的虚拟服务[设置](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/#HTTPMatchRequest)查看。下面两段yaml展示了两个产品在虚拟服务配置上的区别。
 
-The other big difference, however, is in the logging. With Istio you can get the full logging and monitoring experience out of the box, including dashboards. App Mesh allows you to configure the Envoy proxy’s logging location, but afterwards you still need to run an agent that will send these logs somewhere. However, App Mesh also allows easy integration with [X-Ray](https://aws.amazon.com/xray/), AWS’ tracing service that lets you follow the path of a request across many services.
+App Mesh配置：
+
+```yaml
+apiVersion: appmesh.k8s.aws/v1beta1
+kind: VirtualService
+metadata:
+  name: my-svc-a
+  namespace: my-namespace
+spec:
+  meshName: my-mesh
+  routes:
+    - name: route-to-svc-a
+      http:
+        match:
+          prefix: /
+        action:
+          weightedTargets:
+            - virtualNodeName: my-app-a
+              weight: 1
+```
+
+Istio配置：
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ratings-route
+spec:
+  hosts:
+  - ratings.prod.svc.cluster.local
+  http:
+  - match:
+    - headers:
+        end-user:
+          exact: jason
+      uri:
+        prefix: "/ratings/v2/"
+      ignoreUriCase: true
+    route:
+    - destination:
+        host: ratings.prod.svc.cluster.local
+```
+
+另外一个比较大的不同是，App Mesh需要你对不同版本的服务分开定义，而Istio是通过目标规则 `DestinationRule` 里的子集 `subsets` 和路由配置做的关联。但本质上它们没有太大区别。
+
+除了路由功能外，App Mesh就显得捉襟见肘了。就在笔者撰写本文时，AWS刚刚添加了重试功能。而Istio借助于强大的Envoy，提供了全面的流量控制能力，如超时重试、故障注入、熔断、流量镜像等。
 
 ### 安全
 
-Lastly, I want to point out one of the differences that is related to security. In Istio you can configure the mesh to use mutual TLS, which allows you to ensure all internal service requests are encrypted. App Mesh doesn’t support this yet.  （beta阶段）
+在安全方面，两者具有较大的区别。默认情况下，一个用户不能直接访问App Mesh的资源，需要通过AWS的[IAM策略](https://docs.aws.amazon.com/app-mesh/latest/userguide/IAM_policies.html)给用户授权。比如下面的配置是容许用户的任意行为去操作任意资源：
 
-### 部署形式
-Istio runs entirely on your cluster with its control plane using resources in your setup, while as a hosted solution the only parts of App Mesh that use resources are the Envoy sidecars.
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "appmesh:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+而虚拟节点间的授权方面，App Mesh目前只有TLS访问的支持，且仅仅是预览版（Preview）并未正式发布。下面的配置展示了一个虚拟节点只容许`tls`方式的访问：
+
+```json
+{
+   "meshName" : "app1",
+   "spec" : {
+      "listeners" : [
+         {
+            "portMapping" : {
+               "port" : 80,
+               "protocol" : "http"
+            },
+            "tls" : {
+               "mode" : "STRICT",
+               "certificate" : {
+                  "acm" : {
+                     "certificateArn" : "arn:aws:acm:us-west-2:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+                  }
+               }
+            }
+         }
+      ],
+      "serviceDiscovery" : {
+         "dns" : {
+            "hostname" : "serviceBv1.mesh.local"
+         }
+      }
+   },
+   "virtualNodeName" : "serviceBv1"
+}
+```
+
+而Istio中端到端的认证是支持mTLS的，同时还支持JWT的用户身份认证。下面的配置分别展示了这两种认证方式：
+
+```yaml
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "reviews"
+spec:
+  targets:
+  - name: reviews
+  peers:
+  - mtls: {}
+```
+
+```yaml
+origins:
+- jwt:
+    issuer: "https://accounts.google.com"
+    jwksUri: "https://www.googleapis.com/oauth2/v3/certs"
+    trigger_rules:
+    - excluded_paths:
+      - exact: /health
+```
+
+Istio的授权是通过RBAC实现的，可以提供基于命名空间、服务和HTTP方法级别的访问控制。这里就不具体演示了，大家可以通过官网[文档](https://istio.io/docs/concepts/security/#authorization-policy)来查看。
+
+While both App Mesh and Istio have support for active health checks that ensure unhealthy members of a service are taken out, Istio goes a bit further with more advanced support for various failure recovery features.
+### 可观察性
+一般来说，可以通过三种方式来观察你的应用：指标数据、分布式追踪、日志。Istio在这三个方面都有比较完整的支持。指标方面，可以通过Envoy获取请求相关的数据，同时还提供了服务级别的指标，以及控制平面的指标来检测各个组件的运行情况。通过内置的Prometheus来收集指标，并使用Grafana展示出来。分布式追踪也支持各种主流的OpenTracing工具，如Jaeger、Zipkin等。访问日志一般都通过ELK去完成收集、分析和展示。另外，Istio还拥有Kiali这样的可视化工具，给你提供整个网格以及微服务应用的拓扑视图。总体来说，Istio在可观察方面的能力是非常强大的，这主要是因为Mixer组件的插件特性带来了巨大的灵活性。
+
+App Mesh在这方面做的也不错。在如下图虚拟节点的配置中可以看到，你可以配置服务的后端基础设施，这样流量就可以出站到这些服务。同时，在日志收集方面，也可以配置到本地日志，或者是其他的日志系统。
+
+![amob](appmeshob.png)
+
+另一方面，AWS又一次发挥了自己闭环生态的优势，提供了App Mesh与自家的CloudWatch、X-Ray这两个监控工具的整合。总的来说，App Mesh在可观察性上也不落下风。
 
 ## 总结
 
+AWS App Mesh作为一个今年5月份才发布的产品，在功能的完整性上和Istio有差距也是情有可原的。从App Mesh的[Roadmap](https://github.com/aws/aws-app-mesh-roadmap/projects/1)可以看出，很多重要的功能，比如熔断已经在开发计划中。从笔者与AWS的开发人员了解的信息来看，他们还是相当重视这个服务网格产品，优先级很高，进度也很快，之前还在预览阶段的重试功能在上个月也正式发布了。App Mesh是可以免费使用的，用户只需要对其中的实例资源付费即可，没有额外费用。另外，借助着自己的生态圈的优势，App Mesh一部分的开发重点是和现有产品的整合，比如Roadmap列出的使用AWS Gateway作为App Mesh的Ingress。这种整合即方便快捷的完善了App Mesh，同时又让生态内的产品结合的更紧密，使得闭环更加的牢固，不得不说是一步好棋。
 
-
-//todo roadmap
-
-//price
-
-
+和App Mesh目前只强调流控能力不同，Istio更多的是把自己打造一个更加完善的、全面的服务网格系统。架构优雅，功能强大，但性能上受到质疑。在产品的更迭上貌似也做的不尽如人意（不过近期接连发布了1.3到1.3.3版本，让我们对它的未来发展又有了期待）。Istio的优势在于3大顶级技术公司的强大资源，加上开源社区的反哺，控制的好的话容易形成可持续发展的局面，并成为下一个明星级产品。但目前各大厂商都意识到了网格的重要性，AWS App Mesh，Kong的Kuma等，竞争也会逐渐激烈。未来是三分天下还是一统山河，让我们拭目以待。
 
 
 
