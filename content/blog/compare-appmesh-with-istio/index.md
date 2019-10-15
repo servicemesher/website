@@ -62,7 +62,7 @@ AWS App Mesh是一个商业产品，目前还没有找到架构上的技术细�
 
 从这张官网的结构图中可以看出，每个服务的橙色部分就是Sidecar代理：Envoy。而中间的AWS App Mesh其实就是控制平面，用来控制服务间的交互。那么这个控制平面具体的功能是什么呢？我们可以从今年的AWS Summit的一篇PPT中看到这样的字样：
 
->  控制平面用来把逻辑意图转换成代理配置，并进行分发。
+>控制平面用来把逻辑意图转换成代理配置，并进行分发。
 
 ![arch2](./aws-summit-appmesh.png)
 
@@ -71,8 +71,6 @@ AWS App Mesh是一个商业产品，目前还没有找到架构上的技术细�
 那么在平台的支持方面呢？下面这张图展示了App Mesh可以被运行在如下的基础设施中，包括EKS、ECS、EC2等等。当然，这些都必须存在于AWS这个闭环生态中。
 
 ![arch3](https://www.allthingsdistributed.com/images/appmesh.png)
-
-
 
 而Istio这方面就相对弱一些。尽管Istio宣称是支持多平台的，但目前来看和Kubernetes还是强依赖。不过它并不受限于单一的云平台，这一点有较大的优势。
 
@@ -90,8 +88,6 @@ Istio部署后类似一个网一样附着在你的Kubernetes集群上， 控制�
 尽管两者的数据平面都是基于Envoy，但它们提供的流量控制能力目前还是有比较大的差距的。在路由的设置方面，App Mesh提供了相对比较丰富的匹配策略，基本能满足大部分使用场景。下面是App Mesh控制台里的路由配置截图，可以看出，除了基本的URI前缀、HTTP Method和Scheme外，也支持请求头的匹配。
 
 ![appmesh-route](appmeshroute.png)
-
-
 
 Istio的匹配策略更加完善，除了上面提到的，还包括HTTP Authority，端口匹配，请求参数匹配等，具体信息可以从官方文档的虚拟服务[设置](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/#HTTPMatchRequest)查看。下面两段yaml分别展示了两个产品在虚拟服务配置上的差异。
 
@@ -221,7 +217,9 @@ origins:
 Istio的授权是通过RBAC实现的，可以提供基于命名空间、服务和HTTP方法级别的访问控制。这里就不具体展示了，大家可以通过官网[文档](https://istio.io/docs/concepts/security/#authorization-policy)来查看。
 
 While both App Mesh and Istio have support for active health checks that ensure unhealthy members of a service are taken out, Istio goes a bit further with more advanced support for various failure recovery features.
+
 ### 可观察性
+
 一般来说，可以通过三种方式来观察你的应用：指标数据、分布式追踪、日志。Istio在这三个方面都有比较完整的支持。指标方面，可以通过Envoy获取请求相关的数据，同时还提供了服务级别的指标，以及控制平面的指标来检测各个组件的运行情况。通过内置的Prometheus来收集指标，并使用Grafana展示出来。分布式追踪也支持各种主流的OpenTracing工具，如Jaeger、Zipkin等。访问日志一般都通过ELK去完成收集、分析和展示。另外，Istio还拥有Kiali这样的可视化工具，给你提供整个网格以及微服务应用的拓扑视图。总体来说，Istio在可观察方面的能力是非常强大的，这主要是因为Mixer组件的插件特性带来了巨大的灵活性。
 
 App Mesh在这方面做的也不错。在如下图虚拟节点的配置中可以看到，你可以配置服务的后端基础设施，这样流量就可以出站到这些服务。同时，在日志收集方面，也可以配置到本地日志，或者是其他的日志系统。
@@ -238,13 +236,13 @@ AWS App Mesh作为一个今年4月份才发布的产品，在功能的完整性�
 
 ## 参考
 
-https://docs.aws.amazon.com/app-mesh/latest/userguide/what-is-app-mesh.html
+[what is app mesh](https://docs.aws.amazon.com/app-mesh/latest/userguide/what-is-app-mesh.html)
 
-https://github.com/aws/aws-app-mesh-roadmap/projects/1
+[aws app mesh roadmap](https://github.com/aws/aws-app-mesh-roadmap/projects/1)
 
-https://www.allthingsdistributed.com/2019/03/redefining-application-communications-with-aws-app-mesh.html
+[Redefining application communications with AWS App Mesh](https://www.allthingsdistributed.com/2019/03/redefining-application-communications-with-aws-app-mesh.html)
 
-https://istio.io/
+[istio offical](https://istio.io/)
 
 
 
