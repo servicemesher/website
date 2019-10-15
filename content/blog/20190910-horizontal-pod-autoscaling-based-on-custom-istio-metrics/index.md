@@ -59,7 +59,7 @@ tags: ["Kubernetes","Istio"]
 
 我在[这个视频](https://banzaicloud.com/img/blog/k8s-hpa-prom-istio/spring_boot_spotguide.mp4)中记录了这些步骤：
 
-一旦你的`Spring Boot`容器和`MySQL`服务器启动并运行，你就可以从**Spotguid 总览**打开[演示程序](https://spring-boot-custom-metrics-demo.sancyx5g25.sancyx.beta.banzaicloud.io/actuator/health/kubernetes)。这是一个演示应用程序，是典型的'Spring Web'应用程序。我们已经创建了一个'GitHub'代码库，你可以在里面找到示意代码（就像我们的其他'spotguides'一样）。默认情况下，应用程序URL将仅返回运行状况检查状态，该状态连接到'Kubernetes'活动和准备情况检查。然后，JVM指标将暴露给**Prometheus**，并且repo将集成到我们的CI/CD流中，因此，一旦您提交业务逻辑，它将自动部署到集群。在[这里](http://localhost/blog/spotguides-revisited/)阅读更多关于我们的spotguides。
+一旦你的Spring Boot`容器和`MySQL`服务器启动并运行，你就可以从**Spotguid 总览**打开[演示程序](https://spring-boot-custom-metrics-demo.sancyx5g25.sancyx.beta.banzaicloud.io/actuator/health/kubernetes)。这是一个演示应用程序，是典型的`Spring Web`应用程序。我们已经创建了一个`GitHub`代码库，你可以在里面找到示意代码（就像我们的其他`spotguides`一样）。默认情况下，应用程序URL将仅返回运行状况检查状态，该状态连接到`Kubernetes`活动和准备情况检查。然后，JVM指标将暴露给**Prometheus**，并且repo将集成到我们的CI/CD流中，因此，一旦您提交业务逻辑，它将自动部署到集群。在[这里](http://localhost/blog/spotguides-revisited/)阅读更多关于我们的spotguides。
 
 您可以从群集列表或详细信息页面下载`Kubernetes`配置，以便稍后从本地计算机获取对群集的`kubectl`访问权限。
 
@@ -79,7 +79,7 @@ sum(rate(istio_requests_total{destination_service="spring-boot-custom-metrics-de
 
 请务必添加相应的标签过滤器，以便专门选择与您的pod/部署相关的指标。
 
-从部署列表页面上的**Horizontal Pod Autoscaler**菜单中选择*spring-boot-custom-metrics-demo-spotguide-spring-boot* 部署，以访问*HPA Edit*页面。 在那里，您可以通过输入自定义指标或查询的名称来设置cpu，内存和自定义指标。
+从部署列表页面上的**Horizontal Pod Autoscaler**菜单中选择**spring-boot-custom-metrics-demo-spotguide-spring-boot**部署，以访问*HPA Edit*页面。 在那里，您可以通过输入自定义指标或查询的名称来设置cpu，内存和自定义指标。
 
 现在，如果您在更长的时间内生成另一个负载（50个请求/秒），则应在属于部署的HPA中增加副本计数：
 
@@ -192,4 +192,4 @@ $ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods
 }
 ```
 
-**自动缩放**愉快！
+很高兴你阅读本文，希望你有一个关于**自动缩放**愉快的实践体验！
