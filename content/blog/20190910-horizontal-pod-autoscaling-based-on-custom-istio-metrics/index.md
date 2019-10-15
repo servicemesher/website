@@ -6,8 +6,8 @@ draft: false
 banner: "/img/blog/banners/00704eQkgy1fsy2omm18aj30rs0ku7ma.jpg"
 translator: "张成"
 translatorlink: "https://github.com/chengwhynot"
-reviewer:  ["",""]
-reviewerlink:  ["",""]
+reviewer:  ["罗广明","孙海洲","宋净超","赵化冰"]
+reviewerlink:  ["https://github.com/GuangmingLuo","https://github.com/haiker2011","https://github.com/rootsongjc","https://github.com/zhaohuabing"]
 title: "基于自定义Istio指标的Pod水平自动缩放"
 summary: "本文通过spotguides，一个示例spring-boot应用，讲了Banzai Cloud是如何通过Istio operator来实现pod水平扩展"
 categories: ["service-mesh"]
