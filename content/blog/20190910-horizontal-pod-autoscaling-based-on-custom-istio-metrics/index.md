@@ -9,7 +9,7 @@ translatorlink: "https://github.com/chengwhynot"
 reviewer:  ["",""]
 reviewerlink:  ["",""]
 title: "基于自定义Istio指标的Pod水平自动缩放"
-description: "本文通过spotguides，一个示例spring-boot应用，讲了Banzai Cloud是如何通过Istio operator来实现pod水平扩展"
+summary: "本文通过spotguides，一个示例spring-boot应用，讲了Banzai Cloud是如何通过Istio operator来实现pod水平扩展"
 categories: ["service-mesh"]
 tags: ["Kubernetes","Istio"]
 ---
@@ -36,18 +36,18 @@ tags: ["Kubernetes","Istio"]
 > 1. [Horizontal Pod Autoscaler Kubernetes Operator](https://banzaicloud.com/blog/k8s-hpa-operator/)
 > 1. [重新加载水平Pod自动调节器操作员](https://banzaicloud.com/blog/k8s-hpa-operator-reloaded/)
 
-### 太长;求总
+### TL;DR
 
 - [Pipeline](https://github.com/banzaicloud/pipeline)及其[HPA Operator](https://banzaicloud.com/blog/k8s-hpa-operator/)中对重新设计的自定义指标支持的介绍。
 - 使用**来自Prometheus的Istio指标**自动调整Spring Boot部署的示例
 - 深入了解添加自定义指标后发生了什么
-- 切换到另一个**自定义指标适配器 **，[kube-metrics-adapter](https://github.com/zalando-incubator/kube-metrics-adapter)的总结
+- 切换到另一个**自定义指标适配器**，[kube-metrics-adapter](https://github.com/zalando-incubator/kube-metrics-adapter)的介绍
 
 ### 重新支持自定义指标
 
 由于上面列出的原因，我们决定使用另一个**自定义指标适配器**，[kube-metrics-adapter](https://github.com/zalando-incubator/kube-metrics-adapter)。
 
-**kube-metrics-adapter** 是一种通用指标适配器，可以从多个来源收集和提供指标。对于每个源，都有一个`Collector`实现;目前，我们对其**普罗米修斯**收集器最感兴趣。
+**kube-metrics-adapter** 是一种通用指标适配器，可以从多个来源收集和提供指标。对于每个源，都有一个`Collector`实现;目前，我们对其**Prometheus**收集器最感兴趣。
 
 `Prometheus Collector`是一个通用收集器。它将**Prometheus** 查询映射到可由**HPA** 控制器用于部署自动扩展的度量标准。它的方法不同于**Prometheus Adapter** ，它具有预定义的规则集 - 包含针对**Prometheus** 运行的查询，用于将指标转换为自定义指标 - 定期执行。获取所有匹配的指标标准(因为这些查询必须是通用的并且定位所有pod和部署)，并作为自定义指标进行转换和公开。相比之下，“Prometheus collector”仅收集自定义查询返回的指标结果，其定义因部署而异，并且仅针对单个部署/ pod或服务，从而减少了存储的指标总数。该解决方案的一个缺点是，目前，用户应该避免执行性能不佳的查询。
 
@@ -69,9 +69,9 @@ tags: ["Kubernetes","Istio"]
 hey -n 10000 -q 50 https://spring-boot-custom-metrics-demo.sancyx5g25.sancyx.beta.banzaicloud.io/actuator/health/kubernetes
 ```
 
-现在，打开监控（我们的**Spotguide摘要** 或群集详细信息页面中提供的链接）以查看可用的指标并确定您的**Prometheus** 查询。 因为我们启用了Service Mesh，所有网络通信都将通过Envoy代理，将指标发送到Istio遥测服务，该服务由**Prometheus**抓取。
+现在，打开监控（我们的**Spotguide摘要**或群集详细信息页面中提供的链接）以查看可用的指标并确定您的**Prometheus** 查询。 因为我们启用了Service Mesh，所有网络通信都将通过Envoy代理，将指标发送到Istio遥测服务，该服务由**Prometheus**抓取。
 
-我将基于我的示例，查询基于**istio_requests_total **指标，该指标与Spring容器相关：
+我将基于我的示例，查询基于**istio_requests_total**指标，该指标与Spring容器相关：
 
 ```bash
 sum(rate(istio_requests_total{destination_service="spring-boot-custom-metrics-demo-spotguide-spring-boot.default.svc.cluster.local",destination_service_name="spring-boot-custom-metrics-demo-spotguide-spring-boot",destination_service_namespace="default",destination_workload="spring-boot-custom-metrics-demo-spotguide-spring-boot"}[1m]))
@@ -102,8 +102,6 @@ kubectl get hpa
 NAME                                                   REFERENCE                                                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 spring-boot-custom-metrics-demo-spotguide-spring-boot   Deployment/spring-boot-custom-metrics-demo-spotguide-spring-boot   266m/40   1         10        1          32m
 ```
-
-### BEHIND THE SCENES
 
 ### 背后的场景
 
