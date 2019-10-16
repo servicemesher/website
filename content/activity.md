@@ -10,6 +10,21 @@ keywords: ["service mesh","meetup"]
 
 历届幻灯片下载地址：https://github.com/servicemesher/meetup-slides
 
+## Service Mesh Meetup #7 成都站
+
+时间：2019年10月26日
+
+地点：四川省成都市武侯区蚂蚁C空间
+
+讲师与 Topic：
+
+- 赵化冰（中兴通讯网管软件资深专家）：服务网格技术在5G网络管理平台中的落地实践
+- 肖涵（蚂蚁金服高级技术专家）：蚂蚁金服网络代理的演进之路
+- 杨川胡（ 知群后台负责人）：进击的Traefik——云原生边缘路由探秘
+- 杨彪（美团高级技术专家）：Service Mesh下微服务的架构设计
+
+视频回放：https://tech.antfin.com/activities/949
+
 ## Service Mesh Meetup #6 广州站
 
 时间：2019年8月11日
