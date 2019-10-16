@@ -5,8 +5,8 @@ draft: false
 banner: "/img/blog/banners/00704eQkly1g1lt8lhx6rj31jk15m7wm.jpg"
 author: "马若飞"
 authorlink: "https://github.com/malphi"
-reviewer:  [""]
-reviewerlink:  [""]
+reviewer:  ["罗广明"]
+reviewerlink:  ["https://github.com/guangmingluo"]
 summary: "本文从架构和功能等方面较为全面的对比了AWS App Mesh和Istio两个服务网格产品"
 categories: ["istio"]
 tags: ["istio"]
