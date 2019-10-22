@@ -50,7 +50,7 @@ paginate = 10
 [[menu.main]]
     parent="docs"
     name="Istio中文官网"
-    url = "https://istio.io/zh/"
+    url = "https://archive.istio.io/v1.2/zh"
     weight = 3
 
 [[menu.main]]
@@ -114,7 +114,7 @@ paginate = 10
     weight = 5
 
 [[menu.main]]
-    name = "联系我们"
+    name = "关于"
     url  = "/contact/"
     weight = 5
 # Top bar social links menu
@@ -173,10 +173,10 @@ paginate = 10
     icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
     date_format = "2006年1月2日"
-    logo = "/img/servicemesher-logo.jpg"
+    logo = "/img/servicemesher-logo-new.png"
     # avatar used for thumbnail on sharing
-    avatar = "/img/servicemesher-avatar-banner.jpg"
-    logosmall = "/img/logosmall.jpg"
+    avatar = "/img/servicemesher-avatar-banner-new.jpg"
+    logosmall = "/img/logosmall-new.png"
     address = """<p>微信扫码加入交流讨论群</br>请备注姓名-公司信息</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
       """
     # 是否开启评论功能

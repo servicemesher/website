@@ -9,7 +9,7 @@ translatorlink: "https://github.com/malphi"
 reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 title: "运行在Istio之上的Apache Kafka——基准测试"
-description: "作者对在Istio环境下运行的Kafka进行了基准测试，并对测试结果进行了分析。"
+summary: "作者对在Istio环境下运行的Kafka进行了基准测试，并对测试结果进行了分析。"
 categories: ["Service Mesh"]
 tags: ["Service Mesh"]
 ---
