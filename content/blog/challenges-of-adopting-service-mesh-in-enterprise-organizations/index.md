@@ -7,7 +7,7 @@ translator: "罗广明"
 translatorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 reviewer:  [""]
 reviewerlink:  [""]
-description: "本文作者介绍了企业组织采用服务网格具有哪些挑战，并且结合自身经验给企业组织提出了推进服务网格的建议。"
+summary: "本文作者介绍了企业组织采用服务网格具有哪些挑战，并且结合自身经验给企业组织提出了推进服务网格的建议。"
 tags: ["service mesh"]
 categories: ["service mesh"]
 keywords: ["service mesh"]
