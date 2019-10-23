@@ -12,7 +12,7 @@ categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]
 ---
 
-# Istio Pilot 组件介绍
+## Istio Pilot 组件介绍
 
 在Istio架构中，Pilot组件属于最核心的组件，负责了服务网格中的流量管理以及控制面和数据面之间的配置下发。Pilot内部的代码结构比较复杂，本文中我们将通过对Pilot的代码的深入分析来了解Pilot实现原理。
 
@@ -29,7 +29,7 @@ Pilot的输出为符合xDS接口的数据面配置数据，并通过GRPC Streami
 
 备注：Istio代码库在不停变化更新中，本文分析所基于的代码commit为: d539abe00c2599d80c6d64296f78d3bb8ab4b033
 
-# Pilot-Discovery 代码结构
+## Pilot-Discovery 代码结构
 
 Istio Pilot的代码分为Pilot-Discovery和Pilot-Agent,其中Pilot-Agent用于在数据面负责Envoy的生命周期管理，Pilot-Discovery才是控制面进行流量管理的组件，本文将重点分析控制面部分，即Pilot-Discovery的代码。
 
@@ -38,7 +38,7 @@ Istio Pilot的代码分为Pilot-Discovery和Pilot-Agent,其中Pilot-Agent用于�
 
 Pilot-Discovery的入口函数为：pilot/cmd/pilot-discovery/main.go中的main方法。main方法中创建了Discovery Server，Discovery Server中主要包含三部分逻辑：
 
-## Config Controller
+### Config Controller
 
 Config Controller用于管理各种配置数据，包括用户创建的流量管理规则和策略。Istio目前支持三种类型的Config Controller：
 
@@ -54,7 +54,7 @@ Config Controller用于管理各种配置数据，包括用户创建的流量管
 * Service Entry: 通过定义一个Service Entry可以将一个外部服务手动添加到服务网格中。
 * Envoy Filter: 通过Pilot在Envoy的配置中添加一个自定义的Filter。
 
-## Service Controller
+### Service Controller
 
 Service Controller用于管理各种Service Registry，提出服务发现数据，目前Istio支持的Service Registry包括：
 
@@ -63,7 +63,7 @@ Service Controller用于管理各种Service Registry，提出服务发现数据�
 * MCP： 和MCP config controller类似，从MCP Server中获取Service和Service Instance。
 * Memory： 一个内存中的Service Controller实现，主要用于测试。
 
-## Discovery Service
+### Discovery Service
 
 Discovery Service中主要包含下述逻辑：
 
@@ -71,11 +71,11 @@ Discovery Service中主要包含下述逻辑：
 * 接收Envoy端的xDS请求，从Config Controller和Service Controller中获取配置和服务信息，生成响应消息发送给Envoy。
 * 监听来自Config Controller的配置变化消息和来自Service Controller的服务变化消息，并将配置和服务变化内容通过xDS接口推送到Envoy。（备注：目前Pilot未实现增量变化推送，每次变化推送的是全量配置，在网格中服务较多的情况下可能会有性能问题）。
 
-# Pilot-Discovery 业务流程
+## Pilot-Discovery 业务流程
 
 Pilot-Disocvery包括以下主要的几个业务流程：
 
-## 初始化Pilot-Discovery的各个主要组件
+### 初始化Pilot-Discovery的各个主要组件
 
 Pilot-Discovery命令的入口为pilot/cmd/pilot-discovery/main.go中的main方法，在该方法中创建Pilot Server,Server代码位于文件pilot/pkg/bootstrap/server.go中。Server主要做了下面一些初始化工作：
 
@@ -86,7 +86,7 @@ Pilot-Discovery命令的入口为pilot/cmd/pilot-discovery/main.go中的main方�
 
 ![](pilot-discovery-initialization.svg)
 
-## 创建GRPC Server并接收Envoy的连接请求
+### 创建GRPC Server并接收Envoy的连接请求
 
 Pilot Server创建了一个GRPC Server，用于监听和接收来自Envoy的xDS请求。pilot/pkg/proxy/envoy/v2/ads.go 中的 DiscoveryServer.StreamAggregatedResources方法被注册为GRPC Server的服务处理方法。
 
@@ -94,7 +94,7 @@ Pilot Server创建了一个GRPC Server，用于监听和接收来自Envoy的xDS�
 
 ![](pilot-discovery-receive-connection.svg")
 
-## 配置变化后向Envoy推送更新
+### 配置变化后向Envoy推送更新
 
 这是Pilot中最复杂的一个业务流程，主要是因为代码中采用了多个channel和queue对变化消息进行合并和转发。该业务流程如下：
 
@@ -105,7 +105,7 @@ Pilot Server创建了一个GRPC Server，用于监听和接收来自Envoy的xDS�
 
 ![](pilot-discovery-push-changes.svg)
 
-## 响应Envoy主动发起的xDS请求
+### 响应Envoy主动发起的xDS请求
 
 Pilot和Envoy之间建立的是一个双向的Streaming GRPC服务调用，因此Pilot可以在配置变化时向Envoy推送，Envoy也可以主动发起xDS调用请求获取配置。Envoy主动发起xDS请求的流程如下：
 
@@ -115,11 +115,11 @@ Pilot和Envoy之间建立的是一个双向的Streaming GRPC服务调用，因�
 
 ![](pilot-discovery-client-request.svg")
 
-## Discovery Server业务处理关键代码片段
+### Discovery Server业务处理关键代码片段
 
 下面是Discovery Server的关键代码片段和对应的业务逻辑注解，为方便阅读，代码中只保留了逻辑主干，去掉了一些不重要的细节。
 
-### 处理xDS请求和推送的关键代码
+#### 处理xDS请求和推送的关键代码
 
 该部分关键代码位于 `istio.io/istio/pilot/pkg/proxy/envoy/v2/ads.go` 文件的StreamAggregatedResources 方法中。StreamAggregatedResources方法被注册为GRPC Server的handler，对于每一个客户端连接，GRPC Server会启动一个goroutine来进行处理。
 
@@ -167,7 +167,7 @@ func (s *DiscoveryServer) StreamAggregatedResources(stream ads.AggregatedDiscove
 }
 ```
 
-### 处理服务和配置变化的关键代码
+#### 处理服务和配置变化的关键代码
  
 该部分关键代码位于 `istio.io/istio/pilot/pkg/proxy/envoy/v2/discovery.go` 文件中，用于监听服务和配置变化消息，并将变化消息合并后通过Channel发送给前面提到的 StreamAggregatedResources 方法进行处理。
 
@@ -236,11 +236,11 @@ func debounce(ch chan *model.PushRequest, stopCh <-chan struct{}, pushFn func(re
 }
 ```
 
-## 完整的业务流程
+### 完整的业务流程
 
 ![](pilot-discovery-sequence.svg")
 
-# 参考阅读
+## 参考阅读
 
 * [Mesh Configuration Protocol (MCP)](https://docs.google.com/document/d/1o2-V4TLJ8fJACXdlsnxKxDv2Luryo48bAhR8ShxE5-k/)
 * [Pilot Decomposition](https://docs.google.com/document/d/1S5ygkxR1alNI8cWGG4O4iV8zp8dA6Oc23zQCvFxr83U/)
