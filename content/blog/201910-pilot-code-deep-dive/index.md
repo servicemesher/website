@@ -13,6 +13,7 @@ keywords: ["service mesh","服务网格","istio"]
 ---
 
 # Istio Pilot 组件介绍
+
 在Istio架构中，Pilot组件属于最核心的组件，负责了服务网格中的流量管理以及控制面和数据面之间的配置下发。Pilot内部的代码结构比较复杂，本文中我们将通过对Pilot的代码的深入分析来了解Pilot实现原理。
 
 首先我们来看一下Pilot在Istio中的功能定位，Pilot将服务信息和配置数据转换为xDS接口的标准数据结构，通过GRPC下发到数据面的Envoy。如果把Pilot看成一个处理数据的黑盒，则其有两个输入，一个输出：
@@ -28,8 +29,8 @@ Pilot的输出为符合xDS接口的数据面配置数据，并通过GRPC Streami
 
 备注：Istio代码库在不停变化更新中，本文分析所基于的代码commit为: d539abe00c2599d80c6d64296f78d3bb8ab4b033
 
-
 # Pilot-Discovery 代码结构
+
 Istio Pilot的代码分为Pilot-Discovery和Pilot-Agent,其中Pilot-Agent用于在数据面负责Envoy的生命周期管理，Pilot-Discovery才是控制面进行流量管理的组件，本文将重点分析控制面部分，即Pilot-Discovery的代码。
 
 下图是Pilot-Discovery组件代码的主要结构：
@@ -69,7 +70,6 @@ Discovery Service中主要包含下述逻辑：
 * 启动GRPC Server并接收来自Envoy端的连接请求。
 * 接收Envoy端的xDS请求，从Config Controller和Service Controller中获取配置和服务信息，生成响应消息发送给Envoy。
 * 监听来自Config Controller的配置变化消息和来自Service Controller的服务变化消息，并将配置和服务变化内容通过xDS接口推送到Envoy。（备注：目前Pilot未实现增量变化推送，每次变化推送的是全量配置，在网格中服务较多的情况下可能会有性能问题）。
-
 
 # Pilot-Discovery 业务流程
 
@@ -133,38 +133,38 @@ Pilot和Envoy之间建立的是一个双向的Streaming GRPC服务调用，因�
 // StreamAggregatedResources implements the ADS interface.
 func (s *DiscoveryServer) StreamAggregatedResources(stream ads.AggregatedDiscoveryService_StreamAggregatedResourcesServer) error {
         
-        ......
+    ......
 
-       //创建一个goroutine来接收来自Envoy的xDS请求，并将请求放到reqChannel中
-       con := newXdsConnection(peerAddr, stream)
-	reqChannel := make(chan *xdsapi.DiscoveryRequest, 1)
-	go receiveThread(con, reqChannel, &receiveError)
+    //创建一个goroutine来接收来自Envoy的xDS请求，并将请求放到reqChannel中
+    con := newXdsConnection(peerAddr, stream)
+    reqChannel := make(chan *xdsapi.DiscoveryRequest, 1)
+    go receiveThread(con, reqChannel, &receiveError)
 
-       ......
-      
-      for {
-      //从reqChannel接收Envoy端主动发起的xDS请求
-      case discReq, ok := <-reqChannel:
+     ......
+    
+    for {
+        select{
+        //从reqChannel接收Envoy端主动发起的xDS请求
+        case discReq, ok := <-reqChannel:        
+            //根据请求的类型构造相应的xDS Response并发送到Envoy端
+            switch discReq.TypeUrl {
+            case ClusterType:
+                err := s.pushCds(con, s.globalPushContext(), versionInfo())
+            case ListenerType:
+                err := s.pushLds(con, s.globalPushContext(), versionInfo())
+            case RouteType:
+                err := s.pushRoute(con, s.globalPushContext(), versionInfo())
+            case EndpointType:
+                err := s.pushEds(s.globalPushContext(), con, versionInfo(), nil)
+            }
 
-                 //根据请求的类型构造相应的xDS Response并发送到Envoy端
-                 switch discReq.TypeUrl {
-			case ClusterType:
-                                 err := s.pushCds(con, s.globalPushContext(), versionInfo())
-                        case ListenerType:
-                                 err := s.pushLds(con, s.globalPushContext(), versionInfo())
-                        case RouteType:
-                                 err := s.pushRoute(con, s.globalPushContext(), versionInfo())
-                        case EndpointType:
-                                 err := s.pushEds(s.globalPushContext(), con, versionInfo(), nil)
-
-      // 从PushChannel接收Service或者Config变化后的通知
-      case pushEv := <-con.pushChannel:
-
-                //将变化内容推送到Envoy端
-                err := s.pushConnection(con, pushEv)               
-     }
+        //从PushChannel接收Service或者Config变化后的通知
+        case pushEv := <-con.pushChannel:
+            //将变化内容推送到Envoy端
+            err := s.pushConnection(con, pushEv)   
+        }            
+    }
 }
-
 ```
 
 ### 处理服务和配置变化的关键代码
@@ -175,10 +175,10 @@ ConfigUpdate是处理服务和配置变化的回调函数，service controller�
 
 ```go
 func (s *DiscoveryServer) ConfigUpdate(req *model.PushRequest) {
-	inboundConfigUpdates.Increment()
+  inboundConfigUpdates.Increment()
 
-	//服务或配置变化后，将一个PushRequest发送到pushChannel中
-	s.pushChannel <- req
+  //服务或配置变化后，将一个PushRequest发送到pushChannel中
+  s.pushChannel <- req
 }
 ```
 
@@ -191,54 +191,54 @@ func debounce(ch chan *model.PushRequest, stopCh <-chan struct{}, pushFn func(re
     ......
 
     pushWorker := func() {
-		eventDelay := time.Since(startDebounce)
-		quietTime := time.Since(lastConfigUpdateTime)
+        eventDelay := time.Since(startDebounce)
+        quietTime := time.Since(lastConfigUpdateTime)
 
-		// it has been too long or quiet enough
-                //一段时间内没有收到新的PushRequest，再发起推送
-		if eventDelay >= DebounceMax || quietTime >= DebounceAfter {
-			if req != nil {
-				pushCounter++
-				adsLog.Infof("Push debounce stable[%d] %d: %v since last change, %v since last push, full=%v",
-					pushCounter, debouncedEvents,
-					quietTime, eventDelay, req.Full)
+        // it has been too long or quiet enough
+        //一段时间内没有收到新的PushRequest，再发起推送
+        if eventDelay >= DebounceMax || quietTime >= DebounceAfter {
+            if req != nil {
+                pushCounter++
+                adsLog.Infof("Push debounce stable[%d] %d: %v since last change, %v since last push, full=%v",
+                pushCounter, debouncedEvents,
+                quietTime, eventDelay, req.Full)
 
-				free = false
-				go push(req)
-				req = nil
-				debouncedEvents = 0
-			}
-		} else {
-			timeChan = time.After(DebounceAfter - quietTime)
-		}
-	}
-       for {
-		select {
-		......
-		case r := <-ch:
-			lastConfigUpdateTime = time.Now()
-			if debouncedEvents == 0 {
-				timeChan = time.After(DebounceAfter)
-				startDebounce = lastConfigUpdateTime
-			}
-			debouncedEvents++
-			//合并连续发生的多个PushRequest
-			req = req.Merge(r)
-		case <-timeChan:
-			if free {
-				pushWorker()
-			}
-		case <-stopCh:
-			return
-		}
-	}
+                free = false
+                go push(req)
+                req = nil
+                debouncedEvents = 0
+            }
+        } else {
+           timeChan = time.After(DebounceAfter - quietTime)
+        }
+    }
+    for {
+        select {
+        ......
+
+        case r := <-ch:
+            lastConfigUpdateTime = time.Now()
+            if debouncedEvents == 0 {
+                timeChan = time.After(DebounceAfter)
+                startDebounce = lastConfigUpdateTime
+            }
+            debouncedEvents++
+            //合并连续发生的多个PushRequest
+            req = req.Merge(r)
+        case <-timeChan:
+           if free {
+               pushWorker()
+            }
+        case <-stopCh:
+            return
+    }
+  }
 }
 ```
 
 ## 完整的业务流程
 
 ![](pilot-discovery-sequence.svg")
-
 
 # 参考阅读
 
