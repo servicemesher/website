@@ -14,11 +14,21 @@ typora-copy-images-to: ./proxy-destination.png
 
 > 作者: 哗啦啦 mesh团队，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
 
-## 概述
+## linkerd2介绍
+
+Linkerd由`控制平面`和`数据平面`组成：
+
+- `控制平面`是在所属的`Kubernetes命名空间`（linkerd默认情况下）中运行的一组服务，这些服务可以完成`汇聚遥测数据`，提供面向用户的API，并向`数据平面`代理`提供控制数据`等，它们`共同驱动`数据平面。
+
+- `数据平面`用Rust编写的轻量级代理，该代理安装在服务的`每个pod`中，并成为数据平面的一部分，它接收Pod的`所有接入`流量，并通过`initContainer`配置`iptables`正确转发流量的拦截所有传出流量，因为它是附加工具，并且拦截服务的所有`传入和传出`流量，所以不需要更改代码，甚至可以将其添加到`正在运行`的服务中。
+
+借用官方的图：
+
+![proxy-destination](./control-plane.png)
 
 proxy由rust开发完成，其内部的异步运行时采用了[Tokio](https://tokio-zh.github.io/)框架，服务组件用到了[tower](https://github.com/tower-rs/tower)。
 
-本文主要关注proxy与destination组件交互相关的一些逻辑，简单分析proxy内部的运行逻辑。
+本文主要关注proxy与destination组件交互相关的整体逻辑，分析proxy内部的运行逻辑。
 
 ## 流程分析
 
