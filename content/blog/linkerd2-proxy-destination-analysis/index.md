@@ -1,76 +1,217 @@
 ---
-title: "linkerd2 proxy destination 原理分析"
+title: "linkerd2 proxy destination 学习笔记"
 date: 2019-10-10T16:58:27+08:00
 draft: false
 banner: "/img/blog/banners/00704eQkgy1fqer344dfggj49494elds.jpg"
-author: "李岩"
+author: "哗啦啦mesh团队"
 authorlink: "https://github.com/huntsman-li"
-summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组件 destination 的原理。"
+summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组件中关于 destination 的交互原理。"
 tags: ["linkerd"]
 categories: ["linkerd"]
 keywords: ["service mesh","服务网格","linkerd2","linkerd"]
+typora-copy-images-to: ./proxy-destination.png
 ---
 
-> 作者: 李岩，哗啦啦 mesh团队 架构师，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
+> 作者: 哗啦啦 mesh团队，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
 
-## 概述 
+
+
+## 概述
 
 proxy由rust开发完成，其内部的异步运行时采用了[Tokio](https://tokio-zh.github.io/)框架，服务组件用到了[tower](https://github.com/tower-rs/tower)。
+
+本文主要关注proxy与destination组件交互相关的一些逻辑，简单分析proxy内部的运行逻辑。
 
 ## 流程分析
 
 ### 初始化
 
-1. app::init初始化配置
-2. app::Main::new创建主逻辑main
-3. main.run_until内新加一任务 ProxyParts::build_proxy_task
+proxy启动后：
 
-在ProxyParts::build_proxy_task中会进行一系列的初始化工作，此处只关注dst_svc，其创建代码为：
+1. `app::init`初始化配置
+2. `app::Main::new`创建主逻辑`main`，
+3. `main.run_until`内新加一任务 `ProxyParts::build_proxy_task`。
+
+在`ProxyParts::build_proxy_task`中会进行一系列的初始化工作，此处只关注`dst_svc`，其创建代码为：
 
 ```rust
-            svc::builder()
-               .buffer_pending(
+    dst_svc = svc::stack(connect::svc(keepalive))
+                .push(tls::client::layer(local_identity.clone()))
+                .push_timeout(config.control_connect_timeout)
+                .push(control::client::layer())
+                .push(control::resolve::layer(dns_resolver.clone()))
+                .push(reconnect::layer({
+                    let backoff = config.control_backoff.clone();
+                    move |_| Ok(backoff.stream())
+                }))
+                .push(http_metrics::layer::<_, classify::Response>(
+                    ctl_http_metrics.clone(),
+                ))
+                .push(proxy::grpc::req_body_as_payload::layer().per_make())
+                .push(control::add_origin::layer())
+                .push_buffer_pending(
                     config.destination_buffer_capacity,
                     config.control_dispatch_timeout,
-               )
-               .layer(control::add_origin::layer())
-               .layer(proxy::grpc::req_body_as_payload::layer().per_make())
-               .layer(http_metrics::layer::<_, classify::Response>(
-                    ctl_http_metrics.clone(),
-               ))
-               .layer(reconnect::layer().with_backoff(config.control_backoff.clone()))
-               .layer(control::resolve::layer(dns_resolver.clone()))
-               .layer(control::client::layer())
-               .timeout(config.control_connect_timeout)
-               .layer(keepalive::connect::layer(keepalive))
-               .layer(tls::client::layer(local_identity.clone()))
-               .service(connect::svc())
-               .make(config.destination_addr.clone())
+                )
+                .into_inner()
+                .make(config.destination_addr.clone())
 ```
 
-dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，先不管它；另一个就是ProfilesClient的创建。
+`dst_svc`一共有2处引用，一是`crate::resolve::Resolver`的创建会涉及；另一个就是`ProfilesClient`的创建。
 
-在ProfilesClient::new中：
-1. 调用api::client::Destination::new(dst_svc)创建grpc的client端并存于成员变量service
-2. 接着profiles_client对象会被用于inbound和outbound的创建（省略无关代码）：
+#### `Resolver`
+
+1. `api_resolve::Resolve::new(dst_svc.clone())`创建`resolver`对象
+2. 调用`outbound::resolve`创建 `map_endpoint::Resolve`类型对象，并当做参数`resolve`传入`outbound::spawn`函数开启出口线程
+
+在`outbound::spawn`中，`resolve`被用于创建负载均衡控制层，并用于后续路由控制：
 
 ```rust
-    let dst_stack = svc::builder()
-       .layer(profiles::router::layer(
+let balancer_layer = svc::layers()
+        .push_spawn_ready()
+        .push(discover::Layer::new(
+            DISCOVER_UPDATE_BUFFER_CAPACITY,
+            resolve,
+        ))
+        .push(balance::layer(EWMA_DEFAULT_RTT, EWMA_DECAY));
+```
+
+在`discover::Layer::layer`中：
+
+```rust
+let from_resolve = FromResolve::new(self.resolve.clone());
+let make_discover = MakeEndpoint::new(make_endpoint, from_resolve);
+Buffer::new(self.capacity, make_discover)
+```
+
+#### `Profiles`
+
+1. 在`ProfilesClient::new`中调用`api::client::Destination::new(dst_svc)`创建grpc的client端并存于成员变量`service`
+2. 接着`profiles_client`对象会被用于`inbound`和`outbound`的创建（省略无关代码）：
+
+```rust
+    let dst_stack = svc::stack(...)...
+        .push(profiles::router::layer(
             profile_suffixes,
             profiles_client,
             dst_route_stack,
-       ))
-       .service(...)
+        ))
+        ...
 ```
 
-其中profiles::router::layer会创建一个Layer对象，并将profiles_client赋予get_routes成员。然后在service方法中，会调到Layer::layer方法，里面会创建一个MakeSvc对象，其get_routes成员的值即为profiles_client。
+其中`profiles::router::layer`会创建一个`Layer`对象，并将`profiles_client`赋予`get_routes`成员。然后在`service`方法中，会调到`Layer::layer`方法，里面会创建一个`MakeSvc`对象，其`get_routes`成员的值即为`profiles_client`。
+
+
 
 ### 运行
 
-新的连接过来时，会调用linkerd2_proxy::proxy::server::Server的serve_connection方法，并最终调用MakeSvc::call方法。
+新的连接过来时，从`listen`拿到连接对象后，会交给`linkerd_proxy::transport::tls::accept::AcceptTls`的`call`，然后是`linkerd2_proxy::proxy::server::Server`的`call`，并最终分别调用`linkerd2_proxy_http::balance::MakeSvc::call`和`linkerd2_proxy_http::profiles::router::MakeSvc::call`方法。
 
-在call中：
+#### `balance`
+
+在`linkerd2_proxy_http::balance::MakeSvc::call`中：
+
+1. 调用`inner.call(target)`，此处的`inner`即是前面`Buffer::new`的结果。
+2. 生成一个新的`linkerd2_proxy_http::balance::MakeSvc`对象，当做`Future`返回
+
+先看`inner.call`。它内部经过层层调用，依次触发`Buffer`、`MakeEndpoint`、`FromResolve`等结构的`call`方法，最终会触发最开始创建的`resolve.resolve(target)`，其内部调用`api_resolve::Resolve::call`。
+
+在`api_resolve::Resolve::call`中：
+
+```rust
+    fn call(&mut self, target: T) -> Self::Future {
+        let path = target.to_string();
+        trace!("resolve {:?}", path);
+        self.service
+            // GRPC请求，获取k8s的endpoint
+            .get(grpc::Request::new(api::GetDestination {
+                path,
+                scheme: self.scheme.clone(),
+                context_token: self.context_token.clone(),
+            }))
+            .map(|rsp| {
+                debug!(metadata = ?rsp.metadata());
+                // 拿到结果stream
+                Resolution {
+                    inner: rsp.into_inner(),
+                }
+            })
+    }
+```
+
+将返回的`Resolution`再次放入`MakeSvc`中，然后看其poll：
+
+```rust
+    fn poll(&mut self) -> Poll<Self::Item, Self::Error> {
+        // 这个poll会依次调用:
+        //    linkerd2_proxy_api_resolve::resolve::Resolution::poll
+        //    linkerd2_proxy_discover::from_resolve::DiscoverFuture::poll
+        //    linkerd2_proxy_discover::make_endpoint::DiscoverFuture::poll
+        // 最终获得Poll<Change<SocketAddr, Endpoint>> 
+        let discover = try_ready!(self.inner.poll());
+        let instrument = PendingUntilFirstData::default();
+        let loaded = PeakEwmaDiscover::new(discover, self.default_rtt, self.decay, instrument);
+        let balance = Balance::new(loaded, self.rng.clone());
+        Ok(Async::Ready(balance))
+    }
+```
+
+最终返回service `Balance`。
+
+当具体请求过来后，先会判断`Balance::poll_ready`：
+
+```rust
+    fn poll_ready(&mut self) -> Poll<(), Self::Error> {
+        // 获取Update<Endpoint>
+        // 将Remove的从self.ready_services中删掉
+        // 将Insert的构造UnreadyService结构加到self.unready_services
+        self.poll_discover()?;
+        // 对UnreadyService，调用其poll，内部会调用到svc的poll_ready判断endpoint是否可用
+        // 可用时，将其加入self.ready_services
+        self.poll_unready();
+        
+        loop {
+            if let Some(index) = self.next_ready_index {
+                // 找到对应的endpoint，可用则返回
+                if let Ok(Async::Ready(())) = self.poll_ready_index_or_evict(index) {
+                    return Ok(Async::Ready(()));
+                }
+            }
+            // 选择负载比较低的endpoint
+            self.next_ready_index = self.p2c_next_ready_index();
+            if self.next_ready_index.is_none() {
+                // 
+                return Ok(Async::NotReady);
+            }
+        }
+    }
+```
+
+就绪后，对请求`req`调用`call`：
+
+```rust
+    fn call(&mut self, request: Req) -> Self::Future {
+        // 找到下一个可用的svc，并将其从ready_services中删除
+        let index = self.next_ready_index.take().expect("not ready");
+        let (key, mut svc) = self
+            .ready_services
+            .swap_remove_index(index)
+            .expect("invalid ready index");
+
+        // 将请求转过去
+        let fut = svc.call(request);
+        // 加到unready
+        self.push_unready(key, svc);
+
+        fut.map_err(Into::into)
+    }
+```
+
+
+
+#### `profiles`
+
+在`linkerd2_proxy_http::profiles::router::MakeSvc::call`中：
 
 ```rust
         // Initiate a stream to get route and dst_override updates for this
@@ -80,21 +221,21 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
                 if self.suffixes.iter().any(|s| s.contains(dst.name())) {
                     debug!("fetching routes for {:?}", dst);
                     self.get_routes.get_routes(&dst)
-               } else {
+                } else {
                     debug!("skipping route discovery for dst={:?}", dst);
                     None
-               }
-           }
+                }
+            }
             None => {
                 debug!("no destination for routes");
                 None
-           }
-       };
+            }
+        };
 ```
 
-经过若干判断后，会调用ProfilesClient::get_routes并将结果存于route_stream。
+经过若干判断后，会调用`ProfilesClient::get_routes`并将结果存于`route_stream`。
 
-进入get_routes：
+进入`get_routes`：
 
 ```rust
     fn get_routes(&self, dst: &NameAddr) -> Option<Self::Stream> {
@@ -112,18 +253,18 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
             service: self.service.clone(),
             backoff: self.backoff,
             context_token: self.context_token.clone(),
-       };
+        };
         // 调用Daemon::poll
         let spawn = DefaultExecutor::current().spawn(Box::new(daemon.map_err(|_| ())));
         // 将通道接收端传出
         spawn.ok().map(|_| Rx {
             rx,
             _hangup: hangup_tx,
-       })
-   }
+        })
+    }
 ```
 
-接着看poll：
+接着看`Daemon::poll`：
 
 ```rust
     fn poll(&mut self) -> Poll<Self::Item, Self::Error> {
@@ -139,21 +280,21 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
                             error!(
                                 "profile service unexpected error (dst = {}): {:?}",
                                 self.dst, err,
-                           );
+                            );
                             return Ok(Async::Ready(()));
-                       }
-                   };
+                        }
+                    };
                     // 构造grpc请求
                     let req = api::GetDestination {
                         scheme: "k8s".to_owned(),
                         path: self.dst.clone(),
                         context_token: self.context_token.clone(),
-                   };
+                    };
                     debug!("getting profile: {:?}", req);
                     // 获取请求任务
                     let rspf = self.service.get_profile(grpc::Request::new(req));
                     State::Waiting(rspf)
-               }
+                }
                 // 正在请求时，从请求中获取回复
                 State::Waiting(ref mut f) => match f.poll() {
                     Ok(Async::NotReady) => return Ok(Async::NotReady),
@@ -162,12 +303,12 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
                         trace!("response received");
                         // 流式回复
                         State::Streaming(rsp.into_inner())
-                   }
+                    }
                     Err(e) => {
                         warn!("error fetching profile for {}: {:?}", self.dst, e);
                         State::Backoff(Delay::new(clock::now() + self.backoff))
-                   }
-               },
+                    }
+                },
                 // 接收回复
                 State::Streaming(ref mut s) => {
                     // 处理回复流
@@ -178,36 +319,35 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
                         Async::Ready(StreamState::SendLost) => return Ok(().into()),
                         Async::Ready(StreamState::RecvDone) => {
                             State::Backoff(Delay::new(clock::now() + self.backoff))
-                       }
-                   }
-               }
+                        }
+                    }
+                }
                 // 异常，结束请求
                 State::Backoff(ref mut f) => match f.poll() {
                     Ok(Async::NotReady) => return Ok(Async::NotReady),
                     Err(_) | Ok(Async::Ready(())) => State::Disconnected,
-               },
-           };
-       }
-   }               
-                                   
+                },
+            };
+        }
+    }
 ```
 
-接着 proxy_stream：
+接着 `proxy_stream`：
 
 ```rust
     fn proxy_stream(
         rx: &mut grpc::Streaming<api::DestinationProfile, T::ResponseBody>,
         tx: &mut mpsc::Sender<profiles::Routes>,
         hangup: &mut oneshot::Receiver<Never>,
-   ) -> Async<StreamState> {
+    ) -> Async<StreamState> {
         loop {
             // 发送端是否就绪
             match tx.poll_ready() {
                 Ok(Async::NotReady) => return Async::NotReady,
                 Ok(Async::Ready(())) => {}
                 Err(_) => return StreamState::SendLost.into(),
-           }
- 
+            }
+
             // 从grpc stream中取得一条数据
             match rx.poll() {
                 Ok(Async::NotReady) => match hangup.poll() {
@@ -216,53 +356,72 @@ dst_svc一共有2处引用，一是crate::resolve::Resolver的创建会涉及，
                         // We are now scheduled to be notified if the hangup tx
                         // is dropped.
                         return Async::NotReady;
-                   }
+                    }
                     Err(_) => {
                         // Hangup tx has been dropped.
                         debug!("profile stream cancelled");
                         return StreamState::SendLost.into();
-                   }
-               },
-                 Ok(Async::Ready(None)) => return StreamState::RecvDone.into(),
+                    }
+                },
+                Ok(Async::Ready(None)) => return StreamState::RecvDone.into(),
                 // 正确取得profile结构
                 Ok(Async::Ready(Some(profile))) => {
                     debug!("profile received: {:?}", profile);
                     // 解析数据
                     let retry_budget = profile.retry_budget.and_then(convert_retry_budget);
                     let routes = profile
-                       .routes
-                       .into_iter()
-                       .filter_map(move |orig| convert_route(orig, retry_budget.as_ref()))
-                       .collect();
+                        .routes
+                        .into_iter()
+                        .filter_map(move |orig| convert_route(orig, retry_budget.as_ref()))
+                        .collect();
                     let dst_overrides = profile
-                       .dst_overrides
-                       .into_iter()
-                       .filter_map(convert_dst_override)
-                       .collect();
+                        .dst_overrides
+                        .into_iter()
+                        .filter_map(convert_dst_override)
+                        .collect();
                     // 构造profiles::Routes结构并推到发送端
                     match tx.start_send(profiles::Routes {
                         routes,
                         dst_overrides,
-                   }) {
+                    }) {
                         Ok(AsyncSink::Ready) => {} // continue
                         Ok(AsyncSink::NotReady(_)) => {
                             info!("dropping profile update due to a full buffer");
                             // This must have been because another task stole
                             // our tx slot? It seems pretty unlikely, but possible?
                             return Async::NotReady;
-                       }
+                        }
                         Err(_) => {
                             return StreamState::SendLost.into();
-                       }
-                   }
-               }
+                        }
+                    }
+                }
                 Err(e) => {
                     warn!("profile stream failed: {:?}", e);
                     return StreamState::RecvDone.into();
-               }
-           }
-       }
-   }
+                }
+            }
+        }
+    }
 ```
 
-回到MakeSvc::call方法，前面创建的route_stream会被用于创建一个linkerd2_proxy::proxy::http::profiles::router::Service任务对象，并在其poll_ready方法中通过poll_route_stream从route_steam获取profiles::Routes并调用update_routes创建具体可用的路由规则linkerd2_router::Router，然后在call中调用`linkerd2_router::call`进行对请求的路由判断。
+
+
+回到`MakeSvc::call`方法，前面创建的`route_stream`会被用于创建一个`linkerd2_proxy::proxy::http::profiles::router::Service`任务对象，并在其`poll_ready`方法中通过`poll_route_stream`从`route_steam`获取`profiles::Routes`并调用`update_routes`创建具体可用的路由规则`linkerd2_router::Router`，至此，路由规则已建好，就等具体的请求过来然后在`call`中调用`linkerd2_router::call`进行对请求的路由判断。
+
+
+
+### 图示
+
+#### profile
+
+![proxy-destination](./proxy-destination.png)
+
+
+
+## 总结
+
+proxy采用的tower框架，每个处理逻辑都是其中的一个layer，开发时只需层层堆叠即可。不过，也正因如此，各层之间的接口都极其相似，须得小心不可调错。
+
+对于destination这部分逻辑，linkerd2的destination组件收到来自proxy的grpc请求后，每当endpoint或service profile有任何变动，都会立即通过stream发送过去，proxy收到后根据endpoint调整负载均衡策略，根据service profile调整路由，然后通过它们来处理用户服务的实际请求。
+
