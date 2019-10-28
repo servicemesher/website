@@ -14,8 +14,6 @@ typora-copy-images-to: ./proxy-destination.png
 
 > 作者: 哗啦啦 mesh团队，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
 
-
-
 ## 概述
 
 proxy由rust开发完成，其内部的异步运行时采用了[Tokio](https://tokio-zh.github.io/)框架，服务组件用到了[tower](https://github.com/tower-rs/tower)。
@@ -100,8 +98,6 @@ Buffer::new(self.capacity, make_discover)
 ```
 
 其中`profiles::router::layer`会创建一个`Layer`对象，并将`profiles_client`赋予`get_routes`成员。然后在`service`方法中，会调到`Layer::layer`方法，里面会创建一个`MakeSvc`对象，其`get_routes`成员的值即为`profiles_client`。
-
-
 
 ### 运行
 
@@ -212,7 +208,6 @@ Buffer::new(self.capacity, make_discover)
 #### `profiles`
 
 在`linkerd2_proxy_http::profiles::router::MakeSvc::call`中：
-
 ```rust
         // Initiate a stream to get route and dst_override updates for this
         // destination.
@@ -409,19 +404,13 @@ Buffer::new(self.capacity, make_discover)
 
 回到`MakeSvc::call`方法，前面创建的`route_stream`会被用于创建一个`linkerd2_proxy::proxy::http::profiles::router::Service`任务对象，并在其`poll_ready`方法中通过`poll_route_stream`从`route_steam`获取`profiles::Routes`并调用`update_routes`创建具体可用的路由规则`linkerd2_router::Router`，至此，路由规则已建好，就等具体的请求过来然后在`call`中调用`linkerd2_router::call`进行对请求的路由判断。
 
-
-
 ### 图示
 
 #### profile
 
 ![proxy-destination](./proxy-destination.png)
 
-
-
 ## 总结
 
 proxy采用的tower框架，每个处理逻辑都是其中的一个layer，开发时只需层层堆叠即可。不过，也正因如此，各层之间的接口都极其相似，须得小心不可调错。
-
 对于destination这部分逻辑，linkerd2的destination组件收到来自proxy的grpc请求后，每当endpoint或service profile有任何变动，都会立即通过stream发送过去，proxy收到后根据endpoint调整负载均衡策略，根据service profile调整路由，然后通过它们来处理用户服务的实际请求。
-
