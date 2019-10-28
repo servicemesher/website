@@ -202,12 +202,10 @@ Buffer::new(self.capacity, make_discover)
         fut.map_err(Into::into)
     }
 ```
-
-
-
 #### `profiles`
 
 在`linkerd2_proxy_http::profiles::router::MakeSvc::call`中：
+
 ```rust
         // Initiate a stream to get route and dst_override updates for this
         // destination.
@@ -399,8 +397,6 @@ Buffer::new(self.capacity, make_discover)
         }
     }
 ```
-
-
 
 回到`MakeSvc::call`方法，前面创建的`route_stream`会被用于创建一个`linkerd2_proxy::proxy::http::profiles::router::Service`任务对象，并在其`poll_ready`方法中通过`poll_route_stream`从`route_steam`获取`profiles::Routes`并调用`update_routes`创建具体可用的路由规则`linkerd2_router::Router`，至此，路由规则已建好，就等具体的请求过来然后在`call`中调用`linkerd2_router::call`进行对请求的路由判断。
 
