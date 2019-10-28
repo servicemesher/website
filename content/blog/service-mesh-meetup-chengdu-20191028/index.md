@@ -45,9 +45,11 @@ Traefik 是一个云原生的边缘路由器，开源的反向代理和负载均
 
 ![杨彪 Service Mesh Meetup 成都站](https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*KfVlTbB3RlgAAAAAAAAAAABkARQnAQ)
 
-## 幻灯片下载
+## 幻灯片下载及直播视频回放地址
 
-地址：https://tech.antfin.com/activities/949
+历届 Service Mesh Meetup 幻灯片归档地址：https://github.com/servicemesher/meetup-slides
+
+视频直播回放地址：https://tech.antfin.com/activities/949
 
 ## 致谢
 
