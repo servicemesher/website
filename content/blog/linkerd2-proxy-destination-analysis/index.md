@@ -1,7 +1,9 @@
 ---
 title: "linkerd2 proxy destination 学习笔记"
-date: 2019-10-10T16:58:27+08:00
+date: 2019-10-29T16:38:27+08:00
 draft: false
+reviewer: ["孙海洲"]
+reviewerlink: ["https://github.com/haiker2011"]
 banner: "/img/blog/banners/00704eQkgy1fqer344dfggj49494elds.jpg"
 author: "哗啦啦mesh团队"
 authorlink: "https://github.com/huntsman-li"
@@ -9,7 +11,6 @@ summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组
 tags: ["linkerd"]
 categories: ["linkerd"]
 keywords: ["service mesh","服务网格","linkerd2","linkerd"]
-typora-copy-images-to: ./proxy-destination.png
 ---
 
 > 作者: 哗啦啦 mesh团队，热衷于kubernetes、devops、apollo、istio、linkerd、openstack、calico 等领域技术。
