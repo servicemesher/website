@@ -1,13 +1,13 @@
 ---
 originallink: "https://www.sdxcentral.com/articles/news/kongs-kuma-service-mesh-climbs-the-kubernetes-wall/2019/09/"
-title: "服务网格Kuma爬过了 Kubernetes 这座大山"
+title: "服务网格Kuma爬过了K8S这座大山"
 author: "Dan Meyer"
 authorlink: "https://www.sdxcentral.com/author/dan-meyer/"
 translator: "罗广明"
 translatorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 reviewer:  ["马若飞"]
 reviewerlink:  ["https://github.com/malphi"]
-summary: "本文引述了Kong的CTO对Kuma这款Service Mesh产品的介绍以及对于SMI的看法。"
+description: "本文引述了Kong的CTO对Kuma这款Service Mesh产品的介绍以及对于SMI的看法。"
 tags: ["service mesh"]
 categories: ["service mesh"]
 keywords: ["service mesh","puma","kong"]
@@ -24,7 +24,7 @@ banner: "/img/blog/banners/kuma-banner.jpeg"
 
 - **通用的控制平面**: 易于使用，分布式，可以在任何平台运行。
 - **轻量的数据平面**: 基于Envoy，可处理任意类型流量。
-- **自动化**: 在 Kubernetes 平台上部署无需任何代码改动，也可在虚拟机上灵活部署。
+- **自动化**: 在K8s平台上部署无需任何代码改动，也可在虚拟机上灵活部署。
 - **多租户**: 可在一个集群与同一个控制平面上部署多套服务网格。
 - **网络安全**: 自动mTLS加密。
 - **流量分割**: 灵活的ACL规则。
@@ -32,7 +32,7 @@ banner: "/img/blog/banners/kuma-banner.jpeg"
 - **流量指标**: 与Prometheus/Splunk/ELK自动集成。
 - **代理配置模版**: 方便进阶(收费)用户配置Envoy。
 - **标签选择器**: 可应用不同地域的、特定于云的和面向团队的策略。
-- **平台中立**: 支持 Kubernetes, 虚拟机和裸机。
+- **平台中立**: 支持K8s, 虚拟机和裸机。
 - **强大的APIM Ingress**: 与Kong网关集成。
 
 ![kuma-architecture](kuma-architecture.jpeg)
@@ -83,4 +83,4 @@ Kong以Mashape的名字成立于2009年。2015年，它将Kong平台发布到[�
 
 当Istio因其性能表现疲软之际，会涌现一个又一个的新玩家，给市场带来竞争与多样性，这也是用户喜闻乐见的。Kong涉足服务网格并不算太意外，我们可以了解到除了市面上的传统云厂商打造的和开源的各项服务网格产品，Consul Service Mesh的出现也让人眼前一亮。Consul Service Mesh与Kuma背后的厂商均有其成熟的开源产品做强力支撑：Consul的服务发现与注册产品，Kong的网关产品。他们各自在开源社区拥有一片天下，此时推出服务网格产品自然会有一大批“拥趸”。
 
-Kuma的性能较之Istio以及其它服务网格产品的优劣尚未可知，但是其平台中立的思想还是值得借鉴。当前市场上，Kubernetes 并未完全普及，很多公司的产品都是部署在虚机甚至裸机上，如果此时又想尝试下服务网格技术，Kuma的出现不失为一种惊喜。
+Kuma的性能较之Istio以及其它服务网格产品的优劣尚未可知，但是其平台中立的思想还是值得借鉴。当前市场上，K8s并未完全普及，很多公司的产品都是部署在虚机甚至裸机上，如果此时又想尝试下服务网格技术，Kuma的出现不失为一种惊喜。
