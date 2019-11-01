@@ -175,12 +175,12 @@ Kubernetes中带有节点代理的PKI：
 
 Istio提供两种身份验证：
 
-* **Transport身份验证**（也称为**服务到服务身份验证**），也称为服务到服务身份验证：验证建立连接的客户端，Istio 提供[双向TLS](https://en.wikipedia.org/wiki/Mutual_authentication) 作为用于传输身份验证的完整解决方案，您可以轻松打开此功能，而无需更改服务代码，此解决方案：
-    * 为每个服务提供强大的身份，表示其角色，以实现跨群集和云的互操作性。
-    * 保护服务到服务的通信和用户到服务的通信。
-    * 提供密钥管理系统，以自动进行密钥和证书的生成，分发和轮换。
+- **Transport身份验证**（也称为**服务到服务身份验证**），也称为服务到服务身份验证：验证建立连接的客户端，Istio 提供[双向TLS](https://en.wikipedia.org/wiki/Mutual_authentication) 作为用于传输身份验证的完整解决方案，您可以轻松打开此功能，而无需更改服务代码，此解决方案：
 
-* **来源身份验证**（也称为**最终用户身份验证**）：将发出请求的来源客户端验证为最终用户或设备，Istio 通过 JSON Web 令牌（JWT）验证启用请求身份验证，并为开源 OpenID Connect 提供程序 [ORY Hydra](https://www.ory.sh/)、[Keycloak](https://www.keycloak.org/)、[Auth0](https://auth0.com/)、[Firebase Auth](https://firebase.google.com/docs/auth/)、[Google Auth](https://developers.google.com/identity/protocols/OpenIDConnect)和自定义身份验证提供简单明了的开发体验。
+    - 为每个服务提供强大的身份，表示其角色，以实现跨群集和云的互操作性。
+    - 保护服务到服务的通信和用户到服务的通信。
+    - 提供密钥管理系统，以自动进行密钥和证书的生成，分发和轮换。
+- **来源身份验证**（也称为**最终用户身份验证**）：将发出请求的来源客户端验证为最终用户或设备，Istio 通过 JSON Web 令牌（JWT）验证启用请求身份验证，并为开源 OpenID Connect 提供程序 [ORY Hydra](https://www.ory.sh/)、[Keycloak](https://www.keycloak.org/)、[Auth0](https://auth0.com/)、[Firebase Auth](https://firebase.google.com/docs/auth/)、[Google Auth](https://developers.google.com/identity/protocols/OpenIDConnect)和自定义身份验证提供简单明了的开发体验。
 
 在这两种情况下，Istio 都会 `Istio config store` 通过自定义的Kubernetes API 将身份验证策略存储在其中，pilot 可以使每个代理服务器保持最新状态，并在适当时提供密钥，此外，Istio支持宽容模式下的身份验证，以帮助您了解策略更改在生效之前如何影响您的安全状况。
 
@@ -269,7 +269,7 @@ spec:
   - mtls: {}
 ```
 
-命名空间范围存储中的策略只能影响同一命名空间中的服务。网格范围内的策略会影响网格中的所有服务。为了防止冲突和滥用，只能在网格范围存储中定义一个策略。该策略必须命名`default 并具有空白 `targets:` 部分。您可以在我们的目标选择器部分找到更多信息。
+命名空间范围存储中的策略只能影响同一命名空间中的服务。网格范围内的策略会影响网格中的所有服务。为了防止冲突和滥用，只能在网格范围存储中定义一个策略。该策略必须命名 `default` 并具有空白 `targets:` 部分。您可以在我们的目标选择器部分找到更多信息。
 
 Kubernetes 在当前自定义资源定义（CRD）上实现 Istio 配置。这些 CRD 对应于命名空间范围和集群范围，CRDs 并通过 Kubernetes RBAC 自动继承访问保护。您可以在[Kubernetes CRD文档中](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions)阅读更多内容。
 
@@ -315,7 +315,6 @@ peers:
 双向 TLS 设置具有一个可选 mode 参数，该参数定义对等 Transport 身份验证的严格性。这些模式记录在[身份验证策略参考文档](https://istio.io/docs/reference/config/istio.authentication.v1alpha1/#MutualTls-Mode)中。
 
 默认的双向TLS模式为STRICT。因此，`mode:` STRICT等效于以下所有：
-
 - - mtls: {}
 - - mtls:
 - - mtls: null
