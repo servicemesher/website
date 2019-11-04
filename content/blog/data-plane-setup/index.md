@@ -26,7 +26,7 @@ Istio 服务网格逻辑上分为数据平面和控制平面。
 
 控制平面负责管理和配置代理来路由流量。此外控制平面配置 Mixer 以实施策略和收集遥测数据。
 
-![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/data-plane-setup/006tNc79ly1g1vjqh6zh7j30se0lmq5i.jpg)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g8m7h5pyvjj30se0lmgns.jpg)
 
 Sidecar 注入到应用的过程，可以是自动的，也可以是手动的，了解这一过程是很重要的。应用的流量会被重定向进入或流出 Sidecar，开发人员无需关心。应用接入 Istio 服务网格之后，开发者可以开始使用网格功能并从中受益。然而数据平面是如何工作的，以及需要怎样的条件才能完成这种无缝工作？本文中我们会深入到 Sidecar 注入模型中，来更清晰的了解 Sidecar 的注入过程。
 
@@ -43,7 +43,7 @@ istio-init
 - 它在应用容器之前启动，并且会运行到结束。
 - 如果有多个初始化容器，只有在前一个初始化容器成功结束之后才会启动下一个。
 
-不看看出，这种容器是非常适合执行启动或者初始化任务的，并且也无需和实际的应用容器集成到一起。`istio-init` 只是用来设置 `iptables` 的规则。
+不难看出，这种容器是非常适合执行启动或者初始化任务的，并且也无需和实际的应用容器集成到一起。`istio-init` 只是用来设置 `iptables` 的规则。
 
 ```bash
 istio-proxy
