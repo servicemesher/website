@@ -5,8 +5,8 @@ draft: false
 banner: "/img/blog/banners/00704eQkgy1fqer344dfggj49494elds.jpg"
 author: "哗啦啦mesh团队"
 authorlink: "https://github.com/ilylia"
-reviewer: [""]
-reviewerlink: [""]
+reviewer: ["宋净超"]
+reviewerlink: ["https://jimmysong.io"]
 summary: "在本文章中，能粗略了解到 linker2 的代理服务 proxy 组件中关于 tap 的交互原理。"
 tags: ["linkerd", "proxy", "tap"]
 categories: ["linkerd"]
