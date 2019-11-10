@@ -76,8 +76,8 @@ VPA将从这种能力中受益匪浅，但它不被视为最小可行产品 ( in
 - VPA能够调整已存在的 Pod 的容器资源，特别是能够对 CPU 饥饿和内存溢出等事件作出响应。
 - 当 VPA 重启 Pod 时，它必须尊重中断服务的成本。
 - 用户能够配置 VPA 的在资源上的固定限制,特别是最小和最大资源请求。
-- VPA 要与 Pod 控制器兼容，最起码要与 Deployment 兼容。 特别地：
-  - 资源更新的时候不能干扰 spec 更新或和 spec 更新冲突。
+- VPA 要与 Pod 控制器兼容，最起码要与 `Deployment` 兼容。 特别地：
+  - 资源更新的时候不能干扰 `spec` 更新或和 `spec` 更新冲突。
   - 在已有的部署中，能够滚动更新 VPA 的策略。
 - 在创建 Pod 时能够尽快开始遵循 VPA 策略,特别是对于一些只有VPA策略应用以后才能被调度的 Pod 。
 
@@ -98,9 +98,9 @@ VPA将从这种能力中受益匪浅，但它不被视为最小可行产品 ( in
 - VPA `Recommender` 会监控所有 Pod，为每个 Pod 持续计算新的推荐资源，并将它们存储到 VPA Object 中。
 - VPA `Recommender` 会暴露一个同步 API 获取 Pod 详细信息并返回推荐信息。
 - 所有的 Pod 创建请求都会通过 `VPA Admission Controller`。 如果 Pod 与任何一个 VPA 对象匹配，那么 `Admission controller` 会依据 VPA `Recommender` 推荐的值重写容器的资源。 如果 `Recommender` 连接不上，它将会返回 VPA Object 中缓存的推荐信息。
-- VPA `Updater` 是负责实时更新 Pod 的组件。如果一个 Pod 使用 VPA 的自动模式，那么 `Updater` 会依据推荐资源来决定如何更新。在 MVP 模式中，这需要通过删除 Pod 然后依据新的资源重建 Pod 来实现，这种方法需要 Pod 属于一个Replica Set（或者其他能够重新创建它的组件）。在未来，`Updater` 会利用原地升级，因为重新创建或者重新分配Pod对服务是很有破坏性的，必须尽量减少这种操作。
+- VPA `Updater` 是负责实时更新 Pod 的组件。如果一个 Pod 使用 VPA 的自动模式，那么 `Updater` 会依据推荐资源来决定如何更新。在 MVP 模式中，这需要通过删除 Pod 然后依据新的资源重建 Pod 来实现，这种方法需要 Pod 属于一个 `Replica Set`（或者其他能够重新创建它的组件）。在未来，`Updater` 会利用原地升级，因为重新创建或者重新分配Pod对服务是很有破坏性的，必须尽量减少这种操作。
 - VPA 仅仅控制容器的资源请求,它把资源限制设置为无限,资源请求的计算基于对当前和过去运行状况的分析。
-- `History Storage` 是从 API Server 中获取资源利用率信号和内存溢出并将它们永久保存的组件。`Recommender` 在一开始用这些历史数据来初始化状态。`History Storage` 基础的实现是使用 Prometheus。
+- `History Storage` 是从 `API Server` 中获取资源利用率信号和内存溢出并将它们永久保存的组件。`Recommender` 在一开始用这些历史数据来初始化状态。`History Storage` 基础的实现是使用 Prometheus。
 
 ### 体系架构
 
@@ -169,7 +169,7 @@ type VerticalPodAutoscalerStatus {
 
 #### 更新策略（Update Policy）
 
-更新策略控制了VPA如何应用更改。 在 MVP 中,它只包含一个单个字段: mode
+更新策略控制了VPA如何应用更改。 在 MVP 中,它只包含一个单个字段: `mode`
 
 ```json
 "updatePolicy" {
@@ -180,8 +180,8 @@ type VerticalPodAutoscalerStatus {
 `mode` 可以设置为三种：
 
 - `Intitial`: VPA 只在创建 Pod 时分配资源，在 Pod 的其他生命周期不改变Pod的资源。
-- `Auto`(默认)：VPA 在Pod创建时分配资源，并且能够在 Pod 的其他生命周期更新它们，包括淘汰和重新调度 Pod。
-- `Off`：VPA从不改变Pod资源。`Recommender` 而依旧会在VPA对象中生成推荐信息，他们可以被用在演习中。
+- `Auto`(默认)：VPA 在 Pod 创建时分配资源，并且能够在 Pod 的其他生命周期更新它们，包括淘汰和重新调度 Pod。
+- `Off`：VPA 从不改变Pod资源。`Recommender` 而依旧会在VPA对象中生成推荐信息，他们可以被用在演习中。
 
 以下任意一个操作都可以关掉 VPA ：
 
@@ -189,7 +189,7 @@ type VerticalPodAutoscalerStatus {
 - 删除 VPA 组件。
 - 改变 Pod 的标签让它不在于 VPA `Label Selector` 匹配。
 
-注意：关闭VPA会让Pod不再进行进一步的改变，但它不会恢复到正在Pod的最初资源状态，直到用户手动对它进行更新。
+注意：关闭 VPA 会让 Pod 不再进行进一步的改变，但它不会恢复到正在Pod的最初资源状态，直到用户手动对它进行更新。
 
 ```go
 // VerticalPodAutoscalerStatus describes the runtime state of the autoscaler.
@@ -279,7 +279,7 @@ const (
 
 #### 推荐（Recommendation）
 
-VPA 资源有一个仅输出的字段用来保存一个由 `Recommender` 生成的最近的一次推荐。这个字段可以在 `Recommender` 暂时无法访问时被用来获取最近的一次推荐。这个推荐包含推荐目标资源数量以及范围(最大,最小),可以被 `Updater` 用来决定在何时更新 Pod。在资源紧缺的情况下, `Updater` 可能决定将pod资源压缩到推荐的最小值。范围的宽度同样也影响了推荐的置信区间。
+VPA 资源有一个仅输出的字段用来保存一个由 `Recommender` 生成的最近的一次推荐。这个字段可以在 `Recommender` 暂时无法访问时被用来获取最近的一次推荐。这个推荐包含推荐目标资源数量以及范围(最大,最小),可以被 `Updater` 用来决定在何时更新 Pod。在资源紧缺的情况下, `Updater` 可能决定将 Pod 资源压缩到推荐的最小值。范围的宽度同样也影响了推荐的置信区间。
 
 ```go
 // RecommendedPodResources is the recommendation of resources computed by
@@ -311,7 +311,7 @@ type RecommendedContainerResources struct {
 
 ### 准入控制器（Admission Controller）
 
-VPA Admission Controller 拦截 Pod 创建请求。如果 Pod 与 VPA 配置匹配且模式未设置为 `off`，则控制器通过将建议的资源应用于 Pod spec 来重写资源请求。否则它会使 Pod spec 保持不变。
+VPA Admission Controller 拦截 Pod 创建请求。如果 Pod 与 VPA 配置匹配且模式未设置为 `off`，则控制器通过将建议的资源应用于 Pod `spec` 来重写资源请求。否则它会使 Pod `spec` 保持不变。
 
 控制器通过从 `Recommender` 中的 `/recommendedPodResources` 来获取推荐的资源。如果呼叫超时或失败，控制器将回退到 VPA object 中缓存的建议。如果这也不可用，则控制器允许资源请求传递最初指定的资源。
 
@@ -327,7 +327,7 @@ VPA 准入控制器将作为外部入场钩子（[External Admission Hook](https
 
 意识到每个 VPA object 有一个推荐是非常重要的。用户应使用一个 VPA 来控制具有类似资源使用模式的 Pod ，通常是一组副本或单个工作负载的分片。
 
-`Recommender` 充当了一个 `extension-apiserver`，暴露了一个同步方法，该方法获取 Pod spec 和 Pod 元数据并返回推荐的资源。
+`Recommender` 充当了一个 `extension-apiserver`，暴露了一个同步方法，该方法获取 Pod `spec` 和 Pod 元数据并返回推荐的资源。
 
 #### Recommender API
 
@@ -398,7 +398,7 @@ VPA控制容器的资源请求（内存和 CPU）。在 MVP 中，它总是将�
 
 #### 内存溢出处理（Handling OOMs）
 
-当容器由于超出可用内存而被逐出时，其实际内存要求是未知的（消耗的量显然给出了下限）。这是通过将OOM事件转换为人工内存使用样本来建模的，方法是将“安全边际”乘数 ("safety margin" multiplier ) 应用于最后一次观察到的使用情况
+当容器由于超出可用内存而被逐出时，其实际内存要求是未知的（消耗的量显然给出了下限）。这是通过将 OOM 事件转换为人工内存使用样本来建模的，方法是将“安全边际”乘数 ("safety margin" multiplier ) 应用于最后一次观察到的使用情况
 
 ### 历史存储（History Storage ）
 
