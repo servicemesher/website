@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 垂直伸缩走向何方?"
-date: 
-draft: 
+date: 2019-11-10T15:15:43+08:00
+draft: false
 banner: "/img/blog/banners/00704eQkgy1frjbqc9faoj30rs0kuwnv.jpg"
 author: "Kgrygiel, Mwielgus"
 translator: "余广坝"
