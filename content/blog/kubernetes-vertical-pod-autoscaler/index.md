@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes 垂直伸缩走向何方"
+title: "Kubernetes 垂直伸缩走向何方?"
 date: 
 draft: 
 banner: "/img/blog/banners/00704eQkgy1frjbqc9faoj30rs0kuwnv.jpg"
