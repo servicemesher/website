@@ -2,3 +2,4 @@ public/
 .DS_Store
 deploy.sh
 .idea
+content/blog/kubernetes-vertical-pod-autoscaler/index.md

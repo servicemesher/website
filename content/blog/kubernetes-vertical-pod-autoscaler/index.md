@@ -10,7 +10,7 @@ translatorlink: "https://github.com/yuxiaoba"
 reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 authorlink: "https://github.com/mwielgus"
-summary: "介绍Kubernetes社区对Pod垂直伸缩组件的开发规划"
+summary: "介绍Kubernetes社区对Pod垂直伸缩组件的开发规划。"
 tags: ["kubernetes"]
 categories: ["kubernetes"]
 keywords: ["kubernetes","VPA"]
@@ -54,7 +54,7 @@ VPA有两个目标：
 
 #### 初始资源（Initial resources）
 
-[初始资源](https://github.com/kgrygiel/community/blob/master/contributors/design-proposals/initial-resources.md)基于历史资源利用率提供初始资源请求，它仅仅在Pod创建时触发，VPA打算继承使用这个特性
+[初始资源](https://github.com/kgrygiel/community/blob/master/contributors/design-proposals/initial-resources.md)基于历史资源利用率提供初始资源请求，它仅仅在Pod创建时触发，VPA打算继承使用这个特性。
 
 #### 原地升级（In-place updates）
 
@@ -87,7 +87,7 @@ VPA将从这种能力中受益匪浅，但它不被视为最小可行产品 ( in
 
 ### 可扩展性
 
-在原地升级组件开发好后, VPA 能够使用它
+在原地升级组件开发好后, VPA 能够使用它。
 
 ## 设计
 
@@ -376,7 +376,7 @@ type RecommendationQueryStatus {
 
 `Updater` 依赖于其他机制（例如副本集）来重新创建已删除的 Pod 。但是，它不验证是否实际为 Pod 配置了此类机制。这样的检查可以在 CLI 中实现，并在 VPA 匹配 Pod 时警告用户，但 Pod 不会自动重启。
 
-虽然终止Pod是破坏性的并且通常是不期望的，但有时也是合理的，
+虽然终止Pod是破坏性的并且通常是不期望的，但有时也是合理的：
 
 - 避免 CPU 饥饿.
 - 随机降低跨多个 Pod 的相关 OOM 的风险.
@@ -398,7 +398,7 @@ VPA控制容器的资源请求（内存和 CPU）。在 MVP 中，它总是将�
 
 #### 内存溢出处理（Handling OOMs）
 
-当容器由于超出可用内存而被逐出时，其实际内存要求是未知的（消耗的量显然给出了下限）。这是通过将 OOM 事件转换为人工内存使用样本来建模的，方法是将“安全边际”乘数 ("safety margin" multiplier ) 应用于最后一次观察到的使用情况
+当容器由于超出可用内存而被逐出时，其实际内存要求是未知的（消耗的量显然给出了下限）。这是通过将 OOM 事件转换为人工内存使用样本来建模的，方法是将“安全边际”乘数 ("safety margin" multiplier ) 应用于最后一次观察到的使用情况。
 
 ### 历史存储（History Storage ）
 
