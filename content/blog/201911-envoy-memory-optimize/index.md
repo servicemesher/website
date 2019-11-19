@@ -4,8 +4,8 @@ date: 2019-11-18T11:40:00+08:00
 draft: false
 banner: "/img/blog/banners/201911-envoy-memory-optimize.jpg"
 author: "赵化冰"
-reviewer: [""]
-reviewerlink: [""]
+reviewer: ["罗广明"]
+reviewerlink: ["https://guangmingluo.github.io/guangmingluo.io/"]
 authorlink: "https://zhaohuabing.com"
 originallink: "https://zhaohuabing.com/post/2019-11-15-envoy-memory-optimize/"
 summary: "在Istio服务网格中，每个Envoy占用的内存也许并不算多，但所有sidecar增加的内存累积起来则是一个不小的数字。在进行商用部署时，我们需要考虑如何优化并减少服务网格带来的额外内存消耗。"
@@ -38,7 +38,7 @@ CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %             
 
 ## 减少TCMalloc预留系统内存
 
-根据[Istio官方文档](https://istio.io/docs/concepts/performance-and-scalability/#cpu-and-memory)，Envoy占用的内存数量和其配置状态相关，和请求处理速率无关。在一个较大的namespace中，Envoy大约占用50M内存。然而对于多大为“较大”，Istio官方文档并未给出一个明确的数据。
+根据[Istio官方文档](https://istio.io/docs/concepts/performance-and-scalability/#cpu-and-memory)，Envoy占用的内存大小和其配置相关，和请求处理速率无关。在一个较大的namespace中，Envoy大约占用50M内存。然而对于多大为“较大”，Istio官方文档并未给出一个明确的数据。
 
 通过Envoy的管理端口查看上面环境中一个Envoy内存分配的详细情况：
 
@@ -61,13 +61,13 @@ TCMalloc的内存分配效率比glibc的malloc更高，但会预留系统内存�
 
 ## 通过优化配置降低Envoy内存占用
 
-即是将内存降低到50M，在一些对资源要求比较严格的环境，例如边缘计算的场景中，网格中这些Envoy内存累加在一起也是不能接受的，因此需要想办法进一步降低Envoy的资源使用。 
+即使将内存降低到50M，在一些对资源要求比较严格的环境，例如边缘计算的场景中，网格中这些Envoy内存累加在一起也是不能接受的，因此需要想办法进一步降低Envoy的资源使用。 
 
-根据Envoy的这个github issue [Per listener and per cluster memory overhead is too high #4196](https://github.com/envoyproxy/envoy/issues/4196) 和[Istio](https://istio.io/docs/concepts/performance-and-scalability/#cpu-and-memory)文档可以得知，Envoy占用的内存和其配置的Listener和Cluster个数是成线性关系的，Listener和Cluster越多，Envoy占用的内存越大，因此一个自然的想法就是通过减少Pilot为Envoy创建的Listener和Cluster数量来降低Envoy的内存开销。
+根据Envoy的这个github issue[（Per listener and per cluster memory overhead is too high #4196）](https://github.com/envoyproxy/envoy/issues/4196)和[Istio文档](https://istio.io/docs/concepts/performance-and-scalability/#cpu-and-memory)可以得知，Envoy占用的内存和其配置的Listener和Cluster个数是成线性关系的，Listener和Cluster越多，Envoy占用的内存越大，因此一个自然的想法就是通过减少Pilot为Envoy创建的Listener和Cluster数量来降低Envoy的内存开销。
 
 ### 按nampese对配置进行隔离
 
-在Istio 1.3中，Pilot在创建Lister和Cluster时已经按照namespace对Service进行了隔离，Pilot缺省只会为Envoy创建和其代理服务在同一个namespace中的Service相关的Listener和Cluster。按照namespace进行隔离在一定程度上减少了Envoy中的Listener和Cluster数量，但还是太过于粗犷，对内存的优化效果有限ener和Cluster。这在一定程度上减少了Envoy中的Listener和Cluster数量，但按照namespace进行隔离还是太过于粗犷。
+在Istio 1.3中，Pilot在创建Lister和Cluster时已经按照namespace对Service进行了隔离，Pilot缺省只会为Envoy创建和其代理服务在同一个namespace中的Service相关的Listener和Cluster。按照namespace进行隔离在一定程度上减少了Envoy中的Listener和Cluster数量，但还是太过于粗犷，对内存的优化效果有限。
 
 在实际的产品部署中，一个namespace中往往会部署大量相关的微服务，这些微服务在逻辑上属于同一个业务系统，但并不是namespace中的任意两个微服务之间都存在访问关系，因此按照namespace进行隔离还是会导致Envoy中存在大量该sidecar不需要的Listener和Cluster配置。
 
@@ -75,7 +75,7 @@ TCMalloc的内存分配效率比glibc的malloc更高，但会预留系统内存�
 
 在一个微服务运用中，一个服务访问的其他服务一般不会超过10个，而一个namespace中可能部署多达上百个微服务，导致Envoy中存在大量冗余配置，导致不必要的内存消耗。最合理的做法是只为一个sidecar配置该sidecar所代理服务需要访问的外部服务相关的配置。
 
-Istio提供了[Siedecar](https://istio.io/docs/reference/config/networking/sidecar/) CRD,用于对Pilot向sidecar下发的缺省配置进行更细粒度的调整。下面以Bookinfo示例程序说明如何调整一个sidecar的配置。
+Istio提供了[Siedecar](https://istio.io/docs/reference/config/networking/sidecar/) CRD，用于对Pilot向sidecar下发的缺省配置进行更细粒度的调整。下面以Bookinfo示例程序说明如何调整一个sidecar的配置。
 
 在Bookinfo示例程序中，几个微服务之间的调用关系如下：
 
