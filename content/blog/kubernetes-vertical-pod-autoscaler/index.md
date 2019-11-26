@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes 垂直伸缩走向何方?"
+title: "Kubernetes 垂直自动伸缩走向何方?"
 date: 2019-11-10T15:15:43+08:00
 draft: false
 banner: "/img/blog/banners/00704eQkgy1frjbqc9faoj30rs0kuwnv.jpg"
@@ -10,13 +10,16 @@ translatorlink: "https://github.com/yuxiaoba"
 reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 authorlink: "https://github.com/mwielgus"
-summary: "介绍Kubernetes社区对Pod垂直伸缩组件的开发规划。"
+summary: "介绍 Kubernetes 社区对 Pod 垂直自动伸缩组件的开发规划。"
 tags: ["kubernetes"]
 categories: ["kubernetes"]
 keywords: ["kubernetes","VPA"]
 ---
 
-> 本文系转载，译者：余广坝
+## 编者按
+
+目前 Kubernetes 的 Pod 水平自动伸缩（HPA，Horizontal Pod Autoscaler）已在业界广泛应用。但对一些特殊的 Pod（如一些有状态的 Pod），HPA 并不能很好地解决资源不足的问题。 这就引出 Pod 垂直自动伸缩（VPA，Vertical Pod Autoscaler），本文主要介绍 Kubernetes 社区对 Pod 垂直自动伸缩组件的开发规划。
+
 
 ## VPA定义
 
