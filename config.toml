@@ -49,8 +49,8 @@ paginate = 10
 
 [[menu.main]]
     parent="docs"
-    name="Istio中文官网"
-    url = "https://archive.istio.io/v1.2/zh"
+    name="Istio中文官网(建设中)"
+    url = "https://preliminary.istio.io/zh"
     weight = 3
 
 [[menu.main]]
@@ -112,6 +112,12 @@ paginate = 10
     name = "活动"
     url  = "/activity/"
     weight = 5
+
+[[menu.main]]
+    parent="community"
+    name = "Istio文档汉化"
+    url  = "/istio-trans/"
+    weight = 6
 
 [[menu.main]]
     name = "关于"
@@ -223,10 +229,10 @@ paginate = 10
 [params.see_more]
     enable = true
     icon = "fa fa-pagelines"
-    title = "参与进来"
-    subtitle = "加入 ServiceMesher 社区"
-    link_url = "/contact"
-    link_text = "查看加入方式"
+    title = "Istio文档汉化"
+    subtitle = "由 ServiceMesher 社区组织和维护"
+    link_url = "/istio-trans"
+    link_text = "查看参与方式"
 
 [params.partners]
     enable = true
