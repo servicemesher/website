@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Istio Translation Analysis</title>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+</head>
+<body>
+    <center>
+        <h2>Translated Chinese Words Count</h2>
+        <div id="66718c82bde64e11bc2be2c24eb92d31" class="chart-container" style="width:100%;height:500px"></div>
+    </center>
+    <div style="margin-top:30px;width:100%;text-align:center"><img src="pr_author_top_10.jpg" width="50%"  /></div>
+    <div style="margin-top:30px;width:100%;text-align:center"><img src="pr_reviewers_top_10.jpg" width="50%"  /></div>
+    <div style="margin-top:30px;width:100%;text-align:center"><img src="prs_merged_per_day.jpg" width="50%"  /></div>
+    <div style="margin-top:30px;width:100%;text-align:center"><img src="days_elapse_until_pr_merged.jpg" width="50%" /></div>
+    <script>
+        var chart_66718c82bde64e11bc2be2c24eb92d31 = echarts.init(
+            document.getElementById('66718c82bde64e11bc2be2c24eb92d31'), 'white', {renderer: 'canvas'});
+        var option_66718c82bde64e11bc2be2c24eb92d31 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "pie",
+            "name": "Translated Chinese Words",
+            "clockwise": true,
+            "data": [
+                {
+                    "name": "ilylia",
+                    "value": 15908
+                },
+                {
+                    "name": "huntsman-li",
+                    "value": 11209
+                },
+                {
+                    "name": "malphi",
+                    "value": 11060
+                },
+                {
+                    "name": "JasonRD",
+                    "value": 6915
+                },
+                {
+                    "name": "vivian99-wu",
+                    "value": 5668
+                },
+                {
+                    "name": "yuxiaobo96",
+                    "value": 4685
+                },
+                {
+                    "name": "vflong",
+                    "value": 4608
+                },
+                {
+                    "name": "arunfung",
+                    "value": 4380
+                },
+                {
+                    "name": "dk-lockdown",
+                    "value": 3591
+                },
+                {
+                    "name": "yuer1727",
+                    "value": 3413
+                },
+                {
+                    "name": "ExBs2724",
+                    "value": 3325
+                },
+                {
+                    "name": "luxious",
+                    "value": 3278
+                },
+                {
+                    "name": "gorda",
+                    "value": 3249
+                },
+                {
+                    "name": "cocotyty",
+                    "value": 2765
+                },
+                {
+                    "name": "idefav",
+                    "value": 2640
+                },
+                {
+                    "name": "zyt312074545",
+                    "value": 2621
+                },
+                {
+                    "name": "donychen1134",
+                    "value": 2398
+                },
+                {
+                    "name": "niceforbear",
+                    "value": 2282
+                },
+                {
+                    "name": "Lovnx",
+                    "value": 2206
+                },
+                {
+                    "name": "WisWang",
+                    "value": 2189
+                },
+                {
+                    "name": "GuangmingLuo",
+                    "value": 1861
+                },
+                {
+                    "name": "zqzzq",
+                    "value": 1858
+                },
+                {
+                    "name": "hwdef",
+                    "value": 1538
+                },
+                {
+                    "name": "sirius1024",
+                    "value": 1497
+                },
+                {
+                    "name": "tanjunchen",
+                    "value": 1450
+                },
+                {
+                    "name": "other",
+                    "value": 15034
+                }
+            ],
+            "radius": [
+                "0%",
+                "75%"
+            ],
+            "center": [
+                "40%",
+                "50%"
+            ],
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "ilylia",
+                "huntsman-li",
+                "malphi",
+                "JasonRD",
+                "vivian99-wu",
+                "yuxiaobo96",
+                "vflong",
+                "arunfung",
+                "dk-lockdown",
+                "yuer1727",
+                "ExBs2724",
+                "luxious",
+                "gorda",
+                "cocotyty",
+                "idefav",
+                "zyt312074545",
+                "donychen1134",
+                "niceforbear",
+                "Lovnx",
+                "WisWang",
+                "GuangmingLuo",
+                "zqzzq",
+                "hwdef",
+                "sirius1024",
+                "tanjunchen",
+                "other"
+            ],
+            "selected": {},
+            "show": true,
+            "left": "65%",
+            "top": "10%",
+            "orient": "vertical",
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0
+    }
+};
+        chart_66718c82bde64e11bc2be2c24eb92d31.setOption(option_66718c82bde64e11bc2be2c24eb92d31);
+    </script>
+</body>
+</html>
