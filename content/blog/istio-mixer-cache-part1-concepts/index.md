@@ -58,7 +58,6 @@ target.service: example
 这些将被Istio使用的属性集合，被称为属性词汇，总数大概是50个，详细列表可以参看文档：
 
 - [Attribute Vocabulary](https://istio.io/docs/reference/config/mixer/attribute-vocabulary.html)：来自Istio官方文档中的Reference
-- [属性词汇](http://istio.doczh.cn/docs/reference/config/mixer/attribute-vocabulary.html)：此文档的中文文档翻译，来自http://istio.doczh.cn
 
 ## 引用属性
 
