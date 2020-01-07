@@ -10,10 +10,13 @@ categories: ["service mesh"]
 keywords: ["service mesh","istio","gateway","envoy"]
 ---
 
+本文根据网易高级技术专家王国云于第九届 Service Mesh Meetup 杭州站上分享的整理而成。
+
+![王国云-网易-Service Mesh Meetup](imgs/wangguoyun.jpg)
 
 ## 背景
 
-Service Mesh在严选的探索与实践大致分了以下几个阶段
+Service Mesh在严选的探索与实践大致分了以下几个阶段。
 
 #### 第一个阶段是探索期（2015年底~2016年4月）
 
@@ -351,6 +354,10 @@ Service Mesh架构发展到现在仍有较大的发展空间，严选和轻舟�
 严选的实践说明目前Service Mesh架构成熟度已经具备了大规模落地的条件，希望我们的工作可以为社区带来借鉴意义。
 
 最后感谢Service Mesh Meetup组委会邀请，感谢大家聆听。
+
+### 视频回放和 PPT 下载
+
+请访问：https://tech.antfin.com/community/activities/1056
 
 ### 作者简介
 
