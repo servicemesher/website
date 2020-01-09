@@ -2,8 +2,9 @@
 title: "2020年 Service Mesh 技术展望"
 date: 2020-01-09T10:44:06+08:00
 draft: false
-banner: "/img/blog/banners/0069RVTdly1fusrz35q3sj31jk15ob2b.jpg"
-author: "罗广明"
+banner: "/img/blog/banners/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
+author: "ServiceMesher社区治理委员会"
+authorlink: "https://www.servicemesher.com/"
 summary: "本文由 ServiceMesher 社区治理委员会成员针对 Service Mesh 技术发表的看法汇总而成。"
 tags: ["service mesh"]
 categories: ["service mesh"]
