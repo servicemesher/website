@@ -4,7 +4,7 @@ date: 2020-01-18T10:36:06+08:00
 draft: false
 banner: "/img/blog/banners/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
 author: "罗广明"
-authorlink: "https://guangmingluo.github.io/guangmingluo.io/"
+authorlink: <https://guangmingluo.github.io/guangmingluo.io/>
 summary: "本文由 ServiceMesher 社区治理委员与业界知名大牛针对 Service Mesh 技术发表的看法汇总而成。"
 tags: ["service mesh"]
 categories: ["service mesh"]
