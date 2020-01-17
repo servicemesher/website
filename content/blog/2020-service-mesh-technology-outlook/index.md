@@ -3,9 +3,9 @@ title: "2020年 Service Mesh 技术展望"
 date: 2020-01-09T10:44:06+08:00
 draft: false
 banner: "/img/blog/banners/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
-author: "ServiceMesher社区治理委员会"
-authorlink: "https://www.servicemesher.com/"
-summary: "本文由 ServiceMesher 社区治理委员会成员针对 Service Mesh 技术发表的看法汇总而成。"
+author: "罗广明"
+authorlink: "https://guangmingluo.github.io/guangmingluo.io/"
+summary: "本文由 ServiceMesher 社区治理委员与业界知名大牛针对 Service Mesh 技术发表的看法汇总而成。"
 tags: ["service mesh"]
 categories: ["service mesh"]
 keywords: ["service mesh","istio"]
@@ -19,7 +19,7 @@ keywords: ["service mesh","istio"]
 - Istio 很难被打败，很可能成为服务网格技术的事实标准；
 - 出现更多的服务网格用例，WebAssembly 将带来新的可能。
 
-针对 Service Mesh 技术，ServiceMesher 社区治理委员会成员在 2020 新年伊始发表了他们各自的看法，并汇总成文，希望能给读者们带来一些思考和启发。
+针对 Service Mesh 技术，ServiceMesher 社区治理委员会成员在 2020 新年伊始发表了他们各自的看法，并邀请云原生与服务网格领域业界大牛抒发各自的见解，汇总成文，希望能给读者们带来一些思考和启发。
 
 ## 正文
 
@@ -64,3 +64,19 @@ keywords: ["service mesh","istio"]
 Service Mesh 技术前景广阔，但远未成熟。展望 2020， 作为 Service Mesh 头号玩家的， Istio 还会持续快速发展，我个人很期待的一些演进： 支持 webassembly 扩展的数据面，真正生产可用的 Mixer V2，更易安装和运维的单体控制面 istiod，更容易理解和操纵的用户接口，以及提升 Istio 自身的可观测性。
 
 Service Mesh 技术本质上是各种最佳实践的组合运用。Istio 试图运用精巧的模型，去联结各种平台、观测系统和用户应用。未来的 Istio，一定会更加复杂，这些「复杂」的目的，是让用户能更「简单」地使用 Service Mesh 领域的最佳实践。
+
+### William Morgan
+
+> Buoyant CEO, author of Linkerd，the originator of the concept `Service Mesh`.
+
+The service mesh today exists in a somewhat unfortunate state: while there is real and significant value, the marketing has outpaced the technology. Cloud vendors especially have seized upon the service mesh as a way to differentiate their container offerings, and the resulting frenetic marketing push does end users a substantial disservice. 
+
+今天的服务网格处于有点不幸的状态：虽然有真实和重要的价值，但市场营销已经超过了技术本身。云供应商特别利用服务网格作为区分他们的容器产品的一种方式，而由此产生的狂热的市场推广给终端用户带来了实质性的损害。
+
+However, the service mesh provides some really transformative capabilities when applied correctly. From the perspective of Linkerd, the project which created the service mesh category itself, we continue to believe minimizing the cost of a service mesh, especially the long-term operational cost incurred by complexity, is paramount.
+
+然而，如果应用正确，服务网格确实能提供一些真正变革性的功能。从 Linkerd 的角度来看，创建服务网格的项目，我们仍然认为最小化服务网格的成本，特别是由复杂性引起的长期运营成本是最重要的。
+
+In 2020, Linkerd will continue to focus on its goal of providing "observable security" while minimizing complexity and cost of adoption--Linkerd's ultralight, ultrafast Rust proxies, minimalist control plane, and "do less, not more" philosophy have already paid dividends here. Most importantly, Linkerd's commitment to open governance and home in a neutral foundation will ensure that Linkerd will continue to be a project not for customers of a particular cloud vendor, but for all engineers everywhere.
+
+在2020年，Linkerd 将继续专注于提供“可观察的安全性”的目标，同时最小化复杂性和使用成本 — Linkerd 的超轻、超快 Rust 代理、极简控制平面，以及“少做，而不是多做”的理念已经在这里得到了鲜明的体现。最重要的是，Linkerd 对开放治理和中立基础的承诺将确保 Linkerd 将继续成为一个为所有工程师服务的项目，而不是为某个特定云供应商的客户服务。
