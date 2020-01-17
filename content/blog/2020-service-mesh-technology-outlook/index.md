@@ -1,6 +1,6 @@
 ---
 title: "2020年 Service Mesh 技术展望"
-date: 2020-01-09T10:44:06+08:00
+date: 2020-01-18T10:36:06+08:00
 draft: false
 banner: "/img/blog/banners/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
 author: "罗广明"
