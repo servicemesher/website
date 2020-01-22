@@ -5,7 +5,7 @@ draft: false
 banner: "/img/blog/banners/006tKfTcly1g1n0q9vixdj31420u0hdu.jpg"
 author: "马若飞"
 summary: "本文基于istio最新的架构调整设计文档，分析了istio未来的设计目标"
-tags: ["istio"]
+tags: ["service mesh"]
 categories: ["istio"]
 keywords: ["service mesh","istio"]
 ---
