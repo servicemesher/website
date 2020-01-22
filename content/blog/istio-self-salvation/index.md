@@ -1,12 +1,12 @@
 ---
 title: "回归单体 - Istio的自我救赎？"
-date: 2020-01-23T10:00:06+08:00
+date: "2020-01-23T10:00:06+08:00"
 draft: false
 banner: "/img/blog/banners/006tKfTcly1g1n0q9vixdj31420u0hdu.jpg"
 author: "马若飞"
 summary: "本文基于istio最新的架构调整设计文档，分析了istio未来的设计目标"
-tags: ["istio","service mesh"]
-categories: ["service mesh"]
+tags: ["istio"]
+categories: ["istio"]
 keywords: ["service mesh","istio"]
 ---
 
