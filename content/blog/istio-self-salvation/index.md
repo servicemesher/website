@@ -10,8 +10,6 @@ categories: ["service mesh"]
 keywords: ["service mesh","istio"]
 ---
 
-
-
 # 引子
 
 早在2019年底的KubeConNA中，Google API 基础设施的架构师 Louis Ryan 就透露了 Istio 控制平面架构将要进行调整的消息。从即将发布的 1.5 版本开始，原本多个独立的组件将会整合在一起，成为一个单体结构。我相信每个开发者都能意识到架构调整会带来什么样的后果。这一重磅消息也促使笔者决定著成此文，以告天下拥趸：变化有风险，落地需谨慎！
@@ -19,6 +17,7 @@ keywords: ["service mesh","istio"]
 # 原罪
 
 ## 解耦是罪？
+
 这并不是 Istio 第一次调整架构了。号称 Production ready 的 1.0 版本在后续的 1.1 版本就进行了比较大的调整，分离了 Pilot 的配置下发功能到新的 Galley 组件中，将 Mixer 组件中原本进程内运行的 Plugin 改为了进程外运行的 adapter，进一步加剧了 Mixer 组件的性能问题。
 ![arch1](https://tva1.sinaimg.cn/large/006tNbRwly1gb5pmk8xe4j32140og102.jpg)
 坦白讲，如果抛开性能问题，我个人非常喜欢 Istio 1.1 的架构设计。它是贯彻解耦原则的典范，各个组件职责清晰，界限分明，所谓真正的设计优雅。1.1 版本的控制平面包括了下面几个组件：
@@ -38,6 +37,7 @@ keywords: ["service mesh","istio"]
 Istio 取舍不利是造成现在这种状况的首要原因。
 
 ## 设计的取舍
+
 我们经常说系统要具有可扩展性；另一方面，我们又要小心矫枉过正，以免出现过度设计。既要有预知变化的宽容度，又得避免写出永远也不会运行到的 “dead code”。取舍，在设计阶段贯穿始终。
 
 任何一个系统都是由一粒种子成长为参天大树的，Istio 也不例外。唯一不同的是，它从 0.1 版本刚刚问世就已经枝繁叶茂，功能强大，胸怀宇宙。我们现在很难评断当初的设计是不正确的。但 2 年的市场检验已然说明了问题，完善和强大在某种程度上就是复杂和易用性的缺失，Istio 的落地项目少的可怜。Envoy（Istio的御用数据平面）的缔造者 Matt Keiln 在自己的 Twitter 上评价了 Istio 的落地情况，他用带引号的反语表达了自己的无奈：
@@ -93,11 +93,11 @@ Istio 架构的复杂性主要表现在以下几方面：
 原有组件的功能会整合为如下 2 部分：
 
 - istiod：合并了除Mixer之外的大部分组件功能，成为新的控制平面；
-- istio-agent：私钥生成，本地SDS服务器，启动Envoy等；
+- istio-agent：私钥生成，本地 SDS 服务器，启动 Envoy 等；
 
 同时也删除了部分功能，单体形态也消除了大量的配置项，以及组件通信带来的复杂性。未来大概率情况下，用户只需要维护一个 `mesh.yaml` 的配置文件来定义自己的 mesh，而不是现在要组合各种繁复的自定义资源。
 
-<img src="https://tva1.sinaimg.cn/large/006tNbRwly1gb5rbulcsxj30jk0c2gmd.jpg" alt="newc" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1gb5rbulcsxj30jk0c2gmd.jpg" alt="newc" style="zoom:50%;"/>
 
 在运行层面，新架构提供了更多的选择方式，以应对不同的开发环境：
 
