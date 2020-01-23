@@ -167,12 +167,8 @@ Istio 架构的复杂性主要表现在以下几方面：
 
 - 消除了跨组件通信，避免了通信问题；
 
-性能提升方面，原本被诟病的 Mixer 组件被取消，其功能将合并到 sidecar 中。这其实变相的实现了 [Mixer V2](https://docs.google.com/document/d/1QKmtem5jU_2F3Lh5SqLp0IuPb80_70J7aJEYu4_gS-s/edit) 版本，解决了进程外调用的性能问题；多组件合并为 istiod 也解决了原来重复的序列化和延迟问题。这一次，Istio 在经过社区长期的灵魂拷问下，终于卸下优雅架构的包袱，全面拥抱性能和易用性。
+性能提升方面，原本被诟病的 Mixer 组件将被取消，在未来版本中，其功能将会被合并到 sidecar 中。这其实变相的实现了 [Mixer V2](https://docs.google.com/document/d/1QKmtem5jU_2F3Lh5SqLp0IuPb80_70J7aJEYu4_gS-s/edit) 版本，解决了进程外调用的性能问题；多组件合并为 istiod 也解决了原来重复的序列化和延迟问题。这一次，Istio 在经过社区长期的灵魂拷问下，终于卸下优雅架构的包袱，全面拥抱性能和易用性。
 
 ## 结论
 
-Service Mesh 概念的缔造者，Linkerd 的作者 William Morgan 在接受我们社区采访时说过这样一段话：
-
-> The service mesh today exists in a somewhat unfortunate state: while there is real and significant value, the marketing has outpaced the technology.
-
-“今天的服务网格处于不幸的状态：虽然有真实和重要的价值，但市场营销已经超过了技术本身”。Istio 的高调登场，加上 3 家顶尖厂商的背书，让众多拥趸失去理性思考的能力，盲目的追捧正是这种恶性营销的表现。今天的 Istio 终于放低姿态，以回归单体的方式完成自我救赎，来重新融入社区的怀抱。我仍然相信，未来 Istio 依然有能力成为一个成熟而优秀的产品，深耕于社区，服务于大众。让我们拭目以待。
+Service Mesh 概念的缔造者，Linkerd 的作者 William Morgan 在曾说过这样一段话：“今天的服务网格处于不幸的状态：虽然有真实和重要的价值，但市场营销已经超过了技术本身”。Istio 的高调登场，加上 3 家顶尖厂商的背书，让众多拥趸失去理性思考的能力，盲目的追捧正是这种恶性营销的表现。今天的 Istio 终于放低姿态，以回归单体的方式完成自我救赎，来重新融入社区的怀抱。我仍然相信，未来 Istio 依然有能力成为一个成熟而优秀的产品，深耕于社区，服务于大众。让我们拭目以待。
