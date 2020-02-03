@@ -1,8 +1,8 @@
 ---
-title: “2020 年 Service Mesh 技术展望"
-date: 2020-01-18T10:36:06+08:00
-draft: true
-banner: "/img/blog/banners/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
+title: "2020 年 Service Mesh 技术展望"
+date: 2020-02-02T10:36:06+08:00
+draft: false
+banner: "/img/blog/banners/006tKfTcgy1ftpp63o2m2j31ji15okjm.jpg"
 author: "罗广明"
 authorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 summary: "本文由 ServiceMesher 社区治理委员与业界知名大牛针对 Service Mesh 技术发表的看法汇总而成。"
@@ -25,7 +25,7 @@ keywords: ["service mesh","istio"]
 
 ### 宋净超（蚂蚁金服）
 
-用一句话概括 Service Mesh 近几年的发展——道阻且长，行则将至。这几年来我一直在探寻云原生之道，从容器、Kubernetes 再到 Service Mesh，从底层的基础设施到越来越趋向于业务层面，Service Mesh 肯定不是云原生的终极形式，其复杂性依然很高， 它的发展也远没有同期的 Kubernetes 那么顺利，但是很多人都已意识到了服务网格价值，现在它正在远离最初市场宣传时的喧嚣，走向真正的落地。
+用一句话概括 Service Mesh 近几年的发展——道阻且长，行则将至。这几年来我一直在探寻云原生之道，从容器、Kubernetes 再到 Service Mesh，从底层的基础设施到越来越趋向于业务层面，Service Mesh 肯定不是云原生的终极形式，其复杂性依然很高，且业界标准也尚未形成，它的发展也远没有同期的 Kubernetes 那么顺利，但是很多人都已意识到了服务网格价值，现在它正在远离最初市场宣传时的喧嚣，走向真正的落地。
 
 ### 罗广明（百度）
 
@@ -69,14 +69,34 @@ Service Mesh 技术本质上是各种最佳实践的组合运用。Istio 试图�
 
 > Buoyant CEO, author of Linkerd，the originator of the concept `Service Mesh`.
 
-The service mesh today exists in a somewhat unfortunate state: while there is real and significant value, the marketing has outpaced the technology. Cloud vendors especially have seized upon the service mesh as a way to differentiate their container offerings, and the resulting frenetic marketing push does end users a substantial disservice. 
-
 今天的服务网格处于有点不幸的状态：虽然有真实和重要的价值，但市场营销已经超过了技术本身。云供应商特别利用服务网格作为区分他们的容器产品的一种方式，而由此产生的狂热的市场推广给终端用户带来了实质性的损害。
-
-However, the service mesh provides some really transformative capabilities when applied correctly. From the perspective of Linkerd, the project which created the service mesh category itself, we continue to believe minimizing the cost of a service mesh, especially the long-term operational cost incurred by complexity, is paramount.
 
 然而，如果应用正确，服务网格确实能提供一些真正变革性的功能。从 Linkerd 的角度来看，创建服务网格的项目，我们仍然认为最小化服务网格的成本，特别是由复杂性引起的长期运营成本是最重要的。
 
-In 2020, Linkerd will continue to focus on its goal of providing "observable security" while minimizing complexity and cost of adoption--Linkerd's ultralight, ultrafast Rust proxies, minimalist control plane, and "do less, not more" philosophy have already paid dividends here. Most importantly, Linkerd's commitment to open governance and home in a neutral foundation will ensure that Linkerd will continue to be a project not for customers of a particular cloud vendor, but for all engineers everywhere.
-
 在2020年，Linkerd 将继续专注于提供“可观察的安全性”的目标，同时最小化复杂性和使用成本 — Linkerd 的超轻、超快 Rust 代理、极简控制平面，以及“少做，而不是多做”的理念已经在这里得到了鲜明的体现。最重要的是，Linkerd 对开放治理和中立基础的承诺将确保 Linkerd 将继续成为一个为所有工程师服务的项目，而不是为某个特定云供应商的客户服务。
+
+### Christian Posta
+
+> Field CTO at solo.io, author Istio in Action and Microservices for Java Developers, open-source enthusiast, cloud application development, committer @ Apache, Serverless, Cloud, Integration, Kubernetes, Docker, Istio, Envoy blogger, blog <https://blog.christianposta.com/>.
+
+#### 回顾2019
+
+- 更多的Service Mesh产品发布了！API/软件网络领域的每个人都正在实践自己的服务网格。我认为这对市场来说是一件好事，因为它表明这是有价值的，并且应该探索不同的实现方式。这也将指引我们在未来殊途同归。
+- 越来越多的组织参与到服务网格技术中（从去年的架构讨论开始）可用性是关键！像linkerd这样的网格技术展示了如何简化使用和操作，其他产品也注意到了这一点，并尝试提高它们的可用性。
+- Istio已经持续的进行定期发布，这证明了它开始走向稳定并具有可预测性。
+- Consul推出了和consul模型无缝结合的L7路由特性。
+- 不可忽视，虽然更多的人开始着手服务网格技术的实践，但依然有很多争议：
+  - 谁来支持？
+  - 多租户支持的不好
+  - 对现有应用不总是透明的
+  - VM+容器支持不够好
+  - 暴露什么样的API给用户
+
+#### 2020年展望
+
+服务网格在2019年引领了潮流，我期待它能变得更加强大。2020年，会有更多的组织落地服务网格，继续与现有的网格技术集成，如Istio和其他产品：
+
+- 多网格的存在！虽然现在已经有很多网格实现，但最终还是会收敛的。然而，有趣的是，我不认为融合会像kubernetes那样发生（我们都落在一件事情上）。我怀疑总会有多种服务网格实现会成为主流。每个云提供商都有自己的托管网格产品，这可能与本地网格不同。因此，多集群和网格的多分布将成为主要的部署实现。
+- Web assembly正在流行：它提供了一种在类似Envoy这样的代理中安全地运行用户代码的方法，我们将很快看到服务网格和API网关，如istio和gloo对它提供支持。Web assembly将允许用户/供应商/组织提供功能模块，用以定制化代理并改变其默认行为。Web assembly 工具集将开始出现并对其进行管理。对于那些努力将服务网格集成到现有环境并维护组织兼容性的人来说，这将是令人兴奋的。
+- 优化服务网格数据平面：去年我在第一个ServiceMeshCon演讲（PPT：<https://www.slideshare.net/ceposta/the-truth-about-the-service-mesh-data-plane>）讨论了如何在服务网格数据平面进行调优，就像直接运行你的代码一样。作为代理，和共享的代理。例如，gRPC最近增加了对[xDS API](https://github.com/grpc/proposal/pull/170)的支持， CNCF也有一个工作组来帮助将这个“通用数据平面API”标准化以用于其他用途：<https://github.com/cncf/udpa>。
+
