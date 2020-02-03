@@ -1,10 +1,10 @@
 ---
-title: "2020年 Service Mesh 技术展望"
+title: “2020 年 Service Mesh 技术展望"
 date: 2020-01-18T10:36:06+08:00
-draft: false
+draft: true
 banner: "/img/blog/banners/006tNc79ly1ftkyf36umuj31jk15mnpf.jpg"
 author: "罗广明"
-authorlink: <https://guangmingluo.github.io/guangmingluo.io/>
+authorlink: "https://guangmingluo.github.io/guangmingluo.io/"
 summary: "本文由 ServiceMesher 社区治理委员与业界知名大牛针对 Service Mesh 技术发表的看法汇总而成。"
 tags: ["service mesh"]
 categories: ["service mesh"]
@@ -25,7 +25,7 @@ keywords: ["service mesh","istio"]
 
 ### 宋净超（蚂蚁金服）
 
-云原生的本质是让机器取代人类，执行更多的自动化程序，就像 Kubernetes Operator 所提倡的那样。假如说 Docker 的普及是 Kubernetes 发展的前提，那么 Kubernetes 又成了 Service Mesh 这又一云原生技术的发展前提，Service Mesh 从概念的提出到现在已经发展有三年了，目前总体上正处于概念普及到真正落地的阶段，但是 Service Mesh 的发展远没有 Kubernetes 同期发展的那么顺利，越靠近应用层人类的惯性就越大，就越难被机器替代。如果有一天都可以机器自己写程序了，那谁还管什么 Service Mesh，什么云原生？
+用一句话概括 Service Mesh 近几年的发展——道阻且长，行则将至。这几年来我一直在探寻云原生之道，从容器、Kubernetes 再到 Service Mesh，从底层的基础设施到越来越趋向于业务层面，Service Mesh 肯定不是云原生的终极形式，其复杂性依然很高， 它的发展也远没有同期的 Kubernetes 那么顺利，但是很多人都已意识到了服务网格价值，现在它正在远离最初市场宣传时的喧嚣，走向真正的落地。
 
 ### 罗广明（百度）
 
