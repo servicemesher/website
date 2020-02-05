@@ -51,21 +51,27 @@ There’s a trove of information on this topic. We’ve seen [“API Gateway is 
 
 About a year ago I wrote [about the Identity Crisis of the API Gateway](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/) which evaluated the differences in API Management, Kubernetes Ingresses, and API Gateways (with associated definitions). At the end of that article, I tried to explain how service mesh fits into the equation, but without enough detail on how they’re different or when to use one or the other. I highly recommend [reading that post](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/) as in some ways, that’s the “part one” to this post being a “part two”.
 
-I believe the confusion arises because the following:
+大约一年前，我写了一篇[关于API网关身份危机](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/)的文章，评估了API管理、Kubernetes Ingress和API网关(带有相关定义)的差异。在那篇文章的最后，我试图解释服务网格是如何应对这些功能的，但是没有详细说明它们如何不同，以及什么时候使用它们。我强烈推荐[阅读这篇文章](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/) ，因为在某些方面，它是“第一部分”，本文作为“第二部分”。
 
-- there is overlap in technologies used (proxies)
-- there is overlap in capabilities (traffic control, routing, metric collection, security/policy enforcement, etc.)
-- a belief that “service mesh” replaces API management
-- a misunderstanding of the capabilities of a service mesh
-- some service meshes have their own gateways
+我认为产生混淆的原因如下：
 
-The last bullet is especially confusing to the discussion.
+- 技术使用上存在重叠（代理）
+- 功能上存在重叠（流量控制，路由，指标收集，安全/策略增强等）
+- “服务网格”可替代API管理的理念
+- 服务网格能力的误解
+- 一些服务网格有自己的网关
+
+最后一点尤其使人困惑。
 
 If service mesh is just for east-west traffic (within a boundary), then why do some service meshes, say Istio, [have an Ingress Gateway](https://istio.io/docs/reference/config/networking/gateway/) for north/south (and is part of the mesh)? For example, from the Istio Ingress Gateway docs:
 
+如果服务网格仅仅是针对东西流量（边界内），那么为什么有一些服务网格，如Istio所说，[有一个Ingress网关](https://istio.io/docs/reference/config/networking/gateway/)针对南北流量（并且是网格的一部分）？例如下面来自Istio Ingress网关的文档： 
+
 > Gateway describes a load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections.
+> 网关描述了一个运行在网格边缘的负载均衡器，它接收传入或传出的HTTP/TCP连接。
 
 Aren’t our API’s HTTP? If we can get HTTP requests into the cluster/mesh with Istio’s Gateway (which, btw is built on the amazing [Envoy Proxy](https://www.envoyproxy.io/) project), isn’t that sufficient?
+我们的API不是HTTP吗?如果我们通过Istio的网关将HTTP请求引入集群/网格中（(顺便说一句，这基于强大的[Envoy 代理](https://www.envoyproxy.io/) 项目），这还不够吗?
 
 ## 假设
 
