@@ -169,8 +169,8 @@ From a functionality standpoint, what would an API Gateway need to support? And 
 
 从功能的角度来看，API网关需要支持什么?企业在现实的用例中会看到哪些需要API网关(服务网格不太适合)的情况:
 
-- 请求/响应传输
-- 应用协议传输如 REST/SOAP/XSLT
+- 请求/响应转换
+- 应用协议转换如 REST/SOAP/XSLT
 - 错误/速率定制响应
 - 直接响应
 - 对API/代理管道的精确控制
@@ -182,27 +182,41 @@ From a functionality standpoint, what would an API Gateway need to support? And 
 
 As part of exposing an API on an API gateway, you may wish to hide the details of how the backend API is implemented. This could be some combination of changing the shape of the request, removing/adding headers, placing headers into the body or vice versa. This provides a nice decoupling point from clients when backend services are making changes to the API or when clients cannot update as fast as the provider.
 
-#### Application protocol transformations
+作为在API网关上暴露API的一部分，您可能希望隐藏后端API实现方式的细节。这可能是改变请求内容、删除/添加标头、将标头放入正文的一些组合，反之亦然。当后端服务对API进行更改时，或者当客户端不能像提供方那样快速更新时，这提供了一个与客户端很好的解耦点。
+
+#### 应用协议转换
 
 Many enterprises have investments into technology like XML over HTTP, SOAP, or JSON over HTTP. They may wish to expose these with a tighter, client-specific API and continue to have interoperability. Additionally, service providers may wish to take advantage of new RPC mechanisms like gRPC or streaming protocols like rSocket.
 
-#### Error / Rate limit custom responses
+许多企业在技术上进行了投资，如基于HTTP、SOAP的XML，或基于HTTP的JSON。他们可能希望使用更严格的、特定于客户端的API来公开这些API，并继续保持互操作性。此外，服务提供者可能希望利用新的RPC机制(如gRPC)或流协议(如rSocket)。
+
+#### 错误/速率定制响应
 
 Transforming requests from upstream services is a vital capability of an API Gateway, but so too is customizing responses coming from the gateway itself. Clients that adopt the API Gateway’s virtual API for request/response/error handling expect the gateway to customize its responses to fit that model as well.
 
-#### Direct responses
+转换来自上游服务的请求是API网关的一项重要功能，定制来自网关本身的响应也是如此。采用API网关的虚拟API进行请求/响应/错误处理的客户端也希望网关自定义其响应以适应该模型。
+
+#### 直接响应
 
 When a client (trusted or nefarious) requests a resource that is not available, or is blocked from going upstream for some reason, it’s best to be able to terminate proxying and respond with a pre-canned response.
 
-#### Precise control over Proxy pipeline
+当客户端(受信任的或恶意的)请求不可用的资源，或由于某种原因被阻止上行时，最好能够终止代理并使用预先屏蔽的响应返回。
+
+#### 对API/代理管道的精确控制
 
 There is no one-size fits all proxying expectation. An API Gateway should have the ability to both change the order in which its capabilities get applied (rate limiting, authz/n, routing, transformation, etc) as well as offer a way to debug when things go wrong.
 
-#### API composition
+没有一种方法可以满足所有代理的期望。API网关应该能够改变应用其功能的顺序(速率限制、authz/n、路由、转换等)，并在出现问题时提供一种调试方法。
+
+#### API 聚合
 
 Exposing an abstraction over multiple services often comes with the expectation of mashing up multiple APIs into a single API. Something like GraphQL could fit this bill.
 
 As you can see, providing a powerful decoupling point between clients and provider services involves more than just allowing HTTP traffic into the cluster.
+
+在多个服务上公开一个抽象常常伴随着将多个API混合成一个API的期望。类似于GraphQL的东西可以满足这个需求。
+
+正如您所看到的，在客户端和提供服务者之间提供一个强大的解耦点涉及的不仅仅是允许HTTP通信进入集群。
 
 ## 严格控制什么可以进入/离开服务
 
