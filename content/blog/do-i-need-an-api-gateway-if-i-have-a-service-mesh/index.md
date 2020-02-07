@@ -33,9 +33,9 @@ tags: ["service mesh"]
 然而，市场中仍存在明显的困惑。
 
 > 我也希望看到人们如何看待不同方法之间权衡的严肃讨论。例如，服务网格和 API 网关之间的职责/主张存在重叠。人们对选择感到困惑和不知所措。
-> 
+>
 >— Andrew Clay Shafer 雷启理 （@littleidea）
-> 
+>
 >June 12, 2019
 
 ## 困惑是什么
@@ -52,7 +52,7 @@ tags: ["service mesh"]
 
 最后一点尤其使人困惑。
 
-如果服务网格仅仅是针对东西流量（边界内），那么为什么有一些服务网格，如 Istio 所说，[有一个 Ingress 网关](https://istio.io/docs/reference/config/networking/gateway/)针对南北流量（并且是网格的一部分）？例如下面来自 Istio Ingress 网关的文档： 
+如果服务网格仅仅是针对东西流量（边界内），那么为什么有一些服务网格，如 Istio 所说，[有一个 Ingress 网关](https://istio.io/docs/reference/config/networking/gateway/)针对南北流量（并且是网格的一部分）？例如下面来自 Istio Ingress 网关的文档：
 
 > 网关描述了一个运行在网格边缘的负载均衡器，它接收传入或传出的 HTTP/TCP 连接。
 
@@ -182,9 +182,9 @@ API 网关提供的最后一个主要功能是边缘安全性。这涉及到向�
 
 在之前的一篇博客中，我概述了一些[采用这种技术的挑战（API 网关和服务网格）](https://blog.christianposta.com/challenges-of-adopting-service-mesh-in-enterprise-organizations/)，并给出了关于如何最好地应用这种技术的提示。
 
-重申一下：从边缘开始。这是架构中熟悉的一部分。也要考虑选择最合适的。自从我们引入了云基础设施和云原生应用架构以来，假设（编者注：文章开始所说的假设）已经发生了变化。例如，如果您打算采用 Kubernetes，我强烈建议您考虑使用从头开始构建的应用程序网络技术（例如，检查[ Envoy 代理](https://www.envoyproxy.io/)和已经被提升和转移的应用程序网络技术）。例如，在[ Solo.io](https://www.solo.io/)，我们已经为此建立了一个名为 Gloo 的开源项目。
+重申一下：从边缘开始。这是架构中熟悉的一部分。也要考虑选择最合适的。自从我们引入了云基础设施和云原生应用架构以来，假设（编者注：文章开始所说的假设）已经发生了变化。例如，如果您打算采用 Kubernetes，我强烈建议您考虑使用从头开始构建的应用程序网络技术（例如，检查 [Envoy 代理](https://www.envoyproxy.io/)和已经被提升和转移的应用程序网络技术）。例如，在 [Solo.io](https://www.solo.io/)，我们已经为此建立了一个名为 Gloo 的开源项目。
 
-你需要一个服务网格吗？如果您正在部署到云平台，有多种类型的语言/框架来实现您的工作负载，并构建一个微服务架构，那么您可能需要一个。选择也很多。我做过各种比较和对比的演讲，最近的是[ OSCON 演讲](https://www.slideshare.net/ceposta/navigating-mesh - -istio- -connect-and-linkerd)。请随意[参考](http://twitter.com/christianposta)并找到最合适你的。
+你需要一个服务网格吗？如果您正在部署到云平台，有多种类型的语言/框架来实现您的工作负载，并构建一个微服务架构，那么您可能需要一个。选择也很多。我做过各种比较和对比的演讲，最近的是[ OSCON 演讲](https://www.slideshare.net/ceposta/navigating-mesh-istio-connect-and-linkerd)。请随意[参考](http://twitter.com/christianposta)并找到最合适你的。
 
 ## 结论
 
