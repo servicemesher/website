@@ -224,22 +224,40 @@ Another important functionality of an API Gateway is that of “governing” wha
 
 Again, defining and enforcing these capabilities aren’t as simple as just allowing HTTP traffic into a cluster.
 
+API网关的另一个重要功能是“控制”哪些数据/请求被允许进入应用架构，哪些数据/响应允许流出。这意味着，网关需要对进入或发出的请求有深入的理解。例如，一个常见的场景是Web应用程序防火墙以防止SQL注入攻击。另一种是“数据丢失预防”技术，用于在请求PCI-DSS/HIPPA/GDPR时阻止SSN或PII被返回。边界是帮助实现这些策略的天然位置。
+
+同样，定义和实施这些功能并不像允许HTTP通信流进入集群那么简单。
+
 ## 定制安全/桥接信任域
 
 The last major piece of functionality that an API Gateway provides is edge security. This involves challenging users and services that exist outside of the application architecture to provide identity and scope policies so that access to specific services and business functionality can be restricted. This ties into the previous section.
 
+API网关提供的最后一个主要功能是边缘安全性。这涉及到向存在于应用程序体系结构之外的用户和服务提供身份和范围策略，从而限制对特定服务和业务功能的访问。这与前面的部分相关。
+
 A common example is to be able to tie into OAuth/SSO flows including Open ID Connect. The challenge with these “standards” is that they may not be fully implemented or implemented incorrectly. The API Gateway needs a way to flexibly fit into these environments *as well as provide customization*.
 
+一个常见的例子是能够绑定到OAuth/SSO流，包括Open ID Connect。这些“标准”的挑战在于，它们可能没有得到充分实施，也可能没有得到正确实施。API网关需要一种方法来灵活地适应这些环境*以及提供定制*。
+
 In many enterprises there are already existing identity/trust/auth mechanisms and a big part of the API Gateway is to be able to integrate natively for backward compatibility. Although new standards like [SPIFEE](https://spiffe.io/) have emerged, it will take a while for enterprises to adopt and in the meantime an API Gateway (even one for applications running on their next-generation architecture) is a hard requirement. Again, you can kind of squint and say this is also related to the transformation/decoupling point made above.
+
+在许多企业中，已经存在身份/信任/认证机制，API网关的很大一部分是为了向后兼容而进行本地集成。虽然出现了[SPIFEE](https://spiffe.io/)这样的新标准，但企业需要一段时间才能落地，与此同时，API网关（甚至是针对在其下一代架构上运行的应用程序的网关）是一个艰难的要求。同样，你可以检视并说这也和上面提到的变换/解耦点有关。
 
 ## 怎样落地其中一个/另一个/两者/两者都不？
 
 In a previous blog I outlined some of the [challenges of adopting this type of technology (API Gateways and Service Mesh)](https://blog.christianposta.com/challenges-of-adopting-service-mesh-in-enterprise-organizations/) and gave some tips on how best to adopt.
 
+在之前的一篇博客中，我概述了一些[采用这种技术的挑战(API网关和服务网格)](https://blog.christianposta.com/challenges-of-adopting-service-mesh-in-enterprise-organizations/)，并给出了关于如何最好地应用这种技术的提示。
+
 Re-iterating here: Start with the edge. It’s a familiar part of the architecture. Picking one that best fits is also something to consider. Assumptions have changed since we’ve introduced cloud infrastructure and cloud-native application architectures. For example, if you’re going to adopt Kubernetes, I would highly recommend considering application networking technology built from the ground up to live in that world (ie, check out [Envoy Proxy](https://www.envoyproxy.io/) vs something that’s been lifted and shifted. For example, at [Solo.io](https://www.solo.io/), we’ve built an open-source project leveraging Envoy called Gloo for this purpose.
 
+重申一下：从边缘开始。这是架构中熟悉的一部分。选择一个最合适的也是要考虑的。自从我们引入了云基础设施和云原生应用架构以来，假设已经发生了变化。例如，如果您打算采用Kubernetes，我强烈建议您考虑使用从头开始构建的应用程序网络技术(例如，检查[Envoy Proxy](https://www.envoyproxy.io/)和已经被提升和转移的应用程序网络技术)。例如，在[Solo.io](https://www.solo.io/)，我们已经为此目的建立了一个名为Gloo的开源项目。
+
 Do you need a service mesh? If you’re deploying to a cloud platform, have multiple types of languages/frameworks implementing your workloads, and building a microservices architecture, then you may need one. There are many options. I have done talks on comparing and contrasting various, with my [OSCON presentation being the most recent](https://www.slideshare.net/ceposta/navigating-the-service-mesh-landscape-with-istio-consul-connect-and-linkerd). Feel free to [reach out for guidance](http://twitter.com/christianposta?lang=en) on which one is best for you.
+
+你需要一个服务网格吗?如果您部署到云平台，有多种类型的语言/框架来实现您的工作负载，并构建一个微服务架构，那么您可能需要一个。有很多选择。我做过各种比较和对比的演讲，最近的是[OSCON演讲](https://www.slideshare.net/ceposta/navigating-mesh - -istio- -connect-and-linkerd)。请随意[参考](http://twitter.com/christianposta)并找到最合适你的。
 
 ## 结论
 
 Yes, API Gateways have an overlap with service mesh in terms of functionality. They may also have an overlap in terms of technology used (e.g., Envoy). Their roles are quite a bit different, however, and understanding this can save you a lot of pain as you deploy your microservices architectures and discover unintended assumptions along the way.
+
+是的，API网关在功能上与服务网格有重叠。它们在使用的技术方面也可能有重叠（例如，Envoy）。但是，它们的角色有很大的不同，理解这一点可以在部署微服务架构和发现无意的假设时为您省去很多麻烦。
