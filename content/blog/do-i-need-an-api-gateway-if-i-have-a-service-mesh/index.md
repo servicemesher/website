@@ -23,7 +23,7 @@ tags: ["service mesh"]
 这篇文章也许无法打破缠绕在 API 网关和服务网格周围的喧嚣。即便已经是 2020 年了，围绕这些话题仍然会存在大量的疑虑。我撰写此文是为了给出真实而具体的解释，以帮助大家理清它们之间的差异、重叠以及适用场景。如果你不同意我觉得我在添乱，或者想请我喝杯啤酒，欢迎随时在 Twitter 上@我（@christianposta）。
 
 > **第一个曝光：**我在 [Solo.io](https://solo.io/) 这家公司工作，公司的业务聚焦于今天我们要讨论的主题。我提前说明一下以免你会有“你的观点是有偏见的”的反应。每个人的观点都有偏见。但可以肯定的是，我在 Solo.io 工作是因为我想看到这些想法被付诸实施并推向市场，而不是与之相反。
-
+>
 > **第二个曝光：**我正在写一本有关服务网格的书，名为《Istio in Action》，这花了我很多时间。在本文中，不可否认我是站在 Istio 的角度来讨论“服务网格”的，但如果我指的是更普遍的服务网格的概念时，我会特别指出。
 
 ## 为什么会有另一个关于此话题的博客？
@@ -56,7 +56,7 @@ tags: ["service mesh"]
 
 > 网关描述了一个运行在网格边缘的负载均衡器，它接收传入或传出的 HTTP/TCP 连接。
 
-我们的 API 不是 HTTP 吗？如果我们通过 Istio 的网关将 HTTP 请求引入集群/网格中（顺便说一句，这基于强大的[ Envoy 代理](https://www.envoyproxy.io/) 项目），这还不够吗？
+我们的 API 不是 HTTP 吗？如果我们通过 Istio 的网关将 HTTP 请求引入集群/网格中（顺便说一句，这基于强大的 [Envoy 代理](https://www.envoyproxy.io/) 项目），这还不够吗？
 
 ## 假设
 
@@ -82,7 +82,7 @@ tags: ["service mesh"]
 
 ## 它们的分叉点在哪里
 
-服务网格运行在比 API 网关更低的级别，并在架构中所有单个服务上运行。服务网格为服务客户提供关于架构拓扑的“更多细节”（包括客户端负载均衡、服务发现、请求路由），应该实现的弹性机制（超时、重试、熔断），应该收集的遥测（度量、跟踪）和参与的安全流（mTLS、RBAC）。所有这些实现细节通常由某个 sidecar（请考虑[ Envoy](https://www.envoyproxy.io/)）提供给应用程序，但它们不必这样做。请参阅我在 ServiceMeshCon 有关服务网格数据平面演化的演讲。
+服务网格运行在比 API 网关更低的级别，并在架构中所有单个服务上运行。服务网格为服务客户提供关于架构拓扑的“更多细节”（包括客户端负载均衡、服务发现、请求路由），应该实现的弹性机制（超时、重试、熔断），应该收集的遥测（度量、跟踪）和参与的安全流（mTLS、RBAC）。所有这些实现细节通常由某个 sidecar（请考虑 [Envoy](https://www.envoyproxy.io/)）提供给应用程序，但它们不必这样做。请参阅我在 ServiceMeshCon 有关服务网格数据平面演化的演讲。
 
 下面的话引自 [API 身份危机](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/)：
 
@@ -115,9 +115,9 @@ tags: ["service mesh"]
 API 网关的核心功能是为边界外的客户端提供稳定的 API 接口。从 [Chris Richardson 的微服务模式一书](https://microservices.io/book)中，我们可以将“API 网关模式”改写为：
 
 > 显式地简化一组 API / 微服务的调用
-
+>
 > 为一组特定的用户、客户端或消费者模拟“应用程序”的内聚 API。
-
+>
 > 这里的关键是 API 网关，当它实现时，它将作为应用程序架构的单一入口点，成为客户端的 API
 
 来自 [API 网关身份危机](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/) 一文中 API 网关的实现案例：
