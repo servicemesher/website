@@ -77,41 +77,55 @@ Aren’t our API’s HTTP? If we can get HTTP requests into the cluster/mesh wit
 
 The rest of this article will assume Istio and Istio’s Gateway when we say “service mesh”. I’m picking this scenario because it’s the one that best illustrates the overlap and confusion. Other service meshes [also have a Gateway](https://www.consul.io/docs/connect/mesh_gateway.html), while some [don’t have an explicit gateway](https://linkerd.io/2/tasks/using-ingress/) yet. YMMV.
 
+当我们说“服务网格”时，本文的其余部分将假定是指Istio和Istio的网关。选择这个场景是因为它最能说明重叠和混淆。其他服务网格[也有网关](https://www.consul.io/docs/connect/mesh_gateway.html)，而有些还[没有显式网关](https://linkerd.io/2/tasks/using-ingress/) 。
+
 ## 它们的重合点在哪里
 
 The first order of business is to recognize the areas where the capabilities of an API Gateway and a service mesh seem to overlap. Both handle application traffic, so overlap should not be surprising. The following listing enumerates some of the overlapping capabilities:
 
-- Telemetry collection
-- Distributed tracing
-- Service discovery
-- Load balancing
-- TLS termination/origination
-- JWT validation
-- Request routing
-- Traffic splitting
-- Canary releasing
-- Traffic shadowing
-- Rate limiting
+业务的第一个步骤是识别API网关和服务网格功能似乎重叠的区域。两者都处理应用程序流量，所以重叠应该不足为奇。下面的清单列举了一些重叠的功能:
 
-Okay, so they overlap. So do you need one? Both? Neither?
+- 遥测数据收集
+- 分布式追踪
+- 服务发现
+- 负载均衡
+- TLS 终止/开始
+- JWT 校验
+- 请求路由
+- 流量切分
+- 金丝雀发布
+- 流量镜像
+- 速率控制
+
+好吧，它们确实有重叠。那么你需要一个？还是两个？还是都不需要？
 
 ## 它们的分叉点在哪里
 
 The service mesh operates at a lower level than the API Gateway and on all of the individual services within the architecture. The service mesh gives “more detail” to service clients about the topology of the architecture (client-side load balancing, service discovery, request routing), the resilience mechanisms they should implement (timeouts, retries, circuit breaking), telemetry they should collect (metrics, tracing), and security flows they participate (mTLS, RBAC). All of these implementation details are provided to applications typically by some sidecar process (think [Envoy](https://www.envoyproxy.io/)), though they don’t have to. See my talk on the [evolution of the service-mesh data plane](https://www.slideshare.net/ceposta/the-truth-about-the-service-mesh-data-plane) from ServiceMeshCon.
 
-From the [API Identity Crisis](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/) article:
+服务网格运行在比API网关更低的级别，并在架构中的所有单个服务上运行。服务网格为服务客户提供关于架构拓扑的“更多细节”（包括客户端负载均衡、服务发现、请求路由），应该实现的弹性机制（超时、重试、熔断），应该收集的遥测（度量、跟踪）和参与的安全流（mTLS、RBAC）。所有这些实现细节通常由某个sidecar（请考虑[Envoy](https://www.envoyproxy.io/)）提供给应用程序，但它们不必这样做。请参阅我关于ServiceMeshCon的服务网格数据平面演化的演讲。
+
+下面的话引自 [API 身份危机](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/)：
 
 > The goal of the service mesh is to solve these problems [those listed above] generically for any service/application by doing so transparently at L7. In other words, the service mesh wishes to blend into the service (without actually being coded into the service’s code).
+>
+> 服务网格的目标是通过在L7上透明地操作来解决任何服务/应用程序的这些列举的问题。换句话说，服务网格希望混合到服务中(而不是到服务中编写代码)。
 
 **Bottom line**: service mesh gives more details/fidelity to the services/clients about the implementation of the rest of architecture.
+
+**结论：**服务网格为服务/客户提供了更多关于架构其余部分实现的细节/保真度。
 
 ![img](https://blog.christianposta.com/images/mesh-details.png)
 
 The API Gateway on the other hand serves a different role: “abstract away details” and decouple implementations. The API gateway provides a cohesive abstraction across all of the services in an application architecture – as a whole, while solving some of the edge/boundary problems on behalf of specific APIs.
 
+另一方面，API网关则扮演着不同的角色：“抽象细节”和解耦实现。API网关提供了跨应用程序架构中所有服务的内聚抽象——作为一个整体，为特定的API解决了一些边缘/边界问题。
+
 ![img](https://blog.christianposta.com/images/abstract-api.png)
 
 API gateways live *above* the applications/services regardless of whether a service mesh exists and provides an abstraction to other groups. They do things like aggregate APIs, abstract APIs and expose them differently than they’re implemented, and add more sophisticated zero-trust security policies at the edge based on the user. The *issues at the boundary of an application architecture* are not the same as those within the boundary.
+
+无论服务网格是否存在，API网关都存在于应用程序/服务之上，并为其他部分提供抽象。它们做的事情包括聚合API、抽象API和用不同的实现方式暴露它们，并基于用户在边缘添加更复杂的零信任安全策略。应用程序架构边界上的问题与边界内的问题不同。
 
 ![img](https://blog.christianposta.com/images/infra-layers.png)
 
@@ -119,23 +133,32 @@ API gateways live *above* the applications/services regardless of whether a serv
 
 At the boundary of a microservices/cloud-native architecture, an API Gateway provides three main capabilities that a service mesh does not solve to the same degree:
 
-- Boundary decoupling
-- Tight control over data are allowed in and out
-- Bridging security trust domains
+在微服务/云原生架构的边界上，API网关提供了服务网格无法在同等程度上解决的三个主要能力：
 
-Let’s see:
+- 边界解耦
+- 严格控制数据的进出
+- 桥接安全信任域
+
+让我们看看：
 
 ### 边界解耦
 
 A core functionality of the API Gateway is to provide a stable API interface to clients outside of the boundary. From [Chris Richardson’s Microservices Patterns Book](https://microservices.io/book), we could paraphrase the “API Gateway pattern” as:
 
+API网关的核心功能是为边界外的客户端提供稳定的API接口。从[Chris Richardson的微服务模式一书](https://microservices.io/book)中，我们可以将“API网关模式”改写为:
+
 > explicitly simplifying the calling of a group of APIs/microservices
+> 显式地简化一组APIi /微服务的调用
 
 > emulate a cohesive API for an “application” for a specific set of users, clients, or consumers.
+>
+> 为一组特定的用户、客户或消费者模拟“应用程序”的内聚API。
 
 > The key here is the API gateway, when it’s implemented, becomes the API for clients as a single entry point to the application architecture
+>
+> 这里的关键是API网关，当它实现时，它将成为客户机的API，作为应用程序体系结构的单一入口点
 
-Example API Gateway implementations from the [API Gateway Identity Crisis](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/) article:
+来自 [API 网关身份危机](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/) 一文中API网关的实现案例：
 
 - [Solo.io Gloo](https://gloo.solo.io/)
 - [Spring Cloud Gateway](http://spring.io/projects/spring-cloud-gateway)
@@ -144,16 +167,18 @@ Example API Gateway implementations from the [API Gateway Identity Crisis](https
 
 From a functionality standpoint, what would an API Gateway need to support? And what real-life usecases do enterprises see that would require an API Gateway [where a service mesh isn’t well suited]:
 
-- Request / response transformation
-- Application protocol transformation like REST/SOAP/XSLT
-- Error / Rate limit custom responses
-- Direct responses
-- Precise control over api/proxy pipelining
-- API composition/grouping
+从功能的角度来看，API网关需要支持什么?企业在现实的用例中会看到哪些需要API网关(服务网格不太适合)的情况:
 
-Let’s take a look at each.
+- 请求/响应传输
+- 应用协议传输如 REST/SOAP/XSLT
+- 错误/速率定制响应
+- 直接响应
+- 对API/代理管道的精确控制
+- API 聚合/分组
 
-#### Request / response transformation
+让我们挨个来看。
+
+#### 请求/响应传输
 
 As part of exposing an API on an API gateway, you may wish to hide the details of how the backend API is implemented. This could be some combination of changing the shape of the request, removing/adding headers, placing headers into the body or vice versa. This provides a nice decoupling point from clients when backend services are making changes to the API or when clients cannot update as fast as the provider.
 
