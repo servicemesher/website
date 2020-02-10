@@ -9,7 +9,7 @@ translatorlink: "https://github.com/malphi"
 reviewer:  ["罗广明"]
 reviewerlink:  ["https://github.com/GuangmingLuo"]
 title: "使用了 Service Mesh 后我还需要 API 网关吗"
-summary: "本文对 API 网关和 Service Mesh 进行了对比，指出了它们之间的异同"
+summary: "本文对 API 网关和 Service Mesh 进行了对比，指出了它们之间的异同。"
 categories: ["service mesh"]
 tags: ["service mesh"]
 ---
@@ -40,7 +40,7 @@ tags: ["service mesh"]
 
 ## 困惑是什么
 
-大约一年前，我写了一篇[关于 API 网关身份危机](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/)的问章，评估了 API 管理 Kubernetes Ingress 和 API 网关（带有相关定义）的差异。在那篇文章的最后，我试图解释服务网格是如何应对这些功能的，但是没有详细说明它们如何不同，以及什么时候使用它们。我强烈推荐[阅读这篇文章](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/)，因为在某些方面，它是“第一部分”，本文作为“第二部分”。
+大约一年前，我写了一篇[关于 API 网关身份危机](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/)的文章，评估了 API 管理 Kubernetes Ingress 和 API 网关（带有相关定义）的差异。在那篇文章的最后，我试图解释服务网格是如何应对这些功能的，但是没有详细说明它们如何不同，以及什么时候使用它们。我强烈推荐[阅读这篇文章](https://blog.christianposta.com/microservices/api-gateways-are-going-through-an-identity-crisis/)，因为在某些方面，它是“第一部分”，本文作为“第二部分”。
 
 我认为产生混淆的原因如下：
 
@@ -174,7 +174,7 @@ API 网关的另一个重要功能是“控制”哪些数据/请求允许进入
 
 API 网关提供的最后一个主要功能是边缘安全性。这涉及到向存在于应用程序架构之外的用户和服务提供身份和范围策略，从而限制对特定服务和业务功能的访问。这与前面的部分相关。
 
-一个常见的例子是能够绑定到 OAuth/SSO 流，包括 Open ID Connect。这些“标准”的挑战在于，它们可能没有得到充分实施，也可能没有得到正确实施。API 网关需要一种方法来灵活地适应这些环境*以及提供定制*。
+一个常见的例子是能够绑定到 OAuth/SSO 流，包括 Open ID Connect。这些“标准”的挑战在于，它们可能没有得到充分实施，也可能没有得到正确实施。API 网关需要一种方法来灵活地适应这些环境以及提供定制。
 
 在许多企业中，已经存在身份/信任/认证机制，API 网关的很大一部分是为了向后兼容而进行本地集成。虽然出现了 [SPIFEE](https://spiffe.io/) 这样的新标准，但企业需要一段时间才能落地，与此同时，API 网关（甚至是针对在其下一代架构上运行的应用程序的网关）是一个艰难的要求。同样，你可以检视并说这也和上面提到的变换/解耦点有关。
 
