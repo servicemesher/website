@@ -6,9 +6,9 @@ banner: "/img/blog/banners/006tNbRwly1fxuumk73obj31400u0qv5.jpg"
 author: "朵晓东"
 authorlink: "https://github.com/ldxdl"
 summary: "本文根据晓东在 GIAC 上海站的演讲内容整理，完整的分享 PPT 获取方式见文章底部。"
-tags: ["service mesh","ant financial","sofamesh","sofamosn"]
-categories: ["practice","sofamosn"]
-keywords: ["service mesh","服务网格",”蚂蚁金服","SOFAMesh","SOFAMosn"]
+tags: ["service mesh","蚂蚁金服","sofamesh","MOSN"]
+categories: ["practice","MOSN"]
+keywords: ["service mesh","服务网格",”蚂蚁金服","SOFAMesh","MOSN"]
 ---
 
 > <span data-type="color" style="color:rgb(136, 136, 136)"><strong>朵晓东</strong></span><span data-type="color" style="color:rgb(62, 58, 57)">，</span><span data-type="color" style="color:rgb(62, 58, 57)"><span data-type="color" style="color:rgb(49, 70, 89)">花名奕杉，蚂蚁金服高级技术专家。专注企业云计算技术及产品，蚂蚁金融云 PaaS 创始团队核心成员，Antstack 网络产品负责人。开源爱好者，Apache Kylin 创始团队核心成员；SOFAMesh 创始团队核心成员，SOFAMosn 项目负责人。</span></span>
