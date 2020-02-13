@@ -85,4 +85,6 @@ keywords: ["service mesh"]
 
 本次问卷调查旨在了解 ServiceMesher 社区成员对 Service Mesh 的了解及社区参与程度，帮助 ServiceMesher 社区做的更好，还需要社区成员们共同的努力。
 
+欢迎关注 Service Mesh 技术的小伙伴们[加入 ServiceMesher 社区](https://www.servicemesher.com/contact/)，共同交流学习和成长。
+
 关于本次调查问卷的最终解释权归 ServiceMesher 社区所有。
