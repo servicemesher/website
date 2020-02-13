@@ -6,9 +6,9 @@ banner: "/img/blog/banners/006tNbRwly1fy9khjjni1j313z0u04qq.jpg"
 author: "宋净超"
 authorlink: "https://jimmysong.io"
 summary: "本文是蚂蚁金服开源的 SOFAMosn 的0.4.0版本的发布日志。"
-tags: ["sofamosn","ant financial"]
-categories: ["sofamosn"]
-keywords: ["service mesh","服务网格","sofamosn"]
+tags: ["MOSN","蚂蚁金服"]
+categories: ["MOSN"]
+keywords: ["service mesh","服务网格","MOSN"]
 aliases: "/blog/sofa-mosn-0.4.0-changelog"
 ---
 
