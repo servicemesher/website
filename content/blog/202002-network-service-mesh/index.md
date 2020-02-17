@@ -188,11 +188,11 @@ Network Service Mesh是CNCF中的一个沙箱项目，其架构借鉴了Service 
 
 # 参考文档
 
-* https://drive.google.com/drive/folders/1f5fek-PLvoycMTCp6c-Dn_d9_sBNTfag
-* https://www.youtube.com/watch?v=YeAKtUFaqQ0
-* https://www.youtube.com/watch?v=AWHkn_dqAUA&t=331s
-* https://static.sched.com/hosted_files/kccnceu19/26/NSM%20Deep%20Dive%20KubeCon%20EU%202019%20%28developer%20centric%29.pdf
-* https://www.youtube.com/watch?v=mrkW83_kLLM&t=2990s
-* https://docs.google.com/presentation/d/1aG56Oqv7I1JpNsY4VPNpyoKppT-BRyOdYE43fr9ylNs/edit#slide=id.g64538f607d_2_94
-* https://docs.google.com/presentation/d/1-nlBx0Qo4oCmlwYc72dirVcw19y5MAwvKu0wc4lk1VA/edit#slide=id.g790e663adc_0_145
+* <https://drive.google.com/drive/folders/1f5fek-PLvoycMTCp6c-Dn_d9_sBNTfag>
+* <https://www.youtube.com/watch?v=YeAKtUFaqQ0>
+* <https://www.youtube.com/watch?v=AWHkn_dqAUA&t=331s>
+* <https://static.sched.com/hosted_files/kccnceu19/26/NSM%20Deep%20Dive%20KubeCon%20EU%202019%20%28developer%20centric%29.pdf>
+* <https://www.youtube.com/watch?v=mrkW83_kLLM&t=2990s>
+* <https://docs.google.com/presentation/d/1aG56Oqv7I1JpNsY4VPNpyoKppT-BRyOdYE43fr9ylNs/edit#slide=id.g64538f607d_2_94>
+* <https://docs.google.com/presentation/d/1-nlBx0Qo4oCmlwYc72dirVcw19y5MAwvKu0wc4lk1VA/edit#slide=id.g790e663adc_0_145>
 
