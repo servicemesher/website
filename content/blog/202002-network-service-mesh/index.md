@@ -24,7 +24,6 @@ Kubernetes已经成为云原生应用编排（即应用程序资源分配、部�
 * 每个Pod有一个独立的IP地址。
 * 每个Pod可以和集群中任一个Pod直接进行通信（不经过NAT）。
 
-
 如果忽略掉底层的实现细节，从本质上来看Kubernetes网络模型，Kubernetes网络如下图所示：
 
 ![](kubernetes-network-model.svg)
@@ -57,6 +56,7 @@ Network Service Mesh（NSM）是CNCF下的一个开源项目，为Kubernetes中�
 * Network Service：属于网络功能，对外提供的是L2/L3层的服务，对数据包进行处理和转发，一般不会终结数据包。例如Firewall，DPI，VPN Gateway等。
 
 下图描述了Service和Network Service之间的关系。
+
 ![](network-service.jpg)
 
 一个Kubernetes Service后端可以有多个服务实例来提供对外提供服务，Kubernetes采用Endpoint对象来表示一个Service实例；和Kubernetes Service类似，一个Network Service也可以对应有多个实例，并根据需要进行水平伸缩，以满足不同的客户端处理压力，一个Network Service实例用Network Service Endpoint对象表示。
@@ -184,7 +184,7 @@ NFV（网络功能虚拟化）就是将传统的电信业务以软件的形式�
 
 ## 总结
 
-Network Service Mesh是CNCF中的一个沙箱项目，其架构借鉴了Service Mesh的理念（换句话说，蹭了Service Mesh的热点 :-) ），可以为Kubernetes中部署的应用提供高级的L2/L3网络服务。Network Service Mesh补齐了Kubernetes在网络能力方面的短板，并且可以用于虚拟机、服务器等混合云以及跨云场景，将推动对网络功能有更高要求的行业，如电信，ISP，高级企业应用等向云原生的转型。
+Network Service Mesh是CNCF中的一个沙箱项目，其架构借鉴了Service Mesh的理念（换句话说，蹭了Service Mesh的热点 :-) ），可以为Kubernetes中部署的应用提供高级的L2/L3网络服务。Network Service Mesh补齐了Kubernetes在网络能力方面的短板，并且可以用于虚拟机、服务器等混合云以及跨云场景。相信随着Network Service Mesh项目的发展和逐渐成熟，将加速电信，ISP，高级企业应用等对网络功能有更高要求的行业向云原生的转型。
 
 # 参考文档
 
