@@ -2,7 +2,7 @@
 title: "istio 数据面日志调试"
 date: 2020-02-18T11:29:01+08:00
 draft: false
-banner: "https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2020-02-18-033446.png"
+banner: "https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2020-02-18-083038.png"
 author: "钟华"
 authorlink: "https://imfox.io"
 originallink: ""
@@ -217,9 +217,9 @@ spec:
 
 ---
 
-## 场景二：调试 istio mtls 神坑
+## 场景二：调试 istio mTLS 神坑
 
-我们在现有环境中开启 mtls: 在 istio-system namespace 中配置mtls 所需 meshpolicy 和 destinationrule，分别代表服务端和客户端开启 mtls （省略 了 istio-policy istio-telemetry 相关的调整）。
+我们在现有环境中开启 mTLS: 在 istio-system namespace 中配置 mTLS 所需 meshpolicy 和 destinationrule，分别代表服务端和客户端开启 mTLS （省略 了 istio-policy istio-telemetry 相关的调整）。
 
 ```shell
 % kubectl -n istio-system apply -f mtls-init.yaml
@@ -282,11 +282,11 @@ curl -XPOST http://localhost:15000/logging\?router\=debug
 
 ![image-20200212131616274](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2020-02-12-061445.png)
 
-进一步分析，我们可以发现是因为服务端（helloworld）开启了 mtls，但是客户端（sleep）却没有开启，为什么 istio-system 中的 default destination rule 没有起作用？
+进一步分析，我们可以发现是因为服务端（helloworld）开启了 mTLS，但是客户端（sleep）却没有开启，为什么 istio-system 中的 default destination rule 没有起作用？
 
-原来我们在上一个 demo 中增加的 helloworld DestinationRule中， 默认是没有 mtls 定义（所以不开启 mtls），这个 DR 会在 helloworld pod 中覆盖 istio-system 中的 default destination rule。
+原来我们在上一个 demo 中增加的 helloworld DestinationRule中， 默认是没有 mTLS 定义（所以不开启 mTLS），这个 DR 会在 helloworld pod 中覆盖 istio-system 中的 default destination rule。
 
-我们在 helloworld DestinationRule 中补充 mtls 配置：
+我们在 helloworld DestinationRule 中补充 mTLS 配置：
 
 ```shell
 % kubectl apply -f hello-v1-destinationrule-with-mtls.yaml
@@ -310,7 +310,7 @@ spec:
 
 再次测试，访问正常。
 
-这种 istio mtls 用户接口极度不友好，虽然 mtls 默认做到了全局透明， 业务感知不到 mtls 的存在， 但是一旦业务定义了 DestinationRule，DestinationRule 就必须要知道当前 mtls 是否开启，并作出调整。试想 mtls 配置交由安全团队负责，而业务团队负责各自的 DestinationRule，2个 团队的耦合会非常严重。
+这种 istio mTLS 用户接口极度不友好，虽然 mTLS 默认做到了全局透明， 业务感知不到 mTLS 的存在， 但是一旦业务定义了 DestinationRule，DestinationRule 就必须要知道当前 mTLS 是否开启，并作出调整。试想 mTLS 配置交由安全团队负责，而业务团队负责各自的 DestinationRule，2个 团队的耦合会非常严重。
 
 istio 官方在[文档](https://istio.io/docs/tasks/security/authentication/authn-policy/)里做了提示：
 
@@ -320,7 +320,7 @@ istio 官方在[文档](https://istio.io/docs/tasks/security/authentication/auth
 
 ![image-20200212133704748](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2020-02-12-061458.png)
 
-未来版本中我们应该可以看到 mtls 定义的优化。
+未来版本中我们应该可以看到 mTLS 定义的优化。
 
 ---
 
