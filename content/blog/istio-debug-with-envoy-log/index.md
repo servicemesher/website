@@ -95,9 +95,9 @@ kubectl apply -f sleep-hello.yaml
 
 从日志中我们可以分析出：
 
-对于 sleep pod， sleep app 发出的流量目的端是 hello service ip 和 service port，sleep envoy 处理的是 outbound 流量， envoy 根据规则选择的 「UPSTREAM_CLUSTER 」是`outbound|4000||helloworld.default.svc.cluster.local `, 然后转发给其中的一个 「UPSTREAM_HOST 」, 也就是 hello pod 的 ip 和port。
+对于 sleep pod， sleep app 发出的流量目的端是 hello service ip 和 service port，sleep envoy 处理的是 outbound 流量， envoy 根据规则选择的 「UPSTREAM_CLUSTER 」是`outbound|4000||helloworld.default.svc.cluster.local`, 然后转发给其中的一个 「UPSTREAM_HOST 」, 也就是 hello pod 的 ip 和port。
 
-对于 hello pod，其 envoy 处理的是 inbound 流量，envoy 根据规则选择的 「UPSTREAM_CLUSTER 」 是`inbound|4000|http|helloworld.default.svc.cluster.local `, 其中的 「UPSTREAM_HOST 」 是 「127.0.0.1:5000 」, 也就是该 pod 里的 hello app。
+对于 hello pod，其 envoy 处理的是 inbound 流量，envoy 根据规则选择的 「UPSTREAM_CLUSTER 」 是`inbound|4000|http|helloworld.default.svc.cluster.local`, 其中的 「UPSTREAM_HOST 」 是 「127.0.0.1:5000 」, 也就是该 pod 里的 hello app。
 
 因此，我们可以总结出 istio 中流量端点值的逻辑规则：
 
@@ -185,7 +185,6 @@ spec:
 从 sleep 中访问发现响应 503：
 
 ![image-20200212222518280](https://zhongfox-blogimage-1256048497.cos.ap-guangzhou.myqcloud.com/2020-02-12-142520.png)
-
 
 如果没有上下文，我们很难判断 503 是来自业务容器还是 sidecar，查看 sleep 和 hello 的 envoy 日志，可以发现：hello pod 的envoy 没有接受到请求，sleep pod 的 envoy 里日志：
 
