@@ -73,65 +73,65 @@ CNI 没有改变，仍在 `istio-cni` 中。
 
 ### 控制平面安全
 
-老版本中，当设置了`values.global.controlPlaneSecurityEnabled=true` 时，代理将安全地与控制平面交互，这是1.4版本的默认配置。每个控制平面组件都有一个带有Citadel证书的sidecar，代理通过端口15011连接到Pilot。
+老版本中，当设置了 `values.global.controlPlaneSecurityEnabled=true` 时，代理将安全地与控制平面交互，这是 1.4 版本的默认配置。每个控制平面组件都有一个带有 Citadel 证书的 sidecar，代理通过端口 15011 连接到 Pilot。
 
-在 1.5中，不再推荐或以默认方式将代理连接到控制平面。作为替代，使用由Kubernetes或Istiod签发的DNS证书。代理通过端口15012连接到Pilot。
+新版本中，不再推荐或以默认方式将代理连接到控制平面。作为替代，使用由 Kubernetes 或 Istiod 签发的 DNS 证书。代理通过端口 15012 连接到 Pilot。
 
-## 2. 功能更新
+## 功能更新
 
-Istio 1.5 不仅仅做了减法，也做了很多加法，包括添加了新的功能，性能优化和Bug修复。这一部分列举了流量管理、安全、遥测等多个功能模块的改进。
+Istio 1.5 不仅仅做了减法，也做了很多加法，包括添加了新的功能，性能优化和 Bug 修复。这一部分列举了新版本中在流量管理、安全、遥测等多个功能方面的改进。
 
 ### 流量管理
 
-- 提升了`ServiceEntry的性能。
+- 提升了 `ServiceEntry` 的性能。
 - 修复了 readiness 探针不一致问题。
 - 通过定向局部更新的方式改善了配置更新的性能。
-- 添加了为host设置所在负载均衡器设置的选项。
-- 修复了Pod崩溃会触发过度配置推送的问题。
+- 添加了为 host 设置所在负载均衡器设置的选项。
+- 修复了 Pod 崩溃会触发过度配置推送的问题。
 - 修复了应用调用自己的问题。
 - 添加了使用 Istio CNI 时对 `iptables` 的探测。
 - 添加了 `consecutive_5xx` 和 `gateway_errors` 作为离群值探测选项。
 - 提升了 `EnvoyFilter` 匹配性能优化。
 - 添加了对 `HTTP_PROXY` 协议的支持。
-- 改进了 `iptables` 设置，默认使用 `iptables-restore` 。
-- 默认开启 [自动协议探测](https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#automatic-protocol-selection-experimental) 。
+- 改进了 `iptables` 设置，默认使用 `iptables-restore`。
+- 默认开启[自动协议探测](https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#automatic-protocol-selection-experimental)。
 
 ### 安全
 
-- 添加 Beta 认证 API。新 API 分为 `PeerAuthentication` 和 `RequestAuthenticaiton` ，面向工作负载。
-- 添加认证策略，支持deny操作和语义排除。
-- Beta版本默认开启自动mTLS。
-- 稳定版添加SDS。
-- Node agent 和 Pilot agent合并，移除了Pod安全策略的需要，提升了安全性。
-- 合并 Citadel 证书发放功能到Pilot。
-- 支持 Kubernetes `first-party-jwt` 作为集群中CSR认证的备用token。
-- 通过Istio Agent 向Prometheus 提供密钥和证书。
-- 支持Citadel 提供证书给控制平面。
+- 添加 Beta 认证 API。新 API 分为 `PeerAuthentication` 和 `RequestAuthenticaiton`，面向工作负载。
+- 添加认证策略，支持 deny 操作和语义排除。
+- Beta 版本默认开启自动 mTLS。
+- 稳定版添加 SDS。
+- Node agent 和 Pilot agent 合并，移除了 Pod 安全策略的需要，提升了安全性。
+- 合并 Citadel 证书发放功能到 Pilot。
+- 支持 Kubernetes `first-party-jwt` 作为集群中 CSR 认证的备用 token。
+- 通过 Istio Agent 向 Prometheus 提供密钥和证书。
+- 支持 Citadel 提供证书给控制平面。
 
 ### 遥测
 
-- 为v2 版本的遥测添加TCP协议支持。
-- 在指标和日志中支持添加gRPC响应状态码。
-- 支持Istio Canonical Service
-- 改进v2 遥测流程的稳定性。
-- 为v2遥测的可配置性提供alpha级别的支持。
-- 支持在Envoy节点的元数据中添加AWS平台的元数据。
-- 更新了Mixer的Stackdriver适配器，以支持可配置的刷新间隔来跟踪数据。
-- 支持对Jaeger插件的无头收集服务。
-- 修复了 `kubernetesenv` 适配器以提供对名字中有`.`的Pod的支持。
-- **Improved** the Fluentd adapter for Mixer to provide millisecond-resolution in exported timestamps.改进了Fluentd适配器，在导出的时间戳中提供毫秒级输出。
+- 为 v2 版本的遥测添加 TCP 协议支持。
+- 在指标和日志中支持添加 gRPC 响应状态码。
+- 支持 Istio Canonical Service
+- 改进 v2 遥测流程的稳定性。
+- 为 v2 遥测的可配置性提供 alpha 级别的支持。
+- 支持在 Envoy 节点的元数据中添加 AWS 平台的元数据。
+- 更新了 Mixer 的 Stackdriver 适配器，以支持可配置的刷新间隔来跟踪数据。
+- 支持对 Jaeger 插件的headless收集服务。
+- 修复了 `kubernetesenv` 适配器以提供对名字中有`.`的 Pod 的支持。
+- 改进了 Fluentd 适配器，在导出的时间戳中提供毫秒级输出。
 
 ### Operator
 
-用 `IstioOperator` API 替代了 `IstioControlPlane` API。
-添加了 `istioctl operator init` 和 `istioctl operator remove` 命令。
-添加缓存改善了调和速度。
+- 用 `IstioOperator` API 替代了 `IstioControlPlane` API。
+- 添加了 `istioctl operator init` 和 `istioctl operator remove` 命令。
+- 添加缓存改善了调和速度。
 
 ### 性能和扩展性
 
 - 为网关生成集群时忽略没用的服务。
-- 为headless服务略过调用`updateEDS`。
-- 在ingress网关中默认关闭`SNI-DNAT` 。
+- 为 headless 服务略过调用 `updateEDS`。
+- 在 ingress 网关中默认关闭 `SNI-DNAT` 。
 - 错误覆盖声明。
 - 容量已知时，基于容量创建切片。
 
@@ -141,17 +141,17 @@ Istio 1.5 不仅仅做了减法，也做了很多加法，包括添加了新的�
 
 ### istioctl
 
-- 添加mTLS 分析器。
+- 添加 mTLS 分析器。
 - 添加 JwtAnalyzer。
 - 添加 ServiceAssociationAnalyzer。
 - 添加 SercretAnalyaer。
 - 添加 sidecar ImageAnalyzer。
 - 添加 PortNameAnalyzer。
 - 添加 Policy DeprecatedAnalyzer。
-- 为 `RequestAuthentication`添加了更多的验证规则。
+- 为 `RequestAuthentication` 添加了更多的验证规则。
 - istioctl analyze` 从实验特性转为正式特性。
-- 添加新标记 `-A|--all-namespaces` 给 `istioctl analyze` ，来分析整个集群。
-- 添加通过 `stdin` 到`istioctl analyze` 的内容分析。
+- 添加新标记 `-A|--all-namespaces` 给 `istioctl analyze`，来分析整个集群。
+- 添加通过 `stdin` 到 `istioctl analyze` 的内容分析。
 - 添加 `istioctl analyze -L` 显示所有可用分析列表。
 - 添加从 `istioctl analyze` 抑制信息的能力。
 - 为 `istioctl analyze` 添加结构化格式选项。
@@ -161,12 +161,12 @@ Istio 1.5 不仅仅做了减法，也做了很多加法，包括添加了新的�
 - istioctl analyze 尝试将消息与它们的源文件名关联。
 - istioctl analyze 可打印命名空间。
 - istioctl analyze 默认分析集群内资源。
-- 修复分析器抑制集群级别资源消息的bug。
+- 修复分析器抑制集群级别资源消息的 bug。
 - 为 `istioctl manifest` 添加多文件支持。
 - 替换 `IstioControlPlane` API 为 `IstioOperator` API。
-- 为 istioctl` dashboard 添加选择器。`
+- 为 istioctl` dashboard 添加选择器.
 - 为 `istioctl manifest --set` 标记添加切片和列表支持。
 
 ## 总结
 
-Istio 1.5 是全面拥抱变化的一个版本。重建整个控制平面，打造了全新的部署模式`istiod`；摒弃了拖累系统性能的 Mixer；保证兼容性也不忘持续优化和引入新的功能。在彻底抛弃历史包袱的同时，Istio团队也用他们的勇气践行了敏捷开发的真谛。随着稳定的季度发布，相信未来的 Istio 会越加成熟。让我们拭目以待。
+Istio 1.5 是全面拥抱变化的一个版本。重建整个控制平面，打造了全新的部署模式 `istiod`；摒弃了拖累系统性能的 Mixer；保证兼容性也不忘持续优化和引入新的功能。在彻底抛弃历史包袱的同时，Istio团队也用他们的勇气践行了敏捷开发的真谛。随着稳定的季度发布，相信未来的 Istio 会越加成熟。让我们拭目以待。
