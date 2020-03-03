@@ -38,9 +38,9 @@ Istio 1.5 中会使用一个全新的部署模式：`istiod`。这个组件是�
 
 #### Galley
 
-* 配置验证 - 功能保留，并入 `istiod`。
-* MCP Server - 改为默认关闭。对于大多数用户来说只是一个实现细节。如果确定依赖它，需要部署 `istio-galley`。
-* 实验特性（例如配置分析）- 也需要部署 `istio-galley`。
+- 配置验证 - 功能保留，并入 `istiod`。
+- MCP Server - 改为默认关闭。对于大多数用户来说只是一个实现细节。如果确定依赖它，需要部署 `istio-galley`。
+- 实验特性（例如配置分析）- 也需要部署 `istio-galley`。
 
 #### Citadel
 
@@ -64,10 +64,7 @@ CNI 没有改变，仍在 `istio-cni` 中。
 
 ### 废弃 Mixer
 
-在 Istio 1.5 中 Mixer 被废弃了。默认情况下 `mixer` 完全关闭。遥测的 V2 版本在新版本中是默认特性且不需要 `mixer`。
-
-如果你对 Mixer 的特殊功能有依赖，比如进程外适配器，需要重新开启 Mixer。Mixer 还会持续修复 bug 和安全漏洞直到 Istio 1.7 版本。
-`mixer` 的许多功能在 [Mixer Deprecation](https://tinyurl.com/mixer-deprecation) 文档中都描述了替代方案，包括基于 Wasm sandbox API 的 [in-proxy 扩展](https://github.com/istio/proxy/tree/master/extensions).
+在 Istio 1.5 中 Mixer 被废弃了。默认情况下 `mixer` 完全关闭。遥测的 V2 版本在新版本中是默认特性且不需要 `mixer`。如果你对 Mixer 的特殊功能有依赖，比如进程外适配器，需要重新开启 Mixer。Mixer 还会持续修复 bug 和安全漏洞直到 Istio 1.7 版本。`mixer` 的许多功能在 [Mixer Deprecation](https://tinyurl.com/mixer-deprecation) 文档中都描述了替代方案，包括基于 Wasm sandbox API 的 [in-proxy 扩展](https://github.com/istio/proxy/tree/master/extensions).
 
 最被社区开发者唾弃的 Mixer 终于被废弃，可以说它是影响老版本性能的罪魁祸首。现在皆大欢喜，甚至呼声最高的 Wasm 方案也提上日程。当然我们也能看出 Istio 团队为了保证老版本的升级依赖并没有一刀切的干掉 Mixer，持续修复 bug 到 1.7 版本的深层含义是它会在 1.7 的时候被彻底移除？
 
