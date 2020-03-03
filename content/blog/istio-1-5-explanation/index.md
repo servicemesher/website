@@ -4,6 +4,7 @@ date: "2020-03-03T10:00:06+08:00"
 draft: false
 banner: "/img/blog/banners/006tKfTcly1g0vesgata2j31420u01l1.jpg"
 author: "马若飞"
+authorlink: ["https://github.com/malphi"]
 reviewer: ["罗广明"]
 reviewerlink: ["https://guangmingluo.github.io/guangmingluo.io/"]
 summary: "本文基于istio最新的架构调整设计文档，分析了istio未来的设计目标"
@@ -39,7 +40,7 @@ Istio 1.5 中会使用一个全新的部署模式：`istiod`。这个组件是�
 #### Galley
 
 - 配置验证 - 功能保留，并入 `istiod`。
-- MCP Server - 改为默认关闭。对于大多数用户来说只是一个实现细节。如果确定依赖它，需要部署 `istio-galley`。
+- MCP Server - 改为默认关闭。对于大多数用户来说只是一个实现细节。如果确定依赖它，需要部署 `istio-galley` 并启动其进程。
 - 实验特性（例如配置分析）- 也需要部署 `istio-galley`。
 
 #### Citadel
@@ -60,11 +61,20 @@ CNI 没有改变，仍在 `istio-cni` 中。
 
 #### Pilot
 
-`istio-pilot` 被移除，由包含了它全部功能的 `istiod` 取而代之。为了向后兼容，仍有少许对 Pilot 的引用。
+`istio-pilot` 的独立组件和进程被移除，由包含了它全部功能的 `istiod` 取而代之。为了向后兼容，仍有少许对 Pilot 的引用。
 
 ### 废弃 Mixer
 
 在 Istio 1.5 中 Mixer 被废弃了。默认情况下 `mixer` 完全关闭。遥测的 V2 版本在新版本中是默认特性且不需要 `mixer`。如果你对 Mixer 的特殊功能有依赖，比如进程外适配器，需要重新开启 Mixer。Mixer 还会持续修复 bug 和安全漏洞直到 Istio 1.7 版本。`mixer` 的许多功能在 [Mixer Deprecation](https://tinyurl.com/mixer-deprecation) 文档中都描述了替代方案，包括基于 Wasm sandbox API 的 [in-proxy 扩展](https://github.com/istio/proxy/tree/master/extensions).
+
+新版本中 HTTP 遥测默认基于 in-proxy Stats filter。这节省了 50% 的 CPU 使用量。1.5 中的遥测 V2 和老版本主要有以下几点不同：
+- 流量的源和目标如果没有注入 sidecar，部分遥测信息将无法收集。
+- Egress 遥测不再支持。
+- Histogram bucketization 和 V1 版本有很大不同。
+- TCP 遥测只支持 mTLS。
+- 需要更多的 Prometheus 实例来伺服所有的代理。
+
+如果开发者之前使用的是 Istio 默认的 HTTP 遥测，迁移到新版本是没问题的。可以直接通过 `istioctl upgrade` 自动升级到 V2。
 
 最被社区开发者唾弃的 Mixer 终于被废弃，可以说它是影响老版本性能的罪魁祸首。现在皆大欢喜，甚至呼声最高的 Wasm 方案也提上日程。当然我们也能看出 Istio 团队为了保证老版本的升级依赖并没有一刀切的干掉 Mixer，持续修复 bug 到 1.7 版本的深层含义是它会在 1.7 的时候被彻底移除？
 
@@ -114,7 +124,7 @@ Istio 1.5 不仅仅做了减法，也做了很多加法，包括添加了新的�
 - 为 v2 遥测的可配置性提供 alpha 级别的支持。
 - 支持在 Envoy 节点的元数据中添加 AWS 平台的元数据。
 - 更新了 Mixer 的 Stackdriver 适配器，以支持可配置的刷新间隔来跟踪数据。
-- 支持对 Jaeger 插件的headless收集服务。
+- 支持对 Jaeger 插件的 headless 收集服务。
 - 修复了 `kubernetesenv` 适配器以提供对名字中有`.`的 Pod 的支持。
 - 改进了 Fluentd 适配器，在导出的时间戳中提供毫秒级输出。
 
@@ -146,7 +156,7 @@ Istio 1.5 不仅仅做了减法，也做了很多加法，包括添加了新的�
 - 添加 PortNameAnalyzer。
 - 添加 Policy DeprecatedAnalyzer。
 - 为 `RequestAuthentication` 添加了更多的验证规则。
-- istioctl analyze` 从实验特性转为正式特性。
+- `istioctl analyze` 从实验特性转为正式特性。
 - 添加新标记 `-A|--all-namespaces` 给 `istioctl analyze`，来分析整个集群。
 - 添加通过 `stdin` 到 `istioctl analyze` 的内容分析。
 - 添加 `istioctl analyze -L` 显示所有可用分析列表。
@@ -154,16 +164,16 @@ Istio 1.5 不仅仅做了减法，也做了很多加法，包括添加了新的�
 - 为 `istioctl analyze` 添加结构化格式选项。
 - 为 `istioctl analyze` 的输出添加对应的文档链接。
 - 通过 Istio API 在分析器中提供标注方法。
-- istioctl analyze 可以基于目录加载文件。
-- istioctl analyze 尝试将消息与它们的源文件名关联。
-- istioctl analyze 可打印命名空间。
-- istioctl analyze 默认分析集群内资源。
+- `istioctl analyze` 可以基于目录加载文件。
+- `istioctl analyze` 尝试将消息与它们的源文件名关联。
+- `istioctl analyze` 可打印命名空间。
+- `istioctl analyze` 默认分析集群内资源。
 - 修复分析器抑制集群级别资源消息的 bug。
 - 为 `istioctl manifest` 添加多文件支持。
 - 替换 `IstioControlPlane` API 为 `IstioOperator` API。
-- 为 istioctl` dashboard 添加选择器.
+- 为 `istioctl dashboard` 添加选择器.
 - 为 `istioctl manifest --set` 标记添加切片和列表支持。
 
 ## 总结
 
-Istio 1.5 是全面拥抱变化的一个版本。重建整个控制平面，打造了全新的部署模式 `istiod`；摒弃了拖累系统性能的 Mixer；保证兼容性也不忘持续优化和引入新的功能。在彻底抛弃历史包袱的同时，Istio团队也用他们的勇气践行了敏捷开发的真谛。随着稳定的季度发布，相信未来的 Istio 会越加成熟。让我们拭目以待。
+Istio 1.5 是全面拥抱变化的一个版本。重建整个控制平面，打造了全新的部署模式 `istiod`；摒弃了拖累系统性能的 Mixer；保证兼容性也不忘持续优化和引入新的功能。在彻底抛弃历史包袱的同时，Istio团队也用他们的勇气践行了敏捷开发的真谛。随着稳定的季节性发布，相信未来的 Istio 会越加成熟。让我们拭目以待。
