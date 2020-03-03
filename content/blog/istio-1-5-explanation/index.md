@@ -68,6 +68,7 @@ CNI 没有改变，仍在 `istio-cni` 中。
 在 Istio 1.5 中 Mixer 被废弃了。默认情况下 `mixer` 完全关闭。遥测的 V2 版本在新版本中是默认特性且不需要 `mixer`。如果你对 Mixer 的特殊功能有依赖，比如进程外适配器，需要重新开启 Mixer。Mixer 还会持续修复 bug 和安全漏洞直到 Istio 1.7 版本。`mixer` 的许多功能在 [Mixer Deprecation](https://tinyurl.com/mixer-deprecation) 文档中都描述了替代方案，包括基于 Wasm sandbox API 的 [in-proxy 扩展](https://github.com/istio/proxy/tree/master/extensions).
 
 新版本中 HTTP 遥测默认基于 in-proxy Stats filter。这节省了 50% 的 CPU 使用量。1.5 中的遥测 V2 和老版本主要有以下几点不同：
+
 - 流量的源和目标如果没有注入 sidecar，部分遥测信息将无法收集。
 - Egress 遥测不再支持。
 - Histogram bucketization 和 V1 版本有很大不同。
