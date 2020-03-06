@@ -7,7 +7,7 @@ author: "马若飞"
 authorlink: ["https://github.com/malphi"]
 reviewer: ["罗广明"]
 reviewerlink: ["https://guangmingluo.github.io/guangmingluo.io/"]
-summary: "本文基于istio最新的架构调整设计文档，分析了istio未来的设计目标"
+summary: "本文基于istio最新的架构调整设计文档，分析了istio未来的设计目标。"
 tags: ["istio"]
 categories: ["istio"]
 keywords: ["istio"]
@@ -69,11 +69,11 @@ CNI 没有改变，仍在 `istio-cni` 中。
 
 新版本中 HTTP 遥测默认基于 in-proxy Stats filter。这节省了 50% 的 CPU 使用量。1.5 中的遥测 V2 和老版本主要有以下几点不同：
 
-- 流量的源和目标如果没有注入 sidecar，部分遥测信息将无法收集。
+- 流量的来源和目标如果没有注入 sidecar，部分遥测信息将无法收集。
 - Egress 遥测不再支持。
 - Histogram bucketization 和 V1 版本有很大不同。
 - TCP 遥测只支持 mTLS。
-- 需要更多的 Prometheus 实例来伺服所有的代理。
+- 需要更多的 Prometheus 实例来收集所有代理的数据。
 
 如果开发者之前使用的是 Istio 默认的 HTTP 遥测，迁移到新版本是没问题的。可以直接通过 `istioctl upgrade` 自动升级到 V2。
 
