@@ -8,7 +8,7 @@ authorlink: "https://istio.io"
 translator: "陆培尔"
 translatorlink: "https://lupeier.com"
 originallink: "https://istio.io/blog/2020/wasm-announce/"
-summary: "编者按 istio1.5架构发生了重大升级，用于扩展代理服务器的新接口允许将Istio可扩展性从控制平面移至Sidecar代理本身，本文探讨采用Wasm技术的背景和未来发展的考虑"
+summary: "编者按 istio1.5架构发生了重大升级，用于扩展代理服务器的新接口允许将Istio可扩展性从控制平面移至Sidecar代理本身，本文探讨采用Istio采用Wasm技术的背景和未来生态发展的考虑"
 tags: ["ServiceMesh","Istio","Wasm","Envoy"]
 categories: ["istio"]
 keywords: ["service mesh","服务网格","wasm","istio"]
