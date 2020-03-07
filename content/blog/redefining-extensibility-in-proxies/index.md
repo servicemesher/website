@@ -24,7 +24,7 @@ keywords: ["service mesh","服务网格","wasm","istio"]
 
 这项工作今天发布了Alpha版本，还有很多工作要做，但是我们很高兴将其交到开发人员手中，以便他们可以开始尝试由此带来的巨大可能性。
 
-### 背景
+## 背景
 
 Istio和Envoy项目的创建原则都是基于对可扩展性的需求，但是两个项目采用了不同的方法。 Istio项目的重点是启用具有轻量级开发人员体验的称为[Mixer](https://istio.io/docs/reference/config/policy-and-telemetry/mixer-overview/)的通用进程外扩展模型，而Envoy则专注于代理内[扩展](https://www.envoyproxy.io/docs/envoy/latest/extending/extending)。
 
@@ -34,13 +34,13 @@ Envoy模型强化了整体的构建过程，并要求使用C++编写扩展，从
 
 随着时间的流逝，Istio的一些对性能最敏感的功能已进入Envoy的上游，例如[流量策略检查](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/security/rbac_filter)和[遥测报告](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/security/rbac_filter)。 尽管如此，我们一直希望将单个堆栈融合以实现可扩展性，从而减少折衷：这使Envoy版本与其扩展生态系统脱钩，使开发人员能够使用他们选择的语言进行工作，并使Istio可靠地推出新功能而不会造成停机风险。 
 
-### 什么是WebAssembly？
+## 什么是WebAssembly？
 
 [WebAssembly](https://webassembly.org/)（Wasm）是一种可移植的字节码格式，用于以接近本机的速度执行以[多种语言](https://github.com/appcypher/awesome-wasm-langs)编写的代码。 其最初的[设计目标](https://webassembly.org/docs/high-level-goals/)与上述挑战很好地吻合，并且在其背后得到了可观的行业支持。 Wasm是在所有主要浏览器中本地运行的第四种标准语言（继HTML，CSS和JavaScript之后），于2019年12月成为[W3C Recommendation](https://www.w3.org/TR/wasm-core-1/)。这使我们有信心对其进行战略下注。
 
 尽管WebAssembly最初是作为客户端技术而诞生的，但在服务器上使用它具有许多优点。 运行时是内存安全的，并且经过沙盒处理以确保安全。 有一个大型工具生态系统可用于以文本或二进制格式编译和调试Wasm。 [W3C](https://www.w3.org/)和[BytecodeAlliance](https://bytecodealliance.org/)已成为其他服务器端工作的活跃中枢。 例如，Wasm社区正在W3C标准化[“WebAssembly系统接口”（WASI）](https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/)，并提供一个示例实现，该示例为Wasm“程序”提供类似于OS的抽象。
 
-### 为Envoy带来WebAssembly
+## 为Envoy带来WebAssembly
 
 [在过去的18个月中](https://github.com/envoyproxy/envoy/issues/4272)，我们一直与Envoy社区合作，将Wasm可扩展性纳入Envoy并在上游做出贡献。 我们很高兴地宣布，此特性在[Istio 1.5](https://istio.io/news/releases/1.5.x/announcing-1.5/)随附的Envoy版本中Alpha可用，其源代码包含在[envoy-wasm](https://github.com/envoyproxy/envoy-wasm/)开发分支中，并且正在努力将其合并到Envoy主干中。 该实现使用内置在Google高性能[V8引擎](https://v8.dev/)中的WebAssembly运行时。
 
@@ -72,7 +72,7 @@ Envoy模型强化了整体的构建过程，并要求使用C++编写扩展，从
 
 主机环境和扩展之间的[Proxy-Wasm](https://github.com/proxy-wasm)接口有意设计为与代理无关。 我们已将其内置到Envoy中，但旨在供其他代理供应商采用。 我们希望看到一个世界，您可以获取为Istio和Envoy编写的扩展，并在其他基础架构中运行它。 您很快就会听到更多有关此的信息。
 
-### 在Istio中构建WebAssembly
+## 在Istio中构建WebAssembly
 
 为了提高性能，Istio将其几个扩展移动到了1.5版本中内置的Envoy构建中。 在执行此工作时，我们一直在测试以确保这些相同的扩展可以作为Proxy-Wasm模块进行编译和运行，而行为没有任何变化。 鉴于我们认为Wasm目前的支持为Alpha，因此我们还没有准备好将此设置设为默认设置。 然而，这使我们对通用方法以及已开发的主机环境ABI和SDK充满了信心。
 
@@ -80,7 +80,7 @@ Envoy模型强化了整体的构建过程，并要求使用C++编写扩展，从
 
 最后，我们正在与许多编写了[Mixer适配器](https://istio.io/docs/reference/config/policy-and-telemetry/adapters/)的供应商合作，以帮助他们迁移到Wasm —如果这是前进的最佳途径。 Mixer将在将来的版本中转为社区项目，在那里它将仍可用于遗留用例。
 
-### 开发者体验
+## 开发者体验
 
 没有出色的开发人员体验，再强大的工具也毫无用处。 Solo.io[最近宣布](https://www.solo.io/blog/an-extended-and-improved-webassembly-hub-to-helps-bring-the-power-of-webassembly-to-envoy-and-istio/)发布[WebAssembly Hub](https://webassemblyhub.io/)，这是一套用于构建，部署，共享和发现Envoy和Istio的Envoy Proxy Wasm扩展的工具和存储库。
 
@@ -92,7 +92,7 @@ WebAssembly Hub工具提供了功能强大的CLI和优雅且易于使用的图�
 
 请查看[入门指南](https://docs.solo.io/web-assembly-hub/latest/tutorial_code/)，以创建您的第一个Proxy-Wasm扩展。
 
-### 下一步
+## 下一步
 
 除了努力发布Beta版，我们还致力于确保围绕Proxy-Wasm有一个持久的社区。 ABI需要最终确定，而将其转变为标准的工作将会在适当的标准机构内获得更广泛的反馈后完成。 向Envoy主干提供上游支持的工作仍在进行中。 我们还在为工具和WebAssembly Hub寻找合适的社区之家。
 
