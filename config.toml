@@ -49,8 +49,8 @@ paginate = 10
 
 [[menu.main]]
     parent="docs"
-    name="Istio中文官网"
-    url = "https://preliminary.istio.io/zh/"
+    name="Istio中文官网(建设中)"
+    url = "https://preliminary.istio.io/zh"
     weight = 3
 
 [[menu.main]]
@@ -72,6 +72,12 @@ paginate = 10
     weight = 6
 
 [[menu.main]]
+    parent="docs"
+    name = "Istio知识图谱"
+    url  = "https://github.com/servicemesher/istio-knowledge-map"
+    weight = 7
+
+[[menu.main]]
     name = "社区"
     identifier = "community"
     url  = "/activity/"
@@ -85,36 +91,36 @@ paginate = 10
 
 [[menu.main]]
     parent="community"
-    name = "作者投稿"
+    name = "作者排行"
     url  = "/authors/"
     weight = 2
 
 [[menu.main]]
     parent="community"
-    name = "译者投稿"
+    name = "译者排行"
     url  = "/translators/"
     weight = 3
 
 [[menu.main]]
     parent="community"
-    name = "Istio知识图谱"
-    url  = "https://github.com/servicemesher/istio-knowledge-map"
-    weight = 4
-
-[[menu.main]]
-    parent="community"
     name = "贡献指南"
     url  = "/contributing-specification/"
-    weight = 5
+    weight = 4
 
 [[menu.main]]
     parent="community"
     name = "活动"
     url  = "/activity/"
+    weight = 5
+
+[[menu.main]]
+    parent="community"
+    name = "Istio文档汉化"
+    url  = "/istio-trans/"
     weight = 6
 
 [[menu.main]]
-    name = "联系我们"
+    name = "关于"
     url  = "/contact/"
     weight = 5
 # Top bar social links menu
@@ -168,16 +174,16 @@ paginate = 10
     # 404 page
     errorimage = "/img/404.jpg"
     email = "jimmysong@jimmysong.io"
-    about_us = "<p>传播Service Mesh技术、构建开源文化、推动Service Mesh在企业中落地</p><img src=/img/servicemesher-wechat-tiny.jpg>"
+    about_us = "<p>Service Mesh 在中国的布道者和领航者</br>请关注我们的微信公众号</p><img src=/img/servicemesher-wechat-tiny.jpg>"
     copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
     icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
     date_format = "2006年1月2日"
-    logo = "/img/servicemesher-logo.jpg"
+    logo = "/img/servicemesher-logo-new.png"
     # avatar used for thumbnail on sharing
-    avatar = "/img/servicemesher-avatar-banner.jpg"
-    logosmall = "/img/logosmall.jpg"
-    address = """<p>加我微信（请备注姓名-公司），加入微信交流群，参与社区活动</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
+    avatar = "/img/servicemesher-avatar-banner-new.jpg"
+    logosmall = "/img/logosmall-new.png"
+    address = """<p>微信扫码加入交流讨论群</br>请备注姓名-公司信息</p><p><img src="/img/jimmysong-wechat-tiny.jpg"></p>
       """
     # 是否开启评论功能
     gitalk = true
@@ -223,18 +229,18 @@ paginate = 10
 [params.see_more]
     enable = true
     icon = "fa fa-pagelines"
-    title = "参与进来"
-    subtitle = "加入 ServiceMesher 社区"
-    link_url = "/contact"
-    link_text = "查看加入方式"
+    title = "Istio文档汉化"
+    subtitle = "由 ServiceMesher 社区组织和维护"
+    link_url = "/istio-trans"
+    link_text = "查看参与方式"
 
-[params.clients]
+[params.partners]
     enable = true
-    # All clients are defined in their own files. You can find example items
-    # at 'exampleSite/data/clients'.
+    # All partners are defined in their own files. You can find example items
+    # at 'data/partners'.
     # For more informtion take a look at the README.
     title = "合作社区"
-    subtitle = ""
+    subtitle = "ServiceMesher 社区合作伙伴"
 
 [params.recent_posts]
     enable = true

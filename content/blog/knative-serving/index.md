@@ -17,7 +17,7 @@ keywords: ["service mesh","服务网格","knative","serverless"]
 
 即便使用无服务器架构，处理和响应 HTTP 请求的能力依然重要。在开始写代码使用事件触发一个函数之前，您需要有地方来运行代码。
 
-本章探讨 Knative Serving 组件，您将了解 Knative Serving 如何管理部署以及为应用和函数提供服务。通过 Serving，您可以轻松地将一个预先构建好的镜像部署到底层 Kubernetes 集群中。（在[第三章： Build](./build.md)，您将看到 Knative Build 可以帮助构建镜像以在 Serving 组件中运行）Knative Serving 维护某一时刻的快照，提供自动化伸缩功能 (既支持扩容，也支持缩容直至为零)，以及处理必要的路由和网络编排。
+本章探讨 Knative Serving 组件，您将了解 Knative Serving 如何管理部署以及为应用和函数提供服务。通过 Serving，您可以轻松地将一个预先构建好的镜像部署到底层 Kubernetes 集群中。（在[第三章： Build](/getting-started-with-knative/serving.html)，您将看到 Knative Build 可以帮助构建镜像以在 Serving 组件中运行）Knative Serving 维护某一时刻的快照，提供自动化伸缩功能 (既支持扩容，也支持缩容直至为零)，以及处理必要的路由和网络编排。
 
 Serving 模块定义一组特定的对象以控制所有功能：Revision（修订版本）、Configuration （配置）、Route（路由）和 Service（服务）。Knative 使用 Kubernetes CRD（自定义资源）的方式实现这些 Kubernetes 对象。下图 2-1 展示所有 Serving 组件对象模型间的关系。在接下去的章节将具体介绍每个部分。
 
