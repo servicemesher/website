@@ -17,7 +17,7 @@ keywords: ["service mesh","kubernetes"]
 
 ## 浅谈 Kubernetes Scheduling-Framework 调度周期扩展点的实现
 
-最近几个月一直在研究kubernetes 的 scheduling-framework 调度框架，发现还是十分有意思的，我自己也实现了一个基于 scheduling-framework 调度框架的自定义调度器，希望感兴趣的同学一起学习：https://github.com/NJUPT-ISL/Yoda-Scheduler
+最近几个月一直在研究 kubernetes 的 scheduling-framework 调度框架，发现还是十分有意思的，我自己也实现了一个基于 scheduling-framework 调度框架的自定义调度器，希望感兴趣的同学一起学习：https://github.com/NJUPT-ISL/Yoda-Scheduler
 
 ### Scheduling-framework 调度框架
 
@@ -25,7 +25,7 @@ Kubernetes 的 scheduling-framework 调度框架（以下简称调度框架）�
 
 ### 调度框架设计目标
 
-- 增强kubernetes原有调度器的可扩展性。
+- 增强 kubernetes 原有调度器的可扩展性。
 - 通过将调度程序的某些功能移至插件，可以简化调度程序核心。
 - 调度框架中可设置多个扩展点。
 - 调度框架通过插件机制来接收插件结果，并根据接收到的结果继续或中止。
@@ -33,15 +33,15 @@ Kubernetes 的 scheduling-framework 调度框架（以下简称调度框架）�
 
 ### Proposal
 
-调度框架在Kubernetes 调度器中定义了很多 Go 的接口和 Go API，用于用户设计插件使用。这些用户设计的插件将会被添加到调度程序中，并在编译时包含在内。可以通过配置调度程序的 ComponentConfig 将允许启用、禁用和重新排序插件。自定义调度程序可以“ [在树外](https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/20180409-scheduling-framework.md#custom-scheduler-plugins-out-of-tree) ” 编写其插件并编译包含其自己的插件的调度程序二进制文件。
+调度框架在 kubernetes 调度器中定义了很多 Go 的接口和 Go API，用于用户设计插件使用。这些用户设计的插件将会被添加到调度程序中，并在编译时包含在内。可以通过配置调度程序的 `ComponentConfig` 将允许启用、禁用和重新排序插件。自定义调度程序可以“ [在树外](https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/20180409-scheduling-framework.md#custom-scheduler-plugins-out-of-tree) ” 编写其插件并编译包含其自己的插件的调度程序二进制文件。
 
 ### 调度周期和绑定周期
 
-每次调度器在调度一个Pod的过程都分为两个阶段：**调度周期**和**绑定周期**。
+每次调度器在调度一个 Pod 的过程都分为两个阶段：**调度周期**和**绑定周期**。
 
-在调度周期中，调度器会为Pod选择一个最合适它运行的节点，然后调度过程将进入绑定周期。
+在调度周期中，调度器会为 Pod 选择一个最合适它运行的节点，然后调度过程将进入绑定周期。
 
-在绑定周期中，调度器会检测调度周期中选中的那个“最合适的节点”是不是真的可以让这个pod稳定的运行（比如检测PV、检测是否有端口冲突等），或者需不需要做一些初始化操作（比如设置这个节点上的FPGA板子的状态、设置GPU显卡的驱动版本，CUDA的版本等）。
+在绑定周期中，调度器会检测调度周期中选中的那个“最合适的节点”是不是真的可以让这个 Pod 稳定的运行（比如检测PV、检测是否有端口冲突等），或者需不需要做一些初始化操作（比如设置这个节点上的 FPGA 板子的状态、设置 GPU 显卡的驱动版本，CUDA的版本等）。
 
 ### 扩展点
 
@@ -53,7 +53,7 @@ kubernetes 调度框架在调度周期和绑定周期都为我们提供了丰富
 
 #### Sort 排序
 
-排序扩展点，由于调度器是按照 FIFO 的顺序调度Pod的，因此当队列里出现多个等待调度的 Pod 时，可以对这些Pod 的先后顺序进行排序，把我们想要的 Pod（可能优先级比较高）往出队方向移动，让他可以更快的被调度。
+排序扩展点，由于调度器是按照 `FIFO` 的顺序调度 Pod 的，因此当队列里出现多个等待调度的 Pod 时，可以对这些Pod 的先后顺序进行排序，把我们想要的 Pod（可能优先级比较高）往出队方向移动，让他可以更快的被调度。
 
 目前的 Sort 扩展点只能启用一个，不可以启用多个 Sort 扩展插件。
 
@@ -197,7 +197,7 @@ func (y *Yoda) PostFilter(ctx context.Context, state *framework.CycleState, pod 
 }
 ```
 
-并发这块我们也可以参考1.13 调度器中经常使用的经典并发模型：
+并发这块我们也可以参考 1.13 调度器中经常使用的经典并发模型：
 
 ```go
 func ParallelCollection(workers int, state *framework.CycleState, nodes []*v1.Node, filteredNodesStatuses framework.NodeToStatusMap) *framework.Status {
@@ -252,8 +252,8 @@ func ParallelCollection(workers int, state *framework.CycleState, nodes []*v1.No
 
 Score 扩展点和上一代的调度器的优选流程很像，它分为两个阶段：
 
-1. 第一阶段称为“打分”，用于对已通过过滤阶段的节点进行排名。调度程序将为 `Score` 每个节点调用每个计分插件。
-2. 第二阶段是“归一化”，用于在调度程序计算节点的最终排名之前修改分数，可以不实现， 但是需要保证 Score 插件的输出必须是 **[MinNodeScore，MaxNodeScore]**（[0-100]） 范围内的整数 。如果不是，则调度器会报错，你需要实现 NormalizeScore 来保证最后的得分范围。如果不实现 NormalizeScore，则 Score 的输出必须在此范围内。调度程序将根据配置的插件权重合并所有插件的节点分数。
+1. 第一阶段称为 “打分”，用于对已通过过滤阶段的节点进行排名。调度程序将为 `Score` 每个节点调用每个计分插件。
+2. 第二阶段是 “归一化”，用于在调度程序计算节点的最终排名之前修改分数，可以不实现， 但是需要保证 Score 插件的输出必须是 **[MinNodeScore，MaxNodeScore]**（`[0-100]`） 范围内的整数 。如果不是，则调度器会报错，你需要实现 NormalizeScore 来保证最后的得分范围。如果不实现 NormalizeScore，则 Score 的输出必须在此范围内。调度程序将根据配置的插件权重合并所有插件的节点分数。
 
 看看接口的定义：
 
@@ -314,7 +314,7 @@ type ReservePlugin interface {
 }
 ```
 
-这里和上面的 Score 类似，函数并没有提供 nodeInfo接口，我们可以通过调用`handle.SnapshotSharedLister` 来获取节点的信息。
+这里和上面的 Score 类似，函数并没有提供 nodeInfo 接口，我们可以通过调用 `handle.SnapshotSharedLister` 来获取节点的信息。
 
 ```go
 nodeInfo, err := y.handle.SnapshotSharedLister().NodeInfos().Get(nodeName)
@@ -369,7 +369,7 @@ func New(configuration *runtime.Unknown, f framework.FrameworkHandle) (framework
 
 ### 编译小技巧
 
-由于最终的调度器还是以容器的方式运行的，我们可以写一个Makefile来简化编译流程：
+由于最终的调度器还是以容器的方式运行的，我们可以写一个 `Makefile` 来简化编译流程：
 
 ```makefile
 all: local
@@ -423,7 +423,7 @@ make push
 
 ### 自定义调度器的配置
 
-首先需要设置一个ConfigMap，用于存放调度器的配置文件：
+首先需要设置一个 ConfigMap ，用于存放调度器的配置文件：
 
 ```go
 apiVersion: v1
@@ -597,7 +597,7 @@ rules:
       - create
       - patch
       - update
---- 
+---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -672,7 +672,7 @@ kubernetes & istio member
 
 南京邮电大学物联网学院研究生,热衷于 kubernetes 与云原生相关技术。
 
-微信：FUNKY-STARS  欢迎交流！
+微信：FUNKY-STARS 欢迎交流！
 
 ### 参考
 
