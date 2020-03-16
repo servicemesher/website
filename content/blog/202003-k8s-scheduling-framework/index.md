@@ -694,5 +694,5 @@ kubernetes & istio member
 
 感谢 Scheduler-SIG Leader HuangWei 大佬在 kubecon 2018 的 Q&A 和指导！
 
-感谢 张磊、车漾大佬在 kubecon 2018 的分享和讨论！
+感谢张磊、车漾大佬在 kubecon 2018 的分享和讨论！
 
