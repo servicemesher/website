@@ -679,7 +679,7 @@ spec:
 
 kubernetes & istio member
 
-南京邮电大学物联网学院研究生,热衷于 kubernetes 与云原生相关技术。
+南京邮电大学物联网学院研究生，热衷于 Kubernetes 与云原生相关技术。
 
 微信：FUNKY-STARS 欢迎交流！
 
