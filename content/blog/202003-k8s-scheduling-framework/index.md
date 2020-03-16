@@ -149,7 +149,7 @@ type FilterPlugin interface {
 }
 ```
 
-我们可以对应的实现,比如我这里需要做 GPU 的调度，我需要检查每个节点的 GPU 是否满足 Pod 的运行要求：
+我们可以对应的实现，比如我这里需要做 GPU 的调度，我需要检查每个节点的 GPU 是否满足 Pod 的运行要求：
 
 ```go
 func (y *Yoda) Filter(ctx context.Context, state *framework.CycleState, pod *v1.Pod, node *nodeinfo.NodeInfo) *framework.Status {
