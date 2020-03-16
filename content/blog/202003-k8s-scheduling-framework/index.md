@@ -1,5 +1,5 @@
 ---
-title: "浅谈 Kubernetes Scheduling-Framework 调度周期扩展点的实现"
+title: "浅谈 Kubernetes Scheduling-Framework 插件的实现"
 date: 2020-03-16T7:16:13+08:00
 draft: false
 banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*uxhbQq6zPjUAAAAAAAAAAABkARQnAQ"
