@@ -10,7 +10,7 @@ translatorlink: ""
 reviewer: ["宋净超"]
 reviewerlink: ["https://jimmysong.io"]
 originallink: ""
-summary: "Kubernetes 的 scheduling-framework 调度框架是针对当前 kubernetes 调度器的增强"
+summary: "Kubernetes 的 scheduling-framework 调度框架是针对当前 kubernetes 调度器的增强。"
 tags: ["service mesh"]
 categories: ["translation"]
 keywords: ["service mesh","kubernetes"]
