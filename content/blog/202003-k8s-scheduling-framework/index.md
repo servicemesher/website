@@ -15,8 +15,6 @@ keywords: ["service mesh","kubernetes"]
 ---
 
 
-## 浅谈 Kubernetes Scheduling-Framework 调度周期扩展点的实现
-
 最近几个月一直在研究 kubernetes 的 scheduling-framework 调度框架，发现还是十分有意思的，我自己也实现了一个基于 scheduling-framework 调度框架的自定义调度器，希望感兴趣的同学一起学习：https://github.com/NJUPT-ISL/Yoda-Scheduler
 
 ### Scheduling-framework 调度框架
