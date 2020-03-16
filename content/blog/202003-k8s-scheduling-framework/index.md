@@ -47,7 +47,7 @@ Kubernetes 的 scheduling-framework 调度框架（以下简称调度框架）�
 
 kubernetes 调度框架在调度周期和绑定周期都为我们提供了丰富的扩展点，这些扩展点可以“插上”我们自己设计的调度插件，一个插件可以在多个扩展点注册以执行更复杂或有状态的任务，实现我们想要的调度功能：
 
-![20200125-scheduling-framework-extensions](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/202003-k8s-scheduling-framework/sche.png)
+![20200125-scheduling-framework-extensions](sche.png)
 
 下面阐述下各个扩展点可以实现的功能。
 
@@ -134,7 +134,7 @@ type PreFilterPlugin interface {
  defer state.Unlock()
  ```
 
-#### Filter 过滤插件
+#### Filter 过滤
 
 用于过滤无法运行当前调度的 Pod 的节点。对于每个节点，调度程序将按配置的顺序调用该类插件。如果有任何过滤器插件将节点标记为不可行，则不会为该节点调用其余插件。可以同时评估节点，并且在同一调度周期中可以多次调用 Filter 插件。这块其实是起调度器会多个 go 协程实现对多个节点并发调用 filter，来提高过滤效率。过滤插件其实很类似上一代 kubernetes 调度器中的预选环节，即 Predicates。
 
@@ -676,10 +676,10 @@ kubernetes & istio member
 
 ### 参考
 
-- https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/20180409-scheduling-framework.md
-- https://github.com/kubernetes/enhancements/issues/624
-- https://github.com/angao/scheduler-framework-sample
-- https://github.com/daniel-hutao/k8s-source-code-analysis
+- [Scheduling Framework](https://github.com/kubernetes/enhancements/blob/master/keps/sig-scheduling/20180409-scheduling-framework.md)
+- [enhancements/624](https://github.com/kubernetes/enhancements/issues/624)
+- [scheduler-framework-sample](https://github.com/angao/scheduler-framework-sample)
+- [kubernetes 1.13 源码分析](https://github.com/daniel-hutao/k8s-source-code-analysis)
 
 ### 致谢
 
