@@ -1,7 +1,7 @@
 ---
-title: "浅谈 K8S Scheduling-Framework 调度周期扩展点的实现"
+title: "浅谈 Kubernetes Scheduling-Framework 调度周期扩展点的实现"
 date: 2020-03-16T7:16:13+08:00
-draft: true
+draft: false
 banner: "https://s.gravatar.com/avatar/1b2a55208a0815514fd5de63424b2246?s=80"
 author: "李俊江"
 authorlink: "https://note.run-linux.com/"
@@ -17,7 +17,7 @@ keywords: ["service mesh","kubernetes"]
 ---
 
 
-## 浅谈 K8S Scheduling-Framework 调度周期扩展点的实现
+## 浅谈 Kubernetes Scheduling-Framework 调度周期扩展点的实现
 
 最近几个月一直在研究kubernetes 的 scheduling-framework 调度框架，发现还是十分有意思的，我自己也实现了一个基于 scheduling-framework 调度框架的自定义调度器，希望感兴趣的同学一起学习：https://github.com/NJUPT-ISL/Yoda-Scheduler
 
