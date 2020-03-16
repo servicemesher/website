@@ -35,7 +35,7 @@ Kubernetes 的 scheduling-framework 调度框架（以下简称调度框架）�
 
 ### 调度周期和绑定周期
 
-每次调度器在调度一个 Pod 的过程都分为两个阶段：**调度周期**和**绑定周期**。
+调度器调度一个 Pod 的过程分为两个阶段：**调度周期**和**绑定周期**。
 
 在调度周期中，调度器会为 Pod 选择一个最合适它运行的节点，然后调度过程将进入绑定周期。
 
@@ -695,4 +695,3 @@ kubernetes & istio member
 感谢 Scheduler-SIG Leader HuangWei 大佬在 kubecon 2018 的 Q&A 和指导！
 
 感谢张磊、车漾大佬在 kubecon 2018 的分享和讨论！
-
