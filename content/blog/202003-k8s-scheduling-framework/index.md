@@ -111,7 +111,7 @@ type PreFilterPlugin interface {
  }
  ```
 
- 我们可以做一个简单的接口实现,来实现 StateData：
+ 我们可以做一个简单的接口实现，来实现 StateData：
 
  ```go
  type Data struct {
