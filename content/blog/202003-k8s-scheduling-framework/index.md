@@ -43,6 +43,7 @@ Kubernetes 的 scheduling-framework 调度框架（以下简称调度框架）�
 
 在绑定周期中，调度器会检测调度周期中选中的那个“最合适的节点”是不是真的可以让这个 Pod 稳定的运行（比如检测PV、检测是否有端口冲突等），或者需不需要做一些初始化操作（比如设置这个节点上的 FPGA 板子的状态、设置 GPU 显卡的驱动版本，CUDA的版本等）。
 
+
 ### 扩展点
 
 kubernetes 调度框架在调度周期和绑定周期都为我们提供了丰富的扩展点，这些扩展点可以“插上”我们自己设计的调度插件，一个插件可以在多个扩展点注册以执行更复杂或有状态的任务，实现我们想要的调度功能：
@@ -50,6 +51,7 @@ kubernetes 调度框架在调度周期和绑定周期都为我们提供了丰富
 ![20200125-scheduling-framework-extensions](sche.png)
 
 下面阐述下各个扩展点可以实现的功能。
+
 
 #### Sort 排序
 
@@ -74,6 +76,7 @@ func Less(podInfo1, podInfo2 *framework.PodInfo) bool {
 	return GetPodPriority(podInfo1) > GetPodPriority(podInfo2)
 }
 ```
+
 
 #### Pre-filter 预过滤
 
@@ -134,6 +137,7 @@ type PreFilterPlugin interface {
  defer state.Unlock()
  ```
 
+
 #### Filter 过滤
 
 用于过滤无法运行当前调度的 Pod 的节点。对于每个节点，调度程序将按配置的顺序调用该类插件。如果有任何过滤器插件将节点标记为不可行，则不会为该节点调用其余插件。可以同时评估节点，并且在同一调度周期中可以多次调用 Filter 插件。这块其实是起调度器会多个 go 协程实现对多个节点并发调用 filter，来提高过滤效率。过滤插件其实很类似上一代 kubernetes 调度器中的预选环节，即 Predicates。
@@ -172,6 +176,7 @@ func (y *Yoda) Filter(ctx context.Context, state *framework.CycleState, pod *v1.
 	}
 }
 ```
+
 
 #### Pre-Score 预打分 (v1alpha1 版本称为 Post-Filter)
 
@@ -248,6 +253,7 @@ func ParallelCollection(workers int, state *framework.CycleState, nodes []*v1.No
 }
 ```
 
+
 #### Score 打分
 
 Score 扩展点和上一代的调度器的优选流程很像，它分为两个阶段：
@@ -301,6 +307,7 @@ func (y *Yoda) NormalizeScore(ctx context.Context, state *framework.CycleState, 
 }
 ```
 
+
 #### Reserve 保留
 
 为给定的 Pod 保留节点上的资源时，维护运行时状态的插件可以应实现此扩展点，以由调度程序通知。这是在调度程序实际将 Pod 绑定到 Node 之前发生的，它的存在是为了防止在调度程序等待绑定成功时发生争用情况。
@@ -321,6 +328,7 @@ nodeInfo, err := y.handle.SnapshotSharedLister().NodeInfos().Get(nodeName)
 ```
 
 那么以上就是调度周期的插件与实现，其实绑定周期的插件实现和上述的方法也都类似，实现相关的函数即可。
+
 
 ### 插件注册
 
@@ -366,6 +374,7 @@ func New(configuration *runtime.Unknown, f framework.FrameworkHandle) (framework
 	}, nil
 }
 ```
+
 
 ### 编译小技巧
 
@@ -420,6 +429,7 @@ make build
 ```shell
 make push
 ```
+
 
 ### 自定义调度器的配置
 
