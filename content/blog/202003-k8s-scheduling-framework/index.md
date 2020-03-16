@@ -678,6 +678,7 @@ spec:
 ### 作者介绍
 
 李俊江
+
 kubernetes & istio member
 
 南京邮电大学物联网学院研究生,热衷于 kubernetes 与云原生相关技术。
