@@ -2,11 +2,9 @@
 title: "浅谈 Kubernetes Scheduling-Framework 调度周期扩展点的实现"
 date: 2020-03-16T7:16:13+08:00
 draft: false
-banner: "https://s.gravatar.com/avatar/1b2a55208a0815514fd5de63424b2246?s=80"
+banner: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*uxhbQq6zPjUAAAAAAAAAAABkARQnAQ"
 author: "李俊江"
 authorlink: "https://note.run-linux.com/"
-translator: "N/A"
-translatorlink: ""
 reviewer: ["宋净超"]
 reviewerlink: ["https://jimmysong.io"]
 originallink: ""
@@ -53,7 +51,7 @@ kubernetes 调度框架在调度周期和绑定周期都为我们提供了丰富
 
 下面阐述下各个扩展点可以实现的功能。
 
-- #### Sort 排序
+#### Sort 排序
 
 排序扩展点，由于调度器是按照 FIFO 的顺序调度Pod的，因此当队列里出现多个等待调度的 Pod 时，可以对这些Pod 的先后顺序进行排序，把我们想要的 Pod（可能优先级比较高）往出队方向移动，让他可以更快的被调度。
 
@@ -77,7 +75,7 @@ func Less(podInfo1, podInfo2 *framework.PodInfo) bool {
 }
 ```
 
-- #### Pre-filter 预过滤
+#### Pre-filter 预过滤
 
 该扩展点用于预处理有关 Pod 的信息，或检查集群或 Pod 必须满足的某些条件。预过滤器插件应实现 PreFilter 函数，如果 PreFilter 返回错误，则调度周期将中止。注意，在每个调度周期中，只会调用一次 PreFilter。
 
@@ -136,7 +134,7 @@ type PreFilterPlugin interface {
  defer state.Unlock()
  ```
 
-- #### Filter 过滤插件
+#### Filter 过滤插件
 
 用于过滤无法运行当前调度的 Pod 的节点。对于每个节点，调度程序将按配置的顺序调用该类插件。如果有任何过滤器插件将节点标记为不可行，则不会为该节点调用其余插件。可以同时评估节点，并且在同一调度周期中可以多次调用 Filter 插件。这块其实是起调度器会多个 go 协程实现对多个节点并发调用 filter，来提高过滤效率。过滤插件其实很类似上一代 kubernetes 调度器中的预选环节，即 Predicates。
 
@@ -175,7 +173,7 @@ func (y *Yoda) Filter(ctx context.Context, state *framework.CycleState, pod *v1.
 }
 ```
 
-- #### Pre-Score 预打分 (v1alpha1 版本称为 Post-Filter)
+#### Pre-Score 预打分 (v1alpha1 版本称为 Post-Filter)
 
 **注意：`Pre-Score` 从 v1alpha2 开始可用。**
 
@@ -250,9 +248,9 @@ func ParallelCollection(workers int, state *framework.CycleState, nodes []*v1.No
 }
 ```
 
-- #### Score 打分
+#### Score 打分
 
-打分插件，和上一代的调度器的优选流程很像，有两个阶段：
+Score 扩展点和上一代的调度器的优选流程很像，它分为两个阶段：
 
 1. 第一阶段称为“打分”，用于对已通过过滤阶段的节点进行排名。调度程序将为 `Score` 每个节点调用每个计分插件。
 2. 第二阶段是“归一化”，用于在调度程序计算节点的最终排名之前修改分数，可以不实现， 但是需要保证 Score 插件的输出必须是 **[MinNodeScore，MaxNodeScore]**（[0-100]） 范围内的整数 。如果不是，则调度器会报错，你需要实现 NormalizeScore 来保证最后的得分范围。如果不实现 NormalizeScore，则 Score 的输出必须在此范围内。调度程序将根据配置的插件权重合并所有插件的节点分数。
@@ -303,7 +301,7 @@ func (y *Yoda) NormalizeScore(ctx context.Context, state *framework.CycleState, 
 }
 ```
 
-- #### Reserve 保留
+#### Reserve 保留
 
 为给定的 Pod 保留节点上的资源时，维护运行时状态的插件可以应实现此扩展点，以由调度程序通知。这是在调度程序实际将 Pod 绑定到 Node 之前发生的，它的存在是为了防止在调度程序等待绑定成功时发生争用情况。
 
@@ -671,7 +669,9 @@ spec:
 
 李俊江
 kubernetes & istio member
+
 南京邮电大学物联网学院研究生,热衷于 kubernetes 与云原生相关技术。
+
 微信：FUNKY-STARS  欢迎交流！
 
 ### 参考
