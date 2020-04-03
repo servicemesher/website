@@ -1,10 +1,9 @@
-weight: 94
-title: "线上直播"
+weight: 93
+title: "B 站直播"
 description: >
   <ul class="list-style-none">
-     <li>MOSN 多协议机制解析</li>
-     <li>MOSN Committer，蚂蚁金服无钩</li>
-     <li>MOSN 多协议机制解析</li>
-     <li><a href="https://tech.antfin.com/community/live/1131">点击报名</a></li>
+     <li>MOSN 扩展机制解析</li>
+     <li>MOSN Committer，蚂蚁金服永鹏</li>
+     <li><a href="https://live.bilibili.com/21954520">点击预约直播</a></li>
    </ul>
-image: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*HMFaR5EtIvUAAAAAAAAAAABkARQnAQ"
+image: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*Si_0SowtA9AAAAAAAAAAAABkARQnAQ"
