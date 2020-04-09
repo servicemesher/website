@@ -49,8 +49,8 @@ paginate = 10
 
 [[menu.main]]
     parent="docs"
-    name="Istio中文官网(建设中)"
-    url = "https://preliminary.istio.io/zh"
+    name="Istio中文官网"
+    url = "https://istio.io/zh"
     weight = 3
 
 [[menu.main]]
@@ -103,12 +103,6 @@ paginate = 10
 
 [[menu.main]]
     parent="community"
-    name = "贡献指南"
-    url  = "/contributing-specification/"
-    weight = 4
-
-[[menu.main]]
-    parent="community"
     name = "活动"
     url  = "/activity/"
     weight = 5
@@ -120,9 +114,15 @@ paginate = 10
     weight = 6
 
 [[menu.main]]
+    name = "投稿"
+    url  = "/contributing-specification/"
+    weight = 5
+
+[[menu.main]]
+[[menu.main]]
     name = "关于"
     url  = "/contact/"
-    weight = 5
+    weight = 6
 # Top bar social links menu
 
 [[menu.topbar]]
@@ -175,7 +175,7 @@ paginate = 10
     errorimage = "/img/404.jpg"
     email = "jimmysong@jimmysong.io"
     about_us = "<p>Service Mesh 在中国的布道者和领航者</br>请关注我们的微信公众号</p><img src=/img/servicemesher-wechat-tiny.jpg>"
-    copyright = "Copyright ©️ 2018, ServiceMesher all rights reserved."
+    copyright = "Copyright ©️ 2018 - 2020, ServiceMesher all rights reserved."
     icpno = "京ICP备15032932号-5"
     # Format dates with Go's time formatting
     date_format = "2006年1月2日"
