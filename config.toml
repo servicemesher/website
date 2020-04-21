@@ -103,12 +103,6 @@ paginate = 10
 
 [[menu.main]]
     parent="community"
-    name = "活动"
-    url  = "/activity/"
-    weight = 5
-
-[[menu.main]]
-    parent="community"
     name = "Istio文档汉化"
     url  = "/istio-trans/"
     weight = 6
@@ -118,7 +112,6 @@ paginate = 10
     url  = "/contributing-specification/"
     weight = 5
 
-[[menu.main]]
 [[menu.main]]
     name = "关于"
     url  = "/contact/"
