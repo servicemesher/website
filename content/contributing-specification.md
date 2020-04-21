@@ -1,10 +1,7 @@
 ---
-title: "贡献指南"
-description: "ServiceMesher社区贡献指南。"
-keywords: ["service mesh"]
+title: "投稿指南"
+description: "向 ServiceMesher社区投稿指南。"
 ---
-
-## 向 ServiceMesher 社区投稿
 
 文章收录来源分为三类：原创、翻译、转载。
 
@@ -18,17 +15,12 @@ keywords: ["service mesh"]
 
 ### 定义
 
-“社区”是指 [ServiceMesher](https://www.servicemesher.com) 社区。
-
-“文章”是指向 ServiceMesher 社区投稿的文章。
-
-“作者”是指文章署名的作者。
-
-“读者”是指阅读社区发布的文章的人。
-
-“社区官网”是指 <https://www.servicemesher.com>。
-
-“官网 Github”是指 <https://github.com/servicemesher.com/website>。
+- “社区”是指 [ServiceMesher](https://www.servicemesher.com) 社区。
+- “文章”是指向 ServiceMesher 社区投稿的文章。
+- “作者”是指文章署名的作者。
+- “读者”是指阅读社区发布的文章的人。
+- “社区官网”是指 <https://www.servicemesher.com>。
+- “官网 Github”是指 <https://github.com/servicemesher.com/website>。
 
 ### 投稿原则
 
@@ -42,6 +34,8 @@ keywords: ["service mesh"]
 - 文章中必须包含作者的姓名，公司头衔和简要介绍（仅限专业人士）；
 - 文章可能会在其他平台上以相同署名发布，但必须注明原文出处；
 - 文章必须通过在官网 GitHub 上以提交 PR 的方式提供；
+- 在取得作者授权后可以由第三方提交文章，但必须署名原作者；
+- 请 fork [website](https://github.com/servicemesher/website) 仓库到自己的 GitHub 账号并撰写文章后提交 [PR](https://github.com/servicemesher/website/pulls)；
 
 ### 作者义务
 

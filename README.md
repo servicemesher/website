@@ -1,6 +1,6 @@
 # ServiceMesher 社区网站
 
-本网站由 [ServiceMesher](http://www.servicemesher.com) 社区成员共建，源码位于 GitHub。
+本网站由 [ServiceMesher](https://www.servicemesher.com) 社区成员共建，源码位于 GitHub。
 
 ## 使用技术
 
@@ -9,9 +9,13 @@
 - 搜索：[algolia](https://algolia.com)
 - 图床：Github 或其他支持 https 的图床
 
-## 投稿和贡献指南
+## 投稿
 
-投稿和参与贡献前请先查看[贡献和使用说明](CONTRIBUTING.md)。
+向社区投稿请参考[投稿指南](https://www.servicemesher.com/contributing-specification/)。
+
+## 贡献指南
+
+参与贡献前请先查看[贡献和使用说明](CONTRIBUTING.md)。
 
 ## 注意事项
 
