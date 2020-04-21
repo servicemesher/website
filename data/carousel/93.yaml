@@ -1,9 +1,10 @@
 weight: 93
-title: "B 站直播"
+title: "线上 Meetup"
 description: >
   <ul class="list-style-none">
-     <li>MOSN 扩展机制解析</li>
-     <li>MOSN Committer，蚂蚁金服永鹏</li>
-     <li><a href="https://live.bilibili.com/21954520">点击预约直播</a></li>
+     <li>Service Mesh Virtual Meetup</li>
+     <li>四场线上直播</li>
+     <li>5 月 6 日起相约 B 站</li>
+     <li><a href="/activity">查看详情</a></li>
    </ul>
-image: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*Si_0SowtA9AAAAAAAAAAAABkARQnAQ"
+image: "https://gw.alipayobjects.com/mdn/rms_91f3e6/afts/img/A*7-3_S4_Y3b4AAAAAAAAAAABkARQnAQ"

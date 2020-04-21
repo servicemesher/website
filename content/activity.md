@@ -1,128 +1,50 @@
 ---
-title: "活动"
-description: "Service Mesh Meetup活动页面"
+title: "Service Mesh Virtual Meetup #1"
+description: "Service Mesh  线上分享会。"
 keywords: ["service mesh","meetup"]
 ---
 
-# Service Mesh Meetup活动索引
+因为疫情的原因，ServiceMesher 社区暂时无法举办线下 meetup，因此我们将活动改为线上，将采用 B 站直播的形式。本期为第一届 Service Mesh Virtual Meetup 线上系列直播，邀请了四位来自不同公司的嘉宾，从四个角度对 Service Mesh 的应用实践展开分享。
 
-以下是历届Service Mesh Meetup的活动信息索引。
+本次线上 meetup 分享涵盖 Service Mesh 的可观察性和生产实践。为大家介绍 Service Mesh 中的可观察性与传统微服务中可观察性的区别，如何使用 SkyWalking 来观测 Service Mesh，还有来自百度和陌陌的 Service Mesh 生产实践。
 
-历届幻灯片下载地址：https://github.com/servicemesher/meetup-slides
+本系列采用线上直播的形式，从 2020 年 5 月 6 日开始到 5 月 14 日，每周三、周四晚上 19:00-20:00我们相约进行一个主题分享。
 
-## Service Mesh Meetup #7 成都站
+### 直播安排
 
-时间：2019年10月26日
+**直播地址**：https://live.bilibili.com/21954520
 
-地点：四川省成都市武侯区蚂蚁C空间
+| 时间     | 分享主题                                           | 分享嘉宾                  |
+| -------- | -------------------------------------------------- | ------------------------- |
+| 5 月 6 日 | 陌陌的 Service Mesh 实践                           | 高飞航 陌陌中间件架构师   |
+| 5 月 7 日 | Apache SkyWalking 在 Service Mesh 中的可观察性应用 | 高洪涛 Tetrate 创始工程师 |
+| 5 月 13 日 | Service Mesh 高可用在企业级生产中的实践            | 罗广明 百度高级研发工程师 |
+| 5 月 14 日     | Service Mesh 中的可观察性实践                      | 叶志远 G7 微服务架构师    |
 
-讲师与 Topic：
+### 陌陌的 Service Mesh 实践
 
-- 赵化冰（中兴通讯网管软件资深专家）：服务网格技术在5G网络管理平台中的落地实践
-- 肖涵（蚂蚁金服高级技术专家）：蚂蚁金服网络代理的演进之路
-- 杨川胡（ 知群后台负责人）：进击的Traefik——云原生边缘路由探秘
-- 杨彪（美团高级技术专家）：Service Mesh下微服务的架构设计
+- **时间：**2020/5/6（周三） 19:00-20:00
+- **嘉宾：**高飞航 陌陌中间件架构师
+- **嘉宾简介：**在微服务、多机房架构及中间件产品领域有较为深入的研究，当前关注 Service Mesh、云原生等技术方向。
+-  **Topic 简介：**本期分享讲介绍陌陌从传统微服务架构转向 Service Mesh 架构的探索历程，以及在 Service Mesh 落地实践中关键方案与思考。
 
-视频回放：https://tech.antfin.com/activities/949
+### Apache SkyWalking 在 Service Mesh 中的可观察性应用
 
-## Service Mesh Meetup #6 广州站
+- **时间：**2020/5/6（周四） 19:00-20:00
+- **嘉宾：**高洪涛 Tetrate 创始工程师
+- **嘉宾简介**：FoundingEngineer 美国 Service Mesh 服务商 Tetrate 创始工程师。原华为软件开发云技术专家，对云原生产品有丰富的设计，研发与实施经验。对分布式数据库、容器调度、微服务、Servic Mesh 等技术有深入的了解。目前为 Apache ShardingSphere 和 Apache SkyWalking 核心贡献者，参与该开源项目在软件开发云的商业化进程。前当当网系统架构师，开源达人，曾参与 Elastic-Job 等知名开源项目。对开源项目的管理，推广和社区运营有丰富的经验。
+- **Topic 简介**：Service Mesh 的可观测性是其重要的实践领域。业界翘楚 Istio 使用 Jaeger+Promethues 技术打造其可观测体系。而各个云提供商也分别将自己的监控方案融合在对 Service Mesh 的观测中。可观测性一般包含三个领域：Metric 监控指标、Tracing 分布式追踪和日志搜集。SkyWalking 对前两个领域都有涉猎。SkyWalking 是较早涉足了对 Istio 的 Metric 指标分析的开源项目。从早期的 Mixer 方案一直追踪到后期的与 Envoy 融合方案，同时得益于 MOSN 社区的支持，目前完成 MOSN 对 SkyWalking 追踪模型的支持。本次分享将分别以 Isito 与 MOSN 为例，介绍 SkyWalking 对 Service Mesh 的可观测性的支持。
 
-时间：2019年8月11日
+### Service Mesh 高可用在企业级生产中的实践
 
-地点：广州市天河区黄埔大道西平云路163号广电平云广场 B 塔
+- **时间：**2020/5/13（周三） 19:00-20:00
+- **嘉宾：**罗广明 百度高级研发工程师
+- **嘉宾简介：**百度高级研发工程师，开源项目与云原生技术爱好者，ServiceMesher 社区治理委员会核心成员，对微服务架构、模型、中间件有深入研究。
+- **Topic 简介**：Service Mesh 在企业落地中有诸多挑战，当与传统微服务应用共同部署治理时可用性挑战更为严峻。本次分享将以 Service Mesh 与 Spring Cloud 应用“互联互通、共同治理”为出发点，着重介绍基于 consul 的注册中心的高可用方案，通过智能路由策略实现服务间调用的高可用，以及通过各种限流、熔断策略保证后端服务的高可用。
 
-讲师与 Topic：
+### Service Mesh 中的可观察性实践
 
-- 张波（虎牙基础保障部中间件团队负责人）：虎牙直播在微服务改造方面的实践
-- 彭泽文（蚂蚁金服高级开发工程师）：Service Mesh 在蚂蚁金服的生产级安全实践
-- 涂小刚（慧择网运维经理）：基于 Kubernetes 的微服务实践
-- 敖小剑（蚂蚁金服高级技术专家）：Service Mesh 发展趋势（续）：棋到中盘路往何方
-
-[查看广州站回顾](/blog/service-mesh-meetup-guangzhou-20190811/)
-
-视频回放：https://tech.antfin.com/activities/781
-
-## Service Mesh Meetup #5 广州站
-
-时间：2019年1月6日
-
-地点：广州市天河区黄埔大道西平云路163号广电平云广场 B 塔
-
-讲师与 Topic：
-
-- 郑德惠（唯品会Java资深开发工程师）：唯品会 Service Mesh 的实践分享
-- 陈逸凡（蚂蚁金服资深开发工程师）：SOFAMosn 持续演进路径及实践案例
-- 崔秀龙（HPE 软件分析师）：在网格的边缘试探——企业 Istio 试水指南
-- Roundtable：回顾2018，Service Mesh 蓄势待发：崔秀龙、敖小剑、陈逸凡、郑德惠
-
-[查看广州站回顾](/blog/service-mesh-meetup-guangzhou-20190106/)
-
-视频回放：https://tech.antfin.com/activities/72
-
-## Service Mesh Meetup #4 上海站
-
-时间：2018年11月25日
-
-地点：上海市杨浦区政学路77号[INNOSPACE+](http://www.innospaceplus.com.cn)
-
-讲师与Topic：
-
-- 吴晟（Apache SkyWalking创始人、Apache Sharding-Sphere原型作者、比特大陆资深技术专家、CNCF OpenTracing标准化委员会成员）：Observability and Istio telemetry
-- 敖小剑（蚂蚁金服高级技术专家，十六年软件开发经验，微服务专家，Service Mesh布道师，Servicemesher社区联合创始人）& 张瑜标（阿里巴巴技术专家、前京东Hadoop负责人、Hadoop代码贡献者、现负责UC 基于Kubernetes自研的PaaS平台整体的稳定性）：蚂蚁金服 Service Mesh 渐进式迁移方案
-- 徐运元（谐云科技云平台架构师，致力于容器 PaaS 平台、企业级容器云平台的方案设计和技术落地）：探讨和实践基于Isito的微服务治理事件监控
-- 冯玮（七牛容器云平台产品架构师，曾在百度和华为从事公有云领域高性能分布式计算和存储平台的架构设计和产品研发）：Envoy、Contour与Kubernetes实践
-
-[查看上海站回顾](/blog/service-mesh-meetup-shanghai-20181125/)
-
-视频回放：https://tech.antfin.com/activities/2
-
-## Service Mesh Meetup #3 深圳站
-
-时间：2018年8月25日
-
-地点：深圳市福田区彩田路3001号彩福大厦4楼名堂共享办公福田微谷店
-
-讲师与Topic：
-
-- 张超盟（华为）：Kubernetes容器应用基于Istio的灰度发布实践
-- 朱经惠 （联邦车网）：Istio控制平面组件原理解析
-- 邵俊雄（蚂蚁金服）：SOFAMesh 的通用协议扩展
-- 杨文（JEX）：Kubernetes、Service Mesh、CI/CD 实践
-
-[查看深圳站回顾](/blog/service-mesh-meetup-shenzhen-20180825)
-
-视频回放：http://www.itdks.com/eventlist/detail/2549
-
-## Service Mesh Meetup #2 北京站
-
-时间：2018年7月29日
-
-地点：北京中关村e世界
-
-讲师与Topic：
-
-- 张亮（京东金融数据研发负责人）：Service Mesh的延伸 —— 论道Database Mesh
-- 吴晟（Apache SkyWalking创始人）：Observability on Service Mesh —— Apache SkyWalking 6.0
-- 朵晓东（蚂蚁金服，高级技术专家）：蚂蚁金服开源的Service Mesh数据平面SOFA MOSN深层揭秘
-- 丁振凯（新浪微博，微博搜索架构师）：微博Service Mesh实践 - WeiboMesh
-
-[查看北京站回顾](/blog/beijing-meetup-20180729)
-
-视频回放：http://www.itdks.com/eventlist/detail/2455
-
-## Service Mesh Meetup #1 杭州站
-
-时间：2018年6月30日
-
-地点：杭州蚂蚁Z空间
-
-讲师与Topic：
-
-- 敖小剑（蚂蚁金服）：大规模微服务架构下的 Service Mesh 探索之路
-- 刘超（网易）：网易云的 Service Mesh 产品架构和实现
-- 唐鹏程（才云科技）：在 Kubernetes 上搭建高可用 Service Mesh 监控
-- 徐运元（谐云科技）：Service Mesh 结合容器云平台的思考与实践
-
-[查看杭州站回顾](/blog/hangzhou-meetup-20180630)
-
-视频回放：http://www.itdks.com/eventlist/detail/2311
+- **时间：**2020/5/14（周四） 19:00-20:00
+- **嘉宾：**叶志远 G7 微服务架构师
+- **嘉宾简介**：Spring Cloud 中国社区联合创始人，ServiceMesher 社区成员，《重新定义 Spring Cloud 实战》作者，国内微服务领域早期实践者，云原生追随者。
+- **Topic 简介：**监控是一个老生常谈的话题，而云原生的出现，将监控提升到了一个新的高度，那就是 Oberservability，译作可观察性，它是一种理念，是一种与伸缩性、可用性等非业务性需求同等重要的理念。Service Mesh 是云原生架构中专门治理服务间通讯问题的代理组件，我们有必要随时了解它的运行情况。本次分享将介绍 CNCF Oberservability Landscape，传统监控与可观察性在方法论上的区别，以现实的角度思考 Tracing、Logging、Metrics 三大问题，以及 Service Mesh 可观察性中间件的选型哲学。
