@@ -5,8 +5,8 @@ draft: false
 banner: "http://i1.fuimg.com/717222/095fcf3fe58eb105.png"
 author: "王佰平"
 authorlink: ""
-reviewer: [""]
-reviewerlink: [""]
+reviewer: ["宋净超"]
+reviewerlink: ["https://jimmysong.io"]
 summary: "Istio 1.5 回归单体架构，并抛却原有的 out-of-process 的数据面（Envoy）扩展方式，转而拥抱基于 WASM 的 in-proxy 扩展，以期获得更好的性能。本文基于网易杭州研究院轻舟云原生团队的调研与探索，介绍 WASM 的社区发展与实践。"
 tags: ["service mesh"]
 categories: ["envoy"]
@@ -57,8 +57,6 @@ Mixer 模型虽然提高了极高的灵活性，且对 Envoy 侵入性极低，�
 
 solo.io 推出了 WebAssembly Hub，用于构建、发布以及共享 Envoy WASM 扩展。WebAssembly Hub 包括一套用于简化扩展开发的 SDK（目前 solo.io 提供了AssemblysScript SDK，而 Istio/Envoy 社区提供了 Rust/C++ SDK），相关的构建、发布命令，一个用于共享和复用的扩展仓库。具体的内容可以参考 [solo.io 提供的教程](https://docs.solo.io/web-assembly-hub/latest/tutorial_code/)。
 
-
-
 ## WASM 实践
 
 下面简单实现一个 WASM 扩展作为演示 DEMO，可以帮助大家对 WASM 有进一步了解。此处直接使用了 solo.io 提供的构建工具，避免环境搭建等各个方面的一些冗余工作。**该扩展名为 path_rewrite，可以根据路由原始的 path 值匹配，来将请求 path 重写为不同值**。
@@ -72,7 +70,7 @@ export PATH=$HOME/.wasme/bin:$PATH
 
 wasme 是 solo.io 提供的一个命令行工具，一个简单的类比就是：docker cli 之于容器镜像，wasme 之于 WASM 扩展。
 
-```shell
+```bash
 ping@ping-OptiPlex-3040:~/Desktop/wasm_example$ wasme init ./path_rewrite
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? What language do you wish to use for the filter:
@@ -83,7 +81,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 执行 wasme 初始化命令，会让用户选择使用何种语言开发 WASM 扩展，目前 wasme 工具仅支持 C++ 和 AssemblyScript，当前仍旧选择 cpp 进行开发（AssemblyScript 没有开发经验，后续有机会可以学习一下）。执行命令之后，会自动创建一个 bazel 工程，目录结构如下：其中关键的几个文件已经添加了注释。从目录结构看，solo.io 没有在 wasme 中添加任何黑科技，生成的模板非常的干净，完整而简洁。
 
-```
+```bash
 .
 ├── bazel
 │   └── external
@@ -105,11 +103,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 ```
 
-
-
 **filter.cc 中已经填充了样板代码，包括所有的插件需要实现的接口。开发者只需要按需修改某个接口的具体实现即可(此处列出了整个插件的全部代码，以供参考。虽然该代码没有实现什么特许功能，但是已经包含了一个 WASM 扩展（C++ 语言版）应当具备的所有结构，无论多么复杂的插件，都只是在该结构的基础上填充相关的逻辑代码而已**：
-
-
 
 ```C++
 // NOLINT(namespace-envoy)
@@ -194,15 +188,13 @@ void AddHeaderContext::onDelete() { LOG_DEBUG(std::string("onDelete " + std::to_
 
 ```
 
-
-
 注意到生成的样板代码类型名称仍旧以 AddHeader 为前缀，而没有根据提供的路径名称生成，此处是 wasme 可以优化的一个地方。此外，**自动生成的样板代码中已经包含了 AddHeader 的一些代码，逻辑简单，但是配置解析、API 访问，请求头修改等过程都具备，麻雀虽小，五脏俱全，正好可以帮助初次的开发者可以依葫芦画瓢熟悉 WASM 插件的开发过程**。对于入门是非常友好的。
 
 针对 path_rewrite 具体的开发步骤如下：
 
 **STEP ONE** 首先修改模板代码中 filter.proto 文件，因为 path rewrite 肯定不能简单的只能替换固定值，修改后 proto 文件如下所示：
 
-```Protobuf
+```protobuf
 syntax = "proto3";
 
 message PathRewriteConfig {
@@ -240,8 +232,6 @@ bool AddHeaderRootContext::onConfigure(size_t) {
 }
 ```
 
-
-
 **STEP THREE** 修改请求头接口，具体方法名为 onRequestHeaders，修改后接口代码如下：
 
 ```C++
@@ -272,22 +262,18 @@ FilterHeadersStatus AddHeaderContext::onRequestHeaders(uint32_t) {
 
 
 
-```shell
+```bash
 bazel build :filter.wasm
 ```
 
 接下来是 wasme 命令编译：
 
 
-```shell
+```bash
 wasme build cpp -t webassemblyhub.io/wbpcode/path_rewrite:v0.1 .
 ```
 
-
-
 该命令会使用固定镜像作为编译环境，但是本质和直接使用 bazel 编译并无不同。具体的编译日志可以看出，实际上，该命令也是使用的`bazel build :filter.wasm`。
-
-
 
 ```shell
 Status: Downloaded newer image for quay.io/solo-io/ee-builder:0.0.19
@@ -297,23 +283,16 @@ Starting local Bazel server and connecting to it...
 
 ```
 
-
 注意，上述命令中 wbpcode 为用户名，具体实践时提议替换为自身用户名，如果注册了 webassemblyhub.io 账号，甚至可以进行 push 和 pull 操作。此次就不做相关操作了，直接本地启动带 WASM 的 envoy。命令如下：
-
-
 
 ```
 # --config参数用于指定wasm扩展配置
 wasme deploy envoy webassemblyhub.io/wbpcode/path_rewrite:v0.1 --config "{\"rewrites\": [ {\"regex_match\":\"...\", \"custom_path\": \"/anything\"} ]}" --envoy-run-args "-l trace"
 ```
 
-
-
 从 envoy 执行日志可以看到：最终 envoy 会执行七层 Filter：`envoy.filters.http.wasm`，相关配置为：wasm 文件位置（docker 执行时挂载进入容器内部）、 wasm 文件对应插件配置、runtime 等等。通过在 http_filters 中重复添加多个`envoy.filters.http.wasm`，即可实现多个 WASM 扩展的执行。从下面的日志也可以看出，即使不使用 solo.io 的工具，只需要为 Envoy 指定编译好的 wasm 文件，其执行结果是完全相同的。
 
-
-
-```
+```bash
 [2020-03-31 08:41:24.831][1][debug][config] [external/envoy/source/extensions/filters/network/http_connection_manager/config.cc:388]       name: envoy.filters.http.wasm
 [2020-03-31 08:41:24.831][1][debug][config] [external/envoy/source/extensions/filters/network/http_connection_manager/config.cc:390]     config: {
  "config": {
@@ -333,13 +312,9 @@ wasme deploy envoy webassemblyhub.io/wbpcode/path_rewrite:v0.1 --config "{\"rewr
 
 ```
 
-
-
 之后使用对应 path 调用接口：可发现 WASM 插件已经生效：
 
-
-
-```
+```bash
 ':authority', 'localhost:8080'
 ':path', '/ab' # 原始请求path匹配"..."
 ':method', 'GET'
@@ -347,7 +322,7 @@ wasme deploy envoy webassemblyhub.io/wbpcode/path_rewrite:v0.1 --config "{\"rewr
 'accept', '*/*'
 ```
 
-```
+```bash
 ':authority', 'localhost:8080'
 ':path', '/anything'
 ':method', 'GET'
@@ -360,8 +335,6 @@ wasme deploy envoy webassemblyhub.io/wbpcode/path_rewrite:v0.1 --config "{\"rewr
 'x-envoy-expected-rq-timeout-ms', '15000'
 ```
 
-
-
 ## WASM 总结
 
 WASM 扩展仍在快速发展当中，但是 Isito 使用 WASM API 实现了相关的插件，说明已经做好了迁移的准备。前景美好，值得期待，但有待进一步确定 WASM 沙箱本身稳定性和性能。
@@ -369,9 +342,7 @@ WASM 扩展仍在快速发展当中，但是 Isito 使用 WASM API 实现了相�
 从开发体验来说：
 
 * 借助 solo.io 工具，简单插件的开发几乎没有任何的难度，只是目前支持的语言只有 C++/AssemblyScript（Envoy 社区开发了 Rust 语言 SDK，但是正在开发当中而且使用 Rust 开发 WASM 扩展的价值存疑：Rust 相比于 C++ 最大的优势是通过严格的编译检查来保证内存安全，但是也使得上手难度又提升了一个台阶，在有 WASM 沙箱为内存安全兜底的情况下，使用 Rust 而不使用 JS、Go 等上手更简易的语言来开发扩展，实无必要）。
-
 * 对于相对复杂的插件，如果使用 WASM 的话，测试相比于原生插件会更困难一些，WASM 扩展配置的输入只能依赖手写 JSON 字符串，希望未来能够改善。
-
 * 缺少路由粒度的配置，所有配置都是全局生效，依赖插件内部判断，但是这一部分如果确实有需要，支持起来应该很快，不存在技术上的阻碍，倒是不用担心。
 
 ## 作者简介
