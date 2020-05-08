@@ -1,6 +1,15 @@
 ---
 title: "Service Mesh Virtual Meetup #1"
 description: "Service Mesh  线上分享会。"
+date: 2020-05-06T10:41:54+08:00
+draft: false
+aliases: ["/activity"]
+banner: "https://gw.alipayobjects.com/mdn/rms_95b965/afts/img/A*ZBdiS6UUjAcAAAAAAAAAAABkARQnAQ"
+author: "宋净超"
+authorlink: "https://jimmysong.io"
+summary: "因为疫情的原因，ServiceMesher 社区暂时无法举办线下 meetup，因此我们将活动改为线上，将采用 B 站直播的形式。"
+tags: ["meetup"]
+categories: ["meetup"]
 keywords: ["service mesh","meetup"]
 ---
 
@@ -10,25 +19,28 @@ keywords: ["service mesh","meetup"]
 
 本系列采用线上直播的形式，从 2020 年 5 月 6 日开始到 5 月 14 日，每周三、周四晚上 19:00-20:00我们相约进行一个主题分享。
 
-### 直播安排
+### 直播信息
 
-**直播地址**：https://live.bilibili.com/21954520
+- **直播地址**：https://live.bilibili.com/21954520
+- **直播回放地址**：https://space.bilibili.com/228717294/channel/detail?cid=126804
+- **PPT下载地址**：https://github.com/servicemesher/meetup-slides/tree/master/2020/05/virtual
 
 欢迎关注直播间，四期直播都会在此地址展开，关注后可以获得开播提醒。
 
-| 时间     | 分享主题                                           | 分享嘉宾                  |
-| -------- | -------------------------------------------------- | ------------------------- |
-| 5 月 6 日 | 陌陌的 Service Mesh 实践                           | 高飞航 陌陌中间件架构师   |
-| 5 月 7 日 | Apache SkyWalking 在 Service Mesh 中的可观察性应用 | 高洪涛 Tetrate 创始工程师 |
+| 时间       | 分享主题                                           | 分享嘉宾                  |
+| ---------- | -------------------------------------------------- | ------------------------- |
+| 5 月 6 日  | 陌陌的 Service Mesh 实践                           | 高飞航 陌陌中间件架构师   |
+| 5 月 7 日  | Apache SkyWalking 在 Service Mesh 中的可观察性应用 | 高洪涛 Tetrate 创始工程师 |
 | 5 月 13 日 | Service Mesh 高可用在企业级生产中的实践            | 罗广明 百度高级研发工程师 |
-| 5 月 14 日     | Service Mesh 中的可观察性实践                      | 叶志远 G7 微服务架构师    |
+| 5 月 14 日 | Service Mesh 中的可观察性实践                      | 叶志远 G7 微服务架构师    |
 
 ### 陌陌的 Service Mesh 实践
 
 - **时间：**2020/5/6（周三） 19:00-20:00
 - **嘉宾：**高飞航 陌陌中间件架构师
 - **嘉宾简介：**在微服务、多机房架构及中间件产品领域有较为深入的研究，当前关注 Service Mesh、云原生等技术方向。
--  **Topic 简介：**本期分享讲介绍陌陌从传统微服务架构转向 Service Mesh 架构的探索历程，以及在 Service Mesh 落地实践中关键方案与思考。
+- **Topic 简介：**本期分享讲介绍陌陌从传统微服务架构转向 Service Mesh 架构的探索历程，以及在 Service Mesh 落地实践中关键方案与思考。
+- **视频回放**：https://www.bilibili.com/video/BV1xQ4y1N7PR/
 
 ### Apache SkyWalking 在 Service Mesh 中的可观察性应用
 
