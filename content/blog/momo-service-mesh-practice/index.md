@@ -26,7 +26,7 @@ Service Mesh Virtual Meetup 是 ServiceMesher 社区和 CNCF 联合主办的线�
 
 ### 单体应用到微服务
 
-![幻灯片4.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00wpt42j30zk0k0jwa.jpg)
+![幻灯片4.JPG](images/slide_04.jpg)
 
 各个应用的发展过程，都会经历从单体应用、到应用拆分再到微服务架构这样一个过程。陌陌的这个演进过程，有一点比较特别的是，在应用拆分时加入了由 PHP 开发、与客户端 App 进行对接的 API 层，并采用 Java 开发底层具有复杂运算的业务逻辑，这样能够兼得 PHP 的开发效率与 Java 高性能的优势。
 
@@ -34,7 +34,7 @@ Service Mesh Virtual Meetup 是 ServiceMesher 社区和 CNCF 联合主办的线�
 
 ### 微服务体系演进 
 
-![幻灯片5.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem013lldrj30zk0k0jww.jpg)
+![幻灯片5.JPG](images/slide_05.jpg)
 
 陌陌的微服务架构改造从 2013 年就开始了，在当时还没有较为完善的服务框架产品的情况下，我们自研了服务框架产品 MOA，支撑了陌陌 IM、附近动态、直播、短视频等核心业务的高速发展历程。
 
@@ -42,7 +42,7 @@ Service Mesh Virtual Meetup 是 ServiceMesher 社区和 CNCF 联合主办的线�
 
 ### 微服务体系整体架构 
 
-![幻灯片6.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem0146f69j30zk0k0grh.jpg)
+![幻灯片6.JPG](images/slide_06.jpg)
 
 下面对微服务体系的整体架构进行介绍。我们采用了一个 Redis 作为底层存储的注册中心。服务实例的存活检测主要依赖一个中心化的检测应用 MOA Watcher，能够将无法连通的实例从注册中心的在线列表中移除、摘除实例的业务流量。
 
@@ -54,7 +54,7 @@ Service Mesh Virtual Meetup 是 ServiceMesher 社区和 CNCF 联合主办的线�
 
 ### 流量代理机制 
 
-![幻灯片7.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00zuyomj30zk0k0dl5.jpg)
+![幻灯片7.JPG](images/slide_07.jpg)
 
 在多语言支持的场景中，我们很早就采用了两个和 Service Mesh 非常相近的方案。一个是为了支持多语言发布服务的入流量代理方案，使用 Java 开发的 Proxy 复用了 Java SDK 注册发现与监控等诸多服务治理能力，使得其他语言仅简单处理本地请求后就能实现发布服务。这些 Java Proxy 与多语言的业务进程是 1:1 部署的，但当时的方案是和业务进程放在一个容器里，升级时需要和业务进程一起重新发布。
 
@@ -64,7 +64,7 @@ Service Mesh Virtual Meetup 是 ServiceMesher 社区和 CNCF 联合主办的线�
 
 ### 微服务体系规模
 
-![幻灯片8.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00wfpnmj30zk0k0jwa.jpg)
+![幻灯片8.JPG](images/slide_08.jpg)
 
 随着业务的发展，整个微服务体系也达到了一个很具有挑战的量级。特别是在服务数量大幅增长后，Java 应用的服务治理问题也逐步暴露出来，其中最难以解决的是 SDK 升级的问题，这一点也是进一步推动我们转向 Service Mesh 架构的原因。
 
@@ -72,7 +72,7 @@ Service Mesh Virtual Meetup 是 ServiceMesher 社区和 CNCF 联合主办的线�
 
 ### 架构痛点分析
 
-![幻灯片10.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem012769uj30zk0k0jx5.jpg)
+![幻灯片10.JPG](images/slide_10.jpg)
 
 前面我们提到的各种问题，其实都可以归结为微服务体系中服务治理能力滞后的问题。对于非 Java 的应用，由于没有足够的开发资源，会导致服务框架的 SDK 迭代进度非常缓慢。对于 Java 应用，虽然 SDK 具备最完善的功能，但使全量应用完成升级需要耗费大量人力和时间。根据以往的经验来看，一次推广至少需要一个季度的时间，并且为业务团队带来很多不必要的负担。
 
@@ -80,7 +80,7 @@ Service Mesh Virtual Meetup 是 ServiceMesher 社区和 CNCF 联合主办的线�
 
 ### 引入 Service Mesh
 
-![幻灯片11.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem010t7cwj30zk0k0gr9.jpg)
+![幻灯片11.JPG](images/slide_11.jpg)
 
 Service Mesh 将基础架构逻辑与业务逻辑解耦、并支持独立升级的方式，能够很好地解决前面描述的架构痛点。但引入 Service Mesh 是一项非常重大的架构变更，并且需要多方面的成本投入。因此在实际落地实施前，我们必须思考以下几个问题，并在不同阶段完成对应的工作。
 
@@ -93,7 +93,7 @@ Service Mesh 将基础架构逻辑与业务逻辑解耦、并支持独立升级�
 
 ### 方案选型
 
-![幻灯片13.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00ycxggj30zk0k00z3.jpg)
+![幻灯片13.JPG](images/slide_13.jpg)
 
 在 Service Mesh 领域当前最热门的开源方案是 Istio，但也有很多像蚂蚁金服、美团等公司采用了自研的方案。在这两个方向的选择上，我觉得最重要的还是要结合公司的实际情况。在陌陌的场景下，我们重点考虑了三方面的问题。
 
@@ -105,7 +105,7 @@ Service Mesh 将基础架构逻辑与业务逻辑解耦、并支持独立升级�
 
 #### MOA Mesh 整体架构
 
-![幻灯片14.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem012rjxpj30zk0k0gqu.jpg)
+![幻灯片14.JPG](images/slide_14.jpg)
 
 在我们的 MOA Mesh 整体架构中，数据平面是我们现阶段的重点目标。代理流量的 Agent 需要支持现有服务调用请求的转发，并具备平滑升级机制以实现独立的迭代升级。
 
@@ -117,7 +117,7 @@ Service Mesh 将基础架构逻辑与业务逻辑解耦、并支持独立升级�
 
 #### 部署方式
 
-![幻灯片16.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00weci9j30zk0k0dlx.jpg)
+![幻灯片16.JPG](images/slide_16.jpg)
 
 第一项关键的方案是部署方式。Agent 会采用 Sidecar 方式，与业务进程 1:1 部署。在容器化场景，Agent 会运行在与业务进程相同的 Pod、不同的 Container 中。由于陌陌当前微服务的容器化部署比例很高，这种容器化方案已能覆盖大多数的业务场景。少数物理机或虚拟机部署的场景，可以通过一些定制化的方案解决。
 
@@ -125,7 +125,7 @@ Service Mesh 将基础架构逻辑与业务逻辑解耦、并支持独立升级�
 
 #### 升级方式 - 平滑升级机制
 
-![幻灯片17.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem0137f3nj30zk0k0wkf.jpg)
+![幻灯片17.JPG](images/slide_17.jpg)
 
 第二项关键的方案是平滑升级，这项方案是能否实现数据平面独立迭代升级的关键机制。我们需要实现升级过程不需要业务团队参与，具体需要做到业务进程不重启、并且使业务进程的流量保持不变。
 
@@ -137,7 +137,7 @@ FD 迁移的原理方面，社区中介绍的文章很多，这里不详细展�
 
 #### 升级方式 - 发布流程
 
-![幻灯片18.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem010d11vj30zk0k0tei.jpg)
+![幻灯片18.JPG](images/slide_18.jpg)
 
 FD 迁移只解决了新旧 Agent 平滑替换的问题，Agent 升级还需要一套完整的发布流程来支持。由于 FD 迁移要求升级过程中同时存在新旧两个 Agent，针对这个场景我们考虑了三个备选方案。
 
@@ -149,7 +149,7 @@ FD 迁移只解决了新旧 Agent 平滑替换的问题，Agent 升级还需要�
 
 #### 容灾方式
 
-![幻灯片19.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem011qx00j30zk0k0dlo.jpg)
+![幻灯片19.JPG](images/slide_19.jpg)
 
 第三个关键方案是数据平面的容灾方式。这个方案中我们遵循的原则是尽可能简单，复用原有服务治理的能力。对于大多数应用，Agent 代理的出流量都是由入流量产生的，当 Agent 发生故障时，只要将入流量摘除，业务流量就不再受异常 Agent 的影响。由于代理入流量后注册服务的端口会改为由 Agent 监听，原有微服务体系的健康检测机制通常能直接满足容灾要求。
 
@@ -157,7 +157,7 @@ FD 迁移只解决了新旧 Agent 平滑替换的问题，Agent 升级还需要�
 
 #### 性能问题
 
-![幻灯片20.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem014qiyqj30zk0k00yl.jpg)
+![幻灯片20.JPG](images/slide_20.jpg)
 
 其他经常被关注的问题，首先是性能问题。在微服务体系中应用间的调用链路是非常复杂的，看似微小的耗时增长，叠加以后对顶层的接口与业务的影响也会是非常巨大的。因此 Agent 代理流量之后缩减服务调用的耗时增幅，是 Service Mesh 落地过程中非常重要的一个目标。
 
@@ -169,7 +169,7 @@ Agent 内部我们也进行了一些优化工作，如针对 Java 语言减少 G
 
 #### 资源问题
 
-![幻灯片21.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00zf525j30zk0k0grt.jpg)
+![幻灯片21.JPG](images/slide_21.jpg)
 
 第二个重要的问题是资源消耗。首先在资源分配上，我们采用了 Agent 容器与业务容器共享资源配额的方案。由于业务进程与 Agent 进程二者是缺一不可的，这是一种比较合理的的分配方式。
 
@@ -181,13 +181,13 @@ Agent 内部我们也进行了一些优化工作，如针对 Java 语言减少 G
 
 #### 兼容问题
 
-![幻灯片22.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00x2qzgj30zk0k0tdw.jpg)
+![幻灯片22.JPG](images/slide_22.jpg)
 
 最后一个问题是关于如何兼容原有架构。一方面存在数据平面先上线，控制平面尚未就绪的状态。此时要求数据平面 Agent 能够与其他系统通过原有的 SDK 与接入方式进行对接，不会导致原有功能无法使用。另一方面一定会出现一部分服务先升级，另外一部分服务尚未升级的场景。此时为了支持两类服务间能够互相调用，Agent 必须支持以原有通信协议处理请求，以及根据服务端的升级情况选择适当的协议发起调用。
 
 ## 总结与展望
 
-![幻灯片23.JPG](https://tva1.sinaimg.cn/large/007S8ZIlly1gem00yyvm6j30zk0k0457.jpg)
+![幻灯片23.JPG](images/slide_23.jpg)
 
 通过实践经历我们发现，Service Mesh 确实能够解决微服务领域的关键架构痛点。并且是以一种全新的理念，直接给出这些问题的最优解。但何时引入 Service Mesh 架构，需要结合实际情况、选择一个适当的时机，以便能快速达成目标。
 
