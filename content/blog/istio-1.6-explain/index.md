@@ -74,28 +74,49 @@ Istio 为什么要花大力气支持 VM 这种即将过气的部署载体？而�
 
 ![appmesh](https://tva1.sinaimg.cn/large/007S8ZIlly1gf804aiie4j30oz0dntaj.jpg)
 
-我们再来看看 Istio 的同门师弟，gcloud Traffic Director 的情况。
+我们再来看看 Istio 的同门师弟，gcloud Traffic Director 的情况。其[官方文档](https://cloud.google.com/traffic-director/docs/traffic-director-concepts)中有如下描述：
 
+> **按您的节奏进行现代化改造**
+>
+> Traffic Director 既适用于基于虚拟机 (Compute Engine) 的应用，也适用于容器化应用（Google Kubernetes Engine 或自行管理的 Kubernetes），并能分阶段逐步运用于您的服务。
 
+看到这里我想你应该很清楚了，两大云厂商的 Mesh 产品无一例外地的选择对 VM 支持，主要原因就是综合 Kubernetes、Service Mesh 落地现状，以及市场策略的考虑。Istio 选择跟进无可厚非，且可以和自家产品互取所长，共享资源。我们是否可以大胆猜测一下：未来 Istio 可能会和 Traffic Director 兼容甚至合并？
 
-上云现状的考量；
+1.6 版本的最大变化，就是提供对虚拟机的支持，也是本年度的重点，其原因我们梳理如下：
 
-蚕食竞争对手的市场；
+- 基于云原生落地现状的考量：无论是 Kubernetes、Service Mesh，还是云迁移，整个业界依然处于参差不齐的状态，部署形态复杂多变。对 VM 的支持可以为用户提供统一的接入体验，并平滑接入 Mesh 技术。
 
-回归平台中立的理念；
+- 对抗（蚕食）竞争对手的市场：在收费的云平台，两大高手的策略旗鼓相当；而在开源方面，Istio 无疑是绝对的主角。同时在付费和免费两个层面统一战线，Istio 的这一神补刀，可以说击中了 AWS 的要害，这可能让本来摇摆不定的技术选型者改变主意。
 
-Vm
+- 回归平台中立的理念：Istio 一经推出就宣称具有多平台支持的能力，但两年下来大家都知道它对 Kubernetes 的依赖。提供 VM 支持正是去平台化的良机，为自己曾经立的 Flag 正名。
 
-k8s
+另一个很可能属于市场宣传的行为就是高调宣称支持 Kubernetes Service APIs。对于一个还处于 alpha 版本的功能，如此大力的进行支持，再想想 Istio 与 Kubernetes 网络组的关系，不得不让人感觉有广告嫌疑。都是老熟人，互推一下也是应该的。不过亮相的略显刺眼，有些许尴尬。
 
-preview
+第三个值得一说的是：开始提供新特性预览。
 
-## 生态圈的重要性
+> ***Added\*** a new profile, called `preview`, allowing users to try out new experimental features that include WASM enabled telemetry v2.
 
-portal
+笔者看到这一项的第一反应：这不就是 AWS Preview 吗？AWS 通过这种方式把新功能提前释放给用户使用，以收集使用数据和建议，来改进功能，可以认为是一种 alpha 测试。Istio 的这一举动可以理解为终于要开始践行 MVP（最小化可行产品）理论了，毕竟从前脱离市场和用户，闭门造车的跟头栽的有点大，痛定思痛，终于选择和用户站在一边。
 
-hub
+## 重要的生态圈
 
-## 期待和无奈
+就在 1.6 发布不久前，一直致力于 Service Mesh 生态链产品开发的 solo.io 公司推出了第一个 Istio 开发者门户（[Developer portal](https://www.solo.io/blog/introducing-the-first-developer-portal-for-istio/)）。它可以对网格中运行的 API 进行分类，通过 webUI 提供 API 管理的可视化用户体验，同时还能自动的生成 Istio Gateway、VirtualService 这些自定义资源。
 
-WASM只字未提
+![portal](https://tva1.sinaimg.cn/large/007S8ZIlly1gf86rih40pj31560fsdl5.jpg)
+
+solo.io 和 Google Cloud 是[商业伙伴](https://www.solo.io/company/partners/)关系，他们开发的 Gloo 和 Service Mesh Hub 都已经整合进了 GCP 和 GKE 中。而这一次发布 Portal 无疑又是一次双赢。
+
+Service Mesh 目前的市场格局并不明朗，依然是硝烟弥漫，产品都尚未定型，更不要说生态圈了。对 Goolge 而言，能提前将 solo.io 这样有实力的小弟招入麾下，围绕 Istio 打造一整套生态圈产品，无疑会让 Istio 如虎添翼，也极有可能在市场竞争中增加重量级的砝码。
+
+而对于 solo.io 而言，作为初创公司，能和 Envoy 一样抱着 Service Mesh 头号网红的粗腿，既能持续的获得大量的曝光机会，有能为自己的产品带来持续增长的用户群体。这又让我想起在当年在游戏行业的一对CP，Facebook 和 Zynga。Facebook 为 Zynga 输送了大量的用户，而 Zynga 的社交游戏又为 Facebook 的用户留存和黏性做出了贡献。至于后来的相爱相杀，那又是另外的故事了。我们回归正题，别说是 solo，换做是笔者本人，估计早都高喊着“土豪求做友”，跪舔着不放手了。无论如何，solo.io 的一步妙棋，很可能会搅动整个棋局的变化，拭目以待。
+
+生态圈的重要性无需多言，即便如 AWS 这种闭环生态的巨鳄，每年 Summit 也会把最大的展台留给众多 vendor，所谓一个好汉三个帮，谁都不会拒绝有实力的伙伴补强你的实力，玩 LOL 的的朋友会感慨，辅助是多么的重要！Java 叱咤风云二十五年，全靠以 Spring 为首的大将们强力补刀；Golang 若不是没有一个强大的、统一的标准化的生态，估计早把 Java 按在地上摩擦了。再反观日本的动漫产业，再优秀的作品，如果没有丰富的周边和产业链，GDP 要小上几个数量级，恐怕二次元的小弟弟小妹妹们都会少了很多精神寄托吧。
+
+## 期许和无奈
+
+在 InfoQ 最新发布的“技术采用生命周期”调查报告中，将 Istio、Service Mesh 放入了早期采用者这一列，这其实也从应用和市场层面反映出了它们仍处在产品发展的前期，任重道远。产品有限的成熟度制约了技术选型的空间，反过来市场的谨小慎微又让产品缺少了来自实践端的经验和积累。
+
+![infoq](https://tva1.sinaimg.cn/large/007S8ZIlly1gf87rq8kvfj31ec0ow777.jpg)
+
+本次 1.6 版本的发布我个人认为是惊喜不足，失望有余。Mixer 的寿终正寝让限流、黑白名单这样有用的功能也跟着陪了葬，还未看到要弥补它们的打算。而期待的 Envoy 与 WebAssembly 的强强联手也在本次更新中只字未提。当然了，产品迭代哪能一蹴而就，时间、成本、质量三要素缺一不可。一统江山的 Kubernetes 到了 1.8 才算是稳定版本，何况现在的 1.18，而我们的 Istio才刚刚到 1.6 而已，还需要更多的时间来沉淀。前路漫长，但仍可期许，让我们未来见分晓。
+
