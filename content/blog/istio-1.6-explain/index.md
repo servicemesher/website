@@ -2,7 +2,7 @@
 title: "迈向极简主义 - Istio 1.6 发布"
 author: "马若飞"
 authorlink: "https://github.com/malphi"
-date: 2020-05-28T18:30:10+08:00
+date: 2020-05-28T17:00:10+08:00
 draft: false
 banner: "/img/blog/banners/00704eQkly1fugaipib9ij31ji15okjn.jpg"
 summary:  "Istio 1.6 如期发布。让我们从不同的视角来解读一下这一版本的特性。"
@@ -42,7 +42,8 @@ spec:
 遥测方面，增加了两个实验性的功能，一个是请求类别过滤器，主要用来对不同 API 方法的请求进行标记和分类；另一个是追踪配置API，可以控制采用率等。除此之前，添加了 Prometheus 标准的抓取标注（annotation），提升了集成的体验。Grafana 的 Dashboard 也有[更新](https://grafana.com/orgs/istio)，对终端用户来说这倒是可以期待一下。然并卵，我们最关心的 WASM 只字未提！笔者猜测它在可用性方面还有很多问题。ServiceMesher社区成员对 Istio 各个版本的遥测做了 benchmark，横向对比的结果是 WASM 方式下性能垫底！甚至还不如 1.3 版本。这让人不禁感慨，WASM 之于 Envoy，会不会只是一次看上去很美好的邂逅呢？
 
 ![envoy-wasm](https://tva1.sinaimg.cn/large/007S8ZIlly1gf88kaci9ij31ha0lmgrm.jpg)
-​<center>（图片引自吉米漫画《向左走向右走》）</center>
+
+<center>（图片引自吉米漫画《向左走向右走》）</center>
 
 为了能让升级过程更平滑，Istio 提供了一种叫金丝雀升级（Canary upgrades）的策略，可以安装一个金丝雀版本的控制平面，与老版本同时存在。金丝雀升级可以让你逐渐的切换流量以验证新版本的可用性，同时也保留了回滚的能力。当然，如果你足够自信，依然可以原地升级（In place upgrade)。
 
@@ -92,7 +93,7 @@ Istio 为什么要花大力气支持 VM 这种即将过气的部署载体？而�
 
 第三个值得一说的是：开始提供新特性预览。
 
-> ***Added\*** a new profile, called `preview`, allowing users to try out new experimental features that include WASM enabled telemetry v2.
+> **Added** a new profile, called `preview`, allowing users to try out new experimental features that include WASM enabled telemetry v2.
 
 笔者看到这一项的第一反应：这不就是 AWS Preview 吗？AWS 通过这种方式把新功能提前释放给用户使用，以收集使用数据和建议，来改进功能，可以认为是一种 alpha 测试。Istio 的这一举动可以理解为终于要开始践行 MVP（最小化可行产品）理论了，毕竟从前脱离市场和用户，闭门造车的跟头栽的有点大，痛定思痛，终于选择和用户站在一边。
 
