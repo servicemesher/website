@@ -18,9 +18,7 @@ keywords: ["istio"]
 Istio 1.6 的 Release note 开篇的标题用三个巨大的 Simplify 来表明态度：我们要把极简主义进行到底！其中最大的简化就是将原有组件的功能完全整合入 **Istiod** ，完成了悟天克斯们的合体过程，让 Istiod 更加完整，也彻底移除了Citadel、Sidecar Injector 和 Galley。当然，你也可以理解为，这其实是对 1.5 版本未完成工作的收尾。
 
 <div align="center">
-
-![istiod](https://tva1.sinaimg.cn/large/007S8ZIlly1gf88vqhcgij307e08w0v2.jpg)
-
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gf88vqhcgij307e08w0v2.jpg" alt="istiod" style="zoom:100%;" />
 <center>（图片引自鸟山明漫画《龙珠Z》）</center></div>
 
 第二项简化工作是添加 `istioctl install` 命令来替代 `manifest apply` 的安装过程，用更直观、更精简的命令改善安装过程的体验。当然，`manifest` 子命令依然保留，你还是可以通过清单方式进行部署。在 Change Notes 的三十多项更新中，有七个是`removed`，基本上都和安装有关，比如移除已经废弃的 Helm charts、`istio-pilot`的配置等。可以看出，Istio 团队在极力的通过优化安装流程和部署形态来提升用户的体验。互联网产品有一个很重要的指标叫留存率，安装过程导致的用户流失是非常不值得的，需要花大力气进行流程的优化和调整。毕竟，第一印象的重要性毋庸置疑，以一个干练清爽的年轻人形象去相亲，还是扮演一个拖泥带水的油腻大叔？成功率高下立判。看来 Istio 团队终于醍醐灌顶，要努力做一个干练的奶油小生了。
