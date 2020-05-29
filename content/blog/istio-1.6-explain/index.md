@@ -2,8 +2,6 @@
 title: "迈向极简主义 - Istio 1.6 发布"
 author: "马若飞"
 authorlink: "https://github.com/malphi"
-reviewer: "罗广明"
-reviewerlink: "https://github.com/GuangmingLuo"
 date: 2020-05-28T17:00:10+08:00
 draft: false
 banner: "/img/blog/banners/00704eQkly1fugaipib9ij31ji15okjn.jpg"
@@ -14,6 +12,7 @@ keywords: ["istio"]
 ---
 
 内容摘要：从 1.2 版本开始，Istio 进入季度发布的节奏。5 月 21 日发布的 1.6 版本可以说是最准时的一次。我们是否可以理解 Istio 架构简化后的开发工作已经步入了正轨？这次的更新是否会带给我们惊喜？亦或是还有遗憾？让我们一一道来。
+（感谢[罗广明](https://github.com/GuangmingLuo)同学的审校和修改建议）
 
 ## 加法和减法
 
