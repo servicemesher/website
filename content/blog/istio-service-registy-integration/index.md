@@ -16,7 +16,7 @@ keywords: ["Service Mesh","Istio","Consul"]
 
 作为云原生服务网格领域的热门开源项目，Istio 可以为微服务提供无侵入的流量管理、安全通信、服务可见性等服务治理能力。目前越来越多的微服务项目开始考虑将自己的微服务基础设施向 Istio 进行迁移。
 
-Istio 对 Kubernetes 具有较强的依赖性，其服务发现就是基于 Kubernetes 实现的。大量现存的微服务项目要么还没有迁移到 Kubernetes 上；要么虽然采用了 Kubernetes 来进行部署和管理，但还是使用了 Consul，Eureka 等其他服务注册解决方案或者自建的服务注册中心。
+Istio 对 Kubernetes 具有较强的依赖性，其服务发现就是基于 Kubernetes 实现的。如果要使用 Istio，首先需要迁移到 Kubernetes 上，并使用 Kubernetes 的服务注册发现机制。但是对于大量现存的微服务项目来说，这个前提条件并不成立。很多微服务项目要么还没有迁移到 Kubernetes 上；要么虽然采用了 Kubernetes 来进行部署和管理，但还是使用了 Consul，Eureka 等其他服务注册解决方案或者自建的服务注册中心。
 
 在这种情况下，我们如何能够以最小的代价快速地将现有微服务项目和 Istio 进行集成，以享受 Istio 提供的各种服务治理能力呢？本文将分析 Istio 服务注册机制的原理，并提出几种 Istio 与第三方服务注册中心集成的可行方案，以供读者参考。
 
@@ -70,7 +70,7 @@ Pilot 的入口函数是 pilot/cmd/pilot-discovery/main.go 中的 main 方法。
 
 ### 其他服务注册表的集成
 
-虽然在 1.0 中还有 Eureka 的适配代码框架，但在 Istio 后面的版本完全删除了 Eureka 适配的相关代码。除了 Kubernetes 和 Consul 之外，原生 Istio 代码不支持其他服务注册表。 但我们可以采用以下三种方式将其集成到 Istio 的方式。
+虽然在 1.0 中还有 Eureka 的适配代码框架，但在 Istio 后面的版本完全删除了 Eureka 适配的相关代码。除了 Kubernetes 和 Consul 之外，原生 Istio 代码不支持其他服务注册表。但通过前面对 Pilot 服务模型源码的分析，我们可以得出以下三种将其他服务注册表集成到 Istio 的方式。
 ![](service-registry-integration.svg)
 图3 集成第三方服务注册表的三种方式
 
@@ -104,7 +104,7 @@ configSources:
 
 ## 小结
 
-本文分析了 Istio 和第三方服务注册表集成的几种可能的方式，包括自定义的 Service Registry 适配代码，自定义 MCP Server 和采用一个独立服务向 API Server 写入 ServiceEntry 和 WorkloadEntry 三种方法。有需要的读者可以根据项目的实际情况选择采用哪一种方法。由于第一种和第二种方法目前都存在一些问题，个人建议先采用第三种方式，待 Istio 对 Galley 和 MCP 的改造彻底完成后再考虑向第二种方式迁移。
+本文分析了 Istio 和第三方服务注册表集成的几种可能的方式。如果你使用的是 Consul，可以通过配置参数设置 Consul 的连接地址，将 Consul 集成到 Istio 中。 对于其他的服务注册表，有以下三种可选的集成方案： 自定义的 Service Registry 适配代码，自定义 MCP Server，或者采用一个独立服务向 API Server 写入 ServiceEntry 和 WorkloadEntry。 有需要的读者可以根据项目的实际情况选择采用哪一种方法。由于第一种和第二种方法目前都存在一些问题，建议先采用第三种方式，待 Istio 对 Galley 和 MCP 的改造彻底完成后再考虑向第二种方式迁移。
 
 备注：本文的分析和建议都是基于使用 Istio 1.6 的前提下。随着 Istio 版本的不断发展，其服务模型和注册相关机制可能发生变化，和第三方服务注册表的集成方式也可能变化。
 
