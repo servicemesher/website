@@ -5,8 +5,8 @@ draft: false
 banner: "/img/blog/banners/istio-service-registry-integration.jpg"
 author: "赵化冰"
 authorlink: "https://zhaohuabing.com"
-reviewer:  [""]
-reviewerlink:  [""]
+reviewer:  ["宋净超"]
+reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://zhaohuabing.com/post/2020-06-02-third-party-registry/"
 summary: "对于大量使用了 Consul，Eureka 或者自建服务注册中心的项目来说，如何能够以最小的代价快速地将现有微服务项目和 Istio 进行集成，以享受 Istio 提供的各种服务治理能力呢？本文将分析 Istio 服务注册机制的原理，并提出几种 Istio 与第三方服务注册中心集成的可行方案，以供读者参考。"
 tags: ["Service Mesh","Istio","Consul"]
@@ -61,6 +61,7 @@ Pilot 的入口函数是 pilot/cmd/pilot-discovery/main.go 中的 main 方法。
 鉴于和 Kubernetes 的紧密关系，Istio 在最初只重点关注了 Kubernetes 服务注册的集成。虽然在 Istio 最初的版本中也有 Consul 和 Eureka 的适配代码，但这些代码基本只是处于原型验证的节点，存在较多的故障和性能问题。
 
 由于在项目中采用了 Consul 作为自研服务注册的后端存储，我们在和 Istio 进行集成时对 Consul 的适配进行了大量测试和研究，并解决了一些功能和性能效率方面的问题。这些 Consul 适配的问题解决后已经合入了 Istio 版本中，参见这些 PR：
+
 * [Use watching instead of polling to get update from Consul catalog #17881](https://github.com/istio/istio/pull/17881)
 * [Fix: Consul high CPU usage (#15509) #15510](https://github.com/istio/istio/pull/15510)
 * [Avoid unnecessary service change events(#11971) #12148](https://github.com/istio/istio/pull/12148)
@@ -74,7 +75,7 @@ Pilot 的入口函数是 pilot/cmd/pilot-discovery/main.go 中的 main 方法。
 ![](service-registry-integration.svg)
 图3 集成第三方服务注册表的三种方式
 
-上图中分别用红、绿、三种颜色标识了这三种不同的集成方式。
+上图中分别用红、绿、蓝三种颜色标识了这三种不同的集成方式。
 
 #### 自定义 Service Registry 适配器
 
@@ -100,7 +101,7 @@ configSources:
 
 #### 向 API Server 写入 ServiceEntry 和 WorkloadEntry
 
-该集成方式的业务流程如图3中绿色箭头所示。我们只需要编写一个独立的服务，该服务从第三方法服务注册表中获取服务和服务实例数据，然后转换为 Istio 的 ServiceEntry 和 WorkloadEntry 资源，通过 K8s API Server 的接口写入到 API Server 中。 Pilot 中自带的 Kube Config Controller 会监听 K8s API Server 中和 Istio 相关的资源对象的变化，并将 ServiceEntry 和 WorkloadEntry 转换为 Piolt 的内部服务模型。
+该集成方式的业务流程如图3中绿色箭头所示。我们只需要编写一个独立的服务，该服务从第三方法服务注册表中获取服务和服务实例数据，然后转换为 Istio 的 ServiceEntry 和 WorkloadEntry 资源，通过 Kubernetes API Server 的接口写入到 API Server 中。 Pilot 中自带的 Kube Config Controller 会监听 Kubernetes API Server 中和 Istio 相关的资源对象的变化，并将 ServiceEntry 和 WorkloadEntry 转换为 Piolt 的内部服务模型。
 
 ## 小结
 
@@ -114,4 +115,4 @@ configSources:
 * [Istio Pilot代码深度解析](https://zhaohuabing.com/post/2019-10-21-pilot-discovery-code-analysis)
 * [Istio and managing microservices](https://www.ibm.com/cloud/blog/seamless-integration-istio-and-external-services)
 * [Istio 1.6 Change Notes](https://istio.io/news/releases/1.6.x/announcing-1.6/change-notes/)
-* [The recommended way to integrate a third-party service registry with Istio](https://discuss.istio.io/t/the-recommended-way-to-integrate-a-third-party-service-registry-with
+* [The recommended way to integrate a third-party service registry with Istio](https://discuss.istio.io/t/the-recommended-way-to-integrate-a-third-party-service-registry-with-istio/6863)
