@@ -26,7 +26,6 @@ Envoy，使者，使节，代表！就像其单词含义本身一样，带着一
 容器技术助推了企业实践Devops与进行微服务改造，k8s容器编排平台则让企业能够更加自信的将更多业务从传统架构迁移到基于容器的现代基础架构之上，k8s解决了容器编排、应用发布等问题，但是当服务之间的通信从以前的内存之间调用变成了基于TCP的网络通信后，网络对应用服务的影响变得更加巨大与不确定，基于传统的应用架构的运维手段无法适应与解决巨大且复杂的服务间通信洞察、排错，为了解决这样的问题sevice mesh应用而生，并迅速成为关注的热点，Istio项目则是此生态中最重要的玩家，Istio的架构是一个典型的管理平面与数据分离的架构，在数据平面的选择上是开放的，但是Istio默认选择了Envoy作为数据平面。两大人气明星强强联手，让几乎同一时期的linkerd变得黯然失色。而在这个时间点，NGINX同样也曾短暂的进行了Nginmesh项目，试图让NGINX作为Istio的数据平面，但最终在2018年底放弃了，为什么会放弃，这个本文后面会提到。
 
 当前除了Istio选择Envoy作为数据平面外，以Envoy为基础的项目还有很多，例如k8s的多个Ingress Controller项目：Gloo, Contur, Ambassador。 Istio自身的Ingress gateway与Egress gateway同样选择的是Envoy。来看下其官方首页列出的Envoy用户，说星光熠熠一点也不为过。注意列表里的F5，是不是很有意思。
-
 ![envoy-end-user](envoy-endusers.jpg)
 *（Envoy最终用户列表）*
 
@@ -49,6 +48,7 @@ Envoy，使者，使节，代表！就像其单词含义本身一样，带着一
 #### 接口化与API
 
 当我第一次打开Envoy的配置时候，我的第一感觉是，天啊，这样一个产品用户该怎么配置和使用。先来直观的感受下，在一个并不复杂的实验环境下，一个Envoy的实际配置文件行数竟然达到了20000行。
+
 ```shell
 #  kubectl exec -it productpage-v1-7f4cc988c6-qxqjs -n istio-bookinfo -c istio-proxy -- sh
 $ curl http://127.0.0.1:15000/config_dump | wc -l
@@ -106,17 +106,17 @@ Envoy容许用户以灵活的方式在灵活的位置定义灵活的日志格式
 ![envoy-kiali](envoy-kiali.jpg)
 
 Envoy生成的每个span包含以下数据：
- *  通过设置的原始服务集群--service-cluster。
- * 请求的开始时间和持续时间。
- * 通过设置的原始主机--service-node。
- * 通过x-envoy-downstream-service-cluster 标头设置的下游群集。
- * HTTP请求URL，方法，协议和用户代理。
- * 通过custom_tags设置的其他自定义标签。
- * 上游群集名称和地址。
- * HTTP响应状态代码。
- * GRPC响应状态和消息（如果可用）。
- * HTTP状态为5xx或GRPC状态不是“ OK”时的错误标记。
- * 跟踪特定于系统的元数据。
+*  通过设置的原始服务集群--service-cluster。
+* 请求的开始时间和持续时间。
+* 通过设置的原始主机--service-node。
+* 通过x-envoy-downstream-service-cluster 标头设置的下游群集。
+* HTTP请求URL，方法，协议和用户代理。
+* 通过custom_tags设置的其他自定义标签。
+* 上游群集名称和地址。
+* HTTP响应状态代码。
+* GRPC响应状态和消息（如果可用）。
+* HTTP状态为5xx或GRPC状态不是“ OK”时的错误标记。
+* 跟踪特定于系统的元数据。
 
 #### 现代性
 
@@ -126,17 +126,17 @@ Envoy生成的每个span包含以下数据：
 
 现代性的另一个表现就是对协议的支持，看看以下支持的协议，熟悉应用交付、反向代理软件的同学可能会情不自禁的表示赞叹，而这些协议的支持更从另一方面表现了Envoy作为更加面向开发者和SRE的一个特质。
 
- * gRPC
- * HTTP2
- * MongoDB
- * DynamoDB
- * Redis
- * Postgres
- * Kafka
- * Dubbo
- * Thrift
- * ZooKeeper
- * RockeMQ
+* gRPC
+* HTTP2
+* MongoDB
+* DynamoDB
+* Redis
+* Postgres
+* Kafka
+* Dubbo
+* Thrift
+* ZooKeeper
+* RockeMQ
 
 ### 部署架构
 
@@ -212,6 +212,7 @@ Service Mesh是当前热门的技术方向，F5 基于Istio打造了企业级的
 F5则更加需要让开发人员了解TMOS系统所拥有的巨大潜能（特别是下一代产品在架构以及形态上的颠覆），了解其优秀全代理架构以及可以在任意层面进行的编程控制， 让开发者、SRE以F5 TMOS作为一种能力平台和中间件进行开发，更好的利用F5自身已经拥有的应用交付能力来快速实现自身需求。
 
 最后，再次引用Envoy官方网站首页的一句话：
+
 > 正如微服务从业者很快意识到的那样，当转移到分布式体系结构时出现的大多数操作问题最终都基于两个方面：网络和可观察性。
 
 而保证更可靠的网络交付与更好的可观察性正是前浪们的强项。创新吧，前浪。
