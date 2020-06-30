@@ -155,7 +155,7 @@ Envoy也可以作为Ingress edge网关或Egress 网关，在这种场景下一�
 ![envoy-topo-in-out](t5.jpg)
 *(图片来自https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request#request-flow)*
 
-最后，这是将所有形态的Envoy部署集中到了一起，这种架构可能会在服务从传统架构向微服务架构迁移过程的中间形态。
+最后，这是将所有形态的Envoy部署集中到了一起，这种架构可能会在服务从传统架构向微服务架构迁移过程的中间形态
 ![envoy-topo-all](t4.jpg)
 *(图片来自https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request#request-flow)*
 
