@@ -3,8 +3,10 @@ title: "应用交付老兵眼中的Envoy, 云原生时代下的思考"
 date: 2020-06-30T00:00:00+08:00
 draft: false
 banner: "/img/blog/banners/thoughts-to-envoy-from-ADN-perspective.jpg"
-author: "林静"
+author: "林静 (F5)"
 authorlink: "https://cnadn.net"
+reviewer:  ["SataQiu"]
+reviewerlink:  ["https://github.com/SataQiu"]
 originallink: "https://www.cnadn.net/post/2947.htm"
 summary: "Envoy是云原生时代的明星，其本质是反向代理负载均衡类软件，领域上归于应用交付，那么作为应用交付领域的老兵如何看待Envoy，Envoy又引发了哪些关于传统应用交付领域的思考？"
 tags: ["envoy","反向代理","NGINX","F5"]
