@@ -110,6 +110,7 @@ Envoy容许用户以灵活的方式在灵活的位置定义灵活的日志格式
 ![envoy-kiali](<envoy-kiali.jpg>)
 
 Envoy生成的每个span包含以下数据：
+
 * 通过设置`--service-cluster`的原始服务集群信息。
 * 请求的开始时间和持续时间。
 * 通过设置`--service-node`的原始主机信息。
