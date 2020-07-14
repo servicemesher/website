@@ -1,6 +1,7 @@
 ---
 title: "Service Mesh Webinar #2"
 id: "activity"
+date: 2020-07-14T14:15:43+08:00
 ---
 
 Service Mesh Webinar#2，邀请有米科技高级后端工程师姚昌宇，带来分享《基于 MOSN 和 Istio Service Mesh 的服务治理实践》。
