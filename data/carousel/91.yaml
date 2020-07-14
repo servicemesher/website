@@ -4,7 +4,6 @@ description: >
   <ul class="list-style-none">
      <li>多点生活在 Service Mesh 上的实践</li>
      <li>Istio + MOSN + Dubbo</li>
-     <li>5 月 28 日晚 8 点<a href="https://live.bilibili.com/21954520">相约 B 站</a></li>
      <li><a href="/blog/service-mesh-webinar-1">查看回顾</a></li>
    </ul>
 image: "https://gw.alipayobjects.com/mdn/rms_95b965/afts/img/A*VDkHT77KkscAAAAAAAAAAABkARQnAQ"
