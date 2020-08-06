@@ -2,7 +2,7 @@
 title: "Istio1.5 & Envoy 数据面 WASM 实践"
 date: 2020-04-11T11:40:00+08:00
 draft: false
-banner: "http://i1.fuimg.com/717222/095fcf3fe58eb105.png"
+banner: "/img/blog/banners/006tKfTcly1g0avw2aq99j31an0u0u0y.jpg"
 author: "王佰平"
 authorlink: ""
 reviewer: ["宋净超"]
@@ -31,8 +31,6 @@ Istio 最新发布的 1.5 版本，架构发生了巨大调整，从原有的分
 * 无开发语言限制，开发效率更高（WASM 本身支持语言众多，但是限定到 Envoy 插件开发，必然依赖一些封装好的 SDK 用于和 Envoy 进行交互，目前只有 C++ 语言本身、Rust 以及 AssemblysScript 有一定的支持）。
 
 WASM 的诞生源自前端，是一种为了解决日益复杂的前端 web 应用以及有限的 JavaScript 性能而诞生的技术。它本身并不是一种语言，而是一种字节码标准，一个“编译目标”。WASM 字节码和机器码非常接近，因此可以非常快速的装载运行。任何一种语言，都可以被编译成 WASM 字节码，然后在 WASM 虚拟机中执行（本身是为 web 设计，必然天然跨平台，同时为了沙箱运行保障安全，所以直接编译成机器码并不是最佳选择）。理论上，所有语言，包括 JavaScript、C、C++、Rust、Go、Java 等都可以编译成 WASM 字节码并在 WASM 虚拟机中执行。
-
-![任何一种语言都可以编译成 WASM 字节码并在 WASM 虚拟机中执行](http://i1.fuimg.com/717222/0b05a90f3095e110.png) 
 
 ## 社区发展及现状
 
