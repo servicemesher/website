@@ -142,11 +142,11 @@ paginate = 10
     url = "/contact"
     pre = "<i class='fa fa-2x fa-wechat'></i>"
 
-[[menu.topbar]]
-    weight = 5
-    name = "Google Group"
-    url = "https://groups.google.com/forum/#!forum/servicemesher"
-    pre = "<i class='fa fa-2x fa-google'></i>"
+#[[menu.topbar]]
+#    weight = 5
+#    name = "Google Group"
+#    url = "https://groups.google.com/forum/#!forum/servicemesher"
+#    pre = "<i class='fa fa-2x fa-google'></i>"
 
 [params]
     viewMorePostLink = "/blog/"
