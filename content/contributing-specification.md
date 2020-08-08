@@ -20,7 +20,7 @@ description: "向 ServiceMesher社区投稿指南。"
 - “作者”是指文章署名的作者。
 - “读者”是指阅读社区发布的文章的人。
 - “社区官网”是指 <https://www.servicemesher.com>。
-- “官网 Github”是指 <https://github.com/servicemesher.com/website>。
+- “官网 Github”是指 <https://github.com/servicemesher/website>。
 
 ### 投稿原则
 
