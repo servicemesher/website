@@ -15,7 +15,7 @@ keywords: ["service mesh","服务网格"]
 
 Google Cloud 同时推出两个 Service Mesh 产品的原因是什么？这两个产品的定位有何不同？本文将分别分析这两个产品的架构和功能，以试图解答该疑问。
 
-# Traffic Director
+## Traffic Director
 
 Traffic Director 是 Google Cloud 专为服务网格打造的全托管式流量控制平面，用户不需要对 Traffic Director 进行部署，维护和管理。我们可以把 Traffic Director 看作一个托管的 Pilot（备注：并不确定其内部是否使用的 Pilot），其只提供了流量管理能力，不提供 Istio 控制面的其他能力。用户可以使用 Traffic Director 创建跨区域的、同时支持集群和虚拟机实例的服务网格，并对多个集群和虚拟机的工作负载进行统一的流量控制。Traffic Director 托管控制面 提供了跨地域容灾能力，可以保证99.99%的SLA。
 
@@ -25,21 +25,19 @@ Traffic Director 是 Google Cloud 专为服务网格打造的全托管式流量�
 * 同时支持 K8s 集群和虚拟机
 * 跨地域的流量管理
 
-## Traffic Director 架构
+### Traffic Director 架构
 
 Traffic Director 的总体架构和 Istio 类似，也采用了“控制面 + 数据面”的结构，控制面托管在 Google Cloud 中，对用户不可见。用户只需要在创建 project 时启用 Traffic Director API，即可使用 Traffic Director 提供的网格服务。数据面则采用了和 Istio 相同的 Envoy 作为 proxy。 控制面和数据面采用标准的 xDS v2 进行通信。控制面对外采用了一套自定义的 API 来实现流量管理，并不支持 Istio API。Traffic Director 也没有采用 Istio/K8s 的服务发现，而是采用了一套 Google Cloud 自己的服务注册发现机制，该服务注册发现机制以统一的模型同时支持了容器和虚拟机上的服务，并为工作负载提供了健康检测。
 
-
 ![Traffic Director 架构](traffic-director-arch.png "Traffic Director 架构")
 
-## 服务注册发现机制
+### 服务注册发现机制
 
 Traffic Director 采用了 Google Cloud 的一种称为 Backend Service 的服务注册机制。通过 Backend Service 支持了 GKE 集群中容器工作负载和虚拟机工作负载两种方式的服务注册发现，不过和 Istio 不同的是，Traffic Director 并不支持 K8S 原生的服务注册发现机制。
 
-### 服务注册发现资源模型
+#### 服务注册发现资源模型
 
 Traffic Director 的服务注册发现资源模型如下图所示，图中蓝色的图形为 Traffic Director 中使用的资源，桔色的图形为这些资源对应在 K8s 中的概念。Backend Service 是一个逻辑服务，可以看作 K8s 中的 Service，Backend Service 中可以包含 GKE 集群中的 NEG （Network Endpoint Group），GCE 虚拟机 的 MIG （Managed Instance Group），或者无服务的 NEG 。NEG 中则是具体的一个个工作负载，即服务实例。 
-
 
 ![](traffic-director-service-discovery.png "Traffic Director 服务发现资源模型")
 
@@ -49,7 +47,7 @@ Google Cloud 的这一套服务注册的机制并不只是为 Traffic Director �
 
 下面举例说明如何创建 Backend Service，并将 GKE 和 VM 中运行的服务实例加入到 Backend Service中，以了解相关资源的内部结构。
 
-### 注册 GKE 集群中的容器服务
+#### 注册 GKE 集群中的容器服务
 
 1. 创建 GKE NEG：在 K8s Service 的 yaml 定义中通过 annotation 创建 NEG
 
@@ -94,7 +92,7 @@ gcloud compute backend-services add-backend td-gke-service \
   --max-rate-per-endpoint 5
 ```
 
-### 注册 GCE 虚拟机服务
+#### 注册 GCE 虚拟机服务
 
 1. 创建虚机模版：在创建模版时可以通过命令参数 --service-proxy=enabled 声明使用该模版创建的虚拟机需要安装 Envoy sidecar 代理
 
@@ -148,11 +146,11 @@ gcloud compute backend-services add-backend td-vm-service \
   --global
 ```
 
-## 流量管理实现原理
+### 流量管理实现原理
 
 Traffic Diretor 的主要功能就是跨地域的全局流量管理能力，该能力是建立在 Google Cloud 强大的 VPC 机制基础上的， Google Cloud 的 VPC 可以跨越多个 Region，因此一个 VPC 中的服务网格中可以有来自多个 Region 的服务。另外 Traffic Director 并未直接采用 Istio 的 API，而是自定义了一套 API 来对网格中的流量进行管理。
 
-### 控制面流量规则定义
+#### 控制面流量规则定义
 
 Traffic Director 流量规则相关的控制面资源模型如下图所示，图中下半部分是 Istio 中和这些资源对应的 CRD。
 
@@ -191,11 +189,11 @@ Managed Instance Group 定义
 
 ![](mig.png)
 
-### 数据面 Sidecar 配置
+#### 数据面 Sidecar 配置
 
 Traffic Director 将服务发现信息和路由规则转换为 Envoy 配置，通过 xDS 下发到 Envoy sidecar，控制面规则和数据面配置的对应关系下：
 
-```
+```text
 Forwarding Rule    ->    Envoy Listener
 URL Map            ->    Envoy Route
 Backend Service    ->    Envoy Cluster
@@ -216,7 +214,7 @@ Cluster 配置
 
 ![](envoy-cluster.png)
 
-### 高级流量规则
+#### 高级流量规则
 
 在 URL Map 中设置 Traffic Splitting
 
@@ -274,11 +272,11 @@ Cluster 配置
 
 与 Istio 相比，Traffic Director 的流量管理机制更为灵活，可以在 Mesh 中同时接入 K8s 集群和虚拟机中的工作负载。但 Traffic Director 需要手动进行较多的配置才能对服务进行管理，包括 backend service，forwarding rule，url map 和 DNS，而在 Istio 中，如果不需要进行特殊的路由和流量策略，这些配置都是不需要手动进行的，pilot 会自动创建默认配置。
 
-## Sidecar Proxy 部署机制
+### Sidecar Proxy 部署机制
 
 Traffic Director 数据面采用了和 Istio 相同的机制，通过 Iptables 规则将应用服务的出入流量重定向到 Envoy sidecar，由 Envoy 进行流量路由。Traffic Director 采用了下面的方式来在 K8s 集群的 Pod 或者虚拟机中安装数据面组件。
 
-### VM 手动部署
+#### VM 手动部署
 
 通过脚本从 gcloud 上下载 envoy 二机制，并安装 iptables 流量拦截规则，启动envoy。
 
@@ -322,7 +320,7 @@ sudo /home/envoy/traffic-director/run.sh start"
 
 ```
 
-### VM 自动部署
+#### VM 自动部署
 
 在创建虚拟机模版时添加注入proxy的参数，可以在VM中自动部署Envoy sidecar。
 
@@ -334,15 +332,14 @@ gcloud compute instance-groups managed create td-vm-mig-us-central1 \
 --zone us-central1-a --size=2 --template=td-vm-template-auto
 ```
 
-### GKE 通过 deployment 部署
+#### GKE 通过 deployment 部署
 
 GKE 提供 yaml 模版，需要修改 deployment 文件，在 yaml 中增加 sidecar 相关的镜像。未提供 webhook,参见 Traffic Director 的[示例文件](https://storage.googleapis.com/traffic-director/trafficdirector_istio_sidecar.yaml)。
 
-## VM和GKE混合部署示例
+### VM和GKE混合部署示例
 
 下面我们创建一个示例程序，将 V 和 GKE 中的服务同时加入到 traffic director 管理的 service mesh 中，以展示 traffic director 的对 VM 和容器服务流量统一管理能力。
 该程序的组成如下图所示。程序中部署了三个服务，在 us-central1-a 中部署了两个 VM MIG 服务，在 us-west1-a 中部署了一个 GKE NEG 服务，这三个服务处于同一个 VPC 中，因此网络是互通的。
-
 
 ![](traffic-director-example.png)
 
@@ -399,7 +396,8 @@ app1-84996668df-t4qmn
 app1-84996668df-dlccn
 app1-84996668df-t4qmn
 ```
-# Anthos Service Mesh
+
+## Anthos Service Mesh
 
 Anthos Service Mesh 是 Google 混合云和多云解决方案 Anthos 中负责服务管理的部分。和 Traffic Director 的主要区别是，Anthos Service Mesh 直接采用了开源 Istio， 并且未对控制面进行托管，而是将 Istio 控制面部署在了用户集群中，只是将遥测信息接入了 Google Cloud，并在 Google cloud console 的 Anthos Service Mesh 界面中提供了服务网格的查看和监控界面。
 Anthos Service Mesh关键特性包括：
@@ -408,23 +406,23 @@ Anthos Service Mesh关键特性包括：
 * 支持多云/混合云（不支持虚机）
 * 集中的服务监控控制台。
 
-## Anthos 的整体架构
+### Anthos 的整体架构
 
 Google Cloud Anthos 旨在提供一个跨越 Google Cloud、私有云和其他公有云的统一解决方案，为客户在混合云/多云环境下的集群和应用管理提供一致的体验。Anthos 包含了统一的 GKE 集群管理，服务管理和配置管理三大部分功能。其中 Anthos Service Mesh 负责其中统一的服务管理部分，可以将部署在多个不同云环境中的 Istio 集群在 Anthos Service Mesh 控制台中进行统一的管理和监控。
 
 ![](anthos.png "Anthos 架构")
 
-## Anthos GKE 集群管理
+### Anthos GKE 集群管理
 
 Anthos 对 On-Perm 和多云的 K8s 集群的管理采用了代理的方式，Anthos 会在每个加入 Anthos 的集群中安装一个 agent，由 agent 主动建立一个到 Anthos 控制面的连接，以穿透 NAT，连接建立后，Anthos 控制面会连接集群的 API Server，对集群进查看和行管理。
 
 ![](anthos-cluster-management.png "Anthos 采用 agent 接入 K8s 集群")
 
-## Anthos Service Mesh 的混合云/多云解决方案
+### Anthos Service Mesh 的混合云/多云解决方案
 
 由于采用了开源 Istio，因此 Anthos Service Mesh 的混合云/多云解决方案实际上采用的是 Istio 的多集群方案。Istio 自身的多集群方案是非常灵活的，根据网络模式和控制面的安装模式，可以有多种灵活的搭配组合。Anthos Service Mesh 中推荐使用的是多控制面方案。
 
-### 多网络多控制平面
+#### 多网络多控制平面
 
 该方案中多个集群在不同网络中，不同集群中的 Pod IP 之间是不能通过路由互通的，只能通过网关进行访问。即使在不同集群中部署相同的服务，对远端集群中服务的访问方式也和本地服务不同，即不能采用同一服务名来访问不同集群中的相同服务，因此无法实现跨集群/地域的负载均衡或容灾。
 
@@ -432,7 +430,7 @@ Anthos 对 On-Perm 和多云的 K8s 集群的管理采用了代理的方式，An
 
 ![](multi-network-deployment.png "Anthos Service Mesh 多集群管理-多网络多控制平面")
 
-### 单网络多控制平面
+#### 单网络多控制平面
 
 在该方案中，多个集群处于同一个扁平三层网络之中，各个集群中的服务可以直接相互访问。如下图所示，两个集群中的 Istio 控制面都通过访问对方的 API server 拿到了对方的服务信息。在这种场景中，通常会在不同集群中部署相同的服务，以实现跨地域的负载均衡和容灾。
 
@@ -440,7 +438,7 @@ Anthos 对 On-Perm 和多云的 K8s 集群的管理采用了代理的方式，An
 
 ![](single-network-deployment.png "Anthos Service Mesh 多集群管理-单网络多控制平面")
 
-## Anthos Service Mesh 多集群部署示例
+### Anthos Service Mesh 多集群部署示例
 
 对于 Istio 来讲，其管理的 Mesh 中的多个集群是否跨云/混合云并不影响集群管理的部署方案，因为本质上都是同一网络/多个网络两种情况下的多集群管理。本示例的两个集群都使用了 GKE 的 Cluster。但只要把网络打通，本示例也适用于跨云/混合云的情况。
 
@@ -499,7 +497,6 @@ Metric，Access log和 tracing 过 Envoy stackdriver http filter 上报到 Googl
 ```
 
 尝试从位于 west1-a Region 集群的 sleep pod 中访问 helloworld 服务，可以看到缺省会访问本集群中的 helloword v1 版本的服务实例，不会跨地域访问。
-
 
 ```bash
 g********@cloudshell:~ (huabingzhao-anthos)$ 
@@ -569,7 +566,7 @@ Hello version: v2, instance: helloworld-v2-776f74c475-jws5r
 Hello version: v2, instance: helloworld-v2-776f74c475-jws5r
 ```
 
-# 相互竞争还是优势互补？
+## 相互竞争还是优势互补？
 
 从前面的分析可以看出， Google Cloud 推出的 Traffic Director 和 Anthos Service Mesh 这两个服务网格的产品各有侧重点：
 
@@ -582,8 +579,7 @@ Hello version: v2, instance: helloworld-v2-776f74c475-jws5r
 
 ![](traffic-director-anthos-int.png "Traffic Director 和 Anthos Service Mesh 集成计划")
 
-
-# 参考文档
+## 参考文档
 
 * [Creating a VPC-native cluster](https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips)
 * [Traffic Director](https://cloud.google.com/traffic-director)
