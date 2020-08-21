@@ -20,6 +20,7 @@ Google Cloud 同时推出两个 Service Mesh 产品的原因是什么？这两�
 Traffic Director 是 Google Cloud 专为服务网格打造的全托管式流量控制平面，用户不需要对 Traffic Director 进行部署，维护和管理。我们可以把 Traffic Director 看作一个托管的 Pilot（备注：并不确定其内部是否使用的 Pilot），其只提供了流量管理能力，不提供 Istio 控制面的其他能力。用户可以使用 Traffic Director 创建跨区域的、同时支持集群和虚拟机实例的服务网格，并对多个集群和虚拟机的工作负载进行统一的流量控制。Traffic Director 托管控制面 提供了跨地域容灾能力，可以保证99.99%的SLA。
 
 总而言之，Traffic Director 的关键特性包括：
+
 * 全托管控制面
 * 控制面高可用
 * 同时支持 K8s 集群和虚拟机
@@ -49,11 +50,11 @@ Google Cloud 的这一套服务注册的机制并不只是为 Traffic Director �
 
 #### 注册 GKE 集群中的容器服务
 
-1. 创建 GKE NEG：在 K8s Service 的 yaml 定义中通过 annotation 创建 NEG
+1、 创建 GKE NEG：在 K8s Service 的 yaml 定义中通过 annotation 创建 NEG
 
 ![](gke-neg-define.png)
 
-2. 创建防火墙规则：需要创建一条防火墙规则，以允许 gcloud 对 GKE NEG 中的服务实例进行健康检查
+2、 创建防火墙规则：需要创建一条防火墙规则，以允许 gcloud 对 GKE NEG 中的服务实例进行健康检查
 
 ```bash
 gcloud compute firewall-rules create fw-allow-health-checks \  
@@ -63,14 +64,14 @@ gcloud compute firewall-rules create fw-allow-health-checks \
   --rules tcp
 ```
 
-3. 创建健康检查
+3、创建健康检查
 
 ```bash
 gcloud compute health-checks create http td-gke-health-check \  
   --use-serving-port
 ```
 
-4. 创建 Backend Service，创建时需要指定上一步创建的健康检查
+4、创建 Backend Service，创建时需要指定上一步创建的健康检查
 
 ```bash
 gcloud compute backend-services create td-gke-service \ 
@@ -79,7 +80,7 @@ gcloud compute backend-services create td-gke-service \
   --load-balancing-scheme INTERNAL_SELF_MANAGED
 ```
 
-5. 将 GKE NEG 加入到上一步创建的 Backend service 中
+5、将 GKE NEG 加入到上一步创建的 Backend service 中
 
 ```bash
 NEG_NAME=$(gcloud beta compute network-endpoint-groups list \
@@ -94,14 +95,14 @@ gcloud compute backend-services add-backend td-gke-service \
 
 #### 注册 GCE 虚拟机服务
 
-1. 创建虚机模版：在创建模版时可以通过命令参数 --service-proxy=enabled 声明使用该模版创建的虚拟机需要安装 Envoy sidecar 代理
+1、 创建虚机模版：在创建模版时可以通过命令参数 --service-proxy=enabled 声明使用该模版创建的虚拟机需要安装 Envoy sidecar 代理
 
 ```bash
 gcloud beta compute instance-templates create td-vm-template-auto \    
   --service-proxy=enabled
 ```
 
-2. 创建 MIG：使用虚拟机模版创建一个 managed instance group，该 group 中的实例数为2
+2、 创建 MIG：使用虚拟机模版创建一个 managed instance group，该 group 中的实例数为2
 
 ```bash
 gcloud compute instance-groups managed create td-vm-mig-us-central1 \    
@@ -110,7 +111,7 @@ gcloud compute instance-groups managed create td-vm-mig-us-central1 \
   --template=td-vm-template-auto
 ```
 
-3. 创建防火墙规则
+3、 创建防火墙规则
 
 ```bash
 gcloud compute firewall-rules create fw-allow-health-checks \  
@@ -121,13 +122,13 @@ gcloud compute firewall-rules create fw-allow-health-checks \
   --rules tcp:80
 ```
 
-4. 创建健康检查
+4、 创建健康检查
 
 ```bash
 gcloud compute health-checks create http td-vm-health-check
 ```
 
-5. 创建 Backend Service，创建时需要指定上一步创建的健康检查
+5、 创建 Backend Service，创建时需要指定上一步创建的健康检查
 
 ```bash
 gcloud compute backend-services create td-vm-service \ 
@@ -137,7 +138,7 @@ gcloud compute backend-services create td-vm-service \
   --health-checks td-vm-health-check
 ```
 
-6. 将 MIG 加入到上一步创建的 Backend service 中
+6、 将 MIG 加入到上一步创建的 Backend service 中
 
 ```bash
 gcloud compute backend-services add-backend td-vm-service \  
