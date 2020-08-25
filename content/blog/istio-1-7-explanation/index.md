@@ -1,13 +1,13 @@
 ---
-title: "istio 1.7 发布 - 进击的追风少年"
-date: 2020-08-25T00:00:00+08:00
+title: "Istio 1.7 发布——进击的追风少年"
+date: 2020-08-25T11:00:00+08:00
 draft: false
 banner: "/img/blog/banners/006tKfTcly1g17wqrniy0j31400u0b2d.jpg"
 author: "马若飞"
 authorlink: "https://github.com/malphi"
 reviewer:  ["rootsongjc"]
 reviewerlink:  ["https://github.com/rootsongjc"]
-summary: "从用户角度出发，深度解读 Istio 1.7 版本"
+summary: "从用户角度出发，深度解读 Istio 1.7 版本。"
 tags: ["istio"]
 categories: ["istio"]
 keywords: ["istio"]
@@ -17,19 +17,19 @@ keywords: ["istio"]
 
 2020 年 8 月 21 日，Istio 发布了 1.7 版本。除了介绍新版本的主要更新内容外，本文会重点分析 Istio 团队在产品更新策略上的激进态度和举措。是稳扎稳打做好向后兼容，带给用户所承诺的易用性；还是快刀斩乱麻，做进击的追风少年，且听笔者慢慢道来。
 
-## 如约而至 - Istio 1.7.0 发布
+## 如约而至——Istio 1.7.0 发布
 
-就在几天前，Istio 发布了 1.7 版本，和 1.6 版本的发布时间正好间隔三个月，完美的实现了季度发布的诺言。本次发布的口号是“伟大的 Istio 社区（Istio’s great community）”，因为有来自 40 多个公司的 200 多个开发者做出了贡献。Istio 官方是这样描述的：
+就在几天前，Istio 发布了 1.7 版本，和 1.6 版本的发布时间正好间隔三个月，完美的实现了季度发布的诺言。本次发布的口号是 “伟大的 Istio 社区（Istio’s great community）”，因为有来自 40 多个公司的 200 多个开发者做出了贡献。Istio 官方是这样描述的：
 
-> 正是因为有如此令人惊羡（amazing）的社区，才让 Istio 能够在每个季度有如此多的改进
+> 正是因为有如此令人惊羡（amazing）的社区，才让 Istio 能够在每个季度有如此多的改进。
 
 Istio 团队已经从上个月倒卖商标的麻烦中走了出来，看上去是想通过强调 `Istio's great community` 这个理念来抚平社区开发者受伤的心灵？笔者认为，作为开发者和用户不必太在意 Google 的商业行为，至少现阶段 Istio 还在以开源的身份持续演进，还能为我所用，这就足够了。
 
-1.7 版本中重要的更新主要有以下四个方面：
+1.7 版本中重要的更新主要有以下四个方面。
 
 ### 安全增强
 
-- 确认了使用安全发现服务（SDS）作为证书分发的优势，并把它作为一个重要的安全最佳实践。现在这一特性也被使用在出口网关上
+- 确认了使用安全发现服务（SDS）作为证书分发的优势，并把它作为一个重要的安全最佳实践。现在这一特性也被使用在出口网关上。
 - 信任域验证除了支持 HTTP，现在也可以验证 TCP 流量了，并且还支持在 MeshConfig 中进行配置，提供了更多灵活性。
 - 可以使用 [ECC](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography) 进行 CA 通信，提高了安全性和效率。
 - 网关默认使用非根（non-root）用户部署，这主要是基于一条最佳实践：不要让运行的进程有多于它所需的权限，这会导致不必要的混淆。
@@ -39,8 +39,8 @@ Istio 团队已经从上个月倒卖商标的麻烦中走了出来，看上去�
 在易用性方面主要的改进依然是对 `istioctl` 命令行工具的增强：
 
 - analysis 支持
-- 对可能不安全的 `DestinationRule` 配置发出警告
-- 对使用废弃的 Mixer 资源发出警告
+  - 对可能不安全的 `DestinationRule` 配置发出警告
+  - 对使用废弃的 Mixer 资源发出警告
 - 可以使用 `ISTIOCONFIG` 设置自定义配置
 - 使用助记符来标识端口号
 - 添加了 `istioctl x uninstall` 来方便卸载 Istio
@@ -54,24 +54,25 @@ Istio 团队已经从上个月倒卖商标的麻烦中走了出来，看上去�
 
 > The [Istio Operator](https://istio.io/latest/docs/setup/install/operator/) is a great way to install Istio, as it automates a fair amount of toil. Canary control plane deployments are also important; they allow ultra-safe upgrades of Istio. Unfortunately, you couldn’t use them together - [until now](https://istio.io/latest/docs/setup/upgrade/#canary-upgrades).
 
-  吹了一大堆，其实翻译成人话就是：Operator 目前还不支持金丝雀更新。真是佩服这段文案编写者拐弯抹角的能力。
+吹了一大堆，其实翻译成人话就是：Operator 目前还不支持金丝雀更新。真是佩服这段文案编写者拐弯抹角的能力。
 
 - 提供了 istio-agent 的指标，可以观察它的运行情况
 - Prometheus 指标收集方面的改进
 
-### VM安全性
+### VM 安全性
 
 持续对虚拟机相关功能的开发是本年度的重点，这是 Istio 多次强调的。这是因为目前客户应用部署环境的复杂性和混合性，VM 依然是一种主要的部署选择。和一些托管的竞品（比如 AWS APP Mesh ）相比，Istio 缺失了这方面的能力，使得这些客户不得不观望而无法落地。对 VM 的支持就成为了重中之重，这也是商业上的考量。
 
 然而本次更新没有太多的重量级功能发布，只是做了小的改进，且还在 alpha 阶段。比如为 VM 也增加了安全特性，支持证书自动轮转；`istioctl` 现在可以验证 VM 的代理状态；增加了 RPM 安装包等。
 
-## 温柔一刀 - 升级的伤痛
+## 温柔一刀——升级的伤痛
 
 客观的讲，以上官方的发布文档大部分内容都不痛不痒，对使用层面的用户影响不大。而真正和用户息息相关是安装和升级的变化。Istio 团队并没有在发布首页强调这一点，这引起了笔者的强烈不适并严重怀疑 Istio 有刻意规避问题的嫌疑。我们先来看笔者认为最重要的一条变更：
 
 ### 过分严格的平台版本限制
 
 > Require Kubernetes 1.16+
+>
 > Kubernetes 1.16+ is now required for installation.
 
 这是 Istio 官方第一次在新版本的 Release Note 中明确的说明了 Kubernetes 的版本限制问题。尽管以前老版本的 Istio 也会对平台版本有要求，但通常是这样的口吻：
@@ -80,9 +81,9 @@ Istio 团队已经从上个月倒卖商标的麻烦中走了出来，看上去�
 
 这种描述隐含的意思就是：我们在这几个版本测试过兼容性，但我们并没有说 Istio 不兼容其他版本，可能、也许、大概是兼容的，我们只是没有测试过而已。而这一次是描述是 “required”，请仔细体会这两种说法的区别。
 
-为了验证 1.7 真实的兼容性（ required只是骇人听闻？），笔者做了一次安装测试，测试环境为Docker 桌面版内置的 Kubernetes，版本 v1.15.5。
+为了验证 1.7 真实的兼容性（ required 只是骇人听闻？），笔者做了一次安装测试，测试环境为 Docker 桌面版内置的 Kubernetes，版本 v1.15.5。
 
-首先，使用预检命令验证集群环境是否合法（新版本已经取消了`istioctl verify-install` 命令）
+首先，使用预检命令验证集群环境是否合法（新版本已经取消了 `istioctl verify-install` 命令）
 
 ```bash
 $ bin/istioctl x precheck
@@ -122,19 +123,19 @@ Istio 开发团队也在 Issue 中抱怨对方太激进（aggressive），留给
 
 而对于用户而言，意味着你不得不将自己的 mesh 配置文件的版本号进行更新，如果集群比较庞大，很可能有不少的工作量（主要是测试、验证方面）。你很可能还需要通过金丝雀升级的方式进行，因为无论是先升级 Istio，还是先修改配置，都可能出现兼容问题（说好的易用性和用户体验呢？）。
 
-### 是LTS还是STS（short term support）？
+### 是 LTS 还是 STS（short term support）？
 
-在 Istio 的[版本支持公告页面](https://istio.io/latest/news/support/)，你可以发现以前的老版本都逐渐的停止了维护，特别是具有里程碑意义的 1.5 版本，在发布 3个月后即停止维护，成为 Istio 史上最短命的版本。这一度让我怀疑其架构重建的质量。Istio 在[构建和发布节奏页面](https://istio.io/latest/about/release-cadence/)中这样定义 LTS（long term support）：
+在 Istio 的[版本支持公告页面](https://istio.io/latest/news/support/)，你可以发现以前的老版本都逐渐的停止了维护，特别是具有里程碑意义的 1.5 版本，在发布 3 个月后即停止维护，成为 Istio 史上最短命的版本。这一度让我怀疑其架构重建的质量。Istio 在[构建和发布节奏页面](https://istio.io/latest/about/release-cadence/)中这样定义 LTS（long term support）：
 
 > Support is provided until 3 months after the next LTS
 
-即所谓长期支持，也只有3个月。也就是说在每发布一个新版本，上一个老版本就不保证继续支持了（包括更新、修复bug等）。我们再来对比一下 Ubuntu 对 LTS 的定义，下面是 Ubuntu 20.04 LTS 的一段说明：
+即所谓长期支持，也只有 3 个月。也就是说在每发布一个新版本，上一个老版本就不保证继续支持了（包括更新、修复 bug 等）。我们再来对比一下 Ubuntu 对 LTS 的定义，下面是 Ubuntu 20.04 LTS 的一段说明：
 
-> 下载专为桌面PC和笔记本精心打造的Ubuntu长期支持(LTS)版本。LTS意为“长期支持”，一般为5年。LTS版本将提供免费安全和维护更新至2025年4月。
+> 下载专为桌面 PC 和笔记本精心打造的 Ubuntu 长期支持 (LTS) 版本。LTS 意为 “长期支持”，一般为 5 年。LTS 版本将提供免费安全和维护更新至 2025 年 4 月。
 
 5 年对 3 个月。对于操作系统来说，因为处在整个软件架构的最底层，理应保证长期稳定的维护。Service Mesh 比不了操作系统，但好歹也是基础设施，也应该对上层建筑提供更多稳定性。这个所谓的长期是不是有点过于短暂？追风少年你是要赶着去投胎吗？Istio 对 LTS 的定义让我开始怀疑人生。
 
-## 路在何方 - 稳定是永恒的童话？
+## 路在何方——稳定是永恒的童话？
 
 Service Mesh 领域的权威人士 Christian Posta 在公开采访中表示：Istio 1.7 将会是真正意义上的稳定、可用于生产环境的版本。笔者对此不敢苟同。本次更新表现平平，并无亮点，反倒是对 Kubernetes 的版本限制会导致用户在安装、升级环节增加成本和不确定性，是一次用户体验上的倒退。Istio 1.0 版本就宣称是生成环境可用（Production ready），恐怕这一次也依然会变成川建国金句的翻版：Make Istio production ready again!
 
