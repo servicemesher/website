@@ -123,13 +123,13 @@ Istio 开发团队也在 Issue 中抱怨对方太激进（aggressive），留给
 
 而对于用户而言，意味着你不得不将自己的 mesh 配置文件的版本号进行更新，如果集群比较庞大，很可能有不少的工作量（主要是测试、验证方面）。你很可能还需要通过金丝雀升级的方式进行，因为无论是先升级 Istio，还是先修改配置，都可能出现兼容问题（说好的易用性和用户体验呢？）。
 
-### 是 LTS 还是 STS（short term support）？
+### 短暂的 LTS
 
-在 Istio 的[版本支持公告页面](https://istio.io/latest/news/support/)，你可以发现以前的老版本都逐渐的停止了维护，特别是具有里程碑意义的 1.5 版本，在发布 3 个月后即停止维护，成为 Istio 史上最短命的版本。这一度让我怀疑其架构重建的质量。Istio 在[构建和发布节奏页面](https://istio.io/latest/about/release-cadence/)中这样定义 LTS（long term support）：
+在 Istio 的[版本支持公告页面](https://istio.io/latest/news/support/)，你可以发现以前的老版本都逐渐的停止了维护，特别是具有里程碑意义的 1.5 版本，在发布 6 个月后即停止维护，几乎成为了 Istio 史上最短命的版本。Istio 在[构建和发布节奏页面](https://istio.io/latest/about/release-cadence/)中这样定义 LTS（long term support）：
 
 > Support is provided until 3 months after the next LTS
 
-即所谓长期支持，也只有 3 个月。也就是说在每发布一个新版本，上一个老版本就不保证继续支持了（包括更新、修复 bug 等）。我们再来对比一下 Ubuntu 对 LTS 的定义，下面是 Ubuntu 20.04 LTS 的一段说明：
+即上一个版本会在新版本发布后的 3 个月就停止维护（包括更新、修复 bug 等），算上它自己的发布日期，也只有半年时间。我们再来对比一下 Ubuntu 对 LTS 的定义，下面是 Ubuntu 20.04 LTS 的一段说明：
 
 > 下载专为桌面 PC 和笔记本精心打造的 Ubuntu 长期支持 (LTS) 版本。LTS 意为 “长期支持”，一般为 5 年。LTS 版本将提供免费安全和维护更新至 2025 年 4 月。
 
