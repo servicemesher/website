@@ -592,7 +592,7 @@ Hello version: v2, instance: helloworld-v2-776f74c475-jws5r
 
 虽然 Traffic Director 和 Anthos Service Mesh 两者都是 Google Cloud 上的 Service Mesh 产品，似乎存在竞争关系，但从两者的功能和定位可以看出，这两个产品其实是互补的，可以结合两者以形成一个比较完善的 Service Mesh 托管解决方案。因此 Google Cloud 会对两个产品持续进行整合。下图为 Traffic Director Road Map 中 Anthos 和 Istio 的整合计划。
 
-![](traffic-director-anthos-int.png "Traffic Director 和 Anthos Service Mesh 集成计划")
+![](traffic-director-anthos-int.png)
 
 ## 参考文档
 
