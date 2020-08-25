@@ -5,7 +5,7 @@ draft: false
 banner: "/img/blog/banners/006tKfTcly1g17wqrniy0j31400u0b2d.jpg"
 author: "马若飞"
 authorlink: "https://github.com/malphi"
-reviewer:  ["rootsongjc"]
+reviewer:  ["宋净超"]
 reviewerlink:  ["https://github.com/rootsongjc"]
 summary: "从用户角度出发，深度解读 Istio 1.7 版本。"
 tags: ["istio"]
