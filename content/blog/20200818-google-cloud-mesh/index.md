@@ -1,6 +1,6 @@
 ---
 title: "Google Cloud 服务网格：Traffic Director 与 Anthos Service Mesh 的左右互搏"
-date: 2020-08-18T16:00:00+08:00
+date: 2020-08-26T12:00:00+08:00
 draft: false
 banner: "/img/blog/banners/006tNbRwly1fxozxiskekj31400u07bb.jpg"
 author: "赵化冰"
