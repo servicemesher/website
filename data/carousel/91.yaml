@@ -1,9 +1,0 @@
-weight: 91
-title: "Service Mesh Webinar #1"
-description: >
-  <ul class="list-style-none">
-     <li>多点生活在 Service Mesh 上的实践</li>
-     <li>Istio + MOSN + Dubbo</li>
-     <li><a href="/blog/service-mesh-webinar-1">查看回顾</a></li>
-   </ul>
-image: "https://gw.alipayobjects.com/mdn/rms_95b965/afts/img/A*VDkHT77KkscAAAAAAAAAAABkARQnAQ"
