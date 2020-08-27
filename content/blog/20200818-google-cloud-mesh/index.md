@@ -36,7 +36,7 @@ Traffic Director 架构
 
 ### 服务注册发现机制
 
-Traffic Director 采用了 Google Cloud 的一种称为 Backend Service 的服务注册机制。通过 Backend Service 支持了 GKE 集群中容器工作负载和虚拟机工作负载两种方式的服务注册发现，不过和 Istio 不同的是，Traffic Director 并不支持 K8S 原生的服务注册发现机制。
+Traffic Director 采用了 Google Cloud 的一种称为 Backend Service 的服务注册机制。通过 Backend Service 支持了 GKE 集群中容器工作负载和虚拟机工作负载两种方式的服务注册发现，不过和 Istio 不同的是，Traffic Director 并不支持 K8s 原生的服务注册发现机制。
 
 #### 服务注册发现资源模型
 
@@ -46,7 +46,7 @@ Traffic Director 服务发现资源模型
 
 ![](traffic-director-service-discovery.png)
 
-Google Cloud 的这一套服务注册的机制并不只是为 Traffic Director 而定制的，还可以和 Google Cloud 上的各种负载均衡服务一起使用，作为负载均衡的后端。熟悉 K8s 的同学应该清楚，进入 K8s 集群的流量经过 Load Balancer 后会被首先发送到一个 node 的 nodeport 上，然后再通过 DNAT 转发到 Service 后端的一个 Pod IP 上。Google Cloud 在 cluster 上提供了一个 [VPC native](https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips) 的网络特性，可以在 VPC 中直接路由 Pod ，在打开 VPC native 特性的集群中，通过将 NEG 而不是 K8s service 放到 Load balancer 后端，可以跳过 Kubeproxy iptables 转发这一跳，直接将流量发送到 Pod，降低转发延迟，并可以应用更灵活的LB和路由算法。
+Google Cloud 的这一套服务注册的机制并不只是为 Traffic Director 而定制的，还可以和 Google Cloud 上的各种负载均衡服务一起使用，作为负载均衡的后端。熟悉 K8s 的同学应该清楚，进入 K8s 集群的流量经过 Load Balancer 后会被首先发送到一个 node 的 nodeport 上，然后再通过 DNAT 转发到 Service 后端的一个 Pod IP 上。Google Cloud 在 cluster 上提供了一个 [VPC native](https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips) 的网络特性，可以在 VPC 中直接路由 Pod ，在打开 VPC native 特性的集群中，通过将 NEG 而不是 K8s service 放到 Load balancer 后端，可以跳过 Kubeproxy iptables 转发这一跳，直接将流量发送到 Pod，降低转发延迟，并可以应用更灵活的 LB 和路由算法。
 
 虽然 Backend Service 已经支持了无服务 NEG，但目前 Traffic Director 还不支持，但从资源模型的角度来看，应该很容易扩展目前的功能，以将无服务工作负载加入到服务网格中。
 
@@ -164,7 +164,7 @@ Traffic Director 流量规则相关的控制面资源模型如下图所示，图
 * URL Map：用于设置路由规则，包括规则匹配条件和规则动作两部分。匹配条件支持按照 HTTP 的 Host、Path、Header进行匹配。匹配后可以执行 Traffic Splitting、Redirects、URL Rewrites、Traffic Mirroring、Fault Injection、Header Transformation 等动作。
 * Backend Service：前面在服务发现中已经介绍了 Backend Service 用于服务发现，其实还可以在 Backen Service 上设置流量策略，包括LB策略，断路器配置，实例离线检测等。可以看到 Backend Service 在 Traffic Director 的流量管理模型中同时承担了 Istio 中的 ServiceEntry 和 Destionation Rule 两个资源等功能。
 
-客户端直接通过 VIP 访问服务其实是一个不太友好的方式，因此我们还需要通过一个 DNS 服务将 Rorwarding Rule 中的 VIP 和一个 DNS record 关联起来，在 Google Cloud 中可以采用 [Cloud DNS](https://cloud.google.com/dns/) 来将 Forwarding Rule 的 VIP 关联到一个内部的全局 DNS 名称上。 
+客户端直接通过 VIP 访问服务其实是一个不太友好的方式，因此我们还需要通过一个 DNS 服务将 Forwarding Rule 中的 VIP 和一个 DNS record 关联起来，在 Google Cloud 中可以采用 [Cloud DNS](https://cloud.google.com/dns/) 来将 Forwarding Rule 的 VIP 关联到一个内部的全局 DNS 名称上。 
 
 Traffic Director 流量管理资源模型
 
