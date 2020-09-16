@@ -45,7 +45,7 @@ spec:
 
 ![envoy-wasm](https://tva1.sinaimg.cn/large/007S8ZIlly1gf88kaci9ij31ha0lmgrm.jpg)
 
-<center>（图片引自吉米漫画《向左走向右走》）</center>
+<center>（图片引自几米漫画《向左走向右走》）</center>
 
 为了能让升级过程更平滑，Istio 提供了一种叫金丝雀升级（Canary upgrades）的策略，可以安装一个金丝雀版本的控制平面，与老版本同时存在。金丝雀升级可以让你逐渐的切换流量以验证新版本的可用性，同时也保留了回滚的能力。当然，如果你足够自信，依然可以原地升级（In place upgrade)。
 
