@@ -63,7 +63,7 @@ VPA有两个目标：
 
 [原地升级](https://github.com/kubernetes/kubernetes/issues/5774)是一个计划中的功能,在节点上有足够资源的情况下，原地升级无需杀死容器就能够调整已存在容器的资源的请求和限制。
 
-VPA将从这种能力中受益匪浅，但它不被视为最小可行产品 ( inimum Viable Product, MVP) 的阻挡者。
+VPA将从这种能力中受益匪浅，但它不被视为最小可行产品 ( Minimum Viable Product, MVP) 的阻挡者。
 
 #### 资源估计（Resource estimation）
 
