@@ -193,18 +193,11 @@ MOSN 是 MOSN 是 Modular Open Smart Network 的简称， 是一款使用 Go 语
 按文章发表的时间排序：
 
 - [The Difference Between API Gateways and Service Mesh](https://konghq.com/blog/the-difference-between-api-gateways-and-service-mesh/)： 2020-02，指导架构师确定何时使用API网关以及何时使用服务网格，作者Marco Palladino，来自kong。
-
-- [Do I Need an API Gateway if I Use a Service Mesh?](https://blog.christianposta.com/microservices/do-i-need-an-api-gateway-if-i-have-a-service-mesh/)：2020-01，作者 Christian Posta，中文翻译版本请见马若飞同学的 [使用了 Service Mesh 后我还需要 API 网关吗](https://www.Service Mesher.com/blog/do-i-need-an-api-gateway-if-i-have-a-service-mesh/)，对 Service Mesh 技术和 API 网关的对比，着重分析了两者的功能重合点和分歧点，为技术选型和落地提供了指导思路。
-
+- [Do I Need an API Gateway if I Use a Service Mesh?](https://blog.christianposta.com/microservices/do-i-need-an-api-gateway-if-i-have-a-service-mesh/)：2020-01，作者 Christian Posta，中文翻译版本请见马若飞同学的 [使用了 Service Mesh 后我还需要 API 网关吗](https://www.servicemesher.com/blog/do-i-need-an-api-gateway-if-i-have-a-service-mesh/)，对 Service Mesh 技术和 API 网关的对比，着重分析了两者的功能重合点和分歧点，为技术选型和落地提供了指导思路。
 - [蚂蚁金服 API Gateway Mesh 思考与实践](https://www.infoq.cn/article/azCFGyTDGakZqaLEEDMN): 2019-12，作者贾岛，介绍蚂蚁金服支付宝网关的发展和API Gateway Mesh的由来，强烈推荐阅读，这个文章非常清晰的介绍了蚂蚁金服在Service Mesh和API Gateway融合方面的实践。
-- [API Gateway的身份认同危机](https://www.Service Mesher.com/blog/api-gateways-are-going-through-an-identity-crisis/): 2019-05, 原文作者 Christian Posta，译者周雨青，讲述API Gateway的基本理念如API的定义，API Management的含义，API Gateway模式，以及服务网格和API Gateway的关系。
-
-- [长路漫漫踏歌而行：蚂蚁金服Service Mesh实践探索](../../talk/201810-ant-finance-service-mesh-practice/): 2018-10，我在QCon的演讲，我分享了当时蚂蚁金服在服务间通讯范围的探索，提出将服务网格在东西向通讯中的能力重用到南北向通讯中，当时基于Sidecar的SOFA Gateway产品刚开始开发。
-
+- [API Gateway的身份认同危机](https://www.servicemesher.com/blog/api-gateways-are-going-through-an-identity-crisis/): 2019-05, 原文作者 Christian Posta，译者周雨青，讲述API Gateway的基本理念如API的定义，API Management的含义，API Gateway模式，以及服务网格和API Gateway的关系。
+- 长路漫漫踏歌而行：蚂蚁金服Service Mesh实践探索：2018-10，我在QCon的演讲，我分享了当时蚂蚁金服在服务间通讯范围的探索，提出将服务网格在东西向通讯中的能力重用到南北向通讯中，当时基于Sidecar的SOFA Gateway产品刚开始开发。
 - [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784): 2018-09，作者Richard Li，Datawire的CEO ，在开发 Ambassador API Gateway。Ambassador 是基于 Envoy 的API Gateway开源产品，文章阐述了对服务网格和API Gateway的看法，差异，以及对两者集成的看法。
-
-- [DreamMesh抛砖引玉(9)-API Gateway](../../post/201803-dreammesh-brainstorm-gateway/): 2018-03，这个文章也是我写的，2018年初我和Service Mesh社区的一些朋友深入探讨之后，在DreamMesh系列博客文章中记录下了当时构想的方案，尤其对 API gateway和sidecar是分是合有详细讨论。当时想法还不够成熟，但大体方向已经有雏形了。鸣谢当时参与讨论的同学！
-
+- DreamMesh抛砖引玉(9)-API Gateway：2018-03，这个文章也是我写的，2018年初我和Service Mesh社区的一些朋友深入探讨之后，在DreamMesh系列博客文章中记录下了当时构想的方案，尤其对 API gateway和sidecar是分是合有详细讨论。当时想法还不够成熟，但大体方向已经有雏形了。鸣谢当时参与讨论的同学！
 - [Service Mesh vs API Gateway](https://medium.com/microservices-in-practice/service-mesh-vs-api-gateway-a6d814b9bf56): 2017-10，原文作者 [Kasun Indrasiri](https://medium.com/@kasunindrasiri)，以及 [赵化冰同学翻译的中文版本](https://zhaohuabing.com/2018/04/11/service-mesh-vs-api-gateway/)，文章不长，主要对比了服务网格和API Gateway的产品功能，提出了两者融合的方式——在API Gateway中通过服务网格来调用下游服务。
-
 - [Application Network Functions With ESBs, API Management, and Now.. Service Mesh?](https://blog.christianposta.com/microservices/application-network-functions-with-esbs-api-management-and-now-service-mesh/)：2017-08，作者 Christian Posta，讲述服务网格与ESB，消息代理和API管理之类的事物的关系。内容非常好，强烈推荐阅读（我不得不吐糟一下：配图太辣眼睛）。
