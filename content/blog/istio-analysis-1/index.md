@@ -28,7 +28,7 @@ Istio 作为 Service Mesh 领域的集大成者, 提供了流控, 安全, 遥测
 
 ```bash
 % kubectl -n istio-system get pod
-NAME                                          READY     STATUS 
+NAME                                          READY     STATUS
 grafana-5f54556df5-s4xr4                      1/1       Running
 istio-citadel-775c6cfd6b-8h5gt                1/1       Running
 istio-galley-675d75c954-kjcsg                 1/1       Running
@@ -56,7 +56,7 @@ Service Mesh 的Sidecar 模式要求对数据面的用户Pod进行代理的注�
 
 ## 2. Istio 源码, 镜像和命令
 
-Isito 项目代码主要由以下2个git 仓库组成:
+Istio 项目代码主要由以下2个git 仓库组成:
 
 | 仓库地址                         | 语言 | 模块                                                         |
 | -------------------------------- | ---- | ------------------------------------------------------------ |

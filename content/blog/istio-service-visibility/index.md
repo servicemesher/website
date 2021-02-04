@@ -68,7 +68,7 @@ Istio 1.1 即将发布，这几天陆续看到新文章介绍istio1.1的新功�
 
     - `* ` 表示此网络资源在所有的namespace生效。
 
-我们来围绕服务可见性，对Istio1.1新特性做一个深入了解。 
+我们来围绕服务可见性，对Istio1.1新特性做一个深入了解。
 
 ## ExportTo 属性
 
@@ -120,7 +120,7 @@ message ServiceEntry {
 
 对于k8s原生service，上面的注释说用 annotation "networking.istio.io/exportTo" 可以达到同样的效果。
 
-翻了一下Isito最新的代码，`install/kubernetes/helm/istio/charts/mixer/templates/service.yaml` 的例子：
+翻了一下Istio最新的代码，`install/kubernetes/helm/istio/charts/mixer/templates/service.yaml` 的例子：
 
 ```yaml
 apiVersion: v1
@@ -298,14 +298,14 @@ func (ps *PushContext) initServiceRegistry(env *Environment) error {
         ns := s.Attributes.Namespace
         if len(s.Attributes.ExportTo) == 0 {
             if ps.defaultServiceExportTo[VisibilityPrivate] {
-               ps.privateServicesByNamespace[ns] 
+               ps.privateServicesByNamespace[ns]
                    = append(ps.privateServicesByNamespace[ns], s)
             } else if ps.defaultServiceExportTo[VisibilityPublic] {
                 ps.publicServices = append(ps.publicServices, s)
             }
         } else {
             if s.Attributes.ExportTo[VisibilityPrivate] {
-                ps.privateServicesByNamespace[ns] = 
+                ps.privateServicesByNamespace[ns] =
                    append(ps.privateServicesByNamespace[ns], s)
             } else {
                ps.publicServices = append(ps.publicServices, s)
@@ -327,7 +327,7 @@ func (ps *PushContext) Services(proxy *Proxy) []*Service {
     if proxy != nil && proxy.SidecarScope != nil && proxy.SidecarScope.Config != nil && 		   proxy.Type == SidecarProxy {
         return proxy.SidecarScope.Services()
     }
-    
+
     out := []*Service{}
 
     // 没有 sidecar scope，就只考虑 exportTo 的影响
@@ -348,7 +348,7 @@ func (ps *PushContext) Services(proxy *Proxy) []*Service {
 
 SidecarScope 的说明，来自代码注释：
 
-> SidecarScope是 Sidecar resource 的包装器，带有一些预处理数据，用于确定给定 Sidecar 可访问的Service，VirtualService和 DestinationRule。 预先计算 Sidecar 的 Service，VirtualService和 DestinationRule 可以提高性能，因为我们不再需要为每个 Sidecar 计算此列表。 我们只需将 Sidecar 与 SidecarScope 相匹配。 
+> SidecarScope是 Sidecar resource 的包装器，带有一些预处理数据，用于确定给定 Sidecar 可访问的Service，VirtualService和 DestinationRule。 预先计算 Sidecar 的 Service，VirtualService和 DestinationRule 可以提高性能，因为我们不再需要为每个 Sidecar 计算此列表。 我们只需将 Sidecar 与 SidecarScope 相匹配。
 
 ```go
 type SidecarScope struct {

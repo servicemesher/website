@@ -261,7 +261,7 @@ defaultConfig:
   controlPlaneAuthPolicy: MUTUAL_TLS
 ```
 
-5) 控制面组件 istio-pilot、istio-telemetry、isito-policy 的 sidecar，以及 istio-ingressgateway，istio-egressgateway 增加启动参数以支持控制面 mTLS 认证:
+5) 控制面组件 istio-pilot、istio-telemetry、istio-policy 的 sidecar，以及 istio-ingressgateway，istio-egressgateway 增加启动参数以支持控制面 mTLS 认证:
 
 ```plain
 - --controlPlaneAuthPolicy

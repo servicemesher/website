@@ -188,7 +188,7 @@ Traffic Director 目前提供流量控制功能，包括流量路由和策略执
    - Circuit breakers
    - Timeouts
 
-熟悉 Istio API 和 Envoy xDS API 的同学就会发现这些功能非常眼熟，基本上和 Isito / Envoy 提供的功能相同。
+熟悉 Istio API 和 Envoy xDS API 的同学就会发现这些功能非常眼熟，基本上和 Istio / Envoy 提供的功能相同。
 
 和包括Istio在内的所有Service Mesh产品一致， Traffic Director 也在强调说这些功能都是可以在不修改应用代码的前提下获得，这是理所当然的重要卖点。
 

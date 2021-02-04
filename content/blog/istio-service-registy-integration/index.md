@@ -27,7 +27,7 @@ Istio 对 Kubernetes 具有较强的依赖性，其服务发现就是基于 Kube
 ![](pilot-services-source.svg)
 图1 Istio 服务模型数据来源
 
-从上图中可以得知， Pilot 中管理的服务数据有两处数据来源： 
+从上图中可以得知， Pilot 中管理的服务数据有两处数据来源：
 
 * Service Registry：来源于各个服务注册表，例如 Kubernetes 中的 Service 和 Consul Catalog 中注册的服务。Istio 通过特定的适配器连接这些服务注册表，由适配器将服务注册表中的私有服务模型转换为 Istio 内部支持的标准服务模型。
 * Config Storage：来源于各种配置数据源中的独立服务，通过 Istio 定义的 [ServiceEntry](https://istio.io/docs/reference/config/networking/service-entry/) 和 [WorkloadEntry](https://istio.io/docs/reference/config/networking/workload-entry/) 资源类型加入到 Pilot 的内部服务模型中。
@@ -95,7 +95,7 @@ configSources:
   - address:${your-coustom-mcp-server}:9901
 ```
 
-而从1.5版本开始，[Galley 的功能已经被合并到 Istiod 中，并且缺省被禁用](https://istio.io/news/releases/1.6.x/announcing-1.6/change-notes/)。从 Isito 控制面简化的趋势来看，Galley 后续很可能会被逐渐放弃，其自身功能的稳定性也值得怀疑。因此我不建议在产品中启用 Galley。
+而从1.5版本开始，[Galley 的功能已经被合并到 Istiod 中，并且缺省被禁用](https://istio.io/news/releases/1.6.x/announcing-1.6/change-notes/)。从 Istio 控制面简化的趋势来看，Galley 后续很可能会被逐渐放弃，其自身功能的稳定性也值得怀疑。因此我不建议在产品中启用 Galley。
 
 除此以外，根据 Istio 社区中的这个 [MCP over XDS](https://docs.google.com/document/d/1lHjUzDY-4hxElWN7g6pz-_Ws7yIPt62tmX3iGs_uLyI/edit#heading=h.xw1gqgyqs5b) proposal，社区正在讨论使用 XDSv3/UDPA 代替目前的 MCP 协议来传输配置数据，因此 MCP server 和 Pilot 的通信机制在 1.7 版本中很可能变化。
 

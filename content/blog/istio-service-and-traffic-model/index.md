@@ -13,7 +13,7 @@ keywords: ["service mesh","服务网格","envoy","kubernetes"]
 
 > 本文转载自[宋净超的博客](https://jimmysong.io/posts/istio-service-and-traffic-model/)。
 
-本文介绍了 Istio 和 Kubernetes 中的一些服务和流量的抽象模型。虽然 Istio 一开始确定的抽象模型与对接的底层平台无关，但目前来看基本绑定 Kubernetes，本文仅以 Kubernetes 说明。另外在 [ServiceMesher 社区](http://www.servicemesher.com)中最近有很多关于 Istio、Envoy、Kubernetes 之中的服务模型关系的讨论，本文作为一个开篇说明，Kubernetes 和 Isito 之间有哪些共有的服务模型，Istio 在 Kubernetes 的服务模型之上又增加了什么。
+本文介绍了 Istio 和 Kubernetes 中的一些服务和流量的抽象模型。虽然 Istio 一开始确定的抽象模型与对接的底层平台无关，但目前来看基本绑定 Kubernetes，本文仅以 Kubernetes 说明。另外在 [ServiceMesher 社区](http://www.servicemesher.com)中最近有很多关于 Istio、Envoy、Kubernetes 之中的服务模型关系的讨论，本文作为一个开篇说明，Kubernetes 和 Istio 之间有哪些共有的服务模型，Istio 在 Kubernetes 的服务模型之上又增加了什么。
 
 **服务具有多个版本。**在 CI/CD 过程中，同一个服务可能同时部署在多个环境中，如开发、生产和测试环境等，这些服务版本不一定具有不同的 API，可能只是一些小的更改导致的迭代版本。在 A/B 测试和灰度发布中经常遇到这种情况。
 

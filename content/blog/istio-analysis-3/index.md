@@ -116,8 +116,8 @@ h.HandleFunc("/admitmixer", wh.serveAdmitMixer)
 MCP 提供了一套配置订阅和分发的API, 在MCP中, 可以抽象为以下模型:
 
 - source: 「配置」的提供端, 在Istio中Galley 即是source
-- sink: 「配置」的消费端, 在isito中典型的sink包括Pilot和Mixer组件
-- resource: source和sink关注的资源体, 也就是isito中的「配置」
+- sink: 「配置」的消费端, 在istio中典型的sink包括Pilot和Mixer组件
+- resource: source和sink关注的资源体, 也就是istio中的「配置」
 
 当sink和source之间建立了对某些resource的订阅和分发关系后, source 会将指定resource的变化信息推送给sink, sink端可以选择接受或者不接受resource更新(比如格式错误的情况), 并对应返回ACK/NACK 给source端.
 

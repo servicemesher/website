@@ -22,7 +22,7 @@ keywords: ["envoy log","envoy","istio"]
 
 幸运的是，envoy 本身可以记录流量的信息，本文主要介绍如何利用 envoy 日志，对类似问题进行定位。
 
-demo 环境为腾讯云 TKE，isito 版本 1.4.3，代码归档于：[github.com/zhongfox/envoy-log-demo](https://github.com/zhongfox/envoy-log-demo)
+demo 环境为腾讯云 TKE，istio 版本 1.4.3，代码归档于：[github.com/zhongfox/envoy-log-demo](https://github.com/zhongfox/envoy-log-demo)
 
 ---
 

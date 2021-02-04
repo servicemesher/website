@@ -142,10 +142,10 @@ static RegisterContextFactory register_AddHeaderContext(CONTEXT_FACTORY(AddHeade
                                                       ROOT_FACTORY(AddHeaderRootContext),
                                                       "add_header_root_id");
 
-bool AddHeaderRootContext::onConfigure(size_t) { 
+bool AddHeaderRootContext::onConfigure(size_t) {
   auto conf = getConfiguration();
   Config config;
-  
+
   google::protobuf::util::JsonParseOptions options;
   options.case_insensitive_enum_parsing = true;
   options.ignore_unknown_fields = false;
@@ -155,7 +155,7 @@ bool AddHeaderRootContext::onConfigure(size_t) {
   LOG_DEBUG("onConfigure " + config.value());
   header_name_ = config.name();
   header_value_ = config.value();
-  return true; 
+  return true;
 }
 
 bool AddHeaderRootContext::onStart(size_t) { LOG_DEBUG("onStart"); return true;}
@@ -335,7 +335,7 @@ wasme deploy envoy webassemblyhub.io/wbpcode/path_rewrite:v0.1 --config "{\"rewr
 
 ## WASM 总结
 
-WASM 扩展仍在快速发展当中，但是 Isito 使用 WASM API 实现了相关的插件，说明已经做好了迁移的准备。前景美好，值得期待，但有待进一步确定 WASM 沙箱本身稳定性和性能。
+WASM 扩展仍在快速发展当中，但是 Istio 使用 WASM API 实现了相关的插件，说明已经做好了迁移的准备。前景美好，值得期待，但有待进一步确定 WASM 沙箱本身稳定性和性能。
 
 从开发体验来说：
 

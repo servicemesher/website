@@ -176,7 +176,7 @@ Istioctl 是 Istio 的命令行配置工具，可以用来创建、查询、修�
 
 **部署 BookInfo 应用示例**
 
-Istio 已经安装并验证过了，可以在上面部署示例应用 BookInfo 了，这是一个简单的书店模拟应用，由四个服务组成：网站首页、书籍信息、评论（几个特定的版本有评论服务）和评分，全部由 Isito 管理。
+Istio 已经安装并验证过了，可以在上面部署示例应用 BookInfo 了，这是一个简单的书店模拟应用，由四个服务组成：网站首页、书籍信息、评论（几个特定的版本有评论服务）和评分，全部由 Istio 管理。
 
 **部署 BookInfo 服务**
 
@@ -200,4 +200,4 @@ Istio 已经安装并验证过了，可以在上面部署示例应用 BookInfo �
 
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/test-drive-your-first-istio-deployment-using-play-with-kubernetes-platform-cloud-computing/6286a305ly1fuxwj1ycp2j20jg07rjtf.jpg)
 
-希望本部程能帮你顺利的在 Kubernetes 上部署 Istio。下一篇博客，我将深入 Isito 的内部架构、流量控制、权限和遥测等细节。
+希望本部程能帮你顺利的在 Kubernetes 上部署 Istio。下一篇博客，我将深入 Istio 的内部架构、流量控制、权限和遥测等细节。

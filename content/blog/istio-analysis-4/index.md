@@ -446,7 +446,7 @@ type AggregatedDiscoveryServiceServer interface {
 
 简要说明:
 
-- 使用统一配置管理器(`Galley`)来处理isito CRD的处理, 通过MCP进行下发, Galley作为MCP 服务端, Pilot/Mixer等作为MCP 客户端. 在istio 1.1 中, Galley的以上功能已经发布, 并作为默认的配置处理方式, 只是1.1 中还保留了旧的实现代码, Pilot/Mixer 可以选择独立List/Watch Istio CRD, 未来随着Galley功能的增强和稳定, 旧的实现应该会被移除。
+- 使用统一配置管理器(`Galley`)来处理istio CRD的处理, 通过MCP进行下发, Galley作为MCP 服务端, Pilot/Mixer等作为MCP 客户端. 在istio 1.1 中, Galley的以上功能已经发布, 并作为默认的配置处理方式, 只是1.1 中还保留了旧的实现代码, Pilot/Mixer 可以选择独立List/Watch Istio CRD, 未来随着Galley功能的增强和稳定, 旧的实现应该会被移除。
 - 提议设计新的gRPC双向流协议: Mesh Configuration Protocol (MCP), 对配置进行抽象, 聚合和传输. (类似xDS gRPC), 以此将Pilot中配置对接逻辑从in-process 逐步改造为out-of-process方式。
 
 ------
