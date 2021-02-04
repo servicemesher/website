@@ -144,7 +144,7 @@ Istio的请求寻址方式和普通kubernetes非常相似，原理相同，只�
 
 看下图就知道了，这是一个 Virtual Host 的示例， Istio 通过 Pilot 将这个规则发送给 Sidecar/Envoy ，依靠这个信息来匹配路由请求找到处理请求的cluster：
 
-![Isito中的Pilot注册信息](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u495625j30rd0ldgot.jpg)
+![Istio中的Pilot注册信息](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u495625j30rd0ldgot.jpg)
 
 domains中，除了列出域名外，还有一个特殊的IP地址，这个就是Kubernetes服务的 ClusterIP！因此，Sidecar可以通过前面传递过来的 ClusterIP 在这里进行路由匹配（当然也可以从报文中获取destination然后通过域名匹配）。
 
@@ -156,7 +156,7 @@ domains中，除了列出域名外，还有一个特殊的IP地址，这个就�
 
    同样，对于客户端，这些是看不到的内容。
 
-因此，以客户端的视角看来，Isito的这个DNS寻址方式同样的简单直白！
+因此，以客户端的视角看来，Istio的这个DNS寻址方式同样的简单直白！
 
 ![客户端请求](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/x-protocol-common-address-solution/006tNbRwly1fw0u5cxd61j30st03wmxk.jpg)
 

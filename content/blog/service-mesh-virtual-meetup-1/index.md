@@ -47,7 +47,7 @@ keywords: ["service mesh","meetup"]
 - **时间：**2020/5/6（周四） 19:00-20:00
 - **嘉宾：**高洪涛 Tetrate 创始工程师
 - **嘉宾简介**：FoundingEngineer 美国 Service Mesh 服务商 Tetrate 创始工程师。原华为软件开发云技术专家，对云原生产品有丰富的设计，研发与实施经验。对分布式数据库、容器调度、微服务、Servic Mesh 等技术有深入的了解。目前为 Apache ShardingSphere 和 Apache SkyWalking 核心贡献者，参与该开源项目在软件开发云的商业化进程。前当当网系统架构师，开源达人，曾参与 Elastic-Job 等知名开源项目。对开源项目的管理，推广和社区运营有丰富的经验。
-- **Topic 简介**：Service Mesh 的可观测性是其重要的实践领域。业界翘楚 Istio 使用 Jaeger+Promethues 技术打造其可观测体系。而各个云提供商也分别将自己的监控方案融合在对 Service Mesh 的观测中。可观测性一般包含三个领域：Metric 监控指标、Tracing 分布式追踪和日志搜集。SkyWalking 对前两个领域都有涉猎。SkyWalking 是较早涉足了对 Istio 的 Metric 指标分析的开源项目。从早期的 Mixer 方案一直追踪到后期的与 Envoy 融合方案，同时得益于 MOSN 社区的支持，目前完成 MOSN 对 SkyWalking 追踪模型的支持。本次分享将分别以 Isito 与 MOSN 为例，介绍 SkyWalking 对 Service Mesh 的可观测性的支持。
+- **Topic 简介**：Service Mesh 的可观测性是其重要的实践领域。业界翘楚 Istio 使用 Jaeger+Promethues 技术打造其可观测体系。而各个云提供商也分别将自己的监控方案融合在对 Service Mesh 的观测中。可观测性一般包含三个领域：Metric 监控指标、Tracing 分布式追踪和日志搜集。SkyWalking 对前两个领域都有涉猎。SkyWalking 是较早涉足了对 Istio 的 Metric 指标分析的开源项目。从早期的 Mixer 方案一直追踪到后期的与 Envoy 融合方案，同时得益于 MOSN 社区的支持，目前完成 MOSN 对 SkyWalking 追踪模型的支持。本次分享将分别以 Istio 与 MOSN 为例，介绍 SkyWalking 对 Service Mesh 的可观测性的支持。
 
 ### Service Mesh 高可用在企业级生产中的实践
 

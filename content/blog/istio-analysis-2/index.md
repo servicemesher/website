@@ -6,7 +6,7 @@ banner: "/img/blog/banners/006tKfTcly1g17zwff4g7j31400u0b2a.jpg"
 author: "钟华"
 authorlink: "https://imfox.io"
 originallink: "https://imfox.io/2019/03/19/istio-analysis-2/"
-summary: "今天我们来分析下 isito-sidecar-injector 组件。"
+summary: "今天我们来分析下 istio-sidecar-injector 组件。"
 tags: ["istio"]
 categories: ["istio"]
 keywords: ["service mesh","服务网格","istio"]

@@ -5,15 +5,15 @@ draft: false
 banner: "/img/blog/banners/006tNc79gy1ftzozr8nsuj30rs0kugr1.jpg"
 author: "宋净超"
 authorlink: "https://jimmysong.io"
-summary: "给大家推荐下，目前本人搜集到的可以说是最完整的Isito学习环境和包含代码的示例教程。"
+summary: "给大家推荐下，目前本人搜集到的可以说是最完整的Istio学习环境和包含代码的示例教程。"
 tags: ["istio","service mesh","tutorial"]
 categories: ["tutorial"]
 keywords: ["service mesh","istio"]
 ---
 
-8月1日0点，[Istio 1.0发布，已生产就绪！](/blog/announcing-istio-1.0/)大家都已经跃跃欲试了，几天前我发布了[一键在本地搭建运行Istio 1.0的分布式Kubernetes集群](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster)教程，在本地搭建起来还是有些门槛，稍显复杂，现在我推荐几个可以在线上学习的地方。这是目前搜集的比较完整的Isito学习环境和包含代码的示例教程有如下几个：
+8月1日0点，[Istio 1.0发布，已生产就绪！](/blog/announcing-istio-1.0/)大家都已经跃跃欲试了，几天前我发布了[一键在本地搭建运行Istio 1.0的分布式Kubernetes集群](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster)教程，在本地搭建起来还是有些门槛，稍显复杂，现在我推荐几个可以在线上学习的地方。这是目前搜集的比较完整的Istio学习环境和包含代码的示例教程有如下几个：
 
-目前搜集的比较完整的Isito学习环境和包含代码的示例教程有如下几个：
+目前搜集的比较完整的Istio学习环境和包含代码的示例教程有如下几个：
 
 - Katacoda的学习环境
 - Istio官方的bookinfo教程
@@ -72,7 +72,7 @@ GitHub地址：https://github.com/IBM/microservices-traffic-management-using-ist
 
 推荐原因：个人演示项目，方便定制和修改代码。
 
-- 我个人Fork的RedHat的Java微服务中使用Isito的教程的demo（中文），目前基于Istio 0.8，未来将支持1.0：https://github.com/rootsongjc/istio-tutorial
+- 我个人Fork的RedHat的Java微服务中使用Istio的教程的demo（中文），目前基于Istio 0.8，未来将支持1.0：https://github.com/rootsongjc/istio-tutorial
 - Christian Posta在OSCON上的使用的Istio workshop：https://github.com/christian-posta/istio-workshop
 
 ------

@@ -37,7 +37,7 @@ keywords: ["service mesh","meetup"]
 
 ![](https://raw.githubusercontent.com/servicemesher/website/master/content/blog/service-mesh-meetup-shanghai-20181125/006tNbRwly1fxlajjihjyj318w0u0nc4.jpg)
 
-#### 探讨和实践基于Isito的微服务治理事件监控
+#### 探讨和实践基于Istio的微服务治理事件监控
 
 徐运元 谐云科技云平台架构师，致力于容器 PaaS 平台、企业级容器云平台的方案设计和技术落地
 

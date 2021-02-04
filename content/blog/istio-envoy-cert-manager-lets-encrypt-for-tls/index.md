@@ -10,7 +10,7 @@ translatorlink: "https://github.com/loverto"
 reviewer:  ["宋净超"]
 reviewerlink:  ["https://jimmysong.io"]
 originallink: "https://medium.com/@prune998/istio-envoy-cert-manager-lets-encrypt-for-tls-14b6a098f289"
-summary: "本文是使用Let's Encrypt为Isito（Envoy）Service Mesh添加TLS安全支持的教程。"
+summary: "本文是使用Let's Encrypt为Istio（Envoy）Service Mesh添加TLS安全支持的教程。"
 tags: ["istio","envoy","TLS","Let's Encrypt"]
 categories: ["istio"]
 keywords: ["service mesh","istio","let's encrypt","tls","envoy"]
@@ -58,7 +58,7 @@ Istio 是一个服务网格的实现！
 
 Cert-Manager 附带 helm chart，所以很容易部署，只需按照文档执行命令即可，就像下面介绍的这样：
 
-**更新**  
+**更新**
 
 现在有一个 [Cert-Manager](https://github.com/kubernetes/charts/tree/master/stable/cert-manager) 的[官方 Helm 图表](https://github.com/kubernetes/charts/tree/master/stable/cert-manager)，你不需要 `git clone` ，只需要做 `helm install` 。
 
@@ -90,41 +90,41 @@ contrib/charts/cert-manager
 - 您创建一个证书定义，告诉哪些域需要 SSL
 - Cert-Manager 为您申请证书
 
-所以，我们来创建 Issuer。在创建 ClusterIssuers 时，我不关心特定的命名空间: 
+所以，我们来创建 Issuer。在创建 ClusterIssuers 时，我不关心特定的命名空间:
 
 ```yaml
-apiVersion: certmanager.k8s.io/v1alpha1   
-kind: ClusterIssuer   
-metadata:   
- name: letsencrypt-prod   
- namespace: kube-system   
-spec:   
- acme: 
-     #The ACME server URL   
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: ClusterIssuer
+metadata:
+ name: letsencrypt-prod
+ namespace: kube-system
+spec:
+ acme:
+     #The ACME server URL
      srver: https://acme-v01.api.letsencrypt.org/directory
-     #用于注册ACME的电子邮件地址  
+     #用于注册ACME的电子邮件地址
      email: me@domain.com
-     #用于存储ACME帐户私钥的秘密名称  
-     privateKeySecretRef:   
-       name: letsencrypt-prod   
-     #启用HTTP-01质询提供程序  
-     http01: {}   
----   
-apiVersion: certmanager.k8s.io/v1alpha1   
-kind: ClusterIssuer   
-metadata:   
- name: letsencrypt -staging   
- namespace: kube-system   
-spec:   
- acme : 
-     # ACME的服务器URL   
+     #用于存储ACME帐户私钥的秘密名称
+     privateKeySecretRef:
+       name: letsencrypt-prod
+     #启用HTTP-01质询提供程序
+     http01: {}
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: ClusterIssuer
+metadata:
+ name: letsencrypt -staging
+ namespace: kube-system
+spec:
+ acme :
+     # ACME的服务器URL
      server: https://acme-staging.api.letsencrypt.org/directory
-     # 用于ACME注册的电子邮件地址  
-     email: staging + me@domain.com   
-     # 用于存储ACME帐户私钥的密钥的 名称  
-     privateKeySecretRef:   
-    name: letsencrypt-staging   
-     # 启用HTTP-01质询提供程序  
+     # 用于ACME注册的电子邮件地址
+     email: staging + me@domain.com
+     # 用于存储ACME帐户私钥的密钥的 名称
+     privateKeySecretRef:
+    name: letsencrypt-staging
+     # 启用HTTP-01质询提供程序
      http01: {}
 ```
 
@@ -138,7 +138,7 @@ spec:
 
 Ingress 是您公开服务的前端 Web 代理（这是你的优势......我说 WEB 代理，因为它现在只支持 HTTP/HTTPS）。但让我们假设你知道关于 Ingress 的一切。
 
-**更新**  
+**更新**
 
 这不是一个真正的更新，而是一个更精确的描述，Ingress 也支持 GRPC，当然这是 HTTP/2。
 
@@ -167,26 +167,26 @@ Ingress 的神奇之处在于它在 Kubernetes API 中的实现。您创建一�
 把这个清单放在一个像 *certificate-istio.yml* 这样的文件中 ：
 
 ```yaml
-apiVersion: certmanager.k8s.io/v1alpha1   
-kind: Certificate  
-meteadata:   
- name: istio-ingress-certs   
- namespace: istio-system   
-spec:   
- secretName: istio-ingress-certs   
- issuerRef:  
- 	name: letsencrypt-staging   
- 	kind: ClusterIssuer   
- commonName: www.mydomain.com   
- dnsNames:   
- - www.mydomain.com   
- - mobile.mydomain.com   
- acme:   
-   config:  
-   - http01:   
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+meteadata:
+ name: istio-ingress-certs
+ namespace: istio-system
+spec:
+ secretName: istio-ingress-certs
+ issuerRef:
+ 	name: letsencrypt-staging
+ 	kind: ClusterIssuer
+ commonName: www.mydomain.com
+ dnsNames:
+ - www.mydomain.com
+ - mobile.mydomain.com
+ acme:
+   config:
+   - http01:
         ingressClass: none
-     domains:  
-      - www.mydomain.com   
+     domains:
+      - www.mydomain.com
  	  - mobile.mydomain.com
 ```
 
@@ -303,12 +303,12 @@ spec:
 
 - ingress class  是 *Istio*（显然）
 
-- 我们正在使用 *staging* Issuer（记住我们第一步创建的 Issuer ）。 
+- 我们正在使用 *staging* Issuer（记住我们第一步创建的 Issuer ）。
   您必须根据创建的`Issuer`或`ClusterIssuer`使用正确的 annotation。文档位于 [Ingress-Shim](https://github.com/jetstack/cert-manager/blob/master/docs/user-guides/ingress-shim.md) 项目中
 
 - 我们必须为每个域创建一个 HTTP 规则
 
-- 在 *backend/srvice* 必须我们在上一步中创建的服务，以及域名匹配，所以：  
+- 在 *backend/srvice* 必须我们在上一步中创建的服务，以及域名匹配，所以：
 
   用 *www.mydomain.com* →serviceName cert-manager-ingress-www→pod cm-istio-ingress-certs-xxx，其中label *certmanager.k8s.io/domain =* *www.mydomain.com*
 

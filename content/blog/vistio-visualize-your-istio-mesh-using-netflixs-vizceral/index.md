@@ -110,7 +110,7 @@ kubectl describe deployment vistio-web -n default
 kubectl -n default port-forward $(kubectl -n default get pod -l app=vistio-api -o jsonpath='{.items[0].metadata.name}') 9091:9091 &
 ```
 
-**验证visito-api**
+**验证vistio-api**
 
 vistio-web调用vistio-api来渲染服务网格。访问<http://localhost:9091/graph>您应该会看到类似下列的输出。
 
