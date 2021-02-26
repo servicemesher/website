@@ -1,4 +1,6 @@
-# ServiceMesher 社区网站
+# ServiceMesher 网站代码
+
+**[ServiceMesher 官网的 GitHub](https://github.com/servicemesher/) 归档（[servicemesher.com](https://www.servicemesher.com/) 域名下的所有页面），不再接受新的 PR，请大家直接提交到[云原生社区](https://github.com/cloudnativeto/cloudnative.to)。**
 
 本网站由 [ServiceMesher](https://www.servicemesher.com) 社区成员共建，源码位于 GitHub。
 
